@@ -1,0 +1,296 @@
+=================
+What is Jenkins?
+=================
+
+=> Jenkins is an open source automation tool for CI and CD
+
+=> Jenkins tool developed using Java
+
+=> Jenkins is part of Hudson Project
+
+=> Intially it is called as Hudson then later it renamed to Jenkins
+
+=================
+About CI CD
+=================
+
+=> CI and CD are two most frequently used terms in modern development practises and DevOps practises.
+
+=> CI stands for Continuous Integration. It is fundamental DevOps best practise where developers frequently merge code changes to central repository where automated builds and tests runs.
+
+=> CD means Continuous Delivery or Continous Deployment.
+
+=> Jenkins is a self-contained, open-source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
+
+==================================
+Build & Deployment Process
+==================================
+
+1) Take latest source code from repository
+
+2) Compile source code 
+
+3) Execute Unit tests (Junits)
+
+4) Perform Code Review
+
+5) Package code as war file
+
+6) Deploy the war file into server
+
+Note: All the above build and deployment tasks can be automated using Jenkins tool.
+
+
+==========================
+Jenkins Installation:
+===========================
+
+1) Create an EC2 instance with Ubuntu AMI (t2.micro instance)
+
+2) Connect to your EC2 instance using MobaXterm
+ 
+3) Install Java In Ubuntu VM with below commands
+
+$ sudo apt-get update
+
+$ sudo apt-get install default-jre
+
+4) Install Jenkins in Ubuntu VM with below commands
+
+$ curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+$ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+$ sudo apt-get update
+
+$ sudo apt-get install jenkins
+
+$ sudo systemctl status jenkins
+ 
+5) Access Jenkins Server in browser using below URL
+
+		URL : http://ec2-public-ip:8080/
+
+	Note: Enable 8080 port in security group
+ 
+6) Get the initial administrative password 
+
+	$ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+	pwd : 5fe6ddcc9db244cab6aca5ccf2d6a83a
+
+-> Provide pwd which we have copied to unlock jenkins
+
+-> Select "Install Suggested Plugins" card (it will install those plugins)
+
+-> Create Admin account
+
+===============================
+Creating First Job in Jenkins 
+===============================
+
+1) Goto Jenkins Dashboard
+
+2) Click on New Item
+
+		-> Enter Item Name (Job Name)
+		-> Select Free Style Project & Click OK
+		-> Enter some description
+		-> Click on 'Build' tab
+		-> Click on 'Add Build Step' and select 'Execute Shell'
+
+3) Enter below shellscript
+
+echo "Hello Guys,"
+touch ashokit.txt
+echo "Hello Guys, Welcome to Jenkins Classes" >> ashokit.txt
+echo "Done..!!"
+
+4) Apply and Save
+
+Note: With above steps we have created JENKINS Job
+
+5) Click on 'Build Now' to start Job execution
+
+6) Click on 'Build Number' and then click on 'Console Ouput' to see job execution details.
+
+
+=> Jenkins Home Directory in EC2 : /var/lib/jenkins/workspace/
+
+		$ cd /var/lib/jenkins/workspace/
+
+7) Go to Jenkins home directory and check for the job name --> check the file created inside the job
+
+
+=========================================================
+Jenkins Job with with GIT Hub Repo + Maven - Integeration
+=========================================================
+
+Pre-Requisites : Java, Maven and Git client
+
+# Git installation In EC2 VM
+
+$ sudo apt install git -y
+
+==================================
+Maven Installation In Jenkins: 
+==================================
+
+Jenkins Dashboard -> Manage Jenkins --> Global Tools Configuration -> Add maven
+
+==================================
+Sample Git Repo URLS For Practise
+==================================
+
+Git Hub Repo URL  : https://github.com/ashokitschool/maven-web-app.git
+
+============================================================
+JOB-2 :: Steps To Create Jenkins Job with Git Repo + Maven
+============================================================
+
+1) Connect to EC2 instance in which jenkins server got installed
+
+2) Start Jenkins Server
+
+3) Access Jenkins Server Dashboard and Login with your jenkins credentials
+
+4) Create Jenkins Job with Git Hub Repo 
+
+		-> New Item
+		-> Enter Item Name (Job Name)
+		-> Select 'Free Style Project' & Click OK
+		-> Enter some description
+		-> Go to "Source Code Management" Tab and Select "Git"
+		-> Enter Project "Git Repo URL"
+		-> Go to "Build tab"
+		-> Click on Add Build Step and Select 'Inovke Top Level Maven Targets'
+		-> Select Maven and enter goals 'clean package'
+		-> Click on Apply and Save
+
+Note: With above steps we have created JENKINS Job
+
+5) Click on 'Build Now' to start Job execution
+
+6) Click on 'Build Number' and then click on 'Console Ouput' to see job execution details.
+
+=> Jenkins Home Directory in EC2 : /var/lib/jenkins/workspace/
+
+=> Go to jenkins workspace and then go to job folder then goto target folder there we see war file created.
+
+
+=============================================================================
+Job-3 :: Steps To Create Jenkins Job with Git Repo + Maven + Tomcat Server
+============================================================================
+
+1) Go to Jenkins Dashboard -> Manage Jenkins --> Manage Plugins -> Goto Available Tab -> Search For
+   "Deploy To Container" Plugin -> Install without restart.
+
+2) Create Jenkins Job 
+
+		-> New Item
+		-> Enter Item Name (Job Name)
+		-> Select Free Style Project & Click OK
+		-> Enter some description
+		-> Go to "Source Code Management" Tab and Select "Git"
+		-> Enter Project "Git Repo URL"
+		-> Go to "Build tab"
+		-> Click on Add Build Step and Select 'Inovke Top Level Maven Targets'
+		-> Select Maven and enter goals 'clean package'
+		-> Click on 'Post Build Action' and Select 'Deploy war/ear to container' option
+		-> Give path of war file (You can give like this also : **/*.war )
+		-> Enter Context Path (give project name Ex: java_web_app)
+		-> Click on 'Add Container' and select Tomcat version 9.x
+		-> Add Tomcat server credentials (give the username & pwd which is having manager-script role)
+		-> Enter Tomact Server URL (http://ec2-vm-ip:tomcat-server-port)
+		-> Click on Apply and Save
+
+4) Run the job now using 'Build Now' option and see see 'Console Output' of job
+
+5) Once Job Executed successfully, go to tomcat server dashboard and see application should be displayed.
+
+6) Click on the applicaton name (it should display our application)
+
+
+===================================================
+How to Create Jenkins Jobs with Build Parameters
+===================================================
+
+=> Build Parameters are used to supply input to run the Job. Using Build Parameters we can avoid hard coding.
+
+		Ex : We can pass branch name as build parameter.
+
+-> Create New Item
+-> Enter Item Name & Select Free Style Project
+-> Select "This Project is parameterized" in General Section
+-> Select Choice Parameter
+-> Name : BranchName
+-> Choices : Enter every branch name in nextline
+-> Branches to Build : */${BranchName}
+
+
+==================================
+User Management In Jenkins
+==================================
+
+=> In Our Project multiple teams will be available
+
+			a) Development team
+			b) Testing team
+			c) Operations Team
+
+=> For every Team member Jenkins login access will be provided. 
+
+Note: Every team members will have their own user account to login into jenkins.
+
+=> Operations team members are responsible to create / edit / delete / run jenkins jobs
+
+=> Dev and Testing team members are only responsible to run the jenkins job.
+
+
+================================================
+How to create users and manage user permissions
+================================================
+
+-> Go to Jenkins Dashboard
+
+-> Manage Jenkins -> Manage Users
+
+-> Create Users
+
+-> Go to Configure Global Security
+
+-> Manage Roles & Assign Roles
+
+Note: By default admin role will be available and we can create custom role based on requirement
+
+-> In Role we can configure what that Role assigned user can do in jenkins
+
+-> In Assign Roles we can add users to particular role
+
+
+=========
+Excercise
+========
+
+-> create 1 account for DevOps team member 
+
+-> Create 1 account for Development team member
+
+-> Configure Roles for DevOps team member and Development team member
+
+
+
+
+
+
+
+
+
+
+
+
+
+

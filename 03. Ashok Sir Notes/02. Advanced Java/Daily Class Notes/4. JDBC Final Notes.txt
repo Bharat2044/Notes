@@ -1,0 +1,1763 @@
+=======================
+What is Software Project ?
+=======================
+
+=> Collection of Programs is called as Software Project
+
+=> In industry we can see 3 types of software projects
+
+
+			1) Scratch development  (Brand New)
+
+			2) Maintenence / Support Projects
+
+			3) Migration Projets
+
+
+===========================
+Types of applications using Java
+===========================
+
+1) Stanadlone applications
+
+		Ex : Eclipse IDE, Calculator, Notepad++ etc..
+
+2) Web Applications ( C 2 B )
+		
+		Ex: www.gmail.com, www.facebook.com etc...
+
+3) Distributed Applications ( B 2 B )
+
+		Ex: gpay, phonepay, paytm, makemytrip, irctc......
+
+
+
+============================
+How to deliver project to client ?
+============================
+
+1) Standalone Application  : The project which runs in only one machine
+
+Note : Standalone applications we will deliver as JAR file (Java Archieve)
+
+Note: JAR contains collection of .class files
+
+2) Web Application : Everybody can access through browser
+
+Note: Web Applications will be delivered as WAR file (Web Archieve)
+
+Note: To run "web application" war file we need Server (Ex: Tomcat)
+
+3) Enterprise Application : Distributed Application
+
+Note: Enterprise applications will be delivered as EAR file (Enterprise Archieve)
+
+			
+				JAR : Java Archieve
+				WAR : Web Archieve
+				EAR : Enterprise Archieve
+
+========================
+Java Project Architecture
+=========================
+
+1) Presentation Layer : User Interface (UI)
+
+								 - HTML & CSS
+								 - Java Script
+								 - BootStrap
+								 - JSP (Java Server Pages)
+								 - Angular / React JS
+
+
+2) Web Layer :  It contains logic to deal with Request & Response
+
+						- Servlets
+						- Spring Web MVC
+
+3) Business Layer : It contains business logic
+
+						- form validation
+						- sending email
+						- sending OTP
+						- generate excel / pdf
+						- calculations
+
+4) Persistence Layer : It contains logic to communicate with Database
+		
+						- JDBC
+						- Spring JDBC
+						- Hibernate
+						- Data JPA
+
+
+====================
+How to create JAR file
+====================
+
+-> JAR stands for Java Archieve
+
+-> JAR contains collection of .class files
+
+
+Syntax:  	jar  cvfe  <filename.jar>  <main-class>  *.class
+
+	
+			a)  jar is a command to deal with jar files
+
+				c - means create
+				v - verbose
+				f  - file
+				e - entrypoint
+
+			b)  main-class represents entrypoint for our application execution
+
+			c) *.class means packaging all .class files available in current working directory
+
+
+====================
+How to run JAR file
+====================
+
+Syntax :    java   -jar  <jar-file-name.jar>
+
+====================
+How to Extract JAR file
+====================
+
+Syntax :    jar -xvf  <jar-file-name.jar>
+
+
+=====
+Task
+=====
+
+1) Create User class & Student class 
+
+2) Compile both User & Student classes
+
+2) Package User.class & Student.class as a jar file (Name: project.jar)
+
+3) After jar is created then delete all .java & .class files
+
+4) Create Demo.java class with main ( ) method. Create Objects for User & Student  and print hashCode of both objects.
+
+
+============================================
+What is the difference between PATH & CLASSPATH ?
+============================================
+
+-> PATH is used to locate where our java s/w got installed
+
+-> CLASSPATH is used locate where our .class files / jar files are available
+
+Note: If we set PATH & CLASSPATH in command prompt then they are temporary. If we close CMD then we will loose them.
+
+-> TO set them permanently we need to use Environment Variables.
+
+============
+What is API ?
+============
+
+=> API  stands for Application Programming Interface
+
+=> API contains set of classes and interfaces
+
+=> Sun Microsystem provided JSE API and JEE API
+
+=> JSE API contains set of classes & interfaces which are used to develop Standalone applications
+
+=> JEE API contains set of classes & interfaces which are used to develop Web applications.
+
+=> To understand classes, interfaces, methods available in the APIs Sun Microsystem provided documentation for us.
+
+		URL : https://docs.oracle.com/javase/8/docs/api/
+
+========================================
+How to create documentation for our project ?
+========================================
+
+-> To create documentation for our project we can use below command
+
+		Syntax :   javadoc *.java
+
+-> The above command will create several HTML files
+
+-> We need to open "index.html" file in browser to get documentation of our project.
+
+Note: To provide metadata of our code (class, methods, interfaces) we will use java documentation comments 
+
+/**
+*
+*
+*
+*/
+
+
+==================
+What is Build Path ? 
+==================
+
+-> Jar contains .class files
+
+-> Jar files are also called as Libraries
+
+-> When we want to libraries in our project then we need to add them to Build Path
+
+Ex:
+----
+			1) servlet library we need to develop web app using java
+			2) To communicate with database we need jdbc library
+
+
+
+
+================
+Java De-Compiler
+================
+
+-> It is used to convert byte code to source code
+
+-> We can download java decompiler to convert byte code to source code
+
+-> Using below URL we can dowload Java De-Compiler
+
+URL : https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-windows-1.6.6.zip
+
+
+=============
+Database
+=============
+
+=> Database is a software which is used to store the permanentley
+
+	Ex: Oracle, MySQL,  SQLServer, PostGresSQL
+
+=> To work with database we need to install Database software
+
+=> Database Server software will store the data in the form of tables, rows and columns
+
+=> Database Client software is used to communicate with Database Server Software
+
+										
+									SQL 
+			DataBase client -----------------------------------> Database Server
+
+Note: SQL (Structured Query Language) queries will be used to communicate Database Server
+
+
+=> To communicate with Oracle DB server we can use "SQL Developer" as a client software
+
+=> To communicate with MySQL DB server we can use "MySQL Workbench" as a client software
+
+Note: SQL Developer  & MySQL Workbench softwares are used to execute SQL queries
+
+======
+JDBC
+======
+
+=> JDBC API released by Sun Microsystem
+
+=> Using JDBC API we can communicate with Database software using Java Program
+
+=> JDBC API will act as mediator between Java Program and Database software
+
+								
+								JDBC API
+			Java Program ----------------------------------> Database Server
+
+
+=> JDBC API contains set of interfaces & classes
+
+
+=> Database Software vendors provided implementation for JDBC API. As part of JDBC API implementation they provided Database Driver
+
+Note: Every Database software having its own Driver.
+
+			
+				Oracle Database ------------> OracleDriver
+
+				MySQL Database ----------> MySQL Driver
+
+				SQL Server ------------------> SQLDriver
+
+
+Note: Driver is a program which knows how to connect with Database Software.
+
+=> Database Driver software released as jar file
+
+		
+			MySQL Driver ===========> mysql-connector.jar
+
+			Oracle Driver ==========> ojdbc14.jar
+
+
+Note: We need to download that jar file and add to project build path.
+
+=====================
+JDBC API Components
+=====================
+
+---------------
+Interfaces
+---------------
+Driver
+Connection
+Statement
+PreparedStatement
+CallableStatement
+ResultSet
+RowSet
+
+-------------
+Classes
+------------
+DriverManager
+Types
+Date
+
+-------------------
+Exceptions
+--------------------
+SQLException
+
+
+
+============================
+Steps to develop JDBC Program
+============================
+
+1) Load the Driver class
+
+2) Get Connection from Database
+
+3) Create Statement / PreparedStatement / Callable Statement
+
+4) Execute Query
+
+5) Process the Result
+
+6) Close the Connection
+
+
+
+
+====================================
+Setup Database & Table in MySQL DB
+===================================
+
+=> Connect to MySQL Database Server using MySQL Workbench
+
+# To display list of databases available
+$ show databases;
+
+# To create new database in DB server
+$ create database advjdb;
+
+# To Select database to perform our operations
+$ use advjdb;
+
+# To display all tables available in the database
+$ show tables;
+
+# Create Table in the database
+
+CREATE TABLE BOOKS ( 
+
+		BOOK_ID   INT (10),
+
+		BOOK_NAME VARCHAR(100),
+
+		BOOK_PRICE  INT(10)
+);
+
+commit;
+
+
+========================== FIRST JDBC APPLICATION =========================
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class InsertBook {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String INSERT_SQL = "INSERT INTO BOOKS VALUES(102, 'Python', 2000)";
+
+	public static void main(String[] args) throws Exception {
+
+		// Step-1 : Load Driver
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		// Step-2 : Get DB Connection
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		// Step-3 : Create Statement
+		Statement stmt = con.createStatement();
+
+		// Step-4 : Execute Query
+		int rowsEffected = stmt.executeUpdate(INSERT_SQL);
+
+		// Step-5 : Process Result
+		System.out.println("Record Inserted Count :: " + rowsEffected);
+
+		// Step-6 : Close Connection
+		con.close();
+
+	}
+}
+
+===============
+Types Of Queries
+===============
+
+=> Database queries are divided into 2 types
+
+	1) DML Queries / Non - Select ( CREATE, INSERT,  UPDATE & DELETE)
+
+	2) DQL QUERIES / SELECT 
+
+
+=> To execute NON-SELECT queries we will use below method 
+
+	Syntax :  	int executeUpdate (String sql ) ;
+
+Note: The above method parameter represents query which we want to execute and method return type represents how many rows effected in db table with given query.
+
+=> To execute SELECT queries we will use below method
+
+	Syntax :   ResultSet  executeQuery (String sql)
+
+Note: The above method parameter represents query which we want to execute and method return type represents records returned by given Query.
+
+=> ResultSet represents records returned by given select query.
+
+============================
+SELECT OPERATION USING JDBC
+============================
+
+
+=> When we execute select query using JDBC then we will get data from database in the form of ResultSet object
+
+=> ResultSet Object will maintain a Cursor which will point to current row.
+
+Note: Intially ResultSet cursor will point before first row. We need to move the cursor to next position by calling next ( ) method.
+
+
+		Syntax :     boolean next ( ) 
+
+
+-> When record is present next ( ) method will return true otherwise it will return false.
+
+
+public class SelectBooks {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String SELECT_SQL = "SELECT * FROM BOOKS WHERE BOOK_ID = 1002";
+
+	public static void main(String[] args) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		Statement stmt = con.createStatement();
+
+		ResultSet rs = stmt.executeQuery(SELECT_SQL);
+
+		if (rs.next()) {
+			int bookid = rs.getInt("BOOK_ID");
+			String name = rs.getString("BOOK_NAME");
+			double price = rs.getDouble("BOOK_PRICE");
+
+			System.out.println(bookid);
+			System.out.println(name);
+			System.out.println(price);
+		} else {
+			System.out.println("No Records Found");
+		}
+		con.close();
+	}
+}
+		
+
+
+
+
+
+Requirement : Write a java program to retrieve all the records from the database table and display on the console.
+
+
+public class SelectBooks {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String SELECT_SQL = "SELECT * FROM BOOKS";
+
+	public static void main(String[] args) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(SELECT_SQL);
+
+		while (rs.next()) {
+			System.out.println(rs.getInt("BOOK_ID"));
+			System.out.println(rs.getString("BOOK_NAME"));
+			System.out.println(rs.getDouble("BOOK_PRICE"));
+		}
+		con.close();
+	}
+}
+
+
+
+
+
+Note : By Default ResultSet cursor will move in forward direction. Based on the Requirement we can make it as Bi Directional.
+
+===========
+Assignment 
+===========
+
+=> Develop User Registration and User Login Functionality. 
+
+Note: For Registration and Login read the data from keyboard.
+
+Note: We should not insert user record with duplicate email. If any user trying to register with duplicate email application should show error message.
+
+
+==============
+ResultSet Types
+==============
+
+=> ResultSet will represent data given by our select query
+
+=> ResultSet will maintains cursor to point the rows
+
+=>Initially ResultSet cursor will be available before first record
+
+=> We need to move RS cursor to next position by calling next ( ) method
+
+Note: By Default ResultSet is FORWARD_DIRECTIONAL
+
+
+1) TYPE_FORWARD_ONLY    ( by default )
+
+2) TYPE_SCROLL_INSENSITIVE
+
+3) TYPE_SCROLL_SENSITIVE
+
+
+=>  INSENSITIVE & SENSITIVE ResultSets are scrollable and Bi-Directional
+
+=> ResuletSet concurrency will represent changes of ResultSet data
+
+1) CONCUR_READ_ONLY
+
+2)  CONCUR_UPDATABLE
+
+
+-> CONCUR_READ_ONLY will allow only read operation on the ResultSet
+
+-> CONCUR_UPDATABLE will allow update operations also on the ResultSet
+
+
+Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, 						           ResultSet.CONCUR_UPDATABLE);
+
+		ResultSet rs = stmt.executeQuery(SELECT_SQL);
+
+		rs.absolute(2);
+
+		rs.updateDouble(3, 8500.00);
+		rs.updateRow();
+
+
+
+========================================================
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+
+public class SelectBooks {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String SELECT_SQL = "SELECT BOOK_ID, BOOK_NAME, BOOK_PRICE FROM BOOKS";
+
+	public static void main(String[] args) throws Exception {
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+		ResultSet rs = stmt.executeQuery(SELECT_SQL);
+
+		System.out.println("Query Execution Completed... Data available in ResultSet...");
+		while (rs.next()) {
+			System.in.read();
+			System.in.read();
+			rs.refreshRow();
+			System.out.println(rs.getInt(1) + "---" + rs.getString(2) + "--" + rs.getDouble(3));
+		}
+		con.close();
+	}
+}
+===========================================================================
+
+boolean next ( ) : To move cursor next position
+
+absolute (int row ) : To move cursor to specific row
+
+boolean last ( ) : To move cursor to last row
+
+boolean previous ( ) : To move cursor to previous row
+
+int getInt (int index ) : To get current row column data based on column index
+
+int getInt (String columnName ) : To get current row column data based on column index
+
+==================
+Prepared Statement
+==================
+
+=> PreparedStatement is used to execute both SELECT & NON-SELECT Queries
+
+=> PreparedStatement will support for Positional Parameters ( ? ) in the Query
+
+=> Postional Parameters are used to supply dynamic values to Query in the Run time.
+
+=> When we want to execute same query multiple times with different values then it is highly recommended to use PreparedStatement.
+
+ Query Without Positional Parameters :   INSERT INTO BOOKS VALUES (101, "JAVA", 5000);
+
+ Query With Positional Parameters :   	INSERT INTO BOOKS VALUES (?, ?, ?) ;
+
+
+Note: Positional Parameters index will start from 1.
+
+
+
+
+
+
+
+
+
+
+public String login (String name , String pwd ) {
+
+"select * from users where uname = ' " + name +"  and pwd  ' = " + pwd + " '  ";
+
+}
+
+
+name : ashok--
+pwd: 123
+
+		select * from users where uname=ashok  -- and pwd = 123;
+
+
+
+
+
+
+
+=================================================================================
+Assignment : Develop JDBC application to retrieve books which are having price less than given price.
+
+=> Ask user to enter the price in keyboard, if user entered the price then we have to fetch books which are having price less than user given price and display to console
+
+=> If user don't enter price then fetch all books and display to console
+
+=================================================================================
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Scanner;
+
+public class DynamicSelectBooks {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	public static void main(String[] args) throws Exception {
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter Price");
+		double price = s.nextDouble();
+
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		StringBuilder sql = new StringBuilder("SELECT * FROM BOOKS");
+		if (price > 0) {
+			sql.append(" WHERE BOOK_PRICE <= ?");
+		}
+
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		if (price > 0) {
+			pstmt.setDouble(1, price);
+		}
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			System.out.println(rs.getInt(1) + "--" + rs.getString(2) + "--" + rs.getDouble(3));
+		}
+		
+		con.close();
+
+	}
+
+}
+
+==============================================================================
+
+EMP_ID		EMP_NAME	EMP_SALARY  	EMP_DEPT	EMP_GENDER    WORK_LOCATION
+
+101			 John		  35000.00		 Security			Male			Hyd
+
+102			Smith		 45000.00		 HR				Male			Chennai
+
+103			Rose		 32000.00		Admin			FeMale			 Pune
+
+=================================================================================
+
+WORK_LOCATION  :  HYD
+
+EMP_DEPT :  HR
+
+EMP_GENDER :  Male
+
+CREATE TABLE EMPLOYEE (
+	EMP_ID INT PRIMARY KEY,
+	EMP_NAME VARCHAR(100),
+	EMP_SALARY INT,
+	EMP_DEPT VARCHAR(100),
+	EMP_GENDER VARCHAR(10),
+	WORK_LOCATION VARCHAR(100)
+);
+
+INSERT INTO EMPLOYEE VALUES (1, 'John', 15000.00, 'Admin', 'Male', 'Hyd');
+INSERT INTO EMPLOYEE VALUES (2, 'Smith', 16000.00, 'HR', 'Male', 'Delhi');
+INSERT INTO EMPLOYEE VALUES (3, 'Anil', 7000.00, 'Security', 'Male', 'Hyd');
+INSERT INTO EMPLOYEE VALUES (4, 'Rose', 12000.00, 'HR', 'FeMale', 'Hyd');
+INSERT INTO EMPLOYEE VALUES (5, 'Cathy', 16000.00, 'Sales', 'FeMale', 'Delhi');
+
+=========================================================
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Scanner;
+
+public class SearchEmps {
+	
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+	
+	public static void main(String[] args) throws Exception{
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Enter Dept :: ");
+		String dept = s.next();
+		
+		System.out.println("Enter Location :: ");
+		String workLocation  = s.next();
+		
+		System.out.println("Enter Gender :: ");
+		String gender = s.next();
+		
+		StringBuilder sql = new StringBuilder("SELECT * FROM EMPLOYEE WHERE 1=1 ");
+		
+		if(dept!=null && !dept.equals("null")){
+			sql.append(" AND EMP_DEPT= ?");
+		}
+		
+		if(workLocation!=null && !workLocation.equals("null")) {
+			sql.append(" AND WORK_LOCATION = ?");
+		}
+		
+		if(gender!=null && !gender.equals("null")) {
+			sql.append(" AND EMP_GENDER = ?");
+		}
+		
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+		
+		PreparedStatement  pstmt = con.prepareStatement(sql.toString());
+		
+		int index = 1;
+		
+		if(dept!=null && !dept.equals("null")){
+			pstmt.setString(index, dept);
+			index ++;
+		}
+		
+		if(workLocation!=null && !workLocation.equals("null")) {
+			pstmt.setString(index, workLocation);
+			index ++;
+		}
+		
+		if(gender!=null && !gender.equals("null")) {
+			pstmt.setString(index, gender);
+		}
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			System.out.println(rs.getInt(1) + "--" +rs.getString(2)+"--"+rs.getInt(3)+"--"+
+					rs.getString(4)+"--"+rs.getString(5)+ "--"+rs.getString(6));
+		}
+		con.close();
+	}
+}
+===================================================================
+
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class EmpHike {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+	
+	private static final String SELECT_sQL = "SELECT * FROM EMPLOYEE";
+	
+	private static final String UPDATE_SAL_SQL = "UPDATE EMPLOYEE SET EMP_SALARY=? WHERE EMP_ID=?";
+
+	public static void main(String[] args) throws Exception {
+		
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter Emp Hike :: ");
+		double hike = s.nextDouble();
+		
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(SELECT_sQL);
+		PreparedStatement pstmt = con.prepareStatement(UPDATE_SAL_SQL);
+		while(rs.next()) {
+			int empId = rs.getInt("EMP_ID");
+			double existingSal = rs.getDouble("EMP_SALARY");
+			double newSal = existingSal + (existingSal * hike) / 100;
+			pstmt.setDouble(1, newSal);
+			pstmt.setInt(2, empId);
+			pstmt.executeUpdate();
+		}
+		System.out.println("Update completed....");
+		con.close();
+	}
+}
+========================================================
+
+
+public class EmpHike {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+	
+	private static final String SELECT_sQL = "SELECT * FROM EMPLOYEE";
+	
+
+	public static void main(String[] args) throws Exception {
+		
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter Emp Hike :: ");
+		double hike = s.nextDouble();
+		
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+		
+		String UPDATE_SAL_SQL = "UPDATE EMPLOYEE SET EMP_SALARY=EMP_SALARY + (EMP_SALARY * ?) / 100 ";
+
+		PreparedStatement pstmt = con.prepareStatement(UPDATE_SAL_SQL);
+		pstmt.setDouble(1, hike);
+
+		pstmt.executeUpdate();
+		
+		System.out.println("Update completed....");
+		con.close();
+	}
+}
+
+
+
+
+
+=============
+Requirement :
+=============
+
+Develop JDBC application to increase employees salary based on Department.
+
+Read Hike Percentage for Each Deparment from Keyboard and then update salary with given percentage.
+
+
+Formula :   New_Salary = existing_sal + (existing_Sal * hike_percentage) / 100;
+
+
+=================================================================
+
+
+
+
+========================
+syntax to create Procedure
+========================
+
+CREARE PROCEDURE <PROCEDURE-NAME>  ( params.... )
+
+BEGIN
+
+		// SQL STATEMENTS
+
+END ;
+
+
+=> A procedure can have 3 types of Parameters
+
+
+		1) IN    ----> represents input
+
+		2) OUT  ----> represents output
+
+		3) INOUT   ---> represents both input & output
+
+
+
+============== Procedure without IN & OUT Parameters ============
+
+DELIMITER $$
+CREATE PROCEDURE getBooksData ( )
+BEGIN
+	SELECT * FROM BOOKS;
+END $$
+
+// call the procedure in workbench
+call getBooksData ( ) ;
+=============================================================
+package in.ashokit;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+
+public class ProcedureCallEx {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String PROCEDURE = "call getBooksData()";
+	
+	public static void main(String[] args) throws Exception{
+		
+		Connection con  = DriverManager.getConnection(DB_URL,DB_UNAME,DB_PWD);
+		
+		CallableStatement cstmt = con.prepareCall(PROCEDURE);
+		
+		ResultSet rs = cstmt.executeQuery();
+		
+		while(rs.next()) {
+			System.out.println(rs.getInt(1) + "-"+rs.getString(2)+"-"+rs.getDouble(3));
+		}
+		con.close();
+	}
+}
+===================== PROCEDURE WITH IN PARAMETER ==================
+
+DELIMITER $$
+CREATE PROCEDURE getBookById ( IN BID  INT )
+BEGIN
+	SELECT * FROM BOOKS WHERE BOOK_ID=BID;
+END $$
+
+// call the procedure in workbench
+
+call getBookById (101);
+
+=====================================================================
+package in.ashokit;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.Scanner;
+
+public class ProcedureINParamEx {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String PROCEDURE = "call getBookById(?)";
+	
+	public static void main(String[] args) throws Exception{
+		
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter Book Id :: ");
+		int bookId = s.nextInt();
+		
+		Connection con  = DriverManager.getConnection(DB_URL,DB_UNAME,DB_PWD);
+		
+		CallableStatement cstmt = con.prepareCall(PROCEDURE);
+		cstmt.setInt(1, bookId);
+		
+		ResultSet rs = cstmt.executeQuery();
+		
+		while(rs.next()) {
+			System.out.println(rs.getInt(1) + "-"+rs.getString(2)+"-"+rs.getDouble(3));
+		}
+		con.close();
+	}
+}
+
+====================== Procedure with IN & OUT Parameters ==============================
+
+DELIMITER $$
+CREATE PROCEDURE getBookNameByPrice
+( 
+		IN bprice INT, 
+		OUT bname VARCHAR(100) 
+)
+
+BEGIN
+	SELECT BOOK_NAME as bname from BOOKS where BOOK_PRICE <= bprice ;
+END $$
+
+// call the procedure in workbench
+CALL getBookNameByPrice(5000, @bname);
+
+==========================================================================================
+
+package in.ashokit;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Types;
+import java.util.Scanner;
+
+public class ProcedureINOUTParamEx2 {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String PROCEDURE = "call getBookNameByPrice(?, ?)";
+
+	public static void main(String[] args) throws Exception {
+
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter Book Price :: ");
+		double bookPrice = s.nextDouble();
+
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		CallableStatement cstmt = con.prepareCall(PROCEDURE);
+		cstmt.setDouble(1, bookPrice);
+		cstmt.registerOutParameter(2, Types.VARCHAR);
+
+		ResultSet rs = cstmt.executeQuery();
+
+		while (rs.next()) {
+			System.out.println(rs.getString(1));
+		}
+		con.close();
+	}
+}
+
+================================================================================
+1) Insert Image into database table
+
+Ans) 	create table user (
+			user_id    INT  ,
+			user_name 	VARCHAR(100),
+			user_image BLOB
+		)
+
+2) JDBC program to execute SQL query with IN clause (worklocation : 'Hyd' and 'Pune' )
+
+Ans) select * from employees where work_location IN ('hyd', 'pune');
+
+3) JDBC program to retrieve employess who joined between given dates
+
+01-Jan-2022
+
+31-Dec-2022
+
+Ans)    select * from employees where joining_date between  ?  and ?
+
+===================================================================================
+1) What is Class Path ?
+2) How to set Class Path ?
+3) What is JAR ?
+4) What is API ?
+5) What is JDBC ?
+6) JDBC Driver
+7) JDBC Connection
+8) Statement ( SELECT * NON-SELECT QUERIES )
+9) PreparedStatement  ( SELECT * NON-SELECT QUERIES with Positional  Parameters )
+10) CallableStatement ( Procedures - IN & OUT Params )
+11) Result Set
+12) ResultSet Types (Sensitive, Insensitive ResultSet, READ-ONLY, CONCUR-UPDATABLE)
+===================================================================================
+
+====================
+JDBC Batch Operations
+====================
+
+=> Batch means Bulk Operation
+
+=> When we want to perform Bulk Operations in Database then we can use JDBC Batch Operations concept.
+
+
+Ex:     insert 100 records into table at a time
+
+
+public class BatchOpsEx {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	public static void main(String[] args) throws Exception {
+
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+		Statement stmt = con.createStatement();
+
+		stmt.addBatch("INSERT INTO BOOKS VALUES(106, 'AI', 2800.00)");
+		stmt.addBatch("INSERT INTO BOOKS VALUES(107, 'ML', 3800.00)");
+		stmt.addBatch("INSERT INTO BOOKS VALUES(108, 'DS', 4800.00)");
+
+		int[] count = stmt.executeBatch();
+
+		System.out.println("Records Effected ::" + count.length);
+
+		con.close();
+
+		System.out.println("Execution Completed...");
+	}
+}
+==================================================================================
+
+Assignment -1 : Insert 3 records into table using Batch Operation with PreparedStatement.
+
+Assignment-2 : Read Employee & Emp Address Data from keyboard and insert into DB table.
+
+		Emp Data: ID, Name & Salary
+
+		Address Data : City, State, Country
+
+Note: Employee data should be inserted into EMP table  and ADDRESS data should be inserted into EMP_ADDRESS table.
+
+
+
+
+CREATE  TABLE  EMP
+(
+
+	EMP_ID    INT,
+	EMP_NAME VARCHAR(100).
+	EMP_SALARY INT
+
+)
+
+
+CREATE TABLE EMP_ADDRESS
+(	
+	CITY VARCHAR(50),
+	STATE VARCHAR(50),
+	COUNTRY VARCHAR(50),
+	EMP_ID INT
+)
+
+======================
+Transactions in JDBC
+=======================
+
+=> Single Unit amount of work is called as Transaction
+
+=> We can execute multiple Queries in single transaction
+
+Note: Every Transaction should follow ACID Properties
+
+		A - Atomocity
+
+		C - Consistency
+
+		I  - Isolation
+
+		D - Durability
+
+
+
+
+Note: When we are performing NON-SELECT OPERATIONS (insert / update/ delete) with Database then Transaction is mandatory.
+
+=> For Select Operations Transaction is optional.
+
+=> When we are performing multiple operations in single transaction then either all operations should be success or none of the operation should be success.
+
+
+		Transcation Commit  -  to save the operation  permanently
+
+		Transaction Rollback - to undo the operation
+
+
+=> In JDBC, transaction will be committed by default for every non select query execution because  by default Transaction Auto Commit is true.
+
+   	con.setAutoCommit ( true ) ; // this is default behaviour of Connection obj
+
+
+=> If we want to manage Transactions in JDBC we need to set AutoCommit as False.
+
+		con.setAutoCommit ( false ) ;
+
+
+Note: When Auto Commit is false, we need to commit the transaction programmatically to save our operation in database.
+
+
+Tx Mgmt Code Snippt
+====================
+
+				Connnection con = DriverManager.getConnection(url, uname,pwd);
+
+				con.setAutoCommit (false);
+
+				try{
+						// logic to execute queries
+
+						con.commit ( );
+
+				} catch(Exception e){
+					con.rollback ( ) ;
+				}
+
+===========
+Tx - Example
+============
+
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class EmpAddrInsert {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String EMP_INSERT = "INSERT INTO EMP VALUES(?,?,?)";
+	private static final String EMP_ADDR_INSERT = "INSERT INTO ADDRESS VALUES(?,?,?,?)";
+
+	public static void main(String[] args) throws Exception {
+
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		// By Default conn - autoCommit mode is true
+
+		con.setAutoCommit(false);
+
+		try {
+			PreparedStatement pstmt = con.prepareStatement(EMP_INSERT);
+			pstmt.setInt(1, 101);
+			pstmt.setString(2, "John");
+			pstmt.setDouble(3, 1000.00);
+
+			pstmt.executeUpdate();
+
+			pstmt = con.prepareStatement(EMP_ADDR_INSERT);
+			pstmt.setString(1, "Hyd");
+			pstmt.setString(2, "TG");
+			pstmt.setString(3, "India");
+			pstmt.setInt(4, 101);
+
+			pstmt.executeUpdate();
+
+			con.commit();
+
+			System.out.println("Records Inserted...");
+
+		} catch (Exception e) {
+			System.out.println("Transcation Rolled Back....");
+			con.rollback();
+		}
+		con.close();
+	}
+}
+
+=====================================================================================
+Requirement : Develop JDBC application to read EMP_ID from Keyboard and then retrieve emp data along with address based on given emp_id from Database table.
+=====================================================================================
+
+"SELECT * FROM EMP e, EMP_ADDRESS a WHERE e.emp_id = a.emp_id
+and e.emp_id = ?"
+
+
+public class SelectEmpWithAddr {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	private static final String EMP_SELECT = "SELECT * FROM EMP e, EMP_ADDRESS a WHERE e.emp_id = a.emp_id and e.emp_id = ?";
+
+	public static void main(String[] args) throws Exception {
+		Connection con = DriverManager.getConnection(DB_URL, DB_UNAME, DB_PWD);
+
+		PreparedStatement pstmt = con.prepareStatement(EMP_SELECT);
+
+		pstmt.setInt(1, 101);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			System.out.println(rs.getInt(1));
+			System.out.println(rs.getString(2));
+			System.out.println(rs.getDouble(3));
+			System.out.println(rs.getString(4));
+			System.out.println(rs.getString(5));
+			System.out.println(rs.getString(6));
+		}
+		con.close();
+	}
+}
+
+
+###########   Assignment : Research On Connection Pooling ###################
+
+
+
+
+
+
+
+===================
+Connection Pooling
+===================
+
+=> Connection Pooling is the process of getting fixed no.of connections from database and store them into a pool for re-usability.
+
+=> If we don't use Connection Pooling concept then our project will run into Connections Exhausted Problem (No connections available to communicate with db)
+
+
+=> If we use DriverManager.getConnection ( ) it will give physical connection with database. It is not at all recommended to use Physical Connections.
+
+=> Always we need to use Logical Connections to perform DB operations. To use Logical connections we need to setup Connection Pool.
+
+
+Note: With the connection pooling we can improve performance of the application.
+
+
+
+
+
+
+
+===========================
+How to setup Connection Pool
+==========================
+
+=> We can setup Connection Pool in 2 ways
+
+		1) Client Side Connection Pool
+
+			Ex: DBCP, C3P0, Hikari etc....
+
+		2) Server Managed Connection Pool
+
+			Ex: Tomcat, JBoss, WebLogic etc...
+
+
+===============================================
+Steps to develop JDBC app with Hikari Connection Pool
+===============================================
+
+1) Create Java Project in IDE
+
+2) Add below jars to project build path
+
+		a) Hikar-CP.jar
+		b) SLF4J-api.jar
+		c) mysql-connector.java
+
+3) Create Java class to setup  connection pool like below
+
+
+
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.Statement;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+public class ConnectionFactory {
+
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/advjdb";
+
+	private static final String DB_UNAME = "ashokit";
+
+	private static final String DB_PWD = "AshokIT@123";
+
+	public static void main(String[] args) throws Exception {
+
+		HikariConfig config = new HikariConfig();
+
+		config.setJdbcUrl(DB_URL);
+		config.setUsername(DB_UNAME);
+		config.setPassword(DB_PWD);
+
+		config.setMaximumPoolSize(20);
+		config.setMinimumIdle(5);
+
+		HikariDataSource datasource = new HikariDataSource(config);
+
+		Connection con = datasource.getConnection();
+
+		String sql = "INSERT INTO BOOKS VALUES (202, 'Django', 4500.00)";
+
+		Statement stmt = con.createStatement();
+
+		stmt.executeUpdate(sql);
+
+		System.out.println("RECORD INSERTED.....");
+		con.close();
+	}
+}
+
+===============================
+Working with Properties files in Java
+===============================
+
+-> As of now in JDBC programs we have declared Database properties which is not at all recommended because if database properties are modified then we need to modify our java programs also.
+
+Note: In realtime project we will have multiple databases like below
+
+			a) Dev DB   (Developers will use this db)
+			b) SIT DB   (Testers will use this db)
+			c) UAT DB  (client side testing will happen with this db)
+			d) Prod DB  (live application will use this db)
+
+
+Note : Every database will have different credentials so when we want to change the database then we have to change our java programs which is not a good practise.
+
+
+-> We need to seperate our Java programs with Database Properties using properties file
+
+-> Properties file is used to configure properties in the form of key-value pair
+
+
+Note: file name can be anything but extension should be .properties only
+
+
+-> To work with properties files we have "java.util.Properties" class. Using this class we can store the data in properties file and we can get data from Properties file.
+
+
+load (InputStream is) --> To load all properties into Properties object
+
+getProperty(String key) ---> To load property value based on given key
+
+setProperty(String key, String value ) ---> To set new property with key-value pair
+
+size ( ) ---> To get count of properties
+
+
+
+
+
+
+
+
+
+=> Connection pool should be created only one time when the project starts... and we need to re-use connections from pool for our db operations.
+
+
+package in.ashokit;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+public class ConnectionFactory {
+
+	private static DataSource datasource = null;
+
+	static {
+
+		try {
+
+			File f = new File("DB.properties");
+			FileInputStream fis = new FileInputStream(f);
+
+			Properties p = new Properties();
+			p.load(fis);
+
+			String url = p.getProperty("db.url");
+			String uname = p.getProperty("db.uname");
+			String pwd = p.getProperty("db.pwd");
+			String poolSize = p.getProperty("db.poolSize");
+
+			HikariConfig config = new HikariConfig();
+
+			config.setJdbcUrl(url);
+			config.setUsername(uname);
+			config.setPassword(pwd);
+			config.setMaximumPoolSize(Integer.parseInt(poolSize));
+
+			datasource = new HikariDataSource(config);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Connection getDBConnection() throws Exception {
+		return datasource.getConnection();
+	}
+
+}
+
+
+package in.ashokit;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class BookStore {
+
+	public static void main(String[] args) throws Exception {
+
+		Connection con = ConnectionFactory.getDBConnection();
+
+		Statement stmt = con.createStatement();
+
+		ResultSet rs = stmt.executeQuery("select * from books");
+
+		while (rs.next()) {
+			System.out.println(rs.getInt(1) + "--" + rs.getString(2) + "--" + rs.getDouble(3));
+		}
+
+		rs.close();
+		stmt.close();
+		con.close();
+	}
+
+}
+
+
+=====================Insert image into database ===================
+
+create table person (pid int, pimage blob(1000));
+
+==============================================================
+
+package in.ashokit;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class BookStore {
+
+	public static void main(String[] args) throws Exception {
+
+		File f = new File("file-path");
+		FileInputStream fis = new FileInputStream(f);
+
+		Connection con = ConnectionFactory.getDBConnection();
+
+		String sql = "INSERT INTO PERSON VALUES (?,?)";
+
+		PreparedStatement pstmt = con.prepareStatement(sql);
+
+		pstmt.setInt(1, 101);
+		pstmt.setBlob(2, fis);
+
+		int count = pstmt.executeUpdate();
+
+		System.out.println("Rows Inserted :: " + count);
+
+		pstmt.close();
+		con.close();
+
+	}
+
+}
+
+=========================Read Image from Database ===============
+
+package in.ashokit;
+
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class BookStore {
+
+	public static void main(String[] args) throws Exception {
+
+		Connection con = ConnectionFactory.getDBConnection();
+
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM PERSON");
+		
+		if (rs.next()) {
+			System.out.println(rs.getInt(1));
+			byte[] stream = rs.getBytes(2);
+
+			FileOutputStream fos = new FileOutputStream("path\\image.png");
+			fos.write(stream);
+			fos.close();
+		}
+		con.close();
+	}
+}
+
+======================RowSet Example =========================
+
+public class BookStore {
+
+	public static void main(String[] args) throws Exception {
+
+		JdbcRowSet rowSet = RowSetProvider.newFactory().createJdbcRowSet();
+
+		rowSet.setUrl("jdbc:mysql://localhost:3306/advjdb");
+		rowSet.setUsername("ashokit");
+		rowSet.setPassword("AshokIT@123");
+
+		rowSet.setCommand("select * from books");
+		
+		rowSet.execute();
+
+		while (rowSet.next()) {
+			System.out.print(rowSet.getInt(1) + "\t");
+			System.out.print(rowSet.getString(2) + "\t");
+			System.out.println(rowSet.getInt(3));
+		}
+		rowSet.close();
+	}
+}
+
+============================================================================
+
+=====================
+Types of JDBC Drivers
+=====================
+
+=> In JDBC we have 4 types of drivers
+
+	a) Type-1 Driver
+
+	b) Type-2 Driver
+
+	c) Type -3 Driver
+
+	d) Type-4 Driver
+
+
+Note: Type-1, Type-2, Type-3 drivers are outdated, we are using Type-4 driver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

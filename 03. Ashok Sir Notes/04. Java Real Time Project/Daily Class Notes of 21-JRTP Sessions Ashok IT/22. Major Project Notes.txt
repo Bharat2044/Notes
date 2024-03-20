@@ -1,0 +1,153 @@
+==============
+Major Project 
+==============
+
+Name :  HIS (Health Insurance System)
+
+Client : New Jersey (NJ) State Govt (USA)
+
+Enviroment : Java, J2EE, Spring Boot, Microservices, Oracle DB, AWS and Angular
+
+Description : 
+
+The main aim of this project is to provide fully integrated health and insurance plans for New Jersey state citizens based on their life situations.  Using HIS NJ state providing below plans for NJ state citizens.
+
+
+1) SNAP (Supplemental Nutrition Assistance Program)
+
+2) CCAP (Child Care Assistance Program)
+
+3) Medicaid
+
+4) Mediare
+
+5) QHP (Qualified Health Plan)
+
+
+*************** Every Plan is having some Rules, If citizen satisy those rules then only Citizen will get that plan************
+
+-> SNAP is a food stamp program, SNAP is applicable for the citizens who are having no-income or low-income
+
+-> CCAP is a childrens program, CCAP is applicable for the families who are having less income with childrens
+
+-> Medicaid is a health plan,  Medicaid is applicable for the people with limited income and resources.
+
+-> Medicare is a health plan, Medicare is applicable for the people who are having above 65 years
+
+-> QHP is a health plan and it is commercial plan (People should purchase this plan)
+
+
+*****************************************************************************************************************************************************
+
+-> Citizens will apply for the plan using HIS project
+
+-> HIS project will collect citizen data and it will determine weather that Citizen is eligible for the plan or not
+    
+-> If citizen data matches with PLAN rules, then citizen will be approved for the plan else citizen will be denied for the plan
+
+-> If citizen approved for the plan, then citizen will get monthly benefit amount from the Goverment
+
+******************************************************************************************************************************************************
+
+-> HIS project is an intranet project (public users can't access directley)
+
+Note: Internet project means everybody can access, Intranet means it is accessible by specific people in specific locations.
+
+					AADHAR  -----> Intranet application   
+
+					Gmail ------> Internet application
+
+					Passport ---> Internet application
+
+					Big Bazar Billing  ----> Intranet application
+
+-> HIS project is accessible only in DHS offices
+
+-> In DHS offices govt employees will be available to access HIS application. 
+   Those employees are called as Case Workers.
+
+-> Citizens should go to nearest DHS office to apply for Health & Insurance Plans in New Jersey state.
+
+
+*********************************************************************************************************************************************
+
+
+==================
+HIS Project Modules
+==================
+
+1) Admin 
+
+2) User Management 
+
+3) Application Registration ( AR )
+
+4) Data Collection ( DC )
+
+5) Eligibility Determination ( ED )
+
+6) Correspondence ( CO )
+
+7) Benefit Issuance ( BI )
+
+8) Reports 
+
+
+
+-> Admin module contains below functionalities
+
+				a) Plans Management (Create & Update Plans)
+				b) Case Worker Accounts Management ( Activate & De-Activate accounts)
+
+-> User Management module conaints below functionalities
+
+				a) Login 
+				b) Register
+				c) Forgot Pwd
+				d) Profile
+				e) Dashboard
+
+-> Application Registration (AR) module contains Citizen Onboarding functionality & it will verify citenship of the citizen. If citizen belongs to NJ state then only onboarding will be success otherwise onboarding will be failed.
+
+Note: If citizen belongs to NJ state then only citizen can apply for the plan otherwise can't apply for the plan.
+
+-> Data Collection (DC) module contains functionality to collect data from the citizen to apply for the plan.
+
+
+-> Eligibility Determination (ED) module contains functionality to determine citizen eligiblity for the plan. If citizen data matched with plan conditions then citizen will be approved else citizen will be denied for the plan.
+
+
+-> Correspondence (CO) module contains functionality to send Notices to citizens.
+
+-> Benefit Issuance ( BI ) module contains functionality to send benefit amount to Eligibility Approved Citizens.
+
+-> Reports module contains functionality to generate reports of our application
+
+					a) Daily Status Reports
+					b) Approved Citizens Report
+					c) Denied Citizens Report
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

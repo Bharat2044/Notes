@@ -1,0 +1,259 @@
+$ pwd   // check current working directory or locations
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV
+
+$ echo "Hello World"     // takes input and print output
+// Hello World
+
+$ ls       // Show all the file inside that folder
+// note.txt
+
+$ ls -a       // Show all the file includeing hidden inside that folder
+// ./  ../  note.txt
+
+$ ls -l     // list down and check the permission allow for the file also size print
+/*total 4
+-rw-r--r-- 1 bk628 197609    0 May 30 23:00 new.txt
+drwxr-xr-x 1 bk628 197609    0 May 30 23:04 new_folder/
+-rw-r--r-- 1 bk628 197609 1441 May 30 23:19 note.txt*/
+
+$ ls -al     // list down and check the permission allow for the file including hidden file also print size
+/*
+total 9
+drwxr-xr-x 1 bk628 197609  0 May 30 22:55 ./
+drwxr-xr-x 1 bk628 197609  0 May 30 22:22 ../
+-rw-r--r-- 1 bk628 197609 42 May 30 22:56 note.txt
+*/
+
+$ touch new.txt    // create new file
+
+$ ls
+// new.txt  note.txt
+
+$ mkdir new_folder    // create new folder/directory
+
+$ ls
+// new.txt  new_folder/  note.txt
+
+$ clear     // used to clear the page
+
+$ pwd   // check current working directory or locations
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV
+
+$ cd new_folder     // used to change or move directory or folder
+
+$ pwd   // check current working directory or locations
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV/new_folder
+
+$ cd .      // noting changes same folder
+
+$ pwd
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV/new_folder
+
+$ cd ..     // used to 1 folder back
+
+$ pwd
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV
+
+$ touch .hidden     // create hidden file
+
+$ ls
+// new.txt  new_folder/  note.txt
+
+$ ls -a
+// ./  ../  .hidden  new.txt  new_folder/  note.txt
+
+$ ls
+// new.txt  new_folder/  note.txt
+
+$ cp note.txt new_folder   // copy note.txt file and paste in new_folder
+
+$ cd new_folder
+
+$ ls
+// note.txt
+
+$ mv new.txt new_folder // move new.txt file and paste in new_folder
+
+$ cd ..
+
+$ ls
+// new_folder/  note.txt
+
+$ cd new_folder
+
+$ ls
+// new.txt  note.txt
+
+$ touch bash1.sh
+$ touch bash2.sh
+
+$ ls bash*  // print all the file or folder that are starts with bash
+// bash1.sh  bash2.sh
+
+$ ls new*
+/*new.txt
+new_folder:
+note.txt*/
+
+$ ls new.txt    // print only new.txt file if available
+// new.txt
+
+$ cd -  // print and back last/previous working directory
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV/new_folder
+
+$ pwd
+/c/Users/bk628/OneDrive/Desktop/WEB_DEV/new_folder
+
+$ cd ..
+
+$ pwd
+// /c/Users/bk628/OneDrive/Desktop/WEB_DEV
+
+$ cd ~  // back to home or root directory
+
+$ pwd
+/c/Users/bk628
+
+$ cat note.txt  // print all data or content inside note.txt file
+
+$ less note.txt // print onle some data or content inside note.txt file => enter space or up and down key for next set of data
+
+$ curl
+// curl: try 'curl --help' or 'curl --manual' for more information
+
+$ curl www.google.com   // print some source code of google.com website
+
+$ clear
+
+$ curl -o google.html www.google.com    // download google.com data in google.html file
+/*  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-  0     0    0     0    0     0      0      0 --:--:-- --:--:-100 19577    0 19577    0     0  29487      0 --:--:-- --:--:-- --:--:-- 29572
+*/
+
+$ ls
+// bash1.sh  bash2.sh  google.html  new_folder/  note.txt
+
+$ curl -o word.txt http://www.mit.edu/\~ecprice/wordlist.10000  // download into word.txt file
+/* % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-  0     0    0     0    0     0      0      0 --:--:-- --:--:-100 75880  100 75880    0     0  73553      0  0:00:01  0:00:01 --:--:-- 73741
+*/
+
+$ ls
+// bash1.sh  bash2.sh  google.html  new_folder/  note.txt  word.txt
+
+$ curl http://www.mit.edu/\~ecprice/wordlist.10000  // print all output of file
+
+$ less note.txt
+/echo   // search echo inside note.txt file
+// type n for next occurence
+
+$ cp new_folder new_folder2     // not copy folder => not work these commands for folder
+// cp: -r not specified; omitting directory 'new_folder'
+
+$ cp -r  new_folder new_folder2   // copy all data inside the new_folder into new_folder2
+
+$ cd new_folder2
+
+$ ls
+// new.txt  note.txt
+
+$ cd ..
+
+$ ls
+// bash1.sh  google.html  new_folder2/  word.txt   bash2.sh  new_folder/  note.txt
+
+$ rm bash1.sh   // remove/delete bash1.sh file
+
+$ ls
+// bash2.sh     new_folder/   note.txt    google.html  new_folder2/  word.txt
+
+$ rm *  // delete everything from here
+
+$ rm bash*  // delete all file that starts with bash
+
+$ ls
+// google.html  new_folder/  new_folder2/  note.txt  word.txt
+
+$ rm new_folder2      // not copy folder => not work these commands for folder
+// rm: cannot remove 'new_folder2': Is a directory
+
+$ rm -r new_folder2   // delete new_folder2
+$ rmdir new_folder2  // delete new_folder2
+
+$ ls
+// google.html  new_folder/  note.txt  word.txt
+
+
+$ wc word.txt   // show total number of words inside word.txt file
+// 10000 10000 75880 word.txt
+
+$ wc note.txt   // show total number of words inside note.txt file
+// 190  770 5224 note.txt
+
+$ less word.txt | wc        // pyping concept => print the output/total number of words and tanking input in wc
+// 10000   10000   75880
+
+$ grep py word.txt  // global regular expression print =>  print all words that contains py inside the word.txt file
+/*copy
+copying
+copyright
+copyrighted
+copyrights
+floppy
+happy
+puppy
+python
+spy
+spyware
+therapy
+*/
+
+$ grep py word.txt | wc   // print or count total number of words that contains py
+//     12      12      92
+
+$ grep hello word.txt
+// hello
+
+$ grep hello word.txt | wc
+//      1       1       6
+
+$ ls
+// google.html  new_folder/  note.txt  word.txt
+
+$ touch bash.sh
+/*Inside bash.sh file
+echo "Hello, World!"
+a=3
+echo $a
+*/
+
+$ ls
+// bash.sh  google.html  new_folder/  note.txt  word.txt
+
+$ bash bash.sh  // used to run bash.sh file
+/*Hello, World!
+3*/
+
+$ ./bash.sh  // used to run bash.sh file
+/*Hello, World!
+3*/
+
+$ cat bash.sh   // print content insided bash.sh file
+/*
+echo "Hello, World!"
+
+a=3
+
+echo $a
+*/
+
+$ echo $PS1     // enviroment variable
+// \[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$
+
+$ export PS1="bharat'   // change shell script
+
+
+
+// bashrcgenerator => websites

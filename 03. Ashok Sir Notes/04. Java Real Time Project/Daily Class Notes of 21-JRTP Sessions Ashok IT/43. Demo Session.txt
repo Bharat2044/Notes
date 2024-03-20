@@ -1,0 +1,91 @@
+++++++++++++++++++++++++++++++++++++++++++++++
+JRTP (Java Real-time Project) - Fullstack Development
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Tech Stack : Java 8 + Spring Boot + Microservices + AWS Cloud + Angular
+
+Course Code : 21-JRTP
+
+Name 	: Ashok 
+Exp		: 9+ Yrs Of IT Exp as Java Fullstack Developer
+Role		: Tech Lead in MNC Company (Banking Sector)
+Skills	: Java JEE, Spring, Boot, REST API, Microservices, Cloud, Linux , AWS, DevOps & Angular
+
++++++++++++++
+Pre-Requisites
++++++++++++++
+
+1) Core Java (OOPS, Collections, Threads, Generics, Annotations, Files IO, Exceptions Handling, Strings, Arrays)
+2) Adv Java ( JDBC & Servlets )
+3) Database ( SQL Queries )
+4) Spring Boot  (Paralelly You can Learn)
+
+
+++++++++++++++
+Course Content
+++++++++++++++
+
+Part-1 : IT Industry Details 
+
+-> Types of companies, Interview Process, Projects, Types of Jobs, Types of Teams, Bridge Calls, Role Chart etc..
+
+Part-2 : Realtime Tools (20+ Tools)
+
+-> Maven, Git Hub, BitBucket, JIRA, SonarQube, Jenkins, Nexus, JMETER, POSTMAN, Swagger, Dockers,  Kubernetes, JUNIT, Mockito, Jacocco, Logback, Logstash, Putty, WinScp, Kafka, Redis etc....
+
+Part-3 : Java Microservices 
+
+-> Architecture, Service Registry (Eureka), Api Gateway (Cloud Gateway), FeignClient, Load Balancer, Circuit Breaker 
+
+Part-4 : Mini Projects (Backend Development) (REST APIS)
+
+Part-5 : Major Project (Insurance Domain)
+
+Part-6 : TypeScript + Angular
+
+Part-7 : Linux + AWS Cloud
+
+Part-8 : Interview Preparation
+
+
+##### Note: After completion of this course you can put 3 to 4 years of experience as Java Fullstack Developer #######
+
+
+++++++++++++
+Course Details
+++++++++++++++
+
+Course name 		: Java Realtime Project (Fullstack Development) 
+Course Code 		: 21 - JRTP
+Course Duration 	: 4 Months
+Start Date		: 25-July-2022
+Class Timings	: 8:30 PM - 10:00 PM ( IST )
+Frequency		: Monday - Saturday (Its Weekday Training Program)
+
+Course Fee  		:  7,000 INR (Live classes + Daily Class Notes)
+		     		: 12,000 INR (Live classes + Daily Notes + Backup Vidoes - 6 Months)
+
++++++++++++++++++++++++++
+Advantages with Ashok IT
+++++++++++++++++++++++++
+
+1) Live Classes
+2) Live Coding
+3) Softcopy Material (In Portal)
+4) Doubts Clarifications
+5) Group for communication
+6) Placement Assistance (For freshers)
+
+Note: Daily 1:30 hour for live class + 2 to 3 hours practise is required
+
+Note: Laptop is mandatory
+
+Note: Weekly assignments will be there
+
+			*************************** Project Means Doing and Learning **************************************
+
++++++++++++++++++++++++++++++++++++++++++
+Telegram Channel Username : @ashokitofficial
+++++++++++++++++++++++++++++++++++++++++
+
+

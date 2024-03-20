@@ -1,0 +1,53 @@
+============
+Requirement 
+============
+
+Develop web application with below pages
+
+1) Login Page
+
+		1.1) Email text field
+		1.2) Pwd text Filed
+		1.3) Login Button
+		1.4) Forgot Pwd Hyperlink
+		1.5) Sign Up hyperlink
+
+2) Registration Page
+
+			2.1) Fname text field
+			2.2) Lname text field
+			2.3) Email text field
+			2.4) Pwd text field
+			2.5) Gender radio button
+
+3) Forgot Pwd Page
+
+			2.1) Email
+
+4) Reset New Password Page
+
+			4.1) Email as lablel
+			4.2) New Pwd
+			4.3) Confirm Pwd
+
+5) Dashboard Page 
+
+=> Dashboard page should display left side menu with below names
+
+		5.1) Address Screen ( City, State, Country and Submit button )
+
+		5.2) Education (Highest Qualification, Passout year, Percentage in Highest Qualification and Submit button)
+	
+		5.3) Family Details ( Father Name, Mother Name, No.of Siblings and Submit button)
+
+		5.4) Logout
+
+
+
+		
+
+
+
+
+
+

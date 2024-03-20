@@ -1,0 +1,372 @@
+===============================
+Spring Boot with Angular Integration
+===============================
+
+-> Spring Boot is used to develop Backend REST APIs for the application
+
+-> Angular is used to develop frontend of the application
+
+-> Frontend application contains user interface
+-> Backend apis contains business logic
+
+Note: Frontend application should access backed apis
+
+			Fullstack Development = Fronend Development + Backnd Development
+
+
+==============
+HttpClient
+==============
+
+-> In Angular, we have HttpClient module to communicate with Backend apis
+
+-> HttpClient module is used to send request from one server to another server
+
+
+			Angular   ----> HttpClient Module -----------> Backend Apis
+
+
+-> HttpClientModule is available in '@angular/common/http' package
+
+-> We have to import this HttpClientModule in "AppModule"
+
+
+############################################
+Project-1 : Spring Boot with Angular Integration
+###########################################
+
+================================================================
+1) Create Spring Boot Application using STS IDE with below dependencies
+================================================================
+
+			a) Spring-Boot-Web-Starter
+			b) Dev Tools
+
+================================================================
+2) Create RestController with Required Methods like below
+================================================================
+
+@RestController
+@CrossOrigin
+public class MyRestController {
+
+	@GetMapping("/welcome")
+	public String getWelcomeMsg() {
+		String msg = "Welcome to Fullstack Development...";
+		return msg;
+	}
+
+	@GetMapping("/wish")
+	public String getWishMsg() {
+		String msg = "All The Best My Dear Friend...";
+		return msg;
+	}
+}
+
+3) Run the Spring Boot Application (By default it will run in embedded tomcat server)
+
+=================================================
+4) Create Angular Application using VS Code IDE
+=================================================
+			$ ng new app
+
+=================================================
+5) Import HttpClientModule in App Module ts file
+=================================================
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule, HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+		
+============================================================
+6) Create functions in App Component class to handle template request
+============================================================
+
+import { createInjectableType } from '@angular/compiler';
+import { Component, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app9';
+
+    msg:string = "Welcome to Angular";
+
+    constructor(@Inject (HttpClient) private httpClient:HttpClient){ }
+
+    getWelcomeMessage(){
+       this.httpClient.get("http://localhost:8080/welcome", {responseType : 'text'})
+       .subscribe(response => {
+          this.msg = response;
+       });
+    }
+
+    getWishMessage(){
+        this.httpClient.get("http://localhost:8080/wish", {responseType: 'text'})
+        .subscribe(response => {
+          this.msg = response;
+        });
+    }
+} 
+
+
+=================================================
+7) Design Presentation logic in template file
+=================================================
+<div>
+    <h3>Spring Boot + Angular Integration</h3>
+
+    <input type="button" value="Get Welcome Msg" (click)="getWelcomeMessage()"/>
+    <input type="button" value="Get Wish Msg" (click)="getWishMessage()"/>
+
+    <hr/>
+
+    {{msg}}
+
+</div>
+
+8) Run the Angular Application to test Integration logic
+
+#################################################
+Second Project (Spring Boot with Angular Integration)
+#################################################
+
+==================================================
+1) Create Spring Boot Application with below dependencies
+==================================================
+
+			a) web-starter
+			b) devtools
+			c) lombok
+
+====================================================
+2) Create Binding class to represent request data in Backend
+====================================================
+
+package in.ashokit;
+
+import lombok.Data;
+
+@Data
+public class Contact {
+
+	private String name;
+	private String email;
+	private Long phno;
+
+}
+
+=================================================
+3) Create RestController class with POST request method
+=================================================
+
+package in.ashokit;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@CrossOrigin
+public class ContactRestController {
+
+	private Map<Integer, Contact> contactMap = new HashMap<>();
+
+	@PostMapping("/contact")
+	public Collection<Contact> createContact(@RequestBody Contact c) {
+
+		System.out.println(c);
+
+		contactMap.put(UUID.randomUUID().hashCode(), c);
+
+		return contactMap.values();
+	}
+}
+
+
+=================================================
+4) Create Angular Application using 'ng new app' command
+=================================================
+
+		$ ng new app11
+
+==================================================
+5) Import below two modules in App Module
+
+		a) HttpClientModule  (To send http request using httpclient)
+
+		b) FormsModule (to achieve two way data binding using ngModel)
+
+==================================================
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule, HttpClientModule, FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+=================================================
+6) Create Binding class to represent form data like below
+
+			$ ng generate class contact
+
+=================================================
+
+export class Contact {
+
+    name:string="";
+    email:string="";
+    phno:any="";
+
+}
+
+=================================================
+7) Create Angular service to write business logic like below
+
+		$ ng g s contact
+
+=================================================
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Contact } from './contact';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ContactService {
+
+  private restUrl = 'http://localhost:8080/contact';
+
+  constructor(private httpClient:HttpClient) { }
+ 
+  createContact(contact:Contact):Observable<Contact[]>{
+    return this.httpClient.post<Contact[]>(this.restUrl, contact, {responseType:'json'});
+  }
+}
+
+==========================================
+8) Create Application Logic in Component class
+==========================================
+import { Component } from '@angular/core';
+import { Contact } from './contact';
+import { ContactService } from './contact.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app11';
+
+  contact:Contact = new Contact();
+
+  contacts:Contact[] = [ ];
+
+  constructor(private contactService:ContactService){}
+
+  msg:string = "";
+
+  saveContact(){
+    this.contactService.createContact(this.contact)
+    .subscribe(response => {
+      this.contacts = response;
+    });
+  }
+
+}
+
+
+
+==========================================
+9) Create Presentation logic in template file
+========================================
+
+<h2>Spring Boot with Angular Integration</h2>
+
+{{msg}}
+
+<form>
+ Contact Name: <input type="text" name="name" [(ngModel)]="contact.name" /> <br/>
+ Contact Email: <input type="text" name="email" [(ngModel)]="contact.email" /> <br/>
+ Contact Number: <input type="text" name="phno" [(ngModel)]="contact.phno" /> <br/>
+
+ <input type="button" value="Save" (click)="saveContact()"/>
+</form>
+
+<hr/>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phno</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let contact of contacts">
+            <td>{{contact.name}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.phno}}</td>
+        </tr>
+    </tbody>
+
+</table>
+
+==========================================
+10) Run the application and test it
+========================================
+
+	$ ng serve -o
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+============
+SonarQube
+============
+
+-> SonarQube is used for Code Quality Checking
+
+-> SonarQube is called as Code Review Software
+
+-> SonarQube is Free (Community Edition)
+
+-> SonarQube is developed using Java language
+
+-> SonarQube supports 20+ programming languages for Code Review
+
+	Ex: Java, C#, Python, Node JS, PHP, Java Script, TypeScript, C, C++ etc....
+
+==========================================
+SonarQube will identify below things in the code
+==========================================
+
+1) Bugs (These bugs will break application functionality)
+
+2) Vulnerabilities (Security issues, hackers can attack)
+
+3) Code Smells (issues in code, recommended to fix but not danger)
+
+4) Duplicate Code (repeated lines of code)
+
+5) Code Coverage (howmany lines of code is tested in unit testing)
+
+
+Note: For every project code review will happen in real-time
+
+-> With the help of code review we can identify our mistakes and we can correct them
+
+
+======================
+SonarQube Server Setup
+======================
+
+Minimum RAM : 2 GB
+		
+-> Create EC2 instance with 4 GB RAM (t2.medium)
+
+-> Connect with EC2 instance using MobaXterm
+
+-> Execute below commands in Ec2 instance
+
+$ sudo su
+$ cd /opt
+$ sudo yum install java-1.8.0-openjdk
+$ java -version
+$ wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.8.zip
+$ unzip sonarqube-7.8.zip
+
+Note: SonarQube server will not run with root user
+
+-> Create new user in ec2 instance
+$ useradd sonar
+
+-> Configure sonar user without pwd in suderos file
+
+$ visudo
+
+-> Configure below line in sudoers file
+
+sonar ALL=(ALL) NOPASSWD: ALL
+
+-> Change ownership & file permissions for sonar folder
+$ chown -R sonar:sonar /opt/sonarqube-7.8/
+$ chmod -R 775 /opt/sonarqube-7.8
+$ su - sonar
+
+-> Goto bin directory then goto linux directory and run sonar server 
+
+$ cd /opt/sonarqube-7.8/bin/linux-x86-64
+
+$ sh sonar.sh start
+
+-> Check sonar server status 
+
+$ sh sonar.sh status
+
+******************** Note: Sonar Server runs on 9000 port number by default ******************************
+
+-> Enable 9000 port number in EC2-Instance Security Group as Inbound Rule
+
+-> Now we can access our SonarQube server using below URL
+
+		URL : http://EC2-Public-IP:9000/
+
+Note: Default credentials of sonar
+
+		uname: admin
+		pwd: admin
+
+
+
+===================================
+SonarQube Integration with Maven Project
+===================================
+
+-> configure below properties in pom.xml file
+
+
+<properties>
+	<sonar.host.url>http://3.110.77.68:9000/</sonar.host.url>
+	<sonar.login>admin</sonar.login>
+	<sonar.password>admin</sonar.password>
+  </properties>
+
+-> execute below maven goal
+
+	$ mvn sonar:sonar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1061 @@
+=========
+Chapter-3
+=========
+
+1) Arrays
+
+2) Strings
+
+3) StringBuffer
+
+4) StringBuilder
+
+5) Command Line Arguments
+
+
+
+
+Variable ===> It is used to store the data
+
+Datatype ===> It is used to specify type of the data
+
+		
+				// variable declaration
+				int a ; 
+
+				// variable intialization
+				a = 20 ;
+
+				int i = 45; // this is valid
+
+				int b = 20, 30 ;    // this is in-valid (we can store only one value)
+
+
+// store one student subject wise marks  (we need 6 variables for 6 subjects for one student)
+
+int sub1 = 78;
+
+int sub2 = 98;
+
+int sub3 = 79;
+
+int sub4 = 90;
+
+int sub5 = 95;
+
+int sub6 = 87;
+
+// i want to store 50 students subject wise marks ( we need 300 variables to store all students marks)
+
+=> This is not recommended because so many variables we have to create
+
+=> To overcome this problem we can go for 'Arrays' concept
+
+========
+Arrays
+========
+
+-> It is a referenced data type
+
+-> It is used to store multiple values
+
+-> In Arrays, size is fixed ( we can't change the size in runtime )
+
+-> Arrays supports only Homogenious elements (same type of elements)
+
+Defination : Array is a container which is used to store collection of elements with same data type.
+
+
+Syntax
+----------
+
+// Array Declaration
+datatype [ ]  variableName;
+
+dataype variableName [ ] ;
+
+datatype  [ ]variableName ;
+
+
+// Array Creation 
+variableName = new datatype [ size ] ;
+
+
+datatype[ ] variableName = new datatype [ size ] ;
+
+
+Ex :      int[ ]  arr = new int [ 5 ];
+
+Note: At the time of creating the array the size is mandatory
+
+=> Array Size represents how many values we can store into Array
+
+=> Array will store the data based on indexes
+
+=> Array index always will start from zero (0)
+
+
+class ArrayDemo {
+
+	public static void main(String... args){
+
+			int [ ]  arr  = new int [ 3 ] ;
+
+			arr[0] = 100;
+			arr[1] = 101;
+			arr[2] = 102;
+						
+			System.out.println ( arr [ 0 ] ) ;
+			System.out.println ( arr [ 1 ] ) ;
+			System.out.println ( arr [ 2 ] ) ;
+	}
+}
+------------------------------------------------------------------------------------
+
+=> We can find size of the array using length property
+
+class ArrayDemo {
+	public static void main(String... args){
+
+			int [ ]  arr  = new int [ 5 ] ;
+			arr[0] = 100;
+			arr[1] = 101;
+			arr[2] = 102;
+			
+			System.out.println ( arr.length ) ;
+	}
+}
+
+-------------------------------------------------------------------
+class ArrayDemo {
+	
+    public static void main (String... args) {
+
+			int arr[ ]  = new int [ 3 ] ;
+
+			arr[0] = 100;
+			arr[1] = 101;
+			arr[2] = 102;
+
+			for( int i = 0 ; i < arr.length ; i ++ ) {
+					System.out.println ( arr [i] );
+			}		
+			
+	}
+}
+
+------------------------------------------------
+
+class ArrayDemo {
+
+	public static void main(String... args) {
+
+			boolean [ ]  arr  = new boolean [ 3 ] ;
+
+			arr [2] = true;
+
+			for( int i = 0 ; i < arr.length ; i ++ ) {
+					System.out.println ( arr [i] );
+			}
+	}
+}
+---------------------------------------------------------------
+
+class ArrayDemo {
+	public static void main(String... args) {
+
+			int arr [ ]  = { 101, 102, 103, 104 } ;	
+
+			for ( int i = 0; i < arr.length; i++){
+					System.out.println(arr[i]);
+			}			
+	}
+}
+
+------------------------------------------------------------------------------------------------------
+
+class ArrayDemo {
+
+	public static void main(String... args) {
+
+			int arr [ ]  = { 101, 102, 103, 104 } ;	
+
+			arr [ 0 ] = 200 ;	// it will update 0th index value from 101 to 200
+
+			arr [ 1 ] = 300 ;  // it will update 1st index value from 102 to 300
+
+			System.out.println ( arr [ 101 ] ) ;  // AIOBE ( 101 index not available in array )
+	}
+}
+-----------------------------------------------------------------------------------------------------------------
+
+Note: Array size should be positive integer only
+
+-> Decimal value can't be used for Array Size
+
+-> Negative value also can't be used for Array Size
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+1) Write a java program to find min and max elements in the array
+
+		int arr [ ] = { 15, 8, 9, 2, 11, 4 }
+
+
+============================== Program with Sort method ===============================
+import java.util.*;
+
+class ArrayDemo {
+	
+	public static void main(String... args) {
+
+			int arr [ ] = { 15, 8, 9, 2, 11, 4 } ; 
+
+			Arrays.sort(arr);
+
+			System.out.println ("Min Element : " + arr [ 0 ] );
+
+			System.out.println("Max Element : " + arr [ arr.length - 1 ] );	
+	}
+}
+=========================Program without sort method=========================================
+class ArrayDemo {
+	
+	public static void main(String... args) {
+
+			int arr [ ] = { 15, 8, 9, 2, 11, 4 } ; 
+
+			int min = arr [ 0 ]; 
+			int max = arr [ 0 ] ; 
+
+			for ( int i = 0 ; i < arr.length ; i++){
+				if ( arr [ i ] > max ) {
+					max = arr [ i ] ;
+				}
+				if ( arr [ i ] < min ){
+					min  = arr [ i ];
+				}
+			}
+			System.out.println ( " Min Element :: " + min );
+			System.out.println (" Max Element :: " + max);
+	}
+}
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Q-2 ) Write a  java program to reverse an array ?
+
+		int arr [ ] = { 15, 8, 9, 2, 11, 4 } ; 
+
+
+
+class ArrayDemo {
+	
+	public static void main(String... args) {
+
+			int arr [ ] = { 15, 8, 9, 2, 11, 4, 7 } ;
+
+			int temp = 0;
+
+			for ( int i = 0; i < arr.length / 2 ; i++ ){
+				temp = arr [ i ]; 
+				arr [ i ] = arr [ arr.length - 1 - i ]; 
+				arr [ arr.length-1 - i ] = temp;  
+			}
+
+			for( int n : arr){
+				System.out.print ( n + " " );
+			}
+			
+	}
+}
+
+============================= Array Elements Printing - 3 ways=====================================
+
+import java.util.Arrays;
+
+public class ArraySorting {
+
+	public static void main(String[] args) {
+
+		int arr[] = { 5, 8, 2, 6, 9, 3 };
+
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println();
+
+		for (int x : arr) {
+			System.out.print(x + " ");
+		}
+		System.out.println();
+
+		System.out.println(Arrays.toString(arr));
+	}
+
+}
+=========================================================================================
+
+public class ArraySorting {
+
+	public static void main(String[] args) {
+
+		int arr[] = { 5, 8, 2, 6, 9, 3 };
+		int temp = 0;
+		
+		for (int i = 0; i < arr.length; i++) {
+			
+			for (int j = i + 1; j < arr.length; j++) {
+				if ( arr[i] < arr[j]) {
+					temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+		}
+		System.out.println(Arrays.toString(arr));
+	}
+}
+
+=================================================
+public class SumMatchingPairs {
+
+	public static void main(String[] args) {
+
+		int arr[] = { 3, 5, 1, 6, 2, 7, 9 };
+
+		int sum = 8;
+
+		for (int i = 0; i < arr.length; i++) {
+
+			for (int j = i + 1; j < arr.length; j++) {
+				if (arr[i] + arr[j] == sum) {
+					System.out.println(arr[i] + "+" + arr[j] + "=" + sum);
+				}
+			}
+		}
+	}
+}
+
+=============================================================
+public class NonRepeatedElements {
+
+	public static void main(String[] args) {
+
+		int arr[] = { 2, 3, 2, 1, 3, 4, 5 };
+
+		for (int i = 0; i < arr.length; i++) {
+			int count = 0;
+
+			for (int j = 0; j < arr.length; j++) {
+				if (arr[i] == arr[j]) {
+					count++;
+				}
+			}
+			if (count == 1) {
+				System.out.print(arr[i] + " ");
+			}
+		}
+	}
+}
+
+----------------------------------------------------
+
+
+=> Arrays are divided into 2 types
+
+
+1) Single Dimensional Array
+
+				int arr [ ] =  new int [ size ] ;
+
+2) Multi Dimensional Array
+
+				int   arr [ ] [ ]  = new int [ rowsSize ]  [ columnsSize ] ;
+
+
+import java.util.*;
+
+class MutliDimensionArray{
+
+		public static void main(String... args){
+	
+					int arr [ ] [ ] = new int [ 2 ] [ 2 ];
+
+					arr [0] [0] = 100 ;
+					arr [0] [1] = 200;
+					arr [1] [0] = 300;
+					arr [1] [1] = 400;		
+
+					for (int i = 0; i < arr.length ; i ++ ){
+					
+							for ( int j = 0; j <arr.length ; j ++ ){
+									System.out.println( arr[i] [j] );
+							}				
+					}	
+
+		}
+}
+-----------------------------------------------------------------------------
+
+import java.util.Arrays;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		int arr[][] = new int[2][2];
+
+		arr[0][0] = 100;
+		arr[0][1] = 200;
+		arr[1][0] = 300;
+		arr[1][1] = 400;
+
+		for (int[] ar : arr) {
+			System.out.println(Arrays.toString(ar));
+		}
+	}
+}
+---------------------------------------------------------------------------------------------------------
+
+import java.util.Arrays;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		int arr[][] = { { 100, 200 }, { 300, 400 } };
+
+		for (int[] ar : arr) {
+			System.out.println(Arrays.toString(ar));
+		}
+	}
+}
+----------------------------------------------------------------------------------
+
+public class Demo {
+
+	public static void main(String[] args) {
+		int arr[][] = { { 100, 200 }, { 300, 400 } };
+
+		for (int[] ar : arr) {
+			for(int x : ar) {
+				System.out.println(x);
+			}
+		}
+	}
+}
+
+=======
+Strings
+=======
+
+-> String is a pre-defined class available in java.lang package
+
+-> String we can use as a data type also (Referenced Data Type)
+
+	Note: Every java class can be used as a referenced data type
+
+-> String is used to store group of characters
+
+			Ex :   String name = "abc" ;
+
+-> String is immutable  in java ( can't be modified )
+
+-> We can create String object in 2 ways
+
+				// approach - 1  (string literal)
+				String  name = "ashokit";
+
+				// approach -2 (using new operator)
+				String str = new String ("ashokit");
+
+====================
+String Constant Pool
+====================
+
+-> It is special memory in JVM to store String objects
+
+-> It will not allow us to create duplicate objects
+
+				String s1 =  "hi" ;
+
+				String s2 = "hi" ;
+
+-> s1 and s2 objects are having same content hence only one object will be created and two variables will be pointed to same object.
+
+class StringDemo {
+
+		public static void main(String[ ] args) {
+
+			String s1 =  "hi" ;
+			String s2 = "hi" ;
+
+			if ( s1 == s2 ) {
+				System.out.println (" Both are same ");
+			}else {
+				System.out.println(" Both are not same" );
+			}					
+
+		}
+}
+
+
+=> If we create String objects using 'new' operator always new object will be created in Heap area.
+
+class StringDemo {
+
+		public static void main(String[ ] args) {
+
+			String s1 =  new String ("hello") ;
+
+			String s2 = new String ("hello") ;
+
+			if ( s1 == s2 ) {
+				System.out.println (" Both are same ");
+			}else {
+				System.out.println(" Both are not same" );
+			}					
+
+		}
+}
+
+Note:  In Strings  == will compare address of the objects not content.
+
+
+Q) How many objects will be created ? 
+
+String s1 = "ashokit" ;   // 1 obj
+
+String s2  = "ashokit";  // 1 obj
+
+String s3 = new String("ashokit");  // 2 objs
+
+String s4 = new String("ashokit");  // 3 objs
+
+String s5 = new String("hello"); // 5 objs
+
+String s6 = new String("hi"); // 7 objs
+
+s1 == s2  =====> true
+
+s2 == s3  =====> false
+
+s3 == s4 =====> false
+
+s5 == s6  ====> false
+
+
+=====================
+String class Methods
+=====================
+
+charAt ( )  => To get a character based on given index
+
+					String s1 = "ashokit";
+					System.out.println(s1.charAt(0));
+
+length ( )  => To get size of string ( no.of characters available in String )
+
+						String s1 = "ashokit";
+						System.out.println(s1.length( ) );
+
+concat ( ) => To join two strings (appending)
+
+						String s1 = "ashok";
+						String s2 = "it";
+						String s3 = s1.concat(s2);
+						
+						// String s4 = s1 + s2 ;
+
+						System.out.println(s3);
+
+equals ( ) => To compare content of two Strings
+
+						String s1 = "hi";
+						String s2 = "hello";
+
+						System.out.println( s1.equals(s2) );
+
+
+Note: In Strings,  == operator will compare address of string objects where as 'equals( ) ' method will compare content of the objects.
+
+replace ( ) => To repalce chars with another chars
+
+				String s1 = "hyderabad";
+
+				String s2 = s1.replace("bad", "good");
+
+				System.out.println(s2);
+
+toUpperCase ( ) => To convert string to uppercase string
+
+					s1.toUpperCase( ) ;
+
+toLowerCase ( ) => To convert String to lowercase String
+
+					s1.toLowerCase ( ) ;
+
+indexOf ( ) => To get first occurance of char
+
+				System.out.println ( s1.indexOf('a') ) ;
+
+lastIndexOf ( ) => to get last occurance of char
+
+				System.out.println ( s1.lastIndexOf('a') ) ;
+
+Note: If given char is not available then it will return '-1'
+
+substring ( ) => It is used to get some part of the string. It will take start index & end index.
+
+			start-index : inclusive
+
+			end-index : exclusive
+
+			System.out.println( s1.substring(0,5)
+
+Note: If we don't give end index, it will print from start index to last index.
+
+split ( ) => It is used to split the string based on delimiter (seperator) 
+
+				String s2  = "hi@hello@how are@you";
+
+				String [ ] arr = s2.split ("@");
+				
+				System.out.println(Arrays.toString(arr));
+
+
+valueOf ( )  -> It is used convert any type value into String type
+
+
+					int a = 10 ;
+					int b = 20 ;
+
+					a + b   ===> 30
+
+					String s1 = "10";
+					String s2 = "20";
+
+					s1 + s2  ==> "1020"
+
+					String.valueOf (a) + String.valueOf (b) ==> 1020
+							"10"	    +  "20"     ==> 1020
+
+
+Note: valueOf ( ) is a static method in String class. Static methods will be called using classname. Non-Static methods will be called using Object.
+
+
+startsWith ( )   =>  It is used to check given String is starting with particular char(s) or not
+
+						String str = "ashokit";
+
+						str.startsWith("a") ;    =====> true
+
+						str.startsWith("z") ;     =====> false
+
+endsWith ( )   =>  It is used to check given String is ending particular char(s) or not
+
+						String str = "ashokit";
+			
+						str.endsWith("it");   ===> true
+
+						str.endsWith("good") ===> false
+
+
+trim ( )    ==>  It is used to remove starting and ending spaces of String
+
+						String str = "     hello    ";
+
+						str.trim ( ); 
+
+
+intern ( ) => It is used to access the object from scp
+
+
+String s1 = "hi";
+
+String s2 = s1.intern ( );
+
+s1 == s2 ===> true
+
+
+toString ( ) => It is used to convert object into string format.
+
+
+toCharArray ( )   :  This method is used to convert String to char array
+
+				String s1 = "java";
+
+				char arr[ ]  = s1.toCharArray ( );
+
+===============
+StringBuffer
+===============
+
+-> It is a predefined class available in java.lang package
+
+-> It is used to store group of characters
+
+-> StringBuffer is a mutable object ( We can modify the content )
+
+-> StringBuffer is thread-safe (only one thread can access at a time)
+
+
+		StringBuffer sb  = new StringBuffer ( "hello" );
+
+-----------------------------------------------
+class SBDemo {
+
+		public static void main (String[ ] args){
+				
+					StringBuffer sb = new StringBuffer("hello");
+					sb.append(" hi");
+					System.out.println(sb);
+
+					StringBuffer sb1 = new StringBuffer("java");
+					System.out.println(sb1.reverse());
+
+					String s1 = "ashok";
+					s1.concat("it");
+					System.out.println(s1);
+
+		}
+}
+
+
+=============
+StringBuilder
+=============
+
+-> StringBuilder is a predefined class available in java.lang package
+
+-> This class introduced in JDK 1.5v
+
+-> StringBuilder objects are mutable  ( content can be modified )
+
+-> StringBuilder objects are not thread safe (Multiple threads can access at a time)
+
+			StringBuilder sb = new StringBuilder ( "java" );
+
+			sb.length ( );
+
+			sb.append("program");
+
+
+---------------------------------------------------
+
+class BuilderDemo {
+
+       public static void main (String[ ]  args){
+
+			StringBuilder sb =  new StringBuilder("java") ;
+			System.out.println(sb.length());
+
+			sb.append("program");
+
+			System.out.println(sb);	
+			System.out.println(sb.length());
+		}
+}
+---------------------------------------------------------------------------------------------------
+
+Q) What is the difference between String, StringBuffer & StringBuilder ?
+
+
+String -> Immutable --> Jdk 1.0
+
+StringBuffer---> Mutable + Thread-Safe --> Jdk 1.0
+
+StringBuilder --> Mutable + Not-Thread-Safe --> Introduced in jdk 1.5v
+
+------------------------------------------------------------------------------------------------------
+
+
+=======================
+Command Line Arguments
+========================
+
+-> Arguments means Values
+
+-> Commadline args are used to supply dynamic values as input for our program
+
+-> Cmd Args will be recieved by main method
+
+-> Cmd Args default data type is String
+
+-> We can pass multiple cmd args, they will be stored into one array (String [  ] )
+
+// Program with command line arguments
+
+class CmdArgs {
+
+		public static void main (String [ ] a){
+
+				String s1 = a [0] ; 
+				String s2 = a [1];
+				String s3 = a [2];
+
+				System.out.println( s1 + s2 + s3 );
+		}
+}
+
+
+> javac CmdArgs.java
+
+> java CmdArgs  ashok it hyd
+
+
+// Write a java program to perform sum of two numbers using command line Arguments
+
+
+class CmdArgs {
+
+		public static void main (String [ ] a) {
+
+				System.out.println ("Total Cmd Args :: " + a.length );
+
+				String s1 = a [0];
+
+				String s2 = a [1];
+
+				int x = Integer.parseInt (s1);
+				int y = Integer.parseInt(s2);
+
+				System.out.println (x + y);
+				
+		}
+
+}
+
+> javac CmdArgs.java
+
+> java CmdArgs 10 20
+
+> java CmdArgs 10 20 30
+
+
+============================
+class CharOcc {
+
+		public static void main (String[ ] args){
+
+					String s = "java";
+					char ch  = 'a';
+
+					char arr[ ] = s.toCharArray ( );
+
+					int count = 0;
+	
+					for( int i = 0; i < arr.length ; i ++ ) {
+							if ( arr[i] == 'a' ) {
+									count ++ ;	
+							}
+					}
+				
+				System.out.println(count);
+		}
+}
+===========================================
+class StringReverse {
+
+			public static void main(String[ ] args){
+
+					String s = "java";
+
+					String rev = "";
+
+					for( int i = s.length( ) - 1 ; i >=0 ;  i-- ){
+
+						rev = rev + s.charAt ( i ) ; //avaj
+					}
+			}
+}
+----------------------------------------------------------
+class StringReverse {
+
+			public static void main(String[ ] args){
+
+					String s = args[0];
+
+					String rev = "";
+
+					for( int i = s.length( ) - 1 ; i >=0 ;  i-- ){
+
+						rev = rev + s.charAt ( i ) ; 
+					}
+
+				System.out.println(rev);
+			}
+}
+
+-----------------------------------------------------------------------------
+class Palindrome {
+
+	public static void main(String[ ] args){	
+
+					String s = args [0] ; 
+					String s1 = ""; 
+
+					for(int i = s.length ( ) -1 ; i >=0 ; i -- ){
+							s1 = s1 + s.charAt (i);
+					}
+
+					if( s.equals(s1) ){
+							System.out.println("Palindrome");
+					}else{
+							System.out.println("Not Palindrome");
+					}
+	}
+}
+
+----------------------------
+
+class Palindrome {
+
+	public static void main(String[ ] args){	
+
+					String s = args [0] ; 					
+					StringBuffer sb = new StringBuffer(s);
+
+					sb.reverse() ;
+
+					String s1 = sb.toString( );
+
+					if( s.equals ( s1 ) ) {
+							System.out.println ("Palindrome");
+					}else{
+							System.out.println ("Not Palindrome");
+					}				
+
+	}
+
+}
+
+------------------------------------------------------------------------
+import java.util.*;
+
+class Anagram {
+
+	public static void main(String[ ] args){
+
+			String s1 = args[ 0 ] ;
+			String s2 = args[ 1 ];
+
+			if ( s1.length ( ) != s2.length () ){
+					System.out.println("Given Strings are not anagrams");
+					return ;
+			}
+
+			char a[ ] = s1.toCharArray ( );
+
+			char b[ ] = s2.toCharArray ( ) ;
+
+			Arrays.sort ( a );
+			Arrays.sort ( b );
+
+			boolean flag = Arrays.equals(a, b);
+			if( flag  ){
+				System.out.println("Given strings are anagrams");
+			}else{
+				System.out.println("Given Strings are not anagrams");
+			}
+			
+
+	}
+
+}
+
+------------------------
+
+class SwapStrings{
+
+		public static void main(String[ ] args){
+
+
+				String a = "java";   // 4
+				String b = "program"; // 7
+
+				a = a+b; // 11
+
+				b = a.substring(0, a.length() - b.length());
+
+				a = a.substring(b.length());
+
+				System.out.println(" a = " + a);
+				System.out.println(" b = " + b);
+
+		}
+
+}
+-------------------------------------------------------
+
+class RemoveVowels {
+
+
+			public static void main(String... args){
+				
+					String s = "hello, i love my india";
+
+					s = s.replaceAll ("[aeiouAEIOU]", "");
+
+					System.out.println(s);
+			}
+
+}
+
+----------------------------------------------------------------------
+class ReverseEachWord {
+
+			public static void main(String... args){
+				
+					String s = "Hello My Friend";
+	
+					String[ ]  arr = s.split(" ");
+
+					for(int i = 0; i < arr.length ; i++){
+							String x = arr [ i ];							
+							StringBuffer sb = new StringBuffer(x);
+							sb.reverse( );
+							System.out.print (sb+" ");					
+					}					
+			}
+
+}
+----------------------------------------------------------------------
+
+class WordCount {
+
+			public static void main(String... args){
+				
+					String s = "Hello    Hello           My        Friend";
+
+					String[ ] arr = s.split("\\s+");
+						
+					System.out.println(arr.length);
+			}
+
+}
+
+---------------------------------------------------------------------------
+
+class WordCount {
+
+			public static void main(String... args){
+				
+					String s = "      Hello    Hello           My        Friend";
+
+					String[ ] arr = s.trim().split("\\s+");
+						
+					System.out.println(arr.length);
+			}
+
+}
+
+-------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+

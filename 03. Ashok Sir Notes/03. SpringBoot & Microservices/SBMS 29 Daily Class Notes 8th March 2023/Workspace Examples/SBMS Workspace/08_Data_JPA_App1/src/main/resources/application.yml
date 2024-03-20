@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: AshokIT@123
+    url: jdbc:mysql://localhost:3306/sbms27
+    username: ashokit
+  jpa:
+    show-sql: true

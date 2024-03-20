@@ -1,0 +1,81 @@
+==============
+Spring Batch
+==============
+
+=> Spring Batch is a light weight, comprehensive batch framework designed to enable the development of robust batch applications.
+
+
+============================
+What is Batch Application ?
+============================
+
+-> The application which will process bulk of records is called as Batch application.
+
+Ex :
+
+1) Sending Monthly Salaries to all employees in company
+2) Generating Monthly Payslips for employees
+3) Sending Monlty Bank Account statemet to acc holders
+4) Sending Monthly credit card bill statement to card holders
+5) Sending Festival Greetings to all customers
+6) Sending Notices on daily/weekly/monthly/yearly basis...
+
+
+			 process					process
+CSV File  ==============> Database  ================>   CSV File
+
+
+=========================
+Spring Batch Terminology
+=========================
+
+1) JobLauncher
+
+2) Job
+
+3) Step
+
+4) ItemReader
+
+5) ItemProcessor
+
+6) ItemWriter
+
+7) JobRepository
+
+===============================
+Spring Boot with Batch Example 
+===============================
+
+Requirement : Read Customers Data From CSV file and write into Database table
+
+
+
+1) Create Spring Starter project with below dependencies
+
+		a) web-starter
+		b) batch
+		c) data-jpa
+		d) mysql-driver
+		e) lombok
+
+2) Configure Datasource properites in application.yml file
+
+3) Keep Source File under "src/main/resources" folder (customers.csv)
+
+4) Create Entity class & Repository interface
+
+5) Create Batch Configuration class
+
+6) Create RestController and launch job
+
+
+
+#### Git Hub Repo URL : https://github.com/ashokitschool/sringboot_batch_app.git ####
+
+
+============
+Assignment
+============
+
+=> Read Data from DB table and store into CSV file using Spring Batch.

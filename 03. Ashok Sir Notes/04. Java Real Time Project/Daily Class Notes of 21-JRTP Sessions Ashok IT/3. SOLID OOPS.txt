@@ -1,0 +1,240 @@
+==============
+OOPS Principles
+==============
+1) Encapsulation 
+2) Polymorphism
+3) Abstraction
+4) Inheritence
+
+====================
+SOLID OOPS Principles
+====================
+
+S => Single Responsibility
+
+O => Open Closed 
+
+L => Liskov's Substitution
+
+I  => Interface Seggregation
+
+D => Dependency Inversion / Injection
+
+
+=> The main aim of above SOLID OOPS Principles to make our code more readable, maintainable and loosely coupled.
+
+
+
+======================
+S - Single Responsibility
+======================
+
+=> A class should have only one responsibility
+
+
+// This is not recommended
+class ReportGenerator {
+
+		public void generateExcel ( ) {
+			// logic to generate excel
+		}
+
+		public void generatePdf ( ) {
+			// logic to generate pdf
+		}
+}
+
+// Recommended Approach
+
+class ExcelReportGenerator {
+
+		public void generateExcel ( ) {
+			// logic to generate excel
+		}
+}
+
+class PdfReportGenerator {
+
+		public void generatePdf ( ) {
+			// logic to generate pdf
+		}
+}
+
+======================
+O - Open Closed Principle
+======================
+
+=> Our code should be open for extension and closed for modification
+
+
+
+public class LoanIntrestCalculations {
+
+	public double calculateLoanIntrest (Loan loan) {
+
+			if(loan instanceof CarLoan){
+				return loan.getValue( ) * 7.5 ;
+			}
+
+			if( loan instanceof PersonalLoan) {
+				return loan.getValue ( ) * 11.5 ;
+			}		
+	}
+}
+
+=> If we want to add any other loan details then we need to Modify above class which is not recommended approach.
+
+
+public class Loan {
+
+		public double calculate (...) { 
+			// logic
+		}
+}
+
+public class CarLoan extends Loan {
+
+		public double calculate (...) { 
+			this.calculate ( ) * 7.5 ;
+		}
+}
+
+public class PersonalLoan extends Loan {
+
+		public double calculate (...) { 
+			this.calculate ( ) * 11.5 ;
+		}
+}
+
+
+=============================
+L - Liskov's Substitution principle
+=============================
+
+=> If class A is subtype of class B, we should be able to replace B with A without distrubing the behaviour of our program
+
+
+
+interface Car {
+
+	void startEngine ( ) ;
+	void acclerate ( );
+}
+
+
+public class SwiftCar implements Car {
+
+		private Engine eng;
+
+		void startEngine ( ) {
+			eng.start ( );
+		}
+
+		void acclerate ( ) {
+			eng.powerOn ( );
+		}
+}
+
+public class ElectricCar implements Car {
+
+		void startEngine ( ) {
+			throw new Exception("I don't have engine");
+		}
+
+		void acclerate ( ) {
+			eng.powerOn ( );
+		}
+	
+}
+
+=====================
+I - Interface Seggregation
+=====================
+
+=> Don' force the developers to implement uncessary methods of interface
+
+=> We need to break larger interfaces into smaller interfaces
+
+
+Ex: 
+
+=> javax.servlet.Servlet interface having 5 methods. If we implement Servlet interface then its mandatory to implement all the 5 methods of Servlet interface.
+
+
+=> If we go for Spring Bean Life Cycle there are two interfaces available. They are not forcing developers to implement all methods.
+
+				1) InitializingBean   ----------> afterPropertiesSet ( ) 
+
+				2) DisposableBean	  ----------> destroy ( ) 
+
+
+// Not Recommended
+
+interface ReportService {
+
+	void excelReport ( ) ;
+
+	void pdfReport ( ) ;
+
+}
+
+// Recommended Approach
+
+interface ExcelReportService {
+	void excelReport ( ) ;
+}
+
+interface PdfReportService {
+	void pdfReport ( ) ;
+}
+
+======================
+D - Dependency Inversion
+=====================
+
+=> Our classes should not talk to implementation classes directley. Always code to interfaces and inject dependencies using setter / constructor to achieve loosely coupling.
+
+=> In below Car class it is directley talking to PetrolEngine class which is not the recommended approach. It is tightly coupling.
+
+public class Car {
+
+	public void drive(){
+		PetrolEngine eng = new PetrolEngine ( ) ;
+		eng.start ( ) ;
+		// drive
+	}
+}
+
+=> To overcome that problem we can use Dependency Inversion.
+
+=> In the below example Car class depends on Engine but we are not creating Engine obj directley. We are refferring IEngine interface. Any IEngine implementation class object can be injected through setter method as a Dependency Inversion. Car is loosely coupled with Engine.
+
+public class Car {
+
+	private IEngine eng ;
+
+	public void setEng (IEngine eng){
+		this.eng  = eng;
+	}
+
+	public void drive(){
+		eng.start ( ) ;
+		// drive
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

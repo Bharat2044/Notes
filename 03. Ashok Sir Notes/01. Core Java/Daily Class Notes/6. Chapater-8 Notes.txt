@@ -1,0 +1,275 @@
+==============
+Reflection API
+==============
+
+-> Using Reflecting api we can analyze our java classes
+
+-> Reflection api is used to analyze the software
+
+
+package in.ashokit;
+
+public class Student {
+
+	private int id;
+	private String name;
+
+	public void display() {
+		System.out.println("hi");
+	}
+
+	public void m1() {
+		System.out.println("this is m1()");
+	}
+
+	public void m2() {
+		System.out.println("this is m2()");
+	}
+}
+
+package in.ashokit;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Demo {
+
+	public static void main(String[] args) throws Exception {
+
+		Class clz = Class.forName("in.ashokit.Student");
+
+		Field[] fields = clz.getDeclaredFields();
+		for (Field f : fields) {
+			System.out.println(f.getName());
+		}
+
+		Method[] methods = clz.getDeclaredMethods();
+		for (Method m : methods) {
+			System.out.println(m.getName());
+		}
+
+		Constructor[] constructors = clz.getDeclaredConstructors();
+		for (Constructor c : constructors) {
+			System.out.println(c.getName());
+		}
+
+	}
+
+}
+
+// Accessing private variable outside of the class using Reflection API
+
+
+package in.ashokit;
+
+public class Student {
+
+	private int age = 20;
+
+	public void getAge() {
+		System.out.println("Age : " + age);
+	}
+
+}
+
+
+
+package in.ashokit;
+
+import java.lang.reflect.Field;
+
+public class Demo {
+
+	public static void main(String[] args) throws Exception {
+
+		// loading class into jvm
+		Class clz = Class.forName("in.ashokit.Student");
+
+		// creating object for the loaded class
+		Object obj = clz.newInstance();
+
+		// getting the filed whose name is age
+		Field field = clz.getDeclaredField("age");
+
+		// making variable accessible outside of the class
+		field.setAccessible(true);
+
+		// set value to field
+		field.set(obj, 35);
+
+		Student s = (Student) obj;
+		s.getAge();
+
+	}
+
+}
+
+
+
+
+
+
+/// Invoking the method using Reflection API
+
+package in.ashokit;
+
+import java.lang.reflect.Method;
+
+public class Demo {
+
+	public static void main(String[] args) throws Exception {
+
+		Class<?> clz = Class.forName("in.ashokit.Student");
+
+		Method method = clz.getDeclaredMethod("getAge");
+
+		Object obj = clz.newInstance();
+
+		method.invoke(obj, null);
+	}
+}
+
+
+Q) What is the difference between ClassNotFoundException and NoClassDefFoundError ?
+
+-> If we give wrong class name in Class.forName (" ") then we will get ClassNotFoundException
+
+-> NoClassDefFoundError will occur if jvm not able to find .class file of particular class to load
+
+
+
+==================
+Garbage Collection
+==================
+
+-> Garbage Collection is the process of removing un-used / un-referenced objects from JVMs heap area.
+
+-> Garbage Collection is  an in-built process in JVM
+
+-> In JVM, garbage collector available to perform Garbage Collection.
+
+-> Garbage Collector is a daemon thread (runs in background)
+
+
+package in.ashokit;
+
+public class Student {
+
+	public static void main(String[] args) {
+
+		// Object created
+		Student s1 = new Student();
+
+		// nullifying (making obj eligible for GC)
+		s1 = null;
+
+		System.gc();
+
+	}
+
+	protected void finalize() throws Throwable {
+		System.out.println("finalize( ) called...");
+	}
+
+}
+
+
+=> When we assign s1=null then s1 become un-referenced object and it is elgible for GC
+
+=> When GC identify un-referenced obj then it will call finalize ( ) method and it will remove that object from HEAP area (memory clean up)
+
+========================
+How to invoke GC in java?
+========================
+
+-> In java we have 2 ways to invoke GC
+
+		System.gc();
+
+		Runtime.getRuntime().gc();
+
+Note:  Even if we call above methods there is no gaurantee that JVM will start GC immediatley.
+GC execution process will be managed by JVM only.
+
+
+===============================
+How GC works internally in JVM ?
+===============================
+
+-> Garbage Collection works in below phases
+
+1) Stop the world
+2) Marking
+3) Sweeping
+4) Compaction
+
+-> When GC starts it will trigger STOP THE WORLD (all running threads will be stopped for few milli secs)
+
+-> GC will go to JVM Heap area and it will identify un-referenced objects and it will mark them for sweep. 
+
+-> GC will sweep marked objects
+
+-> After sweeping completed memory holes will be created in Heap area to clear that GC will perform Compaction (it will adjust memory holes).
+
+
+-> After Compaction, GC will give signal to JVM to continue the execution.
+
+
+Note: GC process will slow down our program execution hence Sun Microsystem didn't give the chance for programmers to perform Garbage Collection. It will be managed by JVM.
+
+
+9 AM - 11 AM IST :   Online
+
+Generics
+Inner Classes
+Enums
+Class Loaders
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

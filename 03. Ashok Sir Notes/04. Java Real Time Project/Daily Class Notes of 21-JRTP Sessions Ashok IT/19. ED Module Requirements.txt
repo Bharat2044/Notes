@@ -1,0 +1,49 @@
+=======================
+Eligibility Determination
+=======================
+
+-> After Data Collection completed, then Eligibility Determination module execution will start
+
+-> ED module is responsible to determine citizen is eligble for the applied plan or not based on plan conditions and citizen data
+
+-> After Eligiblity Determination Completed, ED module will insert eligibility data into ED_ELIG_DTLS table and it will insert a record into CO_TRIGGERS table to send notice to citizen
+
+===================
+Plan wise Conditions
+===================
+
+SNAP Condition : If employment_income <=300$ then citizen is eligible for SNAP
+
+CCAP Condition : If emplyment_income <=300$ and kids count > 0 and each kid age <=16 then eligible for CCAP
+
+Medicaid : If employment_income <=300$ and Property Income is 0 then eligible for Medicaid
+
+Medicare : If citizen age is >=65 then eligible for Medicare
+
+NJW : If citizen is un-employed and graduated then eligible for NJW (New Jersey Works)
+
+
+-> After Eligiblity Determination Completed then insert data into below two tables
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

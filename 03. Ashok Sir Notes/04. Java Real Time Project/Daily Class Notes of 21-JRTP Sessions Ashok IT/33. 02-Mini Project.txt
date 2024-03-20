@@ -1,0 +1,125 @@
+#############################
+02-Mini Project : REPORTS_API
+############################
+
+-> In this project we will learn below concepts
+
+
+1) How to implement dynamic search in project
+
+2) How to generate excel report 
+
+3) How to generate pdf report 
+
+
+###########
+DB Tables
+############
+
+
+TABLE NAME :: ELIGIBILITY_DTLS
+
+ELIG_ID				NUMBER		PRIMARY KEY
+NAME				VARCHAR
+MOBILE				NUMBAR
+EMAIL				VARCHAR
+GENDER				CHAR
+SSN					NUMBER
+PLAN_NAME			VARCHAR
+PLAN_STATUS		VARCHAR
+PLAN_START_DATE	DATE
+PLAN_END_DATE		DATE
+CREATE_DATE		DATE
+UPDATE_DATE		DATE
+CREATED_BY		VARCHAR
+UPDATED_BY 		VARCHAR
+
+
+#########
+Classes 
+###########
+
+1) EligibilityDtls.java   (Entity Class)
+
+2) EligibilityDtlsRepo.java (Repository interface)
+
+3) ReportsService.java (Service Interface)
+
+4) ReportsServiceImpl.java  (Service Interface Impl class)
+
+5) ReportsRestController.java  (class)
+
+6) AppProperties.java
+
+7) AppConstants.java
+
+8) SwaggerConfig.java
+
+
+
+############
+Project Setup
+############
+
+1) Create Spring Boot application with below dependencies
+
+		a) starter-web
+		b) starter-data-jpa
+		c) mysql-connector
+		d) project-lombok
+		e) devtools
+		f) swagger
+		g) swagger-ui
+		h) apache-poi
+		i) open-pdf
+
+
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>1.3.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
+
+
+2) Configure datasource properties in application.yml file
+
+3) Create Entity class & Repository Interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

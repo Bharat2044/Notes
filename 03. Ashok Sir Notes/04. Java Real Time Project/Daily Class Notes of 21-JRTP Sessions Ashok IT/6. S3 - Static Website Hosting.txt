@@ -1,0 +1,39 @@
+=============================
+Static Website Hosting using S3
+=============================
+
+1) Create a bucket in S3 (bucket-name : ashokitbuckets)
+
+	- Enter unique name for bucket 
+	
+	- uncheck block public access
+	
+
+2) Goto bucket permissions tab -> configure below policy for bucket 
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::ashokitbuckets/*"
+            ]
+        }
+    ]
+}
+
+2) Upload Website content files in bucket (assets folder, index.html and error.html)
+
+3) Go to Bucket Properties tab -> Enable Static Website hosting and configure index and error pages
+
+index.html for main content
+error.html for wrong url
+
+
+4) It will display URL, access that URL

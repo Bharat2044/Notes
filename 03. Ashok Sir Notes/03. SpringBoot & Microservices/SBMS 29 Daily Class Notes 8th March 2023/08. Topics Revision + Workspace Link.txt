@@ -1,0 +1,118 @@
+==================
+Spring Topics
+=================
+1) What is Framework ?
+2) What is Spring ?
+3) Spring Architecture 
+4) What is Spring Core
+5) What is IOC container ?
+6) What is Dependency Injection ?
+7) How to start IOC container ?
+8) What is Bean Scope ?
+9) Auto Wiring
+10) what is primary attribute ?
+11) what is ref attribute ?
+12) How to configure Java class as Spring Bean ?
+13) What is Spring Bean ?
+14) How to get bean object from IOC ?
+15) Spring Annotations
+16) Component Scanning
+17) @Autowired annotation
+18) Bean Life Cycle
+19) What is @DependsOn ?
+
+====================
+Spring Boot Topics
+====================
+
+1) What is Spring Boot ?
+2) Spring Vs Spring Boot
+3) Advantages with Spring Boot
+				- pom starters
+				- Dependency Version Mgmt
+				- Auto Configuration
+				- Embedded Server
+				- Actuators
+4) What is Start Class in Spring Boot ?
+5) What is @SpringBootApplication annotation ?
+6) What is Component Scanning ?
+7) What is Base Package naming convention ?
+8) What is SpringAppliction.run ( ) method ?
+
+				- load initializers
+				- start listeners
+				- print banner
+				- create IOC container
+				- call runners
+				- return ioc obj
+
+9) How IOC will start in Spring Boot ?
+10) What is Runner in Spring Boot ?
+11) How to create SpringBoot Application ?
+
+========================
+Spring Data JPA Topics
+========================
+
+1) What is Spring Data JPA ?
+2) What is DataSource ?
+3) What is Entity class ?
+4) What are JPA Repositories ?
+5) CrudRepository vs JpaRepository
+6) What methods available in CrudRepository ?
+7) What is UPSERT method in data jpa ?
+8) What is findByXXX method in data jpa ?
+9) What is Custom Query data Jpa ?
+10) SQL vs HQL
+11) What is Dialect class ?
+12) How to perform Non-select operation using @Query annotation ?
+13) What is Generator ?
+14) What is Custom Generator ?
+15) What is Composite Primary key ?
+16) What is Timestamping in Data jpa ?
+17) Pagination and Sorting
+18) Query By Example
+19) What is Spring Boot Profile ?
+20) How to activate Spring Boot Profile
+
+========================
+Spring Web MVC Topics
+========================
+
+1) What is Spring Web MVC ?
+2) Web Application vs Distributed Application
+3) What are the advantages with Spring Web MVC
+4) Spring Web MVC Architecture
+5) What is DispatcherServlet ?
+6) What is HandlerMapper ?
+7) What is Controller / RequestHandler ?
+8) What is ModelAndView ?
+9) What is View Resolver ?
+10) What is View ?
+11) HTTP Methods (@GetMapping & @PostMapping)
+12) @RequestParam
+13) Spring MVC Form Tag Library
+14) H2 Database
+15) What is Thymeleaf ?
+16) How to perform Form Validations ?
+17) CRUD App with Boot + Web MVC + Data JPA + Thymeleaf + BS
+18) What is @ModelAttribute ?
+19) How to change Embedded Container from Tomcat to Jetty ?
+20) How to change Embedded Container Port Number ?
+21) How to configure Context Path in Spring Boot ?
+22) What is @ResponseBody annotation ?
+23) What is @Controller & @RestController ?
+24) What is URL ambiguity in Spring Web MVC ?
+25) How to handle Exceptions in Spring Web MVC?
+26) What is Local Exception Handling?
+27) What is Global Exception Handling?
+28) What is @ControllerAdvice and @ExceptionHandler ?
+
+
+===============================================================================================
+Top 50 Spring web mvc Interview questions & answers : https://www.youtube.com/watch?v=UBNimdxdjKo&list=PLpLBSl8eY8jSMr1hJLB096nq8W0ABQoXH&index=6
+================================================================================================
+
+Spring Core + Data JPA + Web MVC Workspace : https://www.mediafire.com/folder/xwztw5l5et0up/29-SBMS
+
+===================================================================================================

@@ -1,0 +1,94 @@
+==========
+JMETER
+==========
+
+-> JMETER is a free & open source software given by Apache Organization
+
+-> JMETER is used for performance testing
+
+-> Performance testing means the process of verifying stability & responsiveness of the application
+
+-> How our application is responding for different work loads we can verify using JMETER
+
+-> Using JMETER we can create virtual users to test our application performance
+
+-> JMETER is a java based desktop application
+
+-> Using JMETER we can test performance of any web application
+
+Note: We can't implement performance testing manually
+
+
+What is the response time of our application for 100 users ?
+What is the response time of our application for 200 users ?
+What is the response time of our application for 300 users ?
+What is the response time of our application for 400 users ?
+What is the response time of our application for 1000 users ?
+
+-> We need to provide application performance details to client
+
+-> If application performance is slow then we need to troubleshoot the issue and we need to fix it.
+
+
+==============
+JMETER Setup
+===============
+
+1) Download JMETER software 
+
+URL : https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.5.zip
+
+2) Extract JMETER zip file
+
+3) Goto JMETER bin folder and run "jmeter.bat" file  (it will open JMETER tool)
+
+
+=================
+Creating Test Plan
+=================
+
+1) Right Click on Test plan
+
+			- Add Threads 
+			- Add Thread Group
+			- Enter Thread/users count  
+
+2) Right Click on Thread Group   (For sampler)
+
+			- Add Sampler
+				- Http Request
+				- Add Server IP, Port Number, URL Pattern
+
+3) Right Click on Thread Group (For Listerns)
+
+			- Add Listener
+				- Add View Results Tree
+				- Add Summary Report
+			
+
+4) Save the test and run the test
+
+5) Verify the results (we can change thread group count and we can test it)
+
+
+
+
+==================
+JMETER Best Practise
+==================
+
+-> Create the TEST in GUI mode and run the test in CLI mode
+
+
+    Cmd to execute the test ::::   jmeter -n -t test-plan.jmx -l test-results.jtl
+
+-> After test execution complete we can import JTL file into JMETER summary report to see the test results.
+
+
+
+
+
+
+
+
+

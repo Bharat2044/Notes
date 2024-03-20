@@ -1,0 +1,230 @@
++++++++++++++++++++++++++++++++++++++
+What is Software Development Life Cycle ?
++++++++++++++++++++++++++++++++++++++
+
+-> The SDLC refers to a methodology
+
+-> SDLC clearly defines the process of creating high-quality software project
+
+-> SDLC methodology focuses on below phases of software development
+
+
+1) Requirements Analysis
+
+2) Planning
+
+3) Software Design or Architectural Design
+
+4) Development
+
+5) Testing
+
+6) Deployment
+
+7) Support
+
+
+-> We have several methodologies in SDLC
+
+1) Waterfall Model
+
+2) V-Model
+
+3) Spiral Model
+
+4) Agile Model
+
+
++++++++++++++
+Waterfall Model
+++++++++++++++
+
+-> Waterfall Model introduced in 1970
+
+-> The waterfall Model was the first model that introduced as Process Model.
+
+-> It is a linear or sequential approach to develop software projects
+
+-> It is also called as step By step approach to develop the projects
+
+-> In this model we will comple one phase then we will move on to next phase
+
+++++++++++++++++++
+When to use Waterfall
+++++++++++++++++++
+
+-> When requirements are fixed
+
+-> When Project is small
+
+-> When budget if fixed
+
+
++++++++++++++++++++++++
+Dis-Advantages of Waterfall
++++++++++++++++++++++++
+
+-> Risk is high
+
+-> Requirements can't be changed in middle
+
+-> We can't go to previous phase
+
+-> Testing will happen at the end
+
+-> Client involvement is very very less
+
+
+#################
+Agile Methodology
+################
+
+-> Agile is one of the SDLC methodology
+
+-> It is a way to manage the project by breaking into several phases
+
+-> Agile is also called as an iterative approach to develop and deliver the project
+
+-> We can achieve continuous development and continuous delivery using Agile Model
+
+-> It involves constant colloboration with stake holders (clients)
+
+-> Continuous improvement at every stage
+
+-> Client Feedback is most critical part in Agile
+
+-> In Agile, Planning, Implementing, Testing and Delivering is a cyclic process
+
+
+++++++++++++++++
+Agile Terminology
+++++++++++++++++
+
+Backlog Grooming  : Team meeting to identify pending works
+
+Stories  : Tasks (work)
+
+Story Points : Duration to complte the story (3 points - 1 day, 5 points - 2 days, 8 Points - 3 days)
+
+Sprint Planning : Team meeting to identify priority stories to work
+
+Sprint  : Set of stories to complete (Sprint Goal) & Sprint Duration - 2 weeks (10 working days)
+
+Scrum : It is a process   (Daily team meeting to discuss work status - 15 - 20 minutes) 
+
+Retrospective : Review meeting after sprint(s) completed 
+				(What went well, What went wrong, achievements, improvements, lessons learnt, new ideas)
+
+
+###########
+Agile Roles
+###########
+
+Product Owner : Responsible for Deliveriables
+
+Scrum Master  : Who will manage Agile teams
+
+Tech Lead  : Seniour Team Members (Who will help team members technically)
+
+Team Members : Developers & Testers
+
+
+*************  Agile Team Size : 7 - 10 members (Industry Standards)  ***************
+
+
+
+#########
+JIRA Tool
+#########
+
+-> JIRA is an atlasian company product
+
+-> JIRA is a paid software
+
+Note: We can use trail version of JIRA for practise purpose
+
+-> In companies we will use Paid version of JIRA
+
+-> JIRA is used to manage project work
+
+-> We can use JIRA as a bug reporting tool also
+
+-> We will create Stories, Sprints in JIRA Sofware
+
+-> For Team members, work will be assigned in JIRA software only
+
+
+##############
+JIRA Lab Work
+##############
+
+1) Create Trail Account in JIRA
+
+2) Create Project in JIRA
+
+3) Create Stories in Backlog
+
+4) Assign Story Points for each story
+
+5) Add stories to Sprint and Start the Sprint
+
+6) Assign the story to yourself and change story status
+
+		Todo
+		In-Progress
+		Done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

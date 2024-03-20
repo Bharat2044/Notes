@@ -1,0 +1,317 @@
+
+=================== Spring Boot security with JWT authentication ==========================
+
+
+============================================================
+1) Create Spring Boot Application with below dependencies
+============================================================
+
+	a) web-starter
+	b) security-starter
+	c) lombok
+	d) devtools
+
+
+==========================================
+2) Create One Rest Controller like below 
+=========================================
+
+@RestController
+public class WelcomeRestController {
+	
+	@GetMapping("/welcome")
+	public String welcomeMsg() {
+		return "Welcome to Ashok IT";
+	}
+}
+
+==================================================
+3) Create WebSecurityConfigurer class like below 
+==================================================
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+}
+
+============================================================
+4) Create MyUserDetailsService to load user data 
+============================================================
+
+@Service
+public class MyUserDetailsService implements UserDetailsService {
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return new User("admin", "admin@123", Collections.emptyList());
+	}
+}
+
+============================================================
+
+5) Run the application and test it 
+
+============================================================
+
+====================== With above steps our REST API is ready with Spring Security, Now lets add JWT =========================
+
+
+============================================================
+6) Add below two dependencies in pom.xml file
+============================================================
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		
+		
+========================================================================		
+7) Create JWT Util class like below to generate, validate the token
+========================================================================
+
+package in.ashokit.security;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+public class JwtUtil {
+	
+	 private String SECRET_KEY = "secret";
+
+	    public String extractUsername(String token) {
+	        return extractClaim(token, Claims::getSubject);
+	    }
+
+	    public Date extractExpiration(String token) {
+	        return extractClaim(token, Claims::getExpiration);
+	    }
+
+	    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+	        final Claims claims = extractAllClaims(token);
+	        return claimsResolver.apply(claims);
+	    }
+	    private Claims extractAllClaims(String token) {
+	        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+	    }
+
+	    private Boolean isTokenExpired(String token) {
+	        return extractExpiration(token).before(new Date());
+	    }
+
+	    public String generateToken(UserDetails userDetails) {
+	        Map<String, Object> claims = new HashMap<>();
+	        return createToken(claims, userDetails.getUsername());
+	    }
+
+	    private String createToken(Map<String, Object> claims, String subject) {
+
+	        return Jwts.builder()
+	        		   .setClaims(claims)
+	        		   .setSubject(subject)
+	        		   .setIssuedAt(new Date(System.currentTimeMillis()))
+	        		   .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+	        		   .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+	        		   .compact();
+	    }
+
+	    public Boolean validateToken(String token, UserDetails userDetails) {
+	        final String username = extractUsername(token);
+	        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+	    }
+
+}
+
+==============================================================================================
+8) Create AuthenticateRequest class to capture username & password for authentication purpose
+==============================================================================================
+@Data
+public class AuthenticateRequest {
+	
+	private String username;
+	private String password;
+
+}
+
+====================================================================
+9) Create AuthenticationResource like below 
+====================================================================
+package in.ashokit;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.ashokit.security.AuthenticateRequest;
+import in.ashokit.security.JwtUtil;
+import in.ashokit.security.MyUserDetailsService;
+
+@RestController
+public class AuthenticationResource {
+
+	@Autowired
+	private AuthenticationManager authManager;
+
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+
+	@Autowired
+	private JwtUtil jwtUtil;
+
+	@PostMapping("/authenticate")
+	public String authenticate(@RequestBody AuthenticateRequest request) throws Exception {
+
+		try {
+			authManager.authenticate(
+					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+
+		} catch (Exception e) {
+			throw new Exception("Invalid Username & Password");
+		}
+
+		UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
+
+		String token = jwtUtil.generateToken(user);
+
+		return token;
+
+	}
+}
+======================================================================================================
+10) Configure AuthManager bean in SecurityConfigurer class along with permissions
+======================================================================================================
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+					.authorizeRequests()
+					.antMatchers("/authenticate")
+					.permitAll()
+					.anyRequest()
+					.authenticated();
+	}
+}
+
+======================================================
+11) Create Request Filter to intercept each request 
+======================================================
+
+package in.ashokit.security;
+
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+@Component
+public class JwtRequestFilter extends OncePerRequestFilter {
+
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+
+	@Autowired
+	private JwtUtil jwtUtil;
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+
+		String authorizationHeader = request.getHeader("Authorization");
+
+		String username = null;
+		String jwt = null;
+
+		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+			jwt = authorizationHeader.substring(7);
+			username = jwtUtil.extractUsername(jwt);
+		}
+
+		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+			if (jwtUtil.validateToken(jwt, userDetails)) {
+
+				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+						userDetails, null, userDetails.getAuthorities());
+				usernamePasswordAuthenticationToken
+						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+			}
+		}
+		filterChain.doFilter(request, response);
+	}
+
+}
+
+
+==========================================================================
+12) Add RequestFilter to security context in WebsecurityConfigurer class
+==========================================================================
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+					.authorizeRequests()
+					.antMatchers("/authenticate")
+					.permitAll()
+					.anyRequest()
+					.authenticated()
+					.and()
+					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+			http.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
+	}
+	
+======================================================================================================================================
+13) Run the application 
+
+14) Send request to /authenticate with username and password and in request body. If credentials are valid then it will give token
+
+15) Send request to actual resource i.e /welcome using token. If token is valid it will give response
+
+=======================================================================================================================================

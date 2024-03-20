@@ -1,0 +1,363 @@
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV (master)
+    $ pwd
+    /c/Users/bk628/OneDrive/Desktop/WEB_DEV
+
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV (master)
+    $ git --version
+    git version 2.39.0.windows.2
+
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV (master)
+    $ mkdir python_programs
+
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV (master)
+    $ ls
+    python_programs/
+
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV (master)
+    $ cd python_programs
+
+    
+    $ pwd
+    /c/Users/bk628/OneDrive/Desktop/WEB_DEV/python_programs  
+
+    
+    $ ls
+
+    
+    $ ls -a
+    ./  ../
+
+    
+    $ git init
+    Initialized empty Git repository in C:/Users/bk628/OneDrive/Desktop/WEB_DEV/python_programs/.git/
+
+    
+    $ ls
+
+    
+    $ ls -a
+    ./  ../  .git/
+
+    
+    $ cd .git
+
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV/python_programs/.git (GIT_DIR!)
+    $ ls
+    config       FETCH_HEAD  hooks/  objects/
+    description  HEAD        info/   refs/
+
+    bk628@Bharat2044 MINGW64 ~/OneDrive/Desktop/WEB_DEV/python_programs/.git (GIT_DIR!)
+    $ cd ..
+
+    
+    $ git status
+    On branch master
+
+    No commits yet
+
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+            hello_world.py
+
+    nothing added to commit but untracked files present (use "git add" to track)
+
+    
+    $ git add hello_world.py
+
+    
+    $ git status
+    On branch master
+
+    No commits yet
+
+    Changes to be committed:
+      (use "git rm --cached <file>..." to unstage)
+            new file:   hello_world.py
+
+    
+    $ git commit -m "hello world program code added"
+    Author identity unknown
+
+    *** Please tell me who you are.
+
+    Run
+
+      git config --global user.email "you@example.com"       
+      git config --global user.name "Your Name"
+
+    to set your account's default identity.
+    Omit --global to set the identity only in this repository.
+
+    fatal: unable to auto-detect email address (got 'bk628@Bharat2044.(none)')
+
+    
+    $ git status
+    On branch master
+
+    No commits yet
+
+    Changes to be committed:
+      (use "git rm --cached <file>..." to unstage)
+            new file:   hello_world.py
+
+    
+    $ git config user.name "Bharat2044"     // OR, $ git config --global  user.name "Bharat2044"
+
+    
+    $ git config user.email "bk9955204456@gmail.com"    // OR, $ git config --global user.email "bk9955204456@gmail.com"
+
+    
+    $ git config user.name
+    Bharat2044
+
+    
+    $ git config user.email
+    bk9955204456@gmail.com
+
+
+    $ git config --list
+    diff.astextplain.textconv=astextplain
+    filter.lfs.clean=git-lfs clean -- %f
+    filter.lfs.smudge=git-lfs smudge -- %f
+    filter.lfs.process=git-lfs filter-process
+    filter.lfs.required=true
+    http.sslbackend=openssl
+    http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+    core.autocrlf=true
+    core.fscache=true
+    core.symlinks=false
+    pull.rebase=false
+    credential.helper=manager
+    credential.https://dev.azure.com.usehttppath=true        
+    init.defaultbranch=master
+    user.name=Bharat2044
+    user.email=bk9955204456@gmail.com
+    core.repositoryformatversion=0
+    core.filemode=false
+    core.bare=false
+    core.logallrefupdates=true
+    core.symlinks=false
+
+    
+    $ git status
+    On branch master
+
+    No commits yet
+
+    Changes to be committed:
+      (use "git rm --cached <file>..." to unstage)
+            new file:   hello_world.py
+
+    
+    $ git status
+    On branch master
+
+    No commits yet
+
+    Changes to be committed:
+    (use "git rm --cached <file>..." to unstage)
+            new file:   hello_world.py
+
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in work
+
+
+    $ git commit -m "Hello World code updated"
+    [master (root-commit) 713ea7f] Hello World code updated
+    1 file changed, 2 insertions(+)
+    create mode 100644 hello_world.py
+
+    
+    $ git status
+    On branch master
+    nothing to commit, working tree clean
+
+
+    $ git log   // used to check the history
+    commit 713ea7f641ee8656980d16a1cc5126b19ed4576a (HEAD -> master)
+    Author: Bharat2044 <bk9955204456@gmail.com>
+    Date:   Sat Jun 3 12:24:15 2023 +0530
+
+        Hello World code updated
+
+    
+    $ git log -2
+    commit 713ea7f641ee8656980d16a1cc5126b19ed4576a (HEAD -> 
+    master)
+    Author: Bharat2044 <bk9955204456@gmail.com>
+    Date:   Sat Jun 3 12:24:15 2023 +0530
+
+        Hello World code updated
+
+    
+    $ git log --oneline
+    713ea7f (HEAD -> master) Hello World code updated
+
+    
+    $ git log -p
+    commit 713ea7f641ee8656980d16a1cc5126b19ed4576a (HEAD -> master)
+    Author: Bharat2044 <bk9955204456@gmail.com>
+    Date:   Sat Jun 3 12:24:15 2023 +0530
+
+        Hello World code updated
+
+    diff --git a/hello_world.py b/hello_world.py
+    new file mode 100644
+    index 0000000..bd05293
+    --- /dev/null
+    +++ b/hello_world.py
+    @@ -0,0 +1,2 @@
+    +print("Hello, World");
+    +print("Hello, World");
+    \ No newline at end of file
+
+    
+    $ git log --stat
+    commit 713ea7f641ee8656980d16a1cc5126b19ed4576a (HEAD -> master)
+    Author: Bharat2044 <bk9955204456@gmail.com>
+    Date:   Sat Jun 3 12:24:15 2023 +0530
+
+        Hello World code updated
+
+    hello_world.py | 2 ++
+    1 file changed, 2 insertions(+)
+
+
+    $ cat hello_world.py   // print all data inside tha file
+    print("Hello, World");
+    print("Hello, World");
+
+
+    $ less hello_world.py   // print some data inside tha file
+    print("Hello, World");
+    print("Hello, World");
+
+
+    $ clear     // clear the console
+
+
+    $ git diff  // checks what mades changes between working directory and staging area
+    diff --git a/hello_world.py b/hello_world.py
+    index bd05293..efcc74a 100644
+    --- a/hello_world.py
+    +++ b/hello_world.py
+    @@ -1,2 +1,8 @@
+    print("Hello, World");
+    -print("Hello, World");
+    \ No newline at end of file
+    +
+    +a = 2+3;
+    +b = 4-2;
+    +c = 4*2;
+    +d = 4/2;
+    +
+    +print(a, b, c, d);
+
+    
+    $ git diff --staged  // checks what mades changes between staging area and repository
+
+    --------------------------------------------
+            Repository
+                ^^
+                ||      git diff --staged
+                ||
+            Staging Area
+                ^^
+                ||      git diff
+                ||
+            Working Directory
+    --------------------------------------------
+
+
+    $ git status
+    On branch master
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+            modified:   hello_world.py
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    
+    $ git add hello_world.py
+
+    
+    $ git commit -m "Updaed hello world code"
+    [master 4939c09] Updaed hello world code
+    1 file changed, 7 insertions(+), 1 deletion(-)
+
+    
+    $ git status
+    On branch master
+    nothing to commit, working tree clean
+
+    
+    $ git log
+    commit 4939c095bf23c63501ca61f6802ea8aa7967ae54 (HEAD -> master)
+    Author: Bharat2044 <bk9955204456@gmail.com>
+    Date:   Sat Jun 3 12:42:35 2023 +0530
+
+        Updaed hello world code
+
+    commit 713ea7f641ee8656980d16a1cc5126b19ed4576a
+    Author: Bharat2044 <bk9955204456@gmail.com>
+    Date:   Sat Jun 3 12:24:15 2023 +0530
+
+        Hello World code updated
+
+
+
+    * Create a repository on GitHUb where you push your code
+    * Push the local repository
+
+
+    $ git remote add origin https://github.com/Bharat2044/python_programs.git   //Tells where you push your code
+
+
+    $ git push -u origin master
+    error: src refspec master does not match any
+    error: failed to push some refs to 'https://github.com/Bharat2044/python_programs.git'
+
+    
+    $ git push --set-upstream origin master
+    Enumerating objects: 6, done.
+    Counting objects: 100% (6/6), done.
+    Delta compression using up to 8 threads
+    Compressing objects: 100% (3/3), done.
+    Writing objects: 100% (6/6), 546 bytes | 91.00 KiB/s, done.
+    Total 6 (delta 0), reused 0 (delta 0), pack-reused 0     
+    To https://github.com/Bharat2044/python_programs.git
+    * [new branch]      master -> master
+    branch 'master' set up to track 'origin/master'.
+
+
+    $ git status
+    On branch master
+    Your branch is up to date with 'origin/master'.
+
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+            modified:   hello_world.py
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+
+    $ git add hello_world.py
+
+
+    $ git commit -m "Using f-string"
+    [master d48805e] Using f-string
+    1 file changed, 3 insertions(+)
+
+
+    $ git push
+    Enumerating objects: 5, done.
+    Counting objects: 100% (5/5), done.
+    Delta compression using up to 8 threads
+    Compressing objects: 100% (2/2), done.
+    Writing objects: 100% (3/3), 359 bytes | 119.00 KiB/s, done.
+    Total 3 (delta 0), reused 0 (delta 0), pack-reused 0     
+    To https://github.com/Bharat2044/python_programs.git
+    4939c09..d48805e  master -> master

@@ -1,0 +1,295 @@
+##############
+Apache Maven
+##############
+
+-> Maven is a free & open source software given by apache organization
+
+-> Maven is used to automate build process of java applications
+
+-> Maven can perform below activities
+
+			a) Create initial project folder structure
+			b) Download required dependencies (ex: spring, hibernate, kafka, junit, redis etc..)
+			c) Adding Dependencies to build path
+			d) Project Compilation
+			e) Junits execution (unit test cases execution)
+			d) Project Packaging ( jar or war )
+			
+
+-> Maven is called as Build Tool for Java Applications
+
+
+########################
+Maven Main Objectivies
+########################
+
+1) Making the build process easy
+
+2) Providing an uniform build system
+
+3) Providing quality project information
+
+4) Encouraging better development practices
+
+
+####################
+Maven Installation
+####################
+
+-> Maven s/w developed using Java so we need to install java first to install Maven s/w
+
+1) Download & Install Java software
+
+2) Add JAVA_HOME in environment variables (upto JDK directory)
+
+		JAVA_HOME = C:\Program Files\Java\jdk1.8.0_202
+
+3) Set Path for Java upto "jdk/bin" directory
+
+		Path = C:\Program Files\Java\jdk1.8.0_202\bin
+
+4) Download Maven software as a zip file
+
+		URL : https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.zip
+
+5) Extract That Maven Zip file
+
+6) Add M2_HOME in environment variables upto 'Maven' directory
+
+			M2_HOME = C:\apache-maven-3.8.5
+
+7) Set Path for Maven (upto Maven/bin directory)
+	
+			Path = C:\apache-maven-3.8.5\bin
+
+8) Check Maven version in command promot
+
+		>> mvn -version
+
+
+####################
+Maven Terminology
+####################
+
+1) Archetype Selection   : Represents Type of project  (stand-alone or web-app)
+
+			quickstart ---> Standalone application
+			WebApp ----> Web Application
+		
+2) Group ID  : Represents Company Name / Project Name
+
+			groupId : in.ashokit
+			groupId : com.cts
+			groupId : com.ibm
+			groupId : org.springframework
+
+3) Artifact ID : Represents Project Name / Module name
+
+			artifactId : sbi_app
+			artifactId : spring-core
+			artifactId : passport_web
+
+4) Version : Represents version of the project (SNAPSHOT or RELEASE)
+
+			SNAPSHOT ---> Under Development
+			RELEASE   ---> Development Completed
+
+5) Packaging : jar or war
+
+			standalone apps -----> jar file  (which will execute from main method)
+			web app ----> war   (which will execute by server)
+
+6) pom.xml   : Project Object Model
+
+		 -> Pom.xml contains Maven configuration information
+
+		-> When we create maven project then pom.xml will be created by default
+
+
+7) Dependencies  : Jars that are required to develop our project
+
+		Ex: Spring, Hibernate, Kafka, Redis, Junit etc.....
+
+	-> We can search for maven dependencies in "www.mvnrepository.com"
+
+	-> Dependencies we will add in project pom.xml file
+
+	-> Maven will download dependencies which we are added in "pom.xml"
+
+8) Maven Goals : To perform Build activities (compile, test, package, deploy etc...)
+
+mvn clean
+mvn compile
+mvn test
+mvn package
+mvn sonar:sonar
+mvn deploy
+mvn install
+
+9) Maven Plugins  : Every maven goal is associated with a plugin. Plugin performs actual build operation when we execute maven goal
+
+				clean ---> maven-clean-plugin   
+				compile --> maven-compiler-plugin
+				test  --> maven-surefire-plugin
+				package --> maven-jar-plugin or maven-war-plugin
+
+
+10) Maven Repositories : Repository means collection of dependencies
+
+			1) Local Repository  (It will be created in our system)
+			2) Remote Repository ( it is our custom repository - nexus / jfrog )
+			3) Central Repository (It is maintaing by Apache Org)
+
+
+
+#############################################
+creating standalone application using maven in CLI
+#############################################
+
+>> mvn archetype:generate -DgroupId=in.ashokit -DartifactId=01-Maven-App -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+##########################################
+creating web application using maven
+##########################################
+>> mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp -DgroupId=in.ashokit -DartifactId=01-maven-web-app -DinteractiveMode=false
+
+
+-> We can create maven project from IDE also directley
+
+
+-> Create Maven project and observe project folder structure
+
+
+	src/main/java   : Project source code we should write here
+
+	src/main/resources : Configuration files we should create here (xml, yml, properties files)
+
+	src/test/java : Unit test code we should write here (Junits)
+
+	src/test/resources : Unit testing related configuration files
+
+	target  : .class files will be created here
+
+	pom.xml : Maven Configuration file
+
+
+-> Add a dependency in project pom.xml file  (www.mvnrepository.com)
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.3.22</version>
+		</dependency>
+
+	</dependencies>
+
+
+-> Maven will perform 'transitive - dependency' management (It will download all related jars also)
+
+-> When we add 'spring-context' it downloaded "spring-aop, spring-core, spring-beans, spring-expression & spring-jcl dependencies"
+
+-> If we have un-wanted dependencies in build path, those classes will be loaded into JVM metaspace and they will waste JVM  memory. We need to exclude un-wanted dependencies from project build
+
+-> To exclude un-wanted dependencies we will use <exclusion> tag in maven
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.3.22</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+-> To execute Maven goals in IDE, Right click on Maven Project -> Run as -> Maven Build -> Enter Goal name
+
+
+#########################
+Q) what is 'mvn install' goal ?
+#########################
+
+-> maven install goal is used to install shared libraries into maven repository (local or remote)
+
+Note: shared libraries nothing but the libraries which we want to use in multiple projects
+
+-> Shared libraries we will access as a dependency
+
+
+		<dependency>
+			<groupId>in.ashokit</groupId>
+			<artifactId>pwd-utils</artifactId>
+			<version>RELEASE-2.0</version>
+		</dependency>
+
+Note: pwd-utils is our project which we have installed into maven repository and we can access this in other projects by adding details in pom.xml
+
+
+#########################
+Maven Multi Module Project
+#########################
+
+-> Create Maven project with 'packaging' type as 'pom'   (This will act as parent project)
+
+-> Inside parent project we can create child projects (child projects are called as Maven Modules)
+
+-> One parent project can contain multiple childs (Mutile Modules)
+
+-> Right click on parent project --> New -> Maven -> Maven Module -> Create it
+
+Note: Observe 'parent project' pom.xml and 'module project' pom.xml
+
+-> When we execute goal on parent project that goal will be executed for all the modules which are associated with that parent.
+
+
+
+
+1) What is Maven ?
+2) What is Build Automation ?
+3) What are objectivies of Maven ?
+4) What we can do using Maven ?
+5) How to Setup Maven software?
+6) Maven Repositories
+		- Local Repository
+		- Remote Repository
+		- Central Repository
+7) How to create Maven Project (quickstart)
+8) How to create Maven Web App
+9) How to add dependencies in maven
+10) Where to search Maven dependencies
+11) What is transitive dependency Management
+12) What is <exclusion/> in Maven
+13) Maven Goals
+		- clean
+		- compile
+		- test
+		- package
+		- install
+14) Maven Plugins
+15) Maven Multi Module Project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

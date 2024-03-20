@@ -1,0 +1,12 @@
+report:
+  type: excel
+spring:
+  application:
+    name: myapp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: ashokit@123
+    url: jdbc://mysql:localhost:3306/db
+    username: ashokit
+  main:
+    banner-mode: 'off'

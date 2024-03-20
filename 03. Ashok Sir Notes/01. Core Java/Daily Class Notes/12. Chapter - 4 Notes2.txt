@@ -1,0 +1,2720 @@
+==================================================
+Chapter-4 : OOPS (Object Oriented Programming System)
+================================================
+
+-> Programming languages are divided into 2 types
+
+1) Procedure Oriented
+
+		Ex: C, Cobol, Pascal etc.....
+
+2) Object Oriented
+
+		Ex: Java, C#, Python etc.....
+
+-> In Procedure Oriented programming language, we will develop functions & procedures
+
+-> If we want to add more functionalities then we need to develop more functions
+
+-> Maintaining & Managing more functions is difficult task
+
+-> In PoP, data is exposed globally
+
+-> In Pop, there is no security
+
+
+
+-> If we want to develop a project using OOP lanaguage then we have to use Classes & Objects
+
+-> Any language which follows OOPS Principles is called as OOP Language
+
+-> Object Oriented languages provides security for our data
+
+-> The main advantage of OOPS is code re-usability
+
+===============
+OOPS Principles
+===============
+
+1) Encapsulation
+
+2) Abstraction
+
+3) Polymorphism
+
+4) Inhertience
+
+
+================
+Encapsulation
+===============
+
+-> Encapsulation is used to combine our variables & methods as single entity / unit
+
+-> Encapsulation provides data hiding
+
+-> We can achieve encapsulation using Classes
+
+class  Demo {
+
+	//variables
+
+	// methods
+}
+
+============
+Abstraction
+=============
+
+-> Abstraction means hiding un-necessary data and providing only required data
+
+-> We can achieve Abstraction using interfaces & abstract classes
+
+
+Ex : we will not bother about how laptop working internally
+	We will not bother about how car engine starting internally
+
+===============
+Polymorphism
+===============
+
+-> Exhibiting multiple behaviours based on situation is called as Polymorphism
+
+
+Ex:-1 : in below sceario + symbol having 2 diffenent behaviuours
+
+10 + 20 ===> 30    (Here + is adding)
+ 
+"hi" + "hello" ==> hihello  (here + is concatinating)
+
+
+Ex:-2: 
+
+When i come to class i will behave like a trainer
+
+When i go to ofc i will behave like a employee
+
+When i go to home i will behave like a family member
+
+
+============
+Inheritence
+============
+
+-> Extending the properties from one class to another class is called as Inheritence
+
+Ex:   child will inherit the properties from parent
+
+-> The main aim of inhertience is code re-usability
+
+
+Note: In java, one child can't inherit properties from two parents at a time
+
+
+
+
+======
+Class
+======
+
+-> Class is a plan or model or template
+
+-> Class is a blue print of object
+
+-> Class is used to declare variables & methods
+
+-> Project means collection of classes 
+
+-> Once class is created then we can create any no.of objects for a class
+
+-> 'class' keyword is used to create Classes in java
+
+
+class  <ClassName> {
+
+	// variables
+	// methods
+
+}
+
+
+-> Classes will not exist physically
+
+
+========
+Object
+========
+
+-> Any real-world entity is called as Object
+
+-> Objects exist physically
+
+-> Objects will be created based on the Classes
+
+-> Without having the class, we can' create object  (class is mandatory to create objects)
+
+-> Object creation means allocating memory in JVM
+
+-> 'new' keyword is used to create the objects
+
+		
+			ClassName   refVariable = new ClassName ( );
+
+			User  u1  = new User ( );
+
+			User u2 = new User ( ) ;
+
+
+-> Objects will be created by JVM in the runtime
+
+-> Objects will be created in heap area.
+
+-> If object is not using then garbage Collector will remove that object from heap
+
+-> Garbage Collector is responsible for memory cleanup activities in JVM heap area.
+
+-> Garbage Collector will remove un-used objects from heap.
+
+-> Garbage Collector will be managed & controlled by JVM only.
+
+Note: Programmer don't have control on Garbage Collector.
+
+=================
+What is Hash Code
+=================
+
+-> JVM will assign unique hashcode for every object
+
+-> No two objects will have same hashcode
+
+-> We can get hashcode of the object by calling java.lang.Object class hashCode () method.
+
+					u1.hashCode ( );
+
+
+Note: java.lang.Object class is by default parent class for all java classes.
+
+
+
+public class User {
+
+	public static void main(String[] args) {
+		User u1 = new User();
+		System.out.println(u1.hashCode());
+
+		User u2 = new User();
+		System.out.println(u2.hashCode());
+
+		User u3 = new User();
+		System.out.println(u3.hashCode());
+	}
+}
+
+============
+Variables
+============
+
+-> Variables are used to store the data
+
+			int a  = 10 ;
+
+			User u1 = new User ( );
+
+			Student s1 = new Student ( );
+
+-> Variables are divided into 3 types
+
+			a) Global Variables / instance variables / non-static variables
+
+			b) static variables
+
+			c) local variables
+
+
+=================
+instance variables
+=================
+
+-> Variables which are declared inside the class and outside the method are called as instance variables
+
+-> instance variables can be accessed by all the methods available in the class thats why the are called as Global Variables.
+
+-> Initialization is optional for instance variables
+
+-> Instance variables are called as Object variables
+
+-> When we create the object, then only memory will be allocated for instance variables
+
+Note: If we create 2 objects, then 2 times memory will be allocated for instace variables
+
+-> If we don't intialize instance variable, it will be intialized with default value based on datatype when the object is created
+
+-> Every Object will maintain its own copy of the instance variable
+
+
+public class User {
+
+	int age;
+
+	public static void main(String[] args) {
+		User raju = new User();
+		raju.age = 20;
+		System.out.println(raju.age);
+
+		User rani = new User();
+		rani.age = 25;
+		System.out.println(rani.age);
+		
+		User ashok = new User();
+	}
+}
+
+
+=============
+Static Variables
+=============
+
+-> The variables which are declared inside the class and outside the method with 'static' keyword are called as static variables
+
+-> Static variables are class level variables
+
+-> When class is loaded into JVM then immediatley memory will be allocated for static variables
+
+-> Memory will be allocated for static variables only once when the class is loaded into JVM
+
+-> All objects of the class will maintain same copy of the static variables
+
+-> Static variables we will access using classname
+
+
+public class Student {
+
+	String name;
+	String email;
+	long phno;
+	static String institute;
+
+	public static void main(String[] args) {
+
+		Student.institute = "ashokit";
+
+		Student ankit = new Student();
+		ankit.name = "Ankit";
+
+		Student goutham = new Student();
+		goutham.name = "Goutham";
+	}
+}
+
+
+=========================================
+When to declare variable as static or non-static ?
+=========================================
+
+-> If we want to store different value based on object then use instance variable
+
+-> If we want to store same value for all objects then use static variable
+
+==============
+Local Variables
+==============
+
+-> The variables which are declared inside the method or constructor or block are called as Local Variables
+
+-> If we declare a variable with in the method, then that variable can be used / accessed only with in that method
+
+-> Before using local variables, we have to intialize them
+
+-> If we create a variable with in the method, memory will be allocated for that variable when that method is executing. After that method execution completed, local variable will be deleted from memory
+
+
+class Demo {
+
+ public static void main(String[ ] args){
+				int a = 20;
+				int b = 20;
+
+				System.out.println(a);
+				System.out.prinltn(b);
+  }
+}
+
+========
+Methods
+========
+
+-> Methods are used to perform some operation / action
+
+-> In a class we can write any no.of methods including main method
+
+Note: JVM will always invokes main ( ) method
+
+-> If we want to execute our method then we have to invoke / call our methods from main ( ) method.
+
+returnType   <methodName>   (param1, param2, para3..... paramN) {
+
+		//logic
+
+		return value;
+
+}
+
+-> Every method contains 2 parts
+	
+		1) Method Declaration
+		2) Method Body
+
+------------------------------------------
+What is Method Declaration ?
+------------------------------------------
+Method declaration means we are going to decide what is the name of the method , what are the parameters it will take and what kind of value is return by the method.
+
+syntax:
+			returntype  methodname (list of parameters);
+--------------------------------
+What is returntype ?
+-----------------------------
+->  returntype is data type that indicates what type of value is return by the particular method.
+-> returntype can be any primitive type or array type or reference type
+-> if method does not return any value then return type must be specified using a java keyword called " void ".
+-> specifying returntype is mandatory 
+
+-----------------------------------
+What is  method name ?
+----------------------------------
+-> To identify and access the method there is a suitable name is given for a method which is called as method name.
+-> a methodname can be any valid java identifier.
+-> specifying method name is mandatory
+
+--------------------------------------------
+What are method parameters ?
+------------------------------------------
+-> parameters are the variables that will receive the values that are passed into the. particular method on which data method will perform the operations.
+
+-> we can write 0 or more number of parameters of any primitive type or array type or reference type
+
+-> specifying parameters is optional.
+
+-------------------------------------------------------------------------------
+Method body / Method Definition / Method implementation
+-------------------------------------------------------------------------------
+-> Method body means we are going to write the group of statements that are executed by the method.
+-> A method body can be written in between a pair of curly braces
+
+syntax:
+
+returntype methodname(list of parameters)
+{
+	//statements; 
+	return value;
+}
+
+-> here we can write 0 or more number of statements in between the pair of curly braces.
+-> when we write 0 statements then it is called as null implementation
+ 
+-> if the return type is specified as other than void then we must return a value from our method using java keyword called " return ".
+
+syntax:
+return value;
+
+-	the datatype of the value we return must be match with the datatype that we specify as return type.
+-	but if return type specified as void then we must not write any return value statement.
+
+-> In java we can create any number of methods which are in any of the following 4 combinations of methods
+
+1.	method without return type, without parameters
+2.	method without return type, with parameters
+3.	method with return type, without parameters
+4.	method with return type, with parameters
+
+
+
+
+// Write a method to print a msg on console
+
+void hello ( ) {
+	System.out.println("Hello My Friend");
+}
+
+
+// Take 2 numbers as input and return sum as ouput
+
+int  add ( int a, int b ) {
+
+	int c = a + b ;
+
+	return c;
+}
+
+
+
+
+
+// take 2 names as input, concat them and print on console
+
+void  fullname (String fname, String lname) {
+
+	String name = fname + lname;
+
+	S.o.p(name);
+
+}
+
+
+// take person age as input, if person age >=18 then return true else return false
+
+boolean  check (int age ){
+
+	if ( age >= 18 ) {
+		return true;
+	} else {
+		return false;
+	}
+
+}
+
+
+=====================
+Types of Methods
+=====================
+
+=> Methods are divided into 2 types
+
+1) instance methods   ---> Object level methods
+
+2) static methods ----> Class level method
+
+
+->  instance method will be called by using Object
+
+-> static method will be called by using Class
+
+
+-> When we write methods in java class, by default jvm will not execute them
+
+-> To execute our methods we have to call them 
+
+
+Note: JVM will start our program execution from main method. Main method is called as entry point for JVM execution
+
+
+// this is valid
+void   m1 ( ) {
+
+}
+
+// this is valid
+void m1 (int a, float f){
+
+}
+
+// this is valid
+int  add (int a, int b){
+	int c = a + b;
+	return c;
+}
+
+// this is valid
+int add (int a, int b){
+	return a +  b;
+}
+
+// this is valid
+int div (int a, int b){
+	return a / b ;
+}
+
+
+// below method is invalid (method return type is int but it is trying to return string value)
+int  m1 (String name){
+
+	Stirng s1 = name.toUpperCase( ) ;
+
+	return s1;
+
+}
+
+// this is valid
+boolean   m2 ( int a, int b){
+
+	if (a > b )
+		return true;
+	else
+		return false;
+
+}
+
+// this is valid
+boolean m2 (int a, int b){
+
+	return a > b ;
+
+}
+
+
+// this is invalid because it is having 2 return types
+String void m2(){
+
+	return "hi";
+
+}
+
+// this is valid
+boolean   m3( ) {
+
+	return true ;
+}
+
+// this is valid
+void   c1 (int [ ] arr ){
+
+	System.out.println(arr);
+}
+
+
+-----------------------------------------------
+public class Student {
+
+	public static void main(String[] args) {
+		System.out.println("Hi, i am a student");
+
+		Student s1 = new Student();
+		s1.hello();
+
+		Student.greet();
+	}
+
+	void hello() {
+		System.out.println("Hello My Friend...");
+	}
+
+	static void greet() {
+		System.out.println("Good Evening..");
+	}
+}
+-------------------------------------------------------------------
+import java.util.Arrays;
+
+public class Methods {
+
+	public static void main(String[] args) {
+		
+		//object creation
+		Methods m = new Methods();
+
+		int[] ar = { 1, 2, 3 };
+		m.print(ar);
+		
+		m.fullname("ashok", "it");
+	}
+
+	void fullname(String fname, String lname) {
+		String name = fname + lname;
+		System.out.println(name);
+	}
+
+	void print(int[] arr) {
+		System.out.println(Arrays.toString(arr));
+	}
+}
+----------------------------------------------------------------------
+
+1)  Write a java method to find max element in given array
+
+		int   findMaxElement (int [ ] arr ) {	
+				// logic
+			return maxElement;
+		}
+
+2)  Write a java method to find length of given name
+
+		int findLength ( String name) {
+				
+				int length = name.length ( ) ;
+
+				retunr length;
+	 	}
+
+3) Write a java method to perform sum of two numbers
+
+		int  add (int a, int b){
+				//logic
+				return  a+b ;
+		}
+	
+
+4)  Write a java method to concat firstname and lastname
+
+		String  concatNames (String fname, String lname){
+
+				return fname + lname;
+		}
+
+
+5) Write a java method to display person is elgible for vote or not
+
+		boolean  check (int age){
+
+				return age >= 18 ;
+		}
+
+		void  check(int age){	
+			if(age > = 18){
+				s.o.p("eligible");
+			}else{
+				s.o.p("not-eligible");
+			}
+
+		}
+
+6) Write a java method to reverse given array
+
+			
+				int[ ]  reverseArray (int[ ] arr) {
+
+						//logic
+				}
+
+				void  reverseArray (int[ ] arr ) {  ... }
+
+
+6) Write a java method to convert the name into uppercase characters
+
+		String   convertUppercase ( String name ) {
+
+			return name.toUpperCase( );
+	
+		}
+
+----------------------------------------------------------
+int ar[ ]  = {1,2,3};
+
+String s= Arrays.toString ( ar ) ;
+
+
+String str = new String("hi");
+
+StringBuffer sb = new StringBuffer(str);
+
+String s1 = sb.reverse ( );
+
+String line = br.readLine ( );
+
+String name = "ashokit";
+
+// int length ( )
+int x  = name.length ( ) ;
+
+// boolean endsWith (String str)
+boolean z  = name.endsWith("it");
+
+// char charAt (int index)
+char ch   = name.charAt (0);
+
+--------------------------------------------------------------------
+public class Driver {
+
+	public static void main(String[] args) {
+		Driver d = new Driver(); // obj creation
+
+		int x = d.add(10, 20); // calling the method
+		System.out.println(x); // printing the output
+	}
+
+	// instance method
+	int add(int a, int b) {
+		int c = a + b;
+		return c;
+	}
+}
+
+
+
+
+================================
+Working with Methods using Objects
+================================
+
+-> Object means physical entity
+
+-> Objects are used to store the data
+
+-> Object will be created based on class name
+
+-> To create the object we will use 'new' operator
+
+-> Object will be stored in heap area
+
+-> For every Obect jvm will assign one unique hashcode
+
+-> In realtime projects, data will play the major role
+
+-> Java is  a OOP language, so everything will be represented in the form of Objects
+
+-> In Realtime Projects, mainely our methods will deal with Objects only
+
+
+
+// Write a java method to print data available in the Student object
+
+		
+public class Driver {
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+		
+		Student s = new Student();
+		s.id = 101;
+		s.name = "raju";
+		
+		d.print(s);
+	}
+
+	void print(Student s) {
+		System.out.println(s.id + "  " + s.name);
+	}
+
+}
+
+class Student {
+	int id;
+	String name;
+}
+
+
+//  Take employee class with id and salary as properties
+//  Take Driver class and write the method to print employee object data & call the print method from main method
+
+class Employee {
+	int id;
+	double salary;
+}
+public class Driver {
+	
+	public static void main(String[] args) {
+		Driver d = new Driver();
+		
+		Employee e = new Employee();
+		e.id = 101;
+		e.salary = 15000.00;
+		
+		d.print(e);
+	}
+
+	void print(Employee e) {
+		System.out.println(e.id + "--" + e.salary);
+	}
+
+}
+
+
+// Take Product class with productId, productName, productPrice as properties
+
+// Create Driver class with print ( ) method to print product data
+
+
+class Product {
+	int pid;
+	String pname;
+	double price;
+}
+
+class Driver {
+
+	void print(Product p) {
+		System.out.println(p.pid + " " + p.pname + " " + p.price);
+	}
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+
+		Product p = new Product();
+		p.pid = 101;
+		p.pname = "Mouse";
+		p.price = 450.00;
+
+		d.print(p);
+	}
+}
+
+// Take Docter class with docterName, docterAge  as properties
+// Create Driver class with print ( ) method to print Docter data
+
+
+class Docter {
+	String name;
+	int age;
+}
+
+class Driver {
+
+	void print(Docter d) {
+		System.out.println(d.name + " " + d.age);
+	}
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+
+		Docter d1 = new Docter();
+		d1.name = "Rathod";
+		d1.age = 29;
+		d.print(d1);
+	}
+}
+------------------------------------------------------------------------------------------------------------------
+
+// Take a Player class with id, name, age properties
+
+class Player {
+
+	int id;
+	String name;
+	int age;
+}
+
+// Take driver class to print Player Data
+
+class Driver {
+
+	void print (Player p1) {
+		s.o.p(p1.id +"--"+ p1.name+""+p1.age);
+	}
+
+		psvm(String... args){
+			Driver d = new Driver( );
+
+			Player p2 = new Player ( );
+			//set data
+
+			d.print (p2);
+		}
+
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+// write a java method which will give Person object with data 
+
+package ashokit;
+
+class Driver {
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+		Person p = d.m1();
+		System.out.println(p.id + "--" + p.name + "--" + p.age);
+
+	}
+
+	Person m1() {
+		Person p = new Person();
+		p.id = 101;
+		p.name = "Rani";
+		p.age = 32;
+
+		return p;
+	}
+
+}
+
+class Person {
+	int id;
+	String name;
+	int age;
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+
+// Write a java method to return College data (id, name)
+
+
+package ashokit;
+
+class Driver {
+
+	College m1() {
+
+		College c = new College();
+		c.id = 101;
+		c.name = "HITM";
+
+		return c;
+	}
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+		College c = d.m1();
+		System.out.println(c.id + "--" + c.name);
+	}
+
+}
+
+class College {
+	int id;
+	String name;
+}
+
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Raju Data ( 101,  Raju, 30 )
+
+Rani Data ( 102 , Rani, 32 )
+
+// Write a java method which will take id as input. if id is 101 then method should return Raju object
+if id is 102 then method should return Rani object.
+
+
+package ashokit;
+
+class Driver {
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+
+		//read id from keyboard
+
+		Person person = d.m1(120);
+		System.out.println(person.id + "--" + person.name);
+	}
+
+	Person m1(int id) {
+		Person p = new Person();
+		if (id == 101) {
+			p.id = 101;
+			p.name = "Raju";
+			p.age = 30;
+		} else if (id == 102) {
+			p.id = 102;
+			p.name = "Rani";
+			p.age = 32;
+		}
+		return p;
+	}
+}
+
+class Person {
+	int id;
+	String name;
+	int age;
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+// write a java method which will return cricket player data based on player number
+
+Player Data --> id, name, age
+
+7 ----> Dhoni
+
+18 ---> Kohli
+
+45 ---> Rohit Sharma
+
+
+package ashokit;
+
+class Driver {
+
+	public static void main(String[] args) {
+		Driver d = new Driver();
+		Player p = d.m1(45);
+		System.out.println(p.id + "--" + p.name + "--" + p.age);
+	}
+
+	Player m1(int id) {
+
+		Player p = new Player();
+
+		if (id == 7) { //false
+			p.id = 7;
+			p.name = "dhoni";
+			p.age = 40;
+		} else if (id == 18) { // false
+			p.id = 18;
+			p.name = "kohli";
+			p.age = 34;
+		} else if (id == 45) { // true
+			p.id = 45;
+			p.name = "Rohit";
+			p.age = 38;
+		}
+		return p;
+	}
+
+}
+
+class Player {
+	int id;
+	String name;
+	int age;
+}
+
+
+
+
+
+-----------------------------------------------------------------------------
+
+// Write a java method to return University data based on unvesity ID
+
+101 -----> id - 101, name - Oxford
+
+102 ----> id- 102, name - Standford
+
+
+public class University {
+
+	int id;
+	String name;
+
+	public static void main(String[] args) {
+		University u = m1(101);
+		System.out.println(u.id + "--" + u.name);
+		String str = u.m2();
+		System.out.println(str);
+	}
+
+	String m2() {
+		String s = "hello";
+		return s;
+	}
+
+	static University m1(int id) {
+		University u = new University();
+		if (id == 101) {
+			u.id = 101;
+			u.name = "Oxford";
+		} else if (id == 102) {
+			u.id = 102;
+			u.name = "Standford";
+		}
+		return u;
+	}
+}
+
+
+// Write a java class with two methods
+
+// first method should take 2 Person objects as input
+
+		Approach-1:
+
+			void m1(Person p1, Person p2){
+					// logic
+			}
+
+		Approach-2 :
+
+			void m1 (Person[ ] p){
+
+			}
+			
+
+// second method should give 3 Person Objects as ouput
+
+			Person[ ] m2(){
+				 // logic
+			}
+
+
+--------------------------------------------------------------------------
+package ashokit;
+
+public class Person {
+
+	int id;
+	String name;
+
+	Person[] m2() {
+
+		Person p1 = new Person();
+		p1.id = 101;
+		p1.name = "Raju";
+
+		Person p2 = new Person();
+		p2.id = 102;
+		p2.name = "Rani";
+
+		Person p3 = new Person();
+		p3.id = 103;
+		p3.name = "Anil";
+
+		Person[] arr = { p1, p2, p3 };
+
+		return arr;
+
+	}
+
+	void m1(Person p1, Person p2) {
+		System.out.println(p1.id + "--" + p1.name);
+		System.out.println(p2.id + "--" + p2.name);
+	}
+
+	public static void main(String[] args) {
+		Person p = new Person(); // obj1 created
+
+		Person p1 = new Person(); // obj2 created
+		p1.id = 101;
+		p1.name = "Raju";
+
+		Person p2 = new Person(); // obj3 created
+		p2.id = 102;
+		p2.name = "Rani";
+
+		p.m1(p1, p2);
+
+		Person[] arr = p.m2();
+
+		for (Person person : arr) {
+			System.out.println(person.id + "--" + person.name);
+		}
+
+	}
+}
+-------------------------------------------------------------------------------------------------
+
+
+
+
+Class : It is a plan or model. It contains variables & Methods
+
+Object : Physical Entity. It is used to access variables & methods of the class
+
+Variables : Used to store the data 
+
+				 - instance variables (inside class, outside method without static keyword)
+							-> When obj created, memory will be allocated for instance variables
+							-> Every obj will maintain its own copy of instance variables
+
+				 - static variables (inside class, outside method with static keyword)
+							->  When class is loaded then memory will be allocated for static variables
+														
+				 - local variables (inside the method)
+							-> When method is invoked then only memory will be allocated for local variables
+							-> Before using local variable, we have to initialize that
+
+Methods : To perform some operation
+
+				 - instance method ---> We will call by using object
+				 - static method -----> We will call by using Classname
+
+				 - Method Declaration   (Signaure) ---> return type + name + list of parameters
+
+				 - Method Definition  (Body)   ----> logic
+
+
+==============
+Constructors
+==============
+
+-> Constructor is a special method in java which is used to initialize current class instance variables
+
+-> Constructor name should be same as class name
+
+-> Constructor shoudn't have any return type (not even void)
+
+
+Note: If we write return type for the constructor then it will become method
+
+Syntax :
+
+class Demo {
+
+		Demo ( ) {
+				// logic
+		}
+
+}
+
+
+Demo d = new Demo ( );
+
+Note: At the time of object creation our class Constructor will be executed. Constructor is mandatory to create the object.
+
+-> Object creation means calling the constructor (new Demo( ) )
+
+Note: If we don't write the constructor in class, then java compiler will add one default constructor to our class.
+
+-> We can check default constructor for the class using below command
+
+				> javap classname
+
+Note: If we write constructor in the class, then compiler will not add any constructor.
+
+
+-> Constructors are divided into 2 types
+
+1) Zero Param Constructor / Default Constructor
+
+				-  Constructor without parameters
+
+					class Student {
+
+							Student ( ) {
+									...
+							}
+					}
+
+2) Parameterized Constructor
+
+				- Constructor which contains 1 or more paramters
+
+					class Student {
+
+							Student (int i, int b ) {
+									...
+							}
+					}
+				
+
+
+class Employee {
+
+	public Employee(int i, int j) {
+		System.out.println(i + j);
+	}
+
+	public static void main (String[] args) {
+		Employee emp = new Employee(100, 200);
+	}
+
+}
+
+==========
+this keyword
+===========
+
+-> this is a predefined keyword in java
+
+-> It is used to represent current class object
+
+class Employee {
+
+	String name;
+	float salary;
+
+	public Employee(String name, float salary) {
+		this.name = name;
+		this.salary = salary;
+		System.out.println(this.name + "--" + this.salary);
+	}
+
+	public static void main(String[] args) {
+		Employee emp = new Employee("Raju", 55000.00f);
+	}
+
+}
+
+
+------------------------------------------------------------------
+
+public class Student {
+
+	int id;
+	String name;
+	int age;
+	String gender;
+
+	public Student(int id, String name, int age, String gender) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		System.out.println(this.id + "-" + this.name + "-" + this.age + "-" + this.gender);
+	}
+
+	public static void main(String[] args) {
+		Student s1 = new Student(1, "Raju", 20, "Male");
+		Student s2 = new Student(1, "Rani", 22, "FeMale");
+	}
+
+}
+
+
+======================
+Constructor Overloading
+======================
+
+-> Writing more than one constructor with different parameters is called as Constructor Overloading
+
+
+class Employee {
+
+	Employee(int id){
+
+	}
+
+	Employee(double d){
+
+	}
+
+}
+
+
+
+InputStreamReader isr = new InputStreamReader ( );
+
+BufferedReader br = new BufferedReader( isr );
+
+String s = new String("hi");
+
+StringBuffer sb  = new StringBuffer(s);
+
+==========================
+Access Specifiers / Modifiers
+==========================
+
+-> These are used to specify accessibility for our classes, constructors, variables & methods
+
+-> In java we have below 4 access specifiers / modifiers
+
+			1) public
+			2) private
+			3) protected
+			4) default
+
+public : It is used to specify global access for classes, variables, methods and Constructors
+		
+				-> We can take class as public
+				-> We can take constructor as public
+				-> We can take variables as public 
+				-> We can take methods as public
+
+Note: public means anybody can access from inside and outside the class also.
+
+private: It is used to specify local access (with in the class). private variables, private methods, private constructors can't be accessed outside of the class.
+
+				-> We can't use private for classes  (not allowed)
+				-> We can take variables as private
+				-> We can take constructor as private (no body can create obj from outside of cls)
+				-> We can take method as private (no body can call our method from outside of cls)
+
+Note: To make our java class as Singleton, we will use private constructor. The java class which is having only one object is called as Singleton class.
+
+protected : Protected members can be accessed in same package & its sub classes
+
+default : default members can be accessed in same package. When we don't specify any modifier then it comes under default modifier.
+
+Note: only public and default modifiers are allowed for classes. private and protected are not allowed.
+
+Note: If we use 'public' for the class name then class name & file name should be same. We should have only one public class in the java file.
+
+
+Class Name : EligServiceImpl
+
+Method : public EligResponse executePlanCondtions(Long caseNum, String planName, Integer age)
+
+
+			EligServiceImpl    eligService = new EligServiceImpl ( );
+
+			EligResponse response = eligService.executePlanConditions (. . .);
+
+=======
+OOPS
+=======
+
+Encapsulation : Combining variables & methods as single unit. It is used for data hiding.
+	
+			Ex: Java Class
+
+Abstraction : Hiding un-necessary details and providing only useful information.
+
+			Ex: Abstract classes & Interfaces
+
+Inheritence : The process of extending properties from one class to another class is called as inheritence.
+
+			-> It is used for code re-usability
+
+Polymorphism : Exihibiting multiple behaviours based on the situation is called as Polymorphism.
+
+			Ex: Objects will exhibit multiple behaviours
+
+
+=============
+Encapsulation
+=============
+
+-> It is used for data hiding
+
+-> We will combine variables & methods as one single unit using Class
+
+-> Java class is one of the best example for Encapsulation
+
+
+public class Account {
+
+	private int accNum;
+	private String name;
+
+	public void setAccNum(int accNum) {
+		this.accNum = accNum;
+	}
+
+	public int getAccNum() {
+		return this.accNum;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+}
+
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		Account obj = new Account(); // obj creation
+		obj.setAccNum(797979);
+		obj.setName("Ashok");
+
+		int accNum = obj.getAccNum();
+		String name = obj.getName();
+
+		System.out.println(accNum + "--" + name);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========
+Inheritence
+==========
+
+->  The process of extending the properties from one class to another class is called as Inheritence
+
+-> To extend the properties we will use 'extends' keyword
+
+-> From which class we are extending the properties that class is called as 'Parent' or 'Super' or 'Base' class
+
+-> The class which is extending the properties is called as 'Child class' or 'Sub class' or 'Derived' class
+
+-> By using inheritence we can achieve code re-usability
+
+		
+class User {
+	// properties
+	// methods
+}
+
+class Student extends User {
+
+}
+
+Note: In above example 'User' class is acting as Parent class and Student class is acting as Child class.
+
+
+// Inhertience w.r.t to variables
+
+public class User {
+	int id;
+	String name;
+}
+
+public class Student extends User {
+
+	int rank;
+
+	public static void main(String[] args) {
+
+		// child class object creation
+		Student s = new Student();
+		s.rank = 1;
+
+		// accessing parent class properties using child cls obj
+		s.id = 101;
+		s.name = "Bhanu";
+
+		System.out.println(s.id + "--" + s.name + "--" + s.rank);
+	}
+}
+
+public class Student extends User {
+
+	int rank;
+
+	public static void main(String[] args) {
+
+		// creating parent class obj
+		User user = new User();
+		user.id = 101;
+		user.name = "Raj";
+
+		user.rank = 1; // invalid bcz parent can't access child properties
+	}
+}
+
+// inhertience w.r.t to methods
+
+public class User {
+
+	int id;
+	String name;
+
+	void m1() {
+		System.out.println(" Parent class :: m1 ( ) method called");
+	}
+}
+
+public class Employee extends User {
+
+	void m2() {
+		System.out.println("Child class - m2() method called");
+	}
+
+	public static void main(String[] args) {
+
+		// creating object for child class
+		Employee emp = new Employee();
+
+		// calling parent class method
+		emp.m1();
+
+		// calling child class method
+		emp.m2();
+	}
+}
+
+
+// inhertience w.r.t to constructors
+
+->  Whenever we create child class object, then first it will execute parent class zero-param constructor and then it will execute child class constructor.
+
+Q) Why Parent class constructor is executing first ?
+
+-> Child should be able to access parent propertiece hence parent constructor will execute first to initialize parent class properties.
+
+
+public class User {
+
+	int id;
+	String name;
+
+	public User() {
+		System.out.println("Parent class :: 0-param constructor called ");
+	}
+
+}
+
+public class Employee extends User {
+
+	double salary;
+
+	public Employee() {
+		System.out.println("Child Class :: 0-Param Constructor called");
+	}
+
+	void m2() {
+		System.out.println("Child class - m2() method called");
+	}
+
+	public static void main(String[] args) {
+
+		// creating object for child class
+		Employee emp = new Employee();
+
+		// initializing parent class properties using child obj
+		emp.id = 101;
+		emp.name = "John";
+
+		// initialing child class properties using its own obj
+		emp.salary = 4500.00;
+
+		System.out.println(emp.id + "--" + emp.name + "--" + emp.salary);
+	}
+}
+
+
+
+==================
+Types of Inheritence
+==================
+
+-> Inheritence is divided into multiple types
+
+		1) Single Level
+		2) Multi Level
+		3) Multiple --------> Not supported by Java due to Ambiguity problem
+		4) hierarchical
+
+
+Single level  : Class B extends Class A
+
+Multi Level : Class C extends Class B extends class A extends Object
+
+Multiple Inheritence : If one child having more than one parent  (Java doesn't support to avoid ambiguity)
+
+Hierarchical : If one parent having multiple childs 
+
+Note: For every java class, java.lang.Object class will act as Parent either directley or in-directley
+
+-> If our class doesn't have any parent then java.lang.Object will become parent directley
+
+-> If our class having parent then java.lang.Object will become parent in-directley
+
+Note: Every java class can access methods available in java.lang.Object class.
+
+class Parent {
+	void m1() {
+		System.out.println("Parent - Class - m1() Called");
+	}
+
+	void m2() {
+		System.out.println("Parent - Class - m2() called");
+	}
+}
+
+class Child extends Parent {
+
+	public int hashCode() {
+		return 101;
+	}
+
+	void m1() {
+		System.out.println("Child - Class - m1() Called");
+	}
+
+	void m2() {
+		System.out.println("Child - Class - m2() called");
+		super.m2();
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		Child c = new Child();
+		c.m1();
+		c.m2();
+		int hashcode = c.hashCode();
+		System.out.println("Hash Code :: " + hashcode);
+	}
+}
+
+=======================================
+Methods Execution Flow w.r.r to Inheritence
+=======================================
+
+=> When we call a method using Object, first it will check in current class for that method, if available it will call that method directley.  If method not available in current class then it will check in parent class (It can be direct or indirect parent). If parent having that method then it will call parent class method. If parent class also doesn't have method then it will throw Exception.
+
+Note:  In inheritence always priority will be given for Child class / Sub class object. If child class doesn't contain that method then priority will be given to Parent class method.
+
+
+===============
+Polymorphism
+===============
+Poly ----> Many
+
+Phism ---> Forms
+
+-> If any object is exhibiting multiple behaviours based on the Situation then it is called as Polymorphism.
+
+-> Polymorphism is  divided into 2 types
+
+			1) Static polymorphism / Compile-time Polymorphism
+		
+					Ex: Overloading
+
+			2) Dynamic polymorphism / Run-time Polymorphism
+
+					Ex: Overriding
+
+
+
+==================
+Method Overloading
+===================
+
+-> The process of writing more than one method with same name and different parameters is called as Method Overloading.
+
+public class Calculator {
+
+	void add (int i, int j) {
+		System.out.println("Sum from 1st method :" + (i + j));
+	}
+
+	void add (int i, int j, int k) {
+		System.out.println("Sum from 2nd method : " + (i + j + k));
+	}
+
+	public static void main(String[] args) {
+		Calculator c = new Calculator();
+		
+		c.add(10, 20);
+		c.add(10, 20, 30);
+
+		c.add(10, 20, 30, 40);   // invalid
+	}
+}
+
+=> When methods are performing same operation then we should give same name hence it will improve code readability.
+
+Ex:
+
+substring (int start)
+
+substring(int start, int end)
+
+=> In Method Overloading scenario, compiler will decide method should be called. For example if we write like below then program will fail it compilation stage.
+
+================
+Method Overriding
+=================
+
+-> The process of writing same methods in Parent class & Child class is called as Method Overriding.
+
+class Parent {
+
+	void m1( ) {
+		// logic
+	}
+}
+
+class Child extends Parent {
+
+	void m1 ( ){
+		//logic
+	}
+
+	p s v  m (String ... args){
+		Child c = new Child ( );
+		c.m1 ( );
+	}
+}
+
+Note: When we don't want to execute Parent method implementation, then we can write our own implementation in child class using method Overriding.
+
+*********************************** Write a program on Method Overriding *************************************
+
+class RBIBank {
+
+	boolean checkElgibility() {
+		// docs verification logic
+		return true;
+	}
+
+	double getHomeLoanRofi() {
+		return 10.85;
+	}
+}
+
+public class SBIBank extends RBIBank {
+
+	// overriding parent method to give my own rofi
+	double getHomeLoanRofi() {
+		return 12.85;
+	}
+
+	public String applyHomeLoan() {
+		boolean status = checkElgibility(); // parent method
+		if (status) {
+			double homeLoanRofi = getHomeLoanRofi(); // child method
+			String msg = "Your loan approved with RI as ::" + homeLoanRofi;
+			return msg;
+		} else {
+			return "You are not elgible for home loan";
+		}
+	}
+
+	public static void main(String[] args) {
+		SBIBank bank = new SBIBank();
+		String msg = bank.applyHomeLoan();
+		System.out.println(msg);
+	}
+}
+
+
+// Method Overriding Example with User-Defined Objects and String Objects
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		SBIBank b1 = new SBIBank();
+		SBIBank b2 = new SBIBank();
+
+		boolean bankObjStatus = b1.equals(b2); // false
+		System.out.println("Both Banks Are Equal ?? :: " + bankObjStatus);
+
+		String s1 = new String("ashokit");
+		String s2 = new String("ashokit");
+
+		boolean stringObjStatus = s1.equals(s2); // true
+		System.out.println("Both Strings Are Equal ?? :: " + stringObjStatus);
+
+	}
+}
+
+
+NOte: Object class equals ( ) method will compare address of the objects where String class equals ( ) method will compare content of the objects.
+
+Note: String class overriding equals ( ) method.
+
+
+
+
+
+
+==============================
+Types of Relations in Java Classes
+==============================
+
+-> In java classes we can use below 2 types of relations
+
+1) IS-A relation -----> Inheritence
+
+2) HAS-A relation -----> Composition
+
+
+===================
+IS-A relation Example
+===================
+
+-> If one class wants to re-use all the properties of another class then we will go for IS-A relation.
+
+	Ex: Inhertience is the example for IS-A relation
+
+class User {
+	
+	int id;
+	String name;
+
+    void speak ( ){
+	System.out.println("Hi, My Id is : "+ id + ", My Name : "+ name);
+    }
+}
+
+class Student extends User {   // IS-A relation
+
+	public static void main(String... args){
+		Student s = new Student ( );
+		s.id = 10;
+		s.name = "Raju";
+		s.speak ( );
+	}
+}
+
+======================
+HAS-A Relation Example
+======================
+
+-> If one class wants to re-use some properties of another class then we will go for HAS-A relation.
+
+		Ex: Composition is the example for HAS-A relation
+
+class Engine {
+
+	int id;
+	String name;
+	String fuelType;
+
+		void start ( ){
+			System.out.println("Engine Starting....");
+		}
+}
+
+
+class Car {
+
+	void drive ( ){
+		Engine e = new Engine ( );   // HAS-A Relation
+		e.start ( );
+		System.out.println("Journey Started");
+	}
+
+	psvm(String[] args){
+		Car c = new Car ( );
+		c.drive ( );
+	}
+}
+
+=============
+final keyword
+=============
+
+-> final is a reserved keyword in java
+
+-> We can use final keyword at 3 places
+
+		1) class level 
+		2) variable level
+		3) method level
+
+-> final classes can't be inherited. We can't extend properties from final classes. Final classes are immutable.
+
+			public class User extends String { // invalid because String is final class
+
+			}
+
+-> final variables are nothing but constants. Final variable value can't be modified.
+
+					public final int pi = 3.14;
+
+						pi = 4.32; // invalid
+
+-> final methods can't overriden. We can't override final methods.
+
+===========
+Abstraction
+===========
+
+-> The process of hiding un-necessary data and providing only useful data is called as Abstraction.
+
+-> We can achieve abstraction using Interfaces & Abstract classes.
+
+=============
+Method Types
+=============
+
+-> In java we can write 2 types of methods
+
+		1) Concrete Method
+		2) Abstract Method
+
+-> The method which contains body is called as 'Concrete method'
+
+			public void m1 ( )
+			{
+					
+			}	
+
+-> The method which doesn't contain body is called as 'Abstract method'
+
+			public abstract void m2 ( ) ;
+
+Note:  By using 'abstract' keyword we can create abstract methods & abstract classes.
+
+==========
+Interfaces
+===========
+
+-> Interfaces are used to achieve loosely coupling & abstraction
+
+-> Interfaces contains only abstract methods (upto 1.7v of java)
+
+-> To create a interface we will use 'interface' keyword
+
+-> Interface doesn't contain 'constructor'
+
+-> We can't create Object for the interface
+
+-> Once interface is created then anybody can provide implementation for the interface
+
+-> Implementing interface means overriding 'interface abstract methods'
+
+-> When we are implementing a interface then it is mandatory to implement all abstract methods of that interface.
+
+-> To implement a interface we will use 'implements' keyword
+
+Note: One java class can implement Multiple Interfaces at a time.
+
+Note:  One java class can extend properties from only one class and it can implement Multiple interfaces at a time.
+
+
+======================
+Interface Example
+=====================
+
+public interface Bank {
+
+	public void moneyTransfer();
+
+	public void checkBalance();
+}
+
+
+public class HdfcBank implements Bank {
+
+	public void moneyTransfer() {
+		System.out.println("Money Transfer from HDFC....");
+	}
+
+	public void checkBalance() {
+		System.out.println("Checking Balance from HDFC.....");
+	}
+}
+
+public class AxisBank implements Bank {
+
+	public void moneyTransfer() {
+		System.out.println("Money Transfer from Axis ....");
+	}
+
+	public void checkBalance() {
+		System.out.println("Check Balance from Axis....");
+	}
+}
+
+
+public class BankDemo {
+
+	public static void main(String[] args) {
+		Bank b; // reference variable
+
+		b = new AxisBank(); // storing impl obj into ref variable
+
+		b.moneyTransfer(); // axis-bank method will be called
+		b.checkBalance(); // axis-bank method will be called
+ 
+		b = new HdfcBank();  // storing impl obj into ref variable
+
+		b.moneyTransfer(); // hdfc-bank method will be called
+		b.checkBalance(); // hdfc-bank method will be called
+	}
+}
+
+
+=> We can't create Object for interface
+
+=> Interface reference variable can hold its implementation class object.
+
+			Ex:
+
+				Bank b = new AxisBank ( ) ;  // valid
+
+				Bank b = new HdfcBank ( ) ;  // valid
+
+				Bank b = new Kotak ( ) ; // in-valid because it is not implementation class for Bank
+
+=> When method is taking interface a parameter that means that method is expecting interface implementation class object as parameter.
+
+				public void m1 (Bank b ) {  // loosely coupled bcz we can pass any impl cls obj
+
+				}
+
+				public void m1(AxisBank b){ // tightly coupled bcz we have to pass only AxisBank obj
+
+				}
+
+=> When method is having Interface as a return type that means that method will return interface implementation object as return type
+
+				public Bank  m2 ( ) { // loosely coupled bcz we can return any impl cls obj
+
+				}
+
+				public HdfcBank  m2 ( ) {  // tighthly coupled bcz only HdfcBank obj shud be returned
+
+				}
+
+
+
+-> If interface doesn't contain any method then that interface is called as 'Marker Interface'
+
+		Ex: Cloneable, Serializable etc.....
+
+-> If our class implements pre-defined marker interface then JVM will treat our classes as special classes and JVM will provide special functionality based on the marker interface we have implemented.
+
+// user defined marker interface
+public interface Demo {
+
+}
+
+public class Test implements Demo {
+
+}
+
+Note: We can create our own marker interfaces but there is no use because JVM don't know abt our marker interfaces.
+
+Note: In java 1.8, they introduced Functional Interfaces.
+
+-> The interface which contains only one abstract method is called as Functional Interface. 
+-> Functional Interfaces are introduced to called 'Lambda Expressions'.
+-----------------------------------------------------------------------------------------------------------
+
+-> One interface can't implement another interface.
+
+-> One Interface can extend another interface.
+
+-> In Interface we can declare variables also, by default they are public static final.
+
+
+public interface Bank  {
+	public void checkBalance ( ) ;
+}
+
+public interface RbiBank implements Bank {   // invalid
+
+}
+
+public interface RbiBank extends Bank {  // valid
+		public void applyLoan ( ) ;
+}
+
+
+
+===============
+Abstract Classes
+===============
+
+-> The class which contains both concrete and abstract methods is called as abstract class.
+
+-> We will use 'abstract' keyword to represent class as abstract class
+
+-> To write abstract method 'abstract' keyword is mandatory
+
+-> We can write constructor in abstract class but we can't create Object
+
+-> Abstract classes can have child classes
+
+-> When we extend properties from abstract class then it is mandatory to override all abstract methods of that class
+
+-> Abstract class constructor will be executed when we create object for child class.
+
+
+abstract class DieselMachine {
+
+	public DieselMachine() {
+		System.out.println("DieselMachine-Constructor");
+	}
+
+	public void start() {
+		System.out.println("Machine starting....");
+	}
+
+	public abstract void fillFuel();
+}
+
+public class Machine extends DieselMachine {
+
+	public Machine() {
+		System.out.println("Machine Constructor");
+	}
+
+	@Override
+	public void fillFuel() {
+		System.out.println("filling fuel tank....");
+	}
+
+	public static void main(String[] args) {
+		Machine m = new Machine();
+		m.fillFuel();
+		m.start();
+	}
+}
+
+=> We can't use 'abstract' and 'final' combination because it is illegal.
+
+		public abstract final void m1 ( ) ;  // invalid
+
+=> abstract means override in child where as 'final' means don't override .
+
+
+
+
+
+
+=> To create interface we will use 'interface' keyword
+=> To create abstract classes we will use 'abstract' keyword
+
+=> Interface contains abstract methods
+=> Abstract classes can contain both abstract methods & concrete methods
+
+=> Interface can't have constructor
+=> Abstract class can have constructor
+
+=> We can't create obj for interface
+=> We can't create obj for abstract class 
+
+=> One interface can't implement another interface
+=> One interface can extend another interface
+
+=> When we implement any interface then we have to implement all the abstract methods of that interface
+=> When we extend abstract class, we need override all abstract methods
+
+=> Abstract class constructor will be executed when we create object for sub class.
+
+=> If interface contains only one method then it is called Functional Interface
+=> If interface doesn't have any method then it is called as Marker interface
+
+=> When we don't know implementation for methods then we will go for Interfaces
+
+=> When we know partial implementation for methods then we will go for abstract classes
+
+
+============
+Blocks in java
+============
+
+-> Block means some part or some piece of information or some piece of code
+
+-> In java program we can write 2 types of blocks
+
+			1) instance block
+			2) static block
+
+==============
+Instance Block
+=============
+
+-> If you want to execute some piece of code when object is created then we can go for instance block
+-> Instance block will be executed before constructor execution
+
+syntax:
+
+{
+	// stmts
+}
+
+==============
+static Block
+=============
+
+-> If you want to execute some piece of code when class is loaded into JVM then we can go for static block
+-> static block will execute before main ( ) method execution
+
+syntax:
+
+static 
+{
+	// stmts
+}
+
+Q) What is static control flow & instance control flow in java program ?
+
+==================
+Static Control Flow
+==================
+
+-> When class is loaded into JVM then static control flow will start
+
+-> When we run java program, JVM will check for below static members & JVM will allocate memory for them in below order
+
+				a) static variables
+				b) static methods
+				c) static blocks
+
+-> Once memory allocation completed for static members then it will start execution in below order
+
+				a) static block
+				b) static method (if we call) -- only main method will execute automatically by jvm
+				c) static variable
+
+-> static variables can be accessed directley in static blocks and static methods.
+
+Note: If we want to access any instance method or instance variable in static area then we should create object and using that object only we can access. We can't access directley without object.
+
+====================
+Instance Control Flow
+====================
+
+-> instance means Object
+
+-> Instance control flow will begin when object is created for a class
+
+-> When Object is created then memory will be allocated for 
+		
+		a) instance variables
+		b) instance methods 
+		c) instance blocks
+
+-> Once memory allocation completed then execution will happen in below order
+
+		a) instance block
+		b) constructor
+		c) instance methods (if we call)
+
+Note: static members can be access directley in instance areas becase for static memebers memory aready allocated at the time of class loading.
+
+public class Demo {
+
+	{
+		System.out.println("i am from instance block");
+	}
+
+	public Demo() {
+		System.out.println("I am from constructor");
+	}
+
+	static {
+		System.out.println("I am from static block");
+	}
+
+	public static void main(String[] args) {
+		System.out.println("i am from main method...");
+		Demo d = new Demo();
+	}
+}
+
+
+
+===================
+java.lang.Object class
+===================
+
+-> Object is a pre-defined class available in java.lang package
+
+-> Object class will act as super class for all the classes in java either directley or in-directley
+
+Note: If our class doesn't have any super class then Object class will become direct Super class. If our class having any super class then Object class will become in-direct super class.
+
+-> Object class having 11 methods, those 11 methods are by default available for every java object.
+
+
+1) protected Object clone ( )
+
+2) boolean equals (Object obj)
+
+3) protected void finalize( )
+
+4) Class <?> getClass( )
+
+5) int hashCode( )
+
+6) String toString( )
+
+7) notify ( )
+
+8) notifyAll ( )
+
+9) void wait ( ) 
+
+10) void wait(long timeout)
+
+11) void wait (long timeout, int nanos)
+
+Note: Last 5 methods will be used in Multi-Threading concept.
+
+
+===========================
+public String toString ( ) method :
+===========================
+
+-> It is used to represent Object in String format 
+
+-> When we print any object or when we call toString ( ) method by default it will call Object class toString ( ) method
+
+---------------------------------------------------------------------
+Object class toString( ) method implementation
+---------------------------------------------------------------------
+
+public String toString ( ) {
+
+	return this.getClass( ).getName ( ) + "@"+ Integer.toHexString(this.hashCode());
+}
+
+Output :  Student@15db9742
+
+
+-> If we don't like this implementation, then we can override toString ( ) method in our class like below
+
+public class Student {
+
+	int id;
+	String name;
+
+	public static void main(String[] args) {
+
+		Student s = new Student();
+		s.id = 101;
+		s.name = "John";
+
+		System.out.println(s); // toString ( ) will be called
+		System.out.println(s.toString());
+
+		String s1 = new String("hi");
+		System.out.println(s1);
+	}
+
+	public String toString() {
+		return id + "--" + name;
+	}
+
+}
+
+-> We will override toString ( ) method to print content of object.
+
+Note: String class is already overriding toString ( ) method.
+
+====================
+int hashCode ( ) method
+=====================
+
+-> When we create object for a class then JVM will assign one unique hashcode for every Object
+
+-> Using hashCode ( ) method we can get hashcode of the object
+
+-> If we don't want to execute Object class hashCode ( ) method then we can override hashCode ( ) method in our class.
+
+public class Student {
+
+	int id;
+	String name;
+
+	public static void main(String[] args) {
+
+		Student s = new Student();
+		s.id = 101;
+		s.name = "John";
+
+		System.out.println(s); // toString ( ) will be called
+		System.out.println(s.hashCode());
+	}
+
+	public String toString() {
+		return id + "--" + name;
+	}
+
+	public int hashCode() {
+		return id;
+	}
+
+}
+
+===============================
+boolean equals ( Object obj ) method
+===============================
+
+-> equals ( ) method is used to compare one object with another object and returns boolean value. If objects are same then it will return true otherwise it will return false value.
+
+Note: Object class equals( ) method will compare address of the object not content.
+
+public class Student {
+
+	int id;
+	String name;
+
+	public Student(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public static void main(String[] args) {
+
+		Student s1 = new Student(101, "John");
+		Student s2 = new Student(101, "John");
+
+		System.out.println(s1.equals(s2)); // false - compares address
+		System.out.println(s1 == s2); // false - compares address
+
+		String s3 = new String("hi");
+		String s4 = new String("hi");
+
+		System.out.println(s3.equals(s4)); // true - compares content of objects
+
+	}
+}
+
+Note: In String class equals ( ) method overriden to compare content of objects thats why in above program for Strings we are getting 'true' as ouput. For Student class it is checking address hence we are getting 'false' as output.
+
+-> If we want to compare content of our Student objects then we need to override like below
+
+public class Student {
+
+	int id;
+	String name;
+
+	public Student(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public static void main(String[] args) {
+
+		Student s1 = new Student(101, "John");
+		Student s2 = new Student(101, "John");
+
+		System.out.println(s1.equals(s2)); // true - compares content (overriden)
+		System.out.println(s1 == s2); // false - compares address
+
+		String s3 = new String("hi");
+		String s4 = new String("hi");
+
+		System.out.println(s3.equals(s4)); // true - compares content of objects
+
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) // s1 == s2
+			return true;
+		if (obj == null) // s2 == null
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj; // typecasting
+		if (id != other.id) // s1.id != s2.id
+			return false;
+		if (name == null) { // s1.name == null
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name)) // !s1.name.equals(s2.name)
+			return false;
+		return true; // ---> true
+	}
+}
+
+
+=======================
+Class getClass ( ) method
+========================
+
+-> This method is used to get Runtime instance of class
+
+public class Student {
+
+	public static void main(String[] args) throws Exception {
+
+		Student s = new Student(); // obj creation
+		Class clz = s.getClass();
+		System.out.println(clz.getName());
+		System.out.println(s.getClass().getName()); // method chaining to get cls name
+
+		Object object = clz.newInstance(); // 2nd approach to create object for a cls
+		System.out.println(object);
+
+	}
+}
+
+===============
+clone ( ) method
+===============
+
+-> This method is used to create duplicate object for the given object
+
+-> If we want to clone any object then that class should implement Cloneable interface which is marker interface.
+
+-> If your class implements Cloneable interface then only JVM will allow you to clone the object of that class.
+
+public class Student implements Cloneable {
+
+	public static void main(String[] args) throws Exception {
+
+		Student s = new Student();
+		System.out.println(s);
+
+		Object clone = s.clone(); // cloning (another approch to create obj for a class)
+		System.out.println(clone);
+
+	}
+}
+
+Q) In how many ways we can create Object for a class ?
+
+Ans) 
+
+1) using new operator
+
+2) using newInstance ( ) method
+
+3) using clone  ( ) method
+
+=================
+finalize ( ) method
+=================
+
+-> When garbage collector removing any object from JVM then it will call finalize ( ) method
+
+Note: Garbage Collector is used to remove un-used objects / un-referenced objects from JVM heap area.
+
+
+finalize ( ) 
+clone ( )
+equals ( )
+hashCode ( )
+toString ( )
+getClass ( )
+
+notify ( )
+notifyAll ( )
+wait ( ) - 3 overloaded methods
+
+
+class --> This is keyword to create class in Java
+
+Class --> This is predefined class available in java.lang package
+
+Note: newInstance (  ) method available in Class it is used to create obj for a class
+
+Object ---> This is also predefined class available in java.lang package. Default parent for all java classes. It contains 11 methods. Every java class can access Object class methods by default.
+
+
+
+
+
+==============
+OOPS Summary
+==============
+
+1) Procedural Oriented Language (PoP)
+2) Object Oriented Programming Language (OOP)
+3) Classes
+4) Objects
+5) Variables (Instance, static & local)
+6) Methods (Parameters & Return Type)
+7) Instance methods & static methods
+8) Constructors (default, 0-param constructor & parameterized constructor)
+9) Constructor Overloading
+10) this keyword
+11) Access Modifiers (public, private, protected & default)
+12) Encapsulation
+13) setter methods & getter methods
+14) Inheritence
+15) Inheritence Types
+16) Method Execution Order w.r.t Inheritence
+17) Polymorphism
+18) Method Overloading
+19) Method Overriding
+20) Concrete methods & abstract methods
+21) Abstraction
+22) Interfaces
+23) Marker Interface
+24) Abstract classes
+25) Blocks
+26) Static Control Flow
+27) Instance Control Flow
+28) Object class
+29) Object class methods (11 methods)
+30) final keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

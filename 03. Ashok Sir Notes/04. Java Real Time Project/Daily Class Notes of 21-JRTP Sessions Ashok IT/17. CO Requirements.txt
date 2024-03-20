@@ -1,0 +1,56 @@
+========================
+Correspondence Module
+========================
+
+-> Once Citizen Eligibility Determination Completed then ED Module inserting a record into CO_TRIGGERS table to send notice to citizen.
+
+Note : Both Approved Citizens & Denied Citizens data will be inserted into CO_TRIGGERS table.
+
+-> CO Module is responsible to send Notices to Citizens
+
+Note: Notice means a document / letter which contains information
+
+-> Citizen Plan Eligibility Details we have to send to citizen in the notice.
+
+-> Correspondence Module will use CO_TRIGGERS table data to send notices
+
+=========================
+CO Module Business Logic
+=========================
+
+-> CO REST API should  perform below operations
+
+1) Read all pending triggers available in CO_TRIGGERS table
+
+2) For Each Pending Trigger generate a PDF with citizen eligiblity details in table format
+
+Note: In PDF table should contain below details
+
+		Citizen Name : 
+		Plan Name :
+		Plan Status :
+		Plan Start Date:
+		Plan End Date:
+		Benefit Amt : 
+		Denial Reason : 
+		
+Note: If data not available for any row, then display NA.
+
+3) Store the PDF in co_triggers table
+
+4) Send PDF to citizen email
+
+5) Update trigger status as Completed.
+
+
+
+
+
+
+
+
+
+
+
+
+

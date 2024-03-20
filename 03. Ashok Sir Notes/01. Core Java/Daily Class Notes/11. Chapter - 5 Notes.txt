@@ -1,0 +1,997 @@
+=========
+Packages
+=========
+
+-> Packages are used to group the classes , interfaces, exceptions and errors
+
+-> In java language, so many classes, interfaces, Exceptions and Errors are already available.
+
+		Ex: String, StringBuffer, StringBuilder, Arrays, BufferedReader, Scanner etc....
+
+-> Sun people divided predefined classes, interfaces, Exceptions into several packages
+
+				1) java.lang
+
+				2) java.io
+
+				3) java.util
+
+				4) java.sql
+
+-> java.lang package is default package and it is available for all java classes by default.
+
+-> If we want to use any predefined class which is not part of java.lang package then we have to import that class using 'import' keyword.
+
+// Example Of predefined package import
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader(isr);
+	}
+}
+
+====================
+User Defined Packages
+====================
+
+-> In our project we will create our own packages to organize project related classes & interfaces
+
+-> To create a package we will use 'package' keyword
+
+-> In java class, package statement should be in first line and class should have only one package statement.
+
+-> We can create user-defined package like below
+
+			ex:
+					package  ashokit;
+
+					package com.tcs.aadhar;
+
+
+-> Sample package naming convention :  company-name.project-name.module-name
+
+
+				com.ibm.irctc.admin
+						AdminLogin.java
+						AdminService.java
+						Request.java
+
+				com.ibm.irctc.user
+						UserLogin.java
+						UserService.java
+
+				com.ibm.irctc.reports
+						ReportService.java
+						Request.java
+
+Note: In project we can create 2 classes with same in using 2 different packages.
+
+package com.oracle;
+
+public class Engine {
+
+	public void start() {
+		System.out.println("Engine starting...");
+	}
+
+}
+
+
+package com.ibm;
+
+import java.util.Scanner;
+import com.oracle.Engine;
+
+public class Car {
+
+	public void drive() {
+
+		Engine eng = new Engine();
+		eng.start();
+		
+		Scanner s = new Scanner(System.in);
+
+	}
+}
+
+
+Note:
+
+1) In class, package statement should be in first line  (top)
+
+2) After package statement we can write multiple import statements
+
+3) import java.io.*  (it means all classes, interface, exceptions of io package will be imported) - not recommended
+
+4) If 2 classes are in same package then import not required.
+
+
+=================
+Exception Handling
+=================
+1) What is Exception 
+2) Why to handle exception
+3) Types of Exceptions
+4) Exception Vs Error
+5) Exceptions Hierarchy
+6) Checked Exceptions
+7) Un-Checked Exception
+8) Exception Propogation
+9) Exception Handling Keywords
+			8.1 try
+			8.2 catch
+			8.3 finally
+			8.4 throw
+			8.5 throws
+10) Try with Resources (java 1.7v feature)
+11) User Defined Exceptions
+
+
+Succesful / Graceful Termination :  Termination after executing program successfully
+
+Abnormal Termination :  Termination in middle of program execution
+
+=================
+What is Exception ?
+=================
+
+-> Un-expected and Un-wanted situation in the program execution is called as Exception.
+
+-> Exception will distrub normal flow of the program execution
+
+-> When Exception occured program will be terminated abnormally
+
+Note: As a programmer we are responsible for programs graceful termination.
+
+-> To Achive graceful termination we need to handle the execptions occured while program executing.
+
+-> The process of handling Exceptions is called as Exception Handling.
+
+-> The main aim of Exception Handling to achieve graceful termination of the program
+
+-> In java we have so many predefined exceptions
+
+		
+		Ex:
+				ArithematicException
+				NullPointerException
+				FileNotFoundException
+				SQLException
+
+===================
+Exception Hierarchy
+=================
+
+-> In this hierarchy Throwble is the root class
+
+							1. Throwble
+
+								1.1 Exception
+
+									1.1.1  Checked Exception
+									1.1.2  Un-Checked Exception
+									 
+								1.2  Error
+								
+
+ Q) What is the difference between Exception and Error ?
+
+ -> Exceptions can be handled where as Errors can't be handled.
+
+==============
+Exception Types
+==============
+
+-> Exceptions are divided into 2 types
+
+1) Checked Exceptions :: Will be identified at compile time (occurs at run time)
+
+		Ex: IOException, FileNotFoundException, SQLException etc....
+ 
+2) Un-Checked Exceptions : Will occur at Run time ( Compiler can't identify these exception )
+
+		Ex: NullPointerException, ArithematicException etc...
+
+
+=================
+Exception Handling
+=================
+
+-> Java provided 5 keywords to handle exceptions
+
+1) try
+2) catch
+3) finally 
+4) throws
+5) throw
+
+
+========
+try block
+========
+
+-> It is used to keep risky code
+
+syntax:
+
+try {
+	// stmts
+}
+
+Note: We can't write only try block. try block required catch or finally (it can have both also)
+
+try with catch ------>  valid combination
+
+try  with multiple catch blocks ----> valid combination  
+
+try with finally -----> valid combination
+
+try with catch & finally ---> valid combination
+
+only try block ----> invalid
+
+only catch block ---> invalid
+
+only finally block ---> invalid
+
+======
+catch 
+======
+
+-> catch block is used to catch the exception which occured in try block
+
+-> To write catch block , try block is mandatory
+
+-> One try block can contain multiple catch blocks also
+
+syntax:
+
+try {
+
+	// logic
+
+} catch ( Exception e ){
+
+	// logic to catch exception info
+
+}
+
+Note: If exception occured in try block then only catch block will execute otherwise catch block will not execute
+
+
+public class Demo {
+
+	public static void main(String[] args) {
+		System.out.println("main( ) method started...");
+		try {
+			System.out.println("try block start");
+			String s = null;
+			s.length(); // NPE
+			System.out.println("try block end");
+		} catch (Exception e) {
+			System.out.println("in catch block");
+			e.printStackTrace();
+		}
+		System.out.println("main( ) method ended...");
+	}
+}
+
+// in below scenario catch block will not be executed bcz there is no exception in try block
+
+public class Demo {
+
+	public static void main(String[] args) {
+		System.out.println("main( ) method started...");
+		try {
+			System.out.println("try block start");
+			String s = "hi";
+			int i = s.length();
+			System.out.println("try block end");
+		} catch (Exception e) {
+			System.out.println("in catch block");
+			e.printStackTrace();
+		}
+		System.out.println("main( ) method ended...");
+	}
+}
+
+// we can write one try block with multiple catch blocks also like below
+public class Demo {
+
+	public static void main(String[] args) {
+		System.out.println("main( ) method started...");
+		try {
+			System.out.println("try block start");
+			String s = "hi";
+			int i = s.length();
+			System.out.println("try block end");
+		} catch (ArithmeticException e) {
+			System.out.println("in catch block");
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("main( ) method ended...");
+	}
+}
+
+Note: Catch blocks order should be child to parent
+
+// below program will fail at compile time because of un-reachable second catch block
+public class Demo {
+
+	public static void main(String[] args) {
+		System.out.println("main( ) method started...");
+		try {
+			System.out.println("try block start");
+			String s = "hi";
+			int i = s.length();
+			System.out.println("try block end");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("first catch");
+		} catch (NullPointerException ne) {
+			System.out.println("second catch");
+		}
+		System.out.println("main( ) method ended...");
+	}
+}
+
+=============
+finally block
+=============
+
+-> It is used to perform resource clean up activities
+
+		Ex: file close, db connection close etc....
+
+-> finally block will execute always ( irrespective of the exception )
+
+try with finally :  valid combination
+
+try with catch and finally :  valid combination
+
+catch with finally :  invalid combination
+
+only finally : invalid combination
+
+// java program with try-catch-finally scenario
+public class Demo {
+
+	public static void main(String[] args) {
+		System.out.println("main( ) method started...");
+		try {
+			System.out.println("try block - start");
+			int i = 10 / 2;
+			System.out.println("try block - end");
+		} catch (Exception e) {
+			System.out.println("catch block");
+			e.printStackTrace();
+		} finally {
+			System.out.println("finally - block");
+		}
+		System.out.println("main( ) method ended...");
+	}
+}
+
+// java program with try-finally scenario
+
+public class Demo {
+
+	public static void main(String[] args) {
+		System.out.println("main( ) method started...");
+		try {
+			System.out.println("try block - start");
+			int i = 10 / 0;
+			System.out.println("try block - end");
+		} finally {
+			System.out.println("finally - block");
+		}
+		System.out.println("main( ) method ended...");
+	}
+}
+
+
+Q) What is the differnece between   final, finalize( ) and finally ?
+
+
+final : it is a keyword  which is used to declare final variables, final methods and final classes
+
+finalize ( ) : It is predefined method available in Object class, and it will be called by garbage collector before removing unused objects from heap area.
+
+finally : it is a block we will use to execute some clean acitivites in exception handling
+
+
+
+
+
+
+try : it is used to keep our risky code
+
+catch : It is used to catch the exception occured try block
+
+finally : to execute clean up activities
+
+
+throws : It is used to hand over checked exceptions to caller method / jvm
+
+Note: We can ignore checked exceptions using throws keyword
+
+public class Demo {
+
+	public static void main(String[] args) throws FileNotFoundException {
+
+		FileReader fr = new FileReader("abc.txt");
+
+	}
+}
+
+Note: We can ignore all checked exceptions like below
+
+public class Demo {
+
+	public static void main(String[] args) throws Exception {
+
+		FileReader fr = new FileReader("abc.txt");
+		
+		Class.forName("");
+
+	}
+}
+
+=========
+throw : 
+========
+
+-> throw keyword is used to create the exception
+
+syntax:
+
+			throw new Exception("Msg");
+
+
+package in.ashokit;
+
+public class Demo {
+
+	public String getName(int id) throws Exception {
+		if (id == 100) {
+			return "raju";
+		} else if (id == 101) {
+			return "rani";
+		} else {
+			throw new Exception("Invalid Id");
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		Demo d = new Demo();
+		String name = d.getName(101);
+		System.out.println(name);
+
+		String name1 = d.getName(200);
+		System.out.println(name1);
+	}
+}
+
+
+// Stack Over Flow Error
+
+public class Demo {
+
+	void m1() {
+		m2();
+	}
+
+	void m2() {
+		m1();
+	}
+
+	public static void main(String[] args) {
+		System.out.println("main ( ) method - start");
+		Demo d = new Demo();
+		d.m1();
+		System.out.println("main( ) method - end");
+	}
+}
+
+======================
+User Defined Exceptions
+======================
+
+-> In java language we have several pre-defined exception classes
+
+	Ex:
+
+			IOException
+			FileNotFoundException
+			ClassNotFoundException
+			SQLException
+			AirthematicException
+			ArrayNegativeSizeException
+			NullPointerException
+			ClassCastException etc...
+		
+
+-> Based on Project requirement, sometimes we need to create our own exceptions those are called as
+User Defined Exceptions
+
+Ex:
+
+	InvalidCredentialsExceptions
+	NoRecordsFoundException
+	NoDataFoundException
+	InvalidInputException
+
+-> To create our own Exception we need to extend the properties from Exception or RuntimeException class
+
+public class NoDataFoundException extends RuntimeException {
+
+	public NoDataFoundException() {
+
+	}
+
+	public NoDataFoundException(String msg) {
+		super(msg);
+	}
+
+}
+
+
+package in.ashokit;
+
+public class Demo {
+
+	private String getName(int id) {
+		if (id == 100) {
+			return "Raju";
+		} else if (id == 101) {
+			return "Rani";
+		} else {
+			throw new NoDataFoundException("Invalid Id");
+		}
+	}
+
+	public static void main(String[] args) {
+		Demo d = new Demo();
+		d.getName(200);
+	}
+}
+
+
+throws : It is used to ignore checked exceptions 
+
+throw : It is used to create the exception
+
+
+throw new Exception (" ");
+
+
+public class InvalidIdException extends RuntimeException {
+
+		public InvalidIdException(String msg){
+				super (msg);
+		}
+}
+
+int  id = scanner.nextInt ( );
+
+if( id <= 0 ){
+	throw new InvalidIdException("invalid id");
+}
+
+=============
+Method Stack
+============
+
+void m1 ( int a, int b ) {
+	int c = a / b;
+	Sysout( c);
+}
+
+public static void main (String... args){
+		Demo d = new Demo ( );
+		d.m1 ( );
+}
+
+
+
+
+public class Demo {
+
+	void m1(int a, int b) {
+		System.out.println("m1() - started");
+		try {
+			int c = a / b;
+			System.out.println(c);
+		} catch (Exception e) {
+			
+		}
+		System.out.println("m1() - ended");
+	}
+
+	public static void main(String[] args) throws Exception {
+		System.out.println("main() - method started");
+		Demo d = new Demo();
+		d.m1(10, 0);
+		System.out.println("main() - method ended");
+
+	}
+}
+
+------------------------------------------------------------------------
+package in.ashokit;
+
+public class InvalidNumberException extends Exception {
+
+	public InvalidNumberException(String msg) {
+		super(msg);
+	}
+}
+package in.ashokit;
+
+public class Demo {
+
+	void m2(int a, int b) throws Exception {
+		System.out.println("m2() - started");
+		try {
+			int c = a / b;
+			System.out.println(c);
+		} catch (Exception e) {
+			throw new InvalidNumberException("invalid number");
+		}
+		System.out.println("m2() - ended");
+	}
+
+	void m1(int a, int b) throws Exception {
+		System.out.println("m1() - started");
+		m2(a, b);
+		System.out.println("m1() - ended");
+	}
+
+	public static void main(String[] args) {
+		System.out.println("main() - method started");
+		try {
+			Demo d = new Demo();
+			d.m1(10, 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("main() - method ended");
+	}
+}
+
+
+
+
+
+
+
+
+==============
+static import
+==============
+
+-> Static import is used to access static members directley without using class name.
+
+
+package com.ibm.aadhar;
+
+public class Person {
+
+	public static void speak() {
+		System.out.println("Hi, i am ashok");
+	}
+
+	public static void m1() {
+		System.out.println("hi, i am from m1()");
+	}
+
+	public static void m2() {
+		System.out.println("hi, i am from m2()");
+	}
+
+}
+
+/// Java Program with Normal Import to use Person class
+
+package in.ashokit;
+
+import com.ibm.aadhar.Person;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Person.speak();
+		Person.m1();
+		Person.m2();
+
+	}
+}
+
+/// java program with static import
+
+package in.ashokit;
+
+import static com.ibm.aadhar.Person.*;
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		speak();
+		m1();
+		m2();
+
+	}
+}
+
+===========================
+variable arguments   ( var args )
+===========================
+
+-> var-args concept introduced in java 1.5 v
+
+-> When we don't know how many parameters to take for a method then we can use var-args
+
+public int add (int...  x) {
+
+}
+
+1) Only 3 ellipses ( ... ) allowed to declare variable argument
+2) Variable argument should be the last parameter of the method 
+3) A method should contain only one variable argument
+
+
+package in.ashokit;
+
+public class Calculator {
+
+	public void add(int... a) {
+		int sum = 0;
+		for (int x : a) {
+			sum = sum + x;
+		}
+		System.out.println(sum);
+	}
+
+	public static void main(String[] args) {
+		Calculator c = new Calculator();
+		c.add(10, 20);
+		c.add(10, 20, 30);
+		c.add(10, 20, 30, 40);
+		c.add(1, 2, 3, 4, 5);
+	}
+}
+
+
+
+
+
+public   void  m1 (String s, int... i) ;   // valid
+
+public void  m1 (String s, boolean... b) ; // valid
+
+public void  m1 (int i, String... s) ; // valid
+
+public void  m1( int... i ) ; // valid
+
+public void m1 ( double.... d) ; // invalid bcz 4 dots
+
+public void m1 (int... i , int j ) ; // invalid bcz var-arg shud be last
+
+public void m1 ( int i, int... j ) ; // valid
+
+
+
+===============
+Wrapper Classes
+===============
+-> Java is a Object Oriented Programming Language
+
+-> In java we can represent everything in the form of Object 
+
+-> To represent primitive types data in object format java provided Wrapper classes
+
+-> For every primitive type corresponding Wrapper class is available
+
+-> All wrapper classes are part of java.lang package
+
+
+byte  ----> Byte
+
+short  ---> Short
+
+int  --->   Integer
+
+long  ---> Long
+
+float   ----> Float
+
+double   ---->Double
+
+char    ---> Character
+
+boolean   ---> Boolean
+
+
+
+
+
+
+=========================
+What is Boxing & Un-Boxing?
+==========================
+
+-> The process of converting primitive data type into Wrapper Object is called as Boxing.
+
+-> The process of converting Wrapper object into primitive type is called as Un-Boxing.
+
+-> From Java 1.5, boxing and unboxing process automated hence they are called as Auto Boxing & Auto UnBoxing.
+
+
+public class Calculator {
+
+	public static void main(String... args) {
+
+		byte b = 20;
+		System.out.println(b);
+
+		Byte b1 = new Byte(b);  // Auto-boxing
+		System.out.println(b1);
+
+		byte b2 = b1; // Auto-un-boxing
+		System.out.println(b2);
+	}
+}
+
+
+Integer   i1 = new Integer ( 10 ) ;
+Integer   i2 = new Integer ( "20" );
+
+Double  d1  = new Double ( 10.05 );
+Double  d2 =  new Double ( "20.10" );
+
+Character c1 = new Character ('a');
+Character c1 = new Character ("a");   // invalid
+
+
+===========
+Type Casting
+===========
+
+-> Converting data from one data type to another data type is called as Type casting.
+
+-> Type Casting is divided into 2 types
+
+		1) Widening  / Up Casting
+
+		2) Narrowing / Down Casting
+
+
+-> The process of converting data from lower data type to higher data type is called as Widening.
+-> As we are converting lower data type to higher data type there is no data loss 
+-> For widenining no need to speciy type casting explicitley (JVM will take care of that)
+
+				byte  b = 20 ;
+				int i = b ; // widening
+
+
+-> The process of converting data from higher data type to lower data type is called as Narrowing
+-> As we are converting higher data type to lower data type there is a chance of data loss
+-> For narrowing we need to specify type casting manually otherwise program can't be compiled
+
+				long  num = 100 ;
+
+				int  i = num ;  // compile time error
+
+				int x = ( int ) num ; // narrowing
+
+=======================
+Working with String type
+=======================
+
+-> String type data can be converted to Integer using Integer.parseInt (xx) method.
+
+-> parseInt (xx) is a static method available in Integer wrapper class.
+
+public class Calculator {
+
+	public static void main(String[ ] args) {
+
+		String s1 = "10" ;
+		String s2 = "20";
+
+		int i = Integer.parseInt ( s1 ) ;
+		int j = Integer.parseInt ( s2 );
+
+		
+		System.out.println ( i + j );   // 30
+
+	}
+}
+
+
+---------------------------------------------------
+
+String s1 = "10.56" ;
+
+double d = Double.parseDouble (s1);
+
+--------------------------------------------------
+
+String s1 = "hi" ;
+int i = Integer.parseInt ( s1 ) ;  // NumberFormatException
+
+----------------------------------------------------------
+		
+
+// converting int data to String data
+
+public class Calculator {
+
+	public static void main(String[] args) {
+
+		int i = 10;
+		int j = 20;
+
+		String s1 = String.valueOf(i);
+		String s2 = String.valueOf(j);
+
+		System.out.println(s1 + s2); // 1020
+
+	}
+}
+
+----------------------------------------------------------------------
+Type casting w.r.t to Reference Types
+---------------------------------------------------------------------
+
+public class Demo implements Cloneable {
+
+	public static void main(String[] args) throws Exception {
+
+		// child object
+		Demo d = new Demo();
+
+		// storing child obj into parent class reference variable
+		Object obj = d; // widening / up casting   ( low to high )
+
+		// cloning - getting parent object
+		Object object = d.clone();
+
+		// Storing parent object into child class reference variable
+		Demo d1 = (Demo) object; // narrowing  ( high to low )
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

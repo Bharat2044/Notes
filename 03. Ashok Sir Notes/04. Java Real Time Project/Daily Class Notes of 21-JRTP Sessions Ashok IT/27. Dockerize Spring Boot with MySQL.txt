@@ -1,0 +1,67 @@
+===================================
+Dockerizing Spring Boot + MySQL
+===================================
+
+# Pull MySQL DB image
+$ docker pull mysql:5.7
+
+# Download required softwares
+$ sudo yum install git -y
+$ sudo yum install maven -y
+
+# Clone Spring Boot Project From Github
+$ git clone https://github.com/ashokitschool/spring-boot-mysql-docker-compose.git
+
+# Get into project directory
+$ cd <project-dir>
+
+# Package application
+$ mvn clean package
+
+# Create Application image
+$ docker build -t sb-app .
+
+# Check docker images
+$ docker images
+
+# Create Docker Network
+$ docker network create springmysql-net
+
+# See networks available
+$ docker network ls
+
+# Run mysqldb as a docker container
+$ docker run --name mysqldb --network springmysql-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=sbms -d mysql:5.7
+
+# check logs of container
+$ docker logs -f <container_name>
+
+
+If needed we can check if the database has been created correctly.
+
+We can do the following commands.
+
+$ docker exec -it <container_id> bash
+$ mysql -u <username> -p
+$ show databases;
+
+# Run springboot application as a container
+$ docker run --network springmysql-net --name sbapp-container -p 8080:8080 -d sb-app
+
+# check the containers which are running
+$ docker ps
+
+# check logs of application container
+$ docker logs -f <container_id> 
+
+
+# We can access our application now
+
+	URL : http://ec2-vm-public-ip:8080/
+
+
+
+
+
+
+

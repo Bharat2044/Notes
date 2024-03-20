@@ -1,0 +1,302 @@
+1) Create Angular Application
+
+	$ ng new <app-name>
+
+Note: Navigate to angular application folder using 'cd app-name'
+
+2) Install Boot strap and font awesome
+
+	$ npm install bootstrap --save
+	$ npm install jquery --save
+	$ npm install --save font-awesome angular-font-awesome
+
+3) Configure Bootstrap files in "angular.json" file
+
+     "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+		"node_modules/font-awesome/css/font-awesome.css",
+        "src/styles.css"
+      ],
+      "scripts": [
+          "node_modules/jquery/dist/jquery.min.js",
+          "node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ]
+			
+4) Create Request Mapping class
+
+	$ ng generate class searchrequest
+--------------------------------------------------------------------------------------------
+export class SearchRequest {
+
+    planName:string | undefined;
+    planStatus:string | undefined;
+
+}
+---------------------------------------------------------------------------------------------
+5) Create Response Mapping Class 
+
+	$ ng generate class searchresponse
+--------------------------------------------------------------------------------------------
+export class SearchResponse {
+
+    planId : number | undefined;
+    planName : string | undefined;
+    planStatus : string | undefined;
+    holderName : string | undefined;
+    benefitAmt : string | undefined;
+}
+---------------------------------------------------------------------------------------------
+Note: Make sure search-request class variable names are matching with Backend api input fileds and Search-Response class variable names are matching with Backend API output fields
+
+Note: If variable names are not matching then data-mapping will not happen
+
+---------------------------------------------------------------------------------------------
+
+6) Create Service class
+
+	$ ng generate service insurance
+
+---------------------------------------------------------------------------------------------
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SearchRequest } from './search-request';
+import { SearchResponse } from './search-response';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class InsuranceService {
+
+   constructor(private httpClient : HttpClient) {
+   }
+
+   getPlanNames() : Observable<any>{
+     return this.httpClient.get<any>("http://localhost:8080/plan-names);
+   }
+
+   getPlanStatus(): Observable<any>{
+     return this.httpClient.get<any>("http://localhost:8080/plan-statsues");
+   }
+
+   search(request : SearchRequest) : Observable<SearchResponse[]>{
+     return this.httpClient.post<SearchResponse[]>(`http://localhost:8080/search`, request);
+   }
+
+   getExcel() {
+     return this.httpClient.get<any>(`http://localhost:8080/excel`, {responseType : 'arraybuffer' as 'json'});
+   }
+
+   getPdf() {
+    return this.httpClient.get<any>(`http://localhost:8080/pdf`, {responseType : 'arraybuffer' as 'json'});
+  }
+}
+---------------------------------------------------------------------------------------------
+7) Create Component Class
+
+	$ ng generate component insurance
+
+--------------------------------component.ts-------------------------------------------------
+import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormControl, Validator, FormBuilder} from '@angular/forms';
+import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { InsuranceService } from '../insurance.service';
+import { SearchRequest } from '../search-request';
+import { SearchResponse } from '../search-response';
+
+@Component({
+  selector: 'app-insurance',
+  templateUrl: './insurance.component.html',
+  styleUrls: ['./insurance.component.css']
+})
+export class InsuranceComponent implements OnInit {
+
+  constructor(private insuranceService : InsuranceService) { }
+
+  public planNames: string[] | undefined ;
+  public planStatuses : any;
+
+  public selectedPlan = "select";
+  public selectedStatus = "select";
+
+  searchRequest : SearchRequest = new SearchRequest();
+  searchResponse : SearchResponse[] = [];
+
+  ngOnInit(): void {
+    this.getPlanNames();
+    this.getPlanStatus();
+  }
+
+  getPlanNames(){
+    this.insuranceService.getPlanNames().subscribe(data => {
+      this.planNames = data;
+    });
+  }
+
+  getPlanStatus(){
+    this.insuranceService.getPlanStatus().subscribe(data => {
+      this.planStatuses = data;
+    });
+  }
+
+  search(){
+    this.searchRequest.planName = this.selectedPlan;
+    this.searchRequest.planStatus = this.selectedStatus;
+    this.insuranceService.search(this.searchRequest).subscribe(data => {
+          this.searchResponse = data;
+    });
+  }
+
+  onSubmit() {
+    this.search();
+  }
+  exportToExcel() {
+    this.insuranceService.getExcel().subscribe(data => {
+      let file = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+    });
+  }
+
+  exportToPdf() {
+    this.insuranceService.getPdf().subscribe(data => {
+      let file = new Blob([data], { type: 'application/pdf' });
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+    });
+
+  }
+
+}
+
+________________________________________________________
+8) Write below presentation logic in insurance template file
+
+----------------------------------------insurance.component.html--------------------------------------
+
+<div class="row">
+    <div class="col-8 offset-2">
+      <div class="card">
+        <div class="card-header text-center">
+          <h3>Insurance Report</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-3">
+                <select class="form-select" name="planName" [(ngModel)]="selectedPlan">
+                  <option selected Value="select" disabled>Select a Plan Name</option>
+                  <option Value="">All Plans</option>
+                  <option value="{{planName}}" *ngFor="let planName of planNames">{{planName}}</option>
+                </select>
+              </div>
+              <div class="col-3">
+                <select class="form-select" name="planStatus" [(ngModel)]="selectedStatus">
+                  <option selected value="select" disabled>Select a Plan Status</option>
+                  <option Value="">All Status</option>
+                  <option value="{{planStatus}}" *ngFor="let planStatus of planStatuses">{{planStatus}}</option>
+                </select>
+              </div>
+              <div class="col-3">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
+                  Search</button>
+              </div>
+            </div>
+          </form>
+          <div>
+            <div class="row">
+              <div class="col-10 offset-1">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Plan ID</th>
+                      <th>Plan Name</th>
+                      <th>Plan Status</th>
+                      <th>Holder Name</th>
+                      <th>Benefit Amt</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let response of searchResponse">
+                      <td>{{response.planId}}</td>
+                      <td>{{response.planName}}</td>
+                      <td>{{response.planStatus}}</td>
+                      <td>{{response.holderName}}</td>
+                      <td>{{response.benefitAmt}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+  
+            </div>
+  
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-4 offset-8">
+              <div class="row">
+                <div class="col-5 offset-2">
+                  <!-- (click)="exportToExcel()" -->
+                  <!-- <a target="_blank"> -->
+                    <button class="btn btn-success" (click)="exportToExcel()">
+                      Export <i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+                  <!-- </a> -->
+                </div>
+                <div class="col-5">
+                    <button class="btn btn-danger" (click)="exportToPdf()">Export <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> 
+                  <!-- </a> -->
+                </div>
+                <!-- <a class="btn btn-success" (click)="exportToExcel()"> <i class="fa fa-plus-square"></i> Excel</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+---------------------------------------------------------------------------------------------
+
+9) Configure Required Modules in "App Module"
+
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { InsuranceComponent } from './insurance/insurance.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    InsuranceComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+---------------------------------------------------------------------------------------------
+10) invoke insurance-component from app-component using selector
+
+11) Run the application using below command
+
+		$ ng serve --open
+
+--------------------------------------------------------------------------------------------
+
+
+Note: Make sure Backend Rest Controller having @CrossOrigin annotation
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+

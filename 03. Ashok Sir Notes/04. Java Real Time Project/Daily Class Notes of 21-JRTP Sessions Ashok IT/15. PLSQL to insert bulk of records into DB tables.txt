@@ -1,0 +1,74 @@
+DROP PROCEDURE IF EXISTS insertRowsToDcCases;
+DELIMITER //  
+CREATE PROCEDURE insertRowsToDcCases()   
+BEGIN
+DECLARE i INT DEFAULT 1; 
+WHILE (i <= 5000) DO
+    INSERT INTO `dc_cases` (CASE_NUM, APP_ID, PLAN_ID) values (i, i, i);
+    SET i = i+1;
+END WHILE;
+END;
+//  
+DELIMITER ;
+
+call insertRowsToDcCases;
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+DROP PROCEDURE IF EXISTS insertRowsToCoTriggers;
+DELIMITER //  
+CREATE PROCEDURE insertRowsToCoTriggers()   
+BEGIN
+DECLARE i INT DEFAULT 1; 
+WHILE (i <= 5000) DO
+    INSERT INTO `CO_TRIGGERS` (TRG_ID, CASE_NUM, TRG_STATUS) values (i, i, 'Pending');
+    SET i = i+1;
+END WHILE;
+END;
+//  
+DELIMITER ;
+
+call insertRowsToCoTriggers();
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+DROP PROCEDURE IF EXISTS insertRowsToCitizenApps;
+DELIMITER //  
+CREATE PROCEDURE insertRowsToCitizenApps()   
+BEGIN
+DECLARE i INT DEFAULT 1;
+DECLARE j INT DEFAULT 1; 
+WHILE (i <= 5000) DO
+    INSERT INTO `CITIZEN_APPS` (EMAIL,FULLNAME,SSN) values ('ashokitschool@gmail.com','John',123456+j);
+    SET i = i+1;
+	SET j = j+1;
+END WHILE;
+END;
+//  
+DELIMITER ;
+
+call insertRowsToCitizenApps();
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+DROP PROCEDURE IF EXISTS insertRowsToEligDtls;
+DELIMITER //  
+CREATE PROCEDURE insertRowsToEligDtls()   
+BEGIN
+DECLARE i INT DEFAULT 1; 
+WHILE (i <= 5000) DO
+    INSERT INTO `ELIGIBILTY_DTLS` (CASE_NUM, PLAN_NAME,PLAN_STATUS,DENIAL_REASON) values (i, 'SNAP','Denied','High Income');
+    SET i = i+1;
+END WHILE;
+END;
+//  
+DELIMITER ;
+
+call insertRowsToEligDtls();
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+

@@ -1,0 +1,128 @@
+============
+Spring Boot
+============
+
+-> Spring Boot is one approach to develop Spring Based applications with less configurations.
+
+-> Using Spring Boot we can develop below types of applications
+
+			1) Standalone app
+			2) Web 
+			3) Distributed (webservices)
+
+-> We have below advantages with Spring Boot
+
+1) Starter Pom (simplifies maven/gradle build configuration)
+
+				-> web-starter
+				-> datajpa-starter
+				-> security-starter
+				-> mail-starter
+
+2) Auto Configuration (boot will identify required configs for our app)
+
+				-> Creating db connection pool
+				-> deploy web app in embedded server
+				-> Start IOC container
+				-> Component Scanning
+
+
+3) Actuators (To monitor and manage our application)
+
+				-> how many beans loaded ?
+				-> How many url-patterns mapped
+				-> What configuration properties loaded ?
+				-> What is health of app?
+				-> Heap Dump
+				-> Thread Dump
+
+
+4) Embedded Servers : It provides server to run our boot application
+
+			-> Apache Tomcat (default)
+			-> Jetty
+			-> netty
+
+=================================
+Creating Spring Boot Application
+==================================
+
+1) Initializr website (start.spring.io)
+
+2) IDE
+
+
+Note: IDE will internally connect with start.spring.io website to create SpringBoot application (Spring Starter Project)
+
+
+Spring Boot = 
+
+Spring  - xml configurations + Auto Config + Embedded Servers + Actuators
+
+
+
+
+=====================================
+What is Start Class in Spring Boot ?
+=====================================
+
+-> Start class is entry point for boot application execution.
+
+-> Start class is also called as main class in Spring Boot.
+
+
+Note: When we create boot app, start class will create by default
+
+
+@SpringBootApplication
+public class Application{
+
+	public static void main(String... args){
+			
+		SpringApplication.run(Application.class, args);
+
+	}
+
+}
+
+
+=> The @SpringBootApplication annotation is equal to below 3 annotations
+
+1) @SpringBootConfiguration ----> @Configuration
+2) @EnableAutoConfiguration
+3) @ComponentScan
+
+
+======================================
+How IOC starting in Spring Boot ?
+======================================
+
+=> SpringApplication.run ( ) method contains logic to start IOC container
+
+
+boot-starter :: AnnotationConfigApplicationContext
+web-starter :: AnnotationConfigServletWebServerApplicationContext
+starter-webflux :: AnnotationConfigReactiveWebServerApplicationContext
+
+================================
+What is Banner in Spring Boot ?
+================================
+
+-> Spring Logo which is printing on console is called as banner
+
+-> We have below 3 modes for banner
+
+			1) console  (default) --->> prints on console
+			2) log ---->> prints on log file
+			3) off  --->> don't print banner
+
+
+-> We can set banner mode in application.properties file
+
+		spring.main.banner-mode=off
+
+
+-> We can customize banner text in spring boot by creating banner.txt file under src/main/resources folder.
+
+
+ASCII Text Gen Url : https://patorjk.com/software/taag/#p=display&f=Graffiti&t=SBI%20API

@@ -1,0 +1,76 @@
++++++++++++++++++++++++
+Monlith Vs Microservices
++++++++++++++++++++++++
+
+Application can be developed in 2 ways
+
+1) Monolith Architecture
+
+2) Microservices Architecture
+
+-> If we develop all the functionalities in one single application then it is called as Monolith Application
+
+++++++++++
+Advantages
+++++++++++
+1) Development is easy
+2) Deployment is easy
+3) Performance
+4) Easy Testing
+5) Easy Debugging
+6) KT is easy
+
+++++++++++++++
+Dis-Advantages
+++++++++++++++
+
+1) Single point of failure
+2) Whole Application Re-Deployment
+3) Scalability ( Increasing & Decreasing resources based on demand )
+4) Reliability (Strong)
+5) Availability (Zero Downtime)
+
+=> If we develop the functionalities in multiple services/apis then it is called as Microservices Architecture Based Application.
+
+=> Every Microservice will have its own goal
+
+++++++++++
+Advantages
+++++++++++
+
+1) Loosely coupled
+2) Fast Development
+3) Quick Releases
+4) Flexibility
+5) Scalability
+6) No Single Point of failure
+7) Technology independence
+
+
+++++++++++++++
+Challenges
+++++++++++++++
+
+1) Bounded context (identifying no.of services to develop)
+
+2) Lot of configurations
+
+3) Visibility
+
+4) Testing is difficult
+
+5) Debugging
+
+
+URL : https://t.me/ashokitofficial
+
+Telegarm Channel Username : @ashokitofficial
+
+
+
+
+
+
+
+
+

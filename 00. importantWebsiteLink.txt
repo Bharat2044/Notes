@@ -1,0 +1,27 @@
+NSLookUp: Used to find the IP address of any websites
+https://www.nslookup.io/  
+
+Canva Color Wheel: Used to find better colour combinations
+https://www.canva.com/colors/color-wheel/
+
+Animate.css: For learning animation
+https://animate.style/
+
+UI Color Picker: For colour
+https://uicolorpicker.com/
+
+Bennettfeely.com/clipy: To make clip-path, flex, 3D
+https://bennettfeely.com/clippy/
+
+Google Fonts: To choose fonts -> library of fonts
+https://fonts.google.com/
+
+Font Awesome & Google Icon: To select icons
+https://fontawesome.com/
+https://fonts.google.com/icons
+
+
+
+
+
+

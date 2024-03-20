@@ -1,0 +1,132 @@
+++++++++++++
+Session - 04
+++++++++++++
+
+Types of software companies
+
+1) Product Based Companies : Develop & Sell projects/Product to customers in market
+
+		Ex: Oracle, Amazon, Facebook, Microsoft, Google, Netflix etc....
+
+2) Service Based Companies : Develop projects based on Client Requirement
+
+		Ex: TCS, Infy, CGI, Capgemini, Coginizent, Accenture, Wipro, TechM, Deloitte, HCL etc...
+
+3) Outsourcing Companies : Provides employees to other companies on  Contract basis
+
+		Ex: SourceOne, A2HR, MagnaInfotech, HCL, CTS, Capgemni...
+
+Note: Now a days so many Service Based companies are doing Outsourcing business...
+
+
++++++++++++++++
+Interview Process
++++++++++++++++
+
+1st round : Coding Test (Hacker Rank / Hacker Earth / Code Pair )
+
+2nd round : Technical Discussion - 1
+
+3rd round : Technical Discussion - 2
+
+4th round : Project Manager Discussion
+
+5th round : HR Discussion (Salary discussion)
+
+
+-> Product Based Company Interview process
+
+		- Data Structures
+		- Algorithms
+		- Problems Solving
+		- Design Patterns
+		- System Design
+		- Time Complexity
+		- Space Complexity
+		- Big O notations
+
+-> Package structure will be high in product based companies
+
+			Package structure = your no.of.years.of.exp * 8 lakhs
+
+-> Service Based Company Interview process
+
+		- Coding 
+		- Collections
+		- Threads
+		- Lambdas & Streams
+		- Exceptions
+		- Spring Boot
+		- Microservices
+		- Dockers & K8S
+		- Jenkins
+		- Code Review
+		- Unit Testing
+		- Security
+		- Project Architecture
+		- Challenges faced
+
+
+> Package structure will be less in service based companies
+
+	Package structure = your no.of.years.of.exp * 3 - 4 lakhs
+
+
+
+
++++++++++++++++++++++++++
+What is Software Project ?
+++++++++++++++++++++++++++
+
+-> Collection of programs is called as Project
+
+-> Software Projects will reduce human efforts & makes humans life simple
+
+
+++++++++++++++++++++++
+Types of Software Projects
++++++++++++++++++++++++
+
+-> In IT companies we can see 3 types of Projects
+
+1) Scratch development projects		:  Brand New Project  (learning scope will be there)
+
+2) Maintenence / Support projects	:  Enhancements / Change Requests / Bug Fixing
+
+3) Migration projects				: Upgrading to latest technologies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

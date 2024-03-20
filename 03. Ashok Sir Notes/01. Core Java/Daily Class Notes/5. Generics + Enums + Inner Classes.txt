@@ -1,0 +1,266 @@
+==============
+Generics In Java
+==============
+
+-> Generics introduced in java 1.5 version
+
+-> Using Generics, we can write our classes / variable / methods which are indendent of data type
+
+-> Generics are used to achieve type safety
+
+public void m1 ( Integer i ){
+
+}
+
+m1 (10) ;  // valid
+
+m1 ("hi") ; // in-valid
+
+
+-> The above method is taking Integer as a parameter (It is tightly coupled). If we want to pass String as a parameter for m1 ( ) method it is not possible. Compiler will not accept it.
+
+-> To overcome above problem we can use Generics in Java.
+
+package in.ashokit;
+
+public class Demo<T> {
+
+	public void m1(T arg) {
+		System.out.println("Param Recieved : " + arg);
+	}
+
+	public static void main(String[] args) throws Exception {
+		Demo d = new Demo();
+
+		d.m1(10); // passing int value
+		d.m1("hi"); // passing String value
+		d.m1(100.51); // passing double value
+		d.m1(true); // passing boolean value
+	}
+}
+
+// Java program with Generic Type to achieve Type Safety
+
+package in.ashokit;
+
+public class Demo<T> {
+
+	T obj;
+
+	void add(T obj) {
+		this.obj = obj;
+	}
+
+	T get() {
+		return obj;
+	}
+
+	public static void main(String[] args) throws Exception {
+
+		Demo<Integer> d1  = new Demo<>();
+		d1.add(10);
+		System.out.println(d1.get());
+		
+		Demo<String> d2 = new Demo<>();
+		d2.add("Hi");
+		System.out.println(d2.get());
+	}
+}
+
+
+// Java Program with Generic Parameters for Constructor
+
+package in.ashokit;
+
+public class Demo<T1, T2> {
+
+	T1 obj1;
+	T2 obj2;
+
+	Demo(T1 obj1, T2 obj2) {
+		this.obj1 = obj1;
+		this.obj2 = obj2;
+	}
+
+	void print() {
+		System.out.println(obj1 + ", " + obj2);
+	}
+
+	public static void main(String[] args) throws Exception {
+		Demo<Integer, String> d1 = new Demo<>(101, "Ram");
+		d1.print();
+
+		Demo<String, Long> d2 = new Demo<>("Ashok", 798686868l);
+		d2.print();
+
+		Demo<String, Boolean> d3 = new Demo<>("Raju", true);
+		d3.print();
+	}
+}
+
+=====================
+Generics with wild Cards
+======================
+
+Demo< ? extends Number > 
+
+=> The above wild card represents Demo class should take any class obj which is extending from Number class.
+
+
+
+Auto Boxing
+Auto Unboxing
+Var Args
+Callable
+ExecutorService
+Generics
+Enums
+
+
+=============
+Enums in Java
+=============
+
+-> Enum introduced in java 1.5v
+
+-> Enum is a special data type in java
+
+-> Enum data type is used to create pre-defined Constants
+
+-> To declare constants using Enum we will use 'enum" keyword
+
+-> Enum stands for Enumeration
+
+	enum WEEKDAYS {
+		MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY;
+	}
+
+	enum WEEKENDDAYS {
+		SATURDAY, SUNDAY;
+	}
+
+
+-> When we want to declare pre-defined constants then we will use Enums concept.
+
+
+======================================
+Few Points To Remember Related To Enums
+======================================
+
+1) Enum constants we can't override
+2) Enum doesn't support object creation
+3) Enum can't extend classes
+4) Enum can be created in seperate file or we can create in existing class also
+
+
+package in.ashokit;
+
+public enum Course {
+
+	JAVA, PYTHON, DEVOPS, AWS, DOCKER, KUBERNETES;
+
+}
+
+package in.ashokit;
+
+public class Demo {
+
+	enum WEEKDAYS {
+		MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY;
+	}
+
+	enum WEEKENDDAYS {
+		SATURDAY, SUNDAY;
+	}
+
+	public static void main(String[] args) throws Exception {
+
+		Course[] values = Course.values();
+		
+		for (Course c : values) {
+			System.out.println(c);
+		}
+	}
+}
+
+
+
+
+=============
+Inner Classes
+==============
+
+-> Creating one class inside another class is called as Inner class.
+
+-> Inner classes are also called as Nested Classes.
+
+-> The class which contains other class is called as Outer class
+
+-> The Class which is  declared inside outer class is called as Inner class.
+
+
+class  A {
+
+	class B {
+
+	}
+
+}
+
+class A - is called as outer class
+
+class B - is called as inner class
+
+-> Inner classes are called as Helper classes
+
+-> Inner classes are hidden from other classes ( only outer class can access inner class functionality )
+
+====================
+Types of Inner classes
+=====================
+
+1) Non static inner classes
+
+			1.1  Regular Inner classes
+			1.2  Method local inner class
+			1.3  Anonymous inner class
+
+2) Static inner classes
+
+
+
+
+
+package in.ashokit;
+
+public class Outer {
+
+	void outerMethod() {
+		Inner i = new Inner();
+		i.innerMethod();
+	}
+
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.outerMethod();
+	}
+
+	private class Inner {
+		void innerMethod() {
+			System.out.println("inner method called...");
+		}
+	}
+}
+
+
+=> We can't use private / protected modifier for outer classes
+
+-> We can use private modifier for inner classes
+
+
+
+
+
+
+
+

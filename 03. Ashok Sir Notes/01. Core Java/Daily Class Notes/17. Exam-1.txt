@@ -1,0 +1,21 @@
+1) What is fullstack development ?
+2) Explain software project layers / architecture 
+3) What are the roles & responsibilites of fullstack developer
+4) What is database and why we need it ?
+5) What is programming language & why we need programming language ?
+6) What is JAVA ?
+7) What are the features of java ?
+8) What is the difference between C and Java ?
+9) What type of applications we can develop using java & brief them
+10) What is the difference between JDK, JRE and JVM ?
+11) What is the execution flow of java program ?
+12) What is the difference between interpreter and compiler ?
+13) Write JVM architecture & explain JVM components
+14) What is JIT ?
+15) Write Java data types with size and default values
+16) What is variable and how to create variables
+17) Write Java program structure & explain them
+18) Write a java program to print welcome msg
+19) Write a java program on variables declaration, initialization & print value of variables
+20) How many types of comments available in java & what is the purpose of them ?
+

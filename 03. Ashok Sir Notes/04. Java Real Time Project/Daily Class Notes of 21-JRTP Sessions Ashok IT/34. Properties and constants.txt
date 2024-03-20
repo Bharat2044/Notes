@@ -1,0 +1,112 @@
+-> When we create boot application we are getting application.properties file by default
+
+-> application.properties file will represent data in key-value format
+
+	Ex:  
+
+		server.port = 8080
+
+-> properties file will be used only in java
+
+
+-> YML stands for YET Another Markup Language
+
+-> YML format is universal to represent data / configuration
+
+->  YML can represent data in key-value, list and map also
+
+-> YML format supported by several programming languages
+
+-> Instead of application.properties we can use application.yml file in Spring Boot
+
+-> In YML file indent spaces are very important
+
+
+++++++++++++++++++++++
+Reading Data From YML
++++++++++++++++++++++
+
+
+------------------------application.yml----------------------------
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: ashokit
+    url: jdbc:h2:mem:testdb
+    username: ashokit
+  jpa:
+    hibernate:
+      ddl-auto: update
+plan-api:
+  messages:
+    planSaveSucc: Plan Saved Successfully
+    planSaveFail: Plan Save Failed
+    planUpdateSucc: Plan Updated Successfully
+    planUpdateFail: Plan Update Failed
+    planDeleteSucc: Plan Deleted Successfully
+    planDeleteFail: Plan Delete Failed
+    planStatusChange: Plan Status Changed Successfully
+    planStatusChangeFail: Plan Status Change Failed
+
+----------------------------------AppProperties.java-------------------------------------
+@Data
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix = "plan-api")
+@Configuration
+public class AppProperties {
+
+	private Map<String, String> messages = new HashMap<>();
+
+}
+
+--------------------------------PlanRestController.java--------------------------------
+
+@RestController
+public class PlanRestController {
+
+	private PlanService planService;
+	
+	private Map<String, String> messages;
+	
+	public PlanRestController(PlanService planService, AppProperties appProps) {
+		this.planService = planService;
+		this.messages = appProps.getMessages();
+		System.out.println(this.messages);
+	}
+
+	//methods of our rest controller
+}
+
+-----------------------------------------------------------------------------------------------------
+
+
+-> We should remove String literals and we should configure them in AppConstants class
+
+
+public class AppConstants {
+
+	public static final String EMPTY_STR = "";
+
+	public static final String PLAN_SAVE_SUCC = "planSaveSucc";
+
+	public static final String PLAN_SAVE_FAIL = "planSaveFail";
+	
+	public static final String PLAN_UPDATE_SUCC = "planUpdateSucc";
+	
+	public static final String PLAN_UPDATE_FAIL  = "planUpdateFail";
+	
+	public static final String PLAN_DELETE_SUCC = "planDeleteSucc";
+	
+	public static final String PLAN_DELETE_FAIL = "planDeleteFail";
+	
+	public static final String PLAN_STATUS_CHANGE = "planStatusChange";
+	
+	public static final String PLAN_STATUS_CHANGE_FAIL = "planStatusChangeFail";
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+

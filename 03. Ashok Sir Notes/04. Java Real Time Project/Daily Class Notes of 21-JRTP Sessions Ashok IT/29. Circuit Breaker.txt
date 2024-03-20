@@ -1,0 +1,92 @@
+public Data getData () { 
+
+		try {
+			// logic to get data from redis
+		} catch(Exception e){
+			// logic to get data from database
+		}
+
+}
+
+-> The above logic is not at all recommended because everytime redis logic will execute if it failed then database logic will execute
+
+Note: Continuosly requests are coming and redis server is down from 2 hours,... for every request try block executing and failing then control going to catch block then fallback logic executing .
+
+(it will increase execution time of program) hence it is not good solution to implement like this.
+
+-> To handle this situation we will use 'Circuit Breaker'
+
+-> Using Circuit Breaker we can execute fallback logic when there is a failure in main logic
+
+
+
+-> If main logic is failed for 5 requests continuosly then execute only fallback logic for next 15 minutes
+
+
+-> After 15 minutes try to execute main logic for 5 requests, if it successful then execute main logic otherwise execute only fallback logic for next 15 minutes
+
+
+==============
+Dependencies
+===============
+           <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-services-starter-circuit-breaker</artifactId>
+		</dependency>
+
+
+================
+Start Class
+===============
+
+@SpringBootApplication
+@EnableHystrix
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+}
+
+===============
+RestController
+===============
+@RestController
+public class DataRestController {
+
+	@GetMapping("/data")
+	@HystrixCommand(
+			fallbackMethod="getDataFromDB",
+			commandProperties= {
+				@HystrixProperty(name="circuitBreaker.requestVolumeThreshold", value="5"),
+				@HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds",value="10000")
+			}
+	)
+	public String getDataFromRedis() {
+		System.out.println("**Redis() method called**");
+		
+		if (new Random().nextInt(10) <= 10) {
+			throw new RuntimeException("Redis Server Is Down");
+		}
+		// logic to access data from redis
+		return "data accessed from redis (main logic) ....";
+	}
+
+	public String getDataFromDB() {
+		System.out.println("**DB() method called**");
+		// logic to access data from db
+		return "data accessed from database (fall back logic) ....";
+	}
+}
+
+=====================================================
+
+
+
+
+

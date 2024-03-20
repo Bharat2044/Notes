@@ -1,0 +1,11 @@
+{
+	"name": "Raju",
+	"from": "Hyd",
+	"to": "Delhi",
+	"gender": "Male",
+	"addr": {
+		"city": "Hyd",
+		"state": "TG",
+		"country": "India"
+	}
+}

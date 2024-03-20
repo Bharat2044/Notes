@@ -1,0 +1,77 @@
+21 - JRTP (Session - 02)
+++++++++++++++++++++
+
+1) What is Fullstack Development ?
+2) Why it is important 
+3) What Fullstack developer will do in company ?
+
+#############################
+What is Fullstack Development?
+#############################
+
+-> It is hot cake in IT industry now a days
+
+-> Every company looking for Fullstack developers
+
+		Fullstack Development = Backend development + Frontend development
+
+Frontend development ---> User interface   (end users can see this)
+
+Backend development  ---> Business logic (end users can't see this)
+
+
+Front end Tech stack : HTML, CSS, Java Script, Boot strap, Angular, React JS etc...
+
+Backend Tech stack : Java, C#, Python, PHP, Node JS etc.....
+
+
+##################
+JRTP-21 Tech Stack
+##################
+
+Frontend Tech stack : HTML, CSS, JS & Angular
+
+Backend Tech Stack : Java 8 + Spring Core + Web MVC + Spring Boot + REST API + Microservices
+
+Database : Oracle, MySQL, H2, Mongo DB
+
+Cloud : AWS Cloud
+
+Realtime Tools : 20 + Tools
+
+OS : Linux Commands
+
+
+######################################################
+What are the Roles & Responsibilities of Fullstack Developer ?
+######################################################
+
+1) Understanding Requirements
+2) Requirements Analysis
+3) Setup Meeting with Functional team to get clarity on requirements
+4) Database Design
+5) Backend Development (APIs development) 
+6) Unit Testing with Mocking 
+7) Code Coverage (80 % coverage is minimum)
+8) Frontend Development (User Interface)
+9) Integration ( Frontend + Backend )
+10) Integration Testing
+11) Code Integration in Repository Server
+12) Code Review 
+13) Deployments (CI CD)
+14) Logs Monitoring
+15) Application Support  / Maintenence
+
+
+
+
+
+
+
+
+
+
+
+
+
+

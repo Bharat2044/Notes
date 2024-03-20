@@ -1,0 +1,110 @@
+You can download *STS IDE* using below link
+
+https://www.mediafire.com/file/a47twmq8k4vperz/spring-tool-suite-3.9.6.RELEASE-e4.9.0-win32-x86_64.zip/file
+
+
+
+
+-> We used Notepad to write the java programs
+
+-> We can use any text editor to write java programs
+
+-> We compiled and executed java programs using command prompt
+
+-> If we use notepad to write programs it will take lot of time to write our code 
+    (time taking process)
+
+-> In Companies we will use IDEs to write the program
+
+==========
+IDE
+==========
+
+-> IDE means Integrated Development Environmnet
+
+-> There are several IDEs available in the market
+
+
+1) Eclipse IDE
+
+2) MyEclipse IDE    ( commercial )
+
+3) NetBeans IDE    (outdated)
+
+4) Spring Tool Suite (STS) IDE
+
+5) IntelliJ IDE    (commercial)
+
+6) Visual Studio (VS) Code IDE   ---> It is mostly used for front-end development
+
+===================
+Advantages with IDE
+==================
+
+-> IDE will provide all the tools which are required for development & execution
+
+-> IDE will provide  Suggestions while writing the code (Intelligence)
+
+-> IDE is providing Auto Compilation
+
+-> Using IDE we can do more work in less time (Productivity will be improved)
+
+-> We can do faster development using IDE
+
+
+
+====================
+Working with IDE
+=====================
+
+1) Download IDE as zip file
+
+2) Extract IDE zip file
+
+3) Open STS.exe  / eclipse.exe file
+
+4) Choose Workspace (location to store our projects)
+
+5) Create Java Project
+
+			-> File -> New -> Java Project -> Give Project Name -> Finish
+
+
+-> In java project we are able to below two folders
+
+			- src  (source files --> .java files we will create under src directory)
+			- bin (binaries -> .class files will be stored in bin directory)
+
+
+-> Once project created then we can create our programs / classes in that project
+
+Note: One project can contain any no.of classes
+
+
+	-> Goto src directory --> Right click on src --> select new --> select class --> Give Classname ---> Finish
+
+
+
+-> We can pass commandline arguments also in IDE
+
+Right Click on Program --> Run as -> Run Configurations -> Arguments -> Program Arguments --> Enter Arguments with space -> Apply --> Run 
+
+
+
+
+**************** Eclipse Shortcut Keys Video : https://www.youtube.com/watch?v=TvYMey5SYa8 **************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

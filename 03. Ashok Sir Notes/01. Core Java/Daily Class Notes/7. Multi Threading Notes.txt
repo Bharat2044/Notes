@@ -1,0 +1,888 @@
+==============
+Multi Threading
+==============
+
+Task : Work
+
+Single Tasking : Performing only one task at a time is called as Single Tasking
+
+Ex: 
+
+1) Explain the topic
+2) Dictate the notes
+3) Ask questions
+
+-> If we perform single tasking then it will take lot of time to complete all our work.
+
+Multi Tasking : Performing multiple tasks at a time is called as Multi Tasking
+
+Ex:
+
+1) Walking & listening music
+
+2) Speaking and Writing
+
+3) Reading book & eating
+
+-> If we perform multi tasking then we complete multiple works at a time.
+
+
+-> Multi Tasking we can achieve in 2 ways
+
+1) Process Based Multi Tasking
+
+	Ex: Windows OS
+
+2) Thread Based Multi Tasking
+
+-> To execute our program logics paralelly then we need to go for Thread Based Multi Tasking
+
+-> Using Thread Based Multi Tasking our program can complete the work quickly
+
+-> To implement Thread Based Multi Tasking we will use Multi Threading
+
+-> Java Supports Multi Threading
+
+=============================
+Use case to go for Multi Threading
+=============================
+
+1) Send sms to all customers at a time
+2) Send Email to all customers at a time
+3) Generate & Send Bank Statements to all customers in email
+
+
+Note: The main aim of Multi Tasking is used execute our program logic paralelly so that we can complete more work in less time.
+
+-> For Every Java program execution, JVM will create one thread by default. That thread is called as Main thread.
+
+
+// Java Program to get the details of Main thread
+
+
+public class Demo {
+
+	public static void main(String... args) {
+
+		Thread currentThread = Thread.currentThread();
+		System.out.println(currentThread.getName()); // main
+
+	}
+}
+
+
+Note: Thread is a predefined class available in java.lang package. In Thread class we have a static method currentThread ( ).
+
+===================
+User Defined Threads
+===================
+
+-> In Java we can create Thread in 2 ways
+
+1) By extending Thread class
+
+2) By Implementing Runnable interface
+
+
+// Java program to create user defined thread using Thread class
+
+public class Demo extends Thread {
+
+	public void run() {
+		System.out.println("run () method called...");
+	}
+
+	public static void main(String... args) {
+
+		Demo d = new Demo();
+
+		Thread t = new Thread(d);
+		t.start();
+	}
+}
+
+
+// Java program to create the thread using Runnable interface
+
+public class Demo implements Runnable {
+
+	public void run() {
+		System.out.println("run () method called...");
+	}
+
+	public static void main(String... args) {
+
+		Demo d = new Demo();
+
+		Thread t = new Thread(d);
+		t.start();
+	}
+}
+
+
+==================================================================================================
+Q) What is the difference between extending Thread class and implementing Runnable interface, which is recommended ?
+==================================================================================================
+
+-> If we extend properties from Thread class then we can't extend properties from any other class because java doesn't support mulitple inheritence. (We are closing gate for Inheritence)
+
+-> If we implement Runnable interface then in future we can extend properties from any class based on requirement. (Our gate is open for inheritence)
+
+Note: Implementing Runnable interface is always recommended.
+
+=======================
+What is Thread Schedular
+=======================
+
+-> Thread Schedular is a program in the JVM which is responsible to schedule Threads execution and resources allocation  required for the thread.
+
+-> When we call start ( ) method then Thread Schedular will start its operation.
+
+			1) Allocating Resources
+
+			2) Thread Scheduling
+
+			3) Thread Execution by calling run ( ) method
+
+
+================================
+start  ( ) method  vs run ( ) method
+================================
+
+-> To start thread execution we will call start ( ) method
+
+			t.start ( )
+
+-> once start ( ) method is called then Thread Schedular will come into picture to execute our thread
+
+-> start ( ) method will call run ( ) method internally
+
+-> inside run ( ) method we will write the logic which should be executed by the thread.
+
+
+=======================================================
+Can we call run ( ) method directley without calling start ( ) method
+========================================================
+
+-> Yes, we can call run ( ) method directley but it will execute like a normal method (there is no use) by "main" thread.
+
+-> If we want to execute run ( ) method as a thread  method then we should call start ( ) method then internally it will call run ( ) method (Thread Schedular will take care of thread execution)
+
+
+public class Demo implements Runnable {
+
+	public void run() {
+		System.out.println("run () method started...");
+
+		Thread t = Thread.currentThread();
+		System.out.println(t.getName());
+
+		System.out.println("run () method ended...");
+	}
+
+	public static void main(String... args) {
+		Demo d = new Demo();
+
+		Thread t = new Thread(d);
+		//t.start();
+		// t.run();
+	}
+}
+
+
+=> If we call start ( ) method then run ( ) method will be executed by our user defined thread (we can see thread name as Thread-0)
+
+=> if we call run ( ) method then run ( ) method will be executed by "main" thread (we can see thread name as main)
+
+
+
+======================
+What is Thread Life Cycle
+======================
+
+-> Thread Life cycle contains several phases of Thread execution
+
+1) New
+
+2) Runnable
+
+3) Running
+
+4) Blocked
+
+5) Terminated
+
+
+New: A thread begins its life cycle in the new state. Thread remains in the new state until we will call start ( ) method.
+
+Runnable : After calling start ( ) method, thread comes from new state to runnable state.
+
+Running : A thread comes to running state when Thread Schedular will pick up that thread for execution.
+
+Blocked  : A thread is in waiting state if it waits for another thread to complete its task.
+
+Terminated : A thread enters into terminated state once it completes its task.
+
+
+
+
+// Java Program on Thread Sleep
+
+package in.ashokit;
+
+public class Demo implements Runnable {
+
+	public void run() {
+		System.out.println("run () method started...");
+
+		try {
+			Thread.sleep(5000); // blocked state
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("run () method ended...");
+	}
+
+	public static void main(String... args) {
+		Demo d = new Demo();
+
+		Thread t = new Thread(d); // new state
+		t.start(); // runnable state
+	}
+}
+
+
+// Java program to start mutliple threads to perform same activity
+
+package in.ashokit;
+
+public class Demo implements Runnable {
+
+	public void run() {
+		System.out.println("run () method started..." + Thread.currentThread().getName());
+		try {
+			Thread.sleep(15000); // blocked state
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("run () method ended..." + Thread.currentThread().getName());
+	}
+
+	public static void main(String... args) {
+		Demo d = new Demo();
+
+		Thread t1 = new Thread(d);
+		t1.setPriority(Thread.MAX_PRIORITY); // 10
+		t1.setName("Thread-1");
+
+		Thread t2 = new Thread(d);
+		t2.setPriority(Thread.NORM_PRIORITY); // 5
+		t2.setName("Thread-2");
+
+		Thread t3 = new Thread(d);
+		t3.setPriority(Thread.MIN_PRIORITY); // 1
+		t3.setName("Thread-3");
+
+		t1.start(); // runnable state
+		t2.start(); // runnable state
+		t3.start(); // runnable state
+	}
+}
+
+Note: We shouldn't start one thread more than one time.
+
+public static void main(String... args) {
+		Demo d = new Demo();
+
+		Thread t1 = new Thread(d);
+
+		t1.start();
+		t1.start(); // java.lang.IllegalThreadStateException
+	}
+
+
+=================
+Callable Interface
+=================
+
+-> This interface introduced in java 1.5
+
+-> Using Callable interface also we can create the Thread
+
+-> This interface contains call ( ) method.
+
+Syntax:
+
+			public Object call ( ) 
+
+====================================================
+What is the difference between Runnable & Callable interfaces
+====================================================
+
+-> Runnable is a functional interface which contains run ( ) method
+-> Callable is a functional interface which contains call ( ) method
+
+-> Runnable run ( ) method returns void (no return type)
+-> Callable call ( ) method returns Object
+
+-> Runnable interface present in java.lang package
+-> Callable interface present in java.util.concurent package
+
+
+==============================
+ExecutorService
+==============================
+
+-> Executor Service introduced in java 1.5v
+
+-> Using ExecutorService we can implement multi threading
+
+-> Using Executors we can create thread pool
+
+-> Using Executor Service we can submit tasks to pool of threads.
+
+-> ExecutorService will re-use threads available in the pool to complete all submitted tasks.
+
+
+// Java Program on Executor Service with Callable interface
+
+package in.ashokit;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class Demo implements Callable {
+
+	public Object call() throws Exception {
+		System.out.println("call ( ) - method executed...");
+		return "success";
+	}
+
+	public static void main(String[] args) throws Exception {
+		Demo d = new Demo();
+		
+		ExecutorService exService = Executors.newFixedThreadPool(10);
+
+		for (int i = 1; i <= 15; i++) {
+			Future submit = exService.submit(d);
+			System.out.println(submit.get().toString());
+		}
+		exService.shutdown();
+	}
+}
+
+
+=============
+Daemon Thread
+=============
+
+We have 3 types of threads in java
+
+1) Default thread created by JVM ( main thread )
+
+2) User Defined Threads ( Thread class, Runnable interface, Callable interface )
+
+3) Daemon Threads
+
+
+Note: The thread which runs in the background is called as Dameon Thread. Daemon Threads also called as low priority threads.
+
+Ex: Garbage Collector is a daemon thread
+
+
+-> We can make our thread as Daemon Thread using setDaemon( ) method
+
+
+// Java Program To Make thread as Daemon
+
+package in.ashokit;
+
+public class Demo implements Runnable {
+
+	@Override
+	public void run() {
+
+		if (Thread.currentThread().isDaemon()) {
+			System.out.println("Daemon Thread Executed...");
+		} else {
+			System.out.println("Normal Thread Executed...");
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Demo d = new Demo();
+		Thread t1 = new Thread(d);
+		t1.setDaemon(true);
+		t1.start();
+	}
+}
+
+
+-> When JVM reaches end of main method, it will terminate our program. If JVM founds Daemon thread running it terminates that daemon thread and then it will shutdown the program.
+
+-> JVM will not care about Daemon Threads running status to stop the program execution.
+
+
+==============
+Synchronization
+==============
+
+
+String ----> Immutable class
+
+StringBuffer ----> Mutable class & synchronized class (Thread safe class)
+
+StringBuilder ---> Mutable class & not-synchronized class  (Not Thread Safe class)
+
+
+Synchronized means Thread safe ===> Only one thread can access the object / resource at a time
+
+Not-Synchronized means Not Thread Safe   => Multiple threads can access same resource / object at a time
+
+
+public class MovieTicketBooking  {
+
+		int avilableTickets = 100;
+
+		public void run ( ) {
+			if ( availableTickets > 0 ) {		
+				// logic to bookTicket;	
+				-- avilableTickets ;
+			}
+		}
+
+		psvm ( ) {
+				Thread t1 = new Thread();
+				Thread t2 = new Thread();
+				Threa  t20 = new Thread();
+
+				t1..... t20 ---start
+		}
+}
+
+-> In the program, multiple threads are trying to book tickets at a time
+
+Note: If multiple threads access the same object at a time then there is a chance of getting data inconsistency problem.
+
+
+=> To avoid data inconsistency problem, we need to use Synchronization concept
+
+=> Synchronization means allowing only one thread to execute our resource / object / logic at a time
+
+Note: By Using Synchronization we can achieve Thread Safety but it will slow down our execution process.
+
+
+===========================
+How to achieve synchronization
+===========================
+
+-> Using  'synchronized' keyword we can implement synchronization
+
+-> synchronized keyword we can use at two places
+
+1)  At method level
+
+2)  At block level
+
+--------------------------------------------
+Syntax For Synchronized Block:
+--------------------------------------------
+
+public void m1( ){
+
+	// pre-logic
+
+	synchronized ( object ) {
+		// imp business logic
+	}	
+	
+	// post-logic
+
+}
+
+
+--------------------------------------------
+Syntax For Synchronized Method :
+--------------------------------------------
+
+public synchronized void m1( ) {
+
+	// important business logic
+
+}
+
+
+
+// Java Program with Synchronized Method
+
+public class Demo implements Runnable {
+
+	public synchronized void printNums() {
+		for (int i = 1; i <= 10; i++) {
+			System.out.println(Thread.currentThread().getName() + "=> " + i);
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void run() {
+		printNums();
+	}
+
+	public static void main(String[] args) {
+		Demo d = new Demo();
+
+		Thread t1 = new Thread(d);
+		t1.setName("Thread-1");
+		t1.start();
+
+		Thread t2 = new Thread(d);
+		t2.setName("Thread-2");
+		t2.start();
+	}
+}
+
+Note: In the above program we are starting 2 threads. two threads will access printNums ( ) method to print the numbers from 1 to 10.
+
+-> If printNums ( ) method having synchronized keyword then two threads will execute the method sequentially one after other .
+
+-> if we remove synchronized keyword from the printNums ( ) method then two threads will access that method at a time.
+
+Note: We can see the difference in the output.
+
+
+==============================================
+Working with Threads using Anonymous Implementation
+==============================================
+
+package in.ashokit;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class MyThread {
+
+	public static void main(String[] args) {
+
+		Thread t1 = new Thread() {
+			public void run() {
+				System.out.println("run ( ) method logic-1");
+			}
+		};
+		t1.start();
+
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("run method() logic-2");
+			}
+		};
+
+		Thread t2 = new Thread(r);
+		t2.start();
+
+		Callable c = new Callable() {
+			public Object call() throws Exception {
+				System.out.println("call( ) method logic - 3");
+				return null;
+			}
+		};
+
+		ExecutorService exService = Executors.newFixedThreadPool(1);
+		exService.submit(c);
+	}
+}
+
+
+==========
+Dead Lock
+=========
+
+-> Dead Lock means ambiguity problem among the threads
+
+-> If 2 threads are waiting for each other to release the resources is called as dead lock.
+
+-> Once we get into dead lock situation then we can't do anything
+
+Ex:
+----
+
+Thread-1   holding resource-1  and waiting for resource-2
+
+Thread-2  holding resource-2 and waiting for resource-1
+
+Note: 
+
+Thread-1 will not release resource-1 hence thread-2 will be in waiting state forever for resource-1
+
+Thread-2 will not release resource-2 hence thread-1 will be in waiting state forever for resource-2
+
+
+
+// Java program which will give dead lock
+
+package in.ashokit;
+
+public class DeadLock {
+
+	public static void main(String[] args) {
+
+		String s1 = "hi";
+		String s2 = "hello";
+
+		Thread t1 = new Thread() {
+			public void run() {
+				synchronized (s1) {
+					System.out.println("Thread-1 locked resource-1");
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					synchronized (s2) {
+						System.out.println("Thread-1 waiting for resource-2");
+					}
+				}
+			}
+		};
+
+		Thread t2 = new Thread() {
+			public void run() {
+				synchronized (s2) {
+					System.out.println("Thread-2 locked resource-2");
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					synchronized (s1) {
+						System.out.println("Thread-2 waiting for resource-1");
+					}
+				}
+			}
+		};
+		t1.start();
+		t2.start();
+	}
+}
+
+
+=============
+join ( ) method
+=============
+
+-> join ( ) method is used to hold second thread execution until first thread execution got completed
+
+
+package in.ashokit;
+
+public class Demo {
+
+	public static void main(String[] args) throws Exception {
+
+		Thread t1 = new Thread() {
+			public void run() {
+				for (int i = 1; i <= 5; i++) {
+					System.out.println(Thread.currentThread().getName() + " => " + i);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		t1.setName("Thread-1");
+
+		Thread t2 = new Thread() {
+			public void run() {
+				for (int i = 1; i <= 5; i++) {
+					System.out.println(Thread.currentThread().getName() + " => " + i);
+					try {
+						Thread.sleep(100);
+						Thread.yield();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		t2.setName("Thread-2");
+
+		t1.start();
+		t1.join();
+		t2.start();
+	}
+}
+
+
+
+==============
+yield ( ) method
+===============
+
+-> yield ( ) method is used to give chance for other equal priority threads to execute
+
+
+// Java program with yield ( ) method
+
+package in.ashokit;
+
+public class YieldDemo {
+
+	public static void main(String[] args) {
+		Thread producer = new Producer();
+		Thread consumer = new Consumer();
+
+		producer.start();
+		consumer.start();
+	}
+}
+
+class Producer extends Thread {
+	public void run() {
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Producer : Produced Item " + i);
+			Thread.yield();
+		}
+	}
+}
+
+class Consumer extends Thread {
+	public void run() {
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Consumer : Consumed Item " + i);
+			Thread.yield();
+		}
+	}
+}
+
+
+
+========================
+Inter Thread Communication
+========================
+
+-> It is used to establish communication among the threads
+
+-> To achieve inter thread communication we have below 3 methods in Object class
+
+		1)  wait ( )
+		2) notify ( )
+		3) notifyAll ( )
+
+Q) Why these 3 methods available in Object class, why not in Thread class ?
+
+-> If these methods available in Thread class then we have to extend Thread class. In future we can't extend from any other java class bcz java is against for Multiple Inheritence.
+
+-> If these methods available in Runnable interface then everybody should implement these method even if they don't need inter thread communication.
+
+-> To overcome all these problems, java kept these methods in Object class so that every class will have access for these methods.
+
+
+
+// Java Program to establish inter thread communication
+
+package in.ashokit;
+
+public class Customer {
+
+	int amount = 10000;
+
+	synchronized void withdraw(int amount) {
+		System.out.println("going to withdraw...");
+		if (this.amount < amount) {
+			System.out.println("Less balance; waiting for deposit...");
+			try {
+				wait();
+			} catch (Exception e) {
+			}
+		}
+		this.amount -= amount;
+		System.out.println("withdraw completed...");
+	}
+
+	synchronized void deposit(int amount) {
+		System.out.println("going to deposit...");
+		this.amount += amount;
+		System.out.println("deposit completed... ");
+		notify();
+	}
+
+	public static void main(String args[]) {
+		final Customer c = new Customer();
+
+		new Thread() {
+			public void run() {
+				c.withdraw(15000);
+			}
+		}.start();
+
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		new Thread() {
+			public void run() {
+				c.deposit(10000);
+			}
+		}.start();
+	}
+}
+
+
+
+
+
+
+
+================================
+Multi Threading Summary
+=================================
+1) What is Multi Tasking
+2) What is Multi Threading
+3) Advantages of Multi Threading
+4) Default Thread in JVM (main)
+5) Getting info of main thread ( Thread.currentThread( ) )
+6) Creating User Defined Threads
+7) By Extending Thread class
+8) By Implementing Runnable interface
+9) By implementing Callable interface
+10) run ( ) method vs call ( )
+11) Executor Service
+12) run ( ) vs start ( ) method
+13) Thread Life Cycle
+14) Thread Schedular
+15) Synchronization (method & block)
+16) What is Thread Safety
+17) Thread creation with Anonymous implementation
+18) Dead Lock (Java Program to give dead lock)
+19) join ( ) method vs yield ( ) method
+20) Inter Thread Communication
+21) Daemon Threads
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

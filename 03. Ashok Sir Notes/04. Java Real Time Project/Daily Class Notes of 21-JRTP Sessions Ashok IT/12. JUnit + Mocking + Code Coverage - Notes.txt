@@ -1,0 +1,326 @@
+=============
+Unit Testing
+=============
+
+-> It is the process of testing individual components of software program
+
+-> Unit testing is used to identify bugs in our code
+
+-> With the help of Unit testing we can provide quality code
+
+-> With the help of Unit testing we can provide bug free code
+
+-> To perform Unit testing we will use Junit & Mocking
+
+
+======================
+What is Junit & Mocking
+======================
+
+-> Junit is a framework which is used to implement unit testing for java applications
+
+-> Unit testing should be done for individual component ( Isolated testing )
+
+-> To implement isolated unit testing we will use Mocking
+
+-> The process of creating substitute object for real object is called as Mocking
+
+-> To perform Mocking there are several Mock Frameworks available in the market
+
+		Ex: Easy Mock, Wire Mock, Mockito, Power Mock etc.....
+
+=====================
+What is Code Coverage ?
+=====================
+
+->  It is used to identify how many lines of code is tested as part of Unit Testing and how many lines of code is not tested as part of Unit testing.
+
+-> Industry Standard is 80% code coverage
+
+-> To identify Code Coverage we can use 'Jacocco' plugin
+
+
+===========================================================================
+
+Target Class : For which class we are performing unit testing that is called as Target class
+
+Test Class : The class which contains unit test logic is called as Test class.
+
+Note: In Test class we will use JUnit framework annotations.
+
+===========
+Example-1
+===========
+
+
+public class Calculator {
+
+	public int add (int i, int j) {
+		return i + j;
+	}
+
+	public int mul(int i, int j) {
+		return i * j;
+	}
+}
+
+public class CalculatorTest {
+
+	@Test
+	public void addTest() {
+		Calculator calc = new Calculator();
+		int actualResult = calc.add(20, 30);
+		int expectedResult = 50;
+		assertEquals(expectedResult, actualResult);
+	}
+
+	@Test
+	public void mulTest() {
+		Calculator calc = new Calculator();
+		int actualResult = calc.mul(2, 3);
+		int expectedResult = 16;
+		assertEquals(expectedResult, actualResult);
+	}
+
+}
+
+===========
+Example - 2
+===========
+
+public class PalindromeCheck {
+
+	public boolean isPalidrome(String str) {
+		String reverse = "";
+		int length = str.length();
+
+		for (int i = length - 1; i >= 0; i--) {
+			reverse = reverse + str.charAt(i);
+		}
+
+		if (str.equals(reverse)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+
+
+public class PalindromeTest {
+
+	@ParameterizedTest
+	@ValueSource(strings = { "racecar", "liril", "madam", "ashok" })
+	public void isPalindromeTest(String str) {
+
+		// creating target object
+		PalindromeCheck pc = new PalindromeCheck();
+
+		// calling target class method
+		boolean actual = pc.isPalidrome(str);
+
+		// verifying result
+		assertTrue(actual);
+	}
+}
+
+===========
+Example-3
+===========
+
+public class StringUtils {
+
+	public Integer stringToInt(String str) {
+
+		if (str == null || str.trim().length() == 0) {
+			throw new IllegalArgumentException("Input is null or empty");
+		}
+
+		return Integer.parseInt(str);
+	}
+}
+
+public class StringUtilsTest {
+
+	@Test
+	public void stringToIntTest1() {
+		StringUtils stu = new StringUtils();
+		assertThrows(IllegalArgumentException.class, () -> stu.stringToInt(null));
+	}
+
+	@Test
+	public void stringToIntTest2() {
+		StringUtils stu = new StringUtils();
+		assertThrows(IllegalArgumentException.class, () -> stu.stringToInt(""));
+	}
+
+	@Test
+	public void stringToIntTest3() {
+		StringUtils stu = new StringUtils();
+		Integer value = stu.stringToInt("10");
+		assertEquals(10, value);
+	}
+}
+
+
+==========================
+Why to go for Mock Objects?
+==========================
+
+-> In the below program our service method dependent on Dao method.
+
+@Service
+public class UserServiceImpl {
+
+		@Autowired
+		private UserDao userdao;
+
+		public boolean saveUser (User user){
+
+				user = userdao. save (user);  // dependency
+			
+				if(user.getId( ) !=null) {
+						return true;
+				}
+				return false;
+		}
+}
+
+-> To test service method, we need to use  Dao object.
+
+Note: If we use real Dao object to test service method then dao will insert test data into database (it is not recommended)
+If dao method is failed then our test will fail.
+
+-> To overcome these problems we will perform Unit Testing with Mock Objects.
+
+Note: The process of creating substitute object for the real object is called as Mocking.
+
+Note: We will create dummy DAO using Mock framework and we will inject into Service for unit testing. Then service method will execute with mock dao object. This process is called as Mocking.
+
+-> in Realtime, We will use Mock objects only for isolated unit testing.
+
+
+
+
+========================
+Unit Testing For REST API
+========================
+
+@WebMvcTest : To represent our target class
+
+@MockBean : To create Mock Object for given class or interface and will inject into target class
+
+MockMvcRequestBuilder : It is used to prepare the Request
+
+MockMvc : It is used to send Http Request
+
+MvcResult : It is used to hold the response given by REST API (HTTP Reponse)
+
+
+@WebMvcTest(value = WelcomeRestController.class)
+public class WelcomeRestControllerTest {
+
+	@MockBean
+	private WelcomeService welcomeService;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Test
+	public void welcomeTest() throws Exception {
+		when(welcomeService.getWelcomeMsg()).thenReturn("Welcome to Ashok IT...!!");
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/welcome");
+		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse response = mvcResult.getResponse();
+		int status = response.getStatus();
+		assertEquals(200, status);
+	}
+}
+
+
+
+==============
+Code Coverage
+==============
+
+-> Code Coverage is the process of measuring how many lines of code is executed as part of Unit testing
+
+-> As per industry standard every project should have minimum 80% of coverage
+
+-> We can generate code coverage report using "Jacoco" plugin
+
+-> By seeing code coverage report we can identify which lines are executed in unit testing and which lines are not executed in unit testing
+
+-> By seeing code coverage report we can improve our unit test scenarios
+
+-> In project for few classes unit testing is not required then such classes or packages we can exclude from Code Coverage report using <exclude/> option
+
+
+-> To generate code coverage report add 'jacoco' plugin in pom.xml file
+
+-> Jacoco plugin is associated with Maven 'test' goal.
+
+-> When Maven 'test' goal is executed thean 'Jacoco' plugin will execute and it will generate the report.
+
+-> Jacoco Report Location :   <project-folder> / target / site / jacoco / index.html
+
+-> Open index.html in browser then we can see Jacoco report
+
+
++++++++++++++++++++++++++++++++++ add below plugin in pom.xml file++++++++++++++++++++++++++++++++++
+
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<configuration>
+					<excludes>
+						<exclude>in/ashokit/entities/**</exclude>
+						<exclude>in/ashokit/bindings/**</exclude>
+						<exclude>in/ashokit/constants/**</exclude>
+						<exclude>in/ashokit/props/**</exclude>
+						<exclude>in/ashokit/exception/**</exclude>
+						<exclude>in/ashokit/config/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+-> For New Joinees below tasks will be assigned in the project for 2 to 3 months of time
+
+1) Unit Test implementation task
+
+2) Code Coverage Improvement tasks
+
+3) Sonar Fixes
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+

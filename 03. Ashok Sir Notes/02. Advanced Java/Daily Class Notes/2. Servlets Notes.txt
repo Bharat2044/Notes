@@ -1,0 +1,416 @@
+
+Requirement : Develop Form To capture Book Data and store it into database table using Servlets.
+
+
+@WebServlet("/bookServlet")
+public class BookServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException{
+
+		String bookId = req.getParameter("bookId");
+		String bookName = req.getParameter("bookName");
+		String bookPrice = req.getParameter("bookPrice");
+		
+		System.out.println(bookId);
+		System.out.println(bookName);
+		System.out.println(bookPrice);
+		
+		PrintWriter pw = res.getWriter();
+		
+		pw.write("Form Submitted");
+
+		DriverManage
+		
+	}
+
+}
+
+
+
+Connection con = 
+			DriverManager.getConnection("","","");
+		
+		String sql = "insert into BOOKS VALUES (?,?,?)";
+		
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, Integer.parseInt(bookId));
+		pstmt.setString(2, bookName);
+		pstmt.setDouble(3, Double.parseDouble(bookPrice));
+		
+		int count = pstmt.executeUpdate();
+		
+		System.out.println("Rows Effected :: "+count);
+		
+		con.close();	
+
+
+
+====================================
+Servlet application with DAO layer
+====================================
+
+HTML Page ===========> User interface (Presentation Logic)
+
+Servlet ======> To handle User Request & Response
+
+JDBC ====> To communicate with Database
+
+Note: We can write JDBC logic inside Servlet class but it is not recommended.
+
+=> We should create DAO class to write JDBC logic.
+
+=> DAO stands for Data Access Object.
+
+Note: For every table one DAO class we have to create.
+
+
+
+===========
+Components
+===========
+
+index.html ====> Presentation Logic
+
+BookServlet.java ====> To handle request & response
+
+BookDAO.java  ====> Persistence Logic (CRUD)
+
+ConnectionFactory.java ===> To handle ConnectionPool
+
+
+
+
+
+
+
+public class BookDAO {
+
+	private static final String INSERT_SQL = "insert into books values(?,?,?)";
+
+	public boolean saveBook(BookDTO dto) throws Exception {
+
+		 // logic
+
+		return count > 0;
+	}
+}
+
+
+
+=> In the above DAO class, saveBook ( ) method is taking BookDTO object as parameter.
+
+=> DTO stands for Data Transfer Object. It is used to transfer the data from one class method to another class method.
+
+Note: In the above project, Servlet class capturing the data from the form and Storing into BookDTO object and calling DAO class method by giving BookDTO object as parameter.
+
+
+
+public class BookDTO {
+
+	private int bookId;
+	private String bookName;
+	private double bookPrice;
+
+	// setters & getters
+
+}
+
+
+
+
+
+
+
+
+
+
+
+===================
+Request Dispatcher
+===================
+
+-> It is a predefined interface in javax.servlet package (Servlet API)
+
+-> It is used to redirect the request from one resource to another resource
+
+		
+    RequestDispatcher rd = request.getRequestDispatcher("resource-url");
+
+	rd.forward(request, response);
+
+	rd.include(request, response);
+		
+
+Note: 
+
+=> If we  forward  request from firstservlet to secondservlet using forward method then only second servlet response will go to client.
+
+=> If we  forward  request from firstservlet to secondservlet using include method then both servlets responses will go to client.
+
+
+
+
+Usecase
+========
+
+LoginServlet.java ===> Responsible to verify User Login Credentials.
+
+MyCourseServlet.java ===> Responsible to display logged in user purchased courses.
+
+
+
+
+
+
+
+================================
+ServletConfig & ServletContext
+=================================
+
+=> Predefined interfaces available in javax.servlet package
+
+=> ServletConfig is specific to one servlet
+   (Every Servlet will contain its own ServletConfig object)
+
+=> By Using ServletConfig obj we can pass init-parameters to servlet
+
+=> ServletContext is specific to one application
+   (One application will contain one ServletContext object)
+
+=> By Using ServletContext obj we can pass context-parameters to all servlets available in the application.
+
+
+============================================================================
+
+Q-1) How many objects will be created for a servlet class when we send multiple requests ?
+
+Ans) Only one object will be created that also when we send first request
+
+Q-2) How many ways are there to create our own servlet ?
+
+Ans) We can create Servlet class in 3 ways
+
+	a) Servlet Interface
+	b) GenericServlet class
+	c) HttpServlet class
+
+Q-3) Servlet (I) vs GenericServlet (C) Vs HttpServlet (C) ?
+
+Ans) 
+
+Q-4) What is Servlet Life Cycle ?
+
+Ans) 
+
+	init ( ) ---> it will be called for first request 
+	service ( ) --> it will be called for every request
+	destroy ( ) ---> it will be called when servlet obj removed from container
+
+Q-5) What is the difference between RequestDispatcher and sendRedirect ( ) method ?
+
+Ans) 
+
+RequestDispatcher is used to redirect the request from one resource to another resource in same server (Ex: ServletOne to ServletTwo)
+
+sendRedirect(String url) method is used to redirect request from one server to another server (Ex: Servlet to Google)
+
+Q-6) What are scoped variables in Servlets ?
+
+		-> request scope
+		-> page Scope
+		-> session scope
+		-> application scope
+
+Q-7) What is the difference between request & session in web app ?
+
+-> request is used to store single request specific info. Once request processing completed request obj will be deleted from the server.
+
+-> session is used to store user identify information. Once user login into application we will store user identity in the session and when user logout from the application then we will close the session of the user.
+		
+
+Q-8) What is request parameter ?
+
+Ans) 
+
+=> Request Parameters are also called as Query Parameters.
+
+=> Query Parameters are used to send the data to server in the URL 
+   in the form of key - value pair.
+
+=> Query Parameters will start with ' ? ' symbol
+
+=> If we have mulitple query parameters then we have to seperate them by    using ' & ' symbol
+
+=> Query Parameters should present only at end of the URL
+
+	
+	Ex:   www.ashokit.in/courses?name=sbms&trainer=ashok
+
+
+=> To read data from query parameters we will use 
+
+		request.getParameter("key");
+
+============================================================================
+
+
+
+
+
+
+
+
+
+
+
+======
+JSP
+======
+
+-> JSP stands for Java Server Pages
+
+-> JSP is used to develop presentation logic
+
+-> Inside JSP we can write HTML tags for presentation logic
+
+-> Every JSP will be converted into Servlet in the background
+
+
+	Servlet ===> To write business logic
+
+	JSP ===> To write presentation logic
+
+
+=> Servlet will be processsed by Servlet Container
+
+=> JSP will be processed by JSP container
+
+
+Note: Servlet Container and JSP container will be part of Server.
+
+
+Note: The main purpose of JSP is used to seperate presentation logic and business logic.
+
+
+================ Assignment ============
+
+1) What is Scriptlet in JSP ?
+
+2) What is directive in JSP ?
+
+3) What are jsp implicit Objects ?
+
+4) What is JSP lifecycle ?
+
+5) jsp include vs jsp forward
+
+6) What is JSTL ?
+
+7) What is MVC ?
+
+
+==========================================
+
+=====
+MVC 
+======
+
+=> MVC stands for Model View Controler
+
+	Model ---> Represents Data
+
+	View ---> Presentation Logic
+
+	Controller ---> It handles request & response
+
+=> It is a Design Pattern to develop our application components with loosely coupling.
+
+=> If we develop our application with MVC design pattern then maintenence of the application will become easy.
+
+
+
+
+=> UI Layer contains presentation logic realted files                (HTMl/JSP/Angular/React/Vue)
+
+=> Web Layer contains controllers to handle request & response logics
+
+	(Servlets, Spring Controllers)
+
+=> DAO layer contains persistence logic (DB) related classes
+
+	(JDBC/Hibernate/Spring ORM/Data JPA)
+
+=> DTO layer contains classes which are used to represent data. 
+
+Note: DTO classes are used to transfer data from one layer to another layer.
+
+
+
+Note: If we develop our application with above architecture then it is called as Layered Architecture Based Application.
+
+
+Tomorrow if we want to change DAO layer logic from JDBC to hibernate then we can change only DAO layer classes without touching web layer & Ui layer components. This is called as Loosely Coupling.
+
+
+=========
+user_tbl
+=========
+user_id  int  auto_increment
+user_name varchar
+user_email varchar
+user_phno int
+
+
+class ConnectionFactory {
+
+  public static Connection getConnection ( ) {
+        //logic
+	return connection;
+  }
+}
+
+
+class UserDTO {
+	id
+	name
+	email
+	phno
+     // settes & getters
+}
+
+
+class UserDAO {
+
+ public boolean saveUser(UserDTO dto){
+            // logic
+ }
+
+ public List<UserDTO> findUsers( ){
+            //logic
+ }
+
+}
+
+
+
+class UserServlet extends HttpServlet{
+
+      doPost ( )
+
+      doGet ( )
+
+}
+
+
+index.jsp
+viewUsers.jsp
+
+
+
+
+
+
+
+
+

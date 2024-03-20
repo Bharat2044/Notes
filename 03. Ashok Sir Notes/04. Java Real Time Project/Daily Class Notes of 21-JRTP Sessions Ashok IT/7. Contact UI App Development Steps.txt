@@ -1,0 +1,472 @@
+
+1) Create Angular Application
+
+	$ ng new contact
+	
+Note: Select Yes for Routing because we have to route the requests to multiple components in this application.	
+	
+2) Install Bootstrap and Jquery in angular application
+
+$ npm install bootstrap
+$ npm install jquery
+
+3) Configure below styles and scripts in angular.json file
+
+"styles": [  
+    "./node_modules/bootstrap/dist/css/bootstrap.css",
+    "src/styles.css"
+],
+"scripts": [               
+    "node_modules/jquery/dist/jquery.min.js",
+    "node_modules/bootstrap/dist/js/bootstrap.min.js"
+]
+
+4) Configure below styles in global src/styles.css file
+
+@import "~bootstrap/dist/css/bootstrap.css";
+/* You can add global styles to this file, and also import other style files */
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background-color: blue;
+    text-align: center;
+    color: white;
+}	
+	
+5) Create Binding Class (contact.ts) to map 'front end application' data with 'backend api data'.
+
+	$ ng generate class contact	
+	
+export class Contact {
+
+    contactId:number=0;
+    contactName:string='';
+    contactEmail:string='';
+    contactNumber:string='';
+
+    constructor(){ }
+}
+
+Note: Make sure your backend api binding class and front end binding class variables are same.
+
+3) Create Service class to write business logic 
+
+	$ ng generate service contact
+	
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Contact } from './contact';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ContactService {
+
+  private baseUrl='http://localhost:8080';
+
+  constructor(private httpClient: HttpClient) { }
+
+  getAllContacts():Observable<Contact[]>{
+    return this.httpClient.get<Contact[]>(`${this.baseUrl}/contacts`);
+  }
+  createContact(contact:Contact):Observable<Object>{
+    return this.httpClient.post(`${this.baseUrl}/contact`,contact,{responseType:"text"});
+  }
+  removeContact(id:number):Observable<Object>{
+    return this.httpClient.delete(`${this.baseUrl}/contact/${id}`,{responseType:"text"})
+  }
+  findContact(id:number):Observable<Contact>{
+    return this.httpClient.get<Contact>(`${this.baseUrl}/contact/${id}`)
+  }
+}
+
+4) Create Components 
+
+$ ng g c createcontact
+$ ng g c contactlist
+$ ng g c contactedit
+
+5) Import HttpClientModule and FormsModule in app.module.ts file
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CreatecontactComponent } from './createcontact/createcontact.component';
+import { ContactlistComponent } from './contactlist/contactlist.component';
+import { ContacteditComponent } from './contactedit/contactedit.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CreatecontactComponent,
+    ContactlistComponent,
+    ContacteditComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+6) Configure Routings in app-routing.module.ts file
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ContacteditComponent } from './contactedit/contactedit.component';
+import { ContactlistComponent } from './contactlist/contactlist.component';
+import { CreatecontactComponent } from './createcontact/createcontact.component';
+
+const routes: Routes = [
+  {path:'contacts',component:ContactlistComponent},
+  {path:'',redirectTo:'contacts',pathMatch:'full'},
+  {path:'create-contact',component:CreatecontactComponent},
+  {path:'edit/:id',component:ContacteditComponent}
+];
+
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+7) Add below code in contactlist.component.ts file 
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Contact } from '../contact';
+import { ContactService } from '../contact.service';
+
+@Component({
+  selector: 'app-contactlist',
+  templateUrl: './contactlist.component.html',
+  styleUrls: ['./contactlist.component.css']
+})
+export class ContactlistComponent implements OnInit {
+
+  contacts:Contact[]=[ ];
+  constructor(private contactService:ContactService, private router:Router) {
+  }
+
+  ngOnInit(): void {
+    this.getAllContacts();
+  }
+
+  getAllContacts(){
+    this.contactService.getAllContacts().subscribe(
+      data=>{
+        this.contacts=data;
+      }
+    );
+  }
+  //remove a contact
+  deleteContact(id:number){
+    this.contactService.removeContact(id).subscribe(
+      data=>{
+        console.log("SUCCESSFULL........");
+        console.log(data);
+        this.getAllContacts();
+      },
+      error=>{
+        console.log("FAILED........");
+        console.log(error);
+      }
+    )
+   }
+   //edit a contact
+  editContact(id:number){
+    console.log("Edited :: "+id);
+    this.router.navigate(['/edit',id]); 
+  }
+}
+
+8) Add Presentation logic for contactlist template file
+
+<h2>Contact List</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let contact of contacts">
+            <td>{{contact.contactId}}</td>
+            <td>{{contact.contactName}}</td>
+            <td>{{contact.contactEmail}}</td>
+            <td>{{contact.contactNumber}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteContact(contact.contactId)">Delete</button>
+            &nbsp;
+              <button class="btn btn-info" (click)="editContact(contact.contactId)">Update</button>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  
+  
+9) Add application in creat contact component file   
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Contact } from '../contact';
+import { ContactService } from '../contact.service';
+
+@Component({
+  selector: 'app-createcontact',
+  templateUrl: './createcontact.component.html',
+  styleUrls: ['./createcontact.component.css']
+})
+export class CreatecontactComponent implements OnInit {
+
+    ngOnInit(): void { }
+
+    contact:Contact=new Contact();
+
+    constructor(private contactService:ContactService,
+    private router:Router) { }
+
+    onSubmit(){
+      console.log(this.contact);
+      this.saveContact();
+    }
+    saveContact(){
+      this.contactService.createContact(this.contact).subscribe(
+        data=>{
+          console.log("SUCCESSFULL........");
+          console.log(data);
+          this.redirectToContactList();
+        },
+        error=>{
+          console.log("FAILED........");
+          console.log(error);
+        }
+      );
+    }
+    redirectToContactList(){
+      this.router.navigate(['/contacts']);
+    }
+}
+
+10) Add presentation logic in create component template file 
+
+
+<div class="col-md-6 offset-md-3">
+    <h2>Create Contact</h2>
+    <form (ngSubmit)="onSubmit()">
+    
+        <div class="form-group">
+            <label >Name</label>
+            <input type="text" 
+            class="form-control" 
+            name="name" 
+            id="name"
+            [(ngModel)]="contact.contactName"
+            >
+        </div>
+        <div class="form-group">
+            <label >Email</label>
+            <input type="text" 
+            class="form-control" 
+            name="email" 
+            id="email"
+            [(ngModel)]="contact.contactEmail"
+            >
+        </div>
+        <div class="form-group">
+            <label >Phone</label>
+            <input type="text" 
+            class="form-control" 
+            name="phone" 
+            id="phone"
+            [(ngModel)]="contact.contactNumber">
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-primary" type="submit">
+                Submit
+            </button>
+        </div>
+    </form>
+    </div>
+	
+11) Add application logic in edit component ts file 
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Contact } from '../contact';
+import { ContactService } from '../contact.service';
+
+@Component({
+  selector: 'app-contactedit',
+  templateUrl: './contactedit.component.html',
+  styleUrls: ['./contactedit.component.css']
+})
+export class ContacteditComponent implements OnInit {
+
+  contact:Contact=new Contact();
+  id:number=0;
+  constructor(private contactService:ContactService,
+    private router:Router,private activeRouter:ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.getContact();
+  }
+  getContact(){
+    this.id=this.activeRouter.snapshot.params['id'];
+    console.log("UPDATED ID ::"+this.id);
+    this.contactService.findContact(this.id).subscribe(
+      data=>{
+        console.log("GETTING A CONTACT..");
+        console.log(data);
+        this.contact=data;
+      },
+      error=>{
+        console.log("SOMETHING WENT WRONG DURING GETTING A CONTACT..");
+        console.log(error);  
+      }
+    );
+  }
+  updateContact(){
+    console.log("UPDATED ..");
+    this.contactService.createContact(this.contact).subscribe(
+      data=>{
+        console.log("UPDATING A CONTACT..");
+        console.log(data);
+        this.router.navigate(['/contacts'])
+      },
+      error=>{
+        console.log("SOMETHING WENT WRONG DURING UPDATING A CONTACT..");
+        console.log(error);
+      });
+    }
+}
+
+
+12) Add presentation logic in editcontact template file 
+
+
+<div class="col-md-6 offset-md-3">
+    <h2>Update Contact</h2>
+    <form (ngSubmit)="updateContact()">
+
+        <div class="form-group">
+            <label >Id</label>
+            <input type="text" 
+            class="form-control" 
+            name="id" 
+            id="id"
+            [(ngModel)]="contact.contactId"
+            readonly>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <label >Name</label>
+            <input type="text" 
+            class="form-control" 
+            name="name" 
+            id="name"
+            [(ngModel)]="contact.contactName"
+            >
+        </div>
+        <br>
+        <div class="form-group">
+            <label >Email</label>
+            <input type="text" 
+            class="form-control" 
+            name="email" 
+            id="email"
+            [(ngModel)]="contact.contactEmail"
+            >
+        </div>
+        <br>
+        <div class="form-group">
+            <label >Phone</label>
+            <input type="text" 
+            class="form-control" 
+            name="phone" 
+            id="phone"
+            [(ngModel)]="contact.contactNumber"
+            >
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-primary" type="submit">
+                Update
+            </button>
+        </div>
+    </form>
+    </div>	
+
+
+13) Configure Router Outlet in app.component.html file 
+
+<!--########### NAV BAR STARTS HERE ##################################################### -->
+
+<nav class="navbar navbar-expand-sm  bg-primary navbar-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ashok IT</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a routerLink="contacts" routerLinkActive="active" class="nav-link" href="#">Contact List</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="create-contact" routerLinkActive="active" class="nav-link" href="#">Add Contact</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<!-- #####################NAV BAR ENDS HERE ############################################### -->
+
+<!-- MAIN CONTENT HERE -->
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span>All Rights Reserved 2022 @ AshokIT</span>
+  </div>
+</footer>
+
+
+
+14) Execute Angular Application using 'ng serve' command.
+
+		$ ng serve
+		
+15) Open the browser and access application using below URL
+
+		URL : http://localhost:4200/
+		
+		
