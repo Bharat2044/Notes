@@ -15,7 +15,7 @@ Day-01 : Linux
 6) Course Info
 
 ================
-pre-requisites
+pre-requisites 
 ================
 
 1) Laptop/Desktop => 8 GB RAM
