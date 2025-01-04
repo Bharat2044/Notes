@@ -1,0 +1,58 @@
+    1  whoami
+    2  ls
+    3  pwd
+    4  ls -l
+    5  ls -la
+    6  cls
+    7  clear
+    8  yum install docker
+    9  systemctl start docker
+   10  history
+   11  docker ps
+   12  docker ps -a
+   13  docker images
+   14  docker pull ubuntu:14.04
+   15  docker images
+   16  docker ps
+   17  docker run ubuntu:14.04
+   18  docker ps
+   19  docker run -t -i ubuntu:14.04
+   20  history
+   21  docker run -d -t -i ubuntu:14.04
+   22  docker ps
+   23  docker pull vimal13/apache-webserver-php
+   24  docker images
+   25  docker run -dit vimal13/apache-webserver-php
+   26  docker ps
+   27  docker inspect 6c2e3d26c53c
+   28  docker ps
+   29  curl http://172.17.0.3
+   30  curl http://172.17.0.4
+   31  curl http://172.17.0.3
+   32  docker ps
+   33  curl https://www.google.com/
+   34  docker images
+   35  docker stop 05774ad1cd23
+   36  docker ps
+   37  docker stop 6c2e3d26c53c
+   38  docker ps
+   39  docker ps -a
+   40  docker ps 
+   41  docker start 6c2e3d26c53c
+   42  curl http://172.17.0.3
+   43  history
+
+
+kubectl
+helm
+cls
+eksctl
+aws version
+aws configure
+eksctl create cluster --name bharatcluster
+aws eks list-clusters
+kubectl get nodes
+cd kubectl/
+kubectl get nodes
+kubectl get pods
+kubectl create deployment myweb --image=vimal13/apache-webserver-php
