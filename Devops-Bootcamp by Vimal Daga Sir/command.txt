@@ -41,6 +41,15 @@
    41  docker start 6c2e3d26c53c
    42  curl http://172.17.0.3
    43  history
+   44  whoami
+   45  yum install java-17-amazon-corretto -v
+   46  java --version
+   47  yum update
+   48  yum update -y
+   49  wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+   50  cd /etc/yum.repos.d/
+   51  ls
+   52  history
 
 
 kubectl
@@ -66,3 +75,94 @@ kubectl expose deployment myweb --type LoadBalancer --port 80 --target-port 80
 kubectl get svc
 kubectl scale deployment myweb --replicas=1
 eksctl delete cluster --name bharatcluster
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    1  whoami
+    2  ls
+    3  pwd
+    4  ls -l
+    5  ls -la
+    6  cls
+    7  clear
+    8  yum install docker
+    9  systemctl start docker
+   10  history
+   11  docker ps
+   12  docker ps -a
+   13  docker images
+   14  docker pull ubuntu:14.04
+   15  docker images
+   16  docker ps
+   17  docker run ubuntu:14.04
+   18  docker ps
+   19  docker run -t -i ubuntu:14.04
+   20  history
+   21  docker run -d -t -i ubuntu:14.04
+   22  docker ps
+   23  docker pull vimal13/apache-webserver-php
+   24  docker images
+   25  docker run -dit vimal13/apache-webserver-php
+   26  docker ps
+   27  docker inspect 6c2e3d26c53c
+   28  docker ps
+   29  curl http://172.17.0.3
+   30  curl http://172.17.0.4
+   31  curl http://172.17.0.3
+   32  docker ps
+   33  curl https://www.google.com/
+   34  docker images
+   35  docker stop 05774ad1cd23
+   36  docker ps
+   37  docker stop 6c2e3d26c53c
+   38  docker ps
+   39  docker ps -a
+   40  docker ps 
+   41  docker start 6c2e3d26c53c
+   42  curl http://172.17.0.3
+   43  history
+   44  whoami
+   45  yum install java-17-amazon-corretto -v
+   46  java --version
+   47  yum update
+   48  yum update -y
+   49  wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+   50  cd /etc/yum.repos.d/
+   51  ls
+   52  history
+   53  rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+   54  yum upgrade
+   55  yum install jenkins
+   56  jenkins --version
+   57  systemctl start jenkins.service 
+   58  systemctl statatus jenkins-service
+   59  systemctl status jenkins
+   60  cd ../
+   61  systemctl status jenkins
+   62  systemctl status jenkins-service
+   63  systemctl start jenkins.service 
+   64  jenkins --version
+   65  systemctl start jenkins.service 
+   66  systemctl status jenkins.service 
+   67  yum install jenkins -y
+   68  systemctl start jenkins.service 
+   69  systemctl status jenkins.service 
+   72  cat /var/lib/jenkins/secrets/initialAdminPassword
+   73 sudosu
