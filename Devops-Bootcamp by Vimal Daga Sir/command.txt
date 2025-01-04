@@ -52,7 +52,10 @@ aws configure
 eksctl create cluster --name bharatcluster
 aws eks list-clusters
 kubectl get nodes
-cd kubectl/
-kubectl get nodes
 kubectl get pods
+kubectl get deployment
 kubectl create deployment myweb --image=vimal13/apache-webserver-php
+kubectl get pods -o wide
+kubectl get services
+kubectl get evc
+eksctl delete cluster --name bharatcluster
