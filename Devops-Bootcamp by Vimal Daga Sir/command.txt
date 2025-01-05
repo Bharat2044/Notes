@@ -77,7 +77,12 @@ kubectl expose deployment myweb --type LoadBalancer --port 80 --target-port 80
 kubectl get svc
 kubectl scale deployment myweb --replicas=1
 eksctl delete cluster --name bharatcluster
-
+kubectl create deployment myweb --image=vimal13/apache-webserver-php --dry-run -o yaml > my.yml
+notepad my.yml
+kubectl get pods
+kubectl apply -f my.yml
+kubectl get pods
+kubectl delete -f my.yml
 
 
 
