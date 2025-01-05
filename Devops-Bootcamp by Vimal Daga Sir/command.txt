@@ -59,6 +59,7 @@ eksctl
 aws version
 aws configure
 eksctl create cluster --name bharatcluster
+eksctl delete cluster --name bharatcluster
 aws eks list-clusters
 kubectl get nodes
 kubectl get pods
