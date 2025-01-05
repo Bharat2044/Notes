@@ -65,6 +65,7 @@ kubectl get nodes
 kubectl get pods
 kubectl get deployment
 kubectl create deployment myweb --image=vimal13/apache-webserver-php
+kubectl delete deployment myweb
 kubectl get pods
 kubectl delete pod myweb-59f99ddd48-kcdrp
 kubectl get deployment
