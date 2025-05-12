@@ -1,0 +1,401 @@
+
+
+################################
+VPC : Virtual Private Cloud
+################################
+
+=> VPC stands for Virtual Private Cloud. 
+
+=> VPC will provide virtual network for the resources in the AWS cloud.
+
+=> VPC will provide isolated network for the resources in the aws cloud.
+
+=> Using VPC we can define our own IP addresses, subnets, route table, internet gateways, NAT gaeway.
+
+=> VPC will provide flexible and secured network environment that enables users to manage their cloud resources.
+
+
+Note-1: Without using VPC we can't create EC2 machines and RDS instances.
+
+Note-2: To encourage beginners, AWS provided default VPC for us.
+
+
+=================
+VPC Terminology
+=================
+
+1) VPC
+2) Types of IPs
+3) CIDR blocks (IP Ranges)
+4) Subnets
+5) Route Table (Routes)
+6) Internet Gateway
+7) NAT Gateway
+8) Security Groups (at resource level)
+9) NACL (at subnet level)
+10) VPC Peering
+
+=================
+Types of IP's
+=================
+
+=> For every electronic device IP address is required to connect with internet.
+
+=> IP addresses are divided into 2 types.
+
+		1) IPV4
+
+		2) IPV6
+
+Note: Earlier we have only IPV4 	
+
+-> IP ranges we will do with CIDR
+
+-> CIDR stands for Class less inter domain range
+
+=========
+IPV4
+=========
+
+=> IPv4 addresses are 32-bit numeric values divied into 4 octets.
+
+=> Every octect is divided using period (.)		
+
+	Ex: 192.168.32.101
+
+=> It is the most widely used IP version and supports approximately 4.3 billion unique addresses.
+
+=> However, due to the increasing number of devices connected to the internet, IPv4 addresses are running out, leading to the adoption of IPv6.
+
+=======
+IPV6
+=======
+
+=> IPv6 addresses are 128-bit alphanumeric addresses written in eight octects separated by colons 
+
+	Ex: :  2001:0db8:85a3:0000:0000:8a2e:0370:7334
+
+=> IPv6 provides a significantly larger address space than IPv4.
+
+=> It was introduced to overcome the IPv4 address exhaustion issue and support the growing number of internet-connected devices.
+
+
+============
+VPC Sizing
+============
+
+=> The process of diciding no.of IPs required for our VPC.
+
+-> Sizing will be calculated in 2 power.
+
+
+Ex:
+
+10.0.0.0/16 => 2 power (32-16) => 2 power (16) => 65, 536
+
+10.0.0.0/32 => 2 power (32-32) => 2 power (0) => 1
+
+10.0.0.0/31 => 2 power (32-31) => 2 power (1) => 2
+
+10.0.0.0/30 => 2 power (32-30) => 2 Power (2) => 4
+
+10.0.0.0/29 => 2 power (32-29) => 2 power(3) => 8
+
+10.0.0.0/28 => 2 power (32-28) => 2 power(4) => 16
+
+10.0.0.0/24 => 2 power (32-24) => 2 power(8) => 256
+
+10.0.0.0/20 => 2 power (32-20) => 2 power(12) => 4096
+
+
+Note: In general for vpc we will use "/16" and for subnets we will use "/24".
+
+=============================================
+Assignment : Do some research on IPv4 Classes
+=============================================
+
+
+VPC : It provides isolated network required for the resources in aws cloud.
+
+CIDR : It is used to decide IP ranges (Ex: /16 , /24 etc...)
+
+Subnets : It is a partition in VPC.
+
+		1) Public Subnet
+
+		2) Private Subnet
+
+Note-1: The subnet which contains internet is called as Public Subnet. Incoming and Outgoing traffic is allowd.
+
+Note-2: The subnet which don't have internet is called as Private Subnet. No incoming and No Outgoing.
+
+Route Table : It is used to configure routing rules for the subnet.
+
+Internet Gateway : It provides incoming and outgoing network access for our VPC.
+
+Note-1 : If we add IGW to route-table then that subnet becomes public subnet.
+
+NAT Gateway : It provides only outgoing access for Subnet resources.
+
+Note: NAT Gateway is commercial (bill be generated).
+
+Security Groups : To configure inbound and outbound rules. It works at resource level. 
+
+Note: SG group supports only ALLOW rules.
+
+NACL : Network Access Control List. It is used to configure both ALLOW and DENY rules at subnet level. NACL rules are applicable for all the resources available in subnet.
+
+VPC Peering : Establishing connection between 2 VPCs.
+
+
+================================================
+Q) How many VPCs we can create in one region 
+================================================
+
+In AWS, you can create up to 5 Virtual Private Clouds (VPCs) per region by default. If we want more VPCs then we need to request aws support team.
+
+
+##########################
+VPC Lab Task For Today
+##########################
+
+# Step-1 :: Create VPC
+
+		Use VPC CIDR as : 10.0.0.0/16
+
+(It will create one Route Table by default. Rename it as "ashokit-private-rt"
+
+
+# Step-2 :: Create Internet Gateway and Attach to our VPC
+
+
+# Step-3 :: Create 2 Subnets (Public and Private Subnets)
+
+  public Subnet CIDR : 10.0.0.0/24
+
+  private Subnet CIDR : 10.0.1.0/24
+
+
+# Step-4 :: Create one new Route Table (Name it as public Route Table)
+
+
+# Step-5 :: Perform subnet association with Route Tables.
+
+		attach public-rt ======> public-sn
+
+		attach private-rt ====> private-sn
+
+
+# Step-6 :: Attach IGW to public-rt to make that subnet as public.
+
+
+# Step-7 :: Create one EC2-VM in public subnet and create another EC2-VM in private subnet.
+
+# Step-8 :: Use SSH client and try to connect with both EC2 VMs.
+
+
+Note: We should be able to connect with EC2 vm created in public-sn and we shouldn't be able to connect with EC2 vm created in private-subnet.
+
+=================================================================================
+Step - 9 : Connect with 'private-ec2' from 'public-ec2' using 'ssh' connection
+=================================================================================
+
+Note: As both Ec2 instances are available under same VPC, we should be able to access one machine from another machine.
+
+
+----------------------
+Procedure to access
+----------------------
+
+-> Connect with public subnet ec2-vm using mobaxterm (ssh client).
+
+-> Upload private ec2-vm .pem file into public-ec2 vm from our local system.
+    (in mobaxterm we have upload option)
+
+-> Once pem file uploaded, execute  below command to provide read permission to our pem file
+
+		$ chmod 400 <pem-file-name>
+
+-> Execute below command to make ssh connection from public-ec2 to private-ec2
+
+		$ ssh -i "pem-file-name"  ec2-user@private-ec2-vm-private-ip
+
+	Ex: ssh -i "ashokitnewkey.pem" ec2-user@65.2.73.111		
+
+
+Note: It should establish connection (this is internal connection)	
+
+-> Try to ping google from private ec2 vm (it should not allow because igw is not available).
+
+Note: For example we want to download software or code from internet to our private subnet ec2-vm then we should allow only outgoing traffic access.
+
+Note: To achieve above requirement we can use "NAT Gateway" concept.
+
+
+===============================
+VPC with NAT Gateway Lab Task
+===============================
+
+1) Create NAT gateway in public subnet and select connectivity as public.
+
+2) Add NAT gateway in 'private-subnet-routute-table'
+
+3) After NAT Gateway attachment, we should be able to ping google from 'private-subnet-ec2-vm' also.
+
+
+## Note: Delete Elastic IP and NAT Gateway after practise.
+
+
+=====================
+What is VPC Peering
+====================
+
+=> In General VPC will provide isolated network for the resources in aws cloud.
+
+=> If we create resources in private subnet then we can't access them outside.
+
+=> If we have requirement to access one VPC resources in another VPC then we can use VPC peering concept.
+
+								  peering
+				VPC-1 ================> VPC-2
+
+
+Note: VPC peering we can establish between same account vpc's and different account vpc's also.	
+
+
+###### Note: When we are establishing VPC peering both VPCs CIDR range should be different #####
+
+
+		My Default VPC CIDR : 172.31.0.0/16
+
+		My Custom VPC CIDR : 10.0.0.0/16
+
+Note: We can establish VPC peering for above two VPCs because their IP ranges are diffferent hence no IP collision.
+
+====================================
+Procedure To Establish VPC Peering
+====================================
+
+=> Go To VPC -> Select Peering Connections
+
+=> Create VPC Peering request
+
+	VPC Peering (Requester) = ashokit_aws_custom_vpc
+
+	VPC Peering (Accepter) = default_vpc
+
+=> Now you would see the status Pending Acceptance which means, Requestor has sent a request to the peer now target VPC needs to accept the request.
+
+=> Go to VPC Peering -> Click on Actions -> Accept Request
+
+=> Now we need to make entries in Route Tables
+
+=> Now navigate to Route Tables -> Default VPC RT(Route Table) -> Edit routes
+
+Note : By default we will have local + igw, now we need to add custom vpc cidr )
+
+####### Default VPC Route Table should have below 3 Routes ##########
+
+Local : 172.31.0.0/16
+
+IGW : 0.0.0.0/0
+
+VPC Peering : 10.0.0.0/16
+
+
+=> Now navigate to Route Tables -> Custom VPC RT(Route Table) -> Edit routes
+
+Note : By default we will have local + igw, now we need to add default vpc cidr )
+
+####### Custom VPC Route Table should have below 3 Routes ##########
+
+Local : 10.0.0.0/16
+
+IGW : 0.0.0.0/0
+
+VPC Peering : 172.31.0.0/16
+
+
+########### Allow Traffic in VPC Security Groups ###########
+
+Edit Security Group of Default and Custom VPC to allow traffic from each other
+
+Default VPC Security Group looks like
+SSH - 22 - all 
+All Traffic -> Custom -> 10.0.0.0/16
+
+
+Custom VPC Security Group would look like
+SSH - 22 - all 
+All Traffic  -> Customer -> 172.31.0.0/16
+
+==========================Test VPC Peering Connectivity ==========================
+
+# Ping default-vpc EC2-VM private IP from ashokit-custom-vpc vm
+$ ping <private-ip>
+
+
+# Ping ashokit-vpc EC2-VM private IP from default-vpc vm
+$ ping <private-ip>
+
+
+===============================================================
+Q ) What is the difference between NACL and Security Groups ?
+===============================================================
+
+
+================
+Security Group
+================
+
+-> Security Group acts as a Firewall to secure our resources
+
+-> Security Group contains Inbound Rules & Outbound Rules
+
+					inbound rules ---> incoming traffic
+					outbound rules ---> outgoing traffic
+
+-> In One security group we can add 50 Rules.
+
+-> Security Group supports only Allow rules (by default all rules are denied)
+
+-> We can't configure deny rule in security group
+
+	Ex : 172.32.31.90 ----> don't accept request from this IP (we can't do this in SG)
+
+-> Security Groups are applicable at the resource level
+   (manually we have to attach SG to resource)
+
+-> Multiple Security Groups can be attached to single instance & 
+   one instance can have 5 security groups
+
+-> Security Groups are statefull (Any changes applied to incoming rules then those changes will be applicable for Outgoing Rules also
+
+->  Security Group acts as First Level of defense for Outgoing traffic
+
+
+======
+NACL
+======
+
+-> NACL stands for Network Access Control List
+
+-> NACL acts as a firewall for our Subnets in VPC
+
+-> NACL applicable at the subnet level
+
+-> NACL rules are applicable for all the resources which are part of that Subnet
+
+-> NACL rules are stateless (Any changes applied to incoming rules will not be applicable for outgoing rules, we need to do that manually).
+
+-> In NACL we can configure both Allow & Deny rules
+
+	Ex: We can block particual IP address (192.168.2.4) to connect with EC2 instance
+
+-> One subnet can have only one NACL
+
+	Note: One NACL can be added to multiple subnets
+
+-> NACL acts as first level of Defense for Incoming Traffic 
+
+( Security Group acts as First Level of defense for Outgoing traffic )

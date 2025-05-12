@@ -1,0 +1,64 @@
+
+
+=============
+AWS Lambdas
+=============
+
+-> AWS lambdas are used to achieve serverless computing.
+
+-> Serverless computing means run the application without thinking about servers.
+
+-> AWS will take care of servers required to run our application.
+
+=> The main advantage of serverless computing is it works based on 'Pay as you use' model.
+
+=> If your application code is executed then only bill be generated. If nobody accessing your application then no bill.
+
+
+  code executed for only 5 mins : bill will generate only for 5 mins
+
+
+==================================
+Running Java Code with AWS Lambda
+==================================
+
+1) Create Lambda Function with 'java 21' runtime
+
+	- Enable Functional URL
+	- Auth Type None (Public Access)
+
+Note: Once lambda function got created we can see URL to access that function.
+
+2) Access Lambda function using its URL.
+
+2) Upload jar file in 'Code Source'
+
+3) Configure Handler in Runtime
+
+		Class Name : in.ashokit.LambdaHandler
+
+		Method Name : handleRequest
+
+Handler Syntax : className :: methodName
+
+Ex: in.ashokit.LambdaHandler::handleRequest
+
+
+
+===========================
+Static website deployment
+===========================
+
+Approach-1) S3 static website hosting
+
+Approach-2) Take EC2 VM + Install HTTPD + Run Static website
+
+============================
+Dynamic Website Deployment
+============================
+
+Approach-1) Take EC2 VM Then install required softwares and run your application.
+
+Approach-2) Elastic Beanstack (PaaS)
+
+Approach-3) Lambdas (Serverless Computing)

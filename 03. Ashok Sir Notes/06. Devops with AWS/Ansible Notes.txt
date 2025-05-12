@@ -1,0 +1,824 @@
+
+==========================
+Configuration Management 
+==========================
+
+=> Installing required softwares in the machines
+
+=> Copy required files from one machine to another machine
+
+=> OS Patching/Updates
+
+
+=> We can perform configuration management in 2 ways
+
+		1) Manual Configuration Management
+
+		2) Automated Configuration Management
+
+============================================
+Problems with Manual Configuration Mgmt
+============================================
+
+1) Time Taking process
+
+2) Repeated Work
+
+3) Human Mistakes
+
+
+Note: To overcome these problem we are going to automate configuration management in the project.
+
+=> To automate configuration management we have several tools
+
+				1) puppet
+				2) chef
+				3) Ansible (Trending)
+
+
+================
+What is Ansible
+================
+
+-> It is an open source software developed by Michael DeHaan and its ownership is under RedHat.
+
+=> Ansible was written in Python language.
+
+-> Ansible is an automation tool that provides a way to define configuration as code.
+
+
+=======================
+What Ansible can do ?
+=======================
+
+1) Automate Configuration Management
+
+2) App Deployments
+
+
+=======================
+Ansible Architecture
+=======================
+
+1) Control Node
+
+2) Managed Nodes
+
+3) Host Inventory File
+
+4) Playbooks
+
+
+=> The machine which contains ansible software is called as Controlling Node.
+
+=> The machines which are managing by Controlling Node are called as Managed Nodes.
+
+=> Host inventory file contains managed nodes information.
+
+=> Playbook is a YML/YAML which contains set of taks.
+
+
+===============
+Ansible Setup
+===============
+
+URL : https://github.com/ashokitschool/DevOps-Documents/blob/main/11-Ansible-Setup.md
+
+===========================
+Ansible Ad-Hoc Commands
+===========================
+
+=> To run ad-hoc commands we will follow below syntax
+
+
+Syntax :  
+
+$ ansible [all/group-name/private-ip] -m <module> -a <args>
+
+Ex:   $ ansible all -m ping
+
+	  $ ansible webservers -m ping
+
+	  $ ansible dbservers -m ping
+
+=> We have several modules in ansible to perform configuration management
+		
+		1) ping
+
+		2) shell
+
+		3) yum / apt
+
+		4) service
+
+		5) copy
+
+
+$ ansible all -m ping
+
+$ ansible all -m shell -a date
+
+$ ansible all -m yum -a "name=git"
+
+$ ansible webservers -m yum -a "name=httpd"
+
+===========
+Assignment
+===========
+
+=> Ansible Modules and purpose
+
+=> What is YML 
+
+
+===================
+Ansible Playbooks
+===================
+
+=> Playbook is a YAML file
+
+=> Playbook contains one or more tasks
+
+=> Using playbook we can define what tasks to performed and where to be performed.
+
+=> We will give playbook as input for ansible control node to perform tasks in managed nodes.
+
+Note: To write Ansible playbooks, we should learn YAML first.
+
+================
+YML or YAML
+================
+
+=> YML/YAML stands for Yet another markup language.
+
+=> It is used to store the data in human & machine readable format.
+
+=> YML/YAML files will have extension as .yml or .yaml
+
+-> Official Website :  https://yaml.org/
+
+
+============================
+01 - Sample YML file data
+============================
+
+Note: indent spacing is very important
+
+---
+id: 101
+name: Ashok
+gender: Male
+hobbies:
+ - music
+ - chess
+ - cricket
+... 
+
+===========================
+02 - Sample YML file data
+===========================	 
+
+---
+person:
+ id: 101
+ name: Ashok
+ address:
+  city: hyd
+  state: TG
+  country: India
+ hobbies:
+  - cricket
+  - chess
+  - music
+...  
+=============================  
+
+Write YML file to represent employee data with company and job details.
+
+emp -> id, name, company and job
+
+company -> name
+
+job -> exp, type (permanent | contract)
+
+
+---
+emp:
+ id: 101
+ name: Ashok
+ company:
+  name: Microsoft
+ job:
+  exp: 11 Years
+  type: permanent
+...
+
+
+#### Website To validate YML syntax : https://www.yamllint.com/
+
+################### Use VS Code IDE to write YML Files ######################
+
+==================
+Writing Playbooks
+==================
+
+=> Playbook contains 3 sections
+
+    1) Host Section
+
+    2) Variable Section
+
+    3) Task Section
+
+=> Host Section Represents target machines to execute tasks.
+
+=> Variables Section is used to declare variables required for playbook execution.
+
+=> Task section is used to define what operations we want to perform using Ansible.
+
+Note: In single playbook we can specify multiple tasks also.
+
+=> To execute playbook we will use below syntax
+
+	$ ansible-playbook <playbook-yml-file>
+
+
+=================================
+Playbook to ping managed nodes
+=================================
+
+---
+- hosts: all
+  tasks:
+  - name: ping all managed nodes
+    ping:
+...
+
+# It will check the syntax of a playbook
+$ ansible-playbook <playbook-yml-file> --syntax-check
+
+# It will display which hosts would be effected by a playbook before run
+$ ansible-playbook <playbook-yml-file> --list-hosts
+
+# Run the playbook Using below command
+$ ansible-playbook <playbook-yml-file>
+
+# It execute one-step-at-a-time, confirm each task before running with (N)o/(y)es/(c)ontinue
+$ ansible-playbook <playbook-yml-file> --step
+
+# Run the playbook in verbose mode
+$ ansible-playbook <playbook-yml-file> -vvv
+
+====================
+---
+- hosts: all
+  tasks:
+  - name: create a file
+    file: 
+     path: /home/ansible/ashokit.txt
+     state: touch
+...
+========================
+---
+- hosts: all
+  tasks: 
+  - name: copy content to file
+    copy: content="welcome to ashokit\n" dest="/home/ansible/ashokit.txt"
+...
+===========================
+
+---
+- hosts: webservers
+  become: true #use it if you need sudo priviliges
+  tasks:
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: latest
+  - name: copy index.html file
+    copy:
+     src: index.html
+     dest: /var/www/html/index.html
+  - name: start httpd service
+    service: 
+     name: httpd
+     state: started
+...
+
+=================
+Handlers & Tags
+=================
+
+-> In playbook all tasks will be executed by default in sequential order.
+
+=> Using Handlers we can execute tasks based on other tasks status.
+
+Note: If 2nd task status is changed then only execute 3rd task.
+
+-> Handlers are used to notify the tasks to execute.
+
+=> 'notify' keyword we will use to inform handler to execute.
+
+-> Using Tag we can map task to a tag-name
+
+-> Using tag name we can execute particular task and we can skip particular task available in our playbook.
+
+
+# to display all tags available in playbook
+$ ansible-playbook handlers_tags.yml --list-tags
+
+# Execute a task whose tag name is install
+$ ansible-playbook handlers_tags.yml --tags "install"
+
+# Execute the tasks whose tags names are install and copy
+$ ansible-playbook handlers_tags.yml --tags "install,copy"
+
+# Execute all the tasks in playbook by skipping install task
+$ ansible-playbook handlers_tags.yml --skip-tags "install,copy"
+
+============
+Variables
+============
+
+=> Variables are used to store the data in key-value format
+
+  Ex: id=100
+      name=ashok
+      age=20
+      gender=male
+
+=> In Ansible, we can use variables in 4 ways  
+
+    1) Runtime Variables
+
+    2) Playbook variables
+
+    3) Group Variables
+
+    4) Host Variables
+
+
+==================
+Runtime Variables 
+==================
+
+=> We can pass variable value in runtime like below
+
+---
+- hosts: webservers
+  become: true
+  tasks:
+  - name: install package
+    yum:
+     name: "{{package_name}}"
+     state: latest
+...
+
+$ ansible-playbook <yml> --extra-vars package_name=httpd
+
+
+
+===================
+Playbook Variables 
+===================
+
+=> We can declare variable value with in the playbook
+
+
+---
+- hosts: webservers
+  become: true
+  vars:
+   package_name: httpd
+  tasks:
+  - name: install package
+    yum:
+     name: "{{package_name}}"
+     state: latest
+...
+
+=========================================================================
+
+Requirement : Write ansible playbook to install below softwares
+
+In webservers group : install java
+
+In dbservers group : install mysql
+
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: install soft
+    yum:
+     name: "{{package_name}}"
+     state: latest
+...
+
+=> To achieve above requirement we need to use group vars concept
+
+============
+Group Vars
+============
+
+=> group vars concept is used to specify variable value for group of managed nodes as per inventory file.
+
+=> Managed nodes we are configuring host inventory file like below
+
+[webservers]
+webserver1 ansible_host=172.31.0.95
+webserver2 ansible_host=172.31.0.96
+
+[dbservers]
+172.31.5.185
+172.31.5.186
+
+
+=> While executing above playbook for webservers group i want to pass one package name and for dbservers group i want to pass another package name.
+
+Note: We need to create variables based on group name
+
+    Ex : 
+
+        webservers.yml
+        dbservers.yml
+
+Note: group_vars related yml files we should create in host inventory file location
+
+    Host Inventory file location : /etc/ansible/hosts
+
+    webservers variable file : /etc/ansible/group_vars/webservers.yml        
+
+    dbservers variable file : /etc/ansible/group_vars/dbservers.yml
+
+===============
+Host Variables 
+===============   
+
+=> host variables are used to specify variable value at host level (or) machine level
+
+=> host vars we will create in below location
+
+
+    Location : /etc/ansible/host_vars
+
+    webserver1.yml
+
+       package_name: java
+
+    webserver2.yml
+
+        package_name: python
+
+
+Note-1: host variables will take precendence over group variables
+
+Note-2: Variables defined in playbook override both host_vars and group_vars.
+
+===============
+Ansible Vault
+===============
+
+=> It is used to secure our playbooks
+
+=> Using Ansible vault concept, we can encrypt & decrypt our playbooks
+
+  Encryption : Convert data from readable format to un-readable format
+
+  DeCryption : Convert data from un-readable format to readable format
+
+
+# Encrypt our playbook
+ansible-vault encrypt <yml-file-name>
+
+Note: To encrypt a playbook we need to set one vault password
+
+# see encrypted playbook
+cat <yml-file-name>
+
+# see orignal content of playbook
+ansible-vault view <yml-file-name>
+
+# to edit encrypted playbook
+ansible-vault edit <<yml-file-name>>
+
+# how to run encrypted playbook
+ansible-playbook <yml-file-name> --ask-vault-pass
+
+# decrypt playbook
+ansible-vault decrypt <yml-file-name>
+
+
+
+===============
+Ansible Roles
+===============
+
+=> If we add more functionalities in a playbook then it will become very lengthy and it will be difficult to manage and maintain that playbook.
+
+=> Using Roles concept we can break down large playbooks into smaller chunks.
+
+=> Roles will provide abstraction for ansible configuration in a modular and re-usable format.
+
+
+=> Below playbook we will divide into small chunks using Role concept
+
+---
+- hosts: webservers
+  become: true #use it if you need sudo priviliges
+  tasks:
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: latest
+  - name: copy index.html file
+    copy:
+     src: index.html
+     dest: /var/www/html/index.html
+  - name: start httpd service
+    service: 
+     name: httpd
+     state: started
+...
+
+# To create a role we can use below command
+
+Syntax : $ ansible-galaxy init <role-name>
+
+==========================
+Working with Ansible Role
+==========================
+
+### Step-1: Connect with control node and switch to ansible user
+
+$ sudo su ansible
+$ cd ~
+
+### Step-2 : Create a role using 'ansible-galaxy'
+
+$ mkdir roles
+$ cd roles
+$ ansible-galaxy init apache
+$ sudo yum install tree
+$ tree apache
+
+
+### Step-3 : Create tasks inside "tasks/main.yml" like below
+
+---
+# tasks file for apache
+- name: install httpd
+  yum:
+    name: httpd
+    state: latest
+- name: copy index.html
+  copy:
+    src=index.html
+    dest=/var/www/html/
+  notify:
+    - restart apache
+...
+
+### Step-4 : Copy required files into "files" directory
+
+Note: keep index.html file in files directory
+
+### Step-5 : configure handlers in "handler/main.yml"
+
+---
+# handlers file for apache
+- name: restart apache
+  service:
+    name: httpd
+    state: restarted
+...
+
+Note: With above 5 steps our "apache"  role is ready now we can execute that role like below
+
+### Step-6 : Create main playbook to invoke role using role name
+
+$ cd ~
+$ vi invoke-roles.yml
+
+---
+- hosts: all
+  become: true
+  roles:
+    - apache
+...
+
+=================================
+What is gather facts in ansible 
+=================================
+
+=> In Ansible, gathering facts refers to the process of collecting information about the target hosts before executing tasks. 
+
+  Ex: OS, memory, cpu architecture etc....
+
+=> This information will be collected automatically using "setup" module.
+
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+  - name: ping all managed nodes
+    ping:
+...
+
+=================================
+What is debug keyword in ansible
+=================================
+
+=> debug keyword is used to print a msg when playbook is getting executed.
+
+---
+- hosts: localhost
+  gather_facts: yes
+  tasks:
+  - name: print the name of OS family
+    debug: 
+      msg: "The OS is {{ansible_os_family}}"
+
+  - name: print memory info
+    debug:
+      msg: "Total memory is {{ ansible_facts['memtotal_mb'] }} MB."
+...
+
+======================================
+What is register keyword in ansible
+======================================
+
+=> register keyword in ansible allow you to capture the output of a task and store it into a variable for later use.
+
+Note: one task output we can register and we can use it in another task like below
+
+---
+- hosts: localhost
+  tasks:
+  - name: Run a command to get current date
+    command: date
+    register: date_output
+  
+  - name: print date command output 
+    debug:
+     msg: "The current Date is => {{ date_output.stdout }}"
+
+  - name: check command is success or not 
+    debug:
+     msg: "command exeution successfull"   
+    when: date_output.rc == 0
+...
+
+=================================================================
+Write a playbook to install java in different OS family machines
+=================================================================
+
+MN-1 : Amazon linux ==> Red Hat family
+
+MN-2 : Ubuntu ==> Debian family
+
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+  - name: install java in Red Hat family
+    yum:
+     name: java
+     state: latest
+    when: ansible_os_family == 'Red hat'
+
+  - name: install java in Debian family
+    apt:
+     name: java
+     state: latest
+    when: ansible_os_family == 'Debian'
+...
+
+==============================
+Error Handling in Playbooks
+==============================
+
+=> If we get any error in task execution then playbook execution will be terminated abnormally(in the middle).
+
+=> To achieve graceful termination we need to handle that error.
+
+---
+- hosts: all
+  tasks:
+  - name: This is first task
+    command: dates
+    register: dates_output
+    ignore_errors: yes
+
+  - name: This is second task
+    debug: 
+     msg: "Second task executed..."    
+    when: dates_output.rc == 0
+
+  - name: this is third task
+    debug:
+     var: dates_output    
+...
+
+===================================================================================
+Requirement : Write a playbook to check maven is available or not.
+If it is not available then install maven software in control node.
+===================================================================================
+
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: check maven version
+    command: mvn --version
+    register: output
+    ignore_errors: yes
+
+  - name: print ouput 
+    debug:
+     var: output
+
+  - name: install maven
+    yum:
+     name: maven
+     state: latest
+    when: output.failed
+...
+
+
+============================================================
+Assignment: How to create s3 bucket using ansible playbook
+============================================================
+
+## Step-1 : Install amazon.aws using ansible collection
+
+$ ansible-galaxy collection install amazon.aws --force
+
+## Step-2 : install boto3 using ansible ad-hoc command
+
+$ ansible localhost -m pip -a "name=boto3 state=present" --become
+
+## Step-3: Configure AWS Account Access Keys using export command
+
+export AWS_ACCESS_KEY_ID='your-access-key-id'
+export AWS_SECRET_ACCESS_KEY='your-secret-access-key'
+export AWS_DEFAULT_REGION='ap-south-1' 
+
+## Step-4 : Create a playbook and execute that
+
+---
+- hosts: localhost
+  tasks:
+  - name: create s3 bucket
+    amazon.aws.s3_bucket: 
+     name: ashokit7999 #unqiue name required
+     state: present
+     region: ap-south-1
+    register: s3_bucket_info
+
+  - name: print s3 bucket info
+    debug:
+     var: s3_bucket_info
+...
+
+## Step-5 : Check s3 service in aws conole, bucket is created or not.
+
+==========================
+Ansible Classes Summary
+==========================
+
+1) What is Configuration management
+
+2) Ansible Introduction
+
+3) Ansible Architecture
+
+4) Ansible Setup
+
+5) Ansible Ad-Hoc commands
+
+6) Ansible Modules
+
+7) YML file
+
+8) Playbooks
+
+9) Handlers & Tags
+
+10) Variables
+     - Playbook variables
+     - Runtime variables
+     - host vars
+     - group vars
+
+11) Ansible Vault
+
+12) Ansible Roles
+
+14) gather facts + register + debug + when 
+
+15) ignore errors in playbook execution
+
+16) Ansible + AWS Cloud Integration (custom modules)
+
+17) Ansible Tower (theory)
