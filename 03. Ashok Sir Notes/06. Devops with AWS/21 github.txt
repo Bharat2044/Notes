@@ -1,0 +1,243 @@
+
+=========
+Git Hub
+=========
+
+=> It is version control software
+
+-> Git Hub is a platform which is used to store project related files/code
+
+-> In git hub, we can create source code repository to store project code.
+
+-> All the developers can connect to project repository to store all the source code
+   (Code Integration will become easy)
+
+-> Git Hub repository will monitor all code changes
+
+		 - who modified
+		 - when modified
+	     - what modified
+		 - why modified
+
+===================
+Environment Setup
+===================
+
+1) Create account in www.github.com
+
+2) Download & Install git client software
+
+3) Open Git bash and configure your name and email
+
+	$ git config --global user.name "your-name"
+
+	$ git config --global user.email "your-email"
+
+Note: Configuring name and email is just one time process.
+
+
+===============================
+What is Git Hub Repository ?
+===============================
+
+=> Repository is a place where we can store project source code / files.
+
+=> For every project one repository will be created
+
+=> We can create 2 types of repositories in git hub
+
+	1) Public Repo (anybody can see & you choose who can commit)
+
+	2) Private Repo (you choose who can see & commit)
+
+
+## Project Git repo URL : https://github.com/ashokitschool/dcb_loans_app.git	
+
+=> Project team members will connect with git repository using its URL.
+
+==================
+Git Architecture
+==================
+
+1) Working Tree
+
+2) Stating Area
+
+3) Local Repo
+
+4) Central Repo
+
+==============
+Git commands
+===============
+
+git config : To configure name & email
+
+git init : To initialize working tree
+
+git status : To check working tree status
+
+git add : To add files to staging area
+
+git commit : To commit files from staging to local repo
+
+git push : To send files from local repo to remote repo
+
+git clone : To clone remote repo to local machine
+
+git log : To see commit history
+
+git restore : 1) To discard changes when the file is in unstaged state
+			  
+			  2) To unstage the file when it is added to staging area
+
+git rm : To remove files  (rm + commit + push)
+
+git revert : To remove our commits from central repository
+
+			$ git revert <commit-id>
+
+git pull : To take latest changes from central repo to local repo
+
+
+==========================
+What is .gitignore file ?
+==========================
+
+=> .gitignore is used to exclude files & folders from our commits
+
+Ex: In maven project,  we should n't commit target folder to git repository hence we can give this info to git using .gitignore file.
+
+=============
+Git Branches
+=============
+
+=> In a project multiple teams will work paralelly
+
+		1) Bug fixing
+		2) Enhancements
+		3) change request
+		4) Research & Development
+
+=> When multiple teams work on single repository then it will become very difficult to manage the code.		
+
+=> Branches are used to maintain multiple code bases in the single repository.
+
+=> In Realtime project, we will have below branches
+
+		1) main (default)
+
+		2) develop
+
+		3) feature
+
+		4) qa
+
+		5) uat
+
+		6) release/production
+
+Note: We can create any no.of branches in single repository.
+
+=> If we have branches in git repo then multiple teams can work paralelly without effecting other teams code.
+
+===========================================
+What is your project branching strategy ?
+===========================================
+
+=> It is the process of deciding which team should use which branch.
+
+		final code => main branch
+
+		dev activites => develop branch
+
+		enhancements => feature branch
+
+		bug fixing => qa branch
+
+		r & d => research branch
+
+		product deployment => release branch
+
+=================================================
+
+1) git stash
+2) git merge
+3) git rebase
+4) git fetch
+5) What is merge conflict ?
+6) what is git tag?
+
+================================================
+
+
+
+==================
+git stash command
+==================
+
+demo.java
+
+//Story-121 (started : 9 am)
+
+3:00 pm manager told to stop story-121 and work on story - 131
+
+===============
+git conflicts
+===============
+
+git pull : to bring latest code changes from central repo to local repo
+
+
+=========================
+git merge vs git rebase
+=========================
+
+merge : it will merge changes from one branch to another branch and it will preserve commit history.
+
+rebase : it wil merge changes from one branch to another branch and it will not preserve commit history.
+
+=======================
+git pull vs git fetch
+=======================
+
+git pull: Download changes from central repo to local repo and merge changes in working tree.
+
+git fetch : download changes from central repo to local repo.
+
+Note: To merge changes from local repo to working tree we need to use 'git merge' command
+
+		git pull = git fetch + git merge
+
+
+
+
+
+
+git config
+git init
+git status
+git add <filename>
+git add .
+git restore
+git commit -m 'msg'
+git push
+git clone
+git pull
+git fetch
+git merge
+git merge <branch-name>
+git rebase <branch-name>
+git log
+git rm
+git branch
+git checkout <branch-name>
+git stash
+git stash apply
+git revert <commit-id>
+
+
+
+
+
+
