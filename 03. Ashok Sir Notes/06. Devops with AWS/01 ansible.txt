@@ -1,0 +1,131 @@
+
+==========================
+Configuration Management 
+==========================
+
+=> Installing required softwares in the machines
+
+=> Copy required files from one machine to another machine
+
+=> OS Patching/Updates
+
+
+=> We can perform configuration management in 2 ways
+
+		1) Manual Configuration Management
+
+		2) Automated Configuration Management
+
+============================================
+Problems with Manual Configuration Mgmt
+============================================
+
+1) Time Taking process
+
+2) Repeated Work
+
+3) Human Mistakes
+
+
+Note: To overcome these problem we are going to automate configuration management in the project.
+
+=> To automate configuration management we have several tools
+
+				1) puppet
+				2) chef
+				3) Ansible (Trending)
+
+
+================
+What is Ansible
+================
+
+-> It is an open source software developed by Michael DeHaan and its ownership is under RedHat.
+
+=> Ansible was written in Python language.
+
+-> Ansible is an automation tool that provides a way to define configuration as code.
+
+
+=======================
+What Ansible can do ?
+=======================
+
+1) Automate Configuration Management
+
+2) App Deployments
+
+
+=======================
+Ansible Architecture
+=======================
+
+1) Control Node
+
+2) Managed Nodes
+
+3) Host Inventory File
+
+4) Playbooks
+
+
+=> The machine which contains ansible software is called as Controlling Node.
+
+=> The machines which are managing by Controlling Node are called as Managed Nodes.
+
+=> Host inventory file contains managed nodes information.
+
+=> Playbook is a YML/YAML which contains set of taks.
+
+
+===============
+Ansible Setup
+===============
+
+URL : https://github.com/ashokitschool/DevOps-Documents/blob/main/11-Ansible-Setup.md
+
+===========================
+Ansible Ad-Hoc Commands
+===========================
+
+=> To run ad-hoc commands we will follow below syntax
+
+
+Syntax :  
+
+$ ansible [all/group-name/private-ip] -m <module> -a <args>
+
+Ex:   $ ansible all -m ping
+
+	  $ ansible webservers -m ping
+
+	  $ ansible dbservers -m ping
+
+=> We have several modules in ansible to perform configuration management
+		
+		1) ping
+
+		2) shell
+
+		3) yum / apt
+
+		4) service
+
+		5) copy
+
+
+$ ansible all -m ping
+
+$ ansible all -m shell -a date
+
+$ ansible all -m yum -a "name=git"
+
+$ ansible webservers -m yum -a "name=httpd"
+
+===========
+Assignment
+===========
+
+=> Ansible Modules and purpose
+
+=> What is YML 
