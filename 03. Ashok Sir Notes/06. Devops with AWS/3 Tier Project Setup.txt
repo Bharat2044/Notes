@@ -1,0 +1,190 @@
+
+Class Video : https://youtu.be/6cX8l22CKCI
+
+=================================
+DevOps Project Setup (3 Tier)
+=================================
+
+=> Our application contains 3 layers
+
+		1) Database (MySQL)
+
+		2) Backend (Java SpringBoot)
+
+		3) Frontend (Angular)
+
+===========
+DB Setup
+===========
+
+Step-1: Setup AWS RDS MySQL Instance and note down DB details
+
+		DB Endpoint : database-2.cnys8a2a2umm.ap-south-1.rds.amazonaws.com
+		DB Username : admin
+		DB Password : admin4321
+		DB Initial Name : ashokit_ecomm
+
+Step-2: Connect with MySQL DB using Workbench s/w and execute sql queries to insert products data into db tables.
+
+Note: DB Queries file available in backend_app git repo
+
+# Backend App Git Repo : https://github.com/ashokitschool/01_products_api.git
+
+	DB Queries File Name: DB_Setup.sql
+
+
+===================
+DevOps Tools Setup
+===================
+
+### DevOps Tools Integration Document : https://github.com/ashokitschool/DevOps-Documents/blob/main/10-Jenkins-Docker-K8S.md
+
+
+=======================
+Backend App Deployment
+=======================
+
+Step-1 : Configure RDS DB instance connectivity Details in backend app git repo
+	
+	File to change : src/main/resources/application.properties
+
+Step-2 : Create CI CD Pipeline to deploy backend application
+
+	Stage-1 : Clone git repo
+
+	Stage-2 : Maven Build
+
+	Stage-3 : Create Docker Image
+
+	Stage-4 : Push docker image to docker hub
+
+	Stage-5 : K8S Deployment	
+
+Step-3 : Access Backend API in browser using LBR url
+
+	URL : http://LBR-URL/api/products
+
+
+Note: If you are able to see products data in json format then your backend app is running successfully.	
+
+========================== backend-app-ci-cd-pipeline ===============================
+
+pipeline {
+    agent any
+    
+    tools {
+        maven "Maven-3.9.9"
+    }
+
+    stages {
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ashokitschool/01_products_api.git'
+            }
+        }
+        
+        stage('maven build'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        
+        stage('Build Docker Image'){
+            steps{
+                sh 'docker build -t ashokit/products .'
+            }
+        }
+        stage('Push Docker Image'){
+            steps{
+                withCredentials([string(credentialsId: 'docker_login_pwd', variable: 'docker_login_pwd')]) {
+                    sh 'docker login -u ashokit -p ${docker_login_pwd}'
+                    sh 'docker push ashokit/products'
+                }
+            }
+        }
+        stage('K8S Deployment'){
+            steps{
+                sh 'kubectl apply -f Deployment.yml'
+            }
+        }
+    }
+}
+
+
+
+=========================
+Frontend App Deployment
+=========================
+
+# Frontend App Git Repo : https://github.com/ashokitschool/ashokit_ecomm_store.git
+
+
+Step-1 : Configure Backend API LBR Url in frontend application git repo
+
+	File To Configure Bakend URL : ashokit_ecomm_store/src/app/constants.ts
+
+Step-2 : Create CI Job for frontend application
+
+		Stage-1 : Clone git repo
+
+		Stage-2 : Create Docker Image
+
+		Stage-3 : Push Docker Image to Docker hub
+
+Step-3 : Create CD Job for frontend application
+
+		Stage-1 : Clone git repo
+
+		Stage-2 : K8S Deployment
+
+
+========================== frontend-app-ci-job ===============================
+
+pipeline {
+    agent { label 'Slave-1' }
+
+    stages {
+        stage('git clone') {
+            steps {
+               git branch: 'main', url: 'https://github.com/ashokitschool/ashokit_ecomm_store.git'
+            }
+        }
+        stage('Docker Image') {
+            steps {
+                sh 'docker build -t ashokit/ecomm_store .'
+            }
+        }
+        stage('Push Docker Image'){
+            steps{
+                withCredentials([string(credentialsId: 'docker_login_pwd', variable: 'docker_login_pwd')]) {
+                    sh 'docker login -u ashokit -p ${docker_login_pwd}'
+                    sh 'docker push ashokit/ecomm_store'
+                }
+            }
+        }
+    }
+}
+
+
+========================== frontend-app-cd-job ===============================
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git clone') {
+            steps {
+               git branch: 'main', url: 'https://github.com/ashokitschool/ashokit_ecomm_store.git'
+            }
+        }
+        stage('K8S Deploy') {
+            steps {
+               sh 'kubectl apply -f Deployment.yml'
+            }
+        }
+       
+       
+    }
+}
+
+=====================================================================================================
