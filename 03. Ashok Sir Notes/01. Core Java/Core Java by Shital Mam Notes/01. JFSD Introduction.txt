@@ -1,0 +1,100 @@
+================
+What is Fullstack
+=================
+
+Fullstack Development = Frontend Development + Backend Development
+
+
+Frontend : User interface 
+
+-> Clients / Users will interact with s/w application using frontend 
+
+Backend : The hidden part of our application which contains business logic
+
+-> When use perform some operation on frontend then backend logic will execute to handle that operation
+
+-> The programmer who can develop frontend and backend of application is called as fullstack developer
+
+=====================
+Frontend Technologies
+=====================
+HTML & CSS
+Java script
+Bootstap
+Angular 
+React
+
+
+===================
+Backend Technologies
+====================
+Java
+Python
+PHP
+.Net
+Node JS
+
+===============
+Servers
+===============
+Tomcat
+JBoss
+Glassfish
+Oracle Weblogic 
+IBM WebSphere
+IIS
+
+===========
+Databases
+===========
+Oracle
+MySQL
+SQL Server
+Postgres
+Mongo DB
+Casandra
+Hbase
+Hive
+
+========
+Tools
+=========
+Git Hub : For Code Integration
+
+JIRA : Project Management / Bug Tracking / Work Assignment
+
+SonarQube : For Code Quality Checking
+
+JUnit : For Unit Testing
+
+JMETER : For Performance Testing 
+
+JENKINS : For Deployment (Automated Deployment)
+
+==========
+Cloud
+===========
+Amazon  ---> AWS
+Microsoft  ---> Azure
+Google -----> GCP
+Oracle Cloud
+IBM Cloud
+VM Ware Cloud
+Alibaba CLoud etc.....
+
+=======================================
+Roles & Responsibilities of Fullstack Developer
+=======================================
+
+1) Understand Requirements of Project
+2) Analyze requirements 
+3) Design / Planning
+4) Database Design
+5) Development (Backend development)
+6) Unit Testing
+7) Code Review
+8) Code Integration (Git Hub)
+9) Frontend Development
+10) Frontend + Backend Integration
+11) Deployment
+12) Support / Maintenence
