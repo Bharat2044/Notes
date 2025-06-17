@@ -1,0 +1,1026 @@
+======================================
+Chapter-2 : Operators & Control Statements
+======================================
+
+==========
+Operators
+==========
+
+-> Operator is a symbol which performs some operation on operands
+
+			int a  = 10 ;
+
+			int b = 20 ;
+
+			int c = a + b;
+
+-> We have below operators in java
+
+				1) Arithematic Operators
+				2) Logical Operators
+				3) Relational Operators
+				4) Assignment Operators
+				5) new operator
+				6) dot (.)  operator
+				7) ternary operator ( Conditional Operator )
+
+
+-> Arithematic Operators are used to perform Arithematic Operations ( Calculations )
+
+				1) Addition -----> +
+				2) Substraction ---->  -
+				3) Division ------------>  /  ( quotient)
+				4) Multiplication ----------> *
+				5) Modulas ---------> %  (reminder)
+				
+				6) Increment -------> ++
+				7) Decrement ------> --			
+					
+
+--> Increment ( ++ ) is used to increase the value of variable by 1
+
+-> Increment is divided into 2 types
+
+			1) Post Increment   ( a ++ )
+			2) Pre Increment  ( ++ a)
+
+--> Decrement ( -- ) is used to decrease the value of variable by 1
+
+-> Decrement is divided into 2 types
+
+			1) Post Decrement ( a -- )
+
+			2) Pre-Decrement ( --a )
+
+
+
+class PostIncrement {
+
+   public static void main(String... args){
+			
+			int a = 5;
+
+			System.out.println(a++); // it will print 5 then it will become 6
+
+			a++;  // it will become 7
+
+			System.out.println(a++); // it will print 7 then it will become 8
+
+			System.out.println(a); // it will print 8 
+   }
+
+}
+
+
+class PreIncrement {
+
+   public static void main(String... args){
+			
+			int a = 5;
+			System.out.println ( ++ a );  // it will become 6 then it will print
+
+			++ a ;  // it will become 7
+
+			System.out.println(++a);  // it will become 8 then it will print
+
+			System.out.println(a); // it will print 8
+   }
+
+}
+
+
+class PostPreIncrement {
+
+   public static void main(String... args){			
+			int a = 5;
+			
+			int b = ++a  + a++ + a++  + ++a;
+
+			// int b = 6 + 6 + 7 + 9 ==> 28
+			System.out.println(b);
+   }
+}
+
+
+class Decrement {
+
+   public static void main(String... args){			
+			int a = 5;			
+			System.out.println( a -- );  // it will print 5 then it will become 4
+			System.out.println( -- a);  // it will become 3 then it will print 3
+   }
+}
+
+class PostPreDecrement {
+
+   public static void main(String... args){			
+			int a = 5;			
+			int b =  a-- + --a + a--;
+
+			// int b = 5 + 3 + 3
+			System.out.println ( b );
+   }
+}
+
+===================
+Relational Operators
+=====================
+
+-> Relations Operators are used to check relation between two Operands
+
+> , < , >= , <=, !=, ==
+
+================
+Logical Operators
+================
+
+-> To check more than one condition then we will use Logical operators
+
+AND  ---->  &&
+
+OR -----> ||
+
+NOT -----> !
+
+
+=====================
+Assignment Operator
+======================
+
+-> Equals ( = ) is called as assignment operator
+
+-> It is used to assign the value for a variable
+
+		int a  = 10 ;
+
+===============
+new operator
+===============
+
+-> It is used to create the object for a class
+
+		ClassName refVar = new ClassName  (  );
+
+Note: Creating object means allocating memory in heap area
+
+=================
+Dot (.) Operator
+=================
+
+-> Dot operator is used to access class variables & methods
+
+System.out.println ( );
+
+
+java.lang.String
+
+java.util.ArrayList
+
+==================================
+Ternary Operator / Conditional Operator
+==================================
+
+
+-> Ternary operator is used for decision making
+
+Syntax:
+
+	
+		( condition ) ? expression-1 : expression-2
+
+
+-> If condition satisifed then expression-1 will execute otherwise expression-2 will execute
+
+
+
+==================
+instanceof operator
+==================
+
+- > It is used to check object reference belong to a class or not
+
+
+		String str = "ashokit";
+
+		if (str instanceof String ) {
+			//logic
+		}
+
+================
+Control Statements
+================
+-> Java program code will execute line by line sequentially (this is default behaviour)
+-> In project code should execute based on user operation
+-> To satisfy user requirement our code should execute based on some conditions
+->  Using Control Statements we can control program execution flow
+-> Control Statements are divided into 3 types
+
+	1) Decision Making Statements  / Conditional Statements
+	2) Looping Statemetns
+	3) Transfer / Branching Statements
+
+=====================
+Conditional Statements
+=====================
+
+=> Execute the code only once based on condition
+
+
+1) simple if
+2) if - else 
+3) if - else - if - else -if - else (if else ladder)
+4) switch
+
+=================
+Looping Statements
+==================
+
+=> To execute the code repeatedly
+
+1) while loop
+2) do-while loop
+3) for loop
+4) for-each loop
+
+===========================
+Branching / Transfer Statements
+============================
+
+1) break;
+2) continue;
+3) return
+
+
+
+
+
+===========
+Simple if
+===========
+
+-> To execute the statemetns based on condition
+
+syntax
+-------------
+if ( condition ) 
+{
+    // stmt - 1
+    // stmt - 2
+    // stmt - 3
+}
+
+or
+
+if (condition )
+    //stmt
+
+------------------------------------
+class SimpleIf{
+
+   public static void main(String... args){
+			int a = 100;
+
+			int b = 20;
+
+			if( a > b ) {
+				System.out.println("a is greater than b"); 
+				System.out.println("Completed"); 
+			}
+			System.out.println("Bye");
+   }
+}
+---------------------
+
+class IfElseDemo {
+
+      public static void main (String... args){	
+			int age = 16 ;
+
+			if ( age >= 18 ) {
+				System.out.println("Eligible For Vote") ;
+			} else {
+				System.out.println("Not eligible for Vote");
+			}
+      }
+}
+
+-------------------
+Requirement : 
+-----------------------
+int  a = 20;
+
+if a > 0 -----> display msg as 'a is positive number'
+
+if a < 0 ----> display msg as 'a is negative number'
+
+When above both conditions are failed then display msg as 'a is zero'
+
+----------
+syntax
+---------
+
+if ( condition_1 ) {
+		// stmt - 1
+} else if ( condition_2 ) {
+		// stmt - 2
+} else  if ( condition_3 ) { 
+		//stmt - 3
+} else {
+	 	//stmt-4
+}
+
+
+-> if condition_1 is pass then it will execute only stmt-1
+
+-> if condition_1 is fail then it will check condition_2
+
+-> If condition_2 is pass then it will execute only stmt-2
+
+-> If condition_2 is fail then it will check condition_3
+
+-> If condition_3 is pass then it will execute only stmt-3
+
+-> If condition_3 is fail then directley stmt-4 will be executed
+
+--------------------------------------------------------------------------
+class IfElseLadderDemo {
+
+	public static void main(String... args){
+			
+			int a = 0;
+
+			if( a > 0) {
+				System.out.println(" a is positive number ");
+			} else if ( a < 0 ) {
+				System.out.println("a is negative number");
+			} else { 
+				System.out.println("a is zero");
+			}
+		}
+}
+----------------------------------------------------------------------------------------------------------------------------------------------
+Assignment : Develop a java program to decide role of software engineer based on his/her experience
+-----------------------------------------------------------------------------------------------------------------------------------------------
+0 - 2  year exp  -----> Associate Engineer
+
+3 - 5 years exp -----> Software Engineer
+
+6 - 9 years exp -----> Sr.Software Engineer
+
+10 - 13 years exp ----> Manager
+
+------------------------------------------------------------------------------------------------
+
+class RoleFinder {
+
+	public static void main(String... args) {
+
+			int exp = 13;
+
+			if( exp >= 0 && exp <= 2 ){
+					System.out.println("Associate Engineer");
+			}else if ( exp >= 3 && exp <=5 ){
+					System.out.println("Software Engineer");
+			}else if(  exp >= 6 && exp <=9 ){
+					System.out.println("Sr. Software Engineer");
+			}else if( exp >= 10 && exp <=13 ){
+					System.out.println("Manager");
+			}else {
+					System.out.println("Role Not Found");
+			}
+
+      }
+}
+
+
+=> In above program we have hardcoded value for the variable
+=> If we want to test our program with different values we need compile and execute everytime
+=> To overcome this problem we can read the data from keyboard
+
+===================================
+How to read data from keyboard In Java
+===================================
+
+1) BufferedReader    ( java.io )
+
+2) Scanner ( java.util )
+
+3) Command Line Arguments (input for main method)
+
+
+---------------------BufferedReader Program-----------------------
+import java.io.*;
+
+class RoleFinder {
+
+	public static void main(String... args)  throws Exception {
+			
+			InputStreamReader isr = new InputStreamReader(System.in);
+			BufferedReader br = new BufferedReader(isr);
+			String str = br.readLine ( );
+			int exp = Integer.parseInt(str);
+
+			if( exp >= 0 && exp <= 2 ){
+					System.out.println("Associate Engineer");
+			}else if ( exp >= 3 && exp <=5 ){
+					System.out.println("Software Engineer");
+			}else if(  exp >= 6 && exp <=9 ){
+					System.out.println("Sr. Software Engineer");
+			}else if( exp >= 10 && exp <=13 ){
+					System.out.println("Manager");
+			}else {
+					System.out.println("Role Not Found");
+			}
+
+      }
+}
+------------------------------------------------------------------------------------------------
+Requirement : Write a java program to find given number is odd or even
+Note: Read number from keyboard
+------------------------------------------------------------------------------------------------------
+import java.io.*;
+
+class OddOrEven {
+
+    public static void main(String... args) throws Exception {
+
+			InputStreamReader isr = new InputStreamReader(System.in);
+
+			BufferedReader br = new BufferedReader ( isr );
+			System.out.println("Enter Number");
+
+			String str = br.readLine ( );
+
+			int num = Integer.parseInt (str);	
+		
+			if( num % 2 == 0){
+				System.out.println("It is even");
+			}else{
+				System.out.println("It is odd");
+			}
+    }
+
+}
+
+-------------------------------------------------------------------------------------------------------------------------
+Assignment -1 : Write a java program to check given number is a prime number or not
+
+Assignment -2 : Write a java program to check given year is a leap year or not
+-------------------------------------------------------------------------------------------------------------------------
+=============
+swtich case
+==============
+
+-> Using switch case we can make decision
+
+-> When we have upto 5 conditions test then if-else is recommended
+
+-> When we have 10 or 20 conditions to test then switch is recommended
+
+syntax
+----------
+
+switch ( case ) {
+
+case 1 :  // stmt - 1
+	break;
+
+case 2 : // stmt - 2
+	break;
+case 3 : // stmt - 3
+	break;
+...
+default : // stmt - default
+
+}
+
+-------------------------------------------------------------------------------------------------------
+
+Requirement : Write a java program to read a number from keyboard.
+
+Based on the given number print week of the day using 'switch' case
+
+1 - Monday
+2 - Tuesday
+3 - Wednesday
+4 - Thursday
+5- Friday
+6 - Saturday
+7 - Sunday
+>7 - No day found
+-------------------------------------------------------------------------------------------
+
+import java.io.*;
+
+class WeekDay {
+
+	public static void main(String... args) throws Exception {
+		
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader br  = new BufferedReader(isr);
+
+		System.out.println("Enter number");
+		String str = br.readLine ( );
+
+		int num = Integer.parseInt(str);
+
+		switch ( num ) {
+			case 1 : System.out.println("Monday");
+		  			 break;
+
+			case 2 : System.out.println("Tuesday");
+					  break;
+
+			case 3 : System.out.println("Wednesday");
+					 break;
+
+			case 4 : System.out.println("Thursday");
+					  break;
+
+			case 5 : System.out.println("Friday");
+					 break;			
+
+			case 6 : System.out.println("Saturday");
+					  break;
+
+			case 7 : System.out.println("Sunday");
+					 break;	
+
+			default : System.out.println("Day not found");
+		}
+
+	}
+}
+-----------------------------------------------------------------------------------------
+
+1) simple if
+
+2) if - else
+
+3) if - else if - else
+
+4) switch
+
+===========
+Conclusion
+===========
+
+1) 'if' accepts only boolean value (or) boolean expression 
+
+2) 'switch' accepts numbers, char & strings (added in java 1.7v)
+
+3) switch will not accept boolean and decimal values
+
+4) switch cases should belongs to same type
+
+5) switch case datatype and switch case input value should belongs to same datatype
+
+6) 'default' case is optional in 'switch case' 
+
+7) 'break' keyword is also optional in 'switch case'
+
+
+
+
+
+==================
+Loops  in Java
+==================
+-> Loops are used to execute statements repeteadly
+
+-> In java we have below loops
+
+1) while loop
+2) do-while loop
+3) for loop
+4) for-each loop  (arrays & collections)
+
+==================
+While loop
+==================
+-> While loop is used to execute statements until condition is true
+
+-> while loop is called as conditional based loop
+
+-> If condition is true then loop statments will execute otherwise loop will be terminated
+
+syntax
+----------
+while ( condition ){
+	//stmts
+}
+
+Q) Write a java program to print numbers from 1 to 10 using while loop
+
+class WhileDemo {
+    public static void main (String... args){
+			int i = 1;
+			while ( i <= 10 ){
+					System.out.println(i);
+					i++;				
+			}
+	}
+}
+
+============
+do-while loop
+============
+
+-> It is used to execute statements first then it will check the condition
+
+-> do-while is also called as conditional based loop only
+
+-> 
+
+Syntax:
+
+do{
+	//stmts
+}while (condition );
+
+Q) Write a java program to print numbers from 1 to 10 using do-while loop
+
+
+class DoWhile{
+	public static void main(String... args){
+			
+			int i = 1;
+			do {
+				System.out.println(i);
+				i++;
+			}while (i <= 10);
+	}
+}
+
+
+
+Q) What is the difference between while and do-while ?
+
+while ==> It will check the condition first then it will execute the statements
+
+do-while ==> It will execute statement first then it will check condition.
+
+Note: Even if condition is not satisifed our statement will execute once.
+
+
+=================
+for loop
+=================
+-> It is used to execute statements multiple times
+
+-> For loop is called as Range based loop
+
+syntax
+----------
+
+for ( initialization ; condition ; increment / decrement ) {
+
+			//stmts
+}
+
+
+Q) Write java program to print numbers from 1 to 10 using for loop
+
+class ForLoop {
+
+	public static void main(String... args){		
+			for ( int i = 1 ; i <= 10 ; i++ ) {
+					System.out.println(i);
+			}
+	}
+}
+
+=================
+Nested Loops
+================
+
+-> Writing one loop inside another loop is called as Nested loop
+
+
+		for ( int i = 1; i <= 5 ; i++ ){
+
+			for ( int j = 1; j< = 5; j++){
+
+			}
+		}
+
+-> As per above program,  for every execution of outer loop 5 times inner loop will execute
+
+
+Q) Write a java program to print below pattern using loops
+
+*
+* *
+* * *
+* * * *
+* * * * *
+
+
+class NestedLoop {
+
+	public static void main(String... args){
+		
+			for ( int i = 1; i <=5 ; i++ ){
+
+				for ( int j = 1; j <= i ; j++ ){
+						System.out.print("*");
+				}
+				System.out.println();
+			}
+	}
+
+}
+
+
+
+
+Q) Write a java program to print below pattern
+
+1
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5
+
+class NestedLoop {
+
+	public static void main(String... args){
+		
+			for ( int i = 1; i <=5 ; i++ ){
+				for ( int j = 1; j <= i ; j++ ){
+						System.out.print(j);
+				}
+				System.out.println();
+			}
+	}
+}
+
+===========================
+Branching Statements
+=============================
+
+break  ====> It is used to come out from switch case and from loops 
+
+continue ====> It is used to skip one iteration in the loop execution then continue
+
+return ====> To come out from the method
+
+
+class Break {
+
+	public static void main(String... args){
+
+			for (int i = 1; i<= 10; i++ ){
+					if (i >= 5 ){
+						break;
+					}
+					System.out.println(i);
+			}
+	}
+}
+
+
+class Continue {
+
+	public static void main(String... args){
+
+			for (int i = 1; i<= 10; i++ ){
+				if(i == 6 ) {
+					continue;
+				}
+				System.out.println(i);
+			}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+=======================================
+Chapter-2 : Operators & Control Statements
+=======================================
+
+Operators : To perform some operations
+		- Arithematic Operators
+		- Relational Operators
+		- Logical Operators
+		- Ternary Operator
+		- Assignment Operator
+		- New Operator
+		- Dot operator
+
+Conditional Statements : Execute the code only once based on condition
+		- simple if
+		- if - else
+		- if - else if - else ladder
+		- switch case
+
+Loops Concept : Execute the code repeatedly based on condition / range 
+		- while loop
+		- do-while loop
+		- for loop
+		- for each ( Arrays & Collections )
+
+Transfer / Branching Statements : To come out from loop, to skip loop iteration, to come out from method
+		- break
+		- continue
+		- return (used to return some value from the method)
+
+
+================================================
+Chapter-2 :: Logical Programs
+================================================
+
+
+Q-1) Write a java program to read shoes brand name from keyboard, based on brand name print brand slogan like below
+
+Nike -> Just do it
+
+Adidas -> Impossible is nothing
+
+Puma -> Forever Faster
+
+Reebok -> I Am What I Am
+
+==============================================================================
+
+import java.io.*;
+
+class Shoes {
+
+    public static void main(String... args) throws Exception {
+		
+			InputStreamReader isr = new InputStreamReader (System.in);
+			BufferedReader br = new BufferedReader ( isr );
+			System.out.println ("Enter Brand Name");
+			String brand = br.readLine ( );
+
+			switch ( brand ) {	
+	
+				case "Nike" : System.out.println("Just do it");  	 break;
+
+				case "Adidas" : System.out.println("Impossible is nothing");  break;
+
+				case "Puma" : System.out.println("Forever Faster");  break;
+
+				case "Reebok" :  System.out.println("I Am What I Am"); 	break;
+
+				default : System.out.println("Brand Not Found");
+			}
+    }
+}
+==========================================================================================
+Q-2) Write a java program to read person basic salary and calculate Provident Fund amount from the basic salary
+
+Formula : Provident Fund is 12 % of Basic Salary
+==========================================================================================
+import java.io.*;
+
+class EmpPf {
+
+	public static void main(String... args) throws Exception {
+
+			InputStreamReader isr = new InputStreamReader( System.in );
+			BufferedReader br = new BufferedReader (isr);
+			
+			System.out.println("Enter Basic Salary");
+			String str = br.readLine ( );
+
+			double basicSalary = Double.parseDouble ( str );
+
+			double pf = basicSalary * 12 / 100;
+
+			System.out.println(pf);			
+	}
+}
+==========================================================================================
+Q-3) Write a java program to read person age and person salary and print his eligibility for marriage
+
+Condtion : If person age lessthan 30 and salary greater than 1 lakh then eligible for marriage
+==========================================================================================
+import java.io.*;
+
+class Marriage {
+
+    public static void main (String... args) throws Exception {
+		
+		InputStreamReader isr = new InputStreamReader( System.in );
+		BufferedReader br = new BufferedReader(isr);
+
+		System.out.println("Enter Your Age");
+		String str1 = br.readLine ( );
+		int age = Integer.parseInt ( str1 );
+
+		System.out.println("Enter Your Salary");
+		String str2 = br.readLine ( );
+		double salary = Double.parseDouble(str2);
+
+		if ( age < 30 && salary > 100000 ) {
+				System.out.println("You are eligible for marriage");
+		} else {
+				System.out.println("You are not eligible for marriage");
+		}
+   }
+}
+==========================================================================================
+Q-5) Write a java program to print Right Triangle Star Pattern*
+
+*
+* *
+* * *
+* * * *
+* * * * *
+==========================================================================================
+
+class RightTriangle {
+
+
+		public static void main(String... args) {
+
+				for( int i = 1; i<=5 ; i ++ ){
+					
+					for( int j = 1; j<=i ; j++ ){
+							System.out.print ("* ");
+					}
+
+					System.out.println();
+				}
+		}
+}
+
+==========================================================================================
+
+Q-6) Write a java program to print left traingle start pattern*
+
+          * 
+        * * 
+      * * * 
+    * * * * 
+  * * * * * 
+
+==========================================================================================
+class LeftTriangle {
+
+
+		public static void main(String... args) {
+
+				for( int i = 1; i<=5 ; i ++ ){
+				
+					for ( int k = 5-i ; k >= 1 ; k-- ){
+						System.out.print(" ");
+					}					
+					
+					for( int j = 1; j<=i ; j++ ){
+							System.out.print ("*");
+					}
+
+					System.out.println();
+				}
+		}
+}
+==========================================================================================
+Q-7) Write a java program to print Pyramid pattern
+
+    * 
+   * * 
+  * * * 
+ * * * * 
+* * * * *
+==========================================================================================
+class Pyramid {
+
+		public static void main(String... args) {
+
+				for( int i = 1; i<=5 ; i ++ ){
+				
+					for ( int k = 5-i ; k >= 1 ; k-- ){
+						System.out.print(" ");
+					}					
+					
+					for( int j = 1; j<=i ; j++ ){
+							System.out.print ("* ");
+					}
+
+					System.out.println();
+				}
+		}
+}
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
