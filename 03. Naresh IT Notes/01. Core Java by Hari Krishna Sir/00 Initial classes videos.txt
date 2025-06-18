@@ -1,0 +1,26 @@
+Day-1: https://youtu.be/-_iERBkmRv0 (Demo-1)
+Day-2: https://youtu.be/hKPnrVgbIJg  (Demo-2)
+Day-3: https://youtu.be/fj-w4UDmrP4 (Demo-3)
+
+Day-4: https://youtu.be/psFy6D7SFvU (class-1 Java History)
+Day-5: https://youtu.be/TDqudH2BzKY (class-2 Java Features)
+           https://youtu.be/I_s27d1GWz0 (class-3 Java Features part1)
+           https://youtu.be/CphAzi1BJMg (class-4 Java Features part2)
+           https://youtu.be/8_WEJhKVJ1g (class-5 Java Features part3)
+Day-6: https://youtu.be/wcOZNkHOpPw (class-6 end of Java history)
+
+Day-7: https://youtu.be/w5hRKOO3YMw (class-7 Java Editions)
+
+Day-8: https://youtu.be/NJ2YmjWtmsE (class-8 Introduction to CoreJava)
+Day-9: https://youtu.be/tpLNZHpfZaE (class-9 C PD, Java PI, important facts)
+Day-10: https://youtu.be/p8k4Hmhs5Jo (class-10 Diff JDK, JRE, JVM, JIT, Version history)
+
+Day-11: https://youtu.be/y8nKDpATsRE (class-11 Installing JDK, Diff b/w 8 and 9v, env vars)
+Day-12: https://youtu.be/UyFT11J8A3w	(class-12 Temporary Setting JAVA_HOME, path, classpath)
+Day-13: https://youtu.be/pxqggdxzV_w	(class-13 Permanent Setting JAVA_HOME, path, classpath)
+
+Day 14: https://youtu.be/Y4mp07IEhZs	(class-14 Programming elements and essential statements)
+Day 15: https://youtu.be/McIzYAsHChs (class-15 Steps to develop first program, HKProgrammingWorld) 
+Day 16: https://youtu.be/ods-uIZ2MpQ (class 16 Solving CE and RE by ourself)
+Day 17: https://youtu.be/8HqT-J_rxPc (class 17 Compiler, JVM, javap interview questions)
+Day 18: https://youtu.be/IVBfn4pzMv4 (class 18 classpath interview questions)

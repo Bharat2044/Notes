@@ -1,0 +1,22 @@
+//Q) How many ways we can develop custom comparator?
+//Q) What are different ways we provide implementation to comparator interface?
+	/*
+	 * We can provide implementation to Comparator interface in 4 ways
+	 *		1) by using explicit outer class
+	 *      2) by using Anonymous inner class
+	 *      3) by using Lambda expression
+	 *      4) by using Method reference
+	 */ 
+
+Case #1: Develop custom comparator to store B class objects 
+			in ASC order based on property Y value by using explicit outer class approach
+
+Case #2: Develop custom comparator to store B class objects 
+			in Descending order based on property Y value by using Anonymous inner class
+
+Case #2: Develop custom comparator to store B class objects 
+			in Ascending order based on property Y value by using LE
+
+
+
+	 

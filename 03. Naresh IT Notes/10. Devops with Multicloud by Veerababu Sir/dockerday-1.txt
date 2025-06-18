@@ -1,0 +1,204 @@
+    ===============================================================================================================
+
+                                                 ######   DOCKER  ###########
+    ========================================================================================================
+
+
+MONOLITHIC: Deploying monolithic applications is more straightforward than deploying microservices. Developers install the entire application code base and dependencies in a single environment.
+
+MICRO SERVICES: Microservices are deployed using VM or Containers. Containers are the preferred deployment route for microservices as containers are lighter, portable, and modular. The microservice code is packaged into a container image and deployed as a container service.
+multiple services are deployed on multiple servers with multiple databases.
+
+note: if number of application are more will go with microservices concept (docker and kubernetes)
+
+BASED ON USERS AND APP COMPLEXITY WE NEED TO SELECT THE ARCHITECTURE.
+
+FACTORS AFFECTIONG FOR USING MICRO SERVICES:
+FLEXIBLE
+COST 
+MAINTAINANCE
+EASY CONTROL
+
+
+
+
+## ----- Docker overview ----------##
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker's methodologies for shipping, testing, and deploying code, you can significantly reduce the delay between writing code and running it in production.
+
+
+DOCKER IMAGE:
+Docker images are read-only templates that contain instructions for creating a container. A Docker image is a snapshot or blueprint of the libraries and dependencies required inside a container for an application to run
+
+CONTAINERS:
+A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime
+its same as a server/vm.
+operating system independent
+ (Ec2 server=AMI, CONTAINER=IMAGE)
+os will be managed in image 
+
+
+
+-----docker install process -------
+
+
+     ----root------
+
+sudo yum install docker -y # If linux 20203
+
+sudo systemctl start docker
+sudo systemctl status docker
+
+Note : By default Docker works with the root user and other users can only access to Docker with sudo commands. However, we can bypass the sudo commands by creating a new group with the name docker and add ec2_user.
+
+#First let’s create the docker group
+
+if you install on ec2-user 
+
+sudo groupadd docker (optional if group is not created)
+
+#Now let’s add ec2-user to docker group
+
+sudo usermod -a -G docker ec2-user
+
+#In order to enable the changes, run the following command
+
+newgrp docker 
+
+sudo chmod 666 /var/run/docker.sock  # to give access docker demon to run docker server 
+
+docker --version to check docker version
+
+#If you want to see an extended version of the version details, such as the API version, Go version, and Engine Version, use the version command without dashes. give below command
+
+docker version 
+
+
+# ----commands:---- #
+
+---to pull base images from public docker repository
+
+docker pull image <imagename>
+
+docker pull nginx or ubuntu
+
+
+docker inspect image nginx  ### to check images details
+
+docker images # to check list of images 
+
+docker run -it imagename /bin/bash  --will enter into the container interact terminal 
+
+docker run -dt imagename -we are not enter into the container detach terminal
+
+docker run -dt --name <name> <imagename> 
+ (to give csutome name --name)
+
+
+docker ps ## to check running containers 
+
+docker ps -a  ## to check both running and stopped containers 
+
+docker ps -a | grep 'Exited' #to check only stopped container 
+
+
+
+Condition-1----- running container login
+
+## To login container ##
+docker exec -it <continername or continerid> /bin/bash # to login running container
+
+1.if you want to come out from container without stop give "ctrl p+q" or exit (container already running while login time so no impact)
+
+condition-2-------create container from image and login 
+
+## To login container ##
+docker run -it <imagename> /bin/bash # to create container from image and also interactive (login mode)
+
+1.if you want to come out from container without stop give "ctrl p+q"
+
+2.if you give "exit"  container also will stop
+
+Condition-3-------run container detach mode 
+
+docker run -dt <imagename>  (detach mode not going to be interacted with container)
+
+After if we want login "docker exec -it <continername or continerid> /bin/bash"
+
+
+ps -ef   --to know how many processors running if it is in vm many process we can see but it is in container onle few becuase its light weight 
+
+ps -ef | wc -l #to know number of processors request running backend
+
+
+
+
+
+
+#### how to start container#####
+
+docker start <containerid>
+          or
+docker start <container name>
+
+#### how to stop container#####
+docker stop <containerid> 
+           or
+docker stop <container name>
+
+## docker kill comeplete terminated 
+docker kill <containername>
+
+docker pause cont_name	: to pause container
+docker unpause cont_name: to unpause container
+docker inspect cont_name: to get complete info of a container
+docker logs <containerid>: to check the logs
+
+
+
+## danger commands##
+
+#### deleting process ######
+## Images -----
+
+docker rmi <imagename> ##to delete image if image is not tagging to any container weather it is running or stopped 
+
+docker rmi <imageID> -f #forcrfully delete image even respective container weather it is running or stopped
+
+docker system prune -a to remove all images (if images are tag to stopped containers)
+
+
+ ## container ------
+docker rm <containername or containerid> ### to remover stopped container
+
+docker rm -f <container id> delete running and stopped container
+
+docker container prune -- delete all stopped containers 
+
+docker rm -f $(docker ps -aq) ---delete all running containers 
+
+
+
+
+
+
+
+# --Enabeling port-- #
+
+docker run -p <HOST_PORT>:<CONTAINER:PORT> IMAGE_NAME  
+
+docker run -dt -p 3000:3000 --name project-2 ubuntu  #along port expose
+
+===================================================================================
+
+-------- pull jenkins----------
+
+docker pull jenkins/jenkins
+
+docker run -dt -p <local host port>:<container run port> --name <name of the container> <name of the image>
+
+docker run -dt -p 8081:8080 --name jenkins container jenkins/jenkin
+
+access the jenkins with public ip and port number (8081)
+
+
+============================================================

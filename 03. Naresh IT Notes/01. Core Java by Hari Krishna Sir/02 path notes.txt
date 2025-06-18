@@ -1,0 +1,193 @@
+Installing JDK software:
+=================
+	1) Go to google.com -> search JDK 14 download -> click second link
+	2) Click JDK download
+	3) Click Windows JDK.exe
+	4) Double click the downloded exe file
+	5) Click Next 
+	6) Click Change button -> remove "\program files\Java"
+		and make installation path as "C:\jdk-14.0.2"
+	7) Click Next -> Close/Finish
+*** jdk-14 is installed in C:\jdk-14.0.2 folder
+*** this jdk-14.0.2 is called JAVA_HOME
+
+Different types of files exist in a software
+==============================
+When we install any software we will get two types of files
+	1) binary files
+	2) library files
+
+	- binaray file is a command file using which we can run the current software 
+		and also we can run other programs by using this software.
+	
+	- library file is a program file it contains logic to perform one operation
+		and by using it we can develop our own programms. 
+
+	- The library files are also called as API(Application Programming Interface)
+
+	- by default binary files are stored in "bin" folder
+	- by default library files are stored in "lib" folder
+
+Some times we need to access and run a software binary and library files 
+	from outside of this software installed directory from other folders from command prompt
+
+Ofcourse we can not access them by default, because command prompt software does not know 
+the path where those binary and library files are available in this system
+
+We must tell to OS/cmd prompt the path of binary and library files.
+
+For this purpose we must create some variables inside OS
+for finding a software installed directory, its binary and library files
+those variables are technically called environment variables.
+
+About environment variables
+====================
+	A variable that is created inside OS for finding 
+	a Software installed directory, its binary and library files is called env variable.
+
+For Java software we have four env variables
+	
+	1) JAVA_HOME
+	2) path
+	3) classpath
+	4) module-path
+
+	- JAVA_HOME is used for finding JDK software installed directory
+	- path is used for finding ANY software binary files 
+	- classpath is used for find library files of JDK software, our project and Java related other sofwares classes
+	- module-path is used for finding modules of JDK software, our project and Java related other sofwares modules
+
+Note: 
+1) JAVA_HOME, classpath and module-path are specific to Java software
+	where as path is common to all softwares we are installing in the system, including OS
+
+Who does use above environment variables?
+===============================
+- JAVA_HOME is set by programmer and it is used by server software (ex: tomcat)
+- *** path is set by programmer and it is used by command prompt software for finding javac and java tools ***
+- classpath and module-path are used by compiler and JVM for finding the classes and modules
+	those available in other directories
+
+Which environment variable is mandatory to set?
+=================================
+- As of now we must set path variable, it is mandatory
+	because we need to access "javac and java" commands from our project directory
+
+- We not need to set JAVA_HOME, classpath and module-path, they are optional.
+
+
+Diff ways of Setting env variables
+========================
+We can set env variables in two ways
+	1) temporarily	(at command promopt window)
+	2) permanently (in system environment variables window)
+
+	Temporary settings
+	==============
+	  1) Open cmd widow
+	  2) run below command
+
+		>set path=C:\jdk-14.0.1\bin;-------;--------;-------;%path%
+				(Donot show your typing talent, Copy and Paste path values )
+			
+			Commands we use in setting env var temporarity
+				1) set			-> creating and updating env variable
+				2) ;				-> separating one software path to another s/w path
+				3) %evn var%		-> for retrieving existing value of this env var
+				4) echo %evn var%	-> for printing this env variable value
+
+		The "set command" based setup is called temporary, because those setups are available
+		only for this command prompt window. Once this command prompt window is closed
+		all setups are lost. we must do same setups repeateadly every time when new cmd window opened
+
+		Solution: permanent setup
+
+	Permanent setups:
+	=============
+		1) Copy the JDK software "bin" folder path
+		2) Right Click on "This PC"
+		3) Click "Properties"
+		4) Click "Advanced System Settings"
+		5) Click "Envinorment Variables"
+		6) In System Variables section
+			1) Dobule click "path"
+
+		In windows XP, 7, 8
+			2) Press "Home" key on keyboard
+			3) Paste the path you copied  (ctrl+v)
+			4) Enter ";"
+			5) Click "Ok" -> "OK"
+			6) Close all windows
+
+		In windows 10
+			2) Click "New" button
+			3) Paste the path you copied  (ctrl+v)
+			4) Click "Move Up" and bring "Java path" as first path
+			5) Click "Ok"
+			6) Close all windows
+
+		Rule: JDK path must be always first in path variable value
+ 		because other software(ex: Oracle) also contains inbuild JDK
+		If we place our JDK path at end in path variable value,
+			our JDK will not be used in compiling and executing our class.
+
+OS searching algorithm for finding binary files
+================================
+	CWD --> if not available -> Path variable -> First Come First Load (FCFL)  (Left -->Right Seaching in path variable)
+
+	Q1) In one computer how many JDK softwares can we install?
+		Mulitiple JDK of diff versions
+
+	Q2) If we install mulitple diff versions of JDK from which version JDK javac and java will run?
+		CWD or First placed JDK in path variable
+			(Current Working Directory)
+
+	Q3) How can we run Java program with different versions?
+		- set one JDK path in permanent path, which you want to use always
+		- set another JDK path in temporary setting in cmd window which you use for one time
+
+	Q4) If  there are two JDK paths are stored in path variable, which JDK will used?
+		- First placed JDK	
+	
+	Q5) In path variable, I have placed jdk-14 version path, 
+		and in cmd window, I have changed path (CWD) to jdk1.7,
+			then which version javac will be used?
+		- 1.7 vesion will be used (first priority to CWD)
+
+	Q6) Can we set mulitple JDKs in Permanent Path?
+		- Yes, but no use, because it follows FCFE
+		- If we palce mutiple JDKs in PP no problem
+			but only first placed JDK is used.
+
+	Q7) We never to set path for game software to run,
+		why do we need to set path for JDK to run?
+		- We no need to set path for game software, 
+			because we do not run game software binary files from cmd window
+
+		- We must set path for JDK,
+			because we need to run javac and java from cmd window from our 
+			project directory
+		
+	Q8) Summary: When, we must set path for any software?
+		- if we need to access any software binary files 
+			from cmd prompt window from outside of software installed directory
+			 we must set path.
+
+		- If we no need to access a sotfware binary files from cmd window
+			from other directories, we no need to set path
+
+	Q9) Can we run javac and java like game software?
+		- not possible because they are not GUI based programs
+		- they are CUI based programs, they must be executed only from cmd promt window
+			- GUI means Graphical User Interface, a separate window will open 
+			- CUI means Console User Interface, a separate window will not there
+				to run it needs console to run means cmd window
+	
+	Q10) If we develop programs by using IDEs (Eclipse, MyEclipse, Netbeans, intelliJ, JBuilder, etc...)
+		do we need to set path, classpath?
+			- No, not require
+			- IDE will take care of all required setup
+
+			IDE -> Integraged Development Environment
+			It is editor software, which has advanced features
+				for fast development

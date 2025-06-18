@@ -1,0 +1,154 @@
+1.create two pubic "ubuntu" servers in project-vpc    one is for frontend and another one is for backend
+2 create rds database in project-vpc
+3 copy the rds end point
+4.create route 53 private hosted zone with project vpc name is "rds.com"
+5. create record  sub domain is book,, select cnamerecord type ,,,, in the value paste your rds end point ,, then create record
+6. connect to front end server
+
+
+---------------------------------- FrontEnd---------------------------------------
+
+-------Step-1-------install dependencies ------
+ create shell script file "ex:vi test.sh"
+ paste below commands
+
+
+#!/bin/bash
+
+sudo apt update -y
+
+sudo apt install apache2 -y
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs -y
+
+sudo apt update -y
+
+sudo npm install -g corepack -y     
+
+(#Core modules are built-in libraries that come with the Node.js runtime. They provide essential functionality for various tasks like file handling, HTTP requests, working with stream)
+
+corepack enable
+
+corepack prepare yarn@stable --activate 
+
+
+#Yarn is a package manager for JavaScript projects, similar to npm (Node Package Manager). It helps developers manage dependencies (libraries and packages) required for their projects. Yarn ensures fast, reliable, and secure dependency management, making it popular among developers.
+
+Why Use Yarn?
+Speed: Yarn is optimized for faster dependency installation.
+Reliability: Consistent behavior across machines with yarn.lock.
+
+
+sudo npm install -g pm2
+
+
+What is PM2?
+PM2 (Process Manager 2) is a production-grade process manager for Node.js applications. It helps developers run, monitor, and manage Node.js applications effectively. PM2 is widely used for handling application lifecycle management in production environments, ensuring that your applications stay online, perform well, and recover automatically from crashes.
+
+
+
+-- step-2-----------Modifying config.js
+then clone your git repo 
+   git clone https://github.com/CloudTechDevOps/2nd10WeeksofCloudOps-main.git
+   
+  checkout client cd client 
+
+11. edit the config.js
+
+vi client/src/pages/config.js
+  
+const API_BASE_URL = "http://api.narni.co.in";
+ 
+in above line change to your backend publicip
+const API_BASE_URL = "http://publicip";
+ex;const API_BASE_URL = "http://32.68.98.10";
+
+
+------------------------------------------- step-3 ----------- Run 
+12. then go to client directory 
+13.run below commands
+
+****(Use npm run build:
+When preparing the app for deployment (e.g., to a server or hosting service like AWS, Netlify, or Vercel).
+Use npm start:
+During development or to start the app in production (for backend apps).)*****
+
+npm install 
+npm run build
+sudo cp -r build/* /var/www/html
+
+your frontend part is completed 
+
+
+
+
+
+-----------------then connect to backend server---------------------------
+
+
+
+----------------- step-1-------
+1.create shell script file "ex:vi test.sh"
+1.paste below commands
+
+#!/bin/bash
+
+sudo apt update -y
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs -y
+
+sudo apt update -y
+
+sudo npm install -g corepack -y
+
+corepack enable
+
+corepack prepare yarn@stable --activate 
+
+sudo npm install -g pm2
+
+
+--------------- step-2-------
+
+3.then clone your git repo 
+   git clone https://github.com/CloudTechDevOps/2nd10WeeksofCloudOps-main.git
+   cd backend 
+4 edit the .env file in bellow path if u dont have any .env file just create in below path
+
+2nd10WeeksofCloudOps-main.git/backend/.env
+
+### add this mater
+DB_HOST=book.rds.com
+DB_USERNAME=admin	#cahnge to nyour rds user name 
+DB_PASSWORD="veera"   # change to your rds password
+PORT=3306
+
+
+
+----------- step-3---------
+ then run below command in backend directory
+  
+npm install
+npm install dotenv
+
+sudo pm2 start index.js --name "backendApi"
+
+
+-----------------step-4--------------------------
+
+
+22. install MySQL in backend server
+
+sudo apt install mysql-server -y
+
+
+
+
+23 in the backend directory use below command to initialize the database 
+
+mysql -h book.rds.com -u admin -p<password> < test.sql
+
+27. now hit your frontend server public ip you will get response 
+28. add the books 

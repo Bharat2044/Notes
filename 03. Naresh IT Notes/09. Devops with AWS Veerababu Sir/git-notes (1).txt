@@ -1,0 +1,371 @@
+--------------------git--------------------------------
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+*****Installation for Git in your local laptop :
+ URL- https://git-scm.com/downloads   #it support os like Windows,Linux,Mac.
+
+yum install git -y # for linux 
+
+After completed of installation go to cmd promt check : git --version 
+
+
+git init -----to intilaise git process 
+
+-----introduce yourself to Git-------------- 
+------all commands start with git only-----------------
+
+---------------------Git commands---------------------
+----------------### Tell Git who you are----------------------------
+git config --global user.name --- to check configured name 
+git config --global user.email --- to check configured email
+git config --global user.name "veer"
+git config --global user.email "cloud87777@gmail.com"
+
+--------------------git workflow------------
+
+git add -----to add file into staging area from local working directory
+git status ----to see the status of the file where it is 
+git commit -m "comment"
+
+
+---------------------#git changes#-----------
+-------------------------------------------------
+
+git diff ------ compare changes local directory to staging area
+git diff --staged --comapare chnages staging to local repo
+git diff head ----comapare changes local directory to local repo
+
+git diff commit id to commit id -----compare chnages in to two commits
+
+
+
+
+
+
+---------------------------------------------------------------------------------
+                  # Revert changes on git #
+-------------------------------------------------------------------------------
+# Revert changes from working directory #
+
+   git restore <file_name> 
+          or
+   git checkout -- <file_name>     like undo command
+
+
+# Revert changes from Staging Area #
+
+   git restore --staged <file_name>  #to revert changes from Staging area to working directory  
+  
+
+# Revert changes from Local Repository #
+ 
+   git reset HEAD~1         # to revert changes from local repo to working directory 
+   
+
+#if The git reset HEAD~2 command moves the current branch backward by two commits
+   
+Note: if you can give git status or any git commit command everything clear no untracked file no staging files 
+
+                                                          
+Git reset we have three modes (optional)
+
+Mixed—its is default mode discard the commits both local repo and staging area 
+Git reset --mixed commit id   
+
+
+Soft -- discard the commits in local repo only file will be available both staging and working directory
+Git reset --soft commit id   
+
+Hard : discard the commits in local repo , staging and working directory aswell
+Git reset --hard commit id   
+
+ 
+
+-------------------------GITHUB------------------------------
+ GitHub is one of the most popular resources for developers to share code and work on projects together. It’s free, easy to use, and has become central in the movement toward open-source software.
+
+
+git clone ---- to clone entire repository in first time 
+
+git pull ------to pull the updates and chnages from repository
+
+git push ------to push the local updates into remote repo
+
+
+
+
+-----git push-----
+
+# push the changes by using SSH #
+
+### To generate SSH Key
+
+ssh-keygen (give this command into your terminal)
+
+copy the publickey id_rsa.pub
+
+paste into github ssh keys 
+
+settings-->ssh and GPG keys--> Add new ssh key and give any name and paste it your publickey over there 
+
+
+
+
+
+## git local to remote sync (how to add that locally created folder into git hub)
+after creating repos locally and remote we have to give following commands 
+git remote set-url origin git@github.com:User/UserRepo.git
+now it will sync we can start pull push commands
+
+-----------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------
+# push the chnages by using GitHUb Token #
+
+###To generate Token 
+
+settings-->Developer settings-->personal access token -->Token classic --> generate token
+
+
+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
+
+# Example:
+
+git remote set-url origin https://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@github.com:/user/repository.git
+
+git push https://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@github.com:/user/repository.git
+
+git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
+
+
+
+git remote set-url origin https://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@github.com:/CloudTechDevOps/local.git
+
+
+
+
+ 
+
+
+Mapping local repo to remote repository without cloning 
+
+…####### create a new repository on the command line############
+touch file1, file2, file3 
+git init
+git add .
+git commit -m "first commit"
+git remote add <username> <ssh url of repo>
+ex:
+git remote add  CloudTechDevOps git@github.com:CloudTechDevOps/different.git
+
+git remote -v (optional) if we get an error: remote origin already exists.
+git remote remove origin  remove existing origin map and add git remote 
+git branch command ton check which branch you are in.
+git branch -M main    #by default locally created directories updated with master branch but if the remote is main branch we need to rename the branch or create new branch local or create same branch in remote finally we need to map local and remote same branch 
+(or) create same branch in remote "git push --set-upstream <CloudTechDevOps(username)> master"
+git push -u origin main
+
+
+ ----- # GIT Fork #-----
+
+Forking a repository means creating a copy of the repo. When you fork a repo, you create your own copy of the repo on your GitHub account. When several developers want to work on a project but need to make changes that are inappropriate for the original repository, forking is frequently used
+
+----  # Git ignore # ---------
+
+Git Ignore
+When sharing your code with others, there are often files or parts of your project, you do not want to share.
+
+Examples
+
+log files
+temporary files
+hidden files
+personal files
+etc.
+Git can specify which files or parts of your project should be ignored by Git using a .gitignore file.
+
+Git will not track files and folders specified in .gitignore. However, the .gitignore file itself IS tracked by Git.
+
+Create .gitignore
+To create a .gitignore file, go to the root of your local Git, and create it:
+
+Example
+touch .gitignore
+Now open the file using a text editor.
+
+We are just going to add two simple rules:
+
+Ignore any files with the .log extension
+Ignore everything in any directory named temp
+Example
+# ignore ALL .log files
+*.log
+
+# ignore ALL files in ANY directory named temp
+temp/
+Now all .log files and anything in temp folders will be ignored by Git.
+
+
+----------------------------------- # Git Branching #-------------------------------
+
+
+BRANCHES:
+It's an individual process of development for code.
+we create individual branch in real-time to do test and developed.
+each developer will work on their own branch.
+At the end we will merge all branches into actual branch.
+Default branch is Master.
+
+git branch		        : to list the branches
+git branch dev	                : to create a new branch
+git checkout dev	        : to switch from one branch to another.
+git checkout -b dev             : to create and switch from one branch to another.
+git branch -m oldname newname	: to rename a branch
+git branch -D dev	        : to delete a branch
+
+
+
+
+
+-----GIT Merge------
+
+What is Git Merge?
+Git marge will help to combine the changes from two or more branches into a single branch. Developers will work on different branches to improve code or to develop the code after completion we can merge them into a single version of the code.
+
+
+-----## "Practical"----
+
+Clone the sample repository from git hub remote --main branch (git clone <repo url>)
+
+Create branch (dev) from branch (main) --- (git branch dev)
+
+checkout to dev ---(git checkout dev)
+
+Now We can observe all main branch files in dev branch also
+
+We can do few changes in dev branch and push to dev git hub remote branch( git add . , git commit -m "message" git push)
+
+(note :after push we can see the pull request raised from dev msg in git hub console)
+
+we can assign and merge manually )
+
+---or git command process ---
+
+now switch to main branch (git checkout main)
+
+git merge dev (merge the changes into main from dev)
+
+and push to remote repository (GitHub)
+
+now we can see the changes reflected into main branch also because of merging into main from dev
+
+
+
+
+------------------ # Issues in git # ------------------------------
+# unable to push ?
+
+----if two developers are working with same repository 
+
+This error occurs when you attempt to push your local changes to the remote repo without updating your local repo with new changes made to the remote repo.
+
+your push request will fails when the difference will come local to remote commit id's 
+
+so first pull updates changes into local and then push it 
+
+case-1 --
+## git pull ##
+git pull origin <branch name> if multiple branches are there in remote 
+
+git pull ---if only one branch is there 
+
+after that merge the changes into local and push your changes in to remote 
+
+case --2
+
+## git fetch and merge ##
+use git fetch and then git merge also will work
+
+git fetch origin <branch name>  ---if multi branches are there
+
+git fetch   ----if you are in same branch single
+
+case --3 
+
+git pull --rebase (if single branch is there)
+
+git pull origin <branch name> --rebase (if multi branches are there )
+
+
+
+----## Diff between git pull vs git pull --rebase ## ----
+
+git pull :
+
+git pull fetches the latest changes of the current branch from a remote and applies those changes to your local copy of the branch. Generally this is done by merging, i.e. the local changes are merged into the remote changes. So git pull is similar to git fetch & git merge.
+
+git pull --rebase :
+
+You can pull using rebase instead of merge. The local changes you made will be rebased on top of the remote changes, instead of being merged with the remote changes.
+
+ so here local changes will be added on top of remote changes without merging extra commit looks like linear changes 
+
+
+--------------- # git cherry pick #------------------------
+
+if we want merge specific commit into upstream branch (like main ) cherry pick will help us 
+
+git cherry-pic <committed>
+
+  
+#How To Resolve Merge Conflicts?  ---(-conflicts raises due to in same branch while push time and  different branches while merging time )
+
+Trying to update different data int o same file git conflicts occurred 
+
+While merging the two branches if changes are made to two different branches then git will not merge automatically it prompts the user to resolve the merge conflicts manually. Below are the steps to resolve the merge conflicts in git: 
+
+Step 1: Identify the conflict files.
+
+Git will automatically display a message by indicating the file to be resolved from merge conflicts. You have to resolve the conflicts manually.
+
+Step 2: Open the conflict files.
+
+Open the merge conflict files by using editors whatever you are convenient with like (IDE). After opening we can conflict markers as shown below it will indicate where the conflicts are located.
+
+Conflict markers
+
+(<<<<<<<, =======, and >>>>>>>) 
+Step 3: Resolve the conflicts.
+
+Remove the unnecessary changes after examining them carefully and keep the changes that are more important.
+
+Step 4: Moving to the staging.
+
+Use the git add command to add the updated files to the staging area after the conflicts have been resolved.
+
+Step 5: Commit and Push the changes
+
+After resolving conflicts commit the changes by using the below command. Including the message which gives information about changes made while resolving the conflicts.
+
+git commit -m "message"
+Push the changes made to the remote repository by using. Below command.
+
+git push 
+Where other developers can access the code. And perform any changes that are required.
+
+After resolving the conflicts, it is crucial to carefully analyze and test the merged code to make sure that the modifications are functioning as intended and that no new problems have been introduced. These procedures can help developers resolve merge disputes in Git and maintain a dependable and stable codebase.
+  
+
+                 --------------------- Thank You --------------------
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,188 @@
+================================Terraform with Jenkins ============================================
+           ====== multi stage==============
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CloudTechDevOps/Terraform_CICD.git'
+            }
+        }
+        stage('terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('terraform plan') {
+            steps {
+              sh 'terraform plan'
+            }
+        }
+        stage('terraform apply') {
+            steps {
+                sh 'terraform destroy -auto-approve'
+            }
+        }
+    }
+}
+
+
+
+======================== single stage ==================================
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CloudTechDevOps/Terraform_CICD.git'
+            }
+        }
+        stage('terraform process') {
+            steps {
+                sh 'terraform init'
+                sh 'terraform plan'
+                sh 'terraform destroy -auto-approve'
+
+            }
+        }
+       
+    }
+}
+
+========================================================================
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CloudTechDevOps/Terraform_CICD.git'
+            }
+        }
+        stage('terraform process') {
+            steps {
+                sh '''
+                   terraform init
+                   terraform plan
+                   terraform destroy -auto-approve
+                   '''
+
+            }
+        }
+       
+    }
+}
+
+
+==============================build with choice parameter ================================
+here action = apply, destroy 
+
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CloudTechDevOps/Terraform_CICD.git'
+            }
+        }
+        stage('terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('terraform plan') {
+            steps {
+              sh 'terraform plan'
+            }
+        }
+        stage('terraform apply') {
+            steps {
+                sh 'terraform ${action} -auto-approve'
+            }
+        }
+    }
+}
+
+
+=================================== calling specific directory from repo ===============================
+
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/CloudTechDevOps/terraform-0900am.git'
+            }
+        }
+        stage('terraform init') {
+            
+            steps {
+                dir('Day-2-basic-code-tfvars') {
+                sh 'terraform init'
+            }
+        }
+        }
+        stage('terraform plan') {
+            steps {
+              dir('Day-2-basic-code-tfvars') {
+              sh 'terraform plan'
+            }
+        }
+        }
+        stage('terraform apply') {
+            steps {
+                dir('Day-2-basic-code-tfvars') {
+                sh 'terraform ${action} -auto-approve'
+            }
+        }
+    }
+    }
+}
+
+
+
+================================ scripted pipeline ============================
+                             --- specific directory calling from repo -------------
+
+node {
+    
+    stage('git checkout') {
+         git branch: 'main', url: 'https://github.com/CloudTechDevOps/terraform-0900am.git'
+        
+    }
+    stage('terraform init') {
+        dir('Day-2-basic-code-tfvars') {
+        sh 'terraform init'
+     
+    }
+    }
+    stage('terraform plan') {
+        dir('Day-2-basic-code-tfvars') {
+        sh 'terraform plan'
+     
+    }
+    }
+    stage('terraform plan') {
+        dir('Day-2-basic-code-tfvars') {
+        sh 'terraform ${action} -auto-approve'
+     
+    }
+    }
+}
+
+
+
+

@@ -1,0 +1,61 @@
+
+
+Java students :
+
+AWS EC2-----
+
+Integrated EC2 with Application Load Balancer (ALB) to distribute traffic for Spring Boot-based applications.
+Automated ASG policies using Java & AWS SDK, adjusting instance count based on CloudWatch metrics.
+Deployed and managed Spring Boot & Microservices applications on AWS EC2 instances using auto-scaling and load balancing.
+Developed and deployed containerized Java applications using Docker on EC2 instances with Amazon ECS.
+Built a Java-based server monitoring tool that collects EC2 metrics (CPU, Memory, Disk) and sends alerts to Slack via AWS SNS.
+Configured Java web applications (Spring Boot, Jakarta EE, Quarkus) with Nginx & Tomcat on EC2 for high-performance deployment.
+Integrated AWS S3 & RDS with EC2 for data storage and application persistence using Java AWS SDK.
+Automated log rotation & log analysis for Spring Boot applications running on EC2 instances using Log4j/Splunk/CloudWatch Logs.
+
+AWS Load balancer:---
+
+Configured Application Load Balancer (ALB) to distribute traffic to Spring Boot & Java EE applications running on EC2 instances.
+Implemented AWS Network Load Balancer (NLB) for handling high-throughput, low-latency applications built with Java.
+Configured SSL/TLS certificates using AWS Certificate Manager (ACM) to secure Spring Boot REST APIs.
+Set up ALB with auto-scaling groups, ensuring high availability and fault tolerance for Java-based microservices.
+Implemented path-based routing in ALB to direct requests to specific Spring Boot microservices (e.g., /api for backend, /auth for authentication).
+Integrated AWS ALB/NLB with ECS Fargate, deploying containerized Java applications securely.
+Optimized Java-based applications behind ALB/NLB, leveraging sticky sessions, host-based routing, and target group health checks.
+
+
+AWS Lambda ----
+
+Built serverless Java applications using AWS Lambda with API Gateway and DynamoDB/S3 integration.
+Optimized Lambda function performance using Java concurrency features, environment variables, and Lambda Layers.
+Automated AWS Lambda deployments using AWS SAM, Terraform, and CI/CD pipelines (GitHub Actions, Jenkins, GitLab CI/CD).
+Developed serverless Spring Boot microservices using AWS Lambda, reducing infrastructure management overhead.
+Created Lambda functions in Java to process real-time data streams from Amazon Kinesis, DynamoDB Streams, and S3 event triggers.
+Deployed Spring Boot REST APIs using AWS Lambda + API Gateway for a fully serverless backend.
+Implemented AWS Lambda Layers to reuse Java libraries (e.g., Jackson, Apache Commons, AWS SDK) across multiple functions.
+Configured Lambda functions to integrate with Amazon RDS, S3, and SNS for event-driven workflows.
+
+AWS Network-----
+
+Designed and configured Amazon VPC with public and private subnets for secure Java-based application hosting.
+Implemented VPC networking with public and private subnets for Spring Boot microservices running on EC2 instances.
+Configured NAT Gateway, Internet Gateway, and Route Tables to enable secure communication between Java services and external APIs.
+Set up AWS Security Groups & NACLs to control network access for Java applications deployed on EC2 and ECS.
+
+AWS s3----
+
+Configured Amazon S3 as a static website host to serve frontend applications (HTML, CSS, JavaScript).
+Developed Java applications using the AWS SDK for Java to automate file uploads, downloads, and lifecycle policies in S3 buckets.
+Implemented S3 event-based triggers using AWS Lambda (Java) for real-time data processing and workflow automation.
+Configured S3 versioning, encryption (SSE-S3, SSE-KMS), and IAM access policies to enhance data security for Java applications.
+Designed and implemented S3 buckets for storing and serving static files, logs, and backups for Spring Boot applications.
+
+AWS RDS---
+
+AWS RDS Setup & Administration: Configured and managed MySQL, PostgreSQL, and Amazon Aurora with Multi-AZ replication for high availability in Java applications.
+Database Integration: Integrated Spring Boot and Hibernate with RDS using JPA, JDBC, and HikariCP for efficient database access.
+Security & Access Control: Implemented IAM roles, SSL/TLS encryption, AWS Secrets Manager, and KMS for secure database connections.
+Performance Optimization: Optimized database queries using connection pooling (HikariCP), caching (Redis, Elasticache), and read replicas for high performance.
+Backup & Recovery: Configured automated backups, snapshots, and point-in-time recovery to ensure data protection for Java applications.
+Monitoring & Logging: Integrated Amazon CloudWatch, RDS Performance Insights, and AWS Lambda alerts for proactive database monitoring.
+

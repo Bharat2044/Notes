@@ -1,0 +1,8 @@
+FROM ubuntu:20.04
+RUN apt-get update \    
+    && apt-get install -y maven \
+    && apt-get clean
+WORKDIR /app
+COPY . /app
+RUN mvn install
+CMD ["mvn", "--version"]

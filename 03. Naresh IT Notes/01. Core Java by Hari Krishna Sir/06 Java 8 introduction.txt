@@ -1,0 +1,36 @@
+Java 1.0v in 1995
+ --------
+ --------		adding API(libraries) for making		Integer io1 = new Integer(5);		AL al = new AL(); al.add("a");
+ --------		Java projects development fast		int i1 = io1.intValue();			al.add(new Integer(5));
+Java 1.4v																	Object obj = al.get(0);
+																		if(obj instanceof Integer){
+																			Integer io = (Integer)obj; //CCE
+																			int i1 = io.intValue();	
+																		}
+(Tiger)
+Java 5v		adding language level features		Integer io1 = 5;				AL<Integer> al = new AL<Integer>();
+			for less coding						int i1 = io1;					//al.add("a");
+																		al.add(5);
+-----------																		int i = al.get(0);
+-----------
+Java 8v		adding more laguage and API level features
+			for decreading more code writting													
+
+Java 8v is supporting functional programming
+
+//Interface enhancements
+	1) Default methods in interface
+	2) Static methods in interface
+	3) Functional programming
+	4) Functional interface
+	5) @FunctionalInterface annotation
+	6) Lambda expression with lamdba operator
+	7) Method reference with :: separator
+
+//Collection enhancements
+	8) Functional interfaces (java.util.function) 
+	9) Stream API (java.util.stream)
+
+//Date and Time enchancements
+	10) java.time
+

@@ -1,0 +1,39 @@
+//Diff b/w Comparable and Comparator?
+/*
+ * 1) 
+ * 	Comparable is used for providing natural sorting order
+ *  Comparator is used for providing custom sorting order
+ *  
+ * 2) 
+ *  Comparable contains compareTo(Object) param method 
+ * 		for providing objects comparison logic
+ *  Comparator contains compare(Object, Object) param method
+ * 		for providing objects comparison logic
+ * 
+ * 3)
+ *  By default TS.add(-) invokes Comparable.compareTo(-) method
+ *  	when we are adding objects
+ *  TS.add(-) methods invokes Comparator.compare(O, O) only
+ *  	when we pass it as argument explicitly by using TreeSet(Comparator) constructor
+ *   
+ * 4)
+ * 	Comparable is available in java.lang package since Java 1.2v
+ * 	Comparator is available in java.util package since Java 1.2v
+ * 
+ * 5) 
+ * 	Both interfaces are functional interfaces(SAM interface)
+ *  but Comparable is not explicitly declared buy using @FunctionalInterface annotation
+ *  whereas Comparator is declared with @FunctionalInterface annotation 
+ *  because Comparable is not used as method or constructor parameter for passing 
+ *  its implementation class instances.
+ *    	 
+ * 6) 
+ *  Comparable interface has only one method that is compareTo(-)
+ *  	It does not have any additional Java 8v default or static or private methods
+ *  But in Comparator interface,  in addition to compare(-, -) method
+ *  	it has another abstract method equals(Object) and 
+ *  	several Java 8v default and static methods
+ *  
+ *   
+ *         
+ */ 

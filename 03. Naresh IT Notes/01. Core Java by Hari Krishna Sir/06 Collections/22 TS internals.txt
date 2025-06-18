@@ -1,0 +1,29 @@
+		//TS Sorting algorithm has two logics
+			//1. comparing	logic-> developer
+			//2. swapping	logic -> SUN
+		
+			//1. comparing	logic -> developer
+				// by implementing Comparable interface method compareTo()
+				// in the same adding object class	
+				//		1) return -ve to tell smaller object
+				//		2) return +ve to tell bigger object
+				//		3) return 0 to tell duplicate object
+			
+			//2. swapping	logic -> SUN
+				//1) if compareTo() returns -ve -> CO is stored LEFT to TS ele
+				//2) if compareTo() returns +ve -> CO is stored RIGHT to TS ele
+				//3) if compareTo() returns 0 	-> CO is not stored
+		
+		//TS does not have default sorting order
+		//TS default sorting order is not Ascending order
+		
+		//TS sort elements according to the natural sorting order 
+		//given in adding object class Comparable interface compareTo(-)
+		
+		//In compareTo() method we can place below 5 cases logic
+		
+		//if we place CO - AO --> objects are stored in Ascending order
+		//if we place AO - CO --> objects are stored in Descending order
+		//if we place +ve num --> objects are stored in Insertion order including dups
+		//if we place -ve num --> objects are stored in Reverse Insertion order including dups
+		//if we place 0  	  --> only first object is stored

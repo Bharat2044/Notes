@@ -1,0 +1,469 @@
+
+----------------------ANSIBLE----------------
+What is Ansible?
+
+Ansible is an open source, command-line IT automation software application written in Python. It can configure systems, deploy software, and orchestrate advanced workflows to support application deployment, system updates, and more. Ansible's main strengths are simplicity and ease of use.
+
+#How Ansible works?
+
+In Ansible, there are two categories of computers: the control node and managed nodes. The control node is a computer that runs Ansible. There must be at least one control node, although a backup control node may also exist. A managed node is any device being managed by the control node.
+sudo yum update -y
+
+sudo yum install ansible -y
+
+log in to main server (Ansible)
+=================================
+# Connection process (SSH)
+===================================
+generate keys 
+ssh-keygen --copy public ip(id_rsa.pub) and paste it into target server path .ssh/authorizedkeys
+
+so now Ansible server able to ping target server 
+
+======================================
+# Inventory File Process
+=======================================
+What is Inventory File?
+
+Inventory defines the managed nodes you automate, with groups so you can run automation tasks on multiple hosts at the same time
+
+
+Create our own inventory file vi inventory and add target private ips
+
+or 
+
+We can add target private ips into default path of inventory fiel
+
+path--- vi /etc/ansible/hosts
+
+
+
+
+
+=====================================================================================================
+
+   ANSIBLE Configure Approaches to host nodes
+
+=====================================================================================================
+
+########################## keys generation##########################
+APPROACH 1
+-- Create a one ansible master ec2 and two node ec2s
+--Conncet to ansible instance and install ansible 
+   ---sudo yum install ansible -y
+
+--Chen go to host path add two nodes private ips
+    -- sudo vi /etc/ansible/hosts
+	<privateip1>
+	<privateip2> after done save and exit
+
+---Then Host Key verification put false by default it is true 
+	-- sudo vi /etc/ansible/ansible.cfg #create config file
+	--[defaults]
+	   host_key_checking = False
+#########################
+-- Generate a new public and private keys 
+	-- ssh-keygen
+	--go to .ssh directory
+-- Copy the id_rsa.pub key 
+-- Paste it into two nodes
+	-- .ssh
+	-- sudo vi authorized_keys   ##### paste here in two nodes
+--- Then give ping command 
+	# ansible all -m ping
+---- Two nodes will be shown here
+#####################################################################################
+APPROACH 2
+
+-- Create a one ansible master ec2 and two node ec2s
+--Conncet to ansible instance and install ansible 
+   ---sudo yum install ansible -y
+
+--Then go to host path add two nodes private ips
+    -- sudo vi /etc/ansible/hosts
+	<privateip1>
+	<privateip2> after done save and exit
+
+---Then Host Key verification put false by default it is true 
+	-- sudo vi /etc/ansible/ansible.cfg #create config file
+	--[defaults]
+	   host_key_checking = False
+#######################
+-- Copy  your node private key from the local
+--  Create a file id_rsa file in your ansible master .ssh folder 
+	--ansible master
+	-- cd .ssh
+	--sudo vi id_rsa
+-- Paste the your local private key here
+--When you are doing approach 2 don't generate keys
+-- No need to copy paste any public key into nodes after paste local private key into master
+-- Then give ping command you will get response from the nodes
+
+###########################AMI BACKUP OF NODE##########################
+-- Select any one of existing approach 2 node 
+--- Create a AMI from the node 
+-- Again launch instance from the node with different key pair or same key pair
+-- Then go to ansible master add the private ip into existing hosts path
+-- Then give ping command
+-- You get response from the new node.without uploading of your private key in ansible master.Because you taked backup of node it means inside public key also there. private key already uploaded
+
+
+
+
+
+===============================
+Ad-hoc commands 
+=============================
+
+
+
+-# sample ad-hoc coomand -------------------
+
+Ad-hoc commands are commands which can be run individually to perform quick functions
+
+
+###### Ansible ad-hoc commands ##################
+
+ 
+ansible -i inventory all -a "yum install git -y" -b  # this command is to define our own path inventory 
+ansible all -a "yum install git -y" -b  # this command is for deaflt path of inventory so no need to give "-i inventory argument"
+
+here '-b' is beacome a root 
+
+      '-a' is ad-hoc argument 
+      'all' is apply for all hosts # we can replace with all if we want to call sepcific ip
+
+Example
+[web]
+192.168.1.2
+[test]
+192.168.1.3
+
+  if i want to run any adhoc command give below example 
+
+  # ansible web -a "yum install git -y" -b
+
+
+Exampes: 
+ansible -i inventory all -a "yum install maven -y" -b # with define inventory 
+
+ansible -all -a "git --version" -b #default inventory
+
+ansible -i inventory all -a "touch file100" -b
+
+
+####### Ansible Module ##########
+Ansible modules are units of code that can control system resources or execute system commands. Ansible provides a module library that you can execute directly on remote hosts or through playbooks. You can also write custom modules.
+
+
+----ping module-------
+ansible -i inventory all -m ping 
+
+-----stat module ----
+ansible -i inventory all -m stat -a "path=/var/www/html"
+
+----------user----------
+
+ansible -i inventory all -m user -a "name=naresh" -b
+
+-----------setup--------
+ansible -i inventory all -m setup
+
+---------------file------------
+ansible -i inventory all -m file -a "name=demo state=touch"
+
+---------------copy-------------
+ansible -i inventory all -m copy -a "src=file1  dest=~"
+----------------------
+
+------yum or apt module ----- ##Very ImP
+
+(basic state's
+name = (httpd install)
+               state=latest
+               state=present
+               state=absent )
+
+ansible all -m yum -a "name=httpd state=latest" -b
+ansible all -m yum -a "name=httpd state=present" -b
+ansible all -m yum -a "name=httpd state=absent" -b
+
+(name = systemctl or service              
+               state=stopped
+               state= started
+               state=restrted
+               state= absent)
+
+
+Examples :
+ansible -i inventory all -m yum -a "name=httpd state=latest" -b     #to install httpd
+
+ansible -i inventory all -m service -a "name=httpd state=started" -b     #to start service
+
+ansible -i inventory all -m service -a "name=httpd state=stopped" -b     #to stop service
+
+ansible -i inventory all -m yum -a "name=httpd state=absent" -b     #to uninstall service
+
+ansible -i inventory all -m service -a "name=httpd state=restarted" -b     #to restart service
+
+===================== Host Key verification put false by default it is true  ================
+
+sudo vi /etc/ansible/ansible.cfg #create config file
+
+[defaults]
+host_key_checking = False
+
+
+----------------------Ansible playbook----------------------------
+Ansible Playbooks are lists of tasks that automatically execute for your specified inventory or groups of hosts. One or more Ansible tasks can be combined to make a play—an ordered grouping of tasks mapped to specific hosts—and tasks are executed in the order in which they are written
+
+---
+- name: first playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install httpd software
+      yum:
+        name: httpd
+        state: latest
+    - name: start web server
+      service:
+        name: httpd
+        state: started
+
+
+
+
+# to execute plyabook
+ansible-playbook -i inventory test-playbook.yaml
+
+
+
+======== Deploy through Copy ========
+---
+- name: first playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install httpd software
+      yum:
+        name: httpd
+        state: latest
+    - name: start web server
+      service:
+        name: httpd
+        state: started
+    - name: copying the files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: restart server
+      service:
+        name: httpd
+        state: restarted
+
+==============================================
+-----------Global Variable-------------
+==============================================
+---
+- name: first playbook
+  hosts: all
+  become: yes
+  vars:
+    - a: httpd
+    - b: present
+    - c: started
+    - d: restarted
+    
+
+  tasks:
+    - name: install httpd software
+      yum:
+        name: "{{a}}"
+        state: "{{b}}"
+    - name: start web server
+      service:
+        name: "{{a}}"
+        state: "{{c}}"
+    - name: copying the files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: restart server
+      service:
+        name: "{{a}}"
+        state: "{{d}}"
+
+
+====================== TAGS =========================
+
+
+TAGS: To execute or skip specific tasks
+
+- name: first playbook
+  hosts: all
+  tasks:
+    - name: installing git
+      yum:
+       name: git
+       state: present
+      tags: a
+    - name: installing httpd
+      yum:
+        name: maven
+        state: present
+      tags: b
+    - name: create user
+      user:
+        name: test
+        state: present
+      tags: c    
+
+SINGLE TAG: ansible-playbook name.yml --tags a
+MULTI TAG: ansible-playbook name.yml --tags b,c
+SKIP TAG: ansible-playbook name.yml --skip-tags "c"
+MULTI SKIP TAGS: ansible-playbook name.yml --skip-tags "c,d"
+
+
+day--4
+--------------loop--------------------
+
+---
+- name: loopr playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install multiple softwares
+      yum:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - git
+        - tree
+
+
+---
+- name: loopr playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install multiple softwares
+      yum:
+        name: "{{item.x}}"
+        state: "{{item.y}}"
+      with_items:
+        - {x: httpd, y: latest}
+        - {x: git, y: absent}
+        - {x: tree, y: latest}
+    - name: start httpd server
+      service:
+        name: "{{item.x}}"
+        state: "{{item.z}}"
+      with_items:
+        - {x: httpd, z: started}
+
+
+=========================================================================================
+-------------------handler ------------------------------
+Handlers are commonly used in Ansible to start, reload, restart, and stop services. If your playbook calls for changing configuration files, you'll almost certainly need to restart a service to see the changes take effect.
+
+handler will allow if any changes takes place in your application then only it will restart the server untill handler will not run service even run playbook
+
+
+
+---
+- name: first playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install httpd software
+      yum:
+        name: httpd
+        state: latest
+    - name: start web server
+      service:
+        name: httpd
+        state: started
+    - name: copying the files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+      notify: Restart web serve
+  handlers:
+    - name: Restart web server
+      service:
+        name: httpd
+        state: restarted
+================================================================================
+
+--# Condition base operation #
+
+Conditionals in Ansible are used to run tasks or define playbook behavior based on specific conditions. They enable us to create dynamic and responsive automation scripts. Usually, with conditionals, we use the when statement, which evaluates whether a given condition is true or false
+
+---
+- name: first playbook
+  hosts: all
+  become: yes
+  vars:
+    - a: 5
+  tasks:
+    - name: install httpd software
+      yum:
+        name: httpd
+        state: latest
+      when:
+        a == 5    
+    - name: start web server
+      service:
+        name: httpd
+        state: started
+    - name: copying the files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: restart server
+      service:
+        name: httpd
+        state: restarted
+
+
+--------------------vault-------------------------
+ansible-vault create secret.yaml
+
+need to provide password
+
+then go to vi editor and place any yaml file and run 
+
+after that try to edit or read the yaml but we are unable to read due to encryption applies
+
+if we want to modify the yaml give below command 
+
+ansible-vault edit secret.yaml
+and enter given password 
+
+ansible-vault decrypt secret.yaml
+and give password
+
+ansible-vault encrypt secret.yaml
+to provide secure 
+
+========================================================
+                Ansible Include Module 
+========================================================
+
+Includes a file with a list of plays or tasks to be executed in the current playbook. Files with a list of plays can only be included at the top level. Lists of tasks can only be included where tasks normally run
+
+For Reference:
+
+https://github.com/nareshdevopscloud/devops-ansible/tree/main/include_module
+
+==========================================================
+                    Ansibel Roles
+==========================================================
+
+Ansible Roles provide a structured way to organize tasks, templates, files, and variables. This structure makes it easier to manage complex automation setups, as everything related to a specific role is contained within its directory
+
+For reference :
+
+https://github.com/nareshdevopscloud/devops-ansible/tree/main/roles/first_role
+

@@ -1,0 +1,99 @@
+hashCode() and equals() methods TestCases
+=================================
+//A.java
+class A{
+	private int x, y;
+	public A(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
+	public String toString(){
+		return "A("+x+", "+y+")";
+	}
+
+	public int hashCode(){
+		return x + y;
+	}
+
+	public boolean equals(Object obj){
+		if (obj instanceof A){		
+			A a = (A)obj;	
+			return (	
+					( this.x == a.x )
+						&&
+					( this.y == a.y ) 
+				   );	
+		}
+
+		return false;
+	}
+}
+
+//TestAddRemove2.java
+import java.util.*; 
+class TestAddRemove2{
+	public static void main(String[] args){
+		LinkedHashSet lhs = 
+			new LinkedHashSet();
+	
+		lhs.add( new A(2, 3) );	
+		lhs.add( new A(3, 4) );	
+		lhs.add( new A(2, 3) );	
+		lhs.add( new A(3, 2) );	
+		lhs.add( new A(1, 6) );	
+	
+		System.out.println("Original LHS");
+		System.out.println(lhs.size());
+		System.out.println(lhs);
+		
+		lhs.remove( new A(2, 3) );
+		System.out.println("\nElements after removing");
+		System.out.println(lhs.size);
+		System.out.println(lhs);
+	}
+}
+
+From the below testcases, findout
+Q1) How many objects are added and 
+Q2) How many buckets are created and 
+Q3) How many objects are removed?
+
+Find output in below cases
+====================================
+Case #1:	both hashCode() and equals() 	
+		methods are not overridden in class A
+		Q1-A) objects stored:
+		Q2-A) buckets created:
+		Q3-A) removed objects:
+
+Case #2:	only hashCode() method is overridden 
+		by returning directly 5;
+		Q1-A) objects stored:
+		Q2-A) buckets created:
+		Q3-A) removed objects:
+
+Case #3:	only equals() method is overridden 
+		by returning either true/false;
+		Q1-A) 
+		Q2-A) 
+		Q3-A) 
+
+Case #4:	hashCode() method is overridden 
+		by returning 5; also equals() method is 
+		overridden by returning true;
+		Q1-A) 
+		Q2-A) 
+		Q3-A) 
+
+Case #5:  in above case return false from equals() method
+		Q1-A) 
+		Q2-A) 
+		Q3-A) 
+
+Case #6: hashCode() method is overridden by returning x + y
+	        and equals() method is overridden by comparing 
+		x and y data
+		Q1-A) 
+		Q2-A) 
+		Q3-A) 

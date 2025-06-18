@@ -1,0 +1,39 @@
+kubectl get nodes
+Drain the Node:
+
+Use the kubectl drain command to safely evict all the pods from the node. This command ensures that your applications are gracefully terminated, and no new pods are scheduled on the node.
+
+Replace ip-192-168-56-36.ap-south-1.compute.internal with your node's name.
+
+
+kubectl drain ip-192-168-56-36.ap-south-1.compute.internal --ignore-daemonsets --delete-emptydir-data
+Explanation of the options:
+
+--ignore-daemonsets: This option allows the node to be drained even if there are daemonset-managed pods on it.
+--delete-emptydir-data: This option allows pods using emptyDir volumes to be deleted, as these volumes are tied to the node's filesystem and are ephemeral.
+Example Command
+Here is the command with the given node name:
+
+
+kubectl drain ip-192-168-56-36.ap-south-1.compute.internal --ignore-daemonsets --delete-emptydir-data
+Verification
+After running the drain command, verify that the node has been drained:
+
+
+
+kubectl get nodes
+The output should show that the node is in a SchedulingDisabled state, indicating that it has been drained and no new pods will be scheduled on it.
+
+Uncordon the Node (Optional)
+If you want to make the node schedulable again after performing maintenance, you can uncordon the node:
+
+
+kubectl uncordon ip-192-168-56-36.ap-south-1.compute.internal
+
+
+Draining a node in Kubernetes is a common operation for performing maintenance or decommissioning a node. The kubectl drain command safely evicts all the pods while ensuring minimal disruption to your applications. Remember to use --ignore-daemonsets and --delete-emptydir-data options to handle special cases. After maintenance, you can make the node schedulable again using the kubectl uncordon command.
+
+
+
+
+

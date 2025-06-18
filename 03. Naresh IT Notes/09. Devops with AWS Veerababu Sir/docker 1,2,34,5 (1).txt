@@ -1,0 +1,329 @@
+==============================================================================
+
+                                                 ######   DOCKER  ###########
+    ========================================================================================================
+
+
+MONOLITHIC: Deploying monolithic applications is more straightforward than deploying microservices. Developers install the entire application code base and dependencies in a single environment.
+
+MICRO SERVICES: Microservices are deployed using VM or Containers. Containers are the preferred deployment route for microservices as containers are lighter, portable, and modular. The microservice code is packaged into a container image and deployed as a container service.
+multiple services are deployed on multiple servers with multiple databases.
+
+note: if number of application are more will go with microservices concept (docker and Kubernetes)
+
+BASED ON USERS AND APP COMPLEXITY WE NEED TO SELECT THE ARCHITECTURE.
+
+#FACTORS AFFECTIONG FOR USING MICRO SERVICES: 
+
+FLEXIBLE
+COST 
+MAINTAINANCE
+EASY CONTROL
+
+
+
+
+## ----- Docker overview ----------##
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker's methodologies for shipping, testing, and deploying code, you can significantly reduce the delay between writing code and running it in production.
+
+
+DOCKER IMAGE:
+Docker images are read-only templates that contain instructions for creating a container. A Docker image is a snapshot or blueprint of the libraries and dependencies required inside a container for an application to run
+
+CONTAINERS:
+A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime
+its same as a server/vm.
+
+ (Ec2 server=AMI, CONTAINER=IMAGE)
+os will be managed in image 
+
+
+
+-----docker install process -------
+
+
+sudo amazon-linux-extras install docker # if linux 2
+
+sudo yum install docker -y # If linux 20203
+
+sudo systemctl start docker
+sudo systemctl status docker
+
+Note : By default Docker works with the root user and other users can only access to Docker with sudo commands. However, we can bypass the sudo commands by creating a new group with the name docker and add ec2_user.
+
+#First let’s create the docker group
+
+sudo groupadd docker (optional if group is not created)
+
+#Now let’s add ec2-user to docker group
+
+sudo usermod -a -G docker ec2-user
+
+#In order to enable the changes, run the following command
+
+newgrp docker #for immediate enable changes 
+
+sudo chmod 666 /var/run/docker.sock  # to give access docker demon to run docker server 
+
+docker --version to check docker version
+
+#If you want to see an extended version of the version details, such as the API version, Go version, and Engine Version, use the version command without dashes. give below command
+
+docker version 
+
+
+# ----commands:---- #
+
+---to pull base images from public docker repository
+
+docker pull image <imagename>
+
+docker pull nginx or ubuntu
+
+docker images # to check list of images 
+
+
+
+docker inspect image nginx  ### to check images details 
+docker run -it imagename /bin/bash  --create and enter into the container interact terminal 
+
+ctrl p+q # will exit from container without stopping
+
+
+
+docker run -dt imagename -we are not enter into the container detach terminal
+
+docker run -dt --name <name> <imagename> 
+ (to give custom name --name)
+
+
+docker ps ## to check running containers 
+
+docker ps -a  ## to check both running and stopped containers 
+
+docker ps -a | grep Exit   ## to show only stopped containers 
+
+
+
+
+## To login container ##
+docker exec -it <continername or continerid> /bin/bash
+
+1.if you want to come out from connainer without stop give "ctrl+pq"
+2.if you give "exit"  container also will stop
+
+ps -ef   --to know how many processors are running if it is in vm many process we can see but it is in container only few because its light weight 
+
+ps -ef | wc -l #to know number of processors request running backend
+
+
+
+
+
+
+#### how to start container#####
+
+docker start <containerid>
+          or
+docker start <container name>
+
+#### how to stop container#####
+docker stop <containerid> 
+           or
+docker stop <container name>
+
+## docker kill comeplete terminated 
+docker kill <containername>
+
+docker pause cont_name	: to pause container
+docker unpause cont_name: to unpause container
+docker inspect cont_name: to get complete info of a container
+
+
+
+## danger commands##
+
+docker system prune -a to remove all images 
+docker container prune -- delete all stopped containers 
+docker rm -f $(docker ps -a -q)  ---delete all running containers Note: please don't use danger command
+
+docker rm <containername or continerid> ### to delete stopped container 
+docker rmi <imagename> ##to delete image 
+
+docker rm -f <container id> delete running container 
+
+# --Enabling port-- #
+
+docker run -p <HOST_PORT>:<CONTAINER:PORT> IMAGE_NAME  
+
+docker run -dt -p 3000:3000 --name image  #along port expose
+
+===================================================================================
+
+-------- pull jenkins----------
+
+docker pull jenkins/jenkins
+
+docker run -dt -p <local host port>:<container run port> --name <name of the container> <name of the image>
+
+docker run -dt -p 8081:8080 --name jenkins container jenkins/jenkin
+
+access the jenkins with public ip and port number (8081)
+
+docker exec -it <containerId> /bin/bash
+
+run cat /var/jenkins_home/secrets/initialAdminPassword
+
+
+
+
+
+
+
+=======================================================================================
+
+------------# Docker file run commands #----------
+Docker file is a simple text file that consists of instructions to build Docker images.
+-----------------------------------
+##### Docker file instructions ########
+
+FROM:
+    Specifies the base image to build upon. Example: FROM python:3.8-slim
+    You can use official images (like python, alpine, etc.) or custom ones.
+
+RUN:
+   Executes commands within the container during build time.
+   Used for installing dependencies, setting up the environment, etc.
+   Example: RUN apt-get update && apt-get install -y python
+
+WORKDIR:
+   Sets the working directory for subsequent instructions. Example: WORKDIR /app
+   All following instructions will be executed relative to this directory.
+
+COPY and ADD:
+   Copies files and directories from the host machine into the container's filesystem.
+   COPY is preferred for simple copying, while ADD has extra features like extracting tar files.
+   Example: COPY . /app
+   Add: Use to copy files and loader file but little advance like we can add url also 
+EXPOSE:
+   Informs Docker that the container listens on specified network ports at runtime.
+   Does not publish the port; it is for documentation purposes.
+   Example: EXPOSE 80
+CMD:
+   Provides default command to run when a container starts.
+   Overrides can be provided at runtime (only the last CMD instruction is effective).
+   Example: CMD ["python", "app.py"]
+ENTRYPOINT:
+   Configures the container to run as an executable.
+   Useful for setting a default executable or initializing the container environment.
+   Example: ENTRYPOINT ["python"]
+=========================================================
+# Below command to run docker file
+
+docker build -t check .
+docker run -p <HOST_PORT>:<CONTAINER:PORT> IMAGE_NAME
+docker run -dt --name demo -p 8080:80 check
+ex: docker run -dt -p 3000:3000 --name project-2 Saturday
+
+====================================================
+    # Custom Docker file name #
+
+# if we create multiple docker files like Dockerfile and Dockerfile1 
+
+Below command example to run
+
+docker build -f <Dockerfilename> -t <imagename>.
+
+
+docker build -f Dockerfile1 -t image .
+
+
+
+
+=============================================================
+              #  IMAGE PUSH #
+======================================================================
+
+######### docker push to Docker private repository  #########
+docker login first
+docker tag <image> dockerusername/<image>
+docker push <dockerusername>/<image>
+docker pull <dockerusername>/<image>
+
+================================================================
+
+######### docker push to AWS ECR  #########
+
+Retrieve an authentication token and authenticate your Docker client to your registry.
+Use the AWS CLI:
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 992382358200.dkr.ecr.ap-south-1.amazonaws.com
+Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
+
+docker build -t maventomcat .
+After the build completes, tag your image so you can push the image to this repository:
+
+docker tag maventomcat:latest 992382358200.dkr.ecr.ap-south-1.amazonaws.com/maventomcat:latest
+Run the following command to push this image to your newly created AWS repository:
+
+docker push 992382358200.dkr.ecr.ap-south-1.amazonaws.com/maventomcat:latest
+
+
+==================================================================================
+
+----- ## Docker file single stage and multi stage ##--------
+======================================================================================
+# scenario :1 single stage after run mavne manually, deploy war file on tomcat webapp by using docker file 
+
+FROM tomcat:latest
+COPY webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war
+
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
+
+
+# scenario :2 multi satge --run Maven Image by using docker file and deploy on tomcat webapp
+
+ROM maven:3.8.4-eclipse-temurin-17 AS build
+RUN mkdir /app
+WORKDIR /app
+COPY . .
+RUN mvn package
+
+FROM tomcat:latest
+COPY --from=build /app/webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war # copying files fromsta ge -1 docker file maven into tomcat path
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps # adding dependecnes to run base tomcat page 
+
+
+# scenario :3 multi stage from ubuntu scratch by using docker file 
+
+FROM ubuntu:latest as builder
+RUN apt-get update && \
+     apt-get install -y openjdk-8-jdk wget unzip
+
+ARG MAVEN_VERSION=3.9.6
+RUN wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz && \
+    tar -zxvf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    rm apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    mv apache-maven-${MAVEN_VERSION} /usr/lib/maven
+
+ENV MAVEN_HOME /usr/lib/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+ENV PATH=$MAVEN_HOME/bin:$PATH
+RUN mkdir -p /app
+COPY . /app
+ WORKDIR /app
+ RUN mvn install
+FROM tomcat:latest
+COPY --from=builder /app/webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
+
+
+====================================================
+RUN DOCKER FILE DIRECTLY TAKING SOURCE FROM GITHUB 
+======================================================
+docker build -t <imagename> <github projecturl>
+
+Example:
+
+docker build -t mvntomgit https://github.com/CloudTechDevOps/project-1-maven-jenkins-CICD-docker-eks-.git

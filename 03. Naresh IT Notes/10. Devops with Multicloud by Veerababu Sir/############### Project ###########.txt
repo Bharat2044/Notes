@@ -1,0 +1,43 @@
+############### Project ###############
+
+1. Create one VPC  # By selecting the region
+
+2. Create 8 subnets (2 public subnets for load balancer and 2 for frontend 2 for backend 2 for rds)
+
+3. Create AMI from exiting servers frontend and backend
+
+4. Create launch templates for frontend and backend
+
+5. Create a target groups for frontend and backend 
+
+6. Create a load balancer for frontend and backend 
+
+7. Create autoscaling groups for frontend and backend 
+
+8. Create one RDS 
+
+
+9. create route53 record for backend load balancer (record domain should give same as config.js ex:veera.narni.co.in) 
+
+
+Method-2
+
+1. Create bastion host server into public subnet
+
+2. Create a frontend private server 
+
+3. login frontend private server by using bastion host
+
+4. start to deploy process for frontend 
+
+5. Create a backend private server 
+
+3. login Backend private server by using bastion host
+
+4. start to deploy process for backend 
+
+5. access frontend by using curl or loadbalancer or nginx reverse proxy 
+
+6. access backend by using curl or loadbalancer or nginx reverse proxy 
+
+7. Create ami--->LT----->ASG

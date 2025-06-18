@@ -1,0 +1,26 @@
+# Use the official Ubuntu base image
+FROM ubuntu:latest
+
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update the package list and install necessary packages
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk maven && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* # After installing packages with apt-get, the package list files stored in /var/lib/apt/lists/ can consume significant disk space to clear this we can run this
+
+# Verify installations (optional)
+RUN java -version && mvn -version
+
+# Set up working directory (optional, adjust as needed)
+WORKDIR /app
+
+# Copy your application code to the container (optional, adjust as needed)
+COPY . /app
+
+# Expose any necessary ports (optional, adjust as needed)
+EXPOSE 8080
+
+# Define the default command to run Maven (optional, adjust as needed)
+RUN ["mvn", "clean", "install"]

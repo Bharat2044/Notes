@@ -1,0 +1,3 @@
+Main-Class: com.nit.hk.blogic.calc.Calc
+Class-Path: lib\addClasses.jar lib\subClasses.jar lib\mulClasses.jar lib\divClasses.jar
+

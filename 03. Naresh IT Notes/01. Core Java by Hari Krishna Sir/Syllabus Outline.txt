@@ -1,0 +1,26 @@
+1st Month [Java Basics, Dynamic Values Program, OOP Basics]
+	Week-01 -> Demos and Types of Applications, Project Architectures
+	Week-02 -> Introduction, Installation, PEs, HWP, ESC, C, I, K, RW, S
+	Week-03 -> WE, LF, DTs, L, TC, TC, TP, V, Array, CO, Project
+	Week-04 -> RRVs, Project, Modifiers, V and TVs, M and TMs
+
+2nd Month [JVM, SMs, NSMs, Project, Logical Programming]
+	Week-05 -> JVM, SMs [SV, SM, DV, VS, LP, setter, getter, SB, MM, SIM, EF, IFR]
+	Week-06 -> NSMs [NSV, NSM, this kw, LO, CO, AO, Pass-By-Value, VS, set, get, cons, IB, EF, IFR]
+	Week-07 -> toString, RV, null and NPE, Operators
+	Week-08 -> CFS, Arrays, Strings and Logical Programming
+
+3rd Month [OOP Principles, LC-RP architecture, Project, Java8 LE]
+	Week-09 -> OOP Revision, Project, ODM, OR, OP, Encapsulation, Inheritance
+	Week-10 -> S&NSMs EF, SOS, UC,DC, CCE, io, SK, VH
+	Week-11 -> Polymorphism, MO, MOL, Java 5[CV, @O, AB, VA],COVL, CC, FV, FM, FC
+	Week-12 -> Abstraction, AM, AC, interface, Types of Inheritances, C, C, LC-RP arch, RA, Proj, Inner classes
+	                   Java 8 new features[DM, SM, FI, LE, MR]
+
+4th Month [Packages, Java 9v Module, Java SE API, java.lang pac, OC, WC, EH, MT]
+	Week 13 ->Packages, Java 9v Module, Java SE API, java.lang pac, OC
+	Week 14 -> WC, Exception Handling with Java 5v and Java 7v changes
+	Week 15 -> Multi threading, Executor Framework, IO Streams
+	Week 16 -> Collections and Stream API [with Two Sundays(20 hours)]
+
+	Week 17 -> Complete Core Java Revision, IQs, Final Project Development

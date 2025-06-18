@@ -1,0 +1,23 @@
+------------------------GIT---------------
+
+
+What is GIT 
+
+GIT is a ingration tool it will track the chnages, Git is a DevOps tool used for source code management. It is a free and open-source version control system used to handle small to very large projects efficiently. Git is used to tracking changes in the source code, enabling multiple developers to work together on non-linear development.
+
+
+
+git config --global user.name "<name>"      To configure username into git 
+git config --global user.email "<email>"    To configure email into git 
+
+git init ----- .git will create it will start track all the files 
+
+git status ---- to check the status weather modified files are staged or not
+
+git add .  --- to stage all untracked changes into staging area from working directory
+
+git commit -m "sample mmessage"  ---- it will commit the chnages staging are to local repo
+
+git log   ---- to check the commit history into local repo.
+
+git push ---- local repo to github        

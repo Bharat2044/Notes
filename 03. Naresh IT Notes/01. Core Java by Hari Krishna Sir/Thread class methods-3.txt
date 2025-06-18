@@ -1,0 +1,276 @@
+1) public void start() throws IllegalThreadStateException (unchecked exception)
+	-> it is used for causing custom thread to start 
+	-> we are requsting JVM to start custom thread of execution
+	-> start() method does not call run() method implicitly
+	-> run() is called by JVM
+	-> when we call start() method, 
+		-> JVM creates thread of execution for this thread object
+		-> and calls run() method by this thread object
+		-> loads its logic this thread of execution and 
+		-> runs logic given in this run() method concrrently with other threads
+
+	-> Rule: we can not call start() method multiple times on same thread object
+		it will throw an excetion IllegalThreadStateException
+
+    @Override	
+2) public void run()
+	-> it used for supplying logic to execute in custom thread of execution
+	-> it is the initialial point of execution of every custom thread
+	-> it is originally declared in Runnable interface
+	-> it is implemented in Thread class for calling run() from the passed Runnable implementation class
+	-> now we can override run() method either from Thread class or from Runnable interface for suppling logic to execute in custom thread
+
+	-> in project, it is recommended to implement run() method from Runnable interface,  because 
+		1) we can extend from other class (multiple inheritance is supported) 
+		2) we can clearly separate thread creation logic and implementaion logic 
+		3) there by we can achieve parallel development and
+		4) thread creation logic is reusable
+
+	-> Rule: From run() method we can not throw any checked exception
+		because it is an overriding method, we can not add throws checked exception.
+		- In run() method we must catch all checked exception, else we will get compile time error.
+		- From run() method we can throw unchecked exceptions.
+		- If we need to throw a checked exception from run() method,
+		  we must implement exception chaining by using unchecked exception RuntimeException	
+
+3) public Thread.State getState()
+	-> it is used for retrieving the thread state in which this thread is currely available
+	-> it is available from Java 5v onwards
+
+	-> Thread states are represented by an enum State which is created as inner enum in Thread class
+	-> It contains contains below named constants representing diff states of a thread
+		-> NEW, RUNNABLE, TIMED_WAITING, WAITING, BLOCKED, TERMINATED
+
+			-> when we create object thread will be in NEW state
+
+			-> when we call start() method thread is moved to RUNNABLE state Ready-To-Run phase
+			-> as per thread scheduling, when its turn occured thread is moved to RUNNABLE state Running phase
+				-> in this state run() method logic is executed from current thread object class
+			
+			-> when we call sleep(time), join(time), wait(time) on this thread object, 
+				this thread is moved to TIMED_WAITING state from Running state
+			-> when we call no param join(), wait() thread is moved to WAITING state from Running state
+			-> when we call a synchronized method and its object is locked, 
+				then thread is moved to BLOCKED state from running state
+
+			-> after run() method execution completed either normal or with an exception
+				then thread is moved to TERMINATED state
+	
+		Note: from TIMED_WAITING, WAITING, BLOCKED states the is moved to RUNNABLE ready-to-run state
+		means after blocked time, thread is no directly executed. it must wait for its turn
+
+		Note: from TERMINATED state, thread execution is never resumed
+
+4) public boolean isAlive()
+	-> it is used to know a thread is live thread or not
+	-> if thread is live thread it returns true
+	-> else returns false
+
+	-> when thread is in NEW and TERMINATED states, it return false
+		-> means when thread is in NEW state, its execution is not stated, hence it is not live thread
+		-> when thread is in TERMINATED state, its execution is completed, hence it is not live thread
+
+	-> when thread is in RUNNABLE, and an of the three Non-Runnable states T_W, W and B
+		the thread of execution is still available and running so it is a live thread
+
+
+5) 	public void setPriority(int newPriority) throws IllegalArgumentException (unchecked excpetion)
+6) 	public int getPriority()
+
+		- Above methods are used for setting and getting thread priority
+		- every thread has priority when it is created
+		- the priority range is between 1-10
+			- 1 is MIN_PRIORIRY			
+			- 5 is NORM_PRIORIRY
+			- 10 is MAX_PRIORIRY
+		- above three variables are created in Thread class as public static final int variables for representing thread priorities
+
+			- main thread default priority is 5 and 
+			- every custom thread default priority is inherited from parent thread
+
+		- here parernt thread means not super class, parent thread means  the thread from which we have created this thread
+		- means from which thread logic we called start() that thread becomes parent thread to this thread
+
+		- generally we will create all custom threads from main thread,
+		- so all custom threads will have default priority 5
+
+		- if we change main thread priority, then if we create custom thread
+		and if we create a custom thread from other custom thread whose priority is not 5
+		then this new thread priority is not 5
+
+		Rule: we must pass new priority to setPriority(-) method only in between 1-10. 
+		if we pass newPriority (< 1 || >10), this method will throw an exception IllegalArgumentException
+
+7) public void setName(String name)
+8) public String getName()
+	- above methods are used for setting and getting name of the thread
+
+	- we can set name to a thread in two ways
+		1) by using Thread class constructor, at the time of thread object	creation
+			- Thread(String name)
+			- Thread(Runnable target, String name)
+
+		2) by using setName(-) method, after thread object creation	
+
+	- we can set same name to multiple threads, but it creates confusion to programmer
+	- we can change name of the thread 
+		1) after object creation, 
+		2) after start() call, 
+		3) while running, 
+		4) when it is paused and even
+		5) after terminated
+
+	Note: we can also change priority 
+		1) after object creation, 
+		2) after start() call, 
+		3) while running,  
+		4) when it is paused
+		but we can not change priority after terminated
+
+	 - after thread is terminated, if we call setPriority() method, no CE or no RE, 
+		but priority is not changed
+
+9) public static Thread currentThread();
+	- It is used for retrieving currently running thread object of this method
+	- If we need to access a thread in a normal object class method or 
+	- If we need to access main thread object, we must use this method.
+	- In which method we invoked Thread.currentThread() method, 
+		the thread in which this method is running that thread object reference is returned
+
+10) public ThreadGroup getThreadGroup()
+	- It is used for retrieving the ThreadGroup object reference of this thread 
+	- Whenever we need to know this thread belongs to which group,
+		we must use this method.
+
+	- Inside JVM threads are organized under groups
+	- by default every thread belongs to default group "main"
+	- This group is created by JVM when JVM starts
+	- when we craete new custom thread JVM by default adds this thread to thread group main
+
+	- we can also create our own thread groups, by using the class ThreadGroup
+	- then we must add our thread object our group explicitly
+
+	- after creating group if we want any information about this group
+	we must call the methods giving in ThreadGroup class
+
+	- if we want to retriev the thread group of a thread
+	we must call Thread class method th.getThreadGroup()
+	and further we must call ThreadGroup class methods.
+	
+      @Override
+11) public String toString()
+	- In Thread class toString() method is overridden to display Thread object information as
+		Thread[name of this thread, priority of this thread, group name of this thread]
+
+12) public void setDaemon(boolean on) throws IllegalThreadStateException
+	- it is used for setting daemon property value
+	- by using this method we can convert thread from non-daemon to daemon 
+		and daemon to non-daemon, but only before start() method call
+	- if we invoke this method after start() method call it will throw exceptin ITSE
+
+13) public boolean isDaemon()
+	- it is used for knowing thread is daemon or not
+	- if it returns true, thread is daemon
+	- if it retuns false, thread is non-daemon
+
+	Java supports two types of threads
+		1) Daemon threads
+		2) Non-Daemon threads
+
+		- A thread that executes background and helps other threads  to execute is called daemon thread
+		- A thread that executes foreground for running business logic of an application to serve to end-user is  called non-daemon thread
+
+		For example
+			- main thread  is non-daemon thread
+			- garbage collector thread is daemon thread
+
+		JVM must wait and run for non-daemon to complete.
+		JVM will not wait and run for daemon thread to complete.
+
+		If there is not non-daemon thread is runing, JVM will shutdown
+		even though daemon thread execution is not completed.
+
+		Can we guarentee deamon thread execution 100% completion?
+		Nooooooooooo
+
+		By deault every custom thread is created as ____ thread?
+			- it is depending on parent thread
+
+			- if parent thread is daemon, child thread is also daemon 
+			- if parent thread is non-daemon, child thread is also non-daemon 
+			
+			- because main thread is non-daemon, all custom threads are created as non-daemon.
+
+		How JVM can reconginze a thread as daemon or non-daemon?
+			By using Thread class instance property "daemon" 
+
+			if daemon variable value is true, 
+				this thread is daemon
+
+			if daemon variable value is false, 
+				this thread is non-daemon
+
+			main thread object daemon value is false,
+				hence main thread is treated as non-daemon
+
+
+		How can we create our custom thread as daemon thread?
+			by using th.setDaemon(true);	
+
+			we must change daemon property value to true
+			in this custom thread object.
+
+			for this purpose thread class we have setDaemon(-) method
+			
+
+		How can we know the thread is daemon or not?
+			by using th.isDaemon()
+
+			for working with types of thread we have two method is Thread class
+				1) void setDaemon(boolean)
+				2) boolean isDaemon()
+
+			For  example:
+				MyTherad mt = new MyThread();
+				mt.start(); --> thread is started as non-daemon thread
+
+				MyThread mt = new MyThread();
+				mt.setDaemon(true);
+				mt.start(); // thread is started as daemon thread
+
+		Can we call setDaemon(-) in any state?
+			No, we must call setDaemon(-) method only before start() method call
+			when thread is in NEW state.
+
+			if we call setDaemon(-) method after start() method call,
+			we get exception ITSE, this exception is throw from setDaemon method.
+
+14) public static void yied()
+	- it is used for pausing currently running thread and giving CPU resource to other thread for its execution
+	- actiually this method is just a request to JVM for pausing this thread exeuction
+	- so there is not guarentee to pausing this thread execution
+	- if at all paused this current thread is sent Ready-To-Run state for making it wait for next turn.
+
+15) public static void sleep(long mills) throws InterruptedException (checked excpetion)
+16) public static void sleep(long mills, int naos) throws InterruptedException (checked excpetion)
+
+	- it is used for pausing currently running thread for a given period of time independent of other threads
+	- when we call sleep() method this CRT is sent to TIMED_WAITING state.
+	- after given time complete, this thread comes to R-t-R state and wait for its next turn
+
+	- Rule: we must handle InterruptedException, becauese it is checked excpetion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

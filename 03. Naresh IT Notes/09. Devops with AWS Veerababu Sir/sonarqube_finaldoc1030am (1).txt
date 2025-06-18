@@ -1,0 +1,190 @@
+Code Quality check tool
+
+#SonarQube ------------------other tools (veracode, coverity, codescence)
+
+SonarQube is a very popular code quality management tool that is used widely for code analysis to identify code smells, possible bugs, and performance enhancements. SonarQube supports many popular programming languages like Java, JavaScript, C#, Python, Kotlin, Scala etc. It also provides test and code coverage.
+
+SonarQube is a web-based platform used for continuous inspection of code quality. It performs automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities in over 25 programming languages.
+
+Benefits:
+Improve quality.
+Grow developer skills.
+Continuous quality management.
+Reduce risk(vulnerabilities).
+Scale with ease.
+Code quality and smell
+
+code smell : A maintainability issue that makes your code confusing and difficult to maintain.
+
+Code vulnerabilities: Code vulnerabilities are software flaws that open opportunities for potential application misuse, exploits, or breaches that result in sensitive information disclosure, data leaks, ransomware attacks, and other cyber security issues.
+-----------------
+
+three components 
+------>sonarquber server 
+
+----->rules --apply rules on code 
+
+--default data base embedded H2 database 
+
+if required we can configure database additionally for more configuration PostgresSql
+
+------>scanner 
+gather rules 
+scan the source code  
+send the reports to database  
+
+
+
+
+STEUP:
+
+required 4gb ram and 2 cpus
+dependency: java11 or 17
+req: t2.medium
+port: 9000
+
+#Launch an t2.medium instance with allow port 9000 
+
+amazon-linux-extras install java-openjdk11 -y   #if amzon linux 2
+sudo dnf install java-11-amazon-corretto  # if amazon linux 2023
+cd /opt/ #switch to opt directory
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.6.50800.zip
+sudo unzip sonarqube-8.9.6.50800.zip
+
+#sonarqube has to run with user only 
+sudo useradd sonar
+sudo chown sonar:sonar sonarqube-8.9.6.50800 -R
+sudo chmod 777 sonarqube-8.9.6.50800 -R
+
+passwd sonar (create password)
+su - sonar (log in as sonar)
+
+#run this on server manually
+sh /opt/sonarqube-8.9.6.50800/bin/linux-x86-64/sonar.sh start
+sh /opt/sonarqube-8.9.6.50800/bin/linux-x86-64/sonar.sh status
+ 
+to start ----- sh sonar.sh start or ./sonar.sh start
+to check status ----- sh sonar.sh status
+
+#to access 
+public-ip:9000
+user=admin & password=admin
+
+note : after login we need to change our existing password to custom password 
+---------------------------------------------------------------------
+sonar-scanner   -Dsonar.projectKey=test   -Dsonar.sources=.   -Dsonar.host.url=http://13.126.56.81:9000   -Dsonar.login=719aab0720064d9dfac5193b3a10cf1e4210e155
+
+
+sonarQube on Docker 
+
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+--------------------------------------------------------------------
+
+Sonar Scanner 
+
+SonarScanner is a command-line tool that runs on a developer's machine or CI server to analyze project source code and send the results to the SonarQube server.
+##------------------------------------##
+Step 1: Download and Install SonarScanner
+On Linux/MacOS:
+Download SonarScanner:
+
+
+
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+
+Unzip the downloaded file:
+
+
+
+unzip sonar-scanner-cli-4.8.0.2856-linux.zip
+
+Move the unzipped folder to /opt or any preferred location:
+
+
+sudo mv sonar-scanner-4.8.0.2856-linux /opt/sonar-scanner
+
+Set up environment variables:
+
+Add the following lines to your .bashrc, .zshrc, or .profile file:
+
+
+export PATH=$PATH:/opt/sonar-scanner/bin
+
+Source the file to update your PATH:
+
+
+source ~/.bashrc  # or source ~/.zshrc or source ~/.profile
+
+Verify the installation:
+
+
+sonar-scanner --version
+
+
+
+
+
+
+
+
+
+
+###### ----------configure with jenkins-------------------------#####
+
+prerequistes :
+
+create token in sonarqube ---->after login go to adminstration---security--user--create token   # ad0dd045b65af5cbacd3b8c51db616fda1d4b6f5
+
+
+
+
+step-1
+
+--Required plugins--
+
+SonarQube scanner for Jenkins
+
+quality gates if required (optional)
+
+step-2 
+
+go to credential and select text mode paste you token and give name 
+
+go to system configurations paste url and select key and give name ex: 'SonarQube'  (note: this name only we have to call like withSonarQubeEnv('SonarQube'))
+
+
+step-3
+
+create Jenkins job and paste below script maven and sonar 
+
+
+passing with environment variables without hardcoded values (sonar url and token)
+
+pipeline {
+    agent any
+
+    stages {
+        stage('scm') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nareshdevopscloud/project-1-maven-jenkins-CICD-docker-eks-.git'
+            }
+        }
+        stage('clean') {
+            steps {
+                sh 'mvn clean'
+                           
+            }
+        }
+        stage('code quality') {
+            steps {
+                withSonarQubeEnv('SonarQube'){    
+                sh 'mvn install sonar:sonar'
+               
+            }
+        }
+        }
+    }
+}
+
+
+

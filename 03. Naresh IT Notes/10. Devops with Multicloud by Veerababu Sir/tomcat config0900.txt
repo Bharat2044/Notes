@@ -1,0 +1,58 @@
+What is Tomcat?
+
+Tomcat is an open-source web server and servlet. The Apache Software Foundation has developed it. It is used widely for hosting Java-based applications on the web. It is built on Java technologies and implements the Java Servlet and JavaServer Pages (JSP)
+
+################Tomcat#########
+
+#Install tomcat 
+
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.86/bin/apache-tomcat-9.0.86.tar.gz
+
+#untar  tar -xvzf <apachetomcat-tarfile>
+
+
+#Rename it if required   mv <apachetomcat-tarfile> tomcat
+
+tomcat/bin -----sh startup.sh   --to start
+                sh shutdown.sh  -- to stop
+
+default port number of tomcat is 8080
+#to change port number ------ /conf/server.xml
+
+war file should be placed in -------------/tomcat/webapps 
+
+#####################################################
+
+
+custom manager app tomcat --------find / -name context.xml
+
+----after finding the file need to open with vi related manager files 
+
+example -- vi /root/tomcat/webapps/host-manager/META-INF/context.xml
+
+add comment it below two line <!--     -->
+ ex: <!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+     allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+ 
+2.vi /root/tomcat/webapps/manager/META-INF/context.xml
+
+<!--<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+  allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+
+#### login process #########
+#########################################################
+required username and password to login
+
+ tomcat/conf/tomcat-user.xml 
+
+vi tomcat-users.xml and add custom username password 
+
+#ADD BELOW CONTENT   
+
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+  <user username="deployer" password="deployer" roles="manager-script"/>
+  <user username="tomcat" password="s3cret" roles="manager-gui"/>

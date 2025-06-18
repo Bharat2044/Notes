@@ -1,0 +1,30 @@
+
+StandAlone project with collection as transferable object 
+collection and file as mini data base  
+
+Store employee objects as one group based on their department
+We must able to retrieve the a particular employee based on given 
+department and eno randomly. Then we must able to retrieve/remove/update 
+this object data quickly
+
+In this project you must use
+	1. All OOP concepts
+		1. Abstraction
+		2. Inheritance
+		3. Polymorphism
+		4. Encapulation
+		
+	2. Application must be 
+		1. Strongly encapsulated
+		2. High Cohesion
+		3. Loosely coupled 
+		4. Runtime polymorphic application
+		
+	3. with strongly exception handling mechanism	
+		  
+
+		  
+		  
+		  
+		  
+		  

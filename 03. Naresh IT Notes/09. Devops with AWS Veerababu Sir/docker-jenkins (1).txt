@@ -1,0 +1,70 @@
+
+---------------------------------------------------------------------------------------------------------------------------
+-------------------jenkins with docker ----------------------------------------------------------------------------
+jenkins Docker
+
+
+Pre-requistes:
+1. Jenkins is up and running
+2. Docker installed on Jenkins instance. Click here to for integrating Docker and Jenkins
+3. Docker and Docker pipelines plug-in are installed
+4. Repo created in ECR, Click here to know how to do that.
+5. Make sure port 8096 is opened up in firewall rules. 
+6. Create an IAM role with AmazonEC2ContainerRegistryFullAccess policy, attach to Jenkins EC2 instance
+7. Make sure AWS cli is installed in Jenkins instance.
+
+plugins 
+
+docker 
+
+ecr
+
+Jenkins pipeline to automate the following:
+- Automating builds
+- Automating Docker image builds
+- Automating Docker image upload into AWS ECR
+- Automating Docker container provisioning
+
+
+
+
+
+pipeline {
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+         stage('Clone repository') { 
+            steps { 
+                git branch: 'main', credentialsId: 'git', url: 'https://github.com/nareshdevopscloud/jenkins-dockerbuild.git'
+            }
+        }
+
+
+     stage('maven install') { 
+            steps { 
+                sh 'mvn install'
+        }
+        stage('Build') { 
+            steps { 
+                sh '''docker build -t test2 .
+                      docker rm -f $(docker ps -aq)
+                      docker run -d -p 8081:80 test
+                      docker system prune -a
+                      '''
+                
+            }
+        }
+        
+        stage('push to ecr ') {
+            steps {
+                sh '''
+                aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 987075663466.dkr.ecr.us-east-1.amazonaws.com
+                docker tag test:latest 987075663466.dkr.ecr.us-east-1.amazonaws.com/test2:latest
+                docker push 987075663466.dkr.ecr.us-east-1.amazonaws.com/test2:latest
+                '''
+            }
+            }
+        }
+    }

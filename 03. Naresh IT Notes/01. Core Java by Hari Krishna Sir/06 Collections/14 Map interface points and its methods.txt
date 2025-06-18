@@ -1,0 +1,184 @@
+Map<E> interface, its sub interfaces points and its methods
+============================================================
+	1) Map is a root interface of map hierarchy.
+		The collection with mappings.
+	
+	2) It is part of Collections Framework available from Java 1.2v 
+	
+	3) If we want to store objects with mappings, it means 
+		if we want to store (key, value) pair table format 
+		we must choose Map interface and its implementation classes.
+	    
+	4) Map interface does not maintain insertion order*
+		and does not have index.     
+	
+	5) Map interface has one sub interface
+		that is SortedMap and its has 
+		another sub interface that is NavigableMap
+	
+	6) SortedMap interface is for storing entries
+		in keys based sorting order. It is also available from Java 1.2v
+	
+	7) NavigableMap is given from Java 6v, for adding 
+		more navigation methods to SortedMap.	
+			
+	8) Map interface has 7 implemented classes (5 are CF classes and 2 are legacy classes)
+	       HashMap<K,V>, LinkedHashMap<K,V>, EnumMap<K,V>
+	       WeakHashMap<K,V>, IdentityHashMap<K,V>
+	       Hashtable<K,V>, Properties
+	   
+	9) SortedMap and NavigableMap has only one implementation class
+			TreeMap<K, V>        
+	
+	===========================================================================
+						Map<K, V>
+						
+			SortedMap<K,V>
+			
+		   NavigableMap<K,V>
+		   
+	===========================================================================
+							AbatractMap<K,V>		Dictionary<K,V>
+
+	===========================================================================
+													
+													
+			TreeMap<K,V>	HashMap<K,V>    EnumMap<K,V>			Hashtable<K,V>
+									
+						  LinkedHashMap<K,V>     WeakHashMap<K,V>		Properties
+						  												
+								  			IdentityHashMap<K,V>
+								  			
+	===========================================================================
+		-> We must choose Hashtable<K,V> to store only unique entries 
+			in multithreaded application with thread safety. HashMap is the 
+			alternative class for Hashtable. HashMap is given without thread safety
+			
+			Hashtable does not maintain insertion order. Internally it
+			stores entries in keys hash code order that is returned by 
+			Object.hashCode() method either from current adding key class or 
+			from java.lang.Object class. 
+
+		-> We must choose HashMap<K,V> to store only unique entries 
+			in single thread application or in method local operation 
+			without worrying about insertion order. Internally it
+			stores entries in keys hash code order that is returned by 
+			Object.hashCode() method either from current adding key class or 
+			from java.lang.Object class. 
+	
+		-> We must choose LinkedHashMap<K,V> to store only unique entries 
+			in insertion order.
+		
+		-> We must choose WeakHashMap<K,V> to store only unique entries 
+			with weak references, it means if we want to remove entries by garbage collector
+			when there is no external references to keys we must choose WeakHashMap<k, V>
+			
+		-> We must choose IdentityHashMap<K,V> to store only unique entries 
+			based on key object reference wise hash code only. It means like other maps
+			this map does not use Object class hashCode() method, instead it uses 
+			System.identityHashCode(key)
+
+		-> We must choose EnumMap<K,V> to store only one enum's Named constants
+			as keys and any type of object as values.
+		
+		-> We must choose TreeMap<K,V> for storing entries in sorting order(ASE or DESC)
+			based on keys natural sorting order or given custom sorting order
+			
+		-> We must choose Properties to store only string based unique entries 
+			as a property name and value for storing them permanently in a file
+			and later reading them from a file.			
+
+Map<E> methods ()
+====================================================================================	
+	1) finding empty or not
+			public boolean isEmpty()
+	
+	2) adding one entry
+			public V put(K k, V v)
+		
+	3) adding multiple entries
+			public void putAll(Map<? extends K, ? extends V> map)
+	 
+	4) searching for key
+			public boolean containsKey(K k)
+	
+	5) searching for value
+			public boolean containsValue(V v)
+	
+	6) removing one entry	
+			public V remove(Object k)
+			
+	7) removing all entries and making Map empty
+			public void clear()
+		 	
+	8) counting objects
+			public int size()
+					
+	9) retrieving only value 
+			public V get(K k)
+			
+	10) retrieving all keys		
+			public Set<K> keySet()	
+	
+	11) retrieving all values		
+			public Collection<V> values()	
+	
+	12) retrieving all entries		
+			public Set<Map.Entry<K, V>> entrySet()	
+		
+	13) retrieving hash code of this collection
+			public int hashCode()
+					
+	14) comparing two collections
+			public boolean equals(Object obj)
+	
+		
+					+	Java 8v new methods +  
+							
+	15)	public default V 		putIfAbsent(K key, V value)	
+					
+	16)	public default V 		merge(K key,V value, BiFunction<? super V,​? super V,​? extends V> remappingFunction)
+	17)	public default V 		compute(K key, BiFunction<? super K,​? super V,​? extends V> remappingFunction)
+	18)	public default V 		computeIfPresent(K key,BiFunction<? super K,​? super V,​? extends V> remappingFunction)	
+	19)	public default V 		computeIfAbsent(K key,Function<? super K,​? extends V> mappingFunction)
+		
+	20)	public default V 		replace(K key, V value)
+	21)	public default boolean	replace(K key, V oldValue, V newValue)
+	22)	public default void		replaceAll(BiFunction<? super K,? super V,? extends V> function)
+		
+	23)	public default boolean	remove(Object key, Object value)
+	
+	24)	public default V 		getOrDefault(Object key, V defaultValue)
+	
+	25)	public default void 	forEach(BiConsumer<? super K,? super V> action)
+								  			
+	   				+ 	Java 9 methods 	+
+   				
+   	26) Creating unmodifiable (immutable) collection with given elements	
+   		public static <K,V> Map<K,V>	of();
+		public static <K,V> Map<K,V>	of(K k1, V v1)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8, K k9, V v9)
+		public static <K,V> Map<K,V>	of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8, K k9, V v9, K k10, V v10)
+   		public static <K,V> Map<K,V>	ofEntries(Map.Entry<? extends K,? extends V>... entries)
+   		
+   		public static <K,V> Map.Entry<K,V> entry(K k,V v)
+
+   				+ Java 10 method +
+   				
+  	27) Creating unmodifiable (immutable) Map with the entries of given map				
+		public static <K,V> Map<K,V> copyOf(Map<? extends K,? extends V> map)
+
+
+
+
+
+	
+		

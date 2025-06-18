@@ -1,0 +1,169 @@
+Step #1: Create a folder "project2" in D:\01CJ\01JB folder
+
+Step #2: Create a two folders "src" and "bin" in project2 folder
+		for saving .java files and .class files respectively
+
+Step #3: In src filder, create folders with package structure as you menstioned in .java file
+		
+		D:01\CJ\01JB\Project2
+				├───bin
+				└───src
+				    └───com
+					└───nit
+					    └───hk
+						└───ao
+						    ├───blogic
+						    │   ├───add
+						    │   ├───div
+						    │   ├───mul
+						    │   └───sub
+						    └───user
+
+Step #4: Develop java files and save them in the respective package folder
+	----------------------- Addition.java -------------------------------------------
+		package com.nit.hk.ao.blogic.add;
+
+		public class Addition {
+		    public static void add(int a, int b) {
+			   int c = a  + b;
+			   System.out.println("Addition result: "+c);
+		    }
+		}
+	----------------------- Subtraction.java -------------------------------------------
+		package com.nit.hk.ao.blogic.sub;
+
+		public class Subtraction {
+		    public static void sub(int a, int b) {
+			   int c = a  - b;
+			   System.out.println("Subtraction result: "+c);
+		    }
+		}	
+	----------------------- Multiplication.java -------------------------------------------
+		package com.nit.hk.ao.blogic.mul;
+
+		public class Multiplication {
+		    public static int mul(int a, int b) {
+			   int c = a * b;
+			   return c;
+		    }
+		}	
+	----------------------- Division.java -------------------------------------------
+		package com.nit.hk.ao.blogic.div;
+
+		public class Division {
+		    public static int div(int a, int b) {
+			   int c = a / b;
+			   return c;
+		    }
+		}	
+	----------------------- Calc.java -------------------------------------------
+		package com.nit.hk.ao.user;
+
+		import com.nit.hk.ao.blogic.add.Addition;
+		import com.nit.hk.ao.blogic.sub.Subtraction;
+		import com.nit.hk.ao.blogic.mul.Multiplication;
+		import com.nit.hk.ao.blogic.div.Division;
+
+		class Calc {
+		   public static void main(String[] args) {
+			 Addition.add(10, 20);
+			 Subtraction.sub(10, 20);
+			 int mulRes = Multiplication.mul(10, 20);
+			 int divRes = Division.div(10, 20);
+		       
+			 System.out.println("Multiplication result: "+ mulRes);
+			 System.out.println("Division result: "+ divRes);
+			
+		    }
+		}
+
+After saving above Java file in their respective package folders 
+the project folder is look like as below
+	D:01\CJ\01JB\Project2
+		├───bin
+		└───src
+		    └───com
+			└───nit
+			    └───hk
+				└───ao
+				    ├───blogic
+				    │   ├───add
+				    │   │       Addition.java
+				    │   │
+				    │   ├───div
+				    │   │       Division.java
+				    │   │
+				    │   ├───mul
+				    │   │       Multiplication.java
+				    │   │
+				    │   └───sub
+				    │           Subtraction.java
+				    │
+				    └───user
+					    Calc.java
+
+Step #5: Compiling 
+	- Open command prompt with the path D:\01CJ\01JB\Project2
+	- Run javac command as shown below
+		D:\01CJ\01JB\Project2>set classpath=.;src
+		D:\01CJ\01JB\Project2>javac -d bin src\com\nit\hk\ao\user\Calc.java
+		
+	- Then Compiler automatically compiles all java files and places thier
+	  .class files with package folders in bin as shown below
+		D:\01CJ\01JB\Project2
+			├───bin
+			│   └───com
+			│       └───nit
+			│           └───hk
+			│               └───ao
+			│                   ├───blogic
+			│                   │   ├───add
+			│                   │   │       Addition.class
+			│                   │   │
+			│                   │   ├───div
+			│                   │   │       Division.class
+			│                   │   │
+			│                   │   ├───mul
+			│                   │   │       Multiplication.class
+			│                   │   │
+			│                   │   └───sub
+			│                   │           Subtraction.class
+			│                   │
+			│                   └───user
+			│                           Calc.class
+			│
+			└───src
+			    └───com
+				└───nit
+				    └───hk
+					└───ao
+					    ├───blogic
+					    │   ├───add
+					    │   │       Addition.java
+					    │   │
+					    │   ├───div
+					    │   │       Division.java
+					    │   │
+					    │   ├───mul
+					    │   │       Multiplication.java
+					    │   │
+					    │   └───sub
+					    │           Subtraction.java
+					    │
+					    └───user
+						    Calc.java
+
+Step #6: execution
+	D:\01CJ\01JB\Project2>java com.nit.hk.ao.user.Calc
+		Error: Could not find or load main class com.nit.hk.ao.user.Calc
+		Caused by: java.lang.ClassNotFoundException: com.nit.hk.ao.user.Calc
+
+	D:\01CJ\01JB\Project2>set classpath=.;src;bin
+
+	D:\01CJ\01JB\Project2>java com.nit.hk.ao.user.Calc
+		Addition result: 30
+		Subtraction result: -10
+		Multiplication result: 200
+		Division result: 0
+
+	D:\01CJ\01JB\Project2>

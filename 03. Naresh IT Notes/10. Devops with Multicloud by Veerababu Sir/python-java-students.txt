@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask API Test</title>
+</head>
+<body>
+    <h2>Flask API Test</h2>
+
+    <!-- Fetch Users -->
+    <button onclick="getUsers()">Get Users</button>
+    <pre id="userList"></pre>
+
+    <!-- Add User -->
+    <h3>Add User</h3>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <button onclick="addUser()">Add User</button>
+    <p id="addResponse"></p>
+
+    <!-- Update User -->
+    <h3>Update User</h3>
+    <input type="number" id="updateId" placeholder="User ID">
+    <input type="text" id="updateName" placeholder="New Name">
+    <input type="email" id="updateEmail" placeholder="New Email">
+    <button onclick="updateUser()">Update User</button>
+    <p id="updateResponse"></p>
+
+    <!-- Delete User -->
+    <h3>Delete User</h3>
+    <input type="number" id="deleteId" placeholder="User ID">
+    <button onclick="deleteUser()">Delete User</button>
+    <p id="deleteResponse"></p>
+
+    <script>
+        const baseURL = "http://localhost:5000";  // Change this
+
+        // Fetch Users
+        function getUsers() {
+            fetch(`${baseURL}/users`)
+                .then(response => response.json())
+                .then(data => document.getElementById("userList").innerText = JSON.stringify(data, null, 2))
+                .catch(error => console.error("Error:", error));
+        }
+
+        // Add User
+        function addUser() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            fetch(`${baseURL}/users/add`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("addResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Update User
+        function updateUser() {
+            const id = document.getElementById("updateId").value;
+            const name = document.getElementById("updateName").value;
+            const email = document.getElementById("updateEmail").value;
+
+            fetch(`${baseURL}/users/update/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("updateResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Delete User
+        function deleteUser() {
+            const id = document.getElementById("deleteId").value;
+
+            fetch(`${baseURL}/users/delete/${id}`, {
+                method: "DELETE"
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("deleteResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
+
+[root@ip-172-31-86-151 ~]# vi /var/www/html/index.html 
+[root@ip-172-31-86-151 ~]# systemctl restart httpd
+[root@ip-172-31-86-151 ~]# vi /var/www/html/index.html 
+[root@ip-172-31-86-151 ~]# systemctl restart httpd
+[root@ip-172-31-86-151 ~]# cat /var/www/html/index.html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask API Test</title>
+</head>
+<body>
+    <h2>Flask API Test</h2>
+
+    <!-- Fetch Users -->
+    <button onclick="getUsers()">Get Users</button>
+    <pre id="userList"></pre>
+
+    <!-- Add User -->
+    <h3>Add User</h3>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <button onclick="addUser()">Add User</button>
+    <p id="addResponse"></p>
+
+    <!-- Update User -->
+    <h3>Update User</h3>
+    <input type="number" id="updateId" placeholder="User ID">
+    <input type="text" id="updateName" placeholder="New Name">
+    <input type="email" id="updateEmail" placeholder="New Email">
+    <button onclick="updateUser()">Update User</button>
+    <p id="updateResponse"></p>
+
+    <!-- Delete User -->
+    <h3>Delete User</h3>
+    <input type="number" id="deleteId" placeholder="User ID">
+    <button onclick="deleteUser()">Delete User</button>
+    <p id="deleteResponse"></p>
+
+    <script>
+        const baseURL = "http://localhost:5000";  // Change this
+
+        // Fetch Users
+        function getUsers() {
+            fetch(`${baseURL}/users`)
+                .then(response => response.json())
+                .then(data => document.getElementById("userList").innerText = JSON.stringify(data, null, 2))
+                .catch(error => console.error("Error:", error));
+        }
+
+        // Add User
+        function addUser() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            fetch(`${baseURL}/users/add`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("addResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Update User
+        function updateUser() {
+            const id = document.getElementById("updateId").value;
+            const name = document.getElementById("updateName").value;
+            const email = document.getElementById("updateEmail").value;
+
+            fetch(`${baseURL}/users/update/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("updateResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Delete User
+        function deleteUser() {
+            const id = document.getElementById("deleteId").value;
+
+            fetch(`${baseURL}/users/delete/${id}`, {
+                method: "DELETE"
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("deleteResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
+
+[root@ip-172-31-86-151 ~]# vi /var/www/html/index.html 
+[root@ip-172-31-86-151 ~]# systemctl restart httpd
+[root@ip-172-31-86-151 ~]# cat /var/www/html/index.html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask API Test</title>
+</head>
+<body>
+    <h2>Flask API Test</h2>
+
+    <!-- Fetch Users -->
+    <button onclick="getUsers()">Get Users</button>
+    <pre id="userList"></pre>
+
+    <!-- Add User -->
+    <h3>Add User</h3>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <button onclick="addUser()">Add User</button>
+    <p id="addResponse"></p>
+
+    <!-- Update User -->
+    <h3>Update User</h3>
+    <input type="number" id="updateId" placeholder="User ID">
+    <input type="text" id="updateName" placeholder="New Name">
+    <input type="email" id="updateEmail" placeholder="New Email">
+    <button onclick="updateUser()">Update User</button>
+    <p id="updateResponse"></p>
+
+    <!-- Delete User -->
+    <h3>Delete User</h3>
+    <input type="number" id="deleteId" placeholder="User ID">
+    <button onclick="deleteUser()">Delete User</button>
+    <p id="deleteResponse"></p>
+
+    <script>
+        const baseURL = "http://localhost:5000";`  // Change this
+
+        // Fetch Users
+        function getUsers() {
+            fetch(`${baseURL}/users`)
+                .then(response => response.json())
+                .then(data => document.getElementById("userList").innerText = JSON.stringify(data, null, 2))
+                .catch(error => console.error("Error:", error));
+        }
+
+        // Add User
+        function addUser() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            fetch(`${baseURL}/users/add`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("addResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Update User
+        function updateUser() {
+            const id = document.getElementById("updateId").value;
+            const name = document.getElementById("updateName").value;
+            const email = document.getElementById("updateEmail").value;
+
+            fetch(`${baseURL}/users/update/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("updateResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Delete User
+        function deleteUser() {
+            const id = document.getElementById("deleteId").value;
+
+            fetch(`${baseURL}/users/delete/${id}`, {
+                method: "DELETE"
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("deleteResponse").innerText = JSON.stringify(data))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

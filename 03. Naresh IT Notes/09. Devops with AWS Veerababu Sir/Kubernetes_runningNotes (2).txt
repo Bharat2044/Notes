@@ -1,0 +1,878 @@
+----------------------------------- Kubernetes---------------------------------------------
+
+Kubernetes is a container orchestration system that was initially designed by Google to help scale
+containerized applications in the cloud. Kubernetes can manage the lifecycle of containers, creating and
+destroying them depending on the needs of the application, as well as providing a host of other features.
+Kubernetes has become one of the most discussed concepts in cloud-based application development,
+and the rise of Kubernetes signals a shift in the way that applications are developed and deployed.
+In general, Kubernetes is formed by a cluster of servers, called Nodes, each running Kubernetes agent
+processes and communicating with one another. The Master Node contains a collection of processes
+called the control plane that helps enact and maintain the desired state of the Kubernetes cluster, while
+Worker Nodes are responsible for running the containers that form your applications and services.
+
+
+
+## A Kubernetes cluster is composed of two separate planes:
+
+Kubernetes control plane—manages Kubernetes clusters and the workloads running on them. Include components like the API Server, Scheduler, and Controller Manager.
+Kubernetes Workernode that can run containerized workloads. Each node is managed by the kubelet, an agent that receives commands from the control plane. --
+
+==============================================================
+## Master Node or Control Node compomnents  ##
+
+
+## API Server -------
+Provides an API that serves as the front end of a Kubernetes control plane. It is responsible for handling external and internal requests—determining whether a request is valid and then processing it. The API can be accessed via the kubectl command-line interface or other tools like kubeadm, and via REST calls.
+
+## Scheduler :------ 
+This component is responsible for scheduling pods on specific nodes according to automated workflows and user defined conditions, which can include resource requests
+
+## etcd :-----
+A key-value database that contains data about your cluster state and configuration. Etcd is fault tolerant and distributed.
+
+## Controller:-----
+It receives information about the current state of the cluster and objects within it, and sends instructions to move the cluster towards the cluster operator’s desired state. 
+
+====================================================================
+## Worker Node Components ##
+
+## kubelet: ----
+Each node contains a kubelet, which is a small application that can communicate with the Kubernetes control plane. The kubelet is responsible for ensuring that containers specified in pod configuration are running on a specific node, and manages their lifecycle.. It executes the actions commanded by your control plane
+
+## Kube Proxy :---
+All compute nodes contain kube-proxy, a network proxy that facilitates Kubernetes networking services. It handles all network communications outside and inside the cluster, forwarding traffic or replying on the packet filtering layer of the operating system.
+
+## Container Runtime Engine :---
+Each node comes with a container runtime engine, which is responsible for running containers. Docker is a popular container runtime engine, but Kubernetes supports other runtimes that are compliant with Open Container Initiative, including CRI-O and rkt.
+
+===============================================================================
+##  CORE COmponents ##
+
+#Nodes: ----
+Nodes are physical or virtual machines that can run pods as part of a Kubernetes cluster. A cluster can scale up to 5000 nodes. To scale a cluster’s capacity, you can add more nodes.
+
+#POD:--------
+
+Pods—pods are the smallest unit provided by Kubernetes to manage containerized workloads.  A pod typically includes several containers, which together form a functional unit or microservice.
+
+======================================================================================
+What is Minikube?
+Minikube is a tool that sets up a Kubernetes environment on a local PC or laptop
+minikube quickly sets up a local Kubernetes cluster on macOS, Linux, and Windows. We proudly focus on helping application developers and new Kubernetes users.
+
+
+---Installation Process Minikube ---
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+to start minikube---minikube start 
+to check status ----minikube status 
+to update       --- minikube update-context
+
+What is Kubectl?
+
+kubectl is the Kubernetes-specific command line tool that lets you communicate and control Kubernetes clusters. Whether you're creating, managing, or deleting resources on your Kubernetes platform, kubectl is an essential tool.
+
+----------kubectl Installation-----------
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl  -----Make the kubectl binary executable
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+=============================================================
+# EKS cluster Setup Process 
+
+  # Create an IAM Role and attache it to EC2 instance    
+   `Note: create IAM user with programmatic access if your bootstrap system is outside of AWS`   
+   IAM user should have access to   
+   IAM   
+   EC2   
+   VPC    
+   CloudFormation
+
+  # Create your cluster and nodes 
+   ```sh
+   eksctl create cluster --name cluster-name  \
+   --region region-name \
+   --node-type instance-type \
+   --nodes-min 2 \
+   --nodes-max 2 \ 
+   --zones <AZ-1>,<AZ-2>
+   
+   example:
+   eksctl create cluster --name headless \
+      --region ap-south-1 \
+   --node-type t2.small \
+
+# after create cluster to update it
+ aws eks update-kubeconfig --region <region> --name <cluster name>
+
+ ex: aws eks update-kubeconfig --region ap-south-1 --name naresh
+
+ # To delete the EKS clsuter 
+    
+   eksctl delete cluster naresh --region ap-south-1
+   
+   
+
+
+
+
+
+--------------------------Kubernetes workloads----------------------------------------------
+Imperative:
+
+kubectl run pod --image nginx
+------------------------- pods ---------------------------------------------------------------
+
+kubect apply -f pod <.yaml>
+
+kubectl get pods
+
+kubectl get pods -o wide    # to see the 
+
+kubectl delete pod <pod name>
+
+kubectl describe pods <name of the pod>  # to know more details about pod 
+
+kubectl exec <pod-name>  -it -- /bin/sh 
+
+
+---Pod.yaml---
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+      app: webapp
+      type: front-end
+spec:
+  containers:
+  - name: nginx-container 
+    image: nginx
+
+
+
+
+====================================================================
+#Kuberentes Service#:
+
+Kubernetes, a Service is a method for exposing a network application that is running as one or more Pods in your cluster.
+
+git hub link for dervice files : https://github.com/CloudTechDevOps/Kubernetes/tree/main/day-3-services
+--Types:
+
+# ClusterIP : This is the default type for service in Kubernetes.
+
+As indicated by its name, this is just an address that can be used inside the cluster.
+
+# NodePort: A NodePort differs from the ClusterIP in the sense that it exposes a port in each Node.
+
+When a NodePort is created, kube-proxy exposes a port in the range 30000-32767:
+
+# LoadBlancer :
+
+This service type creates load balancers in various Cloud providers like AWS, GCP, Azure, etc., to expose our application to the Internet.
+
+
+
+##Kubernetes has several port configurations for Services:
+
+#Port: the port on which the service is exposed. Other pods can communicate with it via this port.
+
+#TargetPort: the actual port on which your container is deployed. The service sends requests to this port and the pod container must listen to the same port.
+
+#NodePort: exposes a service externally to the cluster. So the application can be accessed via this port externally. By default, it’s automatically assigned during deployment.
+
+========================================================================================================
+
+
+## Horizonal Pod Auto Scaling ##
+
+
+In Kubernetes, a HorizontalPodAutoscaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand.
+
+Horizontal scaling means that the response to increased load is to deploy more Pods. This is different from vertical scaling, which for Kubernetes would mean assigning more resources (for example: memory or CPU) to the Pods that are already running for the workload.
+
+If the load decreases, and the number of Pods is above the configured minimum, the HorizontalPodAutoscaler instructs the workload resource (the Deployment, StatefulSet, or other similar resource) to scale back down.
+git hub link for hpa files : "https://github.com/CloudTechDevOps/Kubernetes/tree/main/day-4-horizonalScaling"
+
+===========================================================================
+# Metric Server deployment ##
+
+The Kubernetes Metrics Server is an aggregator of resource usage data in your cluster, and it isn't deployed by default in Amazon EKS clusters.
+
+we need to deploy by following process 
+
+#Deploy the Metrics Server with the following command:
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+#Verify that the metrics-server deployment is running the desired number of Pods with the following command.
+ 
+kubectl get deployment metrics-server -n kube-system
+
+kubectl top pod # to see pod load
+
+kubectl top node # to see node load 
+
+-----------------------------------ingress-------------------------
+
+What is an Ingress?
+In Kubernetes, an Ingress is an object that allows access to your Kubernetes services from outside the Kubernetes cluster. You configure access by creating a collection of rules that define which inbound connections reach which services.
+
+kubectl create namespace ingress-nginx # create name space for ingress-nginx
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.1/deploy/static/provider/cloud/deploy.yaml     ----to install ingress controller yaml 
+
+
+Create Below deployment file git hub link https://github.com/CloudTechDevOps/Kubernetes/tree/main/day-5-ingress
+
+create deployemnt file for path-1
+
+create deployment file for path-2
+
+create ingress reosurce file 
+
+Note:
+after deploy the above files just run below command 
+kubectl get ingress
+we are able to seec load blancer link and acces by giving path along 
+
+
+---------------------------------------------- RBAC process ----------------------------------------------------------
+
+
+aws configure --profile IAMuser
+
+AKIA6ODUZCK4H2GTR5JT
+
+9AYwm23X/gNFyl73B86kMxJDJNWvj5uIKpl1MO9X
+
+
+aws eks update-kubeconfig --name naresh --profile IAMuser  #user 
+
+aws eks update-kubeconfig --name naresh  #for defulat one 
+
+step-1 user need to create and generate keys 
+
+step-2 create kuberenetes Role 
+
+step-3 cretae kuberentes role binding to bind role and group
+
+step-4 add usr arn into config map file
+
+
+# Role
+==============================================================
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: developer-role
+rules:
+  - apiGroups: [""] # "" indicates the core API group ["apps"]
+    resources: ["ConfigMap"]
+    verbs: ["get", "list"]
+  - apiGroups: [""] # "" indicates the core API group ["apps"]
+    resources: ["pods"]
+    verbs: ["get", "list",]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list"]
+
+
+
+# Role Binding to map role and group
+==========================================
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: default
+subjects:
+  - kind: Group
+    name: "developer"
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: developer-role
+  apiGroup: rbac.authorization.k8s.io
+
+
+
+
+
+#edit command and add belwow user details
+
+#kubectl edit cm aws-auth -n kube-system
+
+#aws auth config
+===============================================
+
+   - userarn: arn:aws:iam::992382358200:user/eks
+     username: eks
+     groups:
+     - developer
+
+=========================================================
+
+
+kubectl get rb 
+kubectl get rolebinding
+kubectl api-resources
+
+# to add user into aws-auth file 
+kubectl edit cm aws-auth -n kube-system
+
+kubectl get cm -n kube-system
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+
+----for example below reference ------
+
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::992382358200:role/eksctl-naresh-nodegroup-ng-bbb93ed-NodeInstanceRole-9GWNpfucPXRt
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::992382358200:user/eks
+      username: eks
+      groups:
+       - developer
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-03-22T02:22:59Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "344678"
+  uid: 8167447c-eb81-4108-8653-690369d98c4f
+
+====================================================================
+                    
+
+ ## schedule ##
+
+Schedulers 
+ ## schedule ##
+
+Scheduling overview
+A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
+
+1. Node Selector
+
+2. Nodeaffinity 
+
+3. Daemonset
+
+4. Taint and Toleration  
+
+
+1.Nodeselector 
+
+NodeSelector is the simplest recommended form of node selection constraint. You can add the nodeSelector field to your Pod specification and specify the node labels you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify.
+
+# to label the node 
+kubectl label nodes <node-name> <label-key>=<label-value>
+
+Example: 
+
+kubectl label nodes ip-192-168-43-22.ap-south-1.compute.internal size=large
+
+
+# to unlabel
+kubectl label nodes <node-name> <label-key>=<label-value>-
+kubectl label nodes ip-192-168-43-22.ap-south-1.compute.internal size=large-
+
+# to list 
+
+kubectl get nodes --show-labels
+
+Labels are casesensitve 
+
+
+Ex:Below Pod node selector 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+      app: webapp
+      type: front-end
+spec:
+  containers:
+  - name: nginx-container 
+    image: nginx
+  nodeSelector:
+    size: Large
+
+Note:if pod label is matching  it will schedule on to labled node only
+     if my pod label is not matching it will not schedule on any node always trying to schedule on labeld node only otherwise it will not scheduled 
+     
+
+===============================================================================
+
+
+2.Node affinity
+Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels. There are two types of node affinity:
+
+a.requiredDuringSchedulingIgnoredDuringExecution: The scheduler can't schedule the Pod unless the rule is met. This functions like nodeSelector, but with a more expressive syntax.
+b.preferredDuringSchedulingIgnoredDuringExecution: The scheduler tries to find a node that meets the rule. If a matching node is not available, the scheduler still schedules the Pod.
+
+  
+
+a.requiredDuringSchedulingIgnoredDuringExecution
+***it will schedule if matches the pod and node label only otherwise it will not schedule
+ 
+Ex: a.Schedule a Pod using required node affinity
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd            
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+
+
+b.preferredDuringSchedulingIgnoredDuringExecution:
+
+******if label match it will create in matched node or another node
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd          
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+
+======================================================================
+3. Daemonset: 
+
+A Daemonset is another controller that manages pods like Deployments, ReplicaSets, and StatefulSets. It was created for one particular purpose: ensuring that the pods it manages to run on all the cluster nodes.pod is going to schedule all available nodes 
+
+ex : if we have three nodes same pod is going to schedule on three nodes 
+
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: test-nginx
+        image: nginx
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+========================================================
+#Taint and tolleration 
+
+Taints are the opposite -- they allow a node to repel a set of pods. Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints.
+
+Two types:
+Noschedule:
+Noexecutive
+
+# Below Commands are for Node Taint and Untaint proces :
+
+
+kubectl taint node ip-192-168-43-22.ap-south-1.compute.internal app=blue:NoSchedule #taint 
+kubectl taint node ip-192-168-43-22.ap-south-1.compute.internal app=blue:NoSchedule- # untaint
+
+kubectl taint node ip-192-168-43-22.ap-south-1.compute.internal app=blue:Noexecutive taint
+kubectl taint node ip-192-168-43-22.ap-south-1.compute.internal app=blue:Noexecutive-  # untaint
+
+kubectl describe node ip-192-168-45-254.ap-south-1.compute.internal | grep Taints  #to list tainted nodes
+
+
+toleration pod example:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "blue"
+    effect: "NoSchedule"
+
+
+IMP Note:
+
+*Toleration pod only create into specfic tainted node if labels match
+
+*The taint effect defines how a tainted node reacts to a pod without appropriate toleration. It must be one of the following effects; 
+
+*NoSchedule—The pod will not get scheduled to the node without a matching toleration. (willnot schedule new pods on tainted node but runinng pods will not delete also after enable taint to nodes)
+
+*NoExecute—This will immediately evict all the pods without the matching toleration from the node (no new pods will schedule will and also delete runinng pods also after enable taint to nodes)
+
+
+
+
+
+
+
+
+===============================================volume============================
+What is a Kubernetes volume?
+A Kubernetes volume is a directory containing data accessible to containers in a given pod, 
+the smallest deployable unit in a Kubernetes cluster. 
+Within the Kubernetes container orchestration and management platform, 
+volumes provide a plugin mechanism that connects ephemeral containers with persistent data storage.
+
+A Kubernetes volume persists until its associated pod is deleted. 
+When a pod with a unique identification is deleted, the volume associated with it is destroyed. 
+If a pod is deleted but replaced with an identical pod, a new and identical volume is also created.
+
+Step - 1
+a) Create an EKS cluster with the clusteconfig file I provided.
+b) Install helm in your local machine. Below is the link -> https://helm.sh/docs/intro/install/
+c) Connect to your EKS cluster. Check the connection.
+
+
+
+Three types of create volume approaches 
+
+  1. Static hots path (pv,pvc,deployment) not recomanded if node will delete volumes also delete
+  2. Static cloud ebs(pv,pvc,deployment) static approach no effect even node will be deleted still volum persistent but ec2 volume need to create manually 
+  3. Dynamic volume provision create by Storage class (pvc,storage class) here pv is going to create by Storage class
+  
+-----helm install-----
+
+https://github.com/helm/helm/releases
+
+wget https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz
+
+tar -zxvf helm-v3.14.0-linux-amd64.tar.gz
+
+mv linux-amd64/helm /usr/local/bin/helm
+
+chmod 777 /usr/local/bin/helm  # give permissions 
+
+helm version 
+
+#Note: after create cluster we have to give Iam ec2 full access or admin access to node group IAM role then only ebs volume able to create by node 
+
+Step - 2
+Install CSI driver in EKS cluster by following below steps.
+a) After connection execute the below commands.
+
+helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+helm repo update
+
+#install aws ebs driver to kubernets 
+helm upgrade --install aws-ebs-csi-driver --namespace kube-system aws-ebs-csi-driver/aws-ebs-csi-driver
+
+#ReadWriteMany#
+If you need to write to the volume, and you may have multiple Pods needing to write to the volume 
+where you'd prefer the flexibility of those Pods being scheduled to different nodes, 
+and ReadWriteMany is an option given the volume plugin for your K8s cluster, use ReadWriteMany.
+
+#ReadWriteOnce#
+If you need to write to the volume but either you don't have the requirement that multiple pods should be able to write to it, 
+or ReadWriteMany simply isn't an available option for you, use ReadWriteOnce.
+
+#ReadOnlyMany
+If you only need to read from the volume, and you may have multiple Pods needing to read from the volume 
+where you'd prefer the flexibility of those Pods being scheduled to different nodes, 
+and ReadOnlyMany is an option given the volume plugin for your K8s cluster, use ReadOnlyMany.
+
+If you only need to read from the volume but either you don't have the requirement that multiple pods should be able to read from it,
+ or ReadOnlyMany simply isn't an available option for you, use ReadWriteOnce. 
+In this case, you want the volume to be read-only but the limitations of your volume plugin have forced you to 
+choose ReadWriteOnce (there's no ReadOnlyOnce option). As a good practice, consider the containers.volumeMounts.readOnly
+
+========================================================================================================================
+
+#PVC recalim policies 
+
+reclaim policy : delete # this is defualt one ,which means when ever pvc deleted pv will delete automatically cretaed by storage class but ebs volume will not delete if you want to delete delete it manually 
+
+reclaim policy : retain # it will persistant 
+
+#Types Of Vlume bindings
+
+volumebinding : Immediate # this is default one ,pv is created immdeialty 
+volumebinding : WaitForFirstConsumer  #pv will create only any pod will claim the stoarage only 
+
+
+=============================================================================
+
+# Grafana and Prometheus:
+
+Prometheus collects and stores metric data as time-series data, while Grafana is an analytics and visualization web application that can ingest data from various sources and display it in customizable charts.
+
+For more details:
+
+#Refer below blog
+
+ "https://medium.com/@veerababu.narni232/deployment-of-prometheus-and-grafana-using-helm-in-eks-cluster-22caee18a872"
+
+---------------------------------------HELM Charts--------------------------------------------
+
+Helm is a tool that automates the creation, packaging, configuration, and deployment of Kubernetes applications by combining your configuration files into a single reusable package. 
+
+-----helm install-----
+
+https://github.com/helm/helm/releases
+
+wget https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz
+
+tar -zxvf helm-v3.14.0-linux-amd64.tar.gz
+
+mv linux-amd64/helm /usr/local/bin/helm
+
+chmod 777 /usr/local/bin/helm  # give permissions 
+
+helm version 
+
+------------------------------------------------------
+
+helm create firstproject helloworld   #create sample helmp chart application-- helloworld
+
+helm install <FIRST_ARGUMENT_RELEASE_NAME> <SECOND_ARGUMENT_CHART_NAME>  # run helm
+
+whenever creates the sample project we will get template of kuberentes structure like below 
+
+so we can place our values and images 
+
+ 1 helloworld
+ 2├── charts
+ 3├── Chart.yaml
+ 4├── templates
+ 5│  ├── deployment.yaml
+ 6│  ├── _helpers.tpl
+ 7│  ├── hpa.yaml
+ 8│  ├── ingress.yaml
+ 9│  ├── NOTES.txt
+10│  ├── serviceaccount.yaml
+11│  ├── service.yaml
+12│  └── tests
+13│      └── test-connection.yaml
+14└── values.yaml
+
+helm list -a  # to list helm chart
+
+helm upgrade firstproject helloworld 
+
+helm delete <chart>  # to delete chart
+
+
+For more details:
+
+#Refer below blog
+
+ "https://medium.com/@veerababu.narni232/writing-your-first-helm-chart-for-hello-world-40c05fa4ac5a"
+
+---------------------------------------------------
+
+
+
+
+
+-------------ArgoCD---------------------
+---------------------------------------
+
+Argo CD is a declarative continuous delivery tool for Kubernetes. It can be used as a standalone tool or as a part of your CI/CD workflow to deliver needed resources to your clusters.
+
+Install process
+
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl get pods -n argocd
+
+kubectl get svc -n argocd
+
+kubectl edit svc argocd-server -n argocd
+
+kubectl get svc -n argocd
+
+#access it nodeIp:Nodeport
+
+kubectl get secrets -n argocd
+
+user= admin
+
+kubectl edit secret argocd-initial-admin-secret -n argocd    # to get intial credential to login argocd
+
+
+echo bnFabGx3emtCNjB5dFZQSA== | base64  --decode
+
+
+For more details:
+
+#Refer below blog
+
+
+https://medium.com/@veerababu.narni232/a-complete-overview-of-argocd-with-a-practical-example-f4a9a8488cf9
+
+=================================================================
+
+#Statefulset
+
+StatefulSet is the workload API object used to manage stateful applications.
+
+Manages the deployment and scaling of a set of Pods, and provides guarantees about the ordering and uniqueness of these Pods.
+
+Like a Deployment, a StatefulSet manages Pods that are based on an identical container spec. Unlike a Deployment, a StatefulSet maintains a sticky identity for each of its Pods. These pods are created from the same spec, but are not interchangeable: each has a persistent identifier that it maintains across any rescheduling.
+
+
+Using StatefulSets :
+
+StatefulSets are valuable for applications that require one or more of the following.
+
+Stable, unique network identifiers.
+Stable, persistent storage.
+Ordered, graceful deployment and scaling.
+Ordered, automated rolling updates.
+
+for more details 
+
+#Refer below blog
+
+
+https://medium.com/@veerababu.narni232/what-are-stateful-applications-2a257d876187
+
+========================================================
+
+  #Headless service 
+
+A Headless Service is a variation of the ClusterIP Service, where the clusterIP field is set to None. Unlike traditional services, Headless Services do not use a single Service IP to proxy connections to the Pods. Instead, they allow you to directly connect to Pods without any load balancing intermediary.
+
+Use Cases for Headless Services
+Headless Services are particularly useful in the following scenarios:
+Service Discovery: Some service discovery mechanisms, such as Kubernetes DNS-based service discovery, require direct access to individual Pods. Headless Services provide a convenient way to achieve this.
+Stateful Applications: Applications that require direct access to individual Pods, such as databases or distributed storage systems, can benefit from using Headless Services.
+Custom Load Balancing: If you need to implement custom load balancing logic or use a specific load balancing mechanism, Headless Services allow you to directly access the Pods without relying on Kubernetes' built-in load balancing.
+
+Accessing Pods using Headless Services
+
+example through DNS name:
+
+Once you have created a Headless Service, you can access the Pods directly using their DNS names or IP addresses. 
+The DNS name for each Pod follows the pattern <pod-ip>.<namespace>.pod.cluster.local.
+
+##For example, if you have a Pod with the IP address 10.0.0.5 in the default namespace, you can access it using the DNS name like below 
+
+10-0-0-5.default.pod.cluster.local.  -----dns name
+
+Also
+
+You can also access the Pods directly by their IP addresses, 
+which can be useful for applications that require direct IP-based communication.
+10-0-0-5 --ip of the target pod
+
+
+Conclusion
+Headless Services in Kubernetes offer a unique approach to accessing individual Pods directly, without relying on a load balancer or a single Service IP. This type of service is invaluable in scenarios where direct Pod access is required, such as service discovery mechanisms, stateful applications like databases, or when implementing custom load balancing logic.
+
+By setting the clusterIP field to None, Headless Services bypass the traditional load balancing layer and instead provide a direct connection to individual Pods. This is achieved through the assignment of DNS records for each Pod, allowing you to access them by their DNS names or IP addresses.
+
+kubectl run -i --tty --image busybox:1.28 dns-validate # create pod and access servcice from pod by using nslookup.
+
+example : nslookup<servcie name> nslookup <cluster ip enables servcie name>
+Server:    10.100.0.10
+Address 1: 10.100.0.10 kube-dns.kube-system.svc.cluster.local
+
+you will get result cluster IP only not pod Ips 
+==========================================================
+nslookup<servcie name> nslookup <headless servcie name>
+
+result
+Name:      mysql
+Address 1: 192.168.11.161 mysql-0.mysql.default.svc.cluster.local
+Address 2: 192.168.61.95 mysql-1.mysql.default.svc.cluster.local
+
+
+================================ Probes =====================
+
+
+Kubernetes, the industry-leading container orchestration tool, offers mechanisms to implement robust health checks for your applications. These checks, termed “probes,” act as guardians of your application's well-being, continuously monitoring the health status of your pods and their hosted applications
+
+
+For More deatils 
+
+Refer blog
+
+https://medium.com/@veerababu.narni232/probes-in-kubernetes-5133ebe03475
+
+=========================EFK Stak ===================
+
+When it comes to log management in Kubernetes, the EFK stack stands out as a robust solution. EFK, short for Elasticsearch, Fluent Bit, and Kibana, streamlines the process of collecting, processing and visualizing logs
+
+For more details :
+
+Refer blog
+
+https://medium.com/@veerababu.narni232/setting-up-the-efk-stackwhat-is-efk-stack-7944fb4e56f0
+
+
+Note:
+pleae click below git hub link for all yml files
+
+https://github.com/CloudTechDevOps/Kubernetes
+ 
+
+

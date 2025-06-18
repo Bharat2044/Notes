@@ -1,0 +1,30 @@
+1. Create Github account
+
+create one sample public repo ---> create one fiel
+
+git clone through "https" into your working directory (laptop or ec2)
+
+add your conntent on top of your content
+
+git add .
+git commit -m "sample msg"
+git push
+
+username ad password 
+
+2. create one more repo --> create on file
+
+
+ssh-keygen
+
+copy public key and paste intoi github settings-->sshgpgkeys--> select ssh key and paste it
+
+git clone through "ssh" into your working directory (laptop or ec2)
+
+add your conntent on top of your content
+
+git add .
+git commit -m "sample msg"
+git push
+
+

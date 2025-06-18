@@ -1,0 +1,35 @@
+---------------linux---------------
+
+sudo su - #switch to root 
+
+su - <username> #switch to user 
+
+ex: su - ec2-user
+
+~   home directory 
+
+root ~  root home directory 
+
+cd ..  #back to one step 
+
+ls     list objects  
+
+cd      #chnage directory 
+
+ex: cd <directoryname>
+
+cd ../..  #back to two steps 
+
+pwd     #present working directory 
+
+whoami #user details 
+
+touch # to create file 
+
+mkdir # create directory
+
+cp #copy command 
+
+mv # move and rename also
+
+rm -rf # remove command 

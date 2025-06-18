@@ -1,0 +1,113 @@
+(1)
+[ec2-user@ip-172-31-1-237 ~]$ sudo yum install python3-pip -y                                  
+
+(2)
+sudo pip3 install ansible
+
+(3)
+python3 -m pip install ansible-core
+
+4)
+python3 -m pip install --upgrade ansible-core
+
+5)
+python3 -m pip list | grep ansible
+
+6)
+sudo yum install ansible -y
+
+7)
+ssh-keygen ##gen keys
+
+8)
+[ec2-user@ip-172-31-1-237 ~]$ cd .ssh
+8.1)
+[ec2-user@ip-172-31-1-237 .ssh]$ cat id_rsa.pub
+
+9)
+paste public keys into both node server
+[ec2-user@ip-172-31-1-237 ~]$ cd .ssh
+[ec2-user@ip-172-31-1-237 .ssh]$  vi authorized_keys
+
+10)
+switch to root user
+
+[root@ip-172-31-1-237 ~]$ vi /etc/ansible/ansible.cfg
+ ## paste into vi editor
+[defaults]
+host_key_checking = False
+
+11)
+[root@ip-172-31-1-237 ~]$ vi /etc/ansible/hosts
+## paste both private ip's of node server
+
+12) ## now switch to ec2 user again
+## check the vi editor 
+[ec2-user@ip-172-31-1-237 ~]$ sudo vi /etc/ansible/ansible.cfg
+
+13)
+[ec2-user@ip-172-31-1-237 ~]$ sudo vi /etc/ansible/hosts
+ ## check vi editor
+
+14)
+ansible all -m ping 
+
+## if it successful 
+
+
+15)
+vi ansible-cloudwatch-playbook.yaml
+## paste into vi editor
+
+---
+- name: Setup Apache and CloudWatch on EC2
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Install CloudWatch Agent
+      yum:
+        name: amazon-cloudwatch-agent
+        state: present
+
+    - name: Create CloudWatch agent config
+      copy:
+        dest: /opt/aws/amazon-cloudwatch-agent/bin/config.json
+        content: |
+          {
+            "logs": {
+              "logs_collected": {
+                "files": {
+                  "collect_list": [
+                    {
+                      "file_path": "/var/log/*",
+                      "log_group_name": "LOG-FROM-EC2",
+                      "log_stream_name": " {instance_id}",
+                      "retention_in_days": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }
+
+    - name: Start the CloudWatch agent
+      command: /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+
+    - name: Check CloudWatch agent status
+      command: /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a status
+      register: cw_agent_status
+
+    - debug:
+        var: cw_agent_status.stdout_lines
+16)
+[ec2-user@ip-172-31-1-237 ~]$ ls
+## to check whether playbook
+
+17)
+ansible-playbook ansible-cloudwatch-playbook.yaml
+## successful
+
+18)
+## now open cloud watch and check your logs
+

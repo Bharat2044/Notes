@@ -1,0 +1,139 @@
+---------------------------------------------------------------------------------------------------------
+                                         #### Terrafrom ###
+-------------------------------------------------------------------------------------------------------
+
+### What Is Terraform? 
+Terraform is an IAC tool, used primarily by DevOps teams to automate various infrastructure tasks. The provisioning of cloud resources, for instance, is one of the main use cases of Terraform. It’s a cloud-agnostic, open-source provisioning tool written in the Go language and created by HashiCorp.
+
+Terraform allows you to describe your complete infrastructure in the form of code. Even if your servers come from different providers such as AWS or Azure, Terraform helps you build and manage these resources in parallel across providers. Think of Terraform as connective tissue and common language that you can utilize to manage your entire IT stack.
+
+
+###--- Benefits of Infrastructure-as-Code (IaC) ---###
+
+IaC replaces standard operating procedures and manual effort required for IT resource management with lines of code. Instead of manually configuring cloud nodes or physical hardware, IaC automates the process infrastructure management through source code.
+
+Here are several of the major key benefits of using an IaC solution like Terraform:
+
+Speed and Simplicity. IaC eliminates manual processes, thereby accelerating the delivery and management lifecycles. IaC makes it possible to spin up an entire infrastructure architecture by simply running a script.
+Team Collaboration. Various team members can collaborate on IaC software in the same way they would with regular application code through tools like Github. Code can be easily linked to issue tracking systems for future use and reference.
+Error Reduction. IaC minimizes the probability of errors or deviations when provisioning your infrastructure. The code completely standardizes your setup, allowing applications to run smoothly and error-free without the constant need for admin oversight.
+Disaster Recovery. With IaC you can actually recover from disasters more rapidly. Because manually constructed infrastructure needs to be manually rebuilt. But with IaC, you can usually just re-run scripts and have the exact same software provisioned again.
+Enhanced Security. IaC relies on automation that removes many security risks associated with human error. When an IaC-based solution is installed correctly, the overall security of your computing architecture and associated data improves massively.
+
+
+------ ### Basic Terraform folder structure ### ------
+
+projectname/
+    |
+    |-- provider.tf
+    |-- version.tf
+    |-- backend.tf
+    |-- main.tf
+    |-- variables.tf
+    |-- terraform.tfvars
+    |-- outputs.tf
+
+main.tf:    contains all providers, resources and data sources
+variables.tf: contains all defined variables
+output.tf:    contains all output resources
+The issue     with this structure is that most logic is stored in the single main.tf file which therefore becomes pretty complex and long. Terraform, however, does not mandate this structure, it only requires a directory of Terraform files. Since the filenames do not matter to Terraform I propose to use a structure that enables users to quickly understand the code. Personally I prefer the following structure 
+provider.tf: contains the terraform block and provider block
+data.tf: contains all data sources
+variables.tf: contains all defined variables
+locals.tf: contains all local variables
+output.tf: contains all output resources
+
+---------- ##### Importent Terraform Commands ### --------
+### Version
+
+terraform –version	Shows terraform version installed
+
+### Initialize infrastructure ###
+
+terraform init	                :Initialize a working directory
+terraform init -input=true	:Ask for input if necessary
+terraform init -lock=false	:Disable locking of state files during state-related operations
+
+terraform plan	                :Creates an execution plan (dry run)
+terraform apply	                :Executes changes to the actual environment
+terraform apply –auto-approve	:Apply changes without being prompted to enter ”yes”
+terraform destroy –auto-approve :Destroy/cleanup without being prompted to enter ”yes”
+
+
+Lab-1: 
+
+1.Install AWS cli (If not installed)
+Generate keys from root or user If user should have prmisiion to create reosurces
+
+2.Download Terraform and copy the path after extractions 
+
+go to system account env variables -- click path edit and add new paste your terraform path
+
+open cmd (command prompt give terraform --version)
+
+3.Download VS code and create project
+
+4. Open VS code extensions install hashicorp extensions 
+
+create files provider.tf, main.tf and varaibles.tf start your work
+ 
+
+sample code 
+
+provider.tf
+
+provider "aws" {
+   
+}
+
+# main.tf---
+
+resource "aws_instance" "localname" {
+    ami = var.ami_id
+    instance_type = var.instance_type
+    key_name = var.key_name
+    tags = {
+      Name = "terraform"
+    }
+}
+
+# Varaibles.tf
+
+variable "ami_id" {
+    description = "passing AMI vlaue to  main.tf"
+    type = string
+    default = ""
+  
+}
+variable "instance_type" {
+  type = string
+  default = ""
+}
+variable "key_name" {
+    type = string
+    default = ""
+  
+}
+
+#output.tf
+
+output "ip" {
+    value=aws_instance.name.public_ip
+    description = "calling public ip of ec2 instance"
+}
+
+output "private_ip" {
+    value=aws_instance.name.private_ip
+    description = "calling private ip of ec2 instance"
+    sensitive = true
+  
+}
+
+
+#terraform.tfvars
+
+ami_id = "ami-013e83f579886baeb"
+instance_type = "t2.micro"
+keyname = "jenkin"
+
+

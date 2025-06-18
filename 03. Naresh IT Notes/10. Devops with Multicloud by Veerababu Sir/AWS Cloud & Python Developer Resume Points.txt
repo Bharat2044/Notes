@@ -1,0 +1,70 @@
+AWS Cloud & Python Developer Resume Points
+
+AWS EC2:
+
+Configured EC2 Auto Scaling Groups (ASG) using Python to dynamically scale instances based on CPU/memory utilization.
+Integrated EC2 with Application Load Balancer (ALB) to distribute traffic for Python-based applications.
+Automated ASG policies using Python & Boto3, adjusting instance count based on CloudWatch metrics.
+Deployed and managed Python applications on AWS EC2 instances using auto-scaling and load balancing.
+Developed and deployed containerized Python applications using Docker on EC2 instances with Amazon ECS.
+Built a Python-based server monitoring tool that collects EC2 metrics (CPU, Memory, Disk) and sends alerts to Slack.
+Configured Python web applications (Flask/Django) with Nginx & Gunicorn on EC2 for high-performance deployment.
+Integrated S3 & RDS with EC2 for data storage and application persistence using Python Boto3.
+Automated log rotation & log analysis for Python applications running on EC2 instances.
+
+AWS Lambda:--------
+
+Built serverless Python applications using AWS Lambda with API Gateway and DynamoDB/S3 integration.
+Optimized Lambda function performance using concurrent executions, environment variables, and layers.
+Automated AWS Lambda deployments using AWS SAM, Terraform, and CI/CD pipelines (GitHub Actions, Jenkins, GitLab CI/CD).
+Developed serverless Python applications using AWS Lambda, reducing infrastructure management overhead.
+Created Lambda functions in Python to process real-time data streams from Kinesis, DynamoDB, and S3 events.
+Deployed Flask/FastAPI/Django REST APIs using AWS Lambda + API Gateway for a fully serverless backend.
+Implemented AWS Lambda Layers to reuse Python libraries (e.g., NumPy, Pandas, Boto3) across multiple functions.
+
+AWS Load Balancer (ALB/NLB/ELB):-------
+
+Configured Application Load Balancer (ALB) to distribute traffic to Python Flask/Django applications on EC2 instances.
+Implemented AWS Network Load Balancer (NLB) for handling high-throughput applications with low latency.
+Configured SSL/TLS certificates using AWS Certificate Manager (ACM) for secure API endpoints.
+Configured AWS Application Load Balancer (ALB) to distribute traffic across multiple EC2 instances running Flask/Django/FastAPI.
+Implemented path-based routing in ALB to direct requests to specific Python microservices (e.g., /api for backend, /auth for authentication).
+
+
+AWS Networking (VPC, Subnets, Security Groups, NAT, VPN):------
+
+Designed and configured Amazon VPC with public and private subnets for secure Python application hosting.
+Designed and implemented VPC networking with public and private subnets for Python-based microservices.
+Configured NAT Gateway, Internet Gateway, and Route Tables to enable secure communication between services.
+Implemented AWS VPN and VPC peering to establish secure communication between cloud and on-premise resources.
+
+AWS S3 (Simple Storage Service):--
+
+Configured Amazon S3 as a static website host to serve frontend applications (HTML, CSS, JavaScript).
+Developed Python scripts (Boto3) to automate file uploads, downloads, and lifecycle policies in S3 buckets.
+Implemented S3 event-based triggers using Lambda for real-time data processing.
+Configured S3 versioning, encryption (SSE-S3, SSE-KMS), and access policies to enhance data security.
+Designed and implemented S3 buckets for storing and serving static files, logs, and backups for Python applications.
+Automated S3 bucket creation, lifecycle policies, and versioning using Python (Boto3) and Terraform.
+Developed Python scripts to upload, download, and manage S3 objects efficiently.
+
+
+AWS Route 53:-----
+
+Points a domain directly to an IP address (not recommended for ALBs since ALBs use dynamic IPs).
+Used when pointing to an EC2 instance or an on-premises IP.
+Maps a domain/subdomain to AWS services like ALB, NLB, CloudFront, S3, and API Gateway.
+Unlike CNAME, it works at the root domain level (e.g., example.com → ALB DNS).
+Automatically updates if the underlying AWS service's DNS changes.
+Configured Route 53 DNS records (A, CNAME, MX, TXT) to manage domain routing for Python applications.
+Set up Route 53 failover routing with health checks for high availability applications.
+Integrated Route 53 with CloudFront for faster content delivery of Python-based web applications.
+
+
+AWS RDS------
+
+AWS RDS Setup & Administration: Configured and managed MySQL, PostgreSQL, Aurora with Multi-AZ for high availability.
+Database Integration: Integrated RDS with Flask/Django using SQLAlchemy, psycopg2, pymysql.
+Security & Access Control: Implemented IAM roles, SSL/TLS encryption, and KMS for secure database access.
+Performance Optimization: Tuned queries, used read replicas, caching, and monitored performance with CloudWatch.
+Backup & Recovery: Configured automated backups, snapshots, and point-in-time recovery.

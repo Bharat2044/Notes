@@ -1,0 +1,31 @@
+Collection<E> interface(21) methods common to List, Set and Queue
+============================================================
+01. public boolean add(E e)
+02. public boolean addAll(Collection<? extends E> c)
+
+03. public boolean isEmpty()
+04. public int size()
+
+	public String toString()
+
+05. public boolean contains(Object o)
+06. public boolean containsAll(Collection<?> c)
+
+07. public Iterator<E> iterator()
+08. public default void forEach(Consumer<? super E> c)
+09. public default Stream<E> stream()  
+10. public default Stream<E> parallelStream()
+11. public default Spliterator<E> spliterator()
+
+12. public boolean remove(Object obj) 
+13. public boolean removeAll(Collection<?> c)
+14. public boolean retainAll(Collection<?> c)  
+15. public void clear()  
+16. public default void removeIf(Predicate<? super E> condition)  
+
+17. public int hashCode() 
+18. public boolean equals(Object obj) 
+ 
+19. public Object[] toArray() 
+20. public <T> T[] toArray(T[] obj) 
+21. public default <T>T[] toArray(IntFuncation<T[]> generator)

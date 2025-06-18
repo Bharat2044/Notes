@@ -1,0 +1,54 @@
+"Installing mySQL on Amazon Linux 2023"  
+
+
+
+sudo dnf update
+sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-4.noarch.rpm
+sudo dnf install mysql80-community-release-el9-4.noarch.rpm
+sudo dnf install mysql-community-server
+
+mysql -V
+
+sudo systemctl start mysqld //Starts MySQL service
+sudo systemctl enable mysqld //Enabled mySQL service to restart on bot
+systemctl status mysqld //Check MySQL service running status
+
+
+Get Initial Password to login mysql
+
+sudo grep 'temporary password' /var/log/mysqld.log
+
+note temp passwd %uaqyK:U_8e8
+
+sudo mysql_secure_installation -p #secure installation mysql
+
+give password and connect
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Passwd@12';
+FLUSH PRIVILEGES;
+mysql -u root -p 
+#create sample data base 
+
+CREATE DATABASE IF NOT EXISTS demodb;
+
+SHOW DATABASES;
+
+CREATE TABLE demodb.persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+USE DBName;
+
+give demodb
+
+SHOW TABLES;
+
+
+
+MySQL -u root -p HVb5q#4TUeG6
+
+

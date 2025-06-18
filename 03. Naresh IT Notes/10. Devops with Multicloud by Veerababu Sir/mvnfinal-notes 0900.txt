@@ -1,0 +1,155 @@
+What is Maven?
+
+Maven is a build automation tool used primarily for Java projects. Maven can also be used to build and manage projects written in C#, Ruby, Scala, and other languages. The Maven project is hosted by The Apache Software Foundation.
+
+
+###############################################
+mavnen advantages 
+
+maven is build tool build the project
+build means adding dependencies [lib] for the code
+we can package the project by passing goals
+project management
+Maven automate the process 
+we can generate the reports 
+maven is written on java programming.
+its maintaining by Apache Software Foundation.
+
+################################################
+
+Once generate the archetype with sample project
+
+We can se folder structure
+
+my-app 
+|-- pom.xml   (adding depened)
+`-- src
+    |-- main
+    |   `-- java
+    |       `-- com
+    |           `-- mycompany
+    |               `-- app
+    |                   `-- App.java
+    `-- test
+        `-- java
+            `-- com
+                `-- mycompany
+                    `-- app
+                        -- test.App.Java
+
+    |-- target/jar 0r war will be created   #note Target folder will create and update with respective goals
+
+target folder Note: after run the goals we can see jar/war file in target folder 
+
+TYPES OF ARTIFACTS:
+1. JAR: JAVA ARCHIVE 		: Backend 
+2. WAR: WEB ARCHIVE		: Frontend + backend
+3. EAR: ENTERPRISE ARCHIVE	: jar + war
+
+## build process tools
+
+JAVA	: MAVEN
+Nodejs  : NPM build
+PYTHON	: GRADLE
+.NET	: VS CODE
+C, C#	: MAKE FILE
+
+Ex:
+#######Folder structure######## 
+
+src/main/java -----sorce code required 
+src/main/resourc ------resources files keep in side here 3rd party files
+
+src/test/java ------unit test cases code keep here
+src/test/resource ------resorces file keep heere 3rd party files to testing 
+
+Whenever you create maven project we will get pom.xml
+
+POM.XML FILE:
+POM means Project Object Model.
+pom.xml - Maven configuration file. Controls the build process for the project
+this file will have complete info of the project.
+Ex: Name, Tools, Version, Snapshot, Dependencies.
+Extension is .xml (Extensible Markup Language)
+Note: if we want to pass any goals this file must be on project folder.
+without this file maven will not pass any goals.
+each project we need to have only one pom.xml
+multiple project cant use same pom.xml.
+
+
+pom.xml two entries 
+1. dpendencies 
+2. plugins( configuration plug in )
+
+
+Dependencies : responsible for downloading the required third party drivers libraries from remote to local 
+
+Plugin: nothing but different configuartions to run project eX : compile 
+
+example maven archetype 
+
+maven-archetype-quickstart  #sample java based application  
+
+maven-archetype-webapp  #sample web app application
+
+mvn archetype:generate  # to generate and see the sample templates 
+
+mvn archetype:generate -DgroupId=com.apple -DartifactId=java_project -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+maven work with two type of repositories 
+
+Maven remote : https://mvnrepository.com/artifact
+
+Mavne Local repo: .M2
+
+
+
+############## life cycles ###################
+clean ------project will be cleaned unnessary files 
+validate - validate the project is correct and all necessary information is available or not
+compile - compile the source code of the project (which converst .java to .class in target foolder)
+test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+package - take the compiled code and package it in its distributable format, such as a JAR.
+install - install the package into the local repository(.m2) jar will fill generate into target folder 
+deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+
+
+
+
+
+example source codes :
+
+
+
+############################## sample code for login page ####################
+
+login.jsp
+<html>
+<head>
+<title>Login Form</title>
+</head>
+<body>
+<h3> Login here </h3>
+<form action="user_login" method="post">
+<table style="width: 20%">
+                 <tr>
+                 <td>UserName</td>
+                                    <td><input type="text" name="username" /></td>
+                         </tr>
+                                    <tr>
+                                    <td>Password</td>
+                                    <td><input type="password" name="password" /></td>
+                           </tr>
+                 </table>
+                 <input type="submit" value="Login" /></form>
+</body>
+</html>
+
+###############sample code for hello world ################################
+
+<html>
+<body>
+<h2>Hello World!</h2>
+</body>
+</html>

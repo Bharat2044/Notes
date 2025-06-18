@@ -1,0 +1,598 @@
+--------############# CICD #############---------------
+--------------------------------------------------
+
+what is CICD?
+
+In software engineering, CI/CD or CICD is the combined practices of continuous integration and continuous delivery or, less often, continuous deployment. They are sometimes referred to collectively as continuous development or continuous software development
+
+Why Jenkins? 
+
+Jenkins is an open-source automation tool for Continuous Integration (CI) and Continuous Deployment (CD).
+
+It is an open-source tool with great community support.
+It is easy to install.
+It has 1000+ plugins to ease your work. If a plugin does not exist, you can code it and share it with the community.
+It is free of cost.
+It is built with Java and hence, it is portable to all the major platforms.
+Inventor: kohsuke kawaguchi
+its a free and open-source tool.
+jenkins written on java.
+it can automate entire sdlc.
+it is owned by sun micro system as hudson.
+hudson is paid version.
+later oracle brought hudson and make it free.
+later hudson was renamed as jenins.
+
+
+
+jenkins runs on 8080 port 
+
+For amazon linux 2023 AMi type
+=================================
+
+Login to server with username and switch to root user
+command : sudo su - 
+Provide the password
+===================
+
+jenkin supports JAVA 11/17
+
+sudo dnf update -y --> it will install or updates the patches
+
+sudo dnf install java-11-amazon-corretto -y --> to install the openjdk11
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --> Install the repo
+
+if wget command not found.Please install the wget software using this command "yum install wget -y"
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key --> Import the required key
+
+sudo yum install jenkins -y --> install the jenkins
+
+sudo systemctl enable jenkins --> Enable the jenkins
+
+sudo systemctl start jenkins --> start jenkins
+
+sudo systemctl status jenkins --> check the status of jenkins service
+
+TO CONNECT:
+public_ip:8080 (browser)
+cat /var/lib/jenkins/secrets/initialAdminPassword (server)
+paste password on browser -- > installing plugins --- > user details -- > start
+
+WORKSPACE: job output is going to be stored in workspace
+
+Default: /var/lib/jenkins/workspace
+
+
+=================================================
+
+Process for Amazon linux 2 AMI type
+==========================================
+
+
+Login to server with username and switch to root user
+command : sudo su - 
+Provide the password
+===================
+
+sudo yum update -y --> it will install or updates the patches
+
+sudo amazon-linux-extras install java-openjdk11 -y --> to install the openjdk11
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --> Install the repo
+
+if wget command not found.Please install the wget software using this command "yum install wget -y"
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key --> Import the required key
+
+sudo yum install jenkins -y --> install the jenkins
+
+sudo systemctl enable jenkins --> Enable the jenkins
+
+sudo systemctl start jenkins --> start jenkins
+
+sudo systemctl status jenkins --> check the status of jenkins service
+
+
+
+sudo yum list java*
+
+ to check list of java version avalable in ec2 repo
+
+
+----for java 17
+
+sudo dnf update
+
+sudo dnf install java-17-amazon-corretto-devel
+
+java -version
+
+
+
+-------------------------------------------------------------
+---------------------------Triggers-------------------------
+
+In Jenkins, a build trigger is a mechanism that initiates the execution of a Jenkins job or pipeline. Triggers are used to start builds automatically based on various events or conditions. There are several ways to trigger builds in Jenkins:
+
+Manual Build Trigger:
+
+Build Now: You can manually trigger a build at any time by clicking the “Build Now” or “Build” button on the Jenkins dashboard for a specific job. This is useful for ad-hoc or on-demand builds.
+Scheduled Build Trigger:
+
+Build Periodically: You can schedule builds to run at specific intervals using the “Build periodically” option in the job configuration. You can use cron syntax to define the schedule. For example, to run a build every night at 2:00 AM, you can use the cron expression 0 2 * * *.
+SCM (Source Code Management) Trigger:
+
+Poll SCM: If you’re using a version control system (e.g., Git, Subversion), you can configure the job to poll the repository for changes. When changes are detected, Jenkins will automatically trigger a build. This is known as the “Poll SCM” build trigger.
+Webhooks Trigger:
+
+Webhooks: Many version control systems and external services support webhooks, which allow them to notify Jenkins when code changes occur. Jenkins can listen for these webhook notifications and trigger builds in response.
+Dependency Build Trigger:
+
+Build after other projects are built: You can configure a job to be triggered after one or more upstream jobs have been built successfully. This is useful for creating build pipelines or ensuring that certain prerequisites are met before starting a build.
+Parameterized Build Trigger:
+
+ex: Job1------job2-----job3
+
+here job1 upstream is job2
+     job2 downstream is Job1
+     job2 upstream is Job3
+     job3 downstream is job2
+
+so whenever jb1 triggers after that job2 will trigeere agter that job3 will trigger 
+
+if any one downstream job fail means necxt upstream job will not success 
+
+Trigger builds with parameters: You can set up parameterized builds where a build is triggered with specific parameter values. This is useful for customizing builds based on input parameters.
+Pipeline Trigger:
+
+Pipeline Trigger: If you’re using Jenkins Pipelines (defined in a Jenkinsfile), you can use various triggers within the pipeline script itself. For example, you can set up a webhook trigger, a schedule trigger, or a manual input trigger as part of your pipeline script.
+Remote API Trigger:
+
+
+Jenkins has numerous plugins available that can provide additional trigger mechanisms. For example, the “GitHub Webhook” plugin allows Jenkins to listen to GitHub events and trigger builds accordingly.
+The choice of build trigger method depends on your specific use case and requirements. 
+
+-----------------pipeline ----------------
+
+1. Declaritive
+2. Groovy scripted 
+
+------------------------------------------------
+Declaritive 
+---------------------------------------------------
+Basic Example:
+
+(PASSS:shortcut)
+----------------------
+single stage:example 
+-----------------------------------
+pipeline {
+    agent any
+
+    stages {
+        stage('first') {
+            steps {
+                echo 'Hello first stage'
+            }
+        }
+    }
+}
+
+--------------------------
+multi stage example:
+-------------------------
+pipeline {
+    agent any
+
+    stages {
+        stage('first') {
+            steps {
+                echo 'Hello first stage'
+            }
+        }
+        
+        stage('second') {
+            steps {
+                echo 'Hello second stage'
+            }
+        }
+    }
+
+
+Example-1 to run terraform 
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('scm') {
+            steps {
+                git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/nareshdevopscloud/devops_maven.git'
+            }
+        }
+        stage('init') {
+            steps {
+                sh "terraform init"
+            }
+        }
+        stage('plan') {
+            steps {
+                sh "terraform  plan"
+            }
+        }
+
+       stage('apply') {
+            steps {
+                sh "terraform  apply"
+            }
+        }
+
+    
+    }
+}
+
+
+Example-2 to build maven by using pipleine (CI) multi stage 
+
+pipeline {
+    agent any
+
+    stages {
+        stage('scm') {
+            steps {
+                git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/nareshdevopscloud/devops_maven.git'
+            }
+        }
+        stage('clean') {
+            steps {
+                sh "mvn clean"
+            }
+        }
+        stage('install') {
+            steps {
+                sh "mvn install"
+            }
+        }
+    
+    }
+}
+
+
+
+example-2
+
+
+PIPELINE AS A CODE: multiple commands or action inside a single stage.
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('one') {
+            steps {
+                git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/nareshdevopscloud/devops_maven.git'
+                sh 'mvn compile'
+                sh 'mvn test'
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
+
+---------------------------------------------------------------------------
+Groovy
+---------------------------------------------------------
+Basic example:
+
+ node{
+   stage{"first") {
+   sh file-1
+    }
+   stage{"second") {
+   sh file-2
+    }
+}
+
+
+-------------Ci JOB using Groovy----------------------
+
+node {
+    stage('git') { 
+        git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/nareshdevopscloud/devops_maven.git'
+    }
+    stage('clean') {
+        sh "mvn clean"
+        }
+    
+    stage('install') {
+        sh "mvn install"
+        
+    }
+}
+
+Note Using Jenknins deployinmg the Terraform IaC(Infrastructure as Code)
+
+------------------- terraform installation-----------------
+
+sudo yum install -y yum-utils shadow-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install terraform
+
+------------------------------
+# Deploy Terraform script by using jenkins 
+
+----declaritive--------
+
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/nareshdevopscloud/terraform-jenkins.git'
+            }
+        }
+        stage('init') {
+            steps {
+                sh "terraform init -reconfigure"
+            }
+        }
+        stage('plan') {
+            steps {
+                sh "terraform plan"
+            }
+        }
+        stage('action') {
+            steps {
+                sh "terraform ${action} --auto-approve"
+            }
+        }
+    }
+}
+
+
+------------------------groovy-----------------
+
+node {
+    stage('checkout') { 
+        git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/nareshdevopscloud/terraform-jenkins.git'
+    }
+    stage('init') {
+        sh "terraform init -reconfigure"
+        
+        }
+    stage('action') {
+        sh "terraform ${action} --auto-approve"
+        
+        }
+}
+
+
+-----------------------------------------------
+approach 3: 
+
+
+Note:   
+
+
+#created jenkins file uploded into github
+
+#we can run job by calling above jenkins file in git hub 
+
+--To Implement 
+
+give GITHUB url and in defination section we need to "sleect pipeline script from scm" option and build the job
+#Jenkins file
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+    
+        stage ("terraform init") {
+            steps {
+                sh ("terraform init -reconfigure") 
+            }
+        }
+        
+        stage ("plan") {
+            steps {
+                sh ('terraform plan') 
+            }
+        }
+
+        stage (" Action") {
+            steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --auto-approve') 
+           }
+        }
+    }
+}
+ 
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------CD------------------------------------------------------
+
+After builld the war file we have to deploy in any application serever like "TOMCAT"
+
+Create one Ec2 instance if (amazon linux 2) ----note : if you choose linux 2023 commands will different)
+
+Need to install java
+
+for java 11
+sudo amazon-linux-extras install java-openjdk11
+
+for java 17
+sudo yum install java-17-amazon-corretto.x86_64
+
+
+
+################  Tomcat  #########
+
+#Install tomcat 
+
+wget url https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.83/bin/apache-tomcat-9.0.83.tar.gz
+
+#untar  tar -xvzf <apachetomcat-tarfile>
+
+
+#Rename it if required   mv <apachetomcat-tarfile> tomcat
+
+tomcat/bin -----sh startup.sh   --to start
+                sh shutdown.sh  -- to stop
+ 
+#to change port number ------ /conf/server.xml
+
+war file should place in -------------/tomcat/webapps 
+
+#####################################################
+custom manager app tomcat --------find / -name context.xml
+
+----after finding the file need to open with vi
+
+example -- vi /opt/tomcat/webapps/manager/META-INF/context.xml
+
+add comment it below two line <!--     -->
+ ex: <!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+     allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+ 
+2.vi /opt/tomcat/webapps/host-manager/META-INF/context.xml
+
+<!--<Valve className="org.apache.catalina.valves.RemoteAddrValve"
+  allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+
+#########################################################
+username and password to login
+
+cd tomcat/config/tomcat-user.xml 
+
+vi tomcat-users.xml and add custom username password 
+
+#ADD BELOW CONTENT   
+
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+  <user username="deployer" password="deployer" roles="manager-script"/>
+  <user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+====================================================================================================
+                    ----- Jenkins MAVEN TOMCAT----
+
+### Maven project Job: CICD deployer on Tomcat
+
+step-1 need to configure Maven and jenkins paths in global tool configuration
+
+manaje jenkins---> tools---> add path for both java and maven
+
+step-2 install required plugin
+
+Dashboard---> Manaje jenkins ----> plugins ---Available plugin
+
+Maven
+
+Deployment container 
+
+step-3:
+need to configure credentials --username : deployer password deployer   :--- reference from ( <user username="deployer" password="deployer" roles="manager-script"/>)
+
+Dashboard ---> Manage Jenkins -- > Credentials --- > System ---> Global credentials (unrestricted) --> add credentials
+
+step-4 create maven job and give git url for source code to build 
+
+step-5 give build actions goals like test, install etc..
+
+step-6 In postbuild actions select war/ear file to give path of War --path **/*.war 
+
+step-7 we need to add container (tomcat) we have to give configured credentials of tomcat and give url of tomcat
+
+webhook 
+http://34.228.189.137:8080/github-webhook/
+
+we have to give jenkins URL as payload url
+
+
+"CI/CD----Maven job---Javaproject"
+
+####pipelinejob:example
+
+pipeline {
+    agent any
+
+    stages {
+        stage('stage-1') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CloudTechDevOps/project-1-maven-jenkins-CICD-docker-eks-.git'
+            }
+        }
+   
+        stage('clean') {
+            steps {
+              sh  'mvn clean'
+            }
+        }
+        
+        stage('test') {
+            steps {
+              sh  'mvn test'
+            }
+        }
+        stage('install') {
+            steps {
+               sh  'mvn install'
+            }
+        }
+        
+        stage('deployment') {
+            steps {
+                
+              deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.201.99.121:8081/')], contextPath: null, war: '**/*.war '
+
+            }
+        }
+        
+    }
+}
+
+==================================================================
+#### Jenkins version upgrade and downgrade ####
+
+jenkins --version
+
+cd /usr/share/java
+
+rm -rf jenkins.war
+
+to download new version war ---> https://updates.jenkins.io/download/war/
+
+take any version on right click and copy the link download by using wget command 
+
+cd /usr/share/java
+
+find new war file which you downloaded version 
+
+#restart your jenkins sudo systemctl start jenkins 
+
+jenkins --version 
+
+login in the jenkins severs check your jobs 
+
+=========================================================================
+
+
+sudo yum list java*  # to upgrade the java --version 
+
+select any one of the version and give yum install <selecte version> -y

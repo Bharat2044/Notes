@@ -1,0 +1,317 @@
+What is polymorphsim?
+	- Poly		-> multiple
+	- Morphism	-> forms      
+
+The polymorphism is one of the OOP principles,
+it is an ability to provide multiple behaviours to 
+an object operation.
+
+The process of exibiting different behaviours 
+for the same operation based on the situation 
+is called polymorphism.
+
+The process of providing multiple implementations
+to a method to perform an operation 
+based on sub type (or) based on parameter type is called polymorphism.
+
+We can develop polymorphism in two ways
+	1) By using method overriding
+	2) By using method overloading
+
+
+class BankAccount {
+	void deposit(){ ----- }
+
+	void deposit(Cash){ ----- }
+	void deposit(Cheque){ ----- }		//method overloading polymorphism
+	void deposit(DD){ ----- }
+	void deposit(NEFT){ ----- }
+	void deposit(RTGS){ ----- }
+	void deposit(IMPS){ ----- }
+}
+
+class HDFCBankAccount extends BankAccount {
+	void deposit(){ ----- }			//method overridding polymorphism
+}
+
+class ICICBankAccount extends BankAccount {
+	void deposit(){ ----- }
+}
+
+class SBIBankAccount extends BankAccount {
+	void deposit(){ ----- }
+}
+
+Problem if we do not develop polymorphism?
+   If we do not develop polymorphism user programmer will face problems
+    1) he must remember multiple names even though operation is same
+    2) we can not develop one user class common to all sub types and parameters
+    3) code is not reusable, code is not easy readable and not understandable and 
+    4) project maintanence becomes complex
+    5) time and money waste, development is slow
+
+
+Problem #1: User programmer must remember mulitple names even though operation is same
+  class Customer {			class HDFCBank {
+    p s v main(S[] args) {			depositCash(Cash){ }
+						depositCheque(Cheque){ }
+	//here we need to			depositDD(DD){ }
+	//invoke each method			depositNEFT(NEFT){ }
+	//separately				depositRTGS(RTGS){ }
+						depositIMPS(IMPS){ }
+	bank.depositCash(cash);			depositUPI(UPI){ }										
+    }					}
+   }
+		
+Problem #2: User programmer can not develop one user class common to all sub types of an object
+He must develop separate user class for each sub type class of an object
+then this kind of code becomes Tight Coupling and Static Binding  (TC and SB)
+
+	class HDFCATM {					class HDFCBank extends Bank{
+		void insertCard(HDFCBank b){	 		hdfcWithdraw(){ }
+			b.hdfcWithdraw();		}
+		}		
+	}
+
+	class ICICIATM {				class ICICIBank extends Bank{	
+		void insertCard(ICICIBank b){			iciciWithdraw() { }
+			b.iciciWithdraw();		}
+		}	
+	}
+	
+	class SBIATM {					class SBIBank extends Bank{ 
+		void insertCard(SBIBank b) {			sbiWithdraw(){ }
+			b.sbiWithdraw();		}
+		}
+	}	
+
+Advantages if we develop polymorphism?
+  If we develop polymorphism user programmer will get benifites
+     1) he no need to remember mulitple names, because we will develop all methods with same name
+     2) we no need to develop mulitple user classes for each sub type and parameter type separately, 
+	because in all sub classes method signature is same, hence one time only we call, 
+	then that one time invoked method now can be executed from diff sub classes
+	based on object and argument we passed. (LC and RP)
+     3) code is reusable, code is easly readable and easly understandable and 
+     4) project maintanence becomes easy
+     5) time and money saved, we will get fast development
+
+
+Adv #1: 
+	class Customer {				class HDFCBank {
+		p s v main(S[] args) {				
+			 bank.deposit(xxx);			deposit(Cash){ }
+			//here we call method			deposit(Cheque){ }
+			//only one time				deposit(DD){ }
+			//based on the given			deposit(NEFT){ }
+			//arg type, method			deposit(RTGS){ }
+			//logic is executed			deposit(IMPS){ }
+
+		}					}
+	}
+		
+Adv #2: LC and RP
+					class Bank {           
+					    void withdraw(){ } 
+					}                      
+
+	class ATM {					class HDFCBank extends Bank{
+		void insertCard(Bank b){			void withdraw(){ }
+			b.withdraw();			}								
+		}		
+	}			
+							class ICICIBank extends Bank{		
+	class Customer {					void withdraw(){ }
+		p s v main(String[] args) { 		}	
+		   ATM atm = new ATM();
+		   atm.insertCard(new HDFCBank());
+		   atm.insertCard(new ICICIBank());	class SBIBank extends Bank{ 
+		   atm.insertCard(new SBIBank());		void withdraw(){ }
+		}					}
+	}	
+		
+
+What are you doing in OOP principles development?
+  - In Inheritance we are dealing with a class	- Creating sub type class
+  - In Encapsulation we are dealing with fields	- Hiding fields from direct access
+  - In Polymorphsim we are dealing with methods	- Providing multiple implementations to the same operation method
+
+
+Develop a program to implement method overriding wise polymorphism for the object Shape.findArea() method
+
+class Shape {
+     void findArea(){
+          System.out.println("Shape area");
+     }
+}
+
+class Rectangle extends Shape {
+     private double l;
+     private double b;
+
+     public Rectangle(double l, double b){
+            this.l = l;
+	    this.b = b;
+     }
+
+     void findArea(){   //overriding with Rectangle implementation
+         System.out.println("Rectangle Area: " +(l * b)));
+     }
+}
+
+class Square extends Shape {
+      private double s;
+     
+      public Square(double s){
+           this.s = s;
+      }
+ 
+      void findArea() {//overriding with Square implementation
+            System.out.println("Square area: "+ (s*s));
+      }
+}
+
+class Circle extends Shape {
+      private static final  double PI = 3.14;
+      private double r;
+
+      public Circle(double r) {
+          this.r = r;
+      }
+
+     void findArea() {//overriding with Cicle implementation
+            System.out.println("Circle area: "+ (PI * r * r));
+      }
+}
+
+class Painter {
+   public static void main(String[] args ) {
+ 
+       /*
+       Shape s;
+
+       s = new Rectangle(10, 5);
+       s.findArea();
+
+       s = new Square(10);
+       s.findArea();
+
+       s = new Circle(10);	
+       s.findArea();
+	*/
+
+
+
+
+	Painter hk = new Painter();
+	hk.draw(new Rectangle(10, 5) );
+	hk.draw(new Square(10);
+	hk.draw(new Circle(10));
+
+   }
+
+   void draw(Shape s){  //LC- any of the sub type can be passed and changed
+           s.findArea();      //RP- executes from the sub class whose object is passed
+   }
+
+}
+
+
+//Develop a program to implement method overloading based polymorphism
+//Define add method in Addition class for adding diff type and diff list of passed values
+class Addition {								class Calc {
+   void add(int i1, int i2){                                                        public static void main(String[] args) {
+          System.out.println("2 ints: "+(i1+i2));					Addition a = new Addition();
+    }
+													a.add(5, 6);	
+    void add(int i1, int i2, int i3){							a.add(5, 6, 7);
+          System.out.println("3 ints: "+(i1 + i2 + i3));
+    }													
+
+    void add(float f1, float f2){								a.add(10.5, 10.6); 
+          System.out.println("2 floats:"+(f1 + f2));				a.add(10.5F, 10.6F);	
+    }
+
+    void add(int i1, float f1){								a.add(5, 6F);	
+          System.out.println("int, float: "+(i1 + f1));
+    }
+
+    static void add(float f1, int i1){							a.add(6F, 5);	
+          System.out.println("float, int: "+(i1 + f1));
+    }													
+}												
+
+class AdditionSub extends Addition {						
+													AdditionSub as = new AdditionSub();
+     void add(String s1, String s2) { //overloading				as.add(10, 20);
+          System.out.println("S, S: "+(s1+s2));					as.add(10, 20F);
+     }													as.add(10F, 20);	
+													as.add("H", "K");	
+     void add(int i1, int i2){ //overriding						
+         int i3 = i1 + i2;									Addition a2 = new AdditionSub();
+	 Sopf("The addition of %d and %d is %d\n", i1, i2, i3);		a2.add(10, 20);	//-> S in A class, E from AS class - RP
+     }													a2.add(10, 20F);     //-> S in A class, E from A    class - CP
+													a2.add(10F, 20);     //-> S in A class, E from A    class - CP
+     static void add(float f1, int i1){							a2.add("H", "K");   //-> S in A class, not found, CE: c f s 
+     	float f2 = f1 + i1;
+	Sopf("The addition of %f and %d is %f\n", f1, i1, f2); 
+     }												     } 	
+}												}
+
+Non-static methods can exibit RP, if they are overridden
+static methods, overloaded and private methods are always exibit CP 
+
+To acheive RP, method must be a overridden method and must call with upcasting
+
+Rule: by using super class referenced variable we can not invoke 
+a sub class specific members a field or a method
+it leads to compile time error.
+
+Execution flow of static and non-static methods with polymorphism
+Compiler and JVM searching and execution algorithms
+===============================================
+	When we invoke either static or non-static method
+	both compiler and JVM searches this method definition 
+	in referenced variable class, not in object type class.
+
+		If method is not found in referenced variable class,
+		comile and JVM searches this method definition
+		in referenced variable super classes upto j.l.Object class
+
+		If method definition is not found in referenced variable class 
+		and in its super classes, compiler throw error, JVM throws exception
+
+		If method is found some where either in ref var class or in its super classes
+		compiler link this method call to that method definition and finishes compilation
+
+		Then at execution time, JVM executes this method either from 
+		that linked class or from current sub class based on current object
+		depending on type of the method static and non-static
+
+			If the method static or not overridden or overloaded
+				it is executed from compiler linked class, 
+				either it is from referenced variable or from its super classes
+				but not from currrent object class, becasuse it is not overridden
+
+			If the method is non-private, non-static and overridden method
+			in current object class, then this method is executed from current object class
+			and exibits Runtime polymorphism or dyamic binding and project becomes
+			dynamically extensible and scallable.
+
+Test case programs based on Interview and Java SE Developer certification exam
+========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

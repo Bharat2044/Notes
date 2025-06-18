@@ -1,0 +1,85 @@
+Set<E> interface and its sub interfaces points
+==============================================
+	1) Set is a sub interface of Collection, it is a unordered collection
+	
+	2) It is part of Collections Framework available from Java 1.2v 
+	
+	3) If we want to store only unique objects, we must choose
+	    Set interface and its sub classes.
+	    
+	4) Set interface does not maintain insertion order*
+		and does not have index.     
+	
+	5) Set interface has one sub interface
+		that is SortedSet and its has 
+		another sub interface that is NavigableSet
+	
+	6) SortedSet interface is for storing objects 
+		in sorting order. It is also available from Java 1.2v
+	
+	7) NavigableSet is given from Java 6v, for adding 
+		more navigation methods to SortedSet.	
+			
+	8) Set interface has 3 implemented classes
+	       HashSet<E>, LinkedHashSet<E>, EnumSet<E>
+	   
+	9) SortedSet and NavigableSet have one implementation class
+			TreeSet<E>        
+	
+	===========================================================================
+						Collection<E>
+						
+					Set<E>
+					
+			SortedSet<E>
+			
+		   NavigableSet<E>
+		   
+	===========================================================================
+							AbatractCollection<E>
+
+							   AbatractSet<E>
+	===========================================================================
+													
+													
+			TreeSet<E>			HashSet<E>          EnumSet<E>
+									
+							  LinkedHashSet<E>
+								  
+	===========================================================================
+
+		-> We must choose HashSet<E> to store only unique objects 
+			without worrying about insertion order. Internally it
+			stores objects in those objects' hash code order 
+	
+		-> We must choose LinkedHashSet<E> to store only unique objects 
+			in insertion order without index.
+		
+		-> We must choose EnumSet<E> to store only one enum's Named constants
+		
+		-> We must choose TreeSet<E> for storing objects in sorting order(ASE or DESC)
+
+Set<E> methods (21 + 12 + 1) => 34
+====================================================================================	
+  			
+   				+ Java 9 methods +
+   				
+   1) Creating unmodifiable (immutable) collection with given elements	
+   		public static <E> List<E>	of();
+   		public static <E> List<E>	of(E e1);
+   		public static <E> List<E>	of(E e1, E e2)
+   		public static <E> List<E>	of(E e1, E e2, E e3)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4, E e5)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4, E e5, E e6)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4, E e5, E e6, E e7)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9)
+   		public static <E> List<E>	of(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9, E e10)
+   		public static <E> List<E>	of(E... e))
+   		
+   				+ Java 10 method +
+   				
+  	2) Creating unmodifiable (immutable) collection with elements of given collection				
+		public static <E> List<E>	copyOf(Collection<? extends E> col)
+

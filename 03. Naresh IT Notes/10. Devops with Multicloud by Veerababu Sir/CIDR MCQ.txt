@@ -1,0 +1,61 @@
+1. What is the default CIDR range for a VPC in AWS?
+   a) 10.0.0.0/1
+   b) 192.168.0.0/16
+   c) 172.16.0.0/16
+   d) There is no default CIDR range.
+
+2. You are designing a VPC with a CIDR range of 10.0.0.0/16. How many IP addresses does the CIDR range provide?
+   a) 65,536
+   b) 32,768
+   c) 16,384
+   d) 256
+
+3. You need to create a VPC with the smallest possible CIDR block. What should you choose?
+   a) 10.0.0.0/16
+   b) 172.16.0.0/28
+   c) 192.168.1.0/28
+   d) 10.0.0.0/30
+
+4. A VPC has a CIDR range of 192.168.0.0/24. You need to create 4 subnets within the VPC. What would be the CIDR range of each subnet?
+   a) /24
+   b) /25
+   c) /26
+   d) /27
+
+5. You have a VPC with a CIDR range of 10.0.0.0/16. You need to divide it into subnets with at least 500 IP addresses each. What is the  maximum CIDR size you can assign to each subnet?
+  a) /24
+  b) /23
+  c) /25
+  d) /26
+
+6. Which of the following CIDR ranges overlaps with 10.0.0.0/16?
+   a) 10.1.0.0/16
+   b) 10.0.0.0/17
+   c) 192.168.0.0/16
+   d) 172.16.0.0/16
+
+7. You need a private IP range for a new VPC that supports 10,000 IP addresses. Which of the following ranges is the best choice?
+   a) 10.0.0.0/24
+   b) 172.16.0.0/20
+   c) 192.168.0.0/22
+   d) 10.1.0.0/16
+
+8. Your VPC has a CIDR block of 192.168.0.0/16. You need to create subnets with /26 CIDR ranges. How many IP addresses are available in  each subnet?
+   a) 64
+   b) 62
+   c) 128
+   d) 126
+
+9. You have a CIDR range of 10.0.0.0/16 and want to allocate a subnet for a database with exactly 500 usable IP addresses. What is the most efficient subnet mask you can use?
+   a) /23
+   b) /24
+   c) /22
+   d) /21
+
+10. You are creating a public and private subnet in a VPC with a CIDR range of 192.168.0.0/16. If the public subnet uses 192.168.1.0/24, which CIDR block can you use for the private subnet without overlapping?
+   a) 192.168.1.0/25
+   b) 192.168.0.0/24
+   c) 192.168.2.0/24
+   d) 192.168.1.128/25
+
+

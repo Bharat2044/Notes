@@ -1,0 +1,813 @@
+Basic syntax:			|				|					|					|
+					|				|					|					|
+	if(boolean arg) {	|  if(boolean arg)	|   if(boolean arg) {		|       if(boolean arg) 	|	if(boolean arg) ;	
+	    ---------------	|     ---------------	|     	---------------       	|	    --------------- 	|           
+	    ---------------	|	    			|	---------------		|	else				|	else ;                        
+	    ---------------	|	    			|	---------------		|	    --------------- 	|    
+	}				|	    			|    } else {			|					|
+					|				|	---------------    	|					|
+					|				|	---------------    	|					|
+					|				|	---------------    	|					|
+					|				|	}				|					|
+------------------------------------------------------------------------------------------------------------------------------------------
+	 if(condition1) {	
+	   	---------------    
+		---------------	
+		---------------	
+	  }else  if(condition2) {		
+		---------------    
+		---------------    
+		---------------    
+	 } else if(condition3) {		
+		---------------    
+		---------------    
+		---------------    		
+	 } else if(condition4){		
+		---------------    
+		---------------    
+		---------------    
+	} else{
+		---------------    
+		---------------    
+		---------------    
+	}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Rules:	
+1) Only one argument is allowed
+	if(true, false) {  }
+
+	if(true){ }
+	if(false){  }
+
+	if(true && false){  }
+	if(true || false){  }
+	if(true & false){  }
+	if(true | false) { }
+	if(true ^ false){  }
+
+2) The allowed argument type is strictly boolean type
+	it can be either literal/var/exp/mc
+
+	if(true){  }					if(1){   }
+	if(false){  }					if(0){   }
+
+	boolean bo1 = true;				int i1  = 1;
+	boolean bo2 = false;			int i2  = 2;
+	if(bo1){  }					if(i1){  }
+	if(bo2){  }					if(i2){  }
+
+	int a = 10;					int a = 10;		boolean bo = false;
+	if(a==20){  }					if(a=10){   }		if(bo=true){  }
+	if(a!=20){ }					if(a!=10){ }		if(bo!=true){ }
+	if(a<20){  }					if(a+20){ }		if(bo+true){ }
+	if((a>5) && (a<20)){  }			if(a&20){ }		if(bo&true){ }
+
+	if(m1()){ }					if(m3()){  }
+	if(m2()){ }					if(m4()){  }
+
+	boolean m1(){					int m3(){
+		return true;					return 5;
+	}							}
+
+	boolean m2(){					char m4(){
+		return false;					return 'a';
+	}							}
+
+3) If we place only one statement 
+	then if body {  } is optional
+     
+	
+	if(true) {				if(true)
+	    Sopln("Hi");		   Sopln("Hi");
+	}
+
+4) without body {  }, if we place multiple statements
+     no CE, only first statement is considered under if block. 
+     Remining statements are not come under if block, 
+     those statemets are always executed.
+
+	int a = ____;
+	if(a < 5 )
+		Sopln("Hi");
+		Sopln("Hello");
+
+	I/P: a = 3				I/P: 7
+	O/P: Hi Hello			O/P: Hello
+	-----------------------------------------------------------	
+	int a = ____;
+	if(a < 5 ){
+		Sopln("Hi");
+		Sopln("Hello");
+	}
+
+	I/P: a = 3				I/P: 7
+	O/P: Hi Hello			O/P: no output
+
+5) We can place empty if(-){ } without any statement under it
+
+	if(true) { }
+
+	or
+
+	if(false) { }
+
+	or
+	
+	int a = 5;
+	if(a<5) { }
+
+ 6) After if(-) with out {  } we can place one statement with 
+	multiple empty lines. Compiler ignores all those empty lines
+	and the first statement after empty lines will be considered under this if(-)
+		
+		 void m1(int a){
+		     if(a < 5) 
+                                           
+                                           
+                                                
+                                                     
+		     System.out.println("Hi");
+		     System.out.println("Hello");
+
+		}	
+
+		m1(3); --> O/P: Hi Hello
+		m1(7); --> O/P: Hello
+
+7) We can not  place just if(-) without any statement under it
+
+	if(true)				void m1(){
+							if(true)
+	or                                                      
+						}	//compiler throws error } 
+	if(false)					//because } will go under if scope			
+							//it is wrong syntax
+	or
+	
+	int a =5;
+	if(a<5)
+
+
+8) If we create if(-) without body {  },
+	we can not declare variable under it,
+	compiler will throw error
+
+		if(true)				if(true) {
+			int p = 10;			int p = 10;
+							}
+
+		if(false)				if(false) {
+			int q = 20;			int q = 20;
+							}
+		
+9) if we declare variable inside if(-){  } block,
+	we can not read that variable outside if(-){ }
+	if we try to access, compiler will throw error: c f s
+	because this variable becomes local to this if(-){ }
+	and it is destoryed when control has came out of if(-){ }
+		
+		if(true) {
+		  int x = 10;
+		  Sopln(x);
+		}
+	        Sopln(x);
+		-----------------------------
+		if(true) 
+		  int x = 10;
+		  Sopln(x);
+		
+10) Inside if(-) without brackets {  }, we can not 
+     declare a variable, but we can assign/initialize variable
+
+		int p;				int p;
+		if(true)				if(true) {
+			p = 10;				p = 10;
+							}
+
+		int q;				int q;
+		if(false)				if(false) {
+			 q = 20;				 q = 20;
+							}
+
+11)	Declaring variable outside if, initializing inside if, and reading after if
+
+	When we declare variable before if(-) block
+	and if we initialize that local variable inside if(-) { }
+	and if we read its value after if(-) block, 
+	some times we will get CE: variable might not have been initialized
+	
+		In case of condition value false and variable expression we will get above error. 	
+
+		If we initialize the local variable with some default value 
+		and if we use SV or NSV we will not CE. 
+
+	If means we must guarentee the local variable must get some value
+	by the time that variable reading statement is executed.
+
+	Q) Identify above CE in the below cases? 
+
+		int p;				int p;
+		if(true)				if(true) {
+			p = 10;				p = 10;
+							}
+
+		Sopln(p);				Sopln(p);
+		------------------------------------------------------------
+		int q;				int q;
+		if(false)				if(false) {
+			 q = 20;				 q = 20;
+							}
+
+		Sopln(q);				Sopln(q);
+		------------------------------------------------------------
+		int p = 10;
+		int c ;
+		if(p == 10){
+			c = 30;
+			System.out.println(c);
+		}
+		System.out.println(c);
+		------------------------------------------------------------
+		int q = 20;
+		int d = -1;
+		if(q == 10){
+			d = 30;
+			System.out.println(d);
+		}
+		System.out.println(d);
+		System.out.println();
+		------------------------------------------------------------
+
+		final int r = 10;
+		int e ;
+		if(r == 10){
+			e = 40;
+			System.out.println(e);
+		}
+		System.out.println(e);
+		------------------------------------------------------------
+		final int s;
+		s  = 10;
+		int f ;
+		if(s == 10){
+			f = 50;
+			System.out.println(f);
+		}
+		System.out.println(f);
+		System.out.println();
+		------------------------------------------------------------
+		final int t;
+		t  = 20;
+		int g = -1;
+		if(t == 10){
+			g = 50;
+			System.out.println(g);
+		}
+		System.out.println(g);
+
+12) if we place ; after if(true) or if(false),
+	the body{ } or the statments placed after if(-)
+	are not come under if(-) scope 
+
+	For example, in the below statements, 
+	int x=10; and Sopln(x) are not come under if(-) block, 
+	only ; is come under if(-) block
+
+		if(true) ;
+		  int x = 10;
+		  Sopln(x);
+	
+		
+		if(false) ;
+		  int y = 10;
+		  Sopln(y);
+
+		  if(true) ; {
+			  int z = 10;
+			  Sopln(z);
+		  }
+
+		  if(false) ; {
+			  int p = 10;
+			  Sopln(p);
+		  }
+
+		  if(false) ; {
+			  int q = 10;
+			  Sopln(q);
+		  }
+		  Sopln(q);
+
+		  int r;	
+		  if(false) ; {
+			  r = 10;
+			  Sopln(r);
+		  }
+		  Sopln(r);
+
+========================else block rules =============================
+13) 	We can not place only else compiler will throw error
+	else block must be associated with if block
+	
+	else {					
+	  Sopln("Hello");
+	}
+	
+	if(true){
+	   Sopln("Hi");
+	} else {
+	   Sopln("Hello");
+	}
+
+	
+14) We can not place multiple "else" blocks
+	to single if. Only one "else" block is allowed
+	
+	if(true){
+	   Sopln("Hi");
+	} else {
+	   Sopln("Hello");
+	} else {				
+	  Sopln("HRU?");
+	}
+
+15) Like if(-), we can also place else without { }
+	if(false) 
+		System.out.println("Hi");
+	else 
+		System.out.println("Hello");
+
+16) Like if(-), if we place else without { }
+	only one statement comes under else scope
+
+	if(false)								O/P
+		System.out.println("Hi");				Hello	
+	else										HRU?
+		System.out.println("Hello");
+		System.out.println("HRU?");
+
+
+	if(true)								O/P
+		System.out.println("Hi");				Hi	
+	else										HRU?
+		System.out.println("Hello");
+		System.out.println("HRU?");
+
+17) we can place if(-) without { } and else with { }
+
+	if(true)								O/P
+		System.out.println("Hi");				Hi	
+	else	{									
+		System.out.println("Hello");
+		System.out.println("HRU?");
+	}
+
+18) we can place if(-) with { } else without { }
+	if(true) {								O/P
+		System.out.println("Hi");				Hi	
+	} else									HRU?
+		System.out.println("Hello");
+		System.out.println("HRU?");
+
+19) If we palce if(-) without { }, we must place only 
+	one stament before else under if
+
+	if we place multiple statatements before else 
+	under if, compiler will throw error for "else"
+	because else will not be associated to if(-)
+	because of more statements
+
+		if(true) 								
+			System.out.println("Hi");					
+			System.out.println("Hello");
+		else										
+			System.out.println("HRU?");
+			System.out.println("WRU?");
+
+20) if we need to place multiple statements under if 
+	we must use {  } to if(-) statements
+
+		if(true) { 								
+			System.out.println("Hi");			O/P		
+			System.out.println("Hello");			Hi
+		 } else								Hello			
+			System.out.println("HRU?");			WRU?
+			System.out.println("WRU?");
+
+	If we add{  }to else also, then the output is
+		if(true) { 								
+			System.out.println("Hi");			O/P		
+			System.out.println("Hello");			Hi
+		 } else {								Hello			
+			System.out.println("HRU?");		
+			System.out.println("WRU?");
+		}
+
+21) We can not place some statements between
+	if and else blocks, compiler will throw error 
+	for "else" because it is not associated with if block
+
+		if(true) { 								
+			System.out.println("Hi");			
+			System.out.println("Hello");		
+		 } 
+	System.out.println("just for fun");	
+		 else {								
+			System.out.println("HRU?");	
+			System.out.println("WRU?");
+		 }
+
+22) Like in if(-), in else also we can not
+	declare variable without { }
+
+		if(true)
+			int p = 10;
+		else 
+			int q = 20;
+	
+	with body there is no compile time error
+		if(true) {
+			int p = 10;
+		}else {
+			int q = 20;
+		}
+
+23) Like in if(-), the variable created inside else will become 
+	local to else block, hence we can not access it 
+	after else block, compiler will throw error
+
+		if(false) {
+			int p = 10;
+			System.out.println(p);
+		}else {
+			int q = 20;
+			System.out.println(q);
+		}
+		System.out.println(p);
+		System.out.println(q);
+
+24) The variable created inside if(-){ } block
+	can not be accessed in else and after if..else
+	because it is local to if(-). 
+	
+	When else block is executing means
+	if block is not executed and variable is not created 
+	hence we can not access if block local variables in else block
+
+		if(false) {
+		   int p = 10;
+		   Sopln(p);
+		}else {
+		   Sopln(p);
+		}		
+		Sopln(p);
+		-------------------------------------------------
+		if(false) {
+			int p = 10;
+			System.out.println(p);
+			System.out.println(q);
+		}else {
+			int q = 20;
+			System.out.println(p);
+			System.out.println(q);
+		}
+		System.out.println(p);
+		System.out.println(q);
+
+25) If we want to access the variables declared if..else
+	after if..else block, we must declare them before if...else blocks
+
+		int p = 10;
+		int q = 20;
+
+		if(false) {
+			System.out.println(p);
+			System.out.println(q);
+		}else {
+			System.out.println(p);
+			System.out.println(q);
+		}
+		System.out.println(p);
+		System.out.println(q);
+
+26)	if we declare variable outside if, 
+		if we initialize it inside if,
+			if we access it either inside else or
+				after if...else, some times we will get error
+
+	Q) Idenfity errors in below cases?
+
+		int p;
+		if(true) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			System.out.println(p);
+		}
+		System.out.println(p);
+	--------------------------------------------
+		int p;
+		if(false) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			System.out.println(p);
+		}
+		System.out.println(p);
+	--------------------------------------------
+		int m = 10;
+		int p;
+		if(m==10) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			System.out.println(p);
+		}
+		System.out.println(p);
+	--------------------------------------------
+		final int m = 10;
+		int p;
+		if(m==10) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			System.out.println(p);
+		}
+		System.out.println(p);
+	--------------------------------------------
+		final int m = 20;
+		int p;
+		if(m==10) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			System.out.println(p);
+		}
+		System.out.println(p);
+	--------------------------------------------
+		final int m ;
+		m = 10;
+		int p;
+		if(m==10) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			System.out.println(p);
+		}
+		System.out.println(p);
+
+27)	if we declare variable outside if, 
+		if we initialize it inside if and also in else,
+			if we access it either inside else or after if...else
+				we never get error
+
+		int m = 10;
+		int p;
+		if(m==10) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			p = 20;
+			System.out.println(p);
+		}
+		System.out.println(p);
+      -------------------------------------------------
+		int m = 20;
+		int p;
+		if(m==10) {
+			p = 10;
+			System.out.println(p);
+		}else {
+			p = 20;
+			System.out.println(p);
+		}
+		System.out.println(p);
+
+
+28)  Creating same variable in if and else blocks
+	it is allowed, because scope is end
+
+		if(true){
+			int a = 10;
+		}
+		else{ 
+			int a = 20;
+		}
+
+29)  Creating same variable in if and else blocks
+	and also after if...else blocks
+
+	it is allowed, because scope is end
+
+		if(true){
+			int a = 10;
+		}
+		else{ 
+			int a = 20;
+		}
+		int a = 30;
+		System.out.println(a);
+
+30)  Creating same variable before if 
+		and in if and in else block
+			and also after if...else blocks
+	it is not allowed, because scope is not end
+
+		int a = 5;
+		if(true){
+			int a = 10;
+		}
+		else{ 
+			int a = 20;
+		}
+		int a = 30;
+		System.out.println(a);
+
+32) we can place empty if...else with body { }	
+	
+		void m1(){
+			if(true) {}
+			else{ }
+		}
+
+32) we can not place empty if...else without body { }	
+
+	Q) Identify errors?
+	---------------------------------------------------------------------------
+		void m1(){			void m1(){		void m1(){			
+			if(true)				if(true)			if(true);				
+			else					else;				else;				
+		}					}                       	}                       
+	-----------------------------------------------------------------------------
+		void m1(){			void m1(){		void m1(){			
+			if(true)				if(true)             	if(true)                  
+			if(false)				if(false)            	if(false);                 
+			else					else;				else;				
+		}					}				}					
+	-----------------------------------------------------------------------------
+		void m1(){						void m1(){		                        
+			if(true)             					if(true)                                    
+			if(false);           					if(false);                                  
+			else								else                                         
+			System.out.println("In else");			System.out.println("In else"); 
+											else
+											System.out.println("In else else"); 
+		}								}				                        
+
+=========================== if-else-if rules ========================
+33) we must palce else block always last
+		
+		if(true){}
+		else if(true){ }
+		else{ }
+		
+		if(true){}
+		else{ }
+		else if(true){ }
+
+34) we can place if-else-if with out else
+		if(true){}
+		else if(true){ }
+
+		if(true){}
+		else if(false){ }
+
+35) apply above variable declaration, variable initialiation  
+	and ; points on if-else-if. Find are there CE in below cases
+
+
+		if(true){
+			int a = 10;
+			System.out.println(a);
+		}
+		else if(true){ 
+			System.out.println(a);
+		}
+		else{ 
+			System.out.println(a);
+		}
+		System.out.println(a);
+
+		
+		int a;
+		if(true){
+			a = 10;
+			System.out.println(a);
+		}
+		else if(true){ 
+			System.out.println(a);
+		}
+		else{ 
+			System.out.println(a);
+		}
+		System.out.println(a);
+
+		int b;
+		if(false){
+			b = 10;
+		}
+		else if(true){ 
+//			System.out.println(b);
+		}
+		else{ 
+//			System.out.println(b);
+		}
+//		System.out.println(b);
+
+		int c;
+		if(false){
+			c = 10;
+		}
+		else if(true){ 
+			c = 20;
+			System.out.println(c);
+		}
+		else{ 
+			System.out.println(c);
+		}
+		System.out.println(c);
+	
+		int d;
+		if(false){
+			d = 10;
+		}
+		else if(false){ 
+			d = 20;
+			System.out.println(d);
+		}
+		else{ 
+//			System.out.println(d);
+		}
+//		System.out.println(d);
+
+		int e;
+		if(false){
+			e = 10;
+		}
+		else if(false){ 
+			e = 20;
+			System.out.println(e);
+		}
+		else{ 
+			e = 30;
+			System.out.println(e);
+		}
+		System.out.println(e);
+
+		int f = 10;
+		int g;
+		if(f == 10){
+			g = 5;
+		}
+		else if(f == 20){ 
+			g = 6;
+			System.out.println(g);
+		}
+		else{ 
+//			System.out.println(g);
+		}
+//		System.out.println(g);
+
+		int h= 20;
+		int i;
+		if(h == 10){
+			i = 5;
+			System.out.println(i);
+		}
+		else if(h == 20){ 
+			i = 6;
+			System.out.println(i);
+		}
+		else{ 
+			i = 7;
+			System.out.println(i);
+		}
+		System.out.println(i);
+
+		if(true){ }
+		else if(true){}
+		else{}
+
+//		if(true)
+//		else if(true)
+//		else
+
+//		if(true)
+//		else if(true)
+//		else ;
+
+//		if(true)
+//		else if(true);
+//		else ;
+
+		if(true);
+		else if(true);
+		else ;
+
+//		if(true);;
+//		else if(true);;
+//		else ;;
+

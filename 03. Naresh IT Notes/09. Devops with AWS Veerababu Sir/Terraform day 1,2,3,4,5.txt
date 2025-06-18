@@ -1,0 +1,131 @@
+---------------------------------------------------------------------------------------------------------
+                                         #### Terrafrom ###
+-------------------------------------------------------------------------------------------------------
+
+### What Is Terraform? 
+Terraform is an IAC tool, used primarily by DevOps teams to automate various infrastructure tasks. The provisioning of cloud resources, for instance, is one of the main use cases of Terraform. It’s a cloud-agnostic, open-source provisioning tool written in the Go language and created by HashiCorp.
+
+Terraform allows you to describe your complete infrastructure in the form of code. Even if your servers come from different providers such as AWS or Azure, Terraform helps you build and manage these resources in parallel across providers. Think of Terraform as connective tissue and common language that you can utilize to manage your entire IT stack.
+
+
+###--- Benefits of Infrastructure-as-Code (IaC) ---###
+
+IaC replaces standard operating procedures and manual effort required for IT resource management with lines of code. Instead of manually configuring cloud nodes or physical hardware, IaC automates the process infrastructure management through source code.
+
+Here are several of the major key benefits of using an IaC solution like Terraform:
+
+Speed and Simplicity. IaC eliminates manual processes, thereby accelerating the delivery and management lifecycles. IaC makes it possible to spin up an entire infrastructure architecture by simply running a script.
+Team Collaboration. Various team members can collaborate on IaC software in the same way they would with regular application code through tools like Github. Code can be easily linked to issue tracking systems for future use and reference.
+Error Reduction. IaC minimizes the probability of errors or deviations when provisioning your infrastructure. The code completely standardizes your setup, allowing applications to run smoothly and error-free without the constant need for admin oversight.
+Disaster Recovery. With IaC you can actually recover from disasters more rapidly. Because manually constructed infrastructure needs to be manually rebuilt. But with IaC, you can usually just re-run scripts and have the exact same software provisioned again.
+Enhanced Security. IaC relies on automation that removes many security risks associated with human error. When an IaC-based solution is installed correctly, the overall security of your computing architecture and associated data improves massively.
+
+
+------ ### Basic Terraform folder structure ### ------
+
+projectname/
+    |
+    |-- provider.tf
+    |-- version.tf
+    |-- backend.tf
+    |-- main.tf
+    |-- variables.tf
+    |-- terraform.tfvars
+    |-- outputs.tf
+
+Give Terraform files logical names
+Terraform tutorials online often demonstrate a directory structure consisting of three files: 
+
+main.tf:    contains all providers, resources and data sources
+variables.tf: contains all defined variables
+output.tf:    contains all output resources
+The issue     with this structure is that most logic is stored in the single main.tf file which therefore becomes pretty complex and long. Terraform, however, does not mandate this structure, it only requires a directory of Terraform files. Since the filenames do not matter to Terraform I propose to use a structure that enables users to quickly understand the code. Personally I prefer the following structure 
+provider.tf: contains the terraform block and provider block
+data.tf: contains all data sources
+variables.tf: contains all defined variables
+locals.tf: contains all local variables
+output.tf: contains all output resources
+
+---------- ##### Importent Terraform Commands ### --------
+### Version
+
+terraform –version	Shows terraform version installed
+
+### Initialize infrastructure ###
+
+terraform init	                :Initialize a working directory
+terraform init -input=true	:Ask for input if necessary
+terraform init -lock=false	:Disable locking of state files during state-related operations
+
+terraform plan	                :Creates an execution plan (dry run)
+terraform apply	                :Executes changes to the actual environment
+terraform apply –auto-approve	:Apply changes without being prompted to enter ”yes”
+terraform destroy –auto-approve :Destroy/cleanup without being prompted to enter ”yes”
+
+Terraform Workspaces
+terraform workspace new	Create a new workspace and select it
+terraform workspace select	Select an existing workspace
+terraform workspace list	List the existing workspaces
+terraform workspace show	Show the name of the current workspace
+terraform workspace delete	Delete an empty workspace
+
+
+Terraform Import
+terraform import aws_instance.example i-abcd1234(instance id)	#import an AWS instance with ID i-abcd1234 into aws_instance resource named “foo”
+
+
+---## Statefile ##--:
+## What is state and why is it important in Terraform? #########
+“Terraform must store state about your managed infrastructure and configuration. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. This state file is extremely important; it maps various resource metadata to actual resource IDs so that Terraform knows what it is managing. This file must be saved and distributed to anyone who might run Terraform.”
+
+###Remote State:----------
+“By default, Terraform stores state locally in a file named terraform.tfstate. When working with Terraform in a team, use of a local file makes Terraform usage complicated because each user must make sure they always have the latest state data before running Terraform and make sure that nobody else runs Terraform at the same time.”
+
+“With remote state, Terraform writes the state data to a remote data store, which can then be shared between all members of a team.”
+
+###State Lock:--------------
+“If supported by your backend, Terraform will lock your state for all operations that could write state. This prevents others from acquiring the lock and potentially corrupting your state.”
+
+“State locking happens automatically on all operations that could write state. You won’t see any message that it is happening. If state locking fails, Terraform will not continue. You can disable state locking for most commands with the -lock flag but it is not recommended.”
+
+## Setting up our S3 Backend 
+Create a new file in your working directory labeled Backend.tf
+
+Copy and paste this configuration in your source code editor in your backend.tf file.
+
+    terraform {
+      backend "s3" {
+        encrypt = true    
+         bucket = "sample"
+        dynamodb_table = "terraform-state-lock-dynamo"
+        key    = "terraform.tfstate"
+        region = "us-east-1"
+      }
+    }
+
+
+
+## before that we have to create resource are s3 and dynamodb those resource will call in backend.tf
+## Creating our DynamoDB Table 
+Create a new file in your working directory labeled dynamo.tf
+
+Copy and paste this configuration in your source code editor in your main.tf file.
+
+# S3 
+resource "aws_s3_bucket" "example" {
+  bucket = sample
+}
+
+
+#Dynamodb
+    resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
+      name = "terraform-state-lock-dynamo"
+      hash_key = "LockID"
+      read_capacity = 20
+      write_capacity = 20
+     
+      attribute {
+        name = "LockID"
+        type = "S"
+      }
+    }

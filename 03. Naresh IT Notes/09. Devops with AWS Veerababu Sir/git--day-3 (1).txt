@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------------
+                  # Revert changes on git #
+-------------------------------------------------------------------------------
+# Revert changes from working directory #
+
+   git restore <file_name> 
+          or
+   git checkout -- <file_name>     like undo command
+
+
+# Revert changes from Staging Area #
+
+   git restore --staged <file_name>  #to revert changes from Staging area to working directory  
+  
+
+# Revert changes from Local Repository #
+ 
+   git reset HEAD~1         # to revert changes from local repo to working directory 
+   
+
+#if The git reset HEAD~2 command moves the current branch backward by two commits
+   
+Note: if you can give git status or any git commit command everything clear no untracked file no staging files 
+
+                                                          
+Git reset we have three modes (optional)
+
+Mixed—its is default mode discard the commits both local repo and staging area 
+Git reset --mixed commit id   
+
+
+Soft -- discard the commits in local repo only file will be available both staging and working directory
+Git reset --soft commit id   
+
+Hard : discard the commits in local repo , staging and working directory aswell
+Git reset --hard commit id   

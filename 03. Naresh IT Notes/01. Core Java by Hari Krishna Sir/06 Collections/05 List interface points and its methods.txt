@@ -1,0 +1,127 @@
+List<E> interface points
+=========================================
+	1) List is a sub interface of Collection, it is a ordered collection
+	
+	2) It is part of Collections Framework available from Java 1.2v 
+	
+	3) If we want to store multiple objects in insertion order 
+		with index including duplicates, we must choose
+	    List interface and its sub classes.
+	
+	3) List interface has 4 implemented classes
+	       Vector, Stack, ArrayList, LinkedList 
+	
+	
+						Collection<E>
+						
+									List<E>
+							
+			AbatractCollection<E>
+
+									AbatractList<E>
+	
+											AbatractSequentalList<E>
+													
+													
+				Vector<E>		ArrayList<E>		LinkedList<E>			
+
+				Stack<E>			
+
+
+	
+		-> We must choose Vector to store objects 
+			with thread-safety in multithreaded model application.
+	
+		-> We must choose ArrayList to store objects in single thread 
+			model application or in method local operations, where we 
+			not require thread-safety.
+		
+		-> We must choose LinkedList if our more opeations are
+			inserting or removing objects at beginning or 
+			in the middle of the collection and want to reterive object 
+			only sequentially.
+		
+		-> We must choose Stack for retrieving objects in LIFO manner.
+
+List<E> methods (21 + 10 + 2 + 12 + 1) => (46)
+====================================================================================	
+	1) inserting one object
+			public void add(int index, E e) 
+		
+	2) inserting one group of object
+			public boolean addAll(int index, Collection<? extends E>  c)
+			
+	3) retrieving an object from given index
+			public E get(int index) throws IOOBE
+			
+	4) replacing an object at given index with given object
+			public E set(int index, E e) throws IOOBE 
+			
+	5) removing an object from given index 
+			public E remove(int index) throws IOOBE
+	
+	6) finding the index of given object first occurrence
+			public int indexOf(Object obj)  
+			
+	7) finding the index of given object last occurrence
+			public int lastIndexOf(Object obj) 
+			
+	8) retrieving  sub list
+			public List<E> subList(int start, int end) throws IOOBE
+			
+	9) retrieving all objects sequentially in bi-direction
+			public ListIterator<E> listIterator()
+					
+   10) retrieving all objects sequentially in bi-direction from given index
+   			public ListIterator<E> listIterator(int index) throws IOOBE
+   			
+   			
+   				+ Java 8 methods +
+   11) Replaces each element of this list with the result of applying the operator to that element.
+   			public default void	replaceAll​(UnaryOperator<E> operator)
+   			
+   12) Sorts this list according to the order induced by the specified Comparator
+   			public default void	sort​(Comparator<? super E> c)
+   		
+   				+ Java 9 methods +
+   				
+   13) Creating unmodifiable (immutable) collection with given elements	
+   		public static <E> List<E>	of​();
+   		public static <E> List<E>	of​(E e1);
+   		public static <E> List<E>	of​(E e1, E e2)
+   		public static <E> List<E>	of​(E e1, E e2, E e3)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4, E e5)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4, E e5, E e6)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9)
+   		public static <E> List<E>	of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9, E e10)
+   		public static <E> List<E>	of​(E... e))
+   		
+   				+ Java 10 method +
+   				
+   14) Creating unmodifiable (immutable) collection with elements of given collection				
+		public static <E> List<E>	copyOf​(Collection<? extends E> col)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		

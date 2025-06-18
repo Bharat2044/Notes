@@ -1,0 +1,133 @@
+Collection<E> interface points
+=========================================
+	1) Collection is the root interface for collection hierarchy.
+	
+	2) A collection represents a group of objects, known as its elements. 
+		Some collections allow duplicate elements and others do not. 
+		Some are ordered and others unordered. The JDK does not provide any direct implementations 
+		of this interface: it provides implementations of more specific sub interfaces like Set & List.
+		 
+	3) This interface is typically used to pass collections around with LC and RP.
+	
+	4) All general-purpose Collection implementation classes 
+		(which typically implement Collection indirectly through one of its subinterfaces) 
+		should provide two "standard" constructors:
+	 
+			1) a void (no arguments) constructor, which creates an empty collection, and  
+			2) a constructor with a single argument of type Collection, 
+				which creates a new collection with the same elements as its argument. 
+				In effect, the latter constructor allows the user to copy any collection, 
+				producing an equivalent collection of the desired implementation type.
+			 
+	5) There is no way to enforce this convention (as interfaces cannot contain constructors)
+		but all of the general-purpose Collection implementations in the Java platform libraries comply.
+	
+	6) Collection hierarchy is subdivided into three groups 
+		based on uniqueness & orderness properties, i.e; Set, List and Queue
+	
+	7) Set is a sub interface of Collection and it is an unordered, unique collection. 
+		Means it allows us to store only unique objects 
+		and stores those object without maintaining insertion order. 
+		It allows both homogeneous or heterogeneous objects.
+	
+	8) List is also a sub interface of Collection and it is a ordered collection, 
+		allows duplicate objects. Those objects may be homogeneous or heterogeneous objects. 
+		It stores objects in insertion order with index. 
+		Insertion order means the order in which we are calling add() method.
+	
+	9) Set is called unordered collection, because objects are stored without index 
+		and not particular order.List is called order collection, because objects are 
+		stored with index in insertion order.
+	
+	10) Set & List has further subclasses to collect objects in a particular storing & retrieving order.
+			1. No order 
+			2. Insertion order
+			3. Sorting order
+			4. LIFO
+			5. FIFO
+			6. Random access
+			7. Sequential access
+	
+	11) In Java 5v, it was derived from Iterable<E> interface 
+	     for retrieving objects by using for-each loop.
+	
+	12) It contains 15 methods, declared, common to all sub types 
+	    for collecting objects. In Java 8v it is provided with more 5 methods 
+	    with default implementation, and 1 more method in Java 11v.
+	    All these methods are "default methods". 
+	    
+	    Below are the 21 methods available in 
+	    Collection<E> interface common to all sub types to perform 
+	    collection  operations. 
+    
+Collection<E> interface methods
+==================================================================
+	1) finding empty or not
+			public boolean isEmpty()
+	
+	2) adding one object
+			public boolean add(E e)
+		
+	3) adding multiple objects
+			public boolean addAll(Collection<? extends E> c)
+	
+	4) searching for one object
+			public boolean contains(E e)
+	
+	5) searching for multiple objects
+			public boolean containsAll(Collection<? extends E> c)
+	
+	6) removing one object	
+			public boolean remove(E e)
+			
+	7) removing multiple objects	
+			public boolean removeAll(Collection<? extends E> c)
+		
+	8) removing uncommon elements
+			public boolean retainAll(Collection<? extends E> c)
+	
+	9) removing all elements, making collection empty
+			public void clear()
+		 	
+	10) counting objects
+			public int size()
+					
+	11) retrieving objects	(inherited from Iterable<T>)
+			public Iterator<E> iterator()  
+		
+	12) retrieving hash code of this collection
+			public int hashCode()
+					
+	13) comparing two collections
+			public boolean equals(Object obj)
+	
+	14) converting collection to array
+			public Object[] toArray()
+		
+	15) converting collection to array of specific type
+			public Object[] toArray(Object[] obj)
+		
+					+	Java 8v new methods +  
+							
+	16) Retrieving objects fast with less code (inherited from Iterable<T>)
+			public default void forEach​(Consumer<? super T> action)
+	
+	17) Retrieving objects fast with less code with more functionality	
+		   	public default Stream<E> stream()
+
+	18) Retrieving objects by processing more fast with less code with more functionality	
+		   	public default Stream<E> parallelStream()
+		   	
+	19) Retrieving objects by processing more fast with less code with more functionality	
+		   	public default Spliterator<E> spliterator() (Split + Iterate)
+		   	
+	20) Removes all of the elements of this collection that satisfy the given predicate. 
+			public default boolean removeIf​(Predicate<? super E> filter)
+								
+					+	Java 11v new methods +  
+					
+	21) converting collection to array of specific type
+			public default <T> T[]	toArray​(IntFunction<T[]> generator)	
+			
+						
+				

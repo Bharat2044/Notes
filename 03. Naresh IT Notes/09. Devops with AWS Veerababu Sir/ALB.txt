@@ -1,0 +1,95 @@
+
+
+
+1.Create one ec2 in private subnet(1a) and one more ec2 in public subnet(1a) connect private instance via bastion host process 
+and add sample application  
+
+2.Create Tg and add private server in to it.
+
+3.Create alb and select avaialability zones 1b,1c az's only and configure tg and access with alb url will see able to acces or not 
+
+4.Modify ALB and add subnet 1a also now you can try to access your application by using ALB url
+
+Note: To create elb, we should create at least two public subnest in different Avaialability zones.
+so try to unders howmany subnets (Public and private) are reuired first 
+
+
+Does ALB redirects Traffic to unselected AZ?
+
+An Application Load Balancer (ALB) in AWS is designed to distribute incoming traffic across multiple targets, 
+such as EC2 instances, containers, and IP addresses, across one or more Availability Zones (AZs). 
+Here are some key points regarding ALB and traffic distribution across Availability Zones:
+
+Traffic Distribution and Availability Zones
+Selected Availability Zones: When you create an ALB, you specify the Availability Zones where it will operate. 
+The ALB will create a load balancer node in each of the specified Availability Zones. 
+These nodes are responsible for handling and distributing incoming traffic to the targets within those zones.
+
+Unselected Availability Zones: ALB does not route traffic to targets in Availability Zones that are not selected during the ALB configuration. 
+If an Availability Zone is not selected, there will be no load balancer node in that zone, and as a result, no traffic will be routed to it.
+
+Traffic Distribution: Within the selected Availability Zones, the ALB will distribute incoming traffic evenly across the registered and healthy targets in those zones. 
+If one of the selected zones becomes unavailable, the ALB will automatically distribute traffic to the remaining healthy zones and targets.
+
+Ensuring High Availability
+To ensure high availability and fault tolerance, it is recommended to configure your ALB to operate in multiple Availability Zones. This setup helps in the following ways:
+
+Resilience: If one Availability Zone goes down, the ALB can still route traffic to targets in the other zones.
+Load Distribution: Evenly distributes traffic to prevent overloading any single Availability Zone or target.
+Example Scenario
+Let's say you have an ALB configured with the following Availability Zones:
+
+Selected AZs: us-east-1a, us-east-1b, and us-east-1c.
+In this configuration:
+
+The ALB will have load balancer nodes in us-east-1a, us-east-1b, and us-east-1c.
+It will distribute traffic only to targets within these selected zones.
+If a target is in us-east-1d (an unselected AZ), the ALB will not route traffic to this target.
+How to Configure Availability Zones for an ALB
+Create or Modify an ALB: When you create or modify an ALB in the AWS Management Console, you can select the Availability Zones.
+Select Subnets: For each selected Availability Zone, you must specify at least one subnet. The load balancer nodes will be created in these subnets.
+
+Example Steps in the AWS Management Console
+
+Navigate to the EC2 Dashboard: Go to the Load Balancers section.
+Create a New Load Balancer: Click on “Create Load Balancer” and choose “Application Load Balancer.”
+Configure Load Balancer: Provide a name, select the scheme (Internet-facing or internal), and select the IP address type.
+Availability Zones: Under the Availability Zones section, select the desired VPC and the Availability Zones along with their corresponding subnets.
+Configure Security Settings: Set up security groups and listener configurations.
+Register Targets: Add the instances or other targets you want the ALB to route traffic to.
+Summary
+Traffic Routing: ALB only routes traffic to targets in the selected Availability Zones.
+High Availability: To achieve high availability, configure the ALB to span multiple Availability Zones.
+Unselected AZs: Targets in unselected Availability Zones will not receive traffic from the ALB.
+By carefully selecting the Availability Zones and configuring the ALB appropriately, you can ensure optimal traffic distribution and high availability for your applications.
+
+
+
+
+Example :
+
+ALB Node Creation
+When you configure an ALB, AWS creates load balancer nodes in each selected Availability Zone. 
+These nodes handle the incoming traffic and distribute it to the registered targets (instances, containers, IP addresses) within the same AZ.
+
+Impact of Unselected AZs
+No Load Balancer Node: If an AZ is not selected during the ALB configuration, there is no load balancer node in that AZ. 
+Consequently, the ALB cannot route traffic to instances located in that AZ.
+Ignored Targets: Instances in the unselected AZs will remain in the target group but will not receive any traffic.
+Example Scenario
+ALB Configuration:
+
+Selected AZs: us-east-1a, us-east-1b
+Unselected AZ: us-east-1c
+Instances:
+
+Instance A in us-east-1a
+Instance B in us-east-1b
+Instance C in us-east-1c (added to the target group but in an unselected AZ)
+
+In this scenario:
+
+Instance A and Instance B: Will receive traffic from the ALB as they are in the selected AZs.
+Instance C: Will not receive any traffic from the ALB because it is in us-east-1c, which is not a selected AZ.
+
+Note : In this process application has to deploy in private servers only not in public 

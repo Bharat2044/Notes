@@ -1,0 +1,37 @@
+List<E> interface methods (21 + 10 + 2 + 11 + 1)
+=================================================
+1. public void add(int index, E e)
+2. public boolean addAll(int index, Collection<? extends E> c)
+
+3. public E get(int index)
+4. public ListIterator<E> listIterator()
+5. public ListIterator<E> listIterator(int index)
+
+6. public E set(int index, E e)
+7. public default void replaceAll(UnaryOpertor<E> operator)
+
+8. public E remove(int index)
+
+9. public int indexOf(Object obj)
+10. public int lastIndexOf(Object obj)
+
+11. public List<E> subList(int start, int end)
+
+12. public default void sort(Comparator<T>  comparator)
+
+13. public static <E> List<E> of()
+14. public static <E> List<E> of(E e)
+15. public static <E> List<E> of(E e1, E e2)
+16. public static <E> List<E> of(E e1, E e2, E e3)
+17. public static <E> List<E> of(E e1, E e2, E e3. E e4)
+18. public static <E> List<E> of(E e1, E e2, E e3. E e4, E e5)
+19. public static <E> List<E> of(E e1, E e2, E e3. E e4, E e5, E e6)
+20. public static <E> List<E> of(E e1, E e2, E e3. E e4, E e5, E e6, E e7)
+21. public static <E> List<E> of(E e1, E e2, E e3. E e4, E e5, E e6, E e7, E e8)
+22. public static <E> List<E> of(E e1, E e2, E e3. E e4, E e5, E e6, E e7, E e8, E e9)
+23. public static <E> List<E> of(E e1, E e2, E e3. E e4, E e5, E e6, E e7, E e8, E e9, E e10)
+24. public static <E> List<E> of(E... e)
+
+25. public static <E> List<E> copyOf(Collection<? extends E> c)
+
+ 

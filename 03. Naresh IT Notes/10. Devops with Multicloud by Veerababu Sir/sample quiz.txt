@@ -1,0 +1,22 @@
+11.Your application experiences variable traffic patterns, and you want to optimize costs while ensuring performance. What EC2 pricing model would you choose, and how would you implement it?
+
+
+12.You are tasked with setting up a secure environment for a multi-tier application. How would you design your VPC to ensure that the web tier is publicly accessible while the database tier remains private?
+
+
+13.A developer accidentally deleted an important S3 bucket. How can you prevent this from happening in the future?
+
+
+14.You are storing sensitive customer data in S3, and you need to ensure that the data is encrypted both at rest and in transit. What steps would you take to achieve this?
+
+15.Your organization has multiple AWS accounts, and you need to share an S3 bucket across these accounts while maintaining strict access controls. How would you achieve this?
+
+16.You are running a multi-tier application with a web tier, application tier, and database tier. How would you configure security groups to ensure that each tier can communicate with the others while maintaining security?
+
+17.You have a VPC with a public subnet and a private subnet. You want to set up a highly available architecture where instances in the private subnet can access the internet for updates but should not be directly accessible from the internet. How would you configure the route tables and the necessary components?
+
+18.You have an existing VPC with a CIDR block of 10.0.0.0/16, and you want to add a new subnet for a new application. However, you realize that the existing subnets are consuming a significant portion of the available IP addresses. How can you expand the VPC's CIDR block to accommodate the new subnet?
+
+19.You have a VPC with a CIDR block of 192.168.0.0/16, and you want to connect it to an on-premises network that uses the CIDR block 192.168.1.0/24. What issues might arise, and how can you resolve them?
+
+20.You need to ensure that your EC2 instances are accessible over the internet while being protected from unauthorized access. What security measures would you implement?

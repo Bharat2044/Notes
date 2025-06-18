@@ -1,0 +1,170 @@
+"Installing mySQL on Amazon Linux 2023"    use 
+ t2.medium
+
+
+# Update the package index
+sudo dnf update -y
+
+# Download the MySQL 8.0 community release package
+sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-4.noarch.rpm
+
+# Install the MySQL community release package
+sudo dnf install mysql80-community-release-el9-4.noarch.rpm -y
+
+# Install MySQL server
+sudo dnf install mysql-community-server -y
+
+# Verify MySQL installation
+mysql -V
+
+# Start the MySQL service
+sudo systemctl start mysqld
+
+# Enable MySQL to start on boot
+sudo systemctl enable mysqld
+
+# Check MySQL service status
+systemctl status mysqld
+
+# Get the temporary password generated for the root user
+sudo grep 'temporary password' /var/log/mysqld.log
+# Note the temporary password from the output, e.g., LWC5VaBpSe:3
+note temp passwd LWC5VaBpSe:3
+LWC5VaBpSe:3
+
+
+#reset temp password
+sudo mysql_secure_installation
+enter your password : LWC5VaBpSe:3
+new password : Clou&12345				# give strong password
+re enter password: Clou&12345
+ #completed  
+Change the password for root ? ((Press y|Y for Yes, any other key for No) : n
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : n
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) : n
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) : n
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
+
+mysql -u root -p 
+#create sample data base 
+
+CREATE DATABASE IF NOT EXISTS demodb;
+
+SHOW DATABASES;
+
+CREATE TABLE Persons.demodb (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+USE DBName;
+
+give demodb
+
+SHOW TABLES;
+
+
+
+
+
+
+
+
+
+
+#### How to give this db access to external ####
+
+Step 1: Configure MySQL to Allow Remote Connections
+Log in to your MySQL server on the primary EC2 instance:
+
+
+mysql -u root -p
+Edit the MySQL configuration file (/etc/my.cnf or /etc/mysql/my.cnf, depending on your installation) to allow connections from any host or a specific IP range. Open the file using a text editor like nano or vim:
+
+
+sudo nano /etc/my.cnf
+Find the bind-address setting and change it to 0.0.0.0 to allow connections from any IP address:
+
+
+[mysqld]
+bind-address = 0.0.0.0
+Alternatively, you can specify a particular IP address or range if you want to restrict access:
+
+
+bind-address = 0.0.0.0
+Save the file and restart the MySQL service to apply the changes:
+
+
+sudo systemctl restart mysqld
+Step 2: Grant Remote Access to the MySQL User
+Log in to MySQL as the root user:
+
+
+mysql -u root -p
+Grant access to the user for remote connections. Replace demouser, demopassword, and your-remote-ip with the actual username, password, and IP address of the EC2 instance that will be connecting remotely:
+
+
+
+GRANT ALL PRIVILEGES ON demodb.* TO 'demouser'@'your-remote-ip' IDENTIFIED BY 'demopassword';
+FLUSH PRIVILEGES;
+If you want to allow access from any IP address (less secure), you can use % instead of an IP address:
+
+
+GRANT ALL PRIVILEGES ON demodb.* TO 'demouser'@'%' IDENTIFIED BY 'demopassword';
+FLUSH PRIVILEGES;
+Exit MySQL:
+
+
+EXIT;
+Step 3: Configure Security Groups
+Go to the AWS Management Console and navigate to EC2.
+
+Select the security group associated with the EC2 instance running MySQL.
+
+Edit inbound rules to allow traffic on the MySQL port (default is 3306) from the IP address of the other EC2 instance:
+
+Type: Custom TCP Rule
+Protocol: TCP
+Port Range: 3306
+Source: The IP address or security group of the EC2 instance that will be connecting remotely
+Save the inbound rule changes.
+
+Step 4: Connect from the Remote EC2 Instance
+On the remote EC2 instance, use the mysql command-line client to connect:
+
+
+mysql -u demouser -p -h primary-ec2-public-dns
+Replace primary-ec2-public-dns with the public DNS or IP address of the EC2 instance running MySQL.
+
+Enter the password when prompted.
+
+Summary of Commands
+On the MySQL Server (Primary EC2 Instance):
+
+
+# Edit MySQL configuration file
+sudo nano /etc/my.cnf
+
+# Change bind-address to 0.0.0.0
+# Restart MySQL service
+sudo systemctl restart mysqld
+
+# Log in to MySQL
+mysql -u root -p
+
+# Grant access to the user
+GRANT ALL PRIVILEGES ON demodb.* TO 'demouser'@'%' IDENTIFIED BY 'demopassword';
+FLUSH PRIVILEGES;
+
+# Exit MySQL
+EXIT;
+On the Remote EC2 Instance:
+
+# Connect to the MySQL server
+mysql -u demouser -p -h primary-ec2-public-dns
+Make sure to adjust security settings carefully to maintain security while allowing necessary access.
+
+

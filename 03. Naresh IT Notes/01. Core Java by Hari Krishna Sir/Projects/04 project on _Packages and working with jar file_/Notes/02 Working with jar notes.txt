@@ -1,0 +1,481 @@
+	What is jar file, why jar ?
+	-----------------------------
+	- Jar file is a compressed file contains packages(folders), classes and interfaces
+
+	- It is used for grouping all pacakges of a software or project as one file 
+		for easy maintaining and distributing to other programmers of same company
+			or to the programmers of other company accross the world.
+	
+	Diff b/w zip and jar file
+	-----------------------------
+	- Like zip/rar it is also a compressed file.
+	- It is a platform independent compressed file. 
+	- It will work in all operating systems.
+	- It is specific to only Java and its related technologies and framewoks. 
+	- The extension of this file is ".jar"
+		
+	How can we access the packages and classes availabe in jar file
+	-----------------------------------------------------------------------------
+	- For accessing packages available in a jar file, we must set classpath with this jar file path
+		we must include jar file name in classpath
+
+	- By default jar files are placed in "lib" folder in every software
+		so we must include lib\jar file path in classpath
+
+	Predefined jar files of JDK, oracle and server softwares
+	--------------------------------------------------------------------
+		- jdk all packages and classes are given in "rt.jar" file
+				in JDK software
+
+		- oracle jdbc driver all packages and classes are given in "ojdbc7.jar" file 
+				in Oracle software 
+
+		- servlet technology all packages and classes are given in "servlet-api.jar" file and 
+		- jsp technology all packages and classes are given in "jsp-api.jar" file 
+				in tomcat/weblogic/websphear server software
+
+		- In order to access oracle driver api , servlet api, jsp api from our classes 
+			we must place those jar files in classpath
+		
+		- Note: By default jar files are placed in "lib" folder in every software
+				so we must include lib\jar file path in classpath
+
+		- Rule: When you create classpath, we must include ".;" in classpath value at beginning
+				otherwise the class available in PWD are found and executed
+
+	Setting classpath temporarily from command prompt	
+	-----------------------------------------------------------------
+		cmd>set 
+		classpath=.;C:\jdk1.8.0_144\lib\tools.jar;C:\jdk1.8.0_144\jre\lib\rt.jar;C:\app\HK\product\12.1.0\dbhome_1\jdbc\li
+		b\ojdbc7.jar;C:\apache-tomcat-9.0.20\lib\servlet-api.jar;C:\apache-tomcat-9.0.20\lib\jsp-api.jar
+
+	- Note: JDK tools.jar and rt.jar file no need to place in classpath, 
+			because jdk tools javac, java and etc.. tools can find 
+			the packages and classes available in rt.jar automatically.
+
+			But we must set classpath for other software jar files
+	
+
+	- Can we include .class file in classpath, a package in classpath and a jar file in classpath?
+		We must not place ".class" file name and "package name" in classpath
+			we must place only uptop their parent directory name
+
+		but we must palce "jar" file name in classpath
+
+
+	Creating jar file for our project classes
+	----------------------------------------------
+	- for creating a jar file we must use JDK tool "jar" command
+	- jar creates an archive for classes and resources(files), and can manipulate or
+		restore individual classes or resources from an archive.
+
+	- jar command has several options to create jar file and working with it
+		1) -c, --create               Meant for creating the archive/jar file
+		2) -f, --file=FILE         Meant for specifing the jar file name to create 
+		3) -v, --verbose            Meant for displaying all file names those are storing in jar file name
+
+		4) -t, --list		     Meant for Listing/displaying the table of contents/file name for the archive
+		5) -u, --update              Meant for Updating an existing jar archive
+		6) -x, --extract              Extract named (or all) files from the archive
+
+
+	- syntax to create jar command 
+		cmd>jar	-cvf	 <jar file name>   <files and folder names with space separator>  
+				-- the specified files and directories are stoed in this jar file
+
+		cmd>jar	-cvf	 <jar file name>   *
+				-- all files and directories available in PWD are stoted in this jar file
+
+		cmd>jar	-cvf	 <jar file name>   *.class
+				-- all .class files available in PWD are stored in this jar file
+
+
+		project
+			|-> A.java
+			|-> A.class
+			|-> B.java
+			|-> B.class
+			|-> C.java
+			|-> C.class
+
+		cmd> jar   -cvf  test.jar  A.class   B.class
+
+		cmd> jar   -cvf  test.jar  *
+
+
+
+			Developer
+				+---bin
+				+---dist
+				+---lib
+				+---src
+				    +---p1
+				    ¦			A.java
+				    ¦
+				    +---p2
+				    ¦			B.java
+				    ¦
+				    +---p3
+							C.java
+
+			Developer:javac -d .\bin src\p1\*.java
+			Developer:javac -d .\bin src\p2\*.java
+			Developer:javac -d .\bin src\p3\*.java
+
+			Developer
+				+---bin
+				¦   +---p1
+				¦   ¦		A.class
+				¦   ¦
+				¦   +---p2
+				¦   ¦		B.class
+				¦   ¦
+				¦   +---p3
+				¦			C.class
+				¦
+				+---dist
+				+---lib
+				+---src
+				    +---p1
+				    ¦			A.java
+				    ¦
+				    +---p2
+				    ¦			B.java
+				    ¦
+				    +---p3
+							C.java
+		
+			Developer> cd dist
+			dist>jar -cvf classes.jar -C   ..\bin\    .
+				classes.jar file is created in dist folder
+
+			Share classes.jar file to user programer 
+//==================================================================
+			User Programmer he will copy it into lib folder
+
+				UserProgrammer
+					+---bin
+					+---dist
+					+---lib
+					¦		classes.jar
+					¦
+					+---src
+					    +---p4
+								Test.java
+				
+
+			UserProgrammer>set classpath=.;lib\clasess.jar
+			UserProgrammer>javac  -d  bin  src\p4\Test.java
+
+				UserProgrammer
+					+---bin
+					¦   +---p4
+					¦           Test.class
+					¦
+					+---dist
+					+---lib
+					¦       classes.jar
+					¦
+					+---src
+					    +---p4
+						    Test.java
+
+			UserProgrammer>java p4.Test
+				Exception java.lang.ClassNotFoundException: Test
+			UserProgrammer>set classpath=.;lib\clasess.jar;bin
+			UserProgrammer>java p4.Test
+					Test main start
+					A m1
+					B m2
+					C m3
+					Test main end
+
+Types of jar files
+--------------------
+We have two types of jar files
+	1) API jar file (library jar file)
+	2) Executable jar file
+
+- A jar file that contains packages and classes with some functionality methods 
+	for reusing by other programmer is called API/library jar file
+		For example:
+			- rt.jar, ojdbc7.jar, servlet-api.jar, jsp-api.jar -> API jar files
+			- classes.jar file with Addition, Subtraction, Multiplication, etc... logic classes is API jar file
+
+- A jar file that can be executed by java command is called executable jar file
+	In this jar file must have main method class and must place 
+	this main method class name in MANIFEST.MF file in this jar file
+	by using the property name MAIN-CLASS
+
+	For example:
+			- a main.jar that constians Calc.class file with main method is called executable jar file
+
+How can we create an executable jar file?
+--------------------------------------------------
+- By default every jar file is not an executable jar file.
+- To make a jar fiel as an executable jar file 
+	in MANIFEST.MF file we must add one property 
+		"Main-Class" with "main method class name" 
+	inside jar file  in META-INF folder
+- Then only this jar file will be an executable jar file
+
+What is MANIFEST.MF file?
+------------------------------------
+- This file is part of a jar file, it is automatically created by jar command in every jar file
+- It is a properties files that contains several properties information of this jar file
+- A property is nothing but a (name, value) pair
+
+	For example:
+		name	value
+		  sno		 101			<- property 1	
+		  sname	 HK			<- property 2
+
+- In a properties file a property name and value are differentiated by using "="
+- Each prooperty is differentiated by using new line, that we must place every property in the separate line
+- In MANIFEST.MF file, we must place properties with predefined names, 
+	but not with our own name, beacause those properties are reading by java command at execution time,
+	java command does not know our own properties names.
+	
+	For example:
+		for place main method class name we must use the property
+			MAIN-Class: main method class name with FQN(<package name>.<class name>)
+
+
+Creating an executable jar file with Test.class without package
+-----------------------------------------------------------------------------
+1)	executableJar
+		|- Test.java
+	
+2)	executableJar>javac Test.java
+			
+		executableJar
+			|- Test.class
+			|- Test.java
+
+3)	executableJar>jar  -cvfe  main.jar   Test   Test.class
+		
+		executableJar
+			|- Test.class
+			|- Test.java
+			|- main.jar
+				|- Test.class
+				|- META-INF
+					|- MANIFEST.MF
+						Main-Class: Test
+
+4)	executableJar>java  -jar  main.jar
+		- java command reads main method class name from MANIFEST.MF file
+		- executes Test.class file available in main.jar 
+		- displays output "Hello, World!"
+	
+Creating an executable jar file with Test.class with package
+------------------------------------------------------------------------
+1)	executableJar
+		|- p1
+		     |-	Test.java
+	
+2)	executableJar>javac  p1\Test.java
+			
+		executableJar
+			|- p1
+				|- Test.class
+				|- Test.java
+
+3)	executableJar>jar  -cvfe  main.jar   p1.Test   p1\Test.class
+		
+		executableJar
+			|- p1
+				|- Test.class
+				|- Test.java
+			|- main.jar
+				|- p1
+					|- Test.class
+				|- META-INF
+					|- MANIFEST.MF
+						Main-Class: p1.Test
+
+4)	executableJar>java  -jar  main.jar
+		- java command reads main method class name "p1.Test" from MANIFEST.MF file
+		- executes Test.class file available in p1 package in this main.jar 
+		- displays output "Hello, World!"
+	
+
+	
+Creating an executable jar file with multiple classes and multiple packages
+-----------------------------------------------------------------------------------------
+1)	executableJar
+		+---p1
+		¦		
+		¦		A.java
+		¦
+		+---p2
+			
+				Test.java
+		
+
+
+2)	executableJar>javac  p2\Test.java
+			
+		executableJar
+			+---p1
+			¦		A.class
+			¦		A.java
+			¦
+			+---p2
+					Test.class
+					Test.java
+			
+3)	executableJar>jar  -cvfe  main.jar   p2.Test   p2\Test.class
+		
+		executableJar
+			+---p1
+			¦		A.class
+			¦		A.java
+			¦
+			+---p2
+			¦		Test.class
+			¦		Test.java
+			¦
+			+---main.jar
+					|- p1
+						|- A.class
+					|- p2
+						|- Test.class
+					|- META-INF
+						|- MANIFEST.MF
+							Main-Class: p2.Test
+
+4)	executableJar>java  -jar  main.jar
+		- java command reads main method class name "p2.Test" from MANIFEST.MF file
+		- executes Test.class file available in p2 package with A.class available in p1 pakcage in this main.jar 
+		- displays output 
+			Test main start
+			A m1
+			Test main end
+	
+
+
+	
+Creating an executable jar file with api jar file with project scenario
+---------------------------------------------------------------------------------
+Project
+	Developer
+		+---bin
+		+---dist
+		+---lib
+		+---src
+				+---p1
+							A.java
+
+	project\Developer>javac -d bin src\p1\A.java
+
+		Developer
+			+---bin
+			¦		+---p1
+			¦				A.class
+			¦
+			+---dist
+			+---lib
+			+---src
+					+---p1
+							A.java
+
+	project\Developer> cd dist
+	project\Developer\dist>jar -cvf  classes.jar  -C ..\bin .
+		Developer
+			+---bin
+			¦		+---p1
+			¦				A.class
+			¦
+			+---dist
+			¦				classes.jar
+			¦
+			+---lib
+			+---src
+					+---p1
+							A.java
+
+	- Share the api jar file classes.jar file to user programmer
+	- Then user programmer places classes.jar in lib in his project folder
+//==============================================================
+Project 
+	User
+	+---bin
+	+---dist
+	+---lib
+	¦			classes.jar
+	¦
+	+---src
+			+---p2
+					 Test.java
+	
+	Proejct\User>javac -d bin src\p2\Test.java
+		error: package p1 is not found
+		error: can not found symbol class A
+
+	Proejct\User>set classpath=.;lib\classes.jar
+
+	Proejct\User>javac -d bin src\p2\Test.java
+		User
+		+---bin
+		¦		+---p2
+		¦				Test.class
+		¦
+		+---dist
+		+---lib
+		¦			 classes.jar
+		¦
+		+---src
+				+---p2
+						Test.java
+
+	Proejct\User>java p2.Test
+		Exception in java.lang.ClassNotFoundException: p2.Test
+
+	Proejct\User>set classpath=%classpath%;bin
+	Proejct\User>java p2.Test
+		Test main start
+		A m1
+		Test main end
+
+//working with executable jar file
+	Proejct\User>jar -cvfe main.jar p2.Test -C bin .
+	Proejct\User>java -jar main.jar
+		Exception java.lang.ClassNotFoundException: p1.A
+
+	Note: When we run a class from jar file, java command does not use classpath 
+			value from set classpath or permanent classpath value
+		
+			We must set classpath inside jar file in MANIFEST.MF file
+
+
+				Manual work for adding classpath in MANIFEST.MF file
+				---------------------------------------------------------------------------------
+					1) Open main.jar file by using winrar/winzip software
+					2) Open MANIFEST.MF file using any editor software (notepad/editplus
+						- If it is not working, extract MANIFEST.MF file from main.jar file to folder,
+					3) Add the property 
+						Class-Path: lib\classes.jar
+					4) Save it -> click Save button on winrar software
+						- If you extracted and editted, copy MANIFEST.MF file into main.jar file
+						- Click save 
+			Not execute main.jar 
+
+	Proejct\User>java -jar main.jar
+		Test main start
+		A m1
+		Test main end
+
+			Adding properties in MANIFEST.MF file through command
+			-----------------------------------------------------------------------
+			1) You youself create MANIFEST.MF by using editor software
+			2) In this file from editor software add the properties you need
+			3) Save it in current project working directory
+			4) Run below command for copying the properties 
+				from your MANIFEST.MF file to the MANIFEST.MF file available in jar file
+
+			
+				User>jar --create --file --verbose main.jar   --manifest mymanifest.mf   -C bin/ .
+
+			Rule: We must place one empty new line at end of the file
+	

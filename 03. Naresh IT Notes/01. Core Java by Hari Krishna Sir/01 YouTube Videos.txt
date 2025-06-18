@@ -1,0 +1,177 @@
+https://www.facebook.com/groups/javaharikrishna/?ref=share
+
+Skills Required to Become  Java Full Stack Developer Courses and Project Architecture 
+	https://youtu.be/Hm0Lo_raX0w
+
+Full Java Course completion steps Road Map
+	https://youtu.be/cI0Hnq8kcU4
+
+Introduction to Java 
+Core Java Day-1: https://youtu.be/sESbUJBosVw
+Core Java Day-2: https://youtu.be/qoIKcF4dLbs
+Core Java Day-3: https://youtu.be/1jAc8wkULCs
+Core Java Day-4: https://youtu.be/Hm0Lo_raX0w
+Core Java Day-5: https://youtu.be/xU10FQkDG84
+Core Java Day-6: https://youtu.be/Zv9b-32dd9Q
+Core Java Day-7: https://youtu.be/XDa58f0LEak
+
+Introduction to Core Java
+Core Java Day-8: https://youtu.be/4IY9yNa-02k
+Core Java Day-9: https://youtu.be/2YOzh4IbZ10
+Core Java Day-10: https://youtu.be/QqL0ZcArUZk
+Core Java Day-11: https://youtu.be/peICbSaELRQ
+Core Java Day-12: https://youtu.be/SVvwhtC0fPQ
+
+https://youtu.be/mtJ_1HZYXew
+
+JDK installation	
+Core Java Day-12: 
+D and I: https://youtu.be/y8nKDpATsRE
+T setting: https://youtu.be/UyFT11J8A3w
+P setting: https://youtu.be/pxqggdxzV_w
+
+Java Programming Sessions
+https://youtu.be/Y4mp07IEhZs
+https://youtu.be/McIzYAsHChs
+https://youtu.be/ods-uIZ2MpQ
+https://youtu.be/8HqT-J_rxPc
+
+Packages and working with jar
+https://www.youtube.com/playlist?list=PLVlQHNRLflP9BLDrL4VSQEIGVvYmUc3uG
+
+Modifiers and Accesibility Modifiers (2 videos)
+https://youtube.com/playlist?list=PLVlQHNRLflP-KGJ89-AY4QR8-_AZmO6bS
+
+Data types, Literals, Type conversions, Type Protions
+https://youtu.be/fqXUUBQP2cA
+https://youtu.be/x64q8zL0bE4
+
+https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
+https://learnsql.com/blog/understanding-numerical-data-types-sql/#:~:text=There%20is%20a%20small%20difference,is%20specified%20by%20the%20coder.
+https://www.google.com/search?q=hexadecimal+floating+point+literal&oq=hexa+decimal+floa&aqs=chrome.2.69i57j0l7.6204j0j7&sourceid=chrome&ie=UTF-8
+https://www.ssec.wisc.edu/~tomw/java/unicode.html#x0080
+
+Reading Runtime Values
+https://youtube.com/playlist?list=PLVlQHNRLflP_Pql6Rs33S05MPWM07qeUH
+https://youtu.be/BWWD-I_8d4U
+https://youtu.be/UOfuRqXsuOg
+
+Operators
+https://youtube.com/playlist?list=PLVlQHNRLflP83IkG4WntpZRuOqt05jGXH
+
+OOP basics- object, class, instance
+https://youtu.be/SgbuibvfsYc
+  
+Variable and Types of variables
+Session-1: https://youtu.be/Zq0fyu6wnUw	
+Session-2: https://youtu.be/n4c0PkA7_-o	
+Session-3: https://youtu.be/QUiyDYyA0DY	
+Session-4: https://youtu.be/1hrwnK9oZ90	
+Session-5: https://youtu.be/9FupU7k2vuQ	   
+
+Method and Types of methods
+https://youtu.be/rCqHLtI1JTA    (Session-1: Introduction)	
+https://youtu.be/mh7jv5DheXo   (Session-2: Types of method, diff b/w AM and CM)
+https://youtu.be/Qya6s8vAFS4   (Session-3: Diff b/w SM and NSM)
+
+https://youtu.be/pQt5qIYLp1M  (Project on Methods -Session #1)
+https://youtu.be/yfHeGCeSRuE  (Project on Methods -Session #2)
+
+Static block
+https://youtu.be/S9eiZ03iKJM
+
+main method Inteview Questions
+https://youtu.be/khGGEnPeAj8
+https://youtu.be/SGFun9DzH6o
+
+System.out.println internal
+https://youtu.be/RxKWW3PUMVg
+https://youtu.be/psad_aRtccI
+
+null and NullPointerException
+https://youtu.be/6DqwzXiEdMo
+
+this keyword	
+https://youtu.be/CIWp5zDr3GE
+https://youtu.be/kWw9fUyEhgo
+
+setter and getter methods
+https://youtu.be/RWnOI29rVj0
+https://youtu.be/P7xVRt4nq-A
+
+OOP summary
+https://youtu.be/nGvwPmt29d0
+https://youtu.be/g_Q69LQRhgg
+
+Upcasting, downcating, ClassCastException, instanceof
+https://youtu.be/0U61fOTBVPI
+https://youtu.be/Ltd7pDPWSeM
+
+Variable hiding
+https://youtu.be/lH39_WHosDY
+https://youtu.be/64tBKc8Jfk8
+
+Method hiding, method overriding, Extending method, Java 5 new features
+https://youtu.be/Ir2ovk1YZ4E
+https://youtu.be/QDAiCYDF3Z0
+https://youtu.be/iHoRV4089Gk
+https://youtu.be/rwF8WCAiEw0
+
+Method Overloading (4 videos + Java 5 new features)
+https://youtube.com/playlist?list=PLVlQHNRLflP94EHgjiFuuTJcSwkGf7m60
+
+Constructor overloading and chaining
+https://youtu.be/peEOOU110h0
+https://youtu.be/ab-e6oQ_xac
+
+Final keyword, final variables, final methods, final classes
+https://youtu.be/6efEOiCii8s
+https://youtu.be/BanNT4HXXLs
+
+interface 
+https://youtu.be/qmDwVfkINkw
+https://youtu.be/hGONMY_A85E
+
+Types of inheritances
+https://youtu.be/zqHSPBaoR_Y
+https://youtu.be/p3Jw3bBRgmE
+https://youtu.be/-uuyEsBxfTQ
+
+Inner classes in Java 
+https://youtu.be/Qu-J3zuBZS4
+https://youtu.be/m-8bcoJnXbM
+https://youtu.be/F2zgBKN-0s0
+https://youtu.be/xwuDExQ2aO4
+https://youtu.be/Jr_9rpwC-Do
+
+Java 8v new features
+https://www.youtube.com/playlist?list=PLVlQHNRLflP_VZ0e3G7BUhjn11sMbiXz_
+
+Java Library Introduction
+https://youtu.be/ppxB65yBSH0
+https://youtu.be/kfXcOCHkdP0
+
+Wrapper classes
+https://www.youtube.com/playlist?list=PLVlQHNRLflP9LK2T29ugERb36DodG4uCn
+
+String Handling
+https://www.youtube.com/playlist?list=PLVlQHNRLflP8qGVbinUkBt5cO9gGgA_Oe
+
+IO Streams 
+https://www.youtube.com/playlist?list=PLVlQHNRLflP_ccU_tekCCCy3aQMXB9q-c
+
+	FIS and FOS
+	https://www.youtube.com/watch?v=fTurYzv90UI
+
+	FR, FW, and FileCopy
+	https://www.youtube.com/watch?v=NvrWtKjoGjs
+
+	DIS, DOS and Serialization session-1
+	https://www.youtube.com/watch?v=pYKJb40nptk
+
+	Serialization session-2
+	https://www.youtube.com/watch?v=wx1jsMGu1IA
+
+Collections
+https://www.youtube.com/playlist?list=PLVlQHNRLflP8hc0C_5Nstx5FIQl_G3YsI
+

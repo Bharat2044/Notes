@@ -1,0 +1,119 @@
+Assignment
+========
+Develop calculator project with 
+	addition, subtraction, multiplication and division operations
+
+Divide this project into five modules (parts)
+	1) Addition module
+	2) Subtraction module
+	3) Multiplication module
+	4) Division module
+	5) Calc module
+and distribute those five modules development to 
+five different teams five developers
+
+Each module code must be shared as a jar file as an (API jar)
+Finally with all modules code you must prepare an executable jar
+and a batch file to execute this executable jar file
+
+Send this entire project as a zip file to client.
+
+
+Step #1: create project folder
+		Project-Calc		
+			├───add-Module
+			├───calc-Module
+			├───div-Module
+			├───mul-Module
+			└───sub-Module
+
+Step #2: In each module folder create folders as per project 
+		Project-Calc	
+			├───add-Module
+			│   ├───bin
+			│   └───src
+			├───calc-Module
+			│   ├───bin
+			│   ├───dist
+			│   ├───lib
+			│   └───src
+			├───div-Module
+			│   ├───bin
+			│   └───src
+			├───mul-Module
+			│   ├───bin
+			│   └───src
+			└───sub-Module
+			    ├───bin
+			    └───src		
+//============================================================================
+		Project-Calc>cd add-Module
+		Project-Calc\add-Module>javac -d bin src\com\nit\hk\blogic\add\Addition.java
+		Project-Calc\add-Module>jar -cvf addClasses.jar -C bin .
+
+		Project-Calc\add-Module>cd ..
+		Project-Calc>cd sub-Module
+		Project-Calc\sub-Module>javac -d bin src\com\nit\hk\blogic\sub\Subtraction.java
+		Project-Calc\sub-Module>jar -cvf subClasses.jar -C bin .
+
+		Project-Calc\sub-Module>cd ..
+		Project-Calc>cd mul-Module
+		Project-Calc\mul-Module>javac -d bin src\com\nit\hk\blogic\mul\Multipliction.java
+		Project-Calc\mul-Module>jar -cvf mulClasses.jar -C bin .
+
+		Project-Calc\mul-Module>cd ..
+		Project-Calc>cd div-Module
+		Project-Calc\div-Module>javac -d bin src\com\nit\hk\blogic\div\Division.java
+		Project-Calc\div-Module>jar -cvf divClasses.jar -C bin .
+//========================================================================		
+		Copy all above 4 jar files into calc-Module lib folder
+//========================================================================		
+		Project-Calc\div-Module>cd ..
+		Project-Calc>cd calc-Module
+		Project-Calc\calc-Module>set classpath=.;lib\addClasses.jar;lib\subClasses.jar;lib\mulClasses.jar;lib\divClasses.jar 
+		Project-Calc\calc-Module>javac -d bin src\com\nit\hk\blogic\calc\Calc.java
+//========================================================================		
+	Running Calc as a .clsss file
+		Project-Calc\calc-Module>set classpath=bin;%classpath%
+		Project-Calc\calc-Module>java com.nit.hk.blogic.calc.Calc.java
+			Output
+			--------------------------
+			--------------------------
+			--------------------------
+			--------------------------
+//========================================================================		
+	creating executable jar file with Calc clsss 
+
+		create MANIFEST.MF file from notepad 
+			1) open note pad
+			2) type below entries
+				Main-Class: com.nit.hk.blogic.calc.Calc
+				Class-Path: lib\addClasses.jar lib\subClasses.jar lib\mulClasses.jar lib\divClasses.jar
+			3) Save above file with the name calcMANIFEST.MF in the calcModule folder
+
+	creating executable jar file with Calc clsss 
+		Project-Calc\calc-Module>jar -cvfm calc.jar calcMANIFEST.MF -C bin .
+//========================================================================		
+	Running Calc from jar file
+		Project-Calc\calc-Module>java -jar calc.jar
+			Output
+			--------------------------
+			--------------------------
+			--------------------------
+			--------------------------
+//========================================================================		
+	creating batch file for running calc jar file 
+		1) open note pad
+		2) type command 
+			java -jar calc.jar
+		3) save it with name run.bat in calc-Module folder
+
+
+	Running batch file
+		Project-Calc\calc-Module>run
+			Output
+			--------------------------
+			--------------------------
+			--------------------------
+			--------------------------
+

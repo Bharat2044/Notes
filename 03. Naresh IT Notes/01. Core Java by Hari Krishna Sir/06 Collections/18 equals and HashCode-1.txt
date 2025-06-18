@@ -1,0 +1,103 @@
+Q1) How can Set & Map implemented classes identifies 
+        a duplicate object and can stop storing them in collection?
+	    By using hashCode(), "==" operator & equals() method
+	
+Explain internals of HashSet/HashMap/Hashtable?
+=======================================
+1) The classes those contain a word "Hash" in their name 
+     internally uses hashCode(), "==" operator & equals()  
+     methods  for stopping duplicate objects, and also for 
+     searching, retrieving & removing correct element from 
+     set and Map based collections.   
+
+2) Inside put() method, 
+	- First hashCode() method is called
+	- Next "==" operator is used
+	- Finally equals() method is called
+	
+3) hashCode() method is used for storing 
+     related objects as one group by separated them 
+     from other group of objects in the same map. 
+
+     So that comparisions will be decreased, 
+     execution will become fast. Execution become fast 
+     because currently adding object will be compared to 
+     only with its "hash code" objects in this map, 
+     but not with all objects availabe in the Map.
+
+4) Further "==" operator is used for comparing 
+     the adding object with its hashCode objects 
+     using reference.
+
+5) Finally equals() method is used for comparing
+     the adding object with its hashcode objects
+     using state (using reference if not overridden).
+
+add()/put() method algorithm in HS/LHS/HM/LHM/Ht 
+=========================================
+6)	For storing objects, HashMap internally uses 
+	"hash table" data structure.
+
+7)	"hash table" internally uses another 
+	data structure called "bucket" for storing 
+	the same hashcode objects as one group.
+
+8)	bucket is a collection of elements those 
+	have same hashcode. This bucket is also a collection 
+	object, it's LinkedList(from 1.8 onwards it's Binary Tree).
+
+9) 	Bucket is used for storing same hash code objects as one 	
+	group. So that comparing & searching will be fast 
+	because currently adding element will be compared only 
+	with this object's hashcode group of objects. 
+
+10)	new bucket will be created only for every new hashcode 
+	object. Then this object will be added to this bucket directly 
+	without any comparisons.
+
+11)	if bucket is already available with this currently adding 	
+	entry's key hashcode, then put() method will check 
+	whether this entry is unique or duplicate by using 
+	"==" opearator and equals() method.
+
+12)	If "==" operator returns "true",
+		adding entry is duplicate on key reference, 
+		then key is not added, but its mapped old value is 
+		replaced	by this new value
+
+13)	If "==" operator returns false, 
+		adding entry is unique based on reference, but it
+		may be duplicate based on state. So, put() method will 
+		call equals() method for comparing entry using its 
+		content.
+
+14)	If equals() method also retuns false, 
+		entry is added in the same bucket, 
+		means it is unique entry on data wise.
+	
+15)	If equals() method returns true,
+		adding entry is duplicate on key state wise, 
+		then key is not added, but its mapped old value is 
+		replaced	by this new value
+
+16) The hash table data structure is internally 
+       implemented by using Node class array
+
+17) The bucket(single linked list with Node objects)
+	is created with given entry(key and value) and 
+	its reference is stored in the table(Node[] object) 
+	in its one of the locations.
+
+18) To find the location to store this entry's node object,
+	inside put() method, key object hash code is divided by
+	the HashMap capacity (Ex: key.hC()%16). 
+	This division's reminder value is nothing but 
+	the index number of the location for storing this entry.
+
+Check below diagram for undestanding:
+
+
+
+Below flow chart diagram will show you 
+HM internal algorithm with all above points
+=================================

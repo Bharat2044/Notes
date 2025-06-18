@@ -1,0 +1,602 @@
+     ===============================================================================================================
+
+                                                 ######   DOCKER  ###########
+    ========================================================================================================
+
+
+MONOLITHIC: Deploying monolithic applications is more straightforward than deploying microservices. Developers install the entire application code base and dependencies in a single environment.
+
+MICRO SERVICES: Microservices are deployed using VM or Containers. Containers are the preferred deployment route for microservices as containers are lighter, portable, and modular. The microservice code is packaged into a container image and deployed as a container service.
+multiple services are deployed on multiple servers with multiple databases.
+
+note: if number odf application are more will go with microservices concept (docker and kubernetes)
+
+BASED ON USERS AND APP COMPLEXITY WE NEED TO SELECT THE ARCHITECTURE.
+
+FACTORS AFFECTIONG FOR USING MICRO SERVICES:
+FLEXIBLE
+COST 
+MAINTAINANCE
+EASY CONTROL
+
+
+
+
+## ----- Docker overview ----------##
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker's methodologies for shipping, testing, and deploying code, you can significantly reduce the delay between writing code and running it in production.
+
+
+DOCKER IMAGE:
+Docker images are read-only templates that contain instructions for creating a container. A Docker image is a snapshot or blueprint of the libraries and dependencies required inside a container for an application to run
+
+CONTAINERS:
+A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime
+its same as a server/vm.
+it will not have any operating system.
+ (Ec2 server=AMI, CONTAINER=IMAGE)
+os will be maanged in image 
+
+
+
+-----docker install process -------
+
+
+sudo amazon-linux-extras install docker # if linux 2
+
+sudo yum install docker -y # If linux 20203
+
+sudo systemctl start docker
+sudo systemctl status docker
+
+Note : By default Docker works with the root user and other users can only access to Docker with sudo commands. However, we can bypass the sudo commands by creating a new group with the name docker and add ec2_user.
+
+#First let’s create the docker group
+
+sudo groupadd docker (optional if group is not created)
+
+#Now let’s add ec2-user to docker group
+
+sudo usermod -a -G docker ec2-user
+
+#In order to enable the changes, run the following command
+
+newgrp docker 
+
+sudo chmod 666 /var/run/docker.sock  # to give access docker demon to run docker server 
+
+docker --version to check docker version
+
+#If you want to see an extended version of the version details, such as the API version, Go version, and Engine Version, use the version command without dashes. give below command
+
+docker version 
+
+
+# ----commands:---- #
+
+---to pull base images from public docker repository
+
+docker pull image <imagename>
+
+docker pull nginx or ubuntu
+
+
+docker inspect image nginx  ### to check images details 
+docker images # to check list of images 
+
+docker run -it imagename /bin/bash  --will enter into the container interact terminal 
+
+docker run -dt imagename -we are not enter into the container detach terminal
+
+docker run -dt --name <name> <imagename> 
+ (to give csutome name --name)
+
+
+docker ps ## to check running containers 
+
+docker ps -a  ## to check both running and stopped containers 
+
+
+
+
+## To login container ##
+docker exec -it <continername or continerid> /bin/bash
+
+1.if you want to come out from connainer without stop give "ctrl+pq"
+2.if you give "exit"  container also will stop
+
+ps -ef   --to know how many processors runing if it is in vm many process we can see but it is in container onle few becuase its light weight 
+
+ps -ef | wc -l #to know number of processors request running backend
+
+
+
+
+
+
+#### how to start container#####
+
+docker start <containerid>
+          or
+docker start <container name>
+
+#### how to stop container#####
+docker stop <containerid> 
+           or
+docker stop <container name>
+
+## docker kill comeplete terminated 
+docker kill <containername>
+
+docker pause cont_name	: to pause container
+docker unpause cont_name: to unpause container
+docker inspect cont_name: to get complete info of a container
+
+
+
+## danger commands##
+
+docker system prune -a to remove all images 
+docker container prune -- delete all stoped containers 
+docker rm -f $(docker ps -a -q)  ---delete all runnig containers Note: please dont use danger command
+
+docker rm <containername or continerid> ### to remover stopped container 
+docker rmi <imagename> ##to delete image 
+
+docker rm -f <continer id> delete runing continer 
+
+# --Enabeling port-- #
+
+docker run -p <HOST_PORT>:<CONTAINER:PORT> IMAGE_NAME  
+
+docker run -dt -p 3000:3000 --name project-2 saturday   #along port expose
+
+===================================================================================
+
+-------- pull jenkins----------
+
+docker pull jenkins/jenkins
+
+docker run -dt -p <local host port>:<container run port> --name <name of the container> <name of the image>
+
+docker run -dt -p 8081:8080 --name jenkins container jenkins/jenkin
+
+access the jenkins with public ip and port number (8081)
+
+
+
+
+
+
+
+=======================================================================================
+
+------------# Docker file runn commands #----------
+Dockerfile is a simple text file that consists of instructions to build Docker images.
+-----------------------------------
+##### Docker file instruiction ########
+
+From : to pull base image
+Run : to excutive commands
+CMD : To Provide defaults for an executing container 
+Entrypoint : To configure a container that will run as an container
+Workdir : to set working directory
+Copy: files form local to the container
+Add: TO copy files and loader file but little advance add command we can add url also 
+Expose : informs docker that the container listen on the specified network port runtime
+Env: To set env variabels 
+
+# below command to run docker file
+
+docker build -t check .
+docker run -p <HOST_PORT>:<CONTAINER:PORT> IMAGE_NAME
+docker run -dit --name demo -p 8080:80 check
+ex: docker run -dt -p 3000:3000 --name project-2 saturday
+
+
+
+
+Ex: 1
+
+# Ex:1 docker pull httpd (readymade)
+
+FROM httpd:2.4
+COPY ./public-html/ /usr/local/apache2/htdocs/ # copy present directory files into destination patha tha is /usr/local/apache2/htdocs/
+
+Ex:2
+
+# httpd with ubuntu (impliment from scratch)
+
+FROM ubuntu #pull ubuntu base image from docker hub
+RUN apt update
+RUN apt-get -y  update
+RUN apt-get -y install apache2 #by using RUN instrcution install apache2
+COPY index.html  /var/www/html #copying index.html file into /var/www/html
+EXPOSE 80 #expose default port number for application
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"] #Run apache2 srever while running container from image
+
+Note:
+-D FOREGROUND This is not a docker command this is Apache server argument which is used to run the web server in the background. If we do not use this argument the server will start and then it will stop
+
+# Ex:3 httpd with centos
+
+FROM centos:7
+RUN yum update -y && yum install -y httpd
+COPY index.html /var/www/html/
+EXPOSE 80
+#httpdserver
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+
+=============================================================
+              #  IMAGE PUSH #
+======================================================================
+
+######### docker push to Docker private repository  #########
+docker login first
+docker tag <image> dockerusername/<image>
+docker push <dockerusername>/<image>
+docker pull <dockerusername>/<image>
+
+================================================================
+
+######### docker push to AWS ECR  #########
+
+Retrieve an authentication token and authenticate your Docker client to your registry.
+Use the AWS CLI:
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 992382358200.dkr.ecr.ap-south-1.amazonaws.com
+Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
+
+docker build -t maventomcat .
+After the build completes, tag your image so you can push the image to this repository:
+
+docker tag maventomcat:latest 992382358200.dkr.ecr.ap-south-1.amazonaws.com/maventomcat:latest
+Run the following command to push this image to your newly created AWS repository:
+
+docker push 992382358200.dkr.ecr.ap-south-1.amazonaws.com/maventomcat:latest
+
+
+==================================================================================
+
+----- ## Docker file single stage and multi stage ##--------
+======================================================================================
+# scenario :1 single stage after run mavne manually, deploy war file on tomcat webapp by using docker file 
+
+FROM tomcat:latest
+COPY webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
+
+
+# scenario :2 multi satge --run Maven Image by using docker file and deploy on tomcat webapp
+
+ROM maven:3.8.4-eclipse-temurin-17 AS build
+RUN mkdir /app
+WORKDIR /app
+COPY . .
+RUN mvn package
+
+FROM tomcat:latest
+COPY --from=build /app/webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war # copying files fromsta ge -1 docker file maven into tomcat path
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps # adding dependecnes to run base tomcat page 
+
+
+# scenario :3 multi stage from ubuntu scratch by using docker file 
+
+FROM ubuntu:latest as builder
+RUN apt-get update && \
+     apt-get install -y openjdk-8-jdk wget unzip
+
+ARG MAVEN_VERSION=3.9.6
+RUN wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz && \
+    tar -zxvf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    rm apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    mv apache-maven-${MAVEN_VERSION} /usr/lib/maven
+
+ENV MAVEN_HOME /usr/lib/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+ENV PATH=$MAVEN_HOME/bin:$PATH
+RUN mkdir -p /app
+COPY . /app
+ WORKDIR /app
+ RUN mvn install
+FROM tomcat:latest
+COPY --from=builder /app/webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
+
+====================================================
+    # Custom Docker file name #
+
+# if we create multiple docker files like Dockerfile and Dockerfile1 
+
+Below command example to run
+
+docker build -f <Dockerfilename> -t <imagename>.
+
+
+docker build -f Dockerfile1 -t image .
+
+
+====================================================
+RUN DOCKER FILE DIRECTLY TAKING SOURCE FROM GITHUB 
+======================================================
+docker build -t <imagename> <github projecturl>
+
+Example:
+
+docker build -t mvntomgit https://github.com/CloudTechDevOps/project-1-maven-jenkins-CICD-docker-eks-.git
+
+
+
+
+
+            Day-4
+
+######### CMD vs Entrypoint  ###
+
+### CMD ##
+CMD Instruction
+The CMD instruction in a Dockerfile specifies the command that will run by default when a container is started. 
+It can be overridden with command-line arguments during the docker run command.
+
+FROM centos:latest
+# Update repository configuration
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
+# Install Git
+CMD ["yum", "-y", "install", "httpd"]
+
+In this example, if you run the container without specifying a command (docker run my-ubuntu-image), it will execute httpd. 
+If you provide additional arguments (docker run my-ubuntu-image "yum -y install git "), they will override the default CMD and execute git.
+     
+  
+Note: if we run docker run image along with argument  yum install -y git it will overwrite new argument,  it will download git only and ignores httpd
+
+##### Entrypoint
+
+The ENTRYPOINT instruction sets the main command that will be run when a container is started. 
+It's often used to specify the executable or script that should be run as the primary process within the container.
+
+FROM centos:latest
+# Update repository configuration
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
+ENTRYPOINT ["yum", "install", "-y", "git"] 
+
+In this example, ENTRYPOINT is set to install git. If you run the container without specifying additional arguments (docker run my-ubuntu-image), it will always to install git. 
+If you provide arguments (docker run my-ubuntu-image https), it will execute httpd also along git.
+
+note: condition:1 after run command docker run image ----it will install git  
+      condition -2 if we run docker run image httpd ----it will install git and httpd also  
+
+
+#Combination of CMD and ENTRYPOINT
+When both CMD and ENTRYPOINT are specified in a Dockerfile, CMD provides default arguments for ENTRYPOINT. 
+This allows flexibility where CMD can define parameters commonly passed to the main command specified by ENTRYPOINT
+
+FROM centos:centos7
+ENTRYPOINT ["yum", "install", "-y"]
+CMD ["git"] 
+
+Here, ENTRYPOINT is set to run "yum install -y", and CMD provides "git" as default arguments. (here yum install -y is not override)
+If you provide arguments (docker run my-ubuntu-image "tree"), they will override the default CMD and install tree only
+
+
+
+
+######## network ##############
+
+
+#Bridge#
+
+Docker provides a default bridge network. Containers connected to this network can communicate with each other using their IP addresses
+
+Key Features of Docker Bridge Network
+Isolation: Containers on a bridge network are isolated from the host and other networks, which enhances security.
+Communication: Containers connected to the same bridge network can communicate with each other using container names.
+Default Gateway: Containers have a default gateway to the bridge network, allowing them to connect to external networks through the host.
+
+
+
+#host#
+Docker host network mode allows a container to share the network stack of the Docker host. 
+This means that the container will use the host's IP address and will not have its own separate network namespace. 
+When you run a container in host network mode, it directly binds to the host's network interfaces.
+n Docker, the host network mode allows a container to share the network stack of the Docker host. 
+This means that the container will use the host's IP address and will not have its own separate network namespace. 
+When you run a container in host network mode, it directly binds to the host's network interfaces.
+
+Key Features of Docker None Network
+
+Simplified Network Configuration:
+No need to map ports between the container and the host, as the container can use any port available on the host.
+Reduces complexity in scenarios where many ports need to be exposed or where dynamic port assignments are challenging to manage.
+
+No Docker Networking Overhead:
+Since the container uses the host’s networking directly, there is no Docker network driver overhead.
+This can result in lower latency and higher throughput for network traffic.
+
+Performance:
+
+Improved network performance due to the elimination of network address translation (NAT) and bridge network overhead.
+Suitable for network-intensive applications that benefit from direct access to the host's network.
+
+##None#
+
+
+In Docker, the none network mode is used to disable networking for a container. 
+When you run a container with the none network mode, it has no network interfaces apart from the loopback interface. 
+This means the container cannot access external networks or communicate with other containers.
+
+Key Features of Docker None Network
+
+Isolation: Containers are completely isolated from all network communications.
+Security: Provides an additional layer of security by preventing any network access.
+Testing: Useful for testing applications in a fully isolated environment or when network functionality is not required.
+
+::Practical::
+
+docker run -dt --name container1 ubuntu
+docker run -dt --name container2 ubuntu
+
+docker network ls
+create two containers 
+container1
+container2
+docker inspect <containername>
+
+container1: 172.17.0.2
+container2: 172.17.0.3
+
+Note:defualt network is bridge 
+
+login to container 
+docker exec -it <containernmae> /bin/bash
+
+
+## need to install ping libraries by using below command (if ping command will not work)
+
+#apt-get update -y
+
+#apt install iputils-ping
+  
+check both containers ips and try to access each other 
+
+ping 172.17.0.3
+
+
+
+# host type
+
+Docker network host, also known as Docker host networking, is a networking mode in which a Docker container shares its network namespace with the host machine. The application inside the container can be accessed using a port at the host's IP address 
+
+docker run -dt --name <container> --network host <image>
+ex:docker run -d --network host nginx
+
+#None type 
+
+none network in docker means when you don't want any network interface for your container. If you want to completely disable the networking on a container, you can use the --network none flag when starting the container.
+
+docker run -dt --name <container> --network None ubuntu
+
+
+#to remove network : docker network rm networkname
+
+
+
+# Create cutome network # (optional)
+
+docker network create <networkname> # to maitain private connection one container from another container
+
+
+docker run -dt --name <container-name> --network <created-networkname> <image-name>
+ex: docker run -dt --name container3 --network private ubuntu
+
+
+##########################################################
+---------------Docker volumes ----------
+
+Volumes are a mechanism for storing data outside containers. All volumes are managed by Docker and stored in a dedicated directory on your host, usually /var/lib/docker/volumes for Linux systems.
+
+### to create volume
+docker volume create <volume-name>
+docker volume ls ##to check list of volumes
+docker inspect volume <volumename>
+docker volume rm <volumename> ## to remove volume
+### to check created volume path
+cd /var/lib/docker/volumes
+
+## run container from ubuntu image along with created volume 
+docker run -ti --name=container1 -v volume1:/volume1 ubuntu    #here you can give any name in place of volume1 if required 
+
+echo "Share this file between containers">/volume1/Example.txt
+
+docker run -ti --name=container2 --volumes-from container1 ubuntu
+
+
+
+--------docker compose installation ------------
+
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+- - - - - - - -- - - - - - - - -- - -  - - -- -  -
+docker-compose version
+
+services:
+  mydb:
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    image: mysql
+  mysite:
+    image: wordpress
+    links:
+    - mydb:site
+    ports:
+    - published: 8080
+      target: 80
+version: '3'
+
+filename : docker-compose.yaml
+
+after run give below details 
+
+ 
+database name : MySQL
+user :root
+password: test
+database host :mydb
+
+
+<docker-compose -f filename.yaml up> need to give this command for custom file name 
+docker-compose up -----#to run docker compose 
+docker-compose ps -----#to see containers status
+
+########### list of commands on Docker compose ######
+Docker-Compose commands.
+To pull docker images.
+docker-compose pull
+
+To create all containers using docker-compose file.
+docker-compose up
+
+To create all containers using docker-compose file with detached mode.
+docker-compose up -d
+
+To stop all running containers with docker-compose.
+docker-compose stop
+
+To view the config file.
+docker-compose config
+
+To remove all stopped containers.
+docker-compose rm
+
+To view the logs of all containers.
+docker-compose logs
+
+To view all images.
+docker-compose images
+
+To view all contaiers created by docker-compose file.
+docker-compose ps
+
+To restart containers with docker-compose file.
+docker-compose restart
+
+
+------Docker Swarm:------
+Docker Swarm is a container orchestration tool for clustering and scheduling Docker containers. With Swarm, IT administrators and developers can establish and manage a cluster of Docker nodes as a single virtual system. Docker Swarm lets developers join multiple physical or virtual machines into a cluster.
+
+Docker Swarm Vs Kubernetes 
+
+Docker swarm will not support autoscaling concepts but Kubernetes will support.
+
+Kubernetes advantages :
+It has a large open source community, backed by Google.
+It supports every operating system.
+It can sustain and manage large architectures and complex workloads.
+It is automated and has a self-healing capacity that supports automatic scaling.
+It has built-in monitoring and a wide range of integrations available.
+It is offered by all three key cloud providers: Google, Azure, and AWS.
+

@@ -1,0 +1,3 @@
+http://www.javaranch.com/java-college.jsp
+http://javapapers.com/core-java/
+http://www.allapplabs.com/interview_questions/

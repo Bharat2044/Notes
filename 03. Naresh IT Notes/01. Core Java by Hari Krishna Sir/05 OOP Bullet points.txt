@@ -1,0 +1,54 @@
+1) How to store data ---> PDT and RDT
+
+2) How to represent an object  
+	-> class and 
+	-> instance
+
+3) How to store data of an object
+	-> types of variables
+
+4) How to initialize this object?
+	-> types of blocks
+	-> types of constructors
+
+5) How to perform operations of an object
+	-> types of methods
+
+6) How to access variables and methods from CO?
+	-> this kw
+
+7) How to pass an object from one class method to another class method?
+	-> pass by value
+
+8) How to stop other programmer to access out object data?
+	-> accessibility modifiers
+
+9) How to provide access to our object data to other programmers?
+	-> setter and getter methods
+	-> with encapsulation priniciple
+
+10) How to develop sub type object an existing object?
+	-> inheritance
+
+11) How to access super class members from sub class members?
+	-> super keyword
+
+12) How to provide multiple implimentations to an object operation?
+	-> Polymorphism
+
+13) With which we are dealing in inheritance?
+	-> class -> sub class	
+
+14) With which we are dealing in encapsulation?
+	-> class fields  (super class and sub class)
+
+15) With which we are dealing in polymorphsim?
+	-> methods
+
+
+
+
+
+
+
+

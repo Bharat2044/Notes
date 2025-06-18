@@ -1,0 +1,83 @@
+Which Man class properly represents the relationship 
+"Man has a best friend who is a Dog"?
+
+A. class Man extends Dog { }
+B. class Man implements Dog { }
+C. class Man { private BestFriend dog; }
+D. class Man { private Dog bestFriend; }
+E. class Man { private Dog<bestFriend>; }
+F. class Man { private BestFriend<dog>; }
+=======================================
+
+Which four statements are true? (Choose four.)
+A. Has-a relationships should never be encapsulated.
+B. Has-a relationships should be implemented using inheritance.
+C. Has-a relationships can be implemented using instance variables.
+D. Is-a relationships can be implemented using the extends keyword.
+E. Is-a relationships can be implemented using the implements keyword.
+F. The relationship between Movie and Actress is an example of an is-a relationship.
+G. An array or a collection can be used to implement a one-to-many has-a relationship.
+=============================================================
+Given:
+11. class Mammal { }
+12.
+13. class Raccoon extends Mammal {
+14. Mammal m = new Mammal();
+15. }
+16.
+17. class BabyRaccoon extends Mammal { }
+Which four statements are true? (Choose four.)
+A. Raccoon is-a Mammal.
+B. Raccoon has-a Mammal.
+C. BabyRaccoon is-a Mammal.
+D. BabyRaccoon is-a Raccoon.
+E. BabyRaccoon has-a Mammal.
+F. BabyRaccoon is-a BabyRaccoon.
+===============================
+Given:
+5. class Thingy { Meter m = new Meter(); }
+6. class Component { void go() { System.out.print("c"); } }
+7. class Meter extends Component { 
+8.	void go() {System.out.print("m"); } }
+9. class DeluxeThingy extends Thingy {
+10. public static void main(String[] args) {
+11. DeluxeThingy dt = new DeluxeThingy();
+12. dt.m.go();
+13. Thingy t = new DeluxeThingy();
+14. t.m.go();
+15. }
+16. }
+Which two are true? (Choose two.)
+A. The output is mm.
+B. The output is mc.
+C. Component is-a Meter.
+D. Component has-a Meter.
+E. DeluxeThingy is-a Component.
+F. DeluxeThingy has-a Component.
+=============================
+
+Given:
+10. interface Jumper { public void jump(); }
+...
+20. class Animal {}
+...
+30. class Dog extends Animal {
+31. Tail tail;
+32. }
+...
+40. class Beagle extends Dog implements Jumper{
+41. public void jump() {}
+42. }
+...
+50. class Cat implements Jumper{
+51. public void jump() {}
+52. }
+Which three are true? (Choose three.)
+A. Cat is-a Animal
+B. Cat is-a Jumper
+C. Dog is-a Animal
+D. Dog is-a Jumper
+E. Cat has-a Animal
+F. Beagle has-a Tail
+G. Beagle has-a Jumper
+

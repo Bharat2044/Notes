@@ -1,0 +1,50 @@
+
+***************************************Terraform*********************************
+
+Download Terraform: latest AMD 64
+https://developer.hashicorp.com/terraform/install?product_intent=terraform
+
+it support all OS
+
+
+Now Edit the system Environment Variables
+ path ->edit->
+download terraform file copy path (create new folder in c drive and paste downloaded terraform file) 
+->ok
+
+Download Visual Studio code 
+
+plugins
+
+HashiCorp Terraform
+HashiCorp HCL syntax
+Terraform
+Terraform autocomplete
+
+Terraform registry doc url : https://registry.terraform.io/providers/hashicorp/aws/latest/docs 
+-see right side -use provider scroll down 
+
+
+-------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+  			*********************************************
+			******************Terraform******************
+Install Of Terraform on Ec2
+
+Preq :
+
+Instance : t2.micro
+Ami      : amazon linux 2023 
+ebs      : 8Gb
+
+
+Command to run ec2 :
+
+sudo yum install -y yum-utils shadow-utils
+
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+
+sudo yum -y install terraform
+
+terraform --version

@@ -1,0 +1,243 @@
+static methods in interface
+===================
+1) Upto Java 7v, in an interface we can only create abstract methods
+2) From Java 8v onwards in addition to default methods we can also create 
+	static implemented methods common to all implementation classes of this interface
+
+3) Syntax:
+	public static RT MN(PL) throws EL{ //logic }
+	
+	For example:
+	interface Example{
+		 void m1();
+		default void m2(){ }
+		static void m3(){ }
+	}
+
+3) Purose of static implemeted method in interfaace 
+	- In an interface static implemented method is introduced 
+		for develoing logic common to all its implementation classes
+		and also common to all its user classes to execute this logic
+		directly by using interface reference (only by using interface name).
+	
+	- Also it is introduced to for stop inheriting into implementation classes and 
+		forcing the implementation clases and user clases to access its logic by using interface name.
+
+	- Rule:interface static method is not inherited to its implementation classes
+	- Hence, we must access interface static method only by using interface name.
+		we can not access it by using implmentation class reference, and even 
+		we can not access it with interface referenced variable, compiler will throw an error
+
+	- For example:
+		interface Example{
+			 void m1();
+			default void m2(){System.out.println("Example DM m2 from Example interface"); }
+			static void m3(){System.out.println("Example SM m3 from Example interface"); }
+		}
+
+		class Sample implements Example{
+			public void m1(){System.out.println("Example AM m1 from Sample class" ); }
+
+			public void m4(){
+				this.m1();
+				this.m2();
+				//this.m3();// CE: c f s 
+				//Sample.m3(); //CE: c f s
+				Example.m3();
+				Example e1 = null;
+				//e1.m3();
+			}
+		};
+
+		class Test02{
+			public static void main(String[] args){
+				Sample s1 = new Sample();
+				s1.m1();
+				s1.m2();
+				//s1.m3();	 //CE: c f s 
+				System.out.println();
+
+				Example e1 = new Sample();
+				e1.m1();
+				e1.m2();
+				///e1.m3();  //CE: illegal static interface method call the receiver expression 
+									//should be replaced with the type qualifier 'Example'
+
+				System.out.println();
+				Example.m3();
+				//Sample.m3();
+
+				System.out.println();
+
+				s1.m4();
+				
+			}
+		};
+
+4) What is the difference between interface static method and final method, are they same?
+A) Nooooooooo, both are different
+	Diff #1:
+		- final method is inherited to sub class, but we can to override
+			means a final can be called by using sub class refence, but we can not redefined it in sub clss
+
+		- where as interface static method is not inherited to sub class, 
+			means we can not call it by using sub class reference
+	Diff #2:	
+		- If we override final method in sub class, we will get CE
+		- If we override interface static method in sub class we will not get compile time error,
+			it is considered as sub class own method. 
+		- In sub class we can define the same interface static method
+			method signature by changing returning and ELM and AMs
+
+5) What is the difference between interface static method and private method, are they same?
+A) Nooooooooooo, both are different
+	- interface static method we can call either in implementation class and in user class
+	- but private method we can not call from other classes
+		
+	- common point is 
+		if override either private method or interface static method.
+			it is not considered as overriding method, overriding 4 rules are not applied
+			we can add any RT, ELMs and AMs
+
+6) What is the differences between inteface static method and class static method, are they same?
+A) Noooooooooooo, both are different	
+	- class static method is inherited to sub class, can override in sub class, all 4 overriding rules are applied
+	  we can call it either by using super class name, super class referenced variable,
+	                         or      by using sub class name, sub class referenced variable
+
+	- inteface static method is not inherited to sub class, can not override in sub class, 
+		if we override, overriding rules are not applied, it is consided as sub class own method
+		we can add any RT, ELMs and AMs
+
+		we can call only by using it inteface name
+		we can not call it by using either interface referenced variable,
+	                         or      by using sub class name, sub class referenced variable
+
+
+7) What are the the differences between default method and static methods in an interface?
+
+	Diff #1: When to choose 
+		- When you 
+			1) want inherit a method to implementation clases and 
+			2) want to allow implmentation classes to override the 
+				interface given default implementations, 
+			3) want to force to invoke this method 
+				by using implementation class object, 
+		    then you must choose default method
+
+		- When you 
+			1) do not want inherit a method to implementation clases and 
+			2) do no want to allow implmentation classes to override the 
+				interface given default implementations, 
+			3) do want to force to invoke this method 
+				only by using interface name, no by using implementation class reference 
+		    then you must choose static method
+
+	Diff #2: purpose and calling rules	
+		- default method is meant for executing logic for implementation class object
+		   hence it is alloed to call only by using an implementation class object
+			Sample s1 = new Sample();
+			s1.m2();
+			
+			Example e1 = new Sample();
+			e1.m2();
+
+			//Example.m2(); //CE:
+			//Sample.m2();	//CE:
+
+		- where as static method is meant executing logic without implementation class object
+		  Hence we must call static method directly with interface reference
+			Example.m3();
+
+			Sample s1 = new Sample();
+			Example e1 = new Sample();
+			//s1.m3();			//CE:
+			//e1.m3();		//CE:	
+			//Sample.m3();		//CE:
+			
+	Diff #3: inheriting and implemenating
+		- default method is inherted and can be override, and all 4 ruels are applied
+		- static method is not inherted and can not override, if we override not error, all 4 ruels are not applied
+		   it is consider as sub class own method and we can add any RT, ELMs and AMs
+
+8) Identify are there any compile time errors in the below program?
+		interface Example{
+			void m1();
+			default void m2(){System.out.println("Example DM m2 from Example interface"); }
+			static void m3(){System.out.println("Example SM m3 from Example interface"); }
+		}
+
+		class Sample implements Example{
+			public void m1(){System.out.println("Example AM m1 from Sample class" ); }
+
+			public void m4(){
+				this.m1();
+				this.m2();
+				//this.m3();// CE: c f s 
+				//Sample.m3(); //CE: c f s
+				Example.m3();
+				Example e1 = null;
+				//e1.m3();
+			}
+		};
+
+		class Xyz implements Example{
+			public void m1(){System.out.println("Example AM m1 from Xyz class" ); }
+			public void m2(){System.out.println("Example DM m2 from Xyx class" ); }
+			public static void m3(){System.out.println("Example SM m3 from Xyx class" ); }
+		}
+
+		class Pqr implements Example{
+			public void m1(){System.out.println("Example AM m1 from Xyz class" ); }
+			public void m2(){System.out.println("Example DM m2 from Xyx class" ); }
+			public void m3(){System.out.println("Example SM m3 from Xyx class" ); }
+		}
+
+		abstract class Mno implements Example{
+			//public int m1(){System.out.println("Example AM m1 from Xyz class" ); }
+			//public int m2(){System.out.println("Example DM m2 from Xyx class" ); }
+			 int m3(){System.out.println("Example SM m3 from Xyx class" ); return 5; }
+		}
+
+		class Efg implements Example{
+			public void m1(){System.out.println("Example AM m1 from Efg class" ); }
+			public void  m2(){System.out.println("Example DM m2 from Efg class" ); }
+			public static int m3(){System.out.println("Efg SM m3 from Efg class" ); return 5; }
+			
+			void m4(){
+				this.m1();
+				this.m2();
+				this.m3();
+				Efg.m3();
+				Example.m3();
+			}
+		};
+
+		class Test02{
+			public static void main(String[] args){
+				Sample s1 = new Sample();
+				s1.m1();
+				s1.m2();
+				//s1.m3();	 //CE: c f s 
+				System.out.println();
+
+				Example e1 = new Sample();
+				e1.m1();
+				e1.m2();
+				///e1.m3();  //CE: illegal static interface method call the receiver expression 
+									//should be replaced with the type qualifier 'Example'
+
+				System.out.println();
+				Example.m3();
+				//Sample.m3();
+
+				System.out.println();
+
+				s1.m4();
+
+				System.out.println();
+				Efg e  = new Efg();
+				e.m4();
+				
+			}
+		};
