@@ -1,0 +1,68 @@
+
+=========
+AWS EFS
+=========
+
+-> AWS EFS lets you create scalable file storage to be used on EC2 instances.
+
+-> EFS we can share with multiple EC2 instances at a time.
+
+-> If we have some configuration files of application and we want to access them in mulitple ec2 instances at a time then we can use EFS concept.
+
+=============================
+Step-1 : Create EFS in AWS
+=============================
+
+=> Login into the AWS console
+=> Go to Services and select EFS under storage
+=> Click on Create file system
+
+File System ID : fs-062b3a5282cc1c82e
+
+=> Create 2 EC2 instances (Amazon Linux AMI)
+
+=> Enable security Group inbound rule with "NFS" protocol with 2049 port number.
+
+
+=============================
+Step-2 : Mounting EFS on EC2
+=============================
+
+# Login to EC2 instance and install the NFS client
+$ sudo yum install -y amazon-efs-utils
+
+# Let's create a folder where you want to mount the EFS
+$ sudo mkdir efsdir
+
+# Mount EFS Filesystem (Make sure you changed FileSystem ID)
+$ sudo mount -t efs -o tls fs-062b3a5282cc1c82e:/ efsdir
+
+# Change the directory to the mount point that is created above using the command:
+$ cd efsdir
+
+# Create a sample text file:
+$ sudo touch f1.txt f2.txt
+
+# Run ls command to list the contents of directory.
+
+==============================================================
+Step-2 : Create another ec2 instance and mount EFS file system 
+==============================================================
+
+# Login to EC2 instance and install the NFS client
+$ sudo yum install -y amazon-efs-utils
+
+# Let's create a folder where you want to mount the EFS.
+$ sudo mkdir efsdir
+
+# Mount EFS Filesystem (Make sure you changed FileSystem ID)
+$ sudo mount -t efs -o tls fs-062b3a5282cc1c82e:/ efsdir
+
+# Change the directory to the mount point that is created above using the command:
+$ cd efsdir
+
+# check the files available
+
+$ ls 
+
+Note : The files we have created in First EC2 instance, should display in second ec2 instance.
