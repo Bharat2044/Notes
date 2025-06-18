@@ -1,0 +1,117 @@
+================================
+vijay kumar
+Created Apr 27Apr 27
+Code on Graphan and Promotheus
+===============================
+
+Step1: Add the following entries to pom.xml for enabling promotheus
+
+ <dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+       
+       <dependency>
+<groupId>io.micrometer</groupId>
+<artifactId>micrometer-registry-prometheus</artifactId>
+<scope>runtime</scope>
+</dependency>
+
+
+
+
+Step2: Add the following configuration for enabling actuator end points
+
+
+management:
+endpoints:
+web:
+exposure:
+include: "*"
+
+
+
+Step3: Open the docker compose file and run the below command:
+
+           docker-compose up -d
+
+This willl install 3 images promotheus,loki and grapahan and all will started
+
+C:\Users\vg672483\Downloads\Graphana>docker-compose up -d
+[+] Building 0.0s (0/0)                                                                                                                                                                 docker:default
+[+] Running 3/3
+ ✔ Container graphana-loki-1        Started                                                                                                                                                       0.0s
+ ✔ Container graphana-grafana-1     Started                                                                                                                                                       0.0s
+ ✔ Container graphana-prometheus-1  Running                                                                                                                                                       0.0s
+
+
+Execution:
+
+1) http://localhost:9090/==&gt; Promothus
+2) http://localhost:3000/ ==> Graphana
+
+Order&PaymentService.zip
+
+
+=====================
+vijay kumar
+Created Mar 30Mar 30
+====================
+
+Execution of Order Service,Payment Service with Gatway,Cloudconfig and Eureka Registry
+
+
+Request JSON1: Hitting Order Service
+
+URL ==> http://localhost:8989/order/bookOrder   Type: POST
+
+RequestBody:
+
+{
+    "order":{
+        "id":110,
+        "name":"AC",
+        "qty":2,
+        "price":50000
+       
+    },
+    "payment":{}
+}
+
+
+
+
+Response:
+
+
+{
+    "order": {
+        "id": 110,
+        "name": "AC",
+        "qty": 2,
+        "price": 50000.0
+    },
+    "amount": 50000.0,
+    "transactionId": "fd22e1ac-9ce4-48fb-b015-1b3a5d8f8a0a",
+    "message": "payment processing successful and order placed"
+}
+
+
+
+
+Request JSON2: Hitting Payment Service
+
+
+http://localhost:8989/payment/110 Type: GET
+
+Response:
+
+{
+    "paymentId": 2,
+    "paymentStatus": "success",
+    "transactionId": "fd22e1ac-9ce4-48fb-b015-1b3a5d8f8a0a",
+    "orderId": 110,
+    "amount": 50000.0
+}
+
+Eurkea URL ==> http://localhost:8761
