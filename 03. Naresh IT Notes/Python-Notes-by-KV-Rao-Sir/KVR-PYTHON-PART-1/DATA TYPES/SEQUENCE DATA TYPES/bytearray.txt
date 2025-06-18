@@ -1,0 +1,90 @@
+			==============================================================
+								3. bytearray
+			==============================================================
+=>'bytearray' is one of the pre-defined class and treated as Sequence Data Type.
+=>The purpose of bytearray data typs is that "To Implement End-to-End Encryption---Security"
+=>At time of Implementing End-to-End Encryption by using bytearray data type, bytearray data type stores the values in the range of (0,256). i.e bytearray data type stores the data from 0 to 255 (256-1).
+=>In Python Programming, we don't have any symbolic notation for Representing bytearray data. But we can convert into bytearray 
+    data type by using  bytearray().
+		Syntax:     varname=bytearray(object)
+=>An object of bytearray maintains Insertion Order (Insertion order is nothing but whatever the order we organize the data in the 
+    same order we display the Data).
+=>On the Object of bytearray , we can perform Both Indexing and Slicing Operations
+=>An object of bytearray belongs to MUTABLE bcoz 'bytearray' object  support item assignment
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTE: The Functionality of bytearray is exactly similar to bytes But an object bytes belongs to IMMUTABLE bcoz bytes object 
+           does not support Item Assignment where as an object bytearray belongs to MUTABLE bcoz bytearray object allows Item Assigment OR Modifications.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> lst1=[100,35,67,256,67,11]
+>>> print(lst1,type(lst1))---------------------[100, 35, 67, 256, 67, 11] <class 'list'>
+>>> ba=bytearray(lst1)----------------------ValueError: byte must be in range(0, 256)
+>>> lst1=[100,35,0,-67,255,67,11]
+>>> print(lst1,type(lst1))----------------------[100, 35, 0, -67, 255, 67, 11] <class 'list'>
+>>> ba=bytearray(lst1)------------------ValueError: byte must be in range(0, 256)
+-------------------------------------------------------------------
+>>> lst1=[100,35,0,67,255,67,11]
+>>> print(lst1,type(lst1))-----------------[100, 35, 0, 67, 255, 67, 11] <class 'list'>
+>>> ba=bytearray(lst1)
+>>> print(ba,type(ba))-------------------bytearray(b'd#\x00C\xffC\x0b') <class 'bytearray'>
+>>> for val in ba:
+...		print(val)
+...
+		100
+		35
+		0
+		67
+		255
+		67
+		11
+-------------------------------------------------
+>>> ba[0]----------------------100
+>>> ba[-1]---------------------11
+>>> ba[1]----------------------35
+>>> ba[2:5]-------------------bytearray(b'\x00C\xff')
+>>> for val in ba[2:5]:
+...		print(val)
+...
+				0
+				67
+				255
+-------------------------------------------------------
+>>> lst1=[100,35,0,67,255,67,11]
+>>> print(lst1,type(lst1))--------------[100, 35, 0, 67, 255, 67, 11] <class 'list'>
+>>> ba=bytearray(lst1)
+>>> print(ba,type(ba),id(ba))-------------bytearray(b'd#\x00C\xffC\x0b') <class 'bytearray'> 1568090935856
+>>> for val in ba:
+...		print(val)
+...
+			100
+			35
+			0
+			67
+			255
+			67
+			11
+>>> ba[0]=125   # Item Assigment  allowed 
+>>> print(ba,type(ba),id(ba))----------------bytearray(b'}#\x00C\xffC\x0b') <class 'bytearray'> 1568090935856
+>>> for val in ba:
+...		print(val)
+...
+			125
+			35
+			0
+			67
+			255
+			67
+			11
+>>> ba[1]=256--------------------ValueError: byte must be in range(0, 256)
+============================================x==========================================
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,130 @@
+Summary
+- Business Backend
+- Business Applications
+- ERP
+- Tier Architecture
+- Layer Architecture
+
+FAQ: What is difference between layer and tier?
+Ans:
+ - Application runs in tier architecture
+	a) Database Tier
+	b) Application Tier
+	c) Presentation Tier
+ - Application is built in layers
+	a) Database Layer
+	b) Business Layer
+	c) UI Layer
+
+			     Database Layer
+- Developers design database.
+- They write queries for data manipulation.
+- The queries are related CRUD operations.
+	C	- Create
+	R	- Read
+	U	- Update
+	D	- Delete
+
+What is a database?
+- Database is an organized collection of information, or data, typically and electronically stored in a computer system.
+- Organized collection of information allows various interactions like sorting, filtering, querying etc.
+- It makes the data suitable for predictions & analysis.
+
+What are the various types of databases?
+1. Relational Database
+2. Object Oriented Database
+3. Distributed Database
+4. Graph Database
+5. NoSQL Database
+6. Dataware house
+7. Entity Database [OLTP]
+8.Open Source Database
+9. Cloud Database
+10. Document Database / JSON database
+11. Self-driving Database
+
+Relational Database		: Structured data
+Object Oriented		: Uses objects of OOP 
+Distributed 		: It allows sharing data between applications in 2 different devices
+			  or applications in 2 different process of same device.
+Graph / OLTP		: Business Entity Framework 
+NoSQL			: Database without SQL as language.
+Warehouse		: Data for analytics and BI. 
+Open Source		: Allows to customize the source code.
+Cloud			: Software as Service
+JSON			: JavaScript Object Notation
+Self-driving		: AI, Cloud and Automation
+
+			      Relational Database
+- Software application is built with combination of various modules.
+- Every module represents a business requirement.
+- Every module doesn't require data to maintain.
+- Developer have to design database models for application.
+- Database models are 
+	1. Conceptual
+	2. Physcial
+	3. Logical
+	4. Entity 
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			

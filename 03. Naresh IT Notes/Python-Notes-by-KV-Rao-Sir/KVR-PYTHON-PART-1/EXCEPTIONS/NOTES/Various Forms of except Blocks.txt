@@ -1,0 +1,132 @@
+		===============================================================
+				Various Forms of "except" Blocks
+		===============================================================
+=>The except block can be used in the following formats
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Format-1:  Single except block can handle one specific exception at a time
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		try:
+		     ------------------------------------------
+		     Block of statements--generates exception
+		     ------------------------------------------
+		except exception-class-name-1:
+		       ----------------------------------------------
+		       Block of statemenets---generates User-Freindly Error Message
+		       --------------------------------------------
+		except exception-class-name-2:
+		       ----------------------------------------------
+		       Block of statemenets---generates User-Freindly Error Message
+		       --------------------------------------------
+		except exception-class-name-n:
+		       ----------------------------------------------
+		       Block of statemenets---generates User-Freindly Error Message
+		       --------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Format-2:  Single except block can handle Multiple specific exception at a time---This Type Facility is called Multi 
+                  Exception handling Block.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		try:
+		     ------------------------------------------
+		     Block of statements--generates exception
+		     ------------------------------------------
+		except (exception-class-name-1,exception-class-name-2,....exception-class-name-n):
+		       ----------------------------------------------
+		       Block of statements---generates User-Freindly Error Message
+		       which coresponds to the type of exception
+		       --------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Format-3:  Single except block can handle the exception with alias name---Here alias can capture type of Error 
+                   Message   occured due to type of exception in other software products like oracle, mysql...etc
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------		
+		try:
+		     ------------------------------------------
+		     Block of statements--generates exception
+		     ------------------------------------------
+		except exception-class-name-1 as alias name:
+		       ----------------------------------------------
+       		       print(alias name)
+		       --------------------------------------------
+		except exception-class-name-2  as alias name:
+		       ----------------------------------------------
+		       print(alias name)
+		       --------------------------------------------
+		except exception-class-name-n  as alias name:
+		       ----------------------------------------------
+       		       print(alias name)
+		       --------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Format-4:  Single except block can handle ALL TYPES of Exceptions--This except block is called default except block
+		 and It must be always written at last otherwise we get SyntaxError
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTE : Only bellow Syntax --Not Rercommended
+
+		try:
+		     ------------------------------------------
+		     Block of statements--generates exception
+		     ------------------------------------------
+		except :
+		       ----------------------------------------------
+       		       print("Ooops some thing went  wrong")
+		       --------------------------------------------
+***************************************************************************************************************************************************
+Final Syntax for Handling the Exceptions
+**************************************************************
+		try:
+		     ------------------------------------------
+		     Block of statements--generates exception
+		     ------------------------------------------
+		except exception-class-name-1:
+		       ----------------------------------------------
+		       Block of statemenets---generates User-Freindly Error Message
+		       --------------------------------------------
+		except exception-class-name-2:
+		       ----------------------------------------------
+		       Block of statemenets---generates User-Freindly Error Message
+		       --------------------------------------------
+		except exception-class-name-n:
+		       ----------------------------------------------
+		       Block of statemenets---generates User-Freindly Error Message
+		       --------------------------------------------
+		except :  # default except block at last
+		       ----------------------------------------------
+       		       print("Ooops some thing went  wrong")
+		       --------------------------------------------
+		else:
+			--------------------------------------------
+			Block of statements
+			generates Results of the Program
+			--------------------------------------------
+		finally:
+		       -----------------------------------------------
+		       Block of Statements
+		       Executes Compulsorily
+		       -----------------------------------------------
+
+				(OR)
+
+		try:
+		     ------------------------------------------
+		     Block of statements--generates exception
+		     ------------------------------------------
+		except (exception-class-name-1,exception-class-name-2,....exception-class-name-n):
+		       ----------------------------------------------
+		       Block of statements---generates User-Freindly Error Message
+		       which coresponds to the type of exception
+		       --------------------------------------------
+		except :  # default except block at last
+		       ----------------------------------------------
+       		       print("Ooops some thing went  wrong")
+		       --------------------------------------------
+		else:
+			--------------------------------------------
+			Block of statements
+			generates Results of the Program
+			--------------------------------------------
+		finally:
+		       -----------------------------------------------
+		       Block of Statements
+		       Executes Compulsorily
+		       -----------------------------------------------
+*************************************************************************************************************************************

@@ -1,0 +1,25 @@
+.x{
+    height: max-content;
+    width: 500px;
+    padding: 20px;
+    z-index: 1000;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    background-color: antiquewhite;
+    animation:prasad 5s ease;
+}
+.modal div{
+    display: flex;
+    justify-content: space-between;
+}
+@keyframes prasad {
+    0%{
+        top: 0%;
+        left: 30%;
+    }
+    100%{
+        top: 30%;
+        left: 30%;
+    }
+}

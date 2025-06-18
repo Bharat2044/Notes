@@ -1,0 +1,14 @@
+		=======================================================================
+			 Welcome to Naresh I Technologies
+			---------------------------------------------------
+			Course : Full Stack PYTHON
+		=======================================================================
+=>About Faculty
+=>About Full Stack PYTHON Course Content
+=>Speciality of My Classes
+=>Job 
+=>How u Must Learn Full Stack PYTHON
+=>Pre-Requsistes for Learing Full Stack PYTHON
+----------------------------------------------------------
+=>Real Time Applications Developed by using PYTHON PROGRAMING
+

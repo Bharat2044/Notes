@@ -1,0 +1,11 @@
+<h1>PokeDEX</h1>
+<div id="pokedex">
+     <input type="text" placeholder="Enter pokemon name" [(ngModel)]="pokemonName">
+     <button (click)="getData()">search</button>
+</div>
+<div id="pokedex-details" *ngIf="pokemonDetails">
+   <img src="{{pokemonDetails.sprites.front_default}}" alt="{{pokemonDetails.name}}">
+   <p>Movies: <span *ngFor="let m of pokemonDetails.moves">{{m.move.name}},</span></p>
+   <p>Height: {{pokemonDetails.height}}</p>
+   <p>Weight:{{pokemonDetails.weight}}</p>
+</div>

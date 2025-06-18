@@ -1,0 +1,58 @@
+		=============================================
+			Data Encapsulation and Data Abstraction
+		=============================================
+Data Encapsulation:
+--------------------------------
+=>The Process of Hiding the confidential Information / Data / Methods from external Programmers / end users is called Data Encapsulation.
+=>The Purpose of Encapsulation concept is that "To Hide Confidental Information / Features of Class (Data Members and Methods  ) ".
+=>Data Encapsulation can be applied in two levels. They are
+		a) At Data Members Level
+		b) At Methods Level
+=>To implement Data Encapsulation in python programming, The Data Members , Methods   must be preceded with double under score ( _ _ ).
+
+Syntax1:-         (Data member Level  through method )    
+---------------
+			 class <ClassName>:
+					def   methodname(self):
+						self.__Data MemberName1=Value1
+						self.__Data MemberName2=Value2
+						--------------------------------------------------
+						self.__Data MemberName-n=Value-n
+
+						(OR)
+
+Syntax1:-		(  Data member Level  through Constructor )
+
+				class <ClassName>:
+					def   __init__(self):
+						self.__Data MemberName1=Value1
+						self.__Data MemberName2=Value2
+						--------------------------------------------------
+						self.__Data MemberName-n=Value-n
+
+
+Syntax2:-			(Method Level)
+
+				class <ClassName>:
+					def   __methodname(self):
+						self.Data MemberName1=Value1
+						self.Data MemberName2=Value2
+						--------------------------------------------------
+						self.Data MemberName-n=Value-n
+
+==============================================================
+Data Abstraction:
+-------------------------------
+=>The Process of retrieving / extracting Essential Details without considering Hidden Details is called Data Abstraction.
+----------------------------------------------------------------------------------------------------------------------------------
+Note:- We can't apply Data Encapsulation on Constructors in Python but whose Initlized Data Memebrs 
+           can be encapsulated.
+Note: We can also Encapsulate Class Name But In real Time Hiding the class name is of no use bcoz we get 
+          ImportError.
+
+		class  __<clsname>:
+		      ---------------------------------
+		      ---------------------------------
+		      ---------------------------------
+====================================================================================
+		        

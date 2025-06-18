@@ -1,0 +1,237 @@
+1. What is Event?
+2. What is Event Handler?
+3. What is Event Listener?
+4. What are Event Args?
+
+5. What is Event propagation?
+A. Propagation is technique where the child event can simulate the parent element event. As parent and child elements use "bubble" for handling interactions. 
+
+6. How to prevent event propagation? 
+A. By using the event method "stopPropagation()".
+
+Syntax:
+		function ChildEvent(e)
+		{
+		   e.stopPropagation();
+		}
+		
+		<button onclick="ChildEvent(event)">  Child </button>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          nav {
+               padding: 30px;
+               background-color: black;
+               color:white;
+               font-size: 20px;
+          }
+     </style>
+     <script>
+        
+     </script>
+</head>
+<body>
+     <nav onclick="NavClick()">
+          Navbar 
+          <button onclick="SearchClick(event)">Search</button>
+     </nav>
+</body>
+</html>
+
+7. How to prevent default actions of any generic element?
+A. Generic elements have default actions to perform, you can stop the default actions
+     by using the event method "preventDefault()".
+
+Syntax:
+	<form onsubmit="FormSubmit(event)">
+
+		<button type="submit"> Submit </button>
+	</form>
+
+	 function FormSubmit(e) {
+		e.preventDefault();
+	}
+	
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+         
+     </style>
+     <script>
+         function FormSubmit(e){
+             e.preventDefault();
+             alert("Form data submitted to Server");
+         }
+     </script>
+</head>
+<body>
+     <form onsubmit="FormSubmit(event)">
+          User Name : <input type="text" name="User"> <button type="submit">Submit</button>
+     </form>
+</body>
+</html>
+
+8. Events are configured for element or browser?
+A. All events used in JS are browser events defined for element. [BOM]
+
+
+9. React is using virtual DOM, then how it can use browser events?
+A. React will not use browser events, It have a virtual DOM events library called 
+    "SyntheticEvents".
+
+10. What are synthetic events?
+A.  SyntheticEvent is base for all events used by react in virtual DOM.
+     SyntheticEvents map to actual BOM events.
+
+Syntax:
+		React => onClick  => BOM => onclick
+		React => onDoubleClick => BOM => ondblclick
+
+Configuring Events in React component:
+
+1. Event requires a subscriber defined in component function
+
+		function  InsertClick(e) {
+
+		}
+
+2. JSX element use SyntheticEvent as sender.
+
+	 <button  onClick={ InsertClick }>  Insert </button>
+
+
+3. Events are registered at the time of mounting the component. Hence it uses 
+    a listener with "event" argument, which can provides access to both
+		a) element data
+		b) event data
+
+	 e.clientX;
+	 e.ctrlKey;
+	 e.target.id;
+	 e.target.className;
+
+Ex:
+event-binding.jsx
+
+export function EventDemo(){
+
+
+    function InsertClick(e){
+        console.log(`
+               Button Id: ${e.target.id}\n 
+               ClassName : ${e.target.className}\n 
+               X Position : ${e.clientX}\n
+               Ctrl Key : ${e.ctrlKey}
+            `);
+    }
+
+     return(
+        <div className="container-fluid">
+            <button id="btnInsert" onClick={InsertClick}  className="btn btn-primary mt-3">Insert</button>
+        </div>
+     )
+}
+
+FAQ: How to configure custom arguments for event in react?
+Ans: You need to define a function return with custom arguments in event handler.
+
+	<button  onClick={ ()=> InsertClick(args) }>   Text </button>
+
+FAQ: How to pass both default and custom args?
+Ans:  The function return configured in handler can have an event parameter, which
+	  provides access to default events.
+
+	<button  onClick={  (e) => InsertClick(args, e) }> Text </button>
+
+Ex:
+event-demo.jsx
+
+
+
+export function EventDemo(){
+
+
+    function InsertClick(name, price, cities, event){
+        console.log(`
+                Name : ${name}\n
+                Price: ${price}\n
+                Cities: ${cities}\n
+                Button Id: ${event.target.id}\n
+                Class : ${event.target.className}
+            `);
+    }
+
+     return(
+        <div className="container-fluid">
+            <button id="btnInsert" onClick={(e)=> InsertClick("TV", 34000, ['Delhi', 'Hyd'], e)}  className="btn btn-primary mt-3">Insert</button>
+        </div>
+     )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

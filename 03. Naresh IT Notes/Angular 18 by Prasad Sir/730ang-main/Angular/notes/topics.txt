@@ -1,0 +1,27 @@
+-- Typescript
+     -- data types
+     -- OOPS
+-- Angular
+    -- introduction
+    -- folders
+    -- data binding
+       -- one way
+          -- string interpolation
+          -- property binding
+          -- event binding
+       -- two way
+    -- directives
+       -- conditional / structural
+          -- ngIf
+          -- ngSwitch
+          -- ngFor
+       -- property directives
+       -- custom directives
+    -- pipes
+    -- services
+    -- httpclient
+    -- routing
+    -- lifeCycleMethods
+    -- RxJS
+    -- template forms
+    -- angular with standalone

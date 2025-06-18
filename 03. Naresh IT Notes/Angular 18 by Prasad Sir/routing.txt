@@ -1,0 +1,17 @@
+Routing is used to naviagte from page(component) to another page (component)
+Angular Routing is essential for Single Page Applications
+Step 1: goto routing module and define routes to different components in routes array as follows
+const routes:Routes= [
+    { path:"about", component: AbcComponent }
+    ]
+    it means if some one goes url/about ---> AbcComponent loads on screen
+
+step2: To clarify routing modules where to print your routed component, use following code
+
+<router-outlet></router-outlet>
+
+step3: to make user accessable to different router , use anchor tags with routerLink
+<a routerLink="/about">click me</a>
+
+ste4: for dynamic routing path has to be path:'something/:something'
+step 5 : for notfound path has to be path:'**'

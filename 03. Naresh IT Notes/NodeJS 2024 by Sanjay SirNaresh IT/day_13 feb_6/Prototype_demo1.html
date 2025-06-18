@@ -1,0 +1,32 @@
+<script>
+    class Student {
+        constructor(roll, name, course) {
+            this.roll = roll;
+            this.name = name;
+            this.course = course;
+            // this.clgName = 'nareshIT';
+            // this.clgAdd = 'Hyderabad';
+        }
+    }
+    Student.prototype.clgName = 'nareshIT';
+    Student.prototype.clgAdd = 'Hyderabad';
+
+    let std1 = new Student(101, 'praveen', 'NodeJS');
+    let std2 = new Student(102, 'Jyoti', 'NodeJS');
+    console.log(std1.name, std1.clgName, std1.fees)
+    console.log(std1, std2);
+
+    // std1.clgName = 'NIT';
+    // console.log(std1.clgName , std2.clgName);
+
+    Student.prototype.clgName = 'nareshInfoTech';
+    console.log(std1.clgName, std2.clgName);
+
+    let emp = { eid: 101, name: 'deepak', sal: 5000 }
+    console.log(emp);
+    console.log(emp.__proto__ == Object.prototype)
+
+    emp.__proto__.comp = 'IBM'
+
+    console.log(emp.comp , emp)
+</script>

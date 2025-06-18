@@ -1,0 +1,39 @@
+Directives are used to change/manipulate the behaviour/flow of DOM Elements
+
+There are 3 types of Directives
+ i. control Directives / conditional Directives : 
+   conditional directives controls the behaviour of DOM based on a condition
+    i. ngIf : ngIf is used to make a particular block appear/disappear based on a condition
+    we can even try else case using ng-template
+   <div *ngIf="isAdmin then bujji">
+      <p>Hello wOrld to Admin</p>
+   </div>
+   <ng-template #bujji>
+     <p>Hello Everyone</p>
+   </ng-template>
+
+   ngSwitch: ngSwitch is used to work when multiple conditons/multiple options are to be checked
+
+   <div [ngSwitch]="day">
+     <p *ngSwitchCase="0">Sunday</p>
+     <p *ngSwitchCase="1">Monday</p>
+     <p *ngSwitchCase="2">Tuesday</p>
+     <p *ngSwitchDefault>Enter corredt option</p>
+   </div>
+  *ngFor: it is used to iterate all the values of a array
+  <div *ngFor="let i of details;let ind =index;let en=even;let od=odd;let f=first;let l=last;trackBy:track">
+<img src="{{i.url}}" alt="{{i.name}}" height="200">
+<h2>{{i.name}}</h2>
+<p>{{ind}}</p>
+<p>{{en}}</p>
+<p>{{od}}</p>
+<p>{{f}}</p>
+<p>{{l}}</p>
+
+</div>
+
+ ii. property Directives: there are two property/attribute directives . they are
+ [ngClass] and [ngStyle]
+  <h1 [ngClass]="{red:isRed,blue:!isRed}" [ngStyle]="{backgroundColor:isRed?'red':'green'}">{{item}}</h1>
+ iii. custom Directives: to create custom directive, we can used
+ ng g d directive-name

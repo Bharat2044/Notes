@@ -1,0 +1,117 @@
+				==============================================================
+							2. tuple 
+				==============================================================
+Index
+--------------------
+=>Properties of tuple
+=>What is tuple
+=>Notations of tuple
+=>Types of tuple
+=>Operations on tuple
+=>Pre-defined Functions in tuple
+=>Nested OR Inner tuple
+=>Combination tuples with list
+=>Programming Examples
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Properties of tuple
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>'tuple' is one of the Pre-Defined Class and Treated as List Data Type.
+=>The purpose of tuple' data type is that "To Store Multiple Values of Same Type  OR Different Type Or the Both the Types  with Unique and Duplicate Values in Single Object . In otherwords tuple used for storing Constant Values of Multiple Values of Same Type  OR Different Type Or the Both the Types  with Unique and Duplicate Values in Single Object.
+=>To store the Elements OR Values in the object of tuple, we use braces  ( ) and the Values separated by comma. 
+=>On the object of tuple, we can perform Both Indexing and Slicing Operations.
+=>An object of tuple belongs to IMMUTABLE bcoz tuple object does not allows us to perform Item Assigment.
+=>An Object of tuple maintains Insertion Order.
+=>In Python Programming, we can create Two Types of tuple objects. They are
+
+			1) Empty tuple
+			2) Non-Empty tuple
+------------------------------------
+1) Empty tuple
+------------------------------------
+=>An Empty tuple is one which does not contain any Elements and whose length is 0
+=>Syntax:  varname=()
+			(OR)
+		   varname=tuple()
+---------------------------------
+2) Non-Empty tuple
+------------------------------------
+=>A Non-Empty tuple is one which contains  Elements and whose length is >0
+=>Syntax:       varname=(Val1,Val2,.....,Val-n)
+					OR
+			varname=tuple(object)		
+					OR
+			varname=Val1,Val2,.....,Val-n
+					OR
+			varname=(Val1,)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTE:  The Functionality of tuple is exactly similar to list, But an Object list belongs to MUTABLE where an object of tuple belongs to IMMUTABLE.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> t1=(10,20,30,10,40,20-23,2.3)
+>>> print(t1,type(t1))---------------(10, 20, 30, 10, 40, -3, 2.3) <class 'tuple'>
+>>> t2=(10,"RS",34.56,True,2+3j)
+>>> print(t2,type(t2))---------------(10, 'RS', 34.56, True, (2+3j)) <class 'tuple'>
+-----------------------------------------------
+>>> t3=10,"TR",45.67,True,"NL"
+>>> print(t3,type(t3))--------------(10, 'TR', 45.67, True, 'NL') <class 'tuple'>
+------------------------------------------------
+>>> t4=(10)
+>>> print(t4,type(t4))--------------10 <class 'int'>
+>>> t4=(10,)
+>>> print(t4,type(t4))---------------(10,) <class 'tuple'>
+>>> t4=10,
+>>> print(t4,type(t4))---------------(10,) <class 'tuple'>
+-----------------------------------------
+>>> t1=(10,20,30,10,40,20-23,2.3)
+>>> print(t1,type(t1))-------------------------(10, 20, 30, 10, 40, -3, 2.3) <class 'tuple'>
+>>> t1[0]-----------------------------------------10
+>>> t1[-1]----------------------------------------2.3
+>>> t1[2]----------------------------------------30
+>>> t1[2:]---------------------------------------(30, 10, 40, -3, 2.3)
+>>> t1[::2]-------------------------------------(10, 30, 40, 2.3)
+>>> t1[::-1]------------------------------------(2.3, -3, 40, 10, 30, 20, 10)
+-----------------------------------------------------
+>>> t1=(10,20,30,10,40,20-23,2.3)
+>>> print(t1,type(t1),id(t1))-----------(10, 20, 30, 10, 40, -3, 2.3) <class 'tuple'> 1785575627680
+>>> t1[0]=25-------TypeError: 'tuple' object does not support item assignment---IMMUTABLE
+---------------------------------------------------------
+>>> s="MISSISSIPPI"
+>>> print(s,type(s))---------------------MISSISSIPPI <class 'str'>
+>>> t=tuple(s)
+>>> print(t,type(t))------------------------('M', 'I', 'S', 'S', 'I', 'S', 'S', 'I', 'P', 'P', 'I') <class 'tuple'>
+>>> l1=[10,20,30,40]
+>>> print(l1,type(l1))----------------------[10, 20, 30, 40] <class 'list'>
+>>> t1=tuple(l1)
+>>> print(t1,type(t1))-------------------------(10, 20, 30, 40) <class 'tuple'>
+>>> t1=tuple(range(10,20,2))
+>>> print(t1,type(t1))------------------------(10, 12, 14, 16, 18) <class 'tuple'>
+----------------------------------------
+MOST IMP
+----------------------------------------
+>>> a=10
+>>> print(a,type(a))---------10 <class 'int'>
+>>> t=tuple(a)--------------------TypeError: 'int' object is not iterable
+>>> t=tuple(12.34)--------------TypeError: 'float' object is not iterable
+>>> a=10
+>>> print(a,type(a))-----------10 <class 'int'>
+>>> t=tuple(a,)-----------TypeError: 'int' object is not iterable
+>>> t=tuple([a]) # Possible
+>>> print(t,type(t))-----------(10,) <class 'tuple'>
+>>> t=tuple((a))--------------TypeError: 'int' object is not iterable
+==========================================================x=================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

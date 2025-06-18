@@ -1,0 +1,32 @@
+Services are used to store common data and to provide communication between any components.
+you can create a service by command 
+" ng generate service service-name"
+it will create two file i.e., one ts and one .spec.ts files and spec.ts is used for testing and actual service lies in .ts
+
+services are initialized with @Injectable decorator stating that these services can be injectable into any other services
+
+How to use Service:
+ -- import service in any components
+ -- create an instance for that service in constructor parameter of that component
+
+
+Dependency Injection: it is one of the fundamental concept in angular.By creating instance in the constructor parameter angular makes the component/pipes/directive independent from its dependencies
+
+HTTP CLIENT:
+httpClient in angular is used to handle http requests. http requests such as GET,POST,DELETE,PUT,PATCH
+
+httpClient returns observable similarly as fetch returns promises
+observable means multiple asynchronous functions
+we resolve observable by subscribe
+
+1. Goto module , import httpClienModule. it is deprecated in 17 & 18 because 17 & 18 it is in built. , write it in imports
+2. Goto component or service , inject httpClient
+3. using httpClient instance access GET,POST,PUT,DELETE methods
+
+
+
+
+
+
+
+

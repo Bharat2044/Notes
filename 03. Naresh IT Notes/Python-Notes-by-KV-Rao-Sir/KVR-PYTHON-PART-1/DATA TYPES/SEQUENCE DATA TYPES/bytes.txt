@@ -1,0 +1,62 @@
+			============================================================
+								2. bytes
+			============================================================
+=>'bytes' is one of the pre-defined class and treated as Sequence Data Type.
+=>The purpose of bytes data typs is that "To Implement End-to-End Encryption---Security"
+=>At time of Implementing End-to-End Encryption by using bytes data type, bytes data type stores the values in the range of 
+   (0,256). i.e bytes data type stores the data from 0 to 255 (256-1).
+=>In Python Programming, we don't have any symbolic notation for Representing bytes data. But we can convert into bytes 
+    data type by using  bytes().
+		Syntax:     varname=bytes(object)
+=>An object of bytes maintains Insertion Order (Insertion order is nothing but whatever the order we organize the data in the 
+    same order we display the Data).
+=>On the Object of bytes , we can perform Both Indexing and Slicing Operations
+=>An object of bytes belongs to IMMUTABLE bcoz 'bytes' object does not support item assignment
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> lst=[100,23,256,7,0,12]
+>>> print(lst,type(lst))------------------------[100, 23, 256, 7, 0, 12] <class 'list'>
+>>> b=bytes(lst)-------------------------------ValueError: bytes must be in range(0, 256)
+>>> lst=[100,-23,255,7,0,12]
+>>> print(lst,type(lst))-----------------------[100, -23, 255, 7, 0, 12] <class 'list'>
+>>> b=bytes(lst)-------------------------------ValueError: bytes must be in range(0, 256)
+-------------------------------------------------------------------------------------
+>>> lst=[100,23,255,7,0,12]
+>>> print(lst,type(lst))-----------------[100, 23, 255, 7, 0, 12] <class 'list'>
+>>> b=bytes(lst)
+>>> print(b,type(b))-------------------b'd\x17\xff\x07\x00\x0c' <class 'bytes'>
+>>> for val in b:
+...		print(val)
+...
+			100
+			23
+			255
+			7
+			0
+			12
+------------------------------------------
+>>> b[0]------------------100
+>>> b[-1]----------------   12
+>>> b[2]-----------------255
+>>> b[2:5]--------------b'\xff\x07\x00'
+>>> for val in b[2:5]:
+...		print(val)
+...
+		255
+		7
+		0
+>>> for val in b[::-1]:
+...		print(val)
+...
+			12
+			0
+			7
+			255
+			23
+			100
+----------------------------------------------------------
+>>> b[0]=125-----------TypeError: 'bytes' object does not support item assignment
+>>> b[0:2]=[10,125]----TypeError: 'bytes' object does not support item assignment
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

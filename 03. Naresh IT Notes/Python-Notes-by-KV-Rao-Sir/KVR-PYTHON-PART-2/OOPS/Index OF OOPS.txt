@@ -1,0 +1,87 @@
+		==========================================================
+			 Object Oriented  Principles or Features or Concepts (11 days)
+		===========================================================
+Index:
+-------------------------------------------------------------------------------------------
+=>What are the advantages of OOPs
+=>List of Object Oriented Principles
+		1. Classes
+		2. Objects
+		3. Data Encapsulation
+		4. Data Abstraction
+		5. Inheritance
+		6. Polymorphism
+		7. Message Passing(already discussed)
+-----------------------------------------------------------------------------------------
+1. Classes
+	=>Importance and purpose of Classes concept
+	=>Syntax for Defining Class
+	=>Types of Data Members
+			a) Instance Data Members
+			b) Class Level Data Members
+	=>Types of Methods
+			a) Instance Methods
+			b) Class Level Methods
+			c) Static Methods
+	=>What is "self" and "cls"
+	=>Programming Examples
+2. Object
+	=>Importance and purpose of Object Concept
+	=>Syntax for creating Object
+	=>Programming Examples
+=>PRAMMING Examples related to Pickling  and Data base communication with Classes and objects.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Constructors in OOPs
+	=>Importance and purpose of Constructors
+	=>Types of Constructors
+			a) Default Constructors
+			b) Parameterized Constructors
+	=>Rules for Using Constructors
+	=>Programming Examples
+--------------------------------------------------------------------------------------------------------------------------------------
+=>Destructrors in OOPs with Garbage Collector
+	=>Importance and purpose of Detstructrors 
+	=>Syntax for defining Detstructrors 
+	=>Internal flow of Detstructrors 
+	=>Relationship between Detstructrors and  Garbage Collector
+	=>gc module 
+=>Progamming Examples
+----------------------------------------------------------------------------------------
+(3) Data Encapsulation and (4) Data Abstraction
+	=>Importance and purpose of Data Encapsulation
+	=>Importaance and purpose of Data Abstraction
+	=>Implementation of Data Ecapsulation and Data Abstraction
+	=>Programming Examples
+------------------------------------------------------------------------------------------------------
+5. Inheritance
+------------------------------------------------------------------------------------------------------
+	=>Importaance and purpose of Inheritance
+	=>Types of Inheritances
+			a) single
+			b) multi level
+			c) hierarchical
+			d) multiple
+			e) Hybrid 
+	=>Syntax for using Inheritance in Python 
+	=>Programming Examples
+-------------------------------------------------------------
+Method Overriding in OOPs
+	=>Importance and purpose of Method Overriding
+	=>Memory management in Method Overriding
+	=>Programming Examples
+--------------------------------------------------
+Constructor Overriding in OOPs
+	=>Importance and purpose of Constructor  Overriding
+	=>Memory management in Constructor  Overriding
+	=>Programming Examples
+----------------------------------------------
+6. Polymorphism
+----------------------------------------------
+		=>Importance and purpose of Polymorphism
+		=>Difference between Polymorphism and Inheritance
+		=>Method Overriding with Polymorphism
+		=>Constructor  Overriding with Polymorphism
+		=>super() and class name approaches in Polymorphism
+		=>Programming Examples
+----------------------------------------------------------------------------------------------------------------
+

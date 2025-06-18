@@ -1,0 +1,104 @@
+Routing in React
+- BrowserRouter
+- Routes
+- Route
+- Link
+- react-router-dom
+
+		             Route Parameters
+- A route is used to access any specific resource. 
+- A route parameter allows to query any content in side the resource. 
+- React application can configure a route parameter in side route path.
+
+	<Route  path="name/:param1/:param2/.."   element={ } />
+
+- The values are passed using "/" as delimeter in URL.
+
+	http://localhost:3000/name/value1/value2
+
+- Every route parameter is mandatory and have order dependency. 
+
+- You can access the route parameters by using "useParams()"  hook. It returns an parameter object with key and value.
+
+	let  params = useParams();
+	
+	params {
+	     param1: value1,
+	     param2: value2
+	}
+
+FAQ: What is difference between "Absolute & Relative" path?
+Ans:  Asbolute path refers to a resource on server. 
+         Relative path refers to any specific content inside resource. 
+
+	http://localhost:3000/products
+
+	<Link  to="electronics"> 	=> Relative Path
+
+	http://localhost:3000/products/electronics
+
+	<Link to="home">
+
+	http://localhost:3000/products/home
+
+	<Link to="/home">		=> Absolute
+
+	http://localhost:3000/home
+
+
+			 Child Routes
+- A child route refers to relative path.
+- Relative is with regard to the parent path.
+- You can configure route to access child component within the parent.
+
+Syntax:
+	<Route  path="parent"  element={<ParentElement />}>
+		
+	         <Route path="child"  element={<ChildElement />} />
+	         ... multiple children.... 
+
+	</Route>
+
+- The child route is responsible for rendering a child component into the parent.
+- It requires an <Outlet /> to configure.
+- <Outlet> is a component that defines where the resulting markup of child is going to
+   render.
+
+FAQ: Can we define multiple outlets?
+Ans: Yes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

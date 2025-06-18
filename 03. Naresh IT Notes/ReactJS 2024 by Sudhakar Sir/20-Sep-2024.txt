@@ -1,0 +1,163 @@
+			Server Side Scripting
+
+- Server side scripting is a technique used in web applications to generate a response customized to every client request.
+- Scripts are employed on server in order to generate response for client request.
+- The popular server side scripting technologies
+	CGI, JSP, ASP, PHP, Node JS etc..
+
+			 Node JS
+- It is open source and cross platform.
+- It uses google chrome V8 compiler.
+- It is JavaScript based. 
+- It is Single Threaded. 
+- It uses Async and Sync methods.
+- It is modular.
+- It will not use caching.
+- Node JS can build web application, create server, cretate CLI tools etc.
+
+1. Create a new project folder for server side programming
+
+	E:\server-app
+
+
+2. Open with VS code and add script file "index.js"
+
+
+3. Server side programs in Node use JavaScript only as language not for DOM.
+
+	- Variables
+	- Data Types
+	- Operators
+	- Statements
+	- Functions
+	- OOP
+
+   Syntax:
+	console.log("Welcome to Node JS");	// valid
+	alert("Welcome to Node";		// invalid
+
+4. You can compile and run server side node programs using node compiler
+
+	> node  index.js
+
+		             Server Side Objects
+- Every server side technologies handles interactions using various server side objects.
+
+	a) Request
+	b) Response
+	c) Cookie
+	d) Session
+	e) Application etc..
+
+- Node provides several built-in server objects
+
+	a) os
+	b) path
+	c) http
+	d) fs   etc..
+
+Syntax:
+	var os = require("os");		// os is a module 
+	os.cpus();
+	os.platform();
+	os.freemem()
+	
+		     Creating a new Web Application
+
+- Node can create server and host any application by using "http" object. 
+
+1. To create a server you have to use the method "createServer()"
+
+2. It uses a callback with "request & reponse" objects.
+
+Syntax:
+	var http = require("http");
+
+	http.createServer( (request, response) =>{ 
+
+	})
+
+     - Request object is used to request data from client, which can be query string,
+       form body etc.
+     - Response object is used to send response to client, which can be html, text,
+        json, xml, file etc.
+
+3. Server requires an application reference to start and respond.
+
+ Syntax:
+	var  app  = http.createServer();
+
+4. Application starts on specific port number using "listen()" method
+
+	app.listen(portNumber);
+
+5. Response object can send any type of content as response by using "write()"
+
+6. The content type is defined by using "writeHead()" 
+
+Syntax:
+	response.writeHead(statusCode, { 'content-type': 'MIME type' });
+	response.write(chunk);
+
+Ex:
+index.js
+
+var http = require("http");
+
+var app = http.createServer((request, response)=>{
+    response.writeHead(200, { 'content-type':'text/html' });
+    response.write("<h2>Welcome to Node Server Side Web Application</h2>");
+    response.end();
+});
+app.listen(5000);
+console.log(`Server Started : http://127.0.0.1:5000`);
+
+> node index.js
+
+- request from any browser
+	
+	http://127.0.0.1:5000  (or)    http://localhost:5000
+
+Ex: JSON type
+
+
+var http = require("http");
+
+var app = http.createServer((request, response)=>{
+    response.writeHead(200, { 'content-type':'application/json' });
+    response.write(JSON.stringify([{Name:'TV', Price:56000}, {Name:'Mobile', Price:12000.33}]));
+    response.end();
+});
+app.listen(5000);
+console.log(`Server Started : http://127.0.0.1:5000`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+		===============================================================
+						Inner OR Nested List
+		===============================================================
+=>The Process of Defining One List inside of another list is called Inner OR Nested List.
+
+=>Syntax:  listobj=[Val1,Val2.....[val11,val12,....Val1n], [Val21,Val22,....Val2n],......Val-n]
+	Here Val1,Val2.....Val-n are called Outer List Elements
+	Here val11,val12...val1n are called One inner  Elements
+	Here val21,val22...val2n are called another inner  Elements
+=>On Inner List, we can perform Both Indexing and Slicing Operations
+=>On Inner List, we can apply all types of Pre-defined functions of list
+==============================================================================================
+Examples
+==============================================================================================>>> lst=[10,"RS",[15,17,19] ,[79,66,80],"OUCET"]
+>>> print(lst)------[10, 'RS', [15, 17, 19], [79, 66, 80], 'OUCET']
+>>> for val in lst:
+...		print(val,type(val),type(lst))
+...
+			10 <class 'int'> <class 'list'>
+			RS <class 'str'> <class 'list'>
+			[15, 17, 19] <class 'list'> <class 'list'>
+			[79, 66, 80] <class 'list'> <class 'list'>
+			OUCET <class 'str'> <class 'list'>
+------------------------------------------------------------------------------
+>>> lst=[10,"RS",[15,17,19] ,[79,66,80],"OUCET"]
+>>> print(lst,type(lst))----------[10, 'RS', [15, 17, 19], [79, 66, 80], 'OUCET'] <class 'list'>
+>>> print(lst[2],type(lst[2]))--------[15, 17, 19] <class 'list'>
+>>> print(lst[-2],type(lst[-2]))---------[79, 66, 80] <class 'list'>
+>>> lst[0:3]----------------------------[10, 'RS', [15, 17, 19]]
+>>> lst[2:4]-----------------------------[[15, 17, 19], [79, 66, 80]]
+>>> lst[2][::2]--------------------------[15, 19]
+>>> lst[-2][-2]-------------------------66
+>>> lst[-2][-2]=68
+>>> print(lst,type(lst))----------------[10, 'RS', [15, 17, 19], [79, 68, 80], 'OUCET'] <class 'list'>
+>>> lst[-2][::2]=[75,76]
+>>> print(lst,type(lst))--------------[10, 'RS', [15, 17, 19], [75, 68, 76], 'OUCET'] <class 'list'>
+>>> lst[-3].append(14)
+>>> print(lst,type(lst))------------[10, 'RS', [15, 17, 19, 14], [75, 68, 76], 'OUCET'] <class 'list'>
+>>> lst[-2].insert(-2,65)
+>>> print(lst,type(lst))------------[10, 'RS', [15, 17, 19, 14], [75, 65, 68, 76], 'OUCET'] <class 'list'>
+>>> lst[2].sort()
+>>> print(lst,type(lst))------------[10, 'RS', [14, 15, 17, 19], [75, 65, 68, 76], 'OUCET'] <class 'list'>
+>>> lst[-2].sort(reverse=True)
+>>> print(lst,type(lst))------------[10, 'RS', [14, 15, 17, 19], [76, 75, 68, 65], 'OUCET'] <class 'list'>
+>>> del lst[2][1::2]
+>>> print(lst,type(lst))------------[10, 'RS', [14, 17], [76, 75, 68, 65], 'OUCET'] <class 'list'>
+>>> lst[3].clear()
+>>> print(lst,type(lst))----------[10, 'RS', [14, 17], [], 'OUCET'] <class 'list'>
+>>> lst[-2].append(67)
+>>> print(lst,type(lst))-----------------------[10, 'RS', [14, 17], [67], 'OUCET'] <class 'list'>
+>>> del lst[2]
+>>> print(lst,type(lst))----------------------[10, 'RS', [67], 'OUCET'] <class 'list'>
+>>> lst.insert(2,[16,14,18])
+>>> print(lst,type(lst))----------------------[10, 'RS', [16, 14, 18], [67], 'OUCET'] <class 'list'>
+>>> lst[3].append(80)
+>>> lst[3].append(77)
+>>> print(lst,type(lst))----------------------[10, 'RS', [16, 14, 18], [67, 80, 77], 'OUCET'] <class 'list'>
+>>> del lst[2:4]
+>>> print(lst,type(lst))---------------------[10, 'RS', 'OUCET'] <class 'list'>
+==============================================================================================
+>>> matrix1=[[10,20,30],[40,50,60],[70,80,90]]
+>>> for row in matrix1:
+...		print(row)
+...
+		[10, 20, 30]
+		[40, 50, 60]
+		[70, 80, 90]
+>>> matrix2=[[1,2,3],[4,5,6],[7,8,9]]
+>>> for row in matrix2:
+...     print(row)
+...
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+>>> mat3=matrix1+matrix2
+>>> for row in mat3:
+...     print(row)
+...
+[10, 20, 30]
+[40, 50, 60]
+[70, 80, 90]
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+======================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+

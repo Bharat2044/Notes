@@ -1,0 +1,32 @@
+h1{
+    text-align: center;
+}
+.disc{
+    position: absolute;
+    width: max-content;
+    color: green;
+    font-size: 28px;
+    animation:slide 15s ease infinite
+}
+@keyframes slide {
+  0%{
+    left:100%;
+  } 
+  100%{
+    left:-50%
+  }   
+}
+.products{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+.product{
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 2px 3px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

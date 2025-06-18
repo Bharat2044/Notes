@@ -1,0 +1,157 @@
+Database Types
+Database Models
+
+1. Conceptual
+2. Physical Model
+3. Logical Model
+4. Entity Model
+
+Database Model		Purpose
+-----------------------------------------------------------------------------------------------------------------------------------
+Conceptual		To define the modules that require data. It comprises of 
+			the module names.
+
+Physical 			To define the filelds for every module and the type of data they
+			have to handle.
+
+Logical			To define and configure the relation between modules. 
+			
+Entity			To define the complete business model with module name,
+			field names, data types, their relationship etc.
+
+Selecting a technology for Project:
+- The selection of technology depends on the client requirements and the technology abilities, which is measured using a table.
+
+	AS-IS			TO-BE			GAP
+	-------------------------------------------------------------------------------------------------------------------
+	What your technologies	What are the		What is not supported
+	are capable of?		client requirements?		by specific tehnologoy
+							for satisfying the client
+							requirements?
+
+Selecting a database for Project:
+- The selection of database for any project depends of different critera, which includes the purpose, budget, type of data to handle, security etc.
+- Choosing between 
+	a) NoSQL Database
+	b) SQL Database
+
+- SQL based database is good for projects 
+	a) that need structured data
+	b) that have complex relational data 
+	c) that require data consistency 
+	d) that require complex operations 
+	e) that require good analytics and BI. [Business Intelligence]
+
+	Ex: MySQL, SQL Server, Oracle
+
+- NoSQL database is a good for projects
+	a) that have to deal with semi-structured or structure-less data.
+	b) that have mostly JSON type data
+	c) that have to manages complex load but with limited functionalities
+	d) that require less analytics and BI
+
+	Ex: Mongodb, Cassandra 
+
+			     MongoDB Database
+- It is a NoSQL database.
+- It is document / JSON based database.
+- It is cloud database.
+- It is object-oriented database.
+- It is and entity based database. [OLTP]
+- It is semi-structured or structure less. 
+
+Setup MongoDB:
+1. Download and Install MongoDB community server on your device.
+
+	https://www.mongodb.com/try/download/community
+
+2. While installing make sure that you selected  "MongoDB Compass"
+
+	- It provides both CLI and GUI interface 
+
+3. Start MongoDB server on your PC
+
+	programs => services => MongoDB Server => Start
+
+4. MongoDB Server runs on 
+
+	mongodb://127.0.0.1:27017
+		(or)
+	mongodb://localhost:27017
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

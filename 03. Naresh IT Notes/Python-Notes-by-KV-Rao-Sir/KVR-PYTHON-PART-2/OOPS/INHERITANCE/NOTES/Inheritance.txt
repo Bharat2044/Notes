@@ -1,0 +1,23 @@
+		=================================================
+						 Inheritance 
+		=================================================
+=>Inhenritance is one of distinct features of OOPs
+=>The purpose of Inheritance is that " To build Re-usable Applications with Effective Memmory Management in Python Object Oriented  Programming".
+-----------------------------------------
+=>Definition of Inheritance:
+-----------------------------------------
+=>The Process obtaining Data members , Methods and Constructors (Features ) of one class   into  another class is called Inheritance.
+=>The class which is giving Data members , Methods and Constructors (Features ) is called  Super or  Base or Parent Class.
+=>The Class which is taking Data members , Methods and Constructors (Features ) is called  Sub or  Derived or Child Class.
+=>The Inheritance concept always follows Logical OR Virtual  Memory Management. This Memory Management says that " Neither we write Source Code nor Takes Physical Memory Space ".
+-------------------------------------------------------------------------------------------------------------------------------------
+Advatnages of Inheritance:
+----------------------------------------------------------------------------------
+=>When we develop any inheritance based application, we get the following advantages.
+		1. Application Development Time is Less
+		2. Application Memory Space is Less
+		3. Application Execution time is Fast / Less 
+		4. Application Performance is enhanced (Improved )
+		5. Redundency (Duplication ) of the code is minimized.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+

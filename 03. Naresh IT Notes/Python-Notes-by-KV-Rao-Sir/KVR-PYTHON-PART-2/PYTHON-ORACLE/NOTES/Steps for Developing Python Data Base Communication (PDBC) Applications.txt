@@ -1,0 +1,22 @@
+		========================================================================
+			Steps for Developing Python Data Base Communication (PDBC) Applications
+		========================================================================
+=>To Develop Python Data Base Communication (PDBC) Applications, we need the following Pre-Requisites.
+			
+		1. Install Python Software
+		2. Install Data Base Software ( Example:  Oracle, MySQL, SQL Server, MongoDB, DB2, Postgrey SQL..etc)
+		3. Install Corresponding Data Base Module for Python Programmers 
+			(  upto Python3.10 Version, Install cx_Oracle module
+			   from Python 3.11 and Higher, Install oracledb module
+			   For MySQL, Install mysql-connector and mysql-connetor-python..etc )
+=>After Installing the above Software, we develop the Application, which Establish the Communication Python 
+   Software and Database Software. To doing this we need to learn the following the Steps.
+****************************************************************************************************************************************
+Step-1: import Appropriate Data Base Module and Other Modules if required.
+Step-2: Every Python Program Must Obtain the Connection
+Step-3: Every Python Program Must  Create an object of Cursor
+Step-4: Every Python Must Design the Query ,Place the Query in Cursor object and send for Execute in Database.
+Step-5: Every Python Program Must Process the Result of the Query
+Step-6: Every Python Program is Recommned to Close the Connection from Database Software.
+****************************************************************************************************************************************
+

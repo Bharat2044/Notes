@@ -1,0 +1,22 @@
+		============================================
+			3) Keyword Parameters (or) arguments
+		============================================
+=>In some of the circumstances, we know the function name and formal parameter names and we don't know the order of formal Parameter names and to pass the data / values accurately we must use the concept of Keyword Parameters (or) arguments.
+=>The implementation of Keyword Parameters (or) arguments says that all the formal parameter names used as arguments in Function call(s) as keys.
+
+Syntax for function definition:-
+-------------------------------------------------
+def    functionname(param1,param2...param-n):
+         ---------------------------------------------
+	 ---------------------------------------------
+
+Syntax for function call:-
+-------------------------------------------------
+	functionname(param-n=val-n,param1=val1,param-n-1=val-n-1,.........)
+
+Here param-n=val-n,param1=val1,param-n-1=val-n-1,...... are called Keywords arguments
+=>When we specify Keyword arguments before Possitional Arguments in Function Calls(s) then we get 
+SyntaxError: positional argument follows keyword argument bcoz PVM gives First Priority for positional arguments.
+========================================X======================================================
+
+

@@ -1,0 +1,21 @@
+			=================================================
+					Reading the Data from File
+			=================================================
+=>To Read the Data from the File, we have 2 Pre-Defined Functions present in the Object of FilePointer of Type TextIOWrapper. They are
+
+			1. read()
+			2. readlines()
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1. read()
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:    varname=FilePointerObj.read()
+=>This Function is used for Reading the Entire Data from File where File Pointer is Pointing  and Type of varname is 
+   <class, 'str'>
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+2. readlines()
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:    varname=FilePointerObj.readlines()
+=>This Function is used for Reading the Entire Data from File where File Pointer is Pointing  and Type of varname is 
+   <class, 'list'>
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTE: read() and readlines() makes us to understand, The data is read from file in the form of Value by Value 

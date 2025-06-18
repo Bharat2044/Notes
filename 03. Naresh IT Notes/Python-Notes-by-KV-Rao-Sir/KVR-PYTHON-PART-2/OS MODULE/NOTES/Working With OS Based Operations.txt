@@ -1,0 +1,162 @@
+		===========================================
+				Working With OS Based Operations
+		===========================================
+=>In Python, "os" is one pre-defined module.
+=>The purpose of os module is that "To perform some os related oprations"  
+=>The Os based operations are		
+		1) Creating Folder / Directory. (mkdir() )
+		2) Creating Folders Hierarchy. (makedirs() )
+		3) Removing Folder / Directory. (rmdir() )
+		4) Removing Folders Hierarchy. (removedirs() )
+		5) Removing File Name from Folder( remove() )
+		6) Renaming a Folder/File Name. (rename())
+		7) List the file names in folder ( listdir() )
+
+--------------------------------------------------------------------------------------------
+1) Creating Folder / Directory
+--------------------------------------------------------------------------------------------
+=>For Creating a Folder / Directory, we use  mkdir().
+=>Syntax:   os.mkdir("Folder Name")
+=>if the folder name already exist then we get FileExistsError
+=>mkdir() can create only one folder at a time and if we try to create folderS hierarchy then 
+    we get FileNotFoundError.
+=>in mkdir(), if we specify any folder name with escape sequence ( \n \u \digits,\t..etc) then 
+   we get OSError.
+
+Examples:
+----------------
+#Program for Creating Folder / Directory
+#mkdirex.py
+import os
+try:
+	os.mkdir("D:\suraj\python\7am")
+	print("Folder Created Successfully-verify")
+except FileNotFoundError:
+	print("mkdir() can create only one folder at a time")
+except FileExistsError:
+	print("The specified folder already exist")
+except OSError:
+	print("Check ur path of folder names")
+------------------------------------------------------------------------------------------------------------
+2) Creating Folders Hierarchy.
+-----------------------------------------------------------------------------------------------------------
+=>For Creating Folders Hierarchy, we use makedirs().
+=>Syntax:    os.makedirs("Folders Hierarchy")
+=>Here Folders Hierarchy represent Root Folder\sub folder\sub-sub folder so on... 
+=>if the folder name already exist then we get FileExistsError
+=> if we specify any folder name with escape sequence ( \n \u \digits,\t..etc) then 
+   we get OSError.
+
+Examples:
+---------------
+#Program for Creating Folders  Hierarchy
+#makedirsex.py
+import os
+try:
+	os.makedirs("D:\\India\\Hyd\\ampt\\python\\python")
+	print("Folder Created Successfully-verify")
+except FileExistsError:
+	print("The specified folder already exist")
+except OSError:
+	print("Check ur path of folder names")
+----------------------------------------------------------------------------------------------------------
+3) Removing Folder / Directory.
+----------------------------------------------------------------------------------------------------------
+=>For Removing Folder / Directory, we use rmdir()
+=>syntax: os.rmdir("folder name")
+=>rmdir() can remove folder name provided folder name is empty.
+=>if we specify any folder name with escape sequence ( \n \u \digits,\t..etc) then 
+   we get OSError.
+-------------------------------------------------------------------------------
+#Program for Removing Folder / Directory
+#rmdirex.py
+import os
+try:
+	os.rmdir("D:\KVR")
+	print("Folder removed Successfully-verify")
+except FileNotFoundError:
+	print("folder name does not exist")
+except OSError:
+	print("rmdir() can remove those foilder which are empty--check ur path")
+----------------------------------------------------------------------------------------------------------
+4) Removing Folders Hierarchy. (removedirs() )
+----------------------------------------------------------------------------------------------------------
+=>For Removing Removing Folders Hierarchy, we use removedirs()
+=>Syntax:    os.removedirs("Folders Hierarchy") 
+=>Here Folders Hierarchy represent Root Folder\sub folder\sub-sub folder so on... 
+=>if the folder name not  exist then we get FileNotFoundError
+=> if we specify any folder name with escape sequence ( \n \u \digits,\t..etc) then 
+   we get OSError.
+--------------------------
+Examples
+-------------------------
+#Program for Removing Folders  Hierarchy
+#removedirsex.py
+import os
+try:
+	os.removedirs("D:\\India\\Hyd\\ampt\\python\\python")
+	print("Folders Hierarchy Removed Successfully-verify")
+except FileNotFoundError:
+	print("The specified folders hierachy does exist")
+except OSError:
+	print("remove those folder which are empty-Check ur path of folder names")
+---------------------------------------------------------------------------------------------------
+5) Removing File Name from Folder.
+---------------------------------------------------------------------------------------------------
+=>To remove the file name from folder, we use remove()
+=>Syntax:  os.remove("Absolute Path of File Name")
+=>If the file name does not exist then we get FileNotFoundError
+-----------------
+Examples
+-----------------
+#Program for removing the file name from folder
+#RemoveFileEx.py
+import os
+try:
+	os.remove("E:\KVR-PYTHON-7AM\MODULES\SE3.py")
+	print("File Name removed Sucessfully")
+except FileNotFoundError:
+	print("File does not exist")
+
+---------------------------------------------------------------------------------------------------
+6) Renaming a Folder/File Name.
+---------------------------------------------------------------------------------------------------
+=>To rename a folder, we rename()
+=>Syntax:  os.rename("Old Folder Name","New Folde Name")
+=>Syntax:  os.rename("Old Folder Name","New Folde Name")
+=>If the Old Folder Name does not exist then we get FileNotFoundError.
+----------------
+Examples
+------------------
+#Program for renaming  a folder anme
+#RenameFolderEx.py
+import os
+try:
+	os.rename("D:\KVR","D:\PYTHON")
+	print("Folder Name renamed")
+except FileNotFoundError:
+	print("File does not exist")
+---------------------------------------------------------------------------------------------------
+7) List the file names in folder.
+---------------------------------------------------------------------------------------------------
+=>To list the file names in folder, we use listdir()
+=>Syntax:   os.listdir("Absolute Path of Folder Name")
+=>If the Folder Name does not exist then we get FileNotFoundError.
+------------------
+Examples:
+------------------
+#Program for Listing files ijn folder
+#ListFileFolderEx.py
+import os
+try:
+	FolderName=input("Enter Folder name to list files:")
+	fileslist=os.listdir(FolderName)
+	print("-"*50)
+	print("List of Files:")
+	print("-"*50)
+	for filename in fileslist:
+		print("\t{}".format(filename))
+	print("-"*50)
+except FileNotFoundError:
+	print("Folder does not exist")
+---------------------------------------------------------------------------------------------------

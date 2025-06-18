@@ -1,0 +1,66 @@
+			===========================================================
+						File Opening Modes
+			===========================================================
+=>File Opening Modes makes us understand In which mode we are Opening the Files.
+=>In Python Programming, we have 8 File Opening Modes. They are
+				1. r
+				2. w
+				3. a
+				4. r+
+				5. w+
+				6. a+
+				7. x
+				8.x+
+***********************************************************************************************************************************************
+1. r
+***********************************************************************************************************************************************
+=>This Mode is used for Opening the File in Read Mode and Performs Read Operations Only.
+=>If we open the file in "r" Mode and if that File Does Not Exist then we get FileNotFoundError.
+=>If we don't specify any File Opening Mode then PVM Takes "r"  mode as default file mode.
+***********************************************************************************************************************************************
+2. w
+***********************************************************************************************************************************************
+=>This Mode is used for Creating the File and Opening the File in Write Mode and Performs Write Operations only. 
+=>If we Open NEW FILE in "w" Mode then New File Created and Opened Write Mode and Performs Write Operations
+=>If we Open EXISTING FILE in "w" Mode then Existing Data of File OVERLAPPED With New Data
+***********************************************************************************************************************************************
+3. a
+***********************************************************************************************************************************************
+=>This Mode is used for Creating the File and Opening the File in Write Mode and Performs Write Operations only. 
+=>If we Open NEW FILE in "a" Mode then New File Created and Opened Write Mode and Performs Write Operations
+=>If we Open EXISTING FILE in "a" Mode then Existing Data of the File APPENDED With New Data.
+***********************************************************************************************************************************************
+4. r+
+***********************************************************************************************************************************************
+=>This Mode is used for Opening the File in Read Mode and Performs Read Operations First and Later we can also 
+    Perform Write Operation.
+=>If we open the file in "r+" Mode and if that File Does Not Exist then we get FileNotFoundError.
+***********************************************************************************************************************************************
+5. w+
+***********************************************************************************************************************************************
+=>This Mode is used for Creating the File and Opening the File in Write Mode and Performs Write Operations First and 
+    later we can also Perform Read Operation. 
+=>If we Open NEW FILE in "w+" Mode then New File Created and Opened Write Mode and Performs Write Operations 
+   and later we can also perform Read Operation.
+=>If we Open EXISTING FILE in "w+" Mode then Existing Data of File OVERLAPPED With New Data
+***********************************************************************************************************************************************
+6. a+
+***********************************************************************************************************************************************
+=>This Mode is used for Creating the File and Opening the File in Write Mode and Performs Write Operations  and 
+    Later we can also Perform Read Operation. 
+=>If we Open NEW FILE in "a+" Mode then New File Created and Opened Write Mode and Performs Write Operations    
+    and  Later we can also Perform Read Operation. 
+=>If we Open EXISTING FILE in "a+" Mode then Existing Data of the File APPENDED With New Data.
+***********************************************************************************************************************************************
+7. x
+***********************************************************************************************************************************************
+=>This Mode is used for Creating the File and Opening the File in Write Mode  EXCLUSIVELY and Performs Write 
+    Operations only. 
+=>If we open EXISTING FILE in "x" mode then we get FileExistError
+***********************************************************************************************************************************************
+8. x+
+***********************************************************************************************************************************************
+=>This Mode is used for Creating the File and Opening the File in Write Mode  EXCLUSIVELY and Performs Write 
+    Operations  and later we can also Perform Read Operation. 
+=>If we open EXISTING FILE in "x+" mode then we get FileExistError
+***********************************************************************************************************************************************

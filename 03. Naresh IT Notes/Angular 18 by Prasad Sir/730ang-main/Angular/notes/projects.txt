@@ -1,0 +1,7 @@
+----- Basic Angular Profile -------------
+1. goto terminal,goto specific folder
+"ng new profile --standalone=false"
+2. after everything created goto profile-->src--->app-->app.component.html-->ctrl+A and delete
+3. in terminal goto profile , type "ng serve -o"
+4. change app.component.html and app.component.css to achieve your result
+5. write in terminal ng build , then one folder named dist will be created and inside that browser folder will be there. push it to netlify.

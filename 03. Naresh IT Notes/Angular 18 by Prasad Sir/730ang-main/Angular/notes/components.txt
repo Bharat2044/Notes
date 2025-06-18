@@ -1,0 +1,11 @@
+Components are logical division of UI / building blocks of UI
+Main USe of Components is Reuasability
+Component will have 4 files
+.component.html --> view/ template
+.component.css ---> styling
+.component.spec.ts --> speification file used for testing
+.component.ts --> component / model
+
+every compoent will have a name called selector. in case if u use selector of one component inside another component, they became nested Components
+
+To create component , type in cmd: "ng generate component component-name" or " ng g c component-name"

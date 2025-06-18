@@ -1,0 +1,21 @@
+		=========================================
+			Introduction to Thread Based Applications
+		=========================================
+=>The purpose of multi threading is that "To provide Concurrent / Simultaneous execution / Paralllel Execution".
+=>Concurrent  Execution is nothing but executing the operations all at once.
+=>The advantage of Concurrent  execution is that to get less execution time.
+=>If a Python Program contains multiple threads then it is called Multi Threading program.
+--------------------------
+=>Def. of thread:
+--------------------------
+=>A Flow of Control is called thread.
+=>The purpose of thread is that "To Perform certain operation whose logic  developed in Functions / Methods  concurently."
+-----------------------------------------------------------------------------------------------------
+=>By default Every Python contains Single Thread and whose name is "MainThread" and It provides Sequential Execution.
+=>Programtically, In a Python Program we can create multiple sub  / Child  threads  and whose purpose is that "To execute operations whose logic is written in Functions / Methods Concurrently ".
+=>Hence Programatically a Python Program contains two types of Threads. They are
+		a) MainThread
+		b) Sub / Child Threads
+=>MainThread is created / Initiated  by PVM ,when program exeuction starts and the role  of mainThread is to execute main program statements and Monitor the exeuction status of Sub threads(if sub threads present).
+=>The Sub / Child Threads always executes operations whose logic is written in Functions / Methods Concurrently ".
+=============================================X================================================

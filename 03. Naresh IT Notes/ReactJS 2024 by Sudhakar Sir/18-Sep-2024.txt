@@ -1,0 +1,146 @@
+		              MERN Stack Application
+
+M	- MongoDB [Database]
+E	- Express JS [Middleware]
+R	- React [Front End]
+N	- Node JS [Server Side]
+
+			Video Library Project
+
+Modules:
+	1. Admin Module
+	2. User Module
+
+Admin Module
+- Admin can login with existing credentials provided in database.
+- Admin can handle following interactions
+	a) Add New Video into Library
+	b) Edit Video
+	c) Update Video Details
+	d) Delete Video
+	e) Add Categories for videos
+
+
+User Module
+- User can register
+- User can login
+- User can browse videos [search]
+- Save videos for watching later
+- User can like, dislike video
+- User can comment on video
+
+Technologies for Video Library Project:
+- Server Side Application		: Node JS
+- Database			: MongoDB
+- API & Middleware 			: Express JS
+- UI				: React with JS
+- Components Library		: Bootstrap, MUI
+- State Management			: Redux
+
+
+			    MongoDB
+- MongoDB is an open source, cross platform database.
+- It is non-SQL database [no-sql]
+- It supports ORM [Object Relational Mapping].
+- It is schema less [structure less]
+- It is document based.
+- It supports Ad-hoc queries.
+- It supports indexing. 
+- Data replications to mantain load. 
+
+Setup MongoDB on your PC
+- Download and Install MongoDB Community Server
+
+    https://www.mongodb.com/try/download/community
+
+- Select "MongoDB Compass" while install
+
+- MongoDB compass is a GUI tool  
+
+- Start MongoDB Server on your PC 
+
+        Run => Services.msc  
+        Programs => Services.msc => Right click on "MongoDB Server" => Start
+
+- Open MongoDB compass and connect to server using the following connection string.
+
+        mongodb://127.0.0.1:27017
+
+
+Terminology:
+
+	Oracle, MySQL..		MongoDB
+	------------------------------------------------------------------------
+	Database			Database
+	
+	Tables			Collections  [ ]
+
+	Record [Row]		Document  { }
+
+	Field			Field / Key
+
+	Joins			Embedded Documents
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

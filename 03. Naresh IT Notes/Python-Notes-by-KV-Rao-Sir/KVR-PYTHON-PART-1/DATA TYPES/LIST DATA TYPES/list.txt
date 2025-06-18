@@ -1,0 +1,132 @@
+			==============================================================
+							1. list
+			==============================================================
+Index
+-----------
+=>Purpose of list
+=>Notation for storing Elements in list
+=>Operations on list
+		a) Indexing
+		b) slicing
+=>Types of Lists
+=>Pre-Defined Functions in list
+=>Inner OR Nested List
+=>Programming Examples
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Properties if list
+-----------------------------------------------------
+=>'list' is one of the pre-defined class and treated as list Category  data type
+=>The purpose of list data type is that "To store Multiple Values either of same type or Different type or Both the 
+    Types  with Unique or Duplicates"
+=>To Store the Elements in list, we use Square Brackets [ ] and the Values Must be separated by comma.
+		Syntax:   varname=[Val1,Val2,.......,Valn-n]
+				here varname is an object of list
+=>An of Object of lis maintains Insertion Order
+=>On the object list, we can perform Both Indexing and Slicing Operations.
+=>An object of list belongs to MUTABLE bcoz We can Update (Item Assignment) the  value(s) either by using Indexing and 
+    slicing.
+=>We can create Two Types of List objects. They are
+			a) Empty List
+			b) Non-Empty List
+----------------------
+a)Empty List
+----------------------
+=>An empty list is one, which does not contain any Elements and whose length is 0
+=>Syntax:    listobj=[ ]
+			(OR)
+		    listobj=list()
+----------------------------------
+b)Non-Empty List
+----------------------------------
+=>A Non-empty list is one, which  contains Elements and whose length is >0
+=>Syntax:    listobj=[Value1,Value2,.......,Value-n ]
+			(OR)
+		    listobj=list(Object)
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+=>To convert any type of object into list type, we use list()
+	Syntax:   listobj=list(object)
+====================================================================================================
+Examples
+====================================================================================================
+>>> lst1=[10,"Rossum",45.67,True,2+3j]
+>>> print(lst1,type(lst1))
+[10, 'Rossum', 45.67, True, (2+3j)] <class 'list'>
+>>> lst2=[10,20,30,10,20,50,60,70]
+>>> print(lst2,type(lst2))
+[10, 20, 30, 10, 20, 50, 60, 70] <class 'list'>
+------------------------------------------------
+>>> lst1=[10,20,30,40,20,40]
+>>> print(lst1,type(lst1))
+[10, 20, 30, 40, 20, 40] <class 'list'>
+>>> lst1[0]
+10
+>>> lst1[-1]
+40
+>>> lst1[2]
+30
+>>> lst1[1:4]
+[20, 30, 40]
+------------------------------------------------
+>>> lst1=[10,"Rossum",45.67,True,2+3j]
+>>> print(lst1,type(lst1),id(lst1))
+[10, 'Rossum', 45.67, True, (2+3j)] <class 'list'> 2454482834048
+>>> lst1[1]
+'Rossum'
+>>> lst1[1]="GUIDO"  # Updating the Value of list with Indexing
+>>> print(lst1,type(lst1),id(lst1))
+[10, 'GUIDO', 45.67, True, (2+3j)] <class 'list'> 2454482834048
+>>> lst1[2:4]
+[45.67, True]
+>>> lst1[2:4]=[66.66,False] # Updating the Values of list with Slicing
+>>> print(lst1,type(lst1),id(lst1))
+[10, 'GUIDO', 66.66, False, (2+3j)] <class 'list'> 2454482834048
+------------------------------------------------------------
+>>> lst1=[]
+>>> print(lst1,type(lst1))
+[] <class 'list'>
+>>> len(lst1)
+0
+		OR
+
+>>> lst2=list()
+>>> print(lst2,type(lst2))
+[] <class 'list'>
+>>> len(lst2)
+0
+--------------------------------------------
+>>> s="MISSISSIPPI"
+>>> print(s,type(s))--------------MISSISSIPPI <class 'str'>
+>>> lst1=list(s)
+>>> print(lst1,type(lst1))----------['M', 'I', 'S', 'S', 'I', 'S', 'S', 'I', 'P', 'P', 'I'] <class 'list'>
+>>> s="ABRAKADABRA"
+>>> print(s,type(s))------------ABRAKADABRA <class 'str'>
+>>> lst1=list(s)
+>>> print(lst1,type(lst1))-----['A', 'B', 'R', 'A', 'K', 'A', 'D', 'A', 'B', 'R', 'A'] <class 'list'>
+>>> lst1=[10,20,30,40,50,60]
+>>> print(lst1,type(lst1))
+[10, 20, 30, 40, 50, 60] <class 'list'>
+>>> b=bytes(lst1)
+>>> print(b,type(b))
+b'\n\x14\x1e(2<' <class 'bytes'>
+>>> lst2=list(b)
+>>> print(lst2,type(lst2))
+[10, 20, 30, 40, 50, 60] <class 'list'>
+---------------------------
+>>> lst1=[10,"Rossum",45.67,True,2+3j]
+>>> print(lst1)
+[10, 'Rossum', 45.67, True, (2+3j)]
+>>> len(lst1)
+5
+-----------------------------
+>>> s="NISSAN"
+>>> print(s,type(s))
+NISSAN <class 'str'>
+>>> lst=list(s)
+>>> print(lst,type(lst))
+['N', 'I', 'S', 'S', 'A', 'N'] <class 'list'>
+>>> len(lst)
+6
+====================================================================================================

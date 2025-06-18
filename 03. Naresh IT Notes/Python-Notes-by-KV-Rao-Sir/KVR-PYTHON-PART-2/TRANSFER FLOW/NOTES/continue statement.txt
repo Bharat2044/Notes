@@ -1,0 +1,35 @@
+						-------------------------------------
+						2. continue statement
+						-------------------------------------
+=>continue is a keyword
+=>continue statement is used for making the PVM to go to the top of the loop without executing the following statements which are written after continue statement for that current Iteration only.
+=>continue statement  to be used always inside of loops.
+=>when we use continue statement inside of loop then else part of corresponding loop also executes provided loop condition becomes false.
+-----------------
+=>Syntax:-
+----------------
+			for varname   in Iterable-object:
+			     ------------------------------------------
+			     if ( Test Cond):
+			          continue 
+			     statement-1  # written after continue statement
+			     statement-2
+			     statement-n
+			-----------------------------------------
+			-----------------------------------------
+
+
+=>Syntax:-
+----------------
+			while (Test Cond):
+			     ------------------------------------------
+			     if ( Test Cond):
+			          continue 
+			     statement-1  # written after continue stateemnt
+			     statement-2
+			     statement-n
+			-----------------------------------------
+			-----------------------------------------
+
+
+===========================X==================================

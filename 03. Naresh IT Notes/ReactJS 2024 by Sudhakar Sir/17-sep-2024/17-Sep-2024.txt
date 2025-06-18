@@ -1,0 +1,78 @@
+Route Parameters
+Nested Routes
+
+		               Authenticating Routes
+- Authorization is the process of preventing access to resources in application.
+- Authentication is the process of verifying user credentials like userid, password, security token etc.
+- Web applications can authenticate the routes by using various state management techniques.
+- Cookies are the key components used for authentication in web applications. 
+- JavaScript cookies are managed by using "document" object.
+
+Syntax:
+	document.cookies = "name=someName; cookieValue=val";
+
+- React uses various 3rd party cookie libraries.
+
+Cookies in React App:
+
+1. Install 3rd party cookie library
+
+	> npm  install  react-cookie --save
+
+2. Cookie is a service, it requires a provider to configure at application level.
+
+     - Go to "index.js"
+     - Import  "CookieProvider"
+     - Configure for application
+
+	<CookieProvider>
+	       <App />
+	</CookieProvider>
+
+3. To configure and use cookie the react-cookie library provides a hook 
+	"useCookies()"
+
+Syntax:
+          const  [cookies, setCookie, removeCookie] = useCookies(['cookieName']);
+
+
+          cookies	: It is used to access a cookie from memory
+          setCookie	: It is used to create and configure a cookie.
+          removeCookie: It removes specified cookie from memory.
+
+Note:
+ - Cookie can be "in-memory", which is temporary cookie. [saved in browser memory]
+ - Cookie can be "persistent", which is permanent. [saved in client HDD]
+
+FAQ: How to handle dynamic navigation in React routing?
+Ans:  By using "useNavigate()" hook.
+
+Syntax:
+	let navigate = useNavigate();
+
+	navigate("/path");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+			=============================================================
+					Types of Copy Techniques in Python
+			=============================================================
+=>In Python Programming, we have Two Types of Copy Techniques. They are
+
+			1. Shallow Copy
+			2. Deep Copy
+-------------------------------------------------------------------
+1.Shallow Copy
+-------------------------------------------------------------------
+=>The Properties of Shallow Copy are
+		1. The Initial Content of Both the list objects are Same
+		2. Both the List Objects Contains Different Memory Address (References)
+		3. Modifications are Indepedent (Whatever the changes we do on one object, they are not reflecting to another object)
+=>To Implement Shallow Copy, we use copy()
+=>Syntax:    listobj2=listobj1.copy()
+------------------------
+Examples
+------------------------
+>>> l1=[10,"RS",34.56]
+>>> print(l1,type(l1),id(l1))-----------[10, 'RS', 34.56] <class 'list'> 2350177407872
+>>> l2=l1.copy()  # Shallow Copy
+>>> print(l2,type(l2),id(l2))-----------[10, 'RS', 34.56] <class 'list'> 2350177374144
+>>> l1.append("PYTHON")
+>>> l2.insert(1,"NL")
+>>> print(l1,type(l1),id(l1))----------[10, 'RS', 34.56, 'PYTHON'] <class 'list'> 2350177407872
+>>> print(l2,type(l2),id(l2))----------[10, 'NL', 'RS', 34.56] <class 'list'> 2350177374144
+-------------------------------------------------------------------
+2.Deep Copy
+-------------------------------------------------------------------
+=>The Properties of Deep Copy are
+		1. The Initial Content of Both the list objects are Same
+		2. Both the List Objects Contains Same Memory Address (References)
+		3. Modifications are Depedent (Whatever the changes we do on one object, they are  reflecting to another object)
+=>To Implement Deep Copy, we use Assigment Operator ( = )
+=>Syntax:    listobj2=listobj1
+----------------------------------
+Examples
+----------------------------------
+>>> l1=[10,"RS",34.56]
+>>> print(l1,type(l1),id(l1))-----------[10, 'RS', 34.56] <class 'list'> 2350177373760
+>>> l2=l1 # Deep Copy
+>>> print(l2,type(l2),id(l2))----------[10, 'RS', 34.56] <class 'list'> 2350177373760
+>>> l1.append("PYTHON")
+>>> print(l1,type(l1),id(l1))--------[10, 'RS', 34.56, 'PYTHON'] <class 'list'> 2350177373760
+>>> print(l2,type(l2),id(l2))-------[10, 'RS', 34.56, 'PYTHON'] <class 'list'> 2350177373760
+>>> l2.insert(2,"NL")
+>>> print(l1,type(l1),id(l1))--------[10, 'RS', 'NL', 34.56, 'PYTHON'] <class 'list'> 2350177373760
+>>> print(l2,type(l2),id(l2))--------[10, 'RS', 'NL', 34.56, 'PYTHON'] <class 'list'> 2350177373760
+>>> l1.clear()
+>>> print(l1,type(l1),id(l1))--------[] <class 'list'> 2350177373760
+>>> print(l2,type(l2),id(l2))---------[] <class 'list'> 2350177373760
+====================================================================================

@@ -1,0 +1,366 @@
+			Polymorphism
+- Poly means "Many".
+- Morphos means "Forms".
+- A single base class object can use the memory of multiple derived classes. 
+
+Syntax:
+        var baseObject = new Array(new Super1(), new Super2());
+
+Ex:
+<script>
+   class Employee
+   {
+       FirstName;
+       LastName;
+       Designation;
+       Print(){
+          document.write(`${this.FirstName} ${this.LastName} - ${this.Designation}<br>`);
+       }
+   }
+   class Developer extends Employee
+   {
+       FirstName = "Rajesh";
+       LastName = "Kumar";
+       Designation = "Developer";
+       Role = "Developer Role : Build, Debug, Test";
+       Print(){
+         super.Print();
+         document.write(this.Role);
+       }
+   }
+   class Admin extends Employee
+   {
+       FirstName = "Kiran";
+       LastName = "Kumar";
+       Designation = "Admin";
+       Role = "Admin Role : Authorizations";
+       Print(){
+         super.Print();
+         document.write(this.Role);
+       }
+   }
+   class Manager extends Employee
+   {
+       FirstName = "Tom";
+       LastName = "Hanks";
+       Designation = "Manager";
+       Role = "Manager Role : Approvals";
+       Print(){
+         super.Print();
+         document.write(this.Role);
+       }
+   }
+
+   let employees = new Array(new Developer(), new Admin(), new Manager());
+
+   var designation = prompt("Enter Designation");
+
+   for(var employee of employees){
+      if(employee.Designation===designation){
+          employee.Print();
+      }
+   }
+
+
+</script>
+
+		           React Class Components
+
+1. React class component is a JavaScript class that extends
+	a) React.Component
+	b) React.PureComponent
+
+2. Component & PureComponent are super classes that provide component behaviour. 
+
+	export   class  Login extends React.Component | React.PureComponent
+	{
+
+	}
+
+  - React.Component mounts complete component when ever any change occurred
+    in component.
+  - React.PureComponent updates only the changes without mounting the complete
+    component.
+
+3. React class component must have a constructor that calls the super constructor.
+
+            export  class  Login extends  React.Component
+             {
+	 constructor(){
+	    super();
+	 }
+             }
+
+
+4. Class component returns JSX by using "render()" method. It is a built-in method
+    of React.Component class
+
+
+	{
+	    render() {
+	         return( <JSX> </JSX>);
+	    }
+	}
+
+Ex:
+import React from "react";
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+     }
+     render(){
+        return(
+            <div>
+                <h3>Register User</h3>
+            </div>
+        )
+     }
+}
+
+Data Binding in Class Component
+- You can configure data in property.
+- Property in class component is immutable. 
+- You can use the binding expression "{  }" to bind data with UI elements.
+
+Syntax:
+	{
+	  UserName = "John";
+	}
+
+	<p>  { this.UserName } </p>
+
+- It is not recommended to property for storing data.
+
+State in Class Component:
+
+- Class components are statefull components.
+- A class component have implicit state.
+- You can't use hooks in class component.
+- You have to configure implicit state with data.
+- State must be configured while creating object for component.
+- You can access the state by using "this.state"
+- "this.state" is an object type
+
+Syntax:
+	constructor()
+	{
+                    super();
+	   this.state = {
+	          key : value,
+	          key : value
+	   }
+	}
+
+	<p> { this.state.key } </p>
+
+- You can store any type of data in state.
+- Class component can have only one state configuration.
+- Every state can have multiple keys with various types of values.
+
+Ex:
+import React from "react";
+
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+            UserName: "David",
+            Categories: ["All", "Electronics", "Fashion"]
+        }
+     }
+     
+     render(){
+        return(
+            <div className="container-fluid">
+                <h3>Hello ! {this.state.UserName}</h3>
+                <select>
+                    {
+                        this.state.Categories.map(category=><option key={category}>{category}</option>)
+                    }
+                </select>
+            </div>
+        )
+     }
+}
+
+- You can set state by using "setState" method of class component. 
+- It is recommended to setState while mounting or on any specific event.
+- The mount phase for class component is defined by using the methods
+
+	a) componentWillMount()
+	b) componentDidMount()
+
+Syntax:
+
+	componentDidMount() {
+	
+	       this.setState({ Key:value })		
+	
+	}
+
+Ex:
+import React from "react";
+
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+           UserName: "",
+           Price: 0,
+           Stock: false
+        }
+        
+     }
+     
+     componentDidMount(){
+        this.setState({UserName: "David", Price:65700, Stock:true});
+     }
+     
+
+     render(){
+        return(
+            <div className="container-fluid">
+                <h2>Hello ! { this.state.UserName }</h2>
+                <p>
+                    Price : {this.state.Price} <br /> 
+                    Stock : {(this.state.Stock===true)?"Available":"Out of Stock"}
+                </p>
+            </div>
+        )
+     }
+}
+
+Class & Style Binding
+- Style and Class Binding are same as you defined into function components.
+
+Syntax:
+	<div style={ {height:'200px' } }> </div>
+
+	<div className={ `border ${this.state.theme}` }>  </div>
+
+EX:
+import React from "react";
+
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+           UserName: "",
+           Price: 0,
+           Stock: false,
+           theme: 'bg-light'
+        }
+        
+     }
+     
+     componentDidMount(){
+        this.setState({UserName: "David", Price:65700, Stock:true, theme:'bg-danger text-white'});
+     }
+     
+
+     render(){
+        return(
+            <div className="container-fluid">
+                <div className={`border p-2 border-2 w-25 mt-2 ${this.state.theme}`}>
+                    <h2>Hello ! { this.state.UserName }</h2>
+                    <p>
+                        Price : {this.state.Price} <br /> 
+                        Stock : {(this.state.Stock===true)?"Available":"Out of Stock"}
+                    </p>
+                </div>
+            </div>
+        )
+     }
+}
+
+		            Event Binding in Class
+- All events are same as function components.
+- It uses SyntheticEvent base.
+- Event will point towards a method.
+
+	class
+	{
+	  handleClick() {
+
+	  }
+	}
+
+	<button onClick={this.handleClick}> Submit </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

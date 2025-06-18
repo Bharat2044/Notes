@@ -1,0 +1,362 @@
+		=====================================================================
+				7. Identity Operators (Python Command Prompt)
+		=====================================================================
+=>The purpose of Identity Operators is that "To Compare the Memory Address of Two Objects".
+=>In Python POrogramming, we have Two Types of Identity Operators. They are
+
+				1. is
+				2. is not 
+************************************************************************************************************************************************
+1. is operator
+************************************************************************************************************************************************
+Syntax:       Object1 is Object2
+------------
+=>Here "is" Operator returns True Provided  the Both the Obejcts Contains Same Memory Addess 
+=>Here "is" Operator returns False Provided  the Both the Obejcts Contains Different Memory Addess 
+************************************************************************************************************************************************
+2. is not operator
+************************************************************************************************************************************************
+Syntax:       Object1 is not Object2
+------------
+=>Here "is not " Operator returns True Provided  the Both the Obejcts Contains Different Memory Addess 
+=>Here "is not " Operator returns False Provided  the Both the Obejcts Contains Same Memory Addess 
+************************************************************************************************************************************************
+NOTE1: If Two Objects Participates in DEEP Copy then "is" Operator returns True
+NOTE2: If Two Objects Participates in SHALLOW Copy then "is" Operator returns False
+NOTE3: If Two Objects Participates in DEEP Copy then "is not" Operator returns False
+NOTE4: If Two Objects Participates in SHALLOW Copy then "is not" Operator returns True
+************************************************************************************************************************************************
+Examples
+------------------------------
+>>> a=None
+>>> b=None
+>>> print(a,id(a))
+None 140725686967152
+>>> print(b,id(b))
+None 140725686967152
+>>> a is b
+True
+>>> a is not b
+False
+---------------------------------------------
+>>> d1={10:"Apple",20:"Mango"}
+>>> d2={10:"Apple",20:"Mango"}
+>>> print(d1,id(d1))
+{10: 'Apple', 20: 'Mango'} 2572496697408
+>>> print(d2,id(d2))
+{10: 'Apple', 20: 'Mango'} 2572496787264
+>>> d1 is d2
+False
+>>> d1 is not d2
+True
+----------------------------------------------
+>>> s1={10,20,30,40}
+>>> s2={10,20,30,40}
+>>> print(s1,id(s1))
+{40, 10, 20, 30} 2572496682368
+>>> print(s2,id(s2))
+{40, 10, 20, 30} 2572496682144
+>>> s1 is s2
+False
+>>> s1 is not s2
+True
+--------------------------------------------------
+>>> lst1=[10,"Likit",45.67]
+>>> lst2=[10,"Likit",45.67]
+>>> print(lst1,id(lst1))
+[10, 'Likit', 45.67] 2572496633024
+>>> print(lst2,id(lst2))
+[10, 'Likit', 45.67] 2572498098496
+>>> lst1 is lst2
+False
+>>> lst1 is not lst2
+True
+----------
+>>> lst1=(10,"Likit",45.67)
+>>> lst2=(10,"Likit",45.67)
+>>> print(lst1,id(lst1))
+(10, 'Likit', 45.67) 2572496882816
+>>> print(lst2,id(lst2))
+(10, 'Likit', 45.67) 2572496882944
+>>> lst1 is lst2
+False
+>>> lst1 is not lst2
+True
+-----------------------------------------------------
+>>> r1=range(10,20)
+>>> r2=range(10,20)
+>>> print(r1,id(r1))
+range(10, 20) 2572498137808
+>>> print(r2,id(r2))
+range(10, 20) 2572498137760
+>>> r1 is r2
+False
+>>> r1 is not r2
+True
+------------------------------------------------
+>>> b1=bytes(range(10,20))
+>>> b2=bytes(range(10,20))
+>>> print(b1,id(b1))
+b'\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13' 2572498137952
+>>> print(b2,id(b2))
+b'\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13' 2572498138048
+>>> b1 is b2
+False
+>>> b1 is not b2
+True
+----------------------------------------------
+>>> s1="INDIA"
+>>> s2="INDIA"
+>>> print(s1,id(s1))
+INDIA 2572498136272
+>>> print(s2,id(s2))
+INDIA 2572498136272
+>>> s1 is s2
+True
+>>> s1 is not s2
+False
+>>> s1="THIS"
+>>> s2="THSI"
+>>> print(s1,id(s1))
+THIS 2572498137904
+>>> print(s2,id(s2))
+THSI 2572498137856
+>>> s1 is s2
+False
+>>> s1 is not s2
+True
+>>> s2="JUST"
+>>> s1="JSUT"
+>>> print(s1,id(s1))
+JSUT 2572498138096
+>>> print(s2,id(s2))
+JUST 2572498138000
+>>> s1 is s2
+False
+>>> s1 is not s2
+True
+>>> s1="WRONG"
+>>> s2="WORNG"
+>>> print(s1,id(s1))
+WRONG 2572498138144
+>>> print(s2,id(s2))
+WORNG 2572498138192
+>>> s1 is s2
+False
+>>> s1 is not s2
+True
+------------------------------------------------------------
+>>> a=2+3j
+>>> b=2+3j
+>>> print(a,id(a))
+(2+3j) 2572496749040
+>>> print(b,id(b))
+(2+3j) 2572496764016
+>>> a is b
+False
+>>> a is not b
+True
+-----------------------------------------------------
+>>> a=True
+>>> b=True
+>>> print(a,id(a))
+True 140725686967088
+>>> print(b,id(b))
+True 140725686967088
+>>> a is b
+True
+>>> a is not b
+False
+-------------------------------------------------------
+>>> a=1.2
+>>> b=1.2
+>>> print(a,id(a))
+1.2 2572496754160
+>>> print(b,id(b))
+1.2 2572496764016
+>>> a is b
+False
+>>> a is not b
+True
+---------------------------------------------------------
+>>> a=300
+>>> b=300
+>>> a is b
+False
+>>> a is not b
+True
+>>> a=123
+>>> b=123
+>>> a is b
+True
+>>> a is not b
+False
+>>>
+>>> a=0
+>>> b=0
+>>> print(a,id(a))
+0 140725687761304
+>>> print(b,id(b))
+0 140725687761304
+>>> a is b
+True
+>>> a is not b
+False
+>>> a=256
+>>> b=256
+>>> print(a,id(a))
+256 140725687769496
+>>> print(b,id(b))
+256 140725687769496
+>>> a is b
+True
+>>> a is not b
+False
+>>> a=257
+>>> b=257
+>>> print(a,id(a))
+257 2572496749392
+>>> print(b,id(b))
+257 2572496749232
+>>> a is b
+False
+>>> a is not b
+True
+>>>
+>>> a=-1
+>>> b=-1
+>>> print(a,id(a))
+-1 140725687761272
+>>> print(b,id(b))
+-1 140725687761272
+>>> a is b
+True
+>>> a is not b
+False
+>>> a=-5
+>>> b=-5
+>>> print(a,id(a))
+-5 140725687761144
+>>> print(b,id(b))
+-5 140725687761144
+>>> a is b
+True
+>>> a is not b
+False
+>>> a=-6
+>>> b=-6
+>>> print(a,id(a))
+-6 2572496749232
+>>> print(b,id(b))
+-6 2572496749392
+>>> a is b
+False
+>>> a is not b
+True
+---------------------------------------------------------------
+>>> a,b=300,300
+>>> print(a,id(a))
+300 2572496763888
+>>> print(b,id(b))
+300 2572496763888
+>>> a is b
+True
+>>> a is not b
+False
+>>> a,b=23456,23456
+>>> a is b
+True
+>>> a is not b
+False
+>>> a,b=1.2,1.2
+>>> print(a,id(a))
+1.2 2572496754160
+>>> print(b,id(b))
+1.2 2572496754160
+>>> a is b
+True
+>>> a is not b
+False
+>>>
+>>>
+>>> lst1,lst2=[10,20],[10,20]
+>>> print(lst1,id(lst1))
+[10, 20] 2572498098496
+>>> print(lst2,id(lst2))
+[10, 20] 2572496633024
+>>> lst1 is lst2
+False
+>>> lst1 is not lst2
+True
+==============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

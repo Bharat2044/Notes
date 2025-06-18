@@ -1,0 +1,34 @@
+		=============================================
+				3. Dynamically Typed 
+		=============================================
+=>In IT, We have two types of languages. They are
+
+			1. Static Typed Programming Languages
+			2. Dynamically Typed Programming Languages
+------------------------------------------------------------------------------------------------------------------------------
+1. Static Typed Programming Languages
+------------------------------------------------------------------------------------------------------------------------------
+=>In Static Typed Programming Languages, It is mandatory to use Data Types along with variable Names (Variable Declaration) Otherwise we get Compile Time Error.
+ExampleS:
+-----------------
+		int  a,b,c ;  // Variable Declaration--mandatory
+		a=10;
+		b=20
+		c=a+b
+Examples:    C,C++, Java, C#.net    etc
+------------------------------------------------------------------------------------------------------------------------------
+2. Dynamically Typed Programming Languages
+------------------------------------------------------------------------------------------------------------------------------
+=>In Dynamically Typed Programming Languages, Programmers will not assign any data type. Internally Language Execution Enviroment will assign the data type automatically OR Implicitly based on Type of Value Programmers uses / assigns.
+
+Examples:
+-------------------
+>>> a=10
+>>> b=1.2
+>>> c=a+b
+>>> print(a,type(a))------------------10 <class 'int'>
+>>> print(b,type(b))-----------------1.2 <class 'float'>
+>>> print(c,type(c))-----------------11.2 <class 'float'>
+----------------
+Examples:  Python 
+------------------------------------------------------------------------------------------------------------------------------

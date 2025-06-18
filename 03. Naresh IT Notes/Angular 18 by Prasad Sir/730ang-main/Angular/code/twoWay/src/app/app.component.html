@@ -1,0 +1,6 @@
+<h1>One Way dat binding</h1>
+<input type="text" (change)="fun1($event)">
+<h2>My name is {{name}}</h2>
+<h2>Two way data binding</h2>
+<input type="text" [(ngModel)]="twoWayInp">
+<h2>My name is {{twoWayInp}}</h2>

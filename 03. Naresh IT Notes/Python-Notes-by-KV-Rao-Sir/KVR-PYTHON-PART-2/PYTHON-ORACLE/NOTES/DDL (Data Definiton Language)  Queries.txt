@@ -1,0 +1,44 @@
+		================================================
+			1. DDL (Data Definiton Language)  Queries
+		================================================
+=>The purpose of  DDL (Data Definiton Language)  Queries is that "To deal with Physical Level  of Tables such as Table creation with column names, droping tables and re-structuring  columns of table".
+=>DDL Queries are classified into 3 types. They are
+			1. create
+			2. alter
+			3. drop
+---------------------------------------------------------------------------------------------------
+1) create
+---------------------------------------------------------------------------------------------------
+=>It is used for creating Table in Database Software.
+=>Syntax:  
+SQL>create table table-name(col1 DB Data Type, Col2 DB DataType,....Col-n DB Data Type)
+Examples:
+---------------
+SQL> create table student (sno number(2) primary key ,sname varchar2(10) not null ,marks  number(5,2) not null);
+---------------------------------------------------------------------------------------------------
+2) alter------ add  option      modify  option
+---------------------------------------------------------------------------------------------------
+=>This Query is used for altering table structure.
+=>In Otherwords, alter is used for modifying the Column Sizes ( modify) and adding new   column names ( add  ) 
+=>Syntax1:
+-----------------
+SQL> alter table table-name modify(existing col-name1 DB Data Type,.... existing col-name-n    DB Data Type)
+-----------------
+=>Syntax2:
+-----------------
+SQL> alter table table-name add(new col-name1 DB Data Type,... new col-name-n   DB Data Type)
+
+Example1:
+--------------
+SQL> alter table teacher modify(tno number(3),tsal number(6,2));
+------------------
+Example2:
+------------------
+SQL> alter table teacher add(cname varchar2(10) not null);
+---------------------------------------------------------------------------------------------------
+3) drop
+---------------------------------------------------------------------------------------------------
+=>This query is used for removing or droping the table from Database Software:
+=>Syntax:    SQL> drop table  tablename
+=>Examples: SQL > drop table employee
+---------------------------------------------------------------------------------------------------

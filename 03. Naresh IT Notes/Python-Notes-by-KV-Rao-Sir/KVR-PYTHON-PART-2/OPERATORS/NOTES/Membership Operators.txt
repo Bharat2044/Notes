@@ -1,0 +1,204 @@
+			===========================================================
+						6. Membership Operators
+			===========================================================
+=>The purpose of  Membership Operators is that "To Check the Existence of a Value in an Iterable Object".
+=>An Iterbale Object is one which contains More Than One Value (SeqeunceType, List Type, Set Type, Dict Type)
+=>A Non-Iterable Object is one which contains Only One Value (All Fundamendal Types, NoneType)
+=>In Python Programming, we have 2 types of Membership Operators. They are
+
+				1. in Operator
+				2. not in Operator
+************************************************************************************************************************************************
+1. in operator
+************************************************************************************************************************************************
+Syntax:       Value in Iterbale_Object
+------------
+=>Here "in" Operator returns True Provided  the specified value present in  Iterbale_Object 
+=>Here "in" Operator returns False Provided  the specified value Not present in  Iterbale_Object 
+************************************************************************************************************************************************
+2. not in operator
+************************************************************************************************************************************************
+Syntax:       Value not in Iterbale_Object
+------------
+=>Here "not in" Operator returns True Provided  the specified value Not present in  Iterbale_Object .
+=>Here "not in" Operator returns False Provided  the specified value present in  Iterbale_Object .
+===================================================================================================
+Examples
+===================================================================================================
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> "P" in s
+True
+>>> "O" in s
+True
+>>> "N" not in s
+False
+>>> "p" in s
+False
+>>> "p" not in s
+True
+>>> "T" in s
+True
+>>> "T" not in s
+False
+-------------------
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> "PYT" in s
+True
+>>> "pyt" not in s
+True
+>>> "pyt" in s
+False
+>>> "PTO" in s
+False
+>>> "PON" not in s
+True
+>>> "pyt" not in s
+True
+>>> "PYt" not in s
+True
+>>> "NOH" in s
+False
+>>> "NOH" not in s[::-1]
+False
+---------------------------------
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> "HON"[::-1] in s[::-1]
+True
+>>> "PTO" in s[::2]
+True
+>>> "PTO" not in s[::2][::-1]
+True
+>>> "PTO"[::-1]  in s[::2]
+False
+---------------------------------------
+>>> lst=[10,"Rossum",23.45,2+3j]
+>>> print(lst)
+[10, 'Rossum', 23.45, (2+3j)]
+>>> "Ross" in lst
+False
+>>> "Ross" not in lst[1]
+False
+>>> "Ross" in lst[1]
+True
+>>> "Rossum"[::-1] not in lst[-3][::-1]
+False
+>>> "Rossum"[::-1] in lst[-3][::-1]
+True
+>>> (2+3j) in lst[-1]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: argument of type 'complex' is not iterable
+>>> (2+3j).real in lst[-1]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: argument of type 'complex' is not iterable
+>>> lst[-1] in lst
+True
+>>> (2+3j) in str(lst[-1])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'in <string>' requires string as left operand, not complex
+>>> 12 in "123"
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'in <string>' requires string as left operand, not int
+>>> "12" in "123"
+True
+-------------------------------------------------
+>>> d={10:"Apple",20:"Mango",30:"Kiwi"}
+>>> "Apple" not in d
+True
+>>> for val in d:
+...     print(val)
+...
+10
+20
+30
+>>> 10 in d
+True
+>>> "20" not in d
+True
+>>> "20" in d
+False
+>>> "20" in d.keys()
+False
+>>> 20 in d.keys()
+True
+>>> d[10] not in d
+True
+>>> d[10][::-1] in d.get(10)
+False
+>>> "1" in int("123"[1])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: argument of type 'int' is not iterable
+>>> "1" not in "123"[1]
+True
+--------------------------
+>>> "MIS" in "MISSISSIPPI"
+True
+>>> "IIP" not in "MISSISSIPPI"[::-1]
+True
+>>> "IIP"[-1] not in "MISSISSIPPI"
+False
+>>> "IIP"[-1] in "MISSISSIPPI"
+True
+----------------
+>>> "MEMBER" not in "Membership Operators"
+True
+>>> "Ope" in "Membership Operators"
+True
+>>> "Opr" not in "Membership Operators"
+True
+----------------
+>>> "2+3j"[-1] in "2+3j"[::][::]
+True
+>>> "2+3j"[-1] in "2+3j"[::][::-1]
+True
+>>> "2+3j"[::-1]------------------------------'j3+2'
+---------------------------
+>>> ["a","e","i","o","u"] in "Apple"---------------TypeError: 'in <string>' requires string as left operand, not list
+======================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===================================================================================================

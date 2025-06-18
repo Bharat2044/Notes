@@ -1,0 +1,10 @@
+		===========================================
+			Method Overriding in Python
+		===========================================
+=>Method Overriding=Method Heading is same + Method Body is Different
+			(OR)
+=>The process of re-defining the original method of base class into various derived classes for performing different operations is called Method Overriding.
+=>To use Method Overriding in python program we must apply Inheritance Principle.
+=>Method Overriding used for implementing Polymorphism Principle.
+    ( PLOYMORPHISM<----METHOD OVERRIDING<-----INHERITANCE<----CLASS AND OBJECTS )
+------------------------------------------------------------------------------------------------------------------------------------------

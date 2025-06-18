@@ -1,0 +1,52 @@
+String
+======
+-String is zero/more characters written inside quote.
+ var a = 'hello'
+ var b = "hello"
+
+-Strings can be created in 2 ways
+   1. Primitive   // var name = 'sachin'
+   2. Object      // var add = new String('mumbai')
+
+let a = 'hello'; // String Literal
+let b = new String('hello'); // String Object
+let c = new String('hello'); // String Object
+console.log(typeof a, typeof b); // string , object
+console.log(a == b); // value comparison
+console.log(c == b); // reference comparison
+==============================================
+let str1 = '2+2';
+let str2 = new String('2+3');
+
+console.log(eval(str1)); // Eval() works with string literal
+console.log(eval(str2)); // Eval() doesn't work with string object
+
+let str3 = str2.valueOf(); // valueOf() converts string object to string literal
+console.log(eval(str3)); 
+=======================================================
+
+String methods:
+--------------
+length;
+toUpperCase();
+toLowerCase();
+charAt();
+charCodeAt();
+concat();
+indexOf();
+lastIndexOf();
+includes();
+match();
+replace();
+replaceAll();
+slice(start, end)
+substring(start, end)
+substr(start, length)
+split()
+search(regex)
+trim()
+eval(); (eval() is from Window Object)
+
+N.p:- substring() cannot accept negative indexes. slice() does.
+
+

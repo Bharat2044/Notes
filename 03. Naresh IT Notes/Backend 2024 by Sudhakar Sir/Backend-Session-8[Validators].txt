@@ -1,0 +1,134 @@
+			    Validation Schema
+- MongoDB collections are schema less [Structure less].
+- You can configure a validation schema that can restrict the values stored in a document.
+- Schema is about configuring structure for data in MongoDB document.
+- MongoDB provides  "jsonSchema", which is a object with specification that manage data in document.
+- "$jsonSchema" is used to configure validation schema
+
+Syntax:
+	$jsonSchema : {
+	     bsonType : "object",
+	     required :  [ "fields required in collection" ],
+	     properties: {  fieldName: { bsonType:"",  description:"" } }
+	}
+
+- Schema is added to collection by using  "validator" property of  collection.
+- Validator can be defined while creating collection or modifying collection.
+
+Syntax:
+  > db.createCollection("name",  validator: {  $jsonSchema: { } });
+
+ > db.runCommand({ collMod: { "name", validator: { } } })
+
+- The validations that you define are used by database designer to store values into a document.
+- If you want the validations to handle at client level then it requires server side and client side validation techniques in both node and javascript.
+
+
+Syntax:
+  > db.createCollection("users", 
+          {
+           validator: {
+                  $jsonSchema:{ 
+	          bsonType: "object",
+	          required: ["UserName", "Age", "Password"],
+	          properties: {
+		 UserName: {
+		       bsonType: "string",
+		       description: "User Name must be a string"
+	                  },
+		Age: {
+		      bsonType: "int",
+		      minimum: 10,
+		      description: "Age must be a number above 10"
+		 }
+	          }	        
+	  }
+             }
+          }
+      )
+
+Note: You can set validation action and validation level for document validations.
+
+	a) Action includes :  Warning, Error
+	b) Level includes : Strict, Moderate, Off
+
+			   Querying Documents
+
+- You can read documents of any collection by using  "find()" method.
+- "find()" method uses query to read and return specific set of documents that match the query.
+
+Syntax:
+     > db.collectionName.find()		// returns all documents
+     > db.collectionName.find({})		// returns all documents
+
+- Find query requires various operators
+
+	$eq		Equal to
+	$ne		Not Equal
+	$gt		Greater than
+	$gte		Greater than or equal
+	$lt		Less than
+	$lte		Less than or equal
+	$and		AND &&
+	$or		OR   || 
+
+Syntax:
+      >db.collectionName.find({ fieldName: { operator:value } })
+      >db.collectionName.find($and:[ { }, { },... ])
+      >db.collectionName.find($or: [ { }, { },.. ])
+
+	https://fakestoreapi.com/products
+
+Ex:
+ > db.products.find({ id:6 })
+ > db.products.find({category:"electronics"})
+ > db.products.find({price: {$gt:600} })
+
+Note: Every query condition must be defined in a "{ }" block.
+          If multiple conditions then you have to defined in "[ ]" meta character
+
+> db.products.find({'rating.rate':{$gte:4.6}})
+
+Note: Objects are defined in single quote with dot operator. You can configure any embedded document in query.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

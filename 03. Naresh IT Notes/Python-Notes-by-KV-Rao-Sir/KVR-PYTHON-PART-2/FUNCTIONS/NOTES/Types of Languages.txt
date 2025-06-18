@@ -1,0 +1,29 @@
+				=========================================================
+							Types of Languages
+				=========================================================
+=>In Industry , we have Two Types of Programming Langauges. They are
+
+			1. Un-Structured Programming Languages.
+			2. Structured Programming Languages.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Un-Structured Programming Languages
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+=>The Un-Structured Programming Languages DOES NOT CONTAIN FUNCTIONs Concept. So that whose related Applications has the Following Limitations.
+
+		1. Application Development time is More
+		2. Application Memory Space is More
+		3. Application Execution Time is More
+		4. Application Performnace is Degraded
+		5. Redundency(Duplication or Replication)  of the Code is More
+Examples: GW-BASIC
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Structured Programming Languages.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+=>The Structured Programming Languages  CONTAINS FUNCTIONs Concept. So that whose related Applications has the Following Advatnages.
+		1. Application Development time is Less.
+		2. Application Memory Space is Less.
+		3. Application Execution Time is Less.
+		4. Application Performnace is Enhanced (Improved)
+		5. Redundency(Duplication or Replication)  of the Code is Minimized.
+Examples:  C, C++, Java, C#.net, PYTHON...etc
+-----------------------------------------------------------------------------------------------------------------------------------------------------------

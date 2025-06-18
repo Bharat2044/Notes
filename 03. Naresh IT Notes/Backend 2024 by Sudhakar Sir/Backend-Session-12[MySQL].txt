@@ -1,0 +1,155 @@
+Relational Data Models
+- Conceptual
+- Physical
+- Logical 
+- Entity
+			      I-Shop Project
+- IEEE Project 
+       https://xploreqa.ieee.org/Xplore/home.jsp
+- Online Shopping Application
+       Search for : i-shop
+- Project Document comprises of Abstract and Description
+- Project Modules [ 9  modules for i-shop website ]
+
+Module Name		Description
+--------------------------------------------------------------------------------------------------------------------------------
+Registration		User / Customer can register in order to use the website.
+
+Products Browse		It comprises of filters for browsing various products
+
+Products Search		It allows to search by using a query and find relative products.
+
+Shopping Cart		It comprises of the products selected by customer/user for buying.
+			[ can allow multiple currencies for products]
+
+Shipping & Billing		It is used by vendors to control the shipping charges and billing
+			details for any product.
+
+Payment Module		It is used by customer to use various payment methods for
+			buying any product.
+
+Admin User Management	It allows admin to manage registered users.
+
+Admin Catalog Management	It allows to control and manage the products and vendors
+			[add, update, delete etc.]
+
+Admin Order Management	It allows to manage the shopping cart of user. Admin can delete
+			or modify the details in cart.
+
+
+Conceptual Model:
+- A conceptual model comprises of information about the modules that require data.
+- I-shop conceptual model
+
+	Register Module		- Users/Customer	- Table [1]
+	
+	Products Browse	]
+	Products Search	]	- Products		- Table [1]
+	Shipping & Billing	]
+	
+	Shopping Cart	]	- Cart		- Table [1]
+
+	Vendor  User	]	- user/customer ]
+	Vendor  Catalog	]	- products	         ]       Use existing tables
+	Vendor  Order	]	- order	         ]
+
+	Vendors		]	- Vendor		- Table [1]
+
+Note: Total number of tables for i-shop database required are "4".
+	a) User
+	b) Vendor
+	c) Product
+	d) Cart
+
+Physical Model:
+- Physical model comprises of information about table name, field name and their data types.
+
+User Module:
+	table name:  "tblusers"
+	fields:
+	UserId		: string
+	UserName	: string
+	Password		: string
+	Email		: string
+	Mobile		: string
+	City		: string
+	Postal Code	: number
+	Address		: string
+
+Product Module
+	table name:  "tblproducts"
+	fields:
+	ProductId		: number
+	Title		: string
+	Image		: number/string
+	Price		: number
+	Stock		: boolean
+	Rating		: number
+	Reviews		: number
+	Description	: string
+	Category		: number
+	Vendor		: number
+	Shipping Charges	: number	
+
+Cart Module
+	tableName	: tblcart
+	fields:
+
+	CartId		: number
+	ProductId		: number
+	VendorId		: number
+	Title		: string
+	Image		: string
+
+Vendor Module
+
+	tableName	: tblvendors
+	fields:
+	
+	VendorId		: number
+	Name		: string
+	ProductId		: number
+	Password		: string
+
+Logical Model 
+- It configures the relation between tables.
+- The relation and validation is defined by using "Contraints".
+
+	Primary Key
+	Foreign Key
+	Unique Key
+	Check 	
+	Not Null
+	etc..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

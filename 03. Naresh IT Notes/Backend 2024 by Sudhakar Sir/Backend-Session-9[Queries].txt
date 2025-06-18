@@ -1,0 +1,85 @@
+Queries
+1. Get all products with in the price range 400 to 600.
+
+Syntax:
+        >db.products.find({ $and: [ {price:{$gte:400}}, {price:{$lte:600}} ] })
+
+2. Get all products with ratings between 4.5  & 5.0 .       "rating.rate"
+
+Syntax:
+     >db.products.find({ $and: [ { 'rating.rate:{$gte:4.5} }, { 'rating.rate':{$lte:5.0} } ] })
+
+3. Get all products with category electronics and others with rating above 4.7
+
+Syntax:
+        > db.products.find({ $or: [ {category:"electronics"}, {'rating.rate':{$gte:4.7}} ] })
+
+4. Get all products of categories jewelery and electronics within the price range 200 to 900.
+ 
+               -category and be electronics and jewelery
+               -their price must be between 200 to 900
+
+Syntax:
+
+>db.products.find({ $and:[ {$or:[{category:"electronics"}, {category:"jewelery"}]}, {$and:[{price:{$gte:200}},{price:{$lte:900}}]} ] })
+
+			Querying Arrays
+- You can query any content from array in document.
+- You can match with the elements in array, either all or specific.
+
+	$all		: It checks for all matching elements
+
+Syntax: Exact matching
+	
+	> db.vendors.find({ Cities: "Hyd" })		
+
+		Cities: [ "Hyd", "Delhi"]	= record-1
+		Cities: [ "Mumbai", "Hyd"]	= record-2
+
+	> db.vendors.find({ $all: {Cities:["Delhi", "Hyd"] } })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

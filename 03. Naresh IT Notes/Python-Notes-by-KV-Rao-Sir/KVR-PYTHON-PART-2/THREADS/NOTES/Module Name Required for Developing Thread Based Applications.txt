@@ -1,0 +1,70 @@
+		==================================================================
+			Module Name Required for Developing Thread Based Applications
+		==================================================================
+=>The Module Name Required for Developing Thread Based Applications is "threading".
+=>The threading Module Contains the Following Deatils
+***************************************************************************************************************************************************
+						Module Name:  threading
+***************************************************************************************************************************************************
+				Function Names in threading module
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. current_thread() : This Function is used for Obtaining Current Thread which is under Execution.
+				    Syntax:  varname=threading.current_thread().name	
+				  
+
+2. active_count():      This Function is used for Obtaining Number of Active Threads(By Default 1)
+				Syntax:  varname=threading.active_count()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+					Class Name-1 : Thread Class
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Here 'Thread' is one of the Pre-Defined Class in threading module
+=>The 'Thread' Contains the following 
+----------------------------------
+1) Thread(target,args):
+---------------------------------
+			Syntax:   varname=threading.Thread(target=Function / Method Name,args=(Val1,Val2,...Val-n))
+=>This Constructor Creates an object Thread Class Called Sub Thread and Initlized with which sub thread targetted to Execute which function where thread logic is Defined and args represents the value(s) carrying from Main Program to Function OR Method. If the Function or Method Not taking any Parameters, No need to specify args.
+Example:   t1=threading.Thread(target=squares,args=([10,20,30,40],[2,3,4,5] , )
+			here t1 is called sub thread whose default name is Thread-1
+------------------------------------
+2) start()
+------------------------------------
+=>This Function is used for Dispatching (Sending to the tagetted Function ) the sub threads
+=>Syntax:   subthreadobj.start()
+Examples:     t1.start()
+------------------------------------
+3) setName(str)
+-------------------------------------
+=>Syntax:   subthread.setName("Sub Thread Name")
+=>This Function is used for setting the Name  toSub Thread and It deprecated on the name of "name" attribute
+=>Recommended Syntax:   subthread.name="Sub Thread Name"
+------------------------------------
+4) getName()
+------------------------------------
+=>Syntax:   tname=subthread.getName()
+=>This Function is used for Obtaining Name of Sub Thread and It deprecated on the name of "name" attribute
+=>Recommended Syntax:   tname=subthread.name
+-----------------------------------
+5) is_alive()
+-----------------------------------
+=>This Function is used for Monitering the Execution status of Sub Threads.
+=>Syntax:     subthreadobj.is_alive()
+=>This function returns True provided thread is running 
+=>This function returns False provided thread is not running (Before Execution, After Execution)
+-----------------------------------
+6) join()
+-----------------------------------
+=>subthreadobj.join()
+=>This Function is used for Making the MainThread to wait Until Sub threads Join with MainThread
+==============================================================================================
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+					Class Name-2 : Lock
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+***************************************************************************************************************************************************

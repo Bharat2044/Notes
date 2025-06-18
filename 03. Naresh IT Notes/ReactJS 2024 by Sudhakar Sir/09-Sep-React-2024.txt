@@ -1,0 +1,350 @@
+JavaScript Classes 
+- Class Declaration
+- Class Expression
+- Class Members
+- Property
+- Accessors
+
+			     Methods
+- A method defines actions to perform.
+- Class will not allow function as class member.
+- Function is immutable.
+- The actions in class are defined by using method.
+
+Syntax:
+	class  Name
+	{
+	   method(){ 
+	   }
+	}
+
+- Method can be void or can return a value. 
+- It is similar to a function with all functional features like
+	- Closure
+	- Parameters
+	- Spread & Rest etc..
+
+Ex:
+<script>
+    class Product
+    {
+       
+        Name = "Samsung TV";
+        Price = 45000.44;
+        Qty = 1;
+        Total(){
+            return this.Qty * this.Price;
+        }
+        Print(){
+            document.write(`Name=${this.Name}<br>Price=${this.Price}<br>Qty=${this.Qty}<br>Total=${this.Total()}`);
+        }
+    }
+    let obj = new Product();
+    obj.Print();
+</script>
+
+
+FAQ: What is difference between function and method?
+Ans:  Function is intended to return a value.
+         Method is always a void type.
+         However in JavaScript function and method have similar behaviour. 
+         Function is immutable and method is mutable.
+
+Note: Function is a not allowed as class member.  But a class can have function.
+
+
+			  Constructor
+- Constructor is a special type of sub-routine in class.
+- It is responsible for instantiation. [Creating object for class]
+- Constructor is a design pattern, that defines how an object can be created for class.
+- Every class have an implicit constructor. 
+- JavaScript class can have explicit constructor to define actions that are performed while creating object for class.
+- JS constructor is anonymous and defined with "constructor" keyword.
+
+Syntax:
+	class  Name
+	{
+	   constructor(){
+	    }
+	}
+
+- Constructor executes automatically for every object.
+- Constructor can be parameterized or parameter less. 
+- If it is parameterized then the values are passed at the time of allocating memory for class.
+
+Syntax:
+	class Name
+	{
+	   constructor(param)
+                     {
+	    }
+	}
+
+	let obj = new Name(value);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Database
+        {
+            constructor(dbName){
+                document.write(`Connected to ${dbName} <br>`);
+            }
+            Insert(){
+                document.write("Record Inserted");
+            }
+            Update(){
+                document.write("Record Updated Successfully..");
+            }
+        }
+        function InsertClick(){
+            let obj = new Database(document.querySelector("select").value);
+            obj.Insert();
+        }
+        function UpdateClick(){
+            let obj = new Database(document.querySelector("select").value);
+            obj.Update();
+        }
+    </script>
+</head>
+<body>
+    <select>
+        <option>Select Database</option>
+        <option>Oracle</option>
+        <option>MySql</option>
+        <option>MongoDB</option>
+    </select>
+    <button onclick="InsertClick()">Insert</button>
+    <button onclick="UpdateClick()">Update</button>
+</body>
+</html>
+
+
+Summary:
+- Property
+- Accessor
+- Method
+- Constructor 
+
+		        Code Reusability & Extensibility 
+- OOP support 2 techniques to handle resuability an extensibility
+
+	1. Aggregation 
+	2. Inheritance 
+
+Aggregation:
+- It is a technique of accessing members of one class in another without configuring any relation between classes. 
+- It is referred as "Object-to-Object" communication.
+- It is known as "Has-A-Relation".
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class HDFC_Bank_Version1
+        {
+            Personal = "Personal Banking Services<br>";
+            Print(){
+                document.write(this.Personal);
+            }
+        }
+        class HDFC_Bank_Version2 
+        {
+            NRI = "NRI Banking Services<br>";
+            Print(){
+                let obj = new HDFC_Bank_Version1();
+                obj.Print();
+                document.write(this.NRI);
+            }
+        }
+        class HDFC_Bank_Version3 
+        {
+            Loans = "Housing Loan, Personal Loan<br>";
+            Print(){
+                let obj = new HDFC_Bank_Version2();
+                obj.Print();
+                document.write(this.Loans);
+            }
+        }
+        function InstallClick(){
+            var ver = document.querySelector("select").value;
+
+            switch(ver){
+                case "ver1": 
+                document.write(`<h2>Version 1 Installed </h2>`);
+                let obj1 = new HDFC_Bank_Version1();
+                obj1.Print();
+                break;
+                case "ver2": 
+                document.write(`<h2>Version 2 Installed </h2>`);
+                let obj2 = new HDFC_Bank_Version2();
+                obj2.Print();
+                break;
+                case "ver3": 
+                document.write(`<h2>Version 3 Installed </h2>`);
+                let obj3 = new HDFC_Bank_Version3();
+                obj3.Print();
+                break;
+                default: 
+                document.write("Please select a version");
+            }
+        }
+    </script>
+</head>
+<body>
+    <select>
+        <option>Select Version</option>
+        <option value="ver1">Version-1 [2022]</option>
+        <option value="ver2">Version-2 [2023]</option>
+        <option value="ver3">Version-3 [Latest]</option>
+    </select>
+    <button onclick="InstallClick()">Install</button>
+</body>
+</html>
+
+
+Inheritance: 
+- It is the process of configuring relation between classes in order to access members of one class in another.
+- Existing class is known as "Super" class.
+- Extended class is known as "Derived" class.
+- Accessing with relation is often called as "Is-A-Relation".
+
+Syntax:
+	class  Super
+	{
+	}
+	class Derived extends Super
+	{
+	}
+
+- Derived class can access super class members by using "super" keyword.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class HDFC_Bank_Version1
+        {
+            Personal = "Personal Banking Services<br>";
+            Print(){
+                document.write(this.Personal);
+            }
+        }
+        class HDFC_Bank_Version2 extends HDFC_Bank_Version1
+        {
+            NRI = "NRI Banking Services<br>";
+            Print(){
+                super.Print();
+                document.write(this.NRI);
+            }
+        }
+        class HDFC_Bank_Version3 extends HDFC_Bank_Version2
+        {
+            Loans = "Housing Loan, Personal Loan<br>";
+            Print(){
+                super.Print();
+                document.write(this.Loans);
+            }
+        }
+        function InstallClick(){
+            var ver = document.querySelector("select").value;
+
+            switch(ver){
+                case "ver1": 
+                document.write(`<h2>Version 1 Installed </h2>`);
+                let obj1 = new HDFC_Bank_Version1();
+                obj1.Print();
+                break;
+                case "ver2": 
+                document.write(`<h2>Version 2 Installed </h2>`);
+                let obj2 = new HDFC_Bank_Version2();
+                obj2.Print();
+                break;
+                case "ver3": 
+                document.write(`<h2>Version 3 Installed </h2>`);
+                let obj3 = new HDFC_Bank_Version3();
+                obj3.Print();
+                break;
+                default: 
+                document.write("Please select a version");
+            }
+        }
+    </script>
+</head>
+<body>
+    <select>
+        <option>Select Version</option>
+        <option value="ver1">Version-1 [2022]</option>
+        <option value="ver2">Version-2 [2023]</option>
+        <option value="ver3">Version-3 [Latest]</option>
+    </select>
+    <button onclick="InstallClick()">Install</button>
+</body>
+</html>
+
+- Inhertiance rule for constructor in JS is to access and call super class constructor in derived class.
+
+Ex:
+<script>
+    class Super
+    {
+        constructor(){
+            document.write("Super Class Constructor<br>");
+        }
+    }
+    class Derived extends Super 
+    {
+        constructor(){
+            super();
+            document.write("Derived Class Constructor");
+        }
+    }
+    let obj = new Derived();
+</script>
+
+		              Polymorphism
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+			==============================================================
+					Network Programing in Python
+			==============================================================
+=>The purpose of Network Programing in Python is that "To share or exchange the Data between multiple devices 
+    which are located either in same network or in different work".
+-------------------------------------
+=>Definition of Network:
+-------------------------------------
+=>A Network is a collection of Autonomous Inter-connected Computers Connected with Server.
+------------------------------------------------------
+=>In Network Programing , we have Two Types of Programs. They are
+
+			1. Server Side Application
+			2. Client Side Application
+----------------------------------------
+1. Server Side Application
+-----------------------------------------
+=>A Server Side Application is one, which is always Receives the Request from Client Side Program, Process the Request and Gives Response Back to the Client Side Program
+----------------------------------------
+2. Client Side Application
+-----------------------------------------
+=>A Client Side Application is one, which is always makes a Request to Server Side Program and Obtains the Result 
+   from Server Side Program
+------------------------------------------------
+3. DNS (Domain Naming Service)
+------------------------------------------------
+=>DNS Represents Name of the Physical Machine where Server Side Program is Residing.
+=>The Default DNS of every Computer is localhost
+----------------------------------------
+4. IP Address
+-----------------------------------------
+=>The IP Address Represents the Four Parts Numerical Value address of  the Physical Machine where Server Side 
+    Program is Residing.
+=>The Default IP Address of every Computer is 127.0.0.1
+----------------------------------------
+5. Port Number
+-----------------------------------------
+=>A Port Number is one of the Logical Numerical ID, where Server Side Program is Running
+=>Henec Any Client Side Application, want to get the connection from Server Side Program, The Client Side Program must pass (DNS/IP Address, Portno)
+=============================================x========================================

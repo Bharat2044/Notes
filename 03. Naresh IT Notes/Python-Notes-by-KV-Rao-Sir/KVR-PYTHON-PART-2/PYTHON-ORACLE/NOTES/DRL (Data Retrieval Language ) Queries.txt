@@ -1,0 +1,35 @@
+		============================================
+			3. DRL (Data Retrieval Language ) Queries
+		============================================
+=>DRL (Data Retrieval Language ) Queries are used for Reading the records from table.
+=>To read the records from table, we use "select"
+=>In Otherwords "select" comes under DRL (Data Retrieval Language ) Query.
+=>Syntax1:       SQL>select  col1,col2,.....col-n   from <table-name>
+=>Syntax2:       SQL>select  col1,col2,.....col-n   from <table-name> where cond list
+=>Syntax3:       SQL>select  *   from <table-name>
+=>Syntax4:       SQL>select  *   from <table-name>  where cond list
+--------------------------------------------------------------------------------------------------------------------------------------
+=>Once the select query executed, all records are present in the object of cursor in Python. 
+=>To get the records from cursor object, we have 3 functions. They are
+		1) fetchone()
+		2) fetchmany(no. of records)
+		3) fetchall()
+-----------------------------------------------------------------------
+1) fetchone():
+=>This function is used for obtaining One Record at a time, where cursor object pointing and it returns either tuple (if records exist) or None (if records does not exist).
+-----------------------------------------------------------------------------
+2) fetchmany(no. of records)
+-----------------------------------------------------------------------------
+=>fetchmany(no. of records) is used for obtaining specified number of records.
+case-1: a) if specified number of records==0 then this function obtains all records(in the case of cx_Oracle Module python     3.8,3.9	  and 3.10 only )
+case-1: b) if specified number of records==0 then this function select no records (in the case of oracledb--python 3.11,3.12     versions Module)
+case-2:  if specified number of records>0 and  specified number of records<=Total Number of Records then this function gives   specified number of records in the case of  both cx_Oracle and oracledb.
+case-3:  if specified number of records>Total Number of Records then this function  obtains all records in the case of  both  cx_Oracle and oracledb
+case-4: if specified number of records<0 then this function  never gives any records in the case of  both cx_Oracle and 
+             oracledb
+case-5: if we don't specify specified number of records then this function obtains all records in the case of  both cx_Oracle and oracledb
+-----------------------------------------------------------------------------
+3) fetchall()
+-----------------------------------------------------------------------------
+=>fetchall()  is used for obtaining all the records from cursor object in the form of tuples of list.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------

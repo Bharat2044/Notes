@@ -1,0 +1,26 @@
+			=============================================
+					Constructors in Python
+			=============================================
+=>The purpose of Constructors in python is that " To initlize the object".
+=>Initlizing the object is nothing but Placing our own data in object without leaving object empty.
+---------------------------------------
+Definition of Constructor
+---------------------------------------
+=>A Constructor is one of the special method which is automatically /  Implicitly called by PVM During Object  Creation and whose purpose is to initlize the object without leaving the object empty.
+-----------------------------------------------------------------
+Syntax for defining Constructor:
+-----------------------------------------------------------------
+	def    __init__(self, list of formal params if any):
+	         --------------------------------------------
+		 Block of Statements
+		 Performs Initlization
+		 --------------------------------------------
+-----------------------------------------------------------------
+Rules or Properties of Constructors
+-----------------------------------------------------------------
+1. The Name of the constructor is always    def   __init__(self,....)
+2. Constructors will  be called by PVM   automatically / implciitly during object creation
+3. Constructors will not return any value except None.
+4. In Python, Constructors can participate in Inheritance Process. 
+5. In Python, Conctructors can be Overridden .
+------------------------------------------------------------------------------------------------------------------------------------------------

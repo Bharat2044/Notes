@@ -1,0 +1,55 @@
+<!-- simple if -->
+<div class="x" *ngIf="isShow">
+  <div><h2>I'm a modal</h2>
+  <button (click)="fun2()">❌</button></div>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptate ducimus tenetur, eveniet consequatur tempore, sed atque necessitatibus ut asperiores enim dolorum dolorem totam, aut hic molestias! Possimus, repudiandae eveniet.  (windows+.)</p>
+</div>
+<button (click)="fun1()">click me to show</button>
+<!-- if - else -->
+ <!-- in angular , you can give names to any block called template reference variable-->
+ <div *ngIf="isAdmin then chitti else bujji">
+  
+ </div>
+ <ng-template #chitti>
+  <h1>Welcome to the Admin</h1>
+ </ng-template>
+ <ng-template #bujji>
+    <h1>Welcome to Students</h1>
+ </ng-template>
+
+
+
+
+
+
+
+<!-- ng switch -->
+<div [ngSwitch]="day">
+   <p *ngSwitchCase="1">Monday</p>
+   <p *ngSwitchCase="2">Tuesday</p>
+   <p *ngSwitchCase="3">Wednesday</p>
+   <p *ngSwitchCase="4">Thursday</p>
+   <p *ngSwitchCase="5">Friday</p>
+   <p *ngSwitchCase="6">saturday</p>
+   <p *ngSwitchCase="7">sunday</p>
+   <p *ngSwitchDefault>Please go with proper day value</p>
+</div>
+
+<!-- ngFor -->
+ <div *ngFor="let i of fruits;let ind=index;let e=even;let o1=odd">
+  <div *ngIf="o1">
+    <p>I love {{i}}, {{ind}}, {{e}}</p>
+  </div>
+ </div>
+<p>i loveeeeee {{fruits[2]}}</p>
+
+
+
+
+
+
+
+
+
+
+

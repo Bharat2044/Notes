@@ -1,0 +1,9 @@
+setImmediate() vs setTimeout()
+==============================
+-setImmediate() is designed to execute a script once the current poll phase completes.
+-setTimeout() schedules a script to be executed after a minimum threshold in ms has elapsed.
+-setImmediate callbacks are called after I/O Queue callbacks are finished or timed out. setImmediate callbacks are placed in Check Queue, which are processed after I/O Queue.
+-setTimeout(fn, 0) callbacks are placed in Timer Queue and will be called after I/O callbacks as well as Check Queue callbacks. As event loop, process the timer queue first in each iteration, so which one will be executed first depends on which phase event loop is.
+
+-if we run setImmediate() & setTimeout() which is not within an I/O cycle (i.e. the main module), the order in which the two timers are executed is non-deterministic.
+-However, if you move the two calls within an I/O cycle, the immediate callback is always executed first.

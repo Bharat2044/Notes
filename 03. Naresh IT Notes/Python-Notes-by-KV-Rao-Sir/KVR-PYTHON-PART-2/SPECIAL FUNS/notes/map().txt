@@ -1,0 +1,15 @@
+		====================================
+				2) map()
+		====================================
+=>map() is used for obtaining new Iterable object from existing iterable object by applying old iterable elements to the function.
+=>In otherwords, map() is used for obtaining new list of elements  from  existing list of elements by applying old list  elements to the function.
+
+=>Syntax:-      varname=map(FunctionName,Iterable_object)
+				
+=>here 'varname' is an object of type <class,map'> and we can convert into any iteratable object by using type casting functions.
+=>"FunctionName" represents either Normal function or anonymous functions.
+=>"Iterable_object" represents Sequence, List, set and dict types.
+=>The execution process of map() is that " map() sends every element of iterable object to the specified function, process it and returns the modified value (result) and new list of elements will be obtained". This process will be continued until all elements of Iterable_object completed.
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+

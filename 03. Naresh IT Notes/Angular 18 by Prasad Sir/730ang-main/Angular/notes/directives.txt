@@ -1,0 +1,43 @@
+directive is used to manipulate or create dynamic DOM,dynamic control flow. There are three types of directives
+1. control/conditional directives
+2. property directives
+3. custom directives
+
+1. custom/conditional directives: these directives are used to change control flow based on condition.
+  -- ngIf: 
+  <div *ngIf="x else something">
+     <h1>Hello</h1>
+  </div>
+  <ng-template #something>
+   <p>gfhjgdfhj</p>
+  </ng-template>
+  -- ngSwitch:
+  switch case is used to choose between multiple options
+  <div [ngSwitch]="value">
+     <div *ngSwitchCase="data1"> // code1 </div>
+     <div *ngSwitchCase="data2"> // code2 </div>
+     <div *ngSwitchCase="data3"> // code3 </div>
+     <div *ngSwitchCase="data4"> // code4 </div>
+     <div *ngSwitchDefault> // default code </div>
+  </div>
+  -- ngFor:
+   // ngFor is used to iterate certain values / a piece of code multiple times
+   let  arr=[2,5,6,7];
+   <div *ngFor="let i of arr">
+      <p> value is {{i}}</p>
+   </div>
+ 2. property directives :
+    There are two property directives by default 
+    i.ngClass: ngClass is a directive used to give class names multiple at a time
+    ii.ngStyle: ngStyle is a directives used to give multiple styles at a time
+    <div class="products" 
+[ngStyle]="{'fontSize':isHeading?'48px':'24px','background-color':bgColor}">
+  <div class="product" *ngFor="let p of products" [ngClass]="{'dark':isDark,}">
+      <img src={{p.image}} alt={{p.title}} height="200"/>
+      <h2>{{p.title}}</h2>
+      <p>Price: {{p.price}}</p>
+      <button>Add to cart</button>
+  </div>
+</div>
+
+3. custom directive:

@@ -1,0 +1,63 @@
+		=============================================
+				Nested OR Inner tuple
+		=============================================
+=>The Process of Defining One tuple Inside of Another tuple is called Inner OR Nested tuple.
+=>Syntax:   tplobj=(Val1,Val2......(Val11,Val12....Val-1n), (Val21,Val22,...Val-2n),....Val-n)
+=>Here (Val1,Val2......,....Val-n) is ccalled Outer tuple Eleemnts
+=>Here (Val11,Val12....Val-1n) is called Inner tuple Elements
+=>Here (Val21,Val22,...Val-2n) is also another Inner tuple  Elements.
+=>On the Inner tuple Objects, we can also Perform Both Indexing and Slicing Operations.
+=>On the Objects Inner tuple, we can apply all the Pre-defined Functions of tuple( index(), count() only)
+==============================================================================
+Examples : Tuple in Tuple  (Possibility 1)
+==============================================================================
+>>> t1=(10,"Rossum",(17,16,18),(77,78,66),"OUCET")
+>>> print(t1,type(t1))------------(10, 'Rossum', (17, 16, 18), (77, 78, 66), 'OUCET') <class 'tuple'>
+>>> t1[0]----------------------------10
+>>> t1[1]----------------------------'Rossum'
+>>> t1[2]----------------------------(17, 16, 18)
+>>> t1[3]----------------------------(77, 78, 66)
+>>> t1[2][1]------------------------16
+>>> t1[-2][-1]----------------------66
+============================================================================
+Possibility 2:    List in Tuple
+============================================================================
+=>Syntax:   tplobj=(Val1,Val2......[Val11,Val12....Val-1n], [Val21,Val22,...Val-2n],....Val-n)
+
+=>Here (Val1,Val2......,....Val-n) is called Outer tuple Eleemnts
+=>Here [Val11,Val12....Val-1n] is called Inner list Elements
+=>Here [Val21,Val22,...Val-2n] is also another Inner list  Elements.
+---------------------------------------
+Examples
+---------------------------------------
+>>> t1=(10,"Rossum",[17,16,18],[77,78,66],"OUCET")
+>>> print(t1,type(t1))---------------(10, 'Rossum', [17, 16, 18], [77, 78, 66], 'OUCET') <class 'tuple'>
+>>> print(t1[2],type(t1[2]))-----------[17, 16, 18] <class 'list'>
+>>> print(t1[3],type(t1[3]))-----------[77, 78, 66] <class 'list'>
+>>> t1[2].sort()
+>>> print(t1,type(t1))------------------(10, 'Rossum', [16, 17, 18], [77, 78, 66], 'OUCET') <class 'tuple'>
+>>> t1[3].sort(reverse=True)
+>>> print(t1,type(t1))------------------(10, 'Rossum', [16, 17, 18], [78, 77, 66], 'OUCET') <class 'tuple'>
+==============================================================================
+Possibility 3:   tuple  in list
+============================================================================
+=>Syntax:   listobj=[Val1,Val2......(Val11,Val12....Val-1n), (Val21,Val22,...Val-2n),....Val-n]
+
+=>Here [Val1,Val2......,....Val-n] is called Outer list Eleemnts
+=>Here (Val11,Val12....Val-1n]) is called Inner tuple Elements
+=>Here (Val21,Val22,...Val-2n) is also another Inner tuple  Elements.
+---------------------------------------
+Examples
+---------------------------------------
+>>> l1=[10,"Rossum",(17,16,18),(77,78,66),"OUCET"]
+>>> print(l1,type(l1))-----------------[10, 'Rossum', (17, 16, 18), (77, 78, 66), 'OUCET'] <class 'list'>
+>>> l1[1]---------------------------------'Rossum'
+>>> print(l1[2],type(l1[2]))---------(17, 16, 18) <class 'tuple'>
+>>> print(l1[3],type(l1[3]))---------(77, 78, 66) <class 'tuple'>
+==================================x============================================
+NOTE:
+--------
+=>One can define One List in another List
+=>One can define One Tuple in another Tuple
+=>One can define One List in another Tuple ( tuple of lists)
+=>One can define One tuple in another List (list of tuples)

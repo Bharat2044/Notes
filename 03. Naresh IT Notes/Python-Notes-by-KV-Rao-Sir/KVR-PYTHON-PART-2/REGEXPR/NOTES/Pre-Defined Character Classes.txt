@@ -1,0 +1,17 @@
+			========================================================
+					Pre-Defined Character Classes
+			========================================================
+=>The Pre-Defined Character Classes are defined OR Designed by Python Lang Developers and available in Python Software and whose purpose is  to Define / Design Search Pattern which is used to search OR Match OR Find in Given Data and Obtains Desired Result.
+=>In otherwords Pre-Defined Character Classes are used in Defining Search Patterns.
+=>Syntax:  "\Pre-Defined Character Classes"
+=>The Pre-Defined Character Classes are given bellow
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. \d ------>Searches for Digits  OR  [0-9]
+2. \D ------>Searches for all except Digits  OR  [^0-9]
+3. \w------->Searches word char (Alpha-numerics) only  OR [A-Za-z0-9]
+4. \W------>Searches for special symbols ( Except  word char (Alpha-numerics) )  OR  [^A-Za-z0-9]
+5. \s------->Searches for SPACE Character
+6. \S------->Searches for all except SPACE Character
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	gd="cH4LuaP7#Bb6@QpWmD9%"
+Find the Letters a b c

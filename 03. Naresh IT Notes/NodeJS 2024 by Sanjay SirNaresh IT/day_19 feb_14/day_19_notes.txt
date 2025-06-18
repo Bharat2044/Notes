@@ -1,0 +1,92 @@
+NPM (Node Package Manager)
+==========================
+-npm is the standard package manager for Node.js.
+-Node Package Manager (NPM) provides two main functionalities:
+	1.Online repositories for node.js packages
+	which are searchable on https://www.npmjs.com/
+	2.Command line utility to install Node.js packages, do version management and dependency management of Node.js packages.
+	
+-NPM comes bundled with Node.js installables.
+-To verify npm version, Run the below command  
+ npm --version/-v
+ 
+-initialize a nodejs project
+ npm init
+ npm init -y (everything default)
+ 
+-npm install 
+ install all the modules as specified in package.json
+
+-Install a Module using npm
+ npm install <Module Name>
+ 
+-Install the package globally
+ npm install <package_name> -g
+ 
+-Save the package as dependency
+ npm install <package_name> --save
+ npm i <package_name>
+ 
+-Save the package as dev-dependency
+ npm install <package_name> --save-dev 
+ 
+-Install the latest version of a package
+ npm install <package_name>@latest
+ 
+-Install any particluar version of a package
+ npm install <package_name>@<version_number>
+ npm install bootstrap@4.0.1
+ 
+-Uninstalling Packages/Modules via NPM
+ npm uninstall <package_name>
+ 
+-Update Packages/Modules via NPM
+ npm update <package_name>
+ 
+-Searching a particular package
+ npm search <package_name>
+ 
+-List all Installed Packages Locally
+ npm list/ls
+
+-List all Installed Packages Globally
+ npm ls -g
+ 
+-Run a Script
+ npm run <script-name>
+
+
+npm i nodemon 			 	--> helps during development and production dependencies
+npm i nodemon --save  		--> helps during development and production dependencies
+npm i nodemon --save-dev  	--> helps during development not in production(-D)
+npm i nodemon --no-save 	--> installs but does not add the entry to the package.json file dependencies
+npm i nodemon --save-optional --> installs and adds the entry to the package.json file optionalDependencies
+npm i --no-optional  --> will prevent optional dependencies from being installed
+
+
+
+
+
+NPM Global vs Local Installation
+--------------------------------
+-By default, NPM installs any dependency in the local mode. 
+-Local mode refers to the package installation in node_modules directory of our project.
+-Locally installed packages are accessible via require() method. 
+ ex: npm i minimist
+    const minimist = require('minimist');
+-Run the below command command to list down all the locally installed modules. 
+ npm ls
+-few packages that should be locally installed:
+ 1.minimist  2.express  3.lodash  4.moment  5.axios  6.rxjs
+-If a module/package needs to be used inside our code using require(), then install that module locally.
+ 
+ 
+-Globally installed packages/modules are stored in system directory. 
+-Such dependencies can be used in CLI (Command Line Interface), but cannot be imported using require() in Node application directly. 
+ ex:- npm i nodemon -g
+      const nodemon = require('nodemon'); //No
+-Few packages that should be globally installed: 
+ 1.npm   2.nodemon  3.typescript  4.create-react-app  5.angular-cli  6.json-server
+-Run the below command command to list down all the globally installed modules. 
+ npm ls -g
+-If we want to use a module in shell/command-prompt not using require(), install that globally.

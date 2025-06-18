@@ -1,0 +1,256 @@
+React Hooks [Functions]
+- useState()
+- useEffect()
+
+Data Binding
+- Number
+- Boolean
+- String
+
+
+						   Undefined Type
+- JS references are implicitly typed.
+- The data type will be determined according to the value assigned. 
+- If value is not assigned or initialized then JS sets as "undefined".
+
+Syntax:
+		var x ;
+		document.write("x=" + x);		//  x = undefined
+
+		if(x) {
+		     //return true if value is defined.
+		}
+
+Syntax:
+	const  [age] = useState();
+	
+	{ age }			=> age = undefined
+
+Ex: 
+data-binding.jsx
+
+import { useEffect, useState } from "react";
+
+export function DataBinding(){
+    
+    const [age, setAge] = useState();
+
+    useEffect(()=>{
+
+       setAge(22);
+
+    }, []);
+
+    return(
+        <div className="container-fluid">
+              <p>{(age)?age:"Please enter age"}</p>
+        </div>
+    )
+}
+
+							Null Type
+- Null is a type returned when value is not provided into reference at runtime of application. 
+- "null" is the keyword used to verify null reference. 
+
+Syntax:
+	const [age, setAge] = useState();
+
+	setAge(prompt("Enter Age"));		// returns null on cancel
+
+	{ (age==null)?"Enter Age":age) }
+
+
+							Symbol
+- It creates a hidden key for object.
+- Hidden keys are ignored over iterations but are accessible individually. 
+
+Syntax:
+	var Id = Symbol();
+	
+	var product = {
+	    [Id] : 1,
+	    Name: "TV"
+	}
+
+	document.write("Id=" + product[Id]);
+
+Summary:
+- Number
+- Boolean
+- String
+- Null
+- Undefined 
+- Symbol 
+- BIGINT
+
+					Binding Non-Primitive Types
+
+1. Array Type
+
+- Array Configuration 
+	a) Meta character
+	b) Array Constructor 
+
+	var  values = [ ];				// static memory
+	var  values = new Array();		// dynamic memory 
+
+FAQ: What is difference between [ ]  & Array()?
+Ans:  [ ] defines static memory, which is continuous memory. 
+         Array() defines dynamic memory, which is discreet memory. 
+
+FAQ: When to use [ ] & Array()?
+Ans:  When you want operations on data continuously then declare by using "[ ]".
+	  When you want disconnected operations on data then declare using Array().
+
+Array Methods:
+1. Reading
+	
+		toString()
+		join()
+		slice()
+		map()
+		find()
+		filter()
+		forEach()
+
+2. Add 
+		push()
+		unshift()
+		splice()
+
+3. Remove
+		pop()
+		shift()
+		splice()
+
+4. Sort
+		sort()
+		reverse()
+
+ etc.. 	
+
+
+Ex:
+data-binding.jsx
+
+import { useEffect, useState } from "react";
+import './data-binding.css';
+
+export function DataBinding(){
+
+
+    const [categories] = useState(["All", "Electronics", "Fashion", "Footwear", "Kids Fashion"]);
+
+    return(
+        <div className="container-fluid">
+              <h2>Categories</h2>
+              <nav className="d-flex justify-content-between bg-light border border-1 p-2 m-2">
+                 {
+                    categories.map(category => <a className="btn btn-warning" key={category} href={`/${category}`}>{category}</a>)
+                 }
+              </nav>
+              <ol className="list-unstyled checklist">
+                  {
+                     categories.map((category, index)=> <li key={index}> <input type="checkbox" /> <label> {category} </label> </li> )
+                  }
+              </ol>
+
+              <select>
+                 {
+                    categories.map(category=> <option key={category} value={category}>{category}</option>)
+                 }
+              </select>
+        </div>
+    )
+}
+
+data-binding.css
+
+
+.checklist {
+   height: 80px;
+   width: 200px;
+   overflow: auto;
+   border:1px solid gray;
+   padding: 10px;
+}
+
+							Object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+VS-Code shorcuts
+=================
+Open terminal - ctrl + `
+open a file - ctrl+p  /  ctrl+e
+Jump To The Beginning Or End Of File - ctrl + home/end
+command pallete - ctrl+shift+p
+toggle side-bar - ctrl+b
+Move to Explorer window - Ctrl+Shift+E 
+search  		- ctrl+f , ctrl+shift+f
+select word - ctrl + d
+delete word 	- ctrl + DEl
+Quick fix  -  ctrl + .
+select text word by word - ctrl+shift+arrow
+move line up    - alt + up-arrow
+move line down    - alt + down-arrow
+copy line up    - alt + shift + up-arrow
+copy line down    - alt + shift + down-arrow
+Add Multiple cursors - alt+click
+select a line - ctrl+l
+Delete Line 		- ctrl+shift+k  /   ctrl+x
+word wrap for a long line - Alt + Z
+Select all results of find - alt+enter
+open next tab - ctrl+tab
+navigate to a line - ctrl+g
+format code - alt+shift + f
+format only selected lines - ctrl + K, then ctrl + F
+comment - ctrl+/   shift+alt+a
+code folding - ctrl+shift+[  
+close tab - ctrl+W
+close all - ctrl + k + w
+Reveal in file explorer - Alt + Shift + R
+Split editor view -  CTRL+\
+Zen mode   -  ctrl + K, then Z
+rename   - f2
+theme change - ctrl + k + t
+to find all shortcuts  - ctrl+k+s

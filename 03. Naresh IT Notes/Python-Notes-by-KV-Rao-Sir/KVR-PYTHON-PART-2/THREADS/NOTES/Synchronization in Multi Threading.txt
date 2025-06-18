@@ -1,0 +1,32 @@
+	================================================
+			Synchronization in Multi Threading
+					(OR)
+			Locking concept in Threading
+	================================================
+=>When multiple threads are operating / working on the same resource(function / method) then by default we get dead lock result / race condition / wrong result / non-thread safety result.
+=>To overcome this dead lock problems, we must apply the concept of Synchronization .
+=>The advantage of synchronization concept is that to avoid dead lock result and provides Thread Safety Result.
+=>In Python Programming, we can obtain synchronization concept by using locking and un-locking concept.
+--------------------------------------------------------------------------------------
+=>Steps for implementing Synchronization Concept:
+			(OR)
+	Steps for avoiding dead lock
+--------------------------------------------------------------------------------------
+1) obtain / create an object of Lock class, which is present in threading module.
+	Syntax:-
+	----------------
+				lockobj=threading.Lock()
+2) To obtain the lock on the sharable resource, we must use acquire()
+		Syntax:
+		--------------
+				lockobj.acquire()
+Once current object acquire the lock, other thread objects are made wait until curent thread object releases the lock.
+3) To un-lock the sharable resource/current object, we must use release()
+	Syntax:
+	-------------
+				lockobj.release()
+
+Once current object releases the lock, other objects are permitted into sharable resource. This process of aquiring and  releasing the lock will be continued until all the thread objects completed their execution.
+====================================x=========================================================
+
+	

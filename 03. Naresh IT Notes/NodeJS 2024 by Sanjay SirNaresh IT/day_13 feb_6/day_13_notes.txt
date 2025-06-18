@@ -1,0 +1,65 @@
+Prototype
+---------
+-A prototype is an object used to implement structure, state, and behaviour inheritance.
+-Prototype is the mechanism by which JavaScript objects inherit features from one another
+-Prototype is an object, where we can attach methods and properties,which enables all the other objects to inherit these methods and properties.
+-Prototype is a base class for all the objects, and it helps us to achieve inheritance.
+-All JavaScript objects inherit properties and methods from a prototype.
+-properties added to the prototype of a class gets available to all the objects of that class.
+-prototype should be used When we have to add new properties like variables and methods 
+at a later point of time,and these properties needs to be shared across all the instances, 
+-a property should be added to the constructor of a class if value of the property changes per object
+-a property should be added to the prototype of a class if the value remains same for all objects.
+
+
+
+'Object' class
+==============
+-Objects are variables that can contain many values inside it.
+-Collection of properties & values. 
+   ex: {prop1:val1,prop2:val2}
+-Object properties are written in 'key:value' pairs. 
+  ex: let user = {name:'sachin' , age:35, add:'mumbai'}
+-we can access object properties in two ways:
+	objectName.propertyName;       user.name;
+	objectName["propertyName"];    user['age'];
+-4 ways to create javascript object
+   1. Object Literal    ex: var obj1 = {};
+   2. Object create()   ex: var obj2 = Object.create({});
+   3. Object Class	    ex: var obj3 = new Object();
+   4. Using Class		ex: var obj4 = new Employee();
+-How to get the length of the object
+	Object.keys(obj).length;
+	
+-How to check if a property exists in an object
+ console.log(propertyName in obj)   (also includes prototype properties)
+ obj.hasOwnProperty(propertyName)   (doesn't includes prototype properties)
+ 
+-Object class static functions : 
+	assign() - Copies properties from one or more source objects to a target object.
+	create() -  creates a new object, using an existing object as the prototype of the newly created object
+	freeze() - Freezes an object. neither the structure nor values can be changed
+	isFrozen() - Determines if an object was frozen
+	seal()  - structure of the object cann't be modified, value of the properties can be changed.
+	isSealed() - Determines if an object is sealed.
+	preventExtensions() -new properties cann't be added to an object, properties can be deleted, value of the properties can be changed
+    isExtensible() - Determines if extending of an object is allowed
+	keys()	- Returns an array of keys
+	values() - Returns an array of values
+	entries() - returns an array of [key, value] pairs
+	fromEntries() - transforms an array/Map into an Object
+	
+-JSON.stringify()  converts object to string.
+-JSON.parse()      converts string to object.
+
+
+-shallow copy : Object.assign()
+                obj2 = {...obj1}
+-deep cloning :  JSON.parse(JSON.stringify(obj))  
+				 obj2 = structuredClone(obj1)
+Note: structuredClone() cann't copy the functions from original object to copied object.
+
+-A shallow copy of an object is a copy whose nested properties share the same references.
+ (Nested objects will not be copied by value)
+-A deep copy of an object is a copy whose nested properties do not share the same references.
+

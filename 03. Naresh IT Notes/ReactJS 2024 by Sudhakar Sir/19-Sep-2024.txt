@@ -1,0 +1,228 @@
+MongoDB Shell Commands:
+
+1. To view existing databases 
+
+	> show  dbs
+
+2. To view active database 
+
+	> db
+
+3. To create a new database or to change into existing database
+
+	> use  databaseName
+	
+Ex:
+	> use videolibrary
+
+ Note: If you define a new name, it creates database.
+           If you define existing name, it starts using the database.
+           New database is displayed in list only when it have some collections.
+
+4. Adding a new collection into database  [collection is table]
+
+	> db.createCollection("newName", {options})
+	> db.createCollection("name")
+
+Options:
+       option		type		description
+       --------------------------------------------------------------------------------------------
+       autoIndexId	boolean	 	It sets a unique ID for every document.
+				ID is auto generated.       
+ 
+       max		number		It defines the maximum number of docs
+				allowed in a collection.
+
+       size		number		It defines the memory to allocate.						Size is defined in bytes.
+
+       capped	boolean		It will not allow to add new documents when
+				set to true. It can replace the old documents
+				when set to false.
+
+Default:
+	autoIndexId	: true
+	max		: varies
+	size		: varies
+	capped		: true
+
+Syntax:
+> db.createCollection("admin", { autoIndexId:true, max:10, capped:true, size:4194304})
+
+5. View Collections in database
+
+	> show collections
+
+6. To remove any collection
+
+	> db.collectionName.drop()
+	> db.users.drop()
+
+7. Insert documents into collection
+
+	a) insertOne()
+	b) insertMany()
+
+Syntax:
+       > db.collectionName.insertOne({ key:value, key:value })
+
+ - Every document is JSON. [POCO]
+ - Key is string type.
+ - Value is any JavaScript type
+ 	a) Primitive
+	b) Non Primitive
+
+Syntax:
+     > db.collectionName.insertMany([ { }, { } ])
+
+Ex:
+> db.categories.insertMany([{CategoryId:2, CategoryName:'Fashion'}, {CategoryId:3, CategoryName:'Footwear'}])
+
+8. Query Documents    
+- You can query documents from any collection using "find()"
+- find() uses a dynamic query expression defined in "{ }".
+
+Syntax:
+      > db.collectionName.find({})		// return all documents
+      > db.categories.find({})
+
+Query Operators:
+
+	{ key: value }		Exact match
+	
+	$gt			Greater than
+	$gte			Greater than or equal
+	$lt			Less than
+	$lte			Less than or equal
+	$ne			Not Equal
+	$eq			Equal
+	$or			OR ||
+	$and			AND &&
+
+Query-1: Find all documents with category jewelery
+
+	>db.products.find({category:"jewelery"})
+
+Query-2: Find all documents with price above 600
+	
+	>db.products.find({ price: {$gte:600} })
+
+Query-3:  Find all document with rating above 4.5
+
+	>db.products.find({ 'rating.rate': {$gt:4.5} })
+
+Query-4:  Find all jewelery products with price above 500
+
+ > db.products.find({ $and:[ {category:'jewelery'}, {price:{$gt:500}} ] })
+
+Query-5:  Find all products with price between 100 to 500
+
+> db.products.find({ $and: [ {price:{$gt:100}}, {price:{$lt:500} } ] } ) 
+
+Query-6: Find all products whose category is jewelery or rating is above 4.7
+
+> db.products.find({$or:[ {category:'jewelery'}, {'rating.rate':{$gt:4.7}} ]})
+
+
+9. Update Documents
+	
+	a) updateOne()
+	b) updateMany()
+
+ Update Operators
+
+	$set		: update values
+	$unset		: remove field
+	$rename		: change field name
+
+Syntax:
+        >db.collectionName.updateOne({findQuery},{updateQuery})
+
+        >db.products.updateOne({ id:3 }, { $set: { price:400, 'rating.rate':4.8 } })
+   
+        >db.products.updateMany({category:'jewelery'}, { $set:{'rating.rage': 4.8 }})
+
+10. Delete Documents
+	a) deleteOne()
+	b) deleteMany()
+
+Syntax:
+> db.collectionName.deleteOne({ findQuery })
+> db.products.deleteOne({id:3})
+> db.products.deleteMany({price:{$lt:100}})
+
+		       Server Side API
+		   [Node JS & Express ]
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

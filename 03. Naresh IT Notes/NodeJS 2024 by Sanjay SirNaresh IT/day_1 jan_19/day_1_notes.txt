@@ -1,0 +1,32 @@
+Browser                   NodeJs
+=======================================
+1. Document              1. document (No)
+2. window                2. window (No)
+3. cookie                3. cookie (No)
+4. offline Storage       4. offline storage(No)
+
+5. No File System        5. File System
+6. database Interaction(No) 6. database (Yes)
+7. client App / UI         7. Server App / BackEnd 
+
+
+NodeJs
+======
+NodeJS  - FrontEnd Development  - Runtime environment   -   Server  - Software
+NodeJS -  BackEdnd Development - Programming Language - FS,OS,HTTP,URL
+
+
+Variables
+=========
+1. var   
+2. let
+3. const
+
+
+   var                           let                                  const
+==============================================================================
+1.reassignment-yes          1. reassignment-yes                 1. reasignment-no
+2.initialization-not        2. initialization-not               2. initialization-mandatory
+3.Since Begining            3. ES-6   2015                      3. ES-6  2015
+4.can be redeclared         4. cann't be redeclared             4. cann't be redeclared
+5.global/function           5. global/function/block            5. global/function/block

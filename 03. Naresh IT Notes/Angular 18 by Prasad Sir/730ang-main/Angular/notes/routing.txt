@@ -1,0 +1,1 @@
+Angular have in built route module system by '@angular/router'

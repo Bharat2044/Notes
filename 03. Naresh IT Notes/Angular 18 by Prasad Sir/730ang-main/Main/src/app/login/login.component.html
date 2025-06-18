@@ -1,0 +1,13 @@
+<div class="container d-flex flex-column justify-content-center align-items-center p-5 m-5 border border-2 border-black rounded rounded-2">
+    <h1>Login Form</h1>
+    <div class="p-5">
+        <input type="email" class=" form-control" placeholder="Enter Email" [(ngModel)]="email"><br><br>
+        <input type="password" class=" form-control" placeholder="Enter Password" [(ngModel)]="password"><br><br>
+        <button class="btn btn-outline-success" (click)="login()">Login</button>
+        <p>or
+        </p>
+                <button class="btn btn-outline-success" (click)="googlelogin()">signin with Google</button>
+
+    </div>
+    <p>If You are not registered, click <a routerLink="signup">Here</a></p>
+</div>

@@ -1,0 +1,43 @@
+	===================================================
+				objects in Python
+	===================================================
+=>When we define a class, memory space is not created for Data Members and Methods but whose memory is created when we create an object w.r.t class name.
+=>The Purpose of creating an object is that "To store Data".
+=>To do any Data Processing, It is mandatory to create an object. 
+=>To create an object, there must exists a class Definition otherwise we get NameError.
+
+Definition of object:
+-----------------------------------
+=>Instance of a class is called object ( Instance is nothing but allocating sufficient memory space for the Data Members and Methods of a class).
+-------------------------------------------------
+Syntax for creating an object
+-------------------------------------------------
+			  varname=classname()                                 
+				(or)
+			 varname=classname(Val1,Val2...Val-n)            
+
+Examples:  create an object of Student
+			
+			so=Student()
+Example:-  create an object Employee
+
+			eo=Employee(10,"Rossum")
+-----------------------------------------------------------------------------------------------
+Differences Between Classes and Objects
+----------------------------------------------------------------------------------------------
+Class:
+------------
+1) A class is a collection of Data Members and Methods
+2) When we define a class, memory space is not created for Data Members and Methods and it can be treated as  specification / model for real time application.
+3) Definition of a perticular class exists only once
+4) When we develop any Program with OOPs principles, Class Definition  Loaded First  in main memory only once.
+---------------
+Objects:
+--------------
+1) Instance of a class is called Object
+2) When we create an object, we get the memory space for Data members and Methods of Class.
+3) w.r.t One class Definition, we can create multiple objects.
+4) we can create an object after loading the class definition otherwise we get    NameError  
+===============================X============================================================
+
+

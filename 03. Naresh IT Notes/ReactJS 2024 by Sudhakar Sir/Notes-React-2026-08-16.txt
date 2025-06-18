@@ -1,0 +1,258 @@
+Mouse Events
+		onMouseOver
+		onMouseOut
+		onMouseDown
+		onMouseUp
+		onMouseMove
+
+Style Binding:
+- It is a technique of configuring styles for JSX elements.
+- You can bind the styles dynamically to make element interactive and responsive.
+- Styles are defined using "style" property, which gets the attributes from JSON object.
+
+Syntax:
+		<h2  style={ { attributeName: 'value' } }>  Text  </h2>
+
+- CSS attribute name must be in camel case.
+- CSS attribute value must be string.
+
+			background-color		backgroundColor
+			text-align				textAlign
+			font-size				fontSize
+			color				color
+			width				width
+
+- Multiple attributes are separated with "," delimiter.
+
+Syntax:
+		<div  style={ { backgroundColor:'red', color:'#fff', border:'1px solid black' } }>
+
+		</div>
+
+Ex:
+event-demo.jsx
+
+import { useState } from "react"
+
+
+export function EventDemo(){
+
+    const [styleObj, setStyleObj] = useState({color:'black'});
+    
+    function handleMouseover(e){
+        setStyleObj({color:e.target.id});
+    }
+
+    function handleMouseOut(){
+        setStyleObj({color:'black'});
+    }
+
+     return(
+        <div className="container-fluid">
+             <h3>Mouse Events</h3>
+             <div className="d-flex p-4 text-white text-center">
+                <div onMouseOut={handleMouseOut} id="red" onMouseOver={handleMouseover} style={{width:'100px', backgroundColor:'red'}}>Red</div>
+                <div onMouseOut={handleMouseOut} id="green" onMouseOver={handleMouseover} style={{width:'100px', backgroundColor:'green'}}>Green</div>
+                <div onMouseOut={handleMouseOut} id="blue" onMouseOver={handleMouseover} style={{width:'100px', backgroundColor:'blue'}}>Blue</div>
+             </div>
+             <h1 style={styleObj}>Sample Text</h1>
+        </div>
+     )
+}
+
+Ex:
+event-demo.css
+
+
+.thumbnail {
+    border: 2px solid gray;
+}
+.thumbnail:hover {
+    border:2px solid blue;
+    cursor: grab;
+}
+
+event-demo.jsx
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+import './event-demo.css';
+
+
+export function EventDemo(){
+
+    const [mobiles, setMobiles] = useState([{img_src:''}]); 
+    const [preview, setPreview] = useState('m1.jpg');
+  
+
+    useEffect(()=>{
+
+        axios.get("mobiles.json")
+        .then(response=> {
+             setMobiles(response.data);
+        })
+
+    },[])
+
+    function handleMouseOver(e){
+        setPreview(e.target.src);
+    }
+
+
+     return(
+        <div className="container-fluid">
+             <div className="mt-4 row">
+                <nav className="col-2">
+                    {
+                        mobiles.map(mobile=>
+                            <div className="my-4 thumbnail" style={{width:'75px'}} key={mobile.img_src}>
+                                <img onMouseOver={handleMouseOver}  width="70" height="70" src={mobile.img_src} />
+                            </div>
+                        )
+                    }
+                </nav>
+                <main className="col-10">
+                    <img src={preview} width="35%" height="400"/>
+                </main>
+             </div>
+        </div>
+     )
+}
+
+Ex:
+event-demo.css
+
+
+@keyframes Rotate
+{
+    from {
+         transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.logo {
+    animation-name: Rotate;
+    animation-duration:5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.logo:hover {
+    animation-name: Rotate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+event-demo.jsx
+
+
+import './event-demo.css';
+
+
+export function EventDemo(){
+
+  
+
+     return(
+        <div className="container-fluid">
+            <div className='d-flex bg-dark justify-content-center align-items-center' style={{height:'100vh'}}>
+                 <img className='logo' src='logo192.png' />
+            </div>
+        </div>
+     )
+}
+
+Ex:
+event-demo.css
+
+
+@keyframes Rotate
+{
+    from {
+         transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes Zoom {
+    form {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(3) rotate(360deg);
+    }
+}
+
+event-demo.jsx
+
+
+import { useState } from 'react';
+import './event-demo.css';
+
+
+export function EventDemo(){
+
+  
+    const [styleObj, setStyleObj] = useState({animationName:'Rotate', animationDuration:'5s', animationIterationCount:'infinite', animationTimingFunction:'linear'});
+
+    function handlMouseOver(){
+        setStyleObj({animationName:'Rotate', animationDuration:'1s', animationIterationCount:'infinite', animationTimingFunction:'linear'});
+    }
+    function handlMouseOut(){
+        setStyleObj({animationName:'Rotate', animationDuration:'5s', animationIterationCount:'infinite', animationTimingFunction:'linear'});
+    }
+
+    function handleMouseDown(){
+        setStyleObj({animationName:'Zoom', animationDuration:'5s', animationTimingFunction:'linear', animationIterationCount:'infinite'});
+    }
+
+     return(
+        <div className="container-fluid">
+            <div className='d-flex bg-dark justify-content-center align-items-center' style={{height:'100vh'}}>
+                 <img onMouseDown={handleMouseDown} onMouseOut={handlMouseOut} onMouseOver={handlMouseOver} style={styleObj} src='logo192.png' />
+            </div>
+        </div>
+     )
+}
+
+Ex: mouse-move
+
+event-demo.jsx
+
+
+import { useState } from 'react';
+import './event-demo.css';
+
+
+export function EventDemo(){
+
+  
+    const [styleObj, setStyleObj] = useState({position:'', left:'', top:''});
+   
+    function handleMouseMove(e){
+         setStyleObj({position:'fixed', left:e.clientX + 'px', top:e.clientY + 'px'});
+    }
+
+     return(
+        <div className="container-fluid" onMouseMove={handleMouseMove}>
+            <div style={{height:'1000px'}}>Move your mouse pointer to test</div>
+            <img style={styleObj} src='flag.gif' width="50" height="50" />
+        </div>
+     )
+}
+
+
+
+
+
+
+
+
+
+

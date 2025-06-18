@@ -1,0 +1,77 @@
+		================================================
+			Working with CSV Files in Python
+		================================================
+=>CSV stannds for Comma Separated Values.
+=>A CSV File is one of the is a simple file format used to store tabular data, such as a 
+    spreadsheet or database.
+=>A CSV file stores tabular data (numbers and text) in plain text.
+=>Each line of the CSV file is a data record. Each record consists of one or more fields,   
+    separated by commas.
+=>Python provides an in-built module called csv to work with CSV files. 
+=>There are 2 classes provided by this module for writing  the data to CSV File. They are
+			1) By using Using csv.writer class object
+			2) By Using csv.DictWriter class object
+=>There are 2 classes provided by this module for Reading  the data from CSV File. They are
+			1) By using Using csv.reader class object
+			2) By Using csv.DictReader class object
+-----------------------------------------------------------------------
+1) By using Using csv.writer class object
+------------------------------------------------------------------------
+=>The csv.writer class object is used to insert data to the CSV file.
+=>To create an object of "csv.writer" class object, we use writer()  and present in csv module.
+=>"csv.writer" class  object provides two Functions for writing to CSV file. 
+=>They are 
+		1) writerow() 
+		2) writerows()
+
+1) writerow(): This method writes a single row at a time. 
+                       Field row can be written using this method.
+	Syntax:-  csvwriterobj.writerow(fields Row /  Data Row)
+2) writerows(): This method is used to write multiple rows at a time.
+			 This can be used to write rows list.
+	Syntax:   Writing CSV files in Python
+			csvwriterobj.writerows(data rows)
+              here data rows can be list tuple set,frozenset only
+--------------------------------------------------------------------------------------------------------------
+2) By Using csv.DictWriter class object
+---------------------------------------------------------------
+=>The "csv.DictWriter" class object is used to insert dict data to the CSV file.
+=>To create an object of "csv.DictWriter" class object, we use DictWriter()  and present in csv module.
+=>"csv.DictWriter" class  object provides two Functions for writing to CSV. 
+		1) writeheader()
+		2) writerows()
+------------------------
+1) writeheader():
+------------------------
+ =>writeheader() method simply writes the first row of your csv file using the pre-specified fieldnames.
+ Syntax:  DictWriterObj.writeheader()
+ ----------------------------------------------------------
+2) writerows():
+------------------------
+=>writerows() method simply writes all the values of (Key,Value) from dict object in the form of separate rows[ Note: it writes only the values(not keys) ]
+Syntax:-     DictWriterObj.writerows(dictobject)
+-------------------------------------------------------------------------------------------------------------------------------
+		Reading the data from  CSV File
+------------------------------------------------------------------------------------------------------------------------------
+=>There are various ways to read a CSV file that uses either the CSV module or the pandas 
+     library. 
+=>The csv Module provides classes for reading  information from CSV file .
+			1) csv.reader
+			2) csv.DictReader
+--------------------------
+1) csv.reader():
+--------------------------
+=>This Function is used for creating an object of "csv.reader" class and It helps us to read the data records from csv file.
+=>Syntax:-     csvreaderobj=csv.reader(filepointer)
+
+-------------------------------------------------------------------------------------
+2) csv.DictReader():
+-----------------------------------
+=>This Function is used for creating an object of "csv.DictReader" class and It helps us to read the data  from csv file where it contains dict data(Key,Value).
+=>Syntax:-     csvdictreaderobj=csv.DictReader(filepointer)
+------------------------------------------------------------------------------------------------------------------
+
+
+
+
+			

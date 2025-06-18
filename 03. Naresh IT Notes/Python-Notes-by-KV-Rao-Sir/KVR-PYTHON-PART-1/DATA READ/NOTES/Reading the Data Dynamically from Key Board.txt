@@ -1,0 +1,23 @@
+			=================================================================
+				Reading the Data Dynamically from Key Board
+          		=================================================================
+=>To Read the Data Dynamically from Key Board, we have Two Types of Pre-Defined Functions. They are
+				1. input()
+				2. input(Message)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. input()
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:			varname=input()
+------------
+=>This Function is used for Reading any type data from Key Board in the form str and It is placed in LHS Variable.
+=>To convert str data (User Input) into Desired data type, we use Type Casting Functions.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. input(Message)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:			varname=input("Message")
+------------
+=>Here Message Represents User-Prompring Message and It is Str type
+=>This Function is used for Reading any type data from Key Board in the form str and It is placed in LHS Variable additionally by 
+    giving User-Prompting Message.
+=>To convert str data (User Input) into Desired data type, we use Type Casting Functions.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------

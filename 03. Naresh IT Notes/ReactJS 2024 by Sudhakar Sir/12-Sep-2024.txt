@@ -1,0 +1,237 @@
+React Class Components
+- Define component 
+- Extend PureComponent , Component
+- Render method
+- State in class
+- Data Binding
+- Style Binding
+- Class Binding
+- Event Binding
+
+		         Binding methods to use State
+- State is configure at the time of creating component.
+- Methods are generated after mounting the component.
+- Hence state can't register the methods defined in components.
+- It will not allow the methods to use state. 
+- You have to bind the methods to current class memory while creating component object. So that they can use the state configured at the time of creating component.
+
+Syntax:
+	constructor()
+	{
+	     this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick()
+	{
+	}
+
+	<button onClick={this.handleClick}>
+
+Ex:
+import React from "react";
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+            msg: ""
+        }
+       this.handleInsertClick = this.handleInsertClick.bind(this);
+     }
+
+     handleInsertClick(){
+      this.setState({msg: "Record Inserted"});
+     }
+
+     render(){
+        return(
+            <div className="container-fluid">
+                <button onClick={this.handleInsertClick}>Insert</button>
+                <p>{this.state.msg}</p>
+            </div>
+        )
+     }
+}
+
+- Registering and binding an method while creating component refers to eager loading.
+- You can implement lazy loading by using bind() method at the event handler. 
+
+Syntax:
+
+  <button  onClick={this.handleClick.bind(this)}>  
+
+FAQ: Can we use class memory without "bind()" method?
+Ans: Yes. If you can keep the method memory alive after the execution, then
+         it can make use of class memory.
+
+Syntax:
+      <button onClick={ ()=> this.handleClick() }> 
+
+- Class component event arguments are same as in function component.
+
+Syntax:
+	handleClick(e)
+	{
+	  e.clientX;
+	  e.keyCode;
+	  e.target.id;
+	  e.target.className;
+	}
+
+- All SyntheticEvents are same
+
+	a) Keyboard Events
+	b) Button Events
+	c) Element State Events
+	d) Touch Events
+	etc.. 
+
+Ex:
+import React from "react";
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+            msg: ""
+        }
+       this.handleInsertClick = this.handleInsertClick.bind(this);
+     }
+
+     handleInsertClick(e){
+      console.log(`${e.target.id}\n${e.target.value}\n${e.clientX}`);
+      this.setState({msg: "Record Inserted"});
+     }
+
+     handleDeleteClick(){
+       this.setState({msg: "Record Deleted Successfully.."});
+     }
+
+     handleUpdateClick(){
+        this.setState({msg: "Record Updated.."});
+     }
+
+     render(){
+        return(
+            <div className="container-fluid">
+                <button id="btnInsert" value="Insert" onClick={this.handleInsertClick}>Insert</button>
+                <button onClick={this.handleDeleteClick.bind(this)} >Delete</button>
+                <button onClick={()=> this.handleUpdateClick()}>Update</button>
+                <p>{this.state.msg}</p>
+            </div>
+        )
+     }
+}
+
+		  Properties in Class Component
+- Controlled components use properties.
+- Parent component controls the child component by passing values into the 
+  properties.
+- Class component have built-in properties object. You can use to configure properties.
+- You can access the properties by using "this.props".
+- It is an object type with key-value collection.
+
+	this.props.key
+
+	<component  key={value} />
+
+Ex:
+vertical-nav-bar.jsx
+
+import React from "react";
+
+
+export class VerticalNavbar extends React.Component
+{
+     constructor(){
+        super();
+     }
+     render(){
+        return(
+            <div className="container-fluid">
+                <nav style={{width:'150px'}} className="border p-4 border-2 border-dark">
+                    <div className="h4">{this.props.title}</div>
+                    <ul className="list-unstyled">
+                        {
+                            this.props.items.map(item=> <li className="bg-dark text-white p-2 my-3 rounded" key={item}>{item}</li>)
+                        }
+                    </ul>
+                </nav>
+            </div>
+        )
+     }
+}
+
+
+register-user.jsx
+
+import React from "react";
+import { VerticalNavbar } from "../vertical-nav-bar/vertical-nav-bar";
+
+export class RegisterUser extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+            msg: ""
+        }
+       this.handleInsertClick = this.handleInsertClick.bind(this);
+     }
+
+     handleInsertClick(e){
+      console.log(`${e.target.id}\n${e.target.value}\n${e.clientX}`);
+      this.setState({msg: "Record Inserted"});
+     }
+
+     handleDeleteClick(){
+       this.setState({msg: "Record Deleted Successfully.."});
+     }
+
+     handleUpdateClick(){
+        this.setState({msg: "Record Updated.."});
+     }
+
+     render(){
+        return(
+            <div className="container-fluid">
+                <VerticalNavbar title="Shopper" items={["Home", "Shop", "Pages", "Blog"]} />
+                <button id="btnInsert" value="Insert" onClick={this.handleInsertClick}>Insert</button>
+                <button onClick={this.handleDeleteClick.bind(this)} >Delete</button>
+                <button onClick={()=> this.handleUpdateClick()}>Update</button>
+                <p>{this.state.msg}</p>
+            </div>
+        )
+     }
+}
+
+
+			Forms & Validations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

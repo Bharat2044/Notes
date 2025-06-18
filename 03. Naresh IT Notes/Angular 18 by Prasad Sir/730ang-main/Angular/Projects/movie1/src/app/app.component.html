@@ -1,0 +1,9 @@
+<div id="input">
+   <input type="text" placeholder="Enter Movie Name" [(ngModel)]="mn">
+   <input type="text" placeholder="Enter Movie Image URL" [(ngModel)]="mu">
+   <button (click)="update()">click here</button>
+</div>
+<div id="output" [class]="isShow?'show':'hide'">
+  <img src="{{movieURL}}" alt="{{movieName}}" height="300" width="300">
+  <h2>{{movieName}}</h2>
+</div>

@@ -1,0 +1,10 @@
+#movies{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+#movie{
+    padding: 20px;
+    box-shadow: 2px 3px black;
+    border-radius: 20px;
+}

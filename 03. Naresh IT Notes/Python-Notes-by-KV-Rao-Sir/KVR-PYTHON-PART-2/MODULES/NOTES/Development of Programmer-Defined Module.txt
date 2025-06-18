@@ -1,0 +1,24 @@
+		=================================================
+			Development of Programmer-Defined Module
+		=================================================
+=>To develop Programmer-Defined Modules, we must use the following steps
+
+	Step-1 : Define Variables (Global variables)
+	Step-2: Define Functions 
+	Step-3: Define Classes
+
+=>After developing step-1, step-2 and step-3 , we must save on some file name with an extension .py (FileName.py) and it is treated as module name. 
+=>Hence Every Python File contains Global Var Names, function Names and Class names is treated as Module Name.
+=>When a file name treated as a module name , internally Python execution environment creates a folder automatically on the name of  __pycache__ and it contains module name on the name  of "filename.cpython-312.pyc ".
+-------------------
+Examples:
+-------------------
+				__pycache__               <-----Folder Name 
+			-------------------------------------------
+				Aop.cpython-312.pyc     <-------------------Module Name
+				mathsinfo.cpython-312.pyc<--------------Module Name
+				icici.cpython-312.pyc<----------------------Module Name
+			----------------------------------------------
+
+			
+		

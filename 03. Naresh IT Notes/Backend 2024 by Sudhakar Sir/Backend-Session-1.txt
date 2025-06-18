@@ -1,0 +1,88 @@
+Software Business Backend
+- Every business backend is managed by ERP tools.
+- Business backend comprises of 
+	- Supplier Management
+	- Customer Management
+	- Materials Management
+	- Finance Management
+	- Sales Management etc..
+- Amazon, Flipkart, Ebay are some of the popular ERP based applications.
+- Popular ERP tools are Oracle, SAP, Ariba etc.
+- Every business backend requires various softwares in the front end.
+- The front end software applications have
+	a) Frontend UI
+	b) Backend Business Logic
+
+Software Application Backend:
+- Applications use various tier architectures like
+	a) one-tier
+	b) two-tier
+	c) 3-tier
+- Every web application is a 3 tier application.
+- It comprises of 
+	a) Presentation Tier
+	b) Application Tier
+	c) Database Tier
+
+- Application runs in tiers.
+- Database tier runs the database, which requires DBA [Database Administration].
+- DBA includes responsibilities like security, maintance, performance, load balancing, etc.
+- Application Tier comprsies of server that hosts your application.
+- Server Administration includes responsibilities like security, mantaince, load, performance etc.
+
+Layers:
+- Every 3 tier application is built in 3 layers.
+	a) UI Layer
+	b) Business Layer
+	c) Database Layer
+- Database layer allows designing database for any application
+	- add data
+	- update data
+	- remove data etc..
+- Business Layer allows designing business logic to handle communication between UI and database. 
+	- Creating Server
+	- Hosting application on server
+	- Handling Request and Response
+	- Creating API's etc..
+- UI layer allows designing user interface for application
+	- Creating Web Pages
+	- Handling Interactions
+	- BOM, DOM
+	- Styling etc.
+
+			       Database Layer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

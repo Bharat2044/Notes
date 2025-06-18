@@ -1,0 +1,21 @@
+		==============================================================
+			Difference between Function, Module and Package
+		==============================================================
+--------------------------------
+Function
+--------------------------------
+=>A Function is a Sub Program, which is used to perform Certain Operation and Provides Code Re-Usability
+=>A Function related Code can be accssed within Same Program But Not Possible to Access Across the Program
+--------------------------------
+Module
+--------------------------------
+=>A Module is a Collection Global Variables , Function Names and Class Names
+=>The purpose of Module is that to Re-Use the Global Variables , Function Names and Class Names of Module either within the Same or Across the Programs provided Module and Its Corresponding Main Program Must Present in Same Folder But Not Possible Access across the Folders OR Environments OR Networks.
+--------------------------------
+Package
+--------------------------------
+=>A Package is a Collection Modules .
+=>The Purpose of Package is that to Re-Use Modules(Global Variables , Function Names and Class Names)  either within the  Same Folder OR Differtent Folder OR  Environments OR Networks.
+=============================================x=================================================
+NOTE: The concepts of Functions, Modules and Packages are called Re-Usable Techniques in Functional 
+            Programming.

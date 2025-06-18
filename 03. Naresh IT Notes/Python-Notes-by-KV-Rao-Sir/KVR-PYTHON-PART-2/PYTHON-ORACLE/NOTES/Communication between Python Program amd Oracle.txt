@@ -1,0 +1,76 @@
+		========================================================================
+			 Communication between Python Program amd Oracle
+		========================================================================
+=>To Develop Python  and oracle Communication (PDBC) Applications, we need the following Pre-Requisites.
+			
+		1. Install Python Software
+		2. Install Oracle Data Base Software 
+		3. Install Corresponding Data Base Module for Python Programmers 
+			(  upto Python3.10 Version, Install cx_Oracle module
+			   from Python 3.11 and Higher, Install oracledb module)
+			
+=>After Installing the above Software, we develop the Application, which Establish the Communication Python 
+   Software and Oracle Database Software. To doing this we need to learn the following the Steps.
+****************************************************************************************************************************************
+Step-1: import cx_Oraxcle OR oracledb depends on Python Version and Other Modules if required.
+Step-2: Every Python Program Must Obtain the Connection from Oracle Database
+Step-3: Every Python Program Must  Create an object of Cursor
+Step-4: Every Python Must Design the Query ,Place the Query in Cursor object and send for Execute in Database.
+Step-5: Every Python Program Must Process the Result of the Query
+Step-6: Every Python Program is Recommned to Close the Connection from Database Software.
+==============================================================================================
+Explanation
+===============================================================================================Step-1: import cx_Oraxcle OR oracledb depends on Python Version and Other Modules if required.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------=>When Python Programmer wants to communicat with Oracle Database then Python Programmer Must import either 
+   cx_Oracle Module (upto Python 3.10) OR oracledb module (from Python 3.11 and Higher).
+
+Examples:      import cx_Oracle as crc
+				(OR
+			import oracledb as orc
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------Step-2: Every Python Program Must Obtain the Connection from Oracle Database
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>After importing either cx_Oracle or oracledb module, Python program Must the get the Connection from Oracle Database.
+=>To get the Connection from Oracle Database, we mus use connect(), which is present in cx_Oracle OR oracledb module.
+---------------------
+Syntax:		varname=oracledb.connect("username/password@DNS/ServiceID")
+---------------------						OR
+			varname=oracledb.connect("username/password@IPAddress/ServiceID")
+
+=>Here varname---->Represents Connection Object of type <class, oracledb.Connection>
+=>here oarcledb---->Represents Name of Pre-Defined Third Party Module
+=>Here connect()--->It is One of the Pre-DefinedFunction used for Obtaining the connection from Oracle Database
+=>here username--->Represents user name of Oracle Database
+=>here password--->Represents Password of Oracle Database
+=>here DNS----------->DNS stands for Domain Naming System/Service. 
+				  DNS Represents Name of the Physical machine where Database Software Resides
+				  The Default DNS of Every Computer is "localhost".
+=>here IPAddress--->IPAddress stands for Internet Protocol Address.
+				   IPAddress Represents Physical Address of the Machine where Database Software Resides.
+				  The Default IPAddress of Every Computer is 127.0.0.1 (Loop Back Address).
+				
+=>here ServiceID---->Represents Alias name or Alternative Name to Original Name.
+				   To Find ServiceID of Oracle Database, we use the following Query at SQL Environment
+				   SQL> select * from global_name;
+				   OUTPUT
+				   -------------
+				     GLOBAL_NAME
+				   ------------------------
+					orcl <----Service ID
+=>Here "username/password@DNS/ServiceID" is calle Connection URL of Oracle Database.
+=>If we write OR Specify any part of "username/password@DNS/ServiceID"  as wrong then we get exception called "oracledb.DatabaseError "
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step-3: Every Python Program Must  Create an object of Cursor
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>The purpose of Creating an object of Cursor is that "To carry the query from Python Program to Oracle Database and brings the result from Oracle Database and handover to Python Program".
+=>To Create an object of Cursor, we use a pre-defined function called cursor()  which is present in connection object.
+=>Syntax:     varname=connobj.cursor()
+=>Here varname is an object of <class, oracledb.Cursor>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step-4: Every Python Must Design the Query ,Place the Query in Cursor object and send for Execute in Database.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>A Query is a Request / Question to the Data Base Software for Peforming any Database Operation.
+=>To Execute the Query from Python Program in Oracle Database, we use a pre-defined function execute(), which is 
+    present in cursor object.
+=>Syntax:     curobj.execute("Query")
+=>Here Query can Either DDL, DML and DRL
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,35 @@
+			================================================================
+				Parameters and Arguments
+			================================================================
+Parameters
+-----------------
+			1) Formal Parameters OR Variables:	a) Used in Function Heading
+											b) For Storing the Inputs coming from Function calls
+											c) To be accessed inside corresponding function definition
+
+			2) Local Parameters OR Variables:	a) Used in Function Body
+											b) For Storing Temporary result OR Function Processing logic
+											c) To be accessed inside corresponding function definition 
+		
+Examples: 
+		def  sum(a,b,c):  # Here  a,b,c are called formal Parameters
+		     d=a+b+c         # Here  'd' is called Local Variable / Parameter
+
+-------------------------------------------------------------------
+Arguments
+-------------------------------------------------------------------
+=>Arguments are the Variables / Values used in Function calls
+----------------
+Examples:
+----------------
+				sum(10,20,30) # Function Call-- here 10 20 30 Argument values
+						OR
+				x=10
+				y=20
+				z=30
+				sum(x,y,z) # ) # Function Call--here x,y,z are called Arguments
+
+=>Here Relationship between Arguments of function call and Parameters of Function is that "Every Argument Value of function call is passing to Formal parameter of Function Definition(called Arguments Passing Mechanism )".
+=====================================x=================================================
+
+

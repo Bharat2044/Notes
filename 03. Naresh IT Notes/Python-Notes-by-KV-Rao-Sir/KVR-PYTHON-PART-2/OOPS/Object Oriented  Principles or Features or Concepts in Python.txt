@@ -1,0 +1,13 @@
+			=====================================================================
+				 Object Oriented  Principles or Features or Concepts in Python
+			======================================================================
+=>To say a Programming Language is Object Oriented then It has to satisfy the following Principles.
+
+			1. Classes
+			2. Objects
+			3. Data Encapsulation
+			4. Data Abstraction
+			5. Inheritance
+			6. Polymorphism
+			7. Message Passing (already discussed) 
+==========================================================================================

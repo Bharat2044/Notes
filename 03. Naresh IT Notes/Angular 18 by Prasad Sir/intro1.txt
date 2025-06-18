@@ -1,0 +1,38 @@
+To build Front end of website HTML,CSS,JS
+popular frameworks/libraries of JS are React,Angular,Vue
+
+1. what is angular?
+Angular is a JS framework and a developer platform developed and maintained by Google from 2012.
+In 2010, Google built Angular JS which works with JS and In 2012, it changes as Angular using TS
+
+2. React vs Angular
+React is a library and Angular is Framework
+React uses JS/TS , but Angular uses only TS
+React is Developed by FB and Angular is developed by Google
+React uses one Way Data Binding
+Angular uses two way data binding
+
+3. Angular versions
+latest version is 18, but still stable is 16.
+official website is Angular.dev
+
+Angular buils SPA and PWA applications
+Course:
+JS basics,TS,Angular,RxJS,Git & GitHub,Netlify
+Duration: 40 sessions , every day 1 task
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

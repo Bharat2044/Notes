@@ -1,0 +1,239 @@
+				   Components in React 18x Environment
+
+- Every component comprises of 3 files
+		a) component.jsx | js
+		b) component.css
+		c) component.test.js
+			     (or)
+		    component.spec.js
+
+- ".jsx" comprises of design and logic.
+- ".css" comprises of styles
+- ".test.js" comprises test cases [JEST Framework]
+
+Note: Import CSS into JSX component. 
+
+	  import   "./file.css";
+
+- Every component must be in "src" folder.
+- Every static resources like images, docs, json files, etc must be in "public".
+
+Ex:
+1. Add a new folder by name  "components" into "src"
+2. Add following files into "login" folder
+
+			login.component.jsx
+			login.component.css
+			login.component.test.js
+
+login.component.jsx
+
+import "./login.component.css";
+
+export function LoginComponent()
+{
+    return(
+        <div className="login-container">
+            <form className="login-form">
+                <h2>User Login</h2>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" /></dd>
+                    <dt>Password</dt>
+                    <dd><input type="password" /></dd>
+                </dl>
+                <button>Login</button>
+            </form>
+        </div>
+    )
+}
+
+login.component.css
+
+.login-form {
+    border:1px solid gray;
+    padding: 20px;
+    border-radius: 10px;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+3. Go to "index.js" and set login as startup
+
+	<React.StrictMode>
+		
+		<LoginComponent />
+
+	</React.StrictMode>
+
+Setup Bootstrap for React Application:
+
+1. Install bootstrap and icons for project
+
+		>npm  install  bootstrap  bootstrap-icons --save
+
+
+2. Go to "index.js" and import 
+
+	import  '../node_modules/bootstrap/dist/css/bootstrap.css';
+	import  '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
+	import bootstrap from "bootstrap";		// imports all components of bootstrap
+									   [carousel, navbar, offcanvas, modals,..]
+Ex:
+ login.component.jsx
+
+import "./login.component.css";
+
+export function LoginComponent()
+{
+    return(
+        <div className="login-container">
+            <form className="login-form alert alert-warning alert-dismissible">
+                <h2 className="bi bi-person-fill">User Login</h2>
+                <button type="button" className="btn btn-close" data-bs-dismiss="alert"></button>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" className="form-control" /></dd>
+                    <dt>Password</dt>
+                    <dd><input type="password" className="form-control" /></dd>
+                </dl>
+                <button className="btn btn-warning w-100">Login</button>
+            </form>
+        </div>
+    )
+}
+
+					            DataBinding in React
+
+- Data Binding is a technique of accessing data from source and binding to UI elements.
+- It also involves identifying the changes in data from UI and update back into source.
+- However React JS will not support Two-Way-Data binding implicitly.
+- It supports only One-Way-Binding. 
+- JavaScript requires various DOM methods to handle data binding.
+- React uses data binding expression "{  }".
+
+Syntax:
+		var username = "John";
+
+		<p>  Hello ! { username },  welcome to React </p>
+
+Binding various Data Types:
+- JavaScript Primitive types
+	1. number
+	2. string
+	3. Boolean
+	4. null
+	5. undefined
+	6. symbol
+	7. bigint 
+
+- JavaScript Non-Primitive types
+	1. Array
+	2. Object
+	3. Map & Set
+- Additional Type
+	1. Date
+	2. Regular Expression
+
+
+							Number Type
+- JavaScript number includes 
+	signed integer			- 32
+	unsigned integer		32
+	float 				4.5
+	double				23.556
+	decimal				21340.4440
+	bigint 				99488483828n
+	exponent				2e3  [2000]	
+	binary				0b1010
+	hexadecimal			0x4130	
+	octa					0o743
+- Number binding can use various JS methods to convert a number into string or with factions. 
+
+	a) toFixed()
+	b) toLocaleString()
+
+Syntax:
+		var price = 56000.00;
+
+		{ price.toFixed(2) }
+
+		{ price.toLocaleString('en-in', { style:'currency', currency:'INR' }) }
+
+- Converting numeric string into number requires
+
+	a) parseInt()
+	b) parseFloat()
+
+						 Boolean
+
+- React can't display "true" or "false" as value in UI.
+- You have to logically handle.
+- JSX will not allow any type of statements in UI.
+
+Syntax:
+	var  stock = true;
+
+	{  (stock==true) ? "true" : "false"  }
+
+				
+						String 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

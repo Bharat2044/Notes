@@ -1,0 +1,18 @@
+		========================================================
+				Reshapping of ndarray and attributes of ndarray
+		========================================================
+=>Reshapping of ndarray is nothing but changing the dimension of ndarray.
+=>To Perform Rehspaing Operation, we have 2 types. They are
+
+			1. shape attribute
+			2. reshape()
+=>The attributes of ndarray are
+
+			1. ndim
+			2. shape
+			3. size
+			4. dtype
+=>Here ndarray is one of the Pre-Defined Class present in numpy module
+=>The purpose of ndarray is that to store 1-D , 2-D and N-Dimesional Data  for performing Array Based Computing and 
+    to do Complex Math Operations.
+==============================================================================================

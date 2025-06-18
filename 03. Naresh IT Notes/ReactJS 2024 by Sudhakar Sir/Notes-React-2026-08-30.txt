@@ -1,0 +1,160 @@
+- React Components
+- Data Binding
+- Style Binding
+- Class Binding
+- Event Binding
+
+						      React Hooks
+- Hook is service.
+- Service is a pre-defined business logic, which you can inject, customize and implement according to the requirements. 
+- Service enables
+	a) Reusability
+	b) Extensibility
+	c) Testability
+	d) Maintainability 
+- Service uses "Single Ton" pattern.
+- An object is created for the first request and same object is used across requests.
+- Service implements "Dependency Injection" mechanism. [DI]
+- DI comprises various components
+	a) Consumer
+	b) Provider
+	c) Injector etc..
+- Consumer is a component that uses the service.
+- Provider is a component responsible for locating the reference & value in memory.
+- Injector injects the value into component. 
+- React from 17x version provides pre-defined Hooks to handle various functionalities
+		useState()
+		useEffect()
+		useRef()
+		useMemo()
+		useCallback()
+		useContext()
+		useReducer() etc..
+- React allows to create custom hooks.
+
+Rules for creating and using hooks:
+1. Hook is a function of JavaScript.
+2. Hook function can't be void.
+3. It must return any functionality or value.
+4. It is configured and used only at high level in code snippet. You can't define at block level.
+
+	      {
+		function LoadProducts()
+		{
+		   const [msg, setMsg] = useState(' ');	// invalid
+		}
+	     }
+
+5. Hook function name must use a camel case.
+
+6. Hook is recommended to start with prefix "use".
+
+7. You can use all react hooks and 3rd party libraries inside hook.
+
+8. You can't use hooks in class component.
+
+9. Hooks can run only in function component.
+
+10. Hooks are available from 17x version, hence you can't import and use hooks 
+      in earlier versions.
+
+11. Hook function can be parameter less or parameterized. If hook is parameterized then every parameter is a required parameter. 
+
+
+Ex:
+1. Add a new folder  "hooks"
+
+2. Add new files 
+
+		captcha.hook.js
+
+
+
+export function useCaptcha()
+{
+    var code = '';
+    code = `${Math.round(Math.random()*10)} ${Math.round(Math.random()*10)} ${Math.round(Math.random()*10)} ${Math.round(Math.random()*10)} ${Math.round(Math.random()*10)} ${Math.round(Math.random()*10)}`
+    return code;
+}
+
+		fetch-api-hook.js
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+export function useFetch(url)
+{
+    const [data, setData] = useState([]);
+    useEffect(()=>{
+        axios.get(url)
+        .then(response=>{
+            setData(response.data);
+        })
+    },[url]);
+    return data;
+}
+
+Ex:
+
+import "./login.component.css";
+import  { useCaptcha } from '../../hooks/captcha-hook'; 
+import { useFetch } from "../../hooks/fetch-api-hook";
+
+export function LoginComponent()
+{
+    let code = useCaptcha();
+
+    let categories = useFetch('https://fakestoreapi.com/products/categories');
+
+    return(
+        <div className="login-container">
+            <form className="login-form alert alert-warning alert-dismissible">
+                <h2 className="bi bi-person-fill">User Login</h2>
+                <button type="button" className="btn btn-close" data-bs-dismiss="alert"></button>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" className="form-control" /></dd>
+                    <dt>Password</dt>
+                    <dd><input type="password" className="form-control" /></dd>
+                    <dt>Verify Code</dt>
+                    <dd>{code}</dd>
+                    <dt>Categories</dt>
+                    <dd>
+                        <select className="form-select">
+                            {
+                                categories.map(category=><option key={category}>{category}</option>)
+                            }
+                        </select>
+                    </dd>
+                </dl>
+                <button className="btn btn-warning w-100">Login</button>
+            </form>
+        </div>
+    )
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

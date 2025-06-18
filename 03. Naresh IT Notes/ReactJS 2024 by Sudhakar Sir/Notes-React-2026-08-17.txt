@@ -1,0 +1,226 @@
+Element State Events
+	onChange
+	onBlur
+	onFocus
+	onSelectStart
+	onSelect
+	
+Two Way Data Binding:
+- It is a technique of identifying the changes in UI elements and updating into data source. 
+- React can handle two way binding only by using "onChange" event.
+- onChange is an Synthetic Event of React that allows changes in value and updates into the source. 
+
+Syntax:
+	  function handleChange(e)
+	  {
+	      setValue(e.target.value);
+	  }
+
+	  <input type="text"  onChange={handleChange}>
+
+Ex:
+event-demo.jsx
+
+
+import { useState } from 'react';
+import './event-demo.css';
+
+
+export function EventDemo(){
+
+  
+    const [Name, setName] = useState('TV');
+    const [nameError, setNameError] = useState('');
+
+    function handleChange(e){
+        setName(e.target.value)
+    }
+
+    function handleBlur(e){
+        if(e.target.value.length===0) {
+            setNameError('Name Required');
+        } else {
+            setNameError('');
+            setName(e.target.value.toUpperCase());
+        }
+    }
+
+    function handleFocus(){
+        setNameError('Name in Block Letters');
+    }
+
+     return(
+        <div className="container-fluid">
+            <h3>Two way binding</h3>
+            <dl>
+                <dt>Product Name</dt>
+                <dd><input type="text" value={Name} onFocus={handleFocus}  onBlur={handleBlur} onChange={handleChange} /></dd>
+                <dd className='text-danger'> {nameError} </dd>
+            </dl>
+            <h3>Details</h3>
+            <dl>
+                <dt>Name</dt>
+                <dd>{Name}</dd>
+            </dl>
+        </div>
+     )
+}
+
+Class Binding:
+- It is a technique used to bind CSS classes to JSX elements dynamically.
+- You can change the class dynamically.
+
+Syntax:
+	<div  className={ 'cssClassName '  + dynamicName }> 
+	<div  className={ `cssClassName ${dynamicName}` }
+
+
+Ex:
+
+import { useState } from 'react';
+import './event-demo.css';
+
+
+export function EventDemo(){
+
+  
+    const [theme, setTheme] = useState('bg-light');
+    const [btnTheme, setbtnTheme] = useState('btn btn-dark w-100');
+
+    function handleThemeChange(e){
+         if(e.target.checked){
+             setTheme('bg-dark text-white');
+             setbtnTheme('btn btn-light w-100');
+         } else {
+             setTheme('bg-light'); 
+             setbtnTheme('btn btn-dark w-100');
+         }
+    }
+
+     return(
+        <div className="container-fluid d-flex justify-content-center">
+            <form className={`mt-4 p-4 border border-1 rounded ${theme}`}>
+                <div className='form-switch'>
+                    <input type='checkbox' onChange={handleThemeChange} className='form-check-input' /> 
+                    <label className='form-check-label ms-2'> Dark Theme </label>
+                </div>
+                <h3 className='bi bi-person-fill'> Signin </h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" className='form-control'/></dd>
+                    <dt>Password</dt>
+                    <dd><input type="password" className='form-control' /></dd>
+                </dl>
+                <button className={btnTheme}>Login</button>
+            </form>
+        </div>
+     )
+}
+
+Ex: EMI Calculator
+
+
+import { useState } from "react"
+
+
+export function EMICalculator(){
+
+    const [amount, setAmount] = useState(100000);
+    const [years, setYears] = useState(1);
+    const [rate, setRate] = useState(10.45);
+    const [emi, setEMI] = useState(0);
+    const [toggle, showToggle] = useState('d-none');
+
+    function handleAmountChange(e){
+        setAmount(e.target.value);
+    }
+
+    function handleYearChange(e){ 
+        setYears(e.target.value);
+    }
+
+    function handleRateChange(e) {
+        setRate(e.target.value);
+    }
+
+    function handleCalculateClick(){
+        var P = parseInt(amount);
+        var R = parseFloat(rate)/12/100;
+        var N = parseInt(years) * 12;
+        var EMI = P * R * (Math.pow(1+R, N)) / (Math.pow(1+R,N) - 1);
+        setEMI(Math.round(EMI).toLocaleString('en-in', {style:'currency', currency:'INR'}));
+        showToggle('d-block');
+    }
+
+    return(
+        <div className="container-fluid bg-secondary" style={{height:'100vh'}}>
+            <h3 className="text-white text-center">Personal Load EMI Calculator</h3>
+            <div className="bg-light m-4 p-4">
+                <div className="row my-3">
+                    <div className="col">
+                        Amount you need &#8377; <input onChange={handleAmountChange} type="text" size="15" value={amount} />
+                    </div>
+                    <div className="col">
+                        for <input type="text" size="2" onChange={handleYearChange} value={years} /> years
+                    </div>
+                    <div className="col">
+                        Interest rate <input type="text" onChange={handleRateChange} size="4" value={rate} /> %
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <input type="range" onChange={handleAmountChange} className="form-range" min="100000" max="1000000" value={amount}/>
+                        <div>
+                            <span>&#8377; 1,00,000</span>
+                            <span className="float-end">&#8377; 10,00,000</span>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <input type="range" onChange={handleYearChange} className="form-range" min="1" max="5" value={years}/>
+                        <div>
+                            <span>1</span>
+                            <span className="float-end">5</span>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <input type="range" onChange={handleRateChange} className="form-range" min="10.45" max="18.45" step="0.01" value={rate}/>
+                        <div>
+                            <span>10.45%</span>
+                            <span className="float-end">18.45%</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="row my-3">
+                    <div className="col text-end">
+                        <button onClick={handleCalculateClick} className="btn btn-primary">Calculate</button>
+                    </div>
+                </div>
+                <div className="row my-4">
+                    <div className="col text-center">
+                         <div className={toggle}>Your monthly EMI is <span className="fs-4 fw-bold text-primary">{emi}</span> for next {years*12} months </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

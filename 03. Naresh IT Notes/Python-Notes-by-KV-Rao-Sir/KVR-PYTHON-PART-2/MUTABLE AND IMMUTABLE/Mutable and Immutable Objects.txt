@@ -1,0 +1,17 @@
+			============================================================
+					Mutable and Immutable Objects
+			============================================================
+-------------------------------------
+Mutable Object
+--------------------------------------
+=>A Mutable Object is one whose Content OR Value Can be changed at Same Memory Address
+=>Examples:  bytearray,list,set,dict
+---------------------------------------------------------
+Immutable Object
+---------------------------------------------------------
+=>An Immutable Object is  which will satisfy the following Properties
+		a) Immutable Object Content Can't be modified at Same Address (Value Can be Modified But whose Modified values															stored at Different Address)
+		b) Immutable Object does not support Item Assigment (TypeError)
+
+Examples: int, float,bool.complex, str, bytes, range,tuple,set,frozenset
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

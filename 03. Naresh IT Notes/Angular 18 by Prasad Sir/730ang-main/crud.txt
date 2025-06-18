@@ -1,0 +1,29 @@
+1. goto terminal -->cmd --> "npm install -g json-server"
+2. Goto backend folder and create a file named db.json ad add some json data like
+  {
+    "movies": [
+        {
+            "Title":"RRR",
+            "Year":2022
+        },
+        {
+            "Title":"KGF",
+            "Year":2018
+        }
+    ]
+  } 
+3. goto terminal-->cmd-->backend folder-->
+ json-server db.json --watch
+
+4. goto crud folder, create new angular app using cmd "ng new frontend --standalone=false"
+5.create a service, ng generate service service-name
+6. run the app "ng serve -o"
+7. goto module import httpClientModule and write it in imports
+8. goto service ---> import &  inject httpClient and write a function to get values from api endpoint. This function returns observable
+9. goto app component ts and import and inject our service and call getFunction which returns observable and subscribe it, get data and store it new array
+10. app.component.html --> print the array using ngFor
+11. put a form in app html and a button to create, on click, trigger a function in ts
+12. collect user data using ngmodel in ts and call api functions in service
+13. in service do post operation to link and put that object
+14. in app ts, subscribe and reload
+15. you can also do similarly delete and update

@@ -1,0 +1,35 @@
+.message-container{
+    width:400px;
+    height:500px;
+    align:center;
+    background-color: antiquewhite;
+    border:2px solid grey;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+.outgoing__message{
+    float:right;
+    clear: both;
+}
+.incoming__message{
+    float:left;
+    clear: both;
+}
+.message_form{
+    clear: both;
+}
+.received__message{
+    background-color: aquamarine;
+    padding: 10px;
+    border-radius: 10px 0 10px 0;
+    margin: 3px 0;
+}
+.sent__message{
+    background-color: cadetblue;
+    padding: 10px;
+    border-radius: 10px 0 10px 0;
+    margin: 3px 0;
+}
+.fallback{
+    clear: both;
+}

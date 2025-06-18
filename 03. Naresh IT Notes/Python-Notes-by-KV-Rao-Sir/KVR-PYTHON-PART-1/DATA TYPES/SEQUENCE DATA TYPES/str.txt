@@ -1,0 +1,112 @@
+			===========================================
+						1. str  
+			===========================================
+Index
+----------------
+=>What is str
+=>Definition of str
+=>Notations of str
+=>Types of strs
+=>Syntax for storing str data
+=>Memory Management of str data
+	a) +Ve Indexing
+	b) -Ve Indexing
+=>Operations on str data
+	a) Indexing
+	b) Slicing Operation
+			
+=>Programming Examples
+=============================================================================
+Properties
+=================================================================================
+=>'str' is one of the pre-defined class and treated as Sequence Data Type.
+=>The purpose of str data type is that "To store String data or text data or Alphanumeric data or numeric data or special symbols  within double Quotes or single quotes or tripple double quotes and tripple single quotes. "
+------------------------
+=>Def. of str:
+-----------------------
+=>str is a collection of Characters or  Alphanumeric data or numeric data or any type of data enclosed within double Quotes or single quotes or tripple double quotes and tripple single quotes. "
+----------------------------
+Types of Str data
+-----------------------------
+=>In Python Programming, we have two types of Str Data. They are
+		1. Single Line String Data
+		2. Multi Line String Data
+-----------------------------------------
+1. Single Line String Data:
+-----------------------------------------
+=>Syntax1:-       varname=" Single Line String Data "
+						(OR)
+=>Syntax2:-       varname=' Single Line String Data '
+=>With the help double Quotes ("  ") and single Quotes (' ') we can store single line str data only but not possible to store multi line string data.
+---------------------------------------------------------------------------------------------------------------------
+2. Multi Line String Data:
+-----------------------------------------
+=>Syntax1:-       varname=" " " String Data1 
+						   String Data2
+						   ------------------
+						   String data-n " " "
+
+						     (OR)
+
+=>Syntax2:-      varname=' ' '    String Data1 
+						   String Data2
+						   ------------------
+						   String data-n ' ' '
+
+=>With the help tripple double Quotes (" " "     " " ") and Tripple single Quotes (' ' '    ' ' ') we can store single line str data and multi line string data.
+------------------------------------------------------------------------------------------------------------------------------------------
+Examples:
+--------------------------------------------------------------------------------------------------------------------------------------
+>>> s1="Python"
+>>> print(s1,type(s1))---------------------------Python <class 'str'>
+>>> s2='Python'
+>>> print(s2,type(s2))--------------------------Python <class 'str'>
+>>> s3="A"
+>>> print(s3,type(s3))--------------------------A <class 'str'>
+>>> s4='A'
+>>> print(s4,type(s4))-------------------------A <class 'str'>
+>>> s1="123456"
+>>> print(s1,type(s1))-------------------------123456 <class 'str'>
+>>> s2="Python3.11"
+>>> print(s2,type(s2))------------------------Python3.11 <class 'str'>
+>>> s3="123$456_abc"
+>>> print(s3,type(s3))------------------------123$456_abc <class 'str'>
+>>> s4="@#$%^&8912"
+>>> print(s4,type(s4))-------------------------@#$%^&8912 <class 'str'>
+>>> s1="Python Programming"
+>>> print(s1,type(s1))-----------------------Python Programming <class 'str'>
+------------------------------------------
+>>> addr1="Guido Van Rossum
+                    ------------------------------    SyntaxError: unterminated string literal (detected at line 1)
+>>> addr1='Guido Van Rossum
+		 ---------------------------------   SyntaxError: unterminated string literal (detected at line 1)
+---------------------------------------------------------------------
+>>> addr1=" " "Guido Van Rossum
+... FNO:3-4, Hill Side
+... Python Software Foundation
+... Nether Lands-56 " " "
+>>> print(addr1,type(addr1))
+				Guido Van Rossum
+				FNO:3-4, Hill Side
+				Python Software Foundation
+				Nether Lands-56 <class 'str'>
+-------------------------------------------------------------------------------------------
+>>> addr2= ' ' ' Travis Oliphant
+... HNO:12-34, Sea Side
+... Numpy Organization
+... Nether lands-58 ' ' '
+>>> print(addr2,type(addr2))
+				Travis Oliphant
+				HNO:12-34, Sea Side
+				Numpy Organization
+				Nether lands-58 <class 'str'>
+-----------------------------------------------------------------
+>>> s1="""Python Programming"""
+>>> print(s1,type(s1))------------Python Programming <class 'str'>
+>>> s1='''Python Programming'''
+>>> print(s1,type(s1))-------------------Python Programming <class 'str'>
+>>> s2="""A"""
+>>> print(s2,type(s2))------------------A <class 'str'>
+>>> s2='''A'''
+>>> print(s2,type(s2))---------------A <class 'str'>
+===========================================================================

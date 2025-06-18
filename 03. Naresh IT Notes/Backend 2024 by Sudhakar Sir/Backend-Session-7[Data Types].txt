@@ -1,0 +1,137 @@
+MongoDB Collections
+- Creating Collection
+- Inserting Documents
+- BSON Data Types
+
+			       Embedded Documents
+- You can configure an embedded document, which is an object inside object.
+- It is often reffered as Nested Document.
+
+	{
+	   "key": value,
+	  "key":  {  
+		"key":value,
+	 	"key":value
+	             }
+	}
+
+- Embedded documents use "dot" operator to access the keys.
+  [ dot is member invoking operator ]
+
+Ex:
+	{
+	  "Id":1,
+	  "Name": "TV",
+	  "Price": 45000.33,
+	  "Rating": {  
+		   "Rate": 4.5,
+		   "Count": 5300
+		}
+	}
+
+FAQ: What is the data type of embedded document?
+Ans:  "Object".
+
+
+			   Arrays in Document
+- Array reduces overhead and complexity.
+- Array is a collection of values stored in sequential order. And allows access in random.
+- BSON array is a collection of various types of elements.
+- Array memory is allocated by using meta character "[ ]" or with "Array()".
+- But Array() constructor is allowed only in JavaScript.
+
+Syntax:
+	{
+	  "Id":1,
+	 "Name": "TV",
+	 "Brands": ["LG", "Samsung"]
+	}
+
+- Array elements are accessed using index or property.
+
+	object.Brands[1]		// Samsung 
+	object.Brands[0]		// LG
+
+- Array can have embedded documents.
+
+	{
+	  "Name" : "TV",
+	  "Vendors": [ 
+		       {
+		          "Vendor_Id": 1,
+		          "Vendor_Name": "Chroma"
+		       },
+		       {
+		         "Vendor_Id": 2,
+		        "Vendor_Name": "Bajaj"
+		       }
+		    ]
+	}
+	object.Vendors[0].Vendor_Name
+
+
+			         MongoDB Date
+- Date and Time values are stored in a document by using "$date" operator
+- JavaScript allows "Date()" constructor, which is a not allowed in BSON type.
+- MongoDB follows ISODate format
+
+	"Year-Month-DayTHours:minutes:seconds.milliSeconds"
+
+- BSON uses date as an object with "$date" operator specifying in ISO format.
+
+Syntax:
+	{
+	  "Manufactured": {
+	            "$date":  "2024-10-14T16:30:53"
+	     }
+	}
+
+- You can configure specific time zone for date type
+
+	          "$date": "2024-10-14T16:40.34.632+0530"               // Indian Standard Time
+
+
+			        Regular Expression
+- It is a pattern with meta characters and quantifiers, that validates the format of input value.
+- JavaScript regular expression is enclosed in "/ regExp  /".
+- BSON uses   "$regularExpression"  to configure a validation pattern.
+
+	{
+	 "Mobile": {
+   		 "$regularExpression": {
+      			"pattern": "(?:)",
+      			"options": ""
+    		}
+  	}
+- It is mostly used for validating a document.
+
+			            Query the Data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

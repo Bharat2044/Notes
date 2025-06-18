@@ -1,0 +1,13 @@
+		=========================================================
+						1. filter()
+		=========================================================
+=>filter() is used for  "Filtering out some elements from list of elements by applying to function".
+=>Syntax:-        varname=filter(FunctionName, Iterable_object)
+---------------------
+Explanation:
+---------------------
+=>here 'varname' is an object of type <class,'filter'> and we can convert into any iteratable object by using type casting functions.
+=>"FunctionName" represents either Normal function or anonymous functions.
+=>"Iterable_object" represents Sequence, List, set and dict types.
+=>The execution process of filter() is that  " Each Value of Iterable object sends to Function Name. If the function return True then the element will be filtered. if the Function returns False then that element will be neglected/not filtered ". This process will be continued until all elements of Iterable object completed.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------

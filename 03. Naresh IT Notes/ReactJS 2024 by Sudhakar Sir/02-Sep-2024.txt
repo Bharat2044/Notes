@@ -1,0 +1,214 @@
+						React Built-in Hooks
+
+1. useState()
+- It configures a local state for component.
+- Local state is available for component across requests. 
+- Data stored in local state is not accessible to other components.
+
+Syntax:
+	const [getter, setter] = useState(anyData);
+
+	setter(newValue);
+
+2. useRef()
+- It creates a reference memory.
+- It can store value or function memory.
+- It is intended to use in the process instead of using in presentation. 
+
+
+Syntax:
+	let  thread = useRef(null);
+	thread.current = value / function;
+
+
+3. useEffect()
+- It defines actions to perform at the time of mount and unmount.
+- Every component mounts only once. 
+- It uses dependencies that specify when a component have to mount again. 
+
+Syntax:
+	useEffect(()=>{
+
+		// actions on mount
+	
+		return()=>{  
+			// actions on unmount
+		}
+
+	},[dependencies])
+
+FAQ: When a component will unmount?
+Ans:  A component unmount when you request another component or when you close
+	 the application.
+
+FAQ: How to define unmount for component?
+Ans: By configuring return function for useEffect() hook.
+
+Syntax:
+		useEffect(()=>{
+
+			return()=>{ 
+
+			}
+
+		},[])
+
+Ex: 
+mount-demo.jsx
+
+import { useEffect, useState } from "react"
+
+export function Login(){
+
+    useEffect(()=>{
+        console.log(`Login Component Mounted`);
+        return()=>{
+            console.log(`Login Component Unmounted`);
+        }
+    },[])
+
+    return(
+        <div>
+            <h3>User Login</h3>
+        </div>
+    );
+}
+
+export function Register(){
+    useEffect(()=>{
+        console.log(`Register Component Mounted`);
+        return()=>{
+            console.log(`Register Component Unmounted`);
+        }
+    },[])
+
+    return(
+        <div>
+            <h3>Register User</h3>
+        </div>
+    )
+}
+
+export function MountDemo(){
+
+    const [component, setComponent] = useState();
+
+    function handleLoginClick(){
+        setComponent(<Login />);
+    }
+
+    function handleRegisterClick(){
+        setComponent(<Register />);
+    }
+
+    return(
+        <div className="container-fluid">
+            <div className="mt-3">
+                <button onClick={handleLoginClick} className="btn btn-primary me-2">Login</button>
+                <button onClick={handleRegisterClick} className="btn btn-warning">Register</button>
+                <div className="mt-4">
+                        {
+                            component
+                        }
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+Note: Remove <React.StrictMode> from index.js to test mount and unmount.
+
+4. useContext()
+- Context refers to "Context Memory".
+- Context memory is allocated for a component and it is accessible to component that run with in the context of parent.
+- Context is explicitly create in React by using "createContext()"
+
+	let   contextName = createContext(null);
+
+- Context requires a scope with provider.
+
+	<contextName  provider={ value }>
+
+		… child components … 
+
+	</contextName>
+
+
+
+- Child component can access and use context memory by using the hook
+	"useContext()"
+
+Syntax:
+	       let  refName = useContext(contextName);
+
+Ex:
+context-demo.jsx
+
+import { createContext, useContext, useState } from "react"
+
+let UserContext = createContext(null);
+
+export function Level1Component(){
+
+    let context = useContext(UserContext);
+
+    return(
+        <div className="m-4 p-4 bg-danger text-white">
+            <h2>Level-1 Component</h2>
+            {context}
+            <Level2Component />
+        </div>
+    )
+}
+
+export function Level2Component(){
+
+    let context = useContext(UserContext);
+
+    return(
+        <div className="m-4 p-4 bg-warning text-dark">
+            <h2>Level-2 Component</h2>
+            <p>{context}</p>
+        </div>
+    )
+}
+
+export function ContextDemo()
+{
+    const [msg, setMsg] = useState();
+
+    function handleNameChange(e){
+        setMsg(e.target.value)
+    }
+
+    return (
+        <div className="container-fluid bg-dark text-white p-4">
+            <UserContext.Provider  value={msg}>
+                <h1>Parent - <input type="text" onChange={handleNameChange}/> </h1>
+                <Level1Component />
+            </UserContext.Provider>
+        </div>
+    )
+}
+
+					  Uncontrolled & Controlled Components
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

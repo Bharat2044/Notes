@@ -1,0 +1,86 @@
+		=============================================
+				Pre-defined Function in tuple
+		=============================================
+=>We know that on the object of tuple we can perform Both Indexing and Slicing Operations.
+=>Along with  these operations, we can also perform other operations by using the following 
+    pre-defined  Functions present in tuple.
+
+		1)index()
+		2)count()
+-------------------
+Examples:
+-------------------
+>>> t1=(10,"RS",45.67)
+>>> print(t1,type(t1))------------(10, 'RS', 45.67) <class 'tuple'>
+>>> t1.index(10)---------0
+>>> t1.index("RS")------1
+>>> t1=(10,"RS",45.67)
+>>> print(t1,type(t1))-------(10, 'RS', 45.67) <class 'tuple'>
+>>> t1.count(10)-------1
+>>> t1.count(100)------0
+>>> t1=(10,0,10,10,20,0,10)
+>>> print(t1,type(t1))---------(10, 0, 10, 10, 20, 0, 10) <class 'tuple'>
+>>> t1.count(10)---------------4
+>>> t1.count(0)-----------------2
+>>> t1.count(100)--------------0
+-----------------------------------------------------
+>>> t1=(10,20,30,40,50,10)
+>>> print(t1,id(t1),type(t1))---------(10, 20, 30, 40, 50, 10) 2420310634464 <class 'tuple'>
+>>> t2=t1  # Deep Copy Possible but Not Shallow Copy
+>>> print(t2,id(t2),type(t2))----------(10, 20, 30, 40, 50, 10) 2420310634464 <class 'tuple'>
+>>> t3=t1   # Deep Copy Possible but Not Shallow Copy
+>>> print(t3,id(t3),type(t3))---------(10, 20, 30, 40, 50, 10) 2420310634464 <class 'tuple'>
+---------------------------
+The Functions not present in tuple
+---------------------------
+append()
+insert()
+remove()
+clear()
+pop(index)
+pop()
+reverse()
+sort()
+copy()
+extend()
+---------------------------------------
+NOTE:-   By Using  del Operator we can't  delete values of tuple object By using Indexing and   slicing bcoz tuple object belongs to Immutable  but we can delete entire tuple object .
+Examples:
+---------------
+>>> t1=(10,-34,0,10,23,56,76,21)
+>>> print(t1,type(t1))--------------(10, -34, 0, 10, 23, 56, 76, 21) <class 'tuple'>
+>>> del t1[0]------TypeError: 'tuple' object doesn't support item deletion
+>>> del t1[0:4]----TypeError: 'tuple' object does not support item deletion
+>>> del t1  # Here we are removing complete object.
+>>> print(t1,type(t1))-----NameError: name 't1' is not defined. 
+========================================================
+MOST IMP:
+---------------
+sorted():  This Function is used for Sorting the data of immutable object tuple and gives 
+                  the sorted data in the form of list.
+=>Syntax:       listobj=sorted(tuple object)
+--------------------------------------------------------
+Examples:
+--------------------------------------------------------
+>>> t1=(10,23,-56,-1,13,15,6,-2)
+>>> print(t1,type(t1))------------(10, 23, -56, -1, 13, 15, 6, -2) <class 'tuple'>
+>>> t1.sort()----------------------AttributeError: 'tuple' object has no attribute 'sort'
+>>> x=sorted(t1) # Here is a General Function
+>>> print(x,type(x))-----------[-56, -2, -1, 6, 10, 13, 15, 23] <class 'list'>
+>>> t1=tuple(x) # Converted  sorted list into tuple
+>>> print(t1,type(t1))---------(-56, -2, -1, 6, 10, 13, 15, 23) <class 'tuple'>
+>>> t2=t1[::-1]
+>>> print(t2,type(t2))------(23, 15, 13, 10, 6, -1, -2, -56) <class 'tuple'>
+		OR
+>>> t1=(10,-4,12,34,16,-6,0,15)
+>>> print(t1,type(t1))---------------------(10, -4, 12, 34, 16, -6, 0, 15) <class 'tuple'>
+>>> l1=list(t1)
+>>> print(l1,type(l1))-----------------[10, -4, 12, 34, 16, -6, 0, 15] <class 'list'>
+>>> l1.sort()
+>>> print(l1,type(l1))-------------------[-6, -4, 0, 10, 12, 15, 16, 34] <class 'list'>
+>>> t1=tuple(l1)
+>>> print(t1,type(t1))---------------(-6, -4, 0, 10, 12, 15, 16, 34) <class 'tuple'>
+>>>t1=t1[::-1]
+>>> print(t1,type(t1))----------------(34, 16, 15, 12, 10, 0, -4, -6) <class 'tuple'>
+========================================x========================================================
+

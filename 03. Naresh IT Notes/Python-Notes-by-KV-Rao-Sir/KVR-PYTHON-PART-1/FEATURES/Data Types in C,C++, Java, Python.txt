@@ -1,0 +1,50 @@
+			Data Types in C,C++, Java, Python
+==================================
+C,C++ Programming Lang Environment
+==================================
+=>Data Types---->AllOcates  Suff Amount of Memory space for Storing Inputs in MM(RAM)
+
+		Data Types			DOS					UNIX
+		----------------		--------------------			---------------------------
+		      int				2 bytes				4 bytes
+		      float				4 bytes DP			8 Bytes DB		
+		      double			8 bytes DP			16 Bytes DB
+		      char				1 Byte				1 Byte
+
+=>Since C, C++ Lang Data Types Takes Different Memory spaces on Different OS and Hence These Lang are Called 
+"Platform Depedent Lang".
+======================================================================================================
+Java Programming Lang Environment
+======================================================================================================
+Data Types : AllOcates  Suff Amount of Memory space for Storing Inputs in MM(RAM)
+----------------
+
+		Data Types			DOS					UNIX
+		------------------		------------------------------	----------------------
+		    byte				1					1
+		    short				2					2
+		    int				4					4
+		    long				8					8
+
+		    float				4					4	
+		    double				8					8
+
+		    boolean			0					0
+
+		    char				2					2
+=>Since Java  Lang Data Types Takes Same Memory spaces on Different OS and Hence This Lang are Called 
+"Platform Indepedent Lang".
+=>BUT All the Data Types (Pre-Defined Data Types ) are not able to Store Large Vol of Data Due to Memory Space Restrictions
+			+ These Data types are  unable to Multiple Values
+Examples:
+------------------
+int a=999999999999999999999999999999-----------------Invalid---Due Memory Space Restrictions
+ int k=10,"RS",34.56,"NL";----------------------------------------Invalid--Due to Multiple Values
+---------------------------------------------
+=>In Java Programming, We can Define Programmer-Defined Data Types by using Classes and Object.
+=>In Java Programming, Objects Stores Multiple Values BUT The Java Objects are Size Restricted
+
+
+==================================
+PYTHON  Programming Lang Environment
+==================================

@@ -1,0 +1,77 @@
+Describe Instances
+
+aws ec2 describe-instances --instance-ids i-071a95f81feb60852
+aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro"
+
+
+Instances creation:
+
+aws ec2 run-instances --image-id ami-5b673c34 --count 1 --instance-type t2.micro --key-name batch03 --security-group-ids sg-deb102b3 --subnet-id subnet-dd942a91
+
+aws ec2 start-instances --instance-ids i-082b7528a1a2812bf
+aws ec2 stop-instances --instance-ids  i-082b7528a1a2812bf
+aws ec2 terminate-instances --instance-ids i-0921e8803c0f2b4ce
+aws ec2 create-tags --resources  i-082b7528a1a2812bf --tags Key=Department,Value=Finance
+aws ec2 describe-volumes 
+aws ec2 create-volume --size 10 --region ap-south-1 --availability-zone ap-south-1a --volume-type gp2
+aws ec2 attach-volume  --volume-id vol-0bbdf64c46fcdef2d --instance-id  i-082b7528a1a2812bf  --device /dev/sdh
+aws ec2 delete-volume --volume-id vol-0f4dc59b2056001c4
+aws ec2 detach-volume --volume-id vol-05386545e9926bc66
+
+aws ec2 describe-key-pairs
+
+aws ec2 terminate-instances --instance-ids i-1234567890abcdef0
+
+aws ec2 create-image --instance-id  i-0a76a216a9e73da33 --name "Dev AMI" --description "AMI for development server"
+aws ec2 deregister-image --image-id ami-07c5e02e2031a3501
+aws ec2 delete-snapshot --snapshot-id snap-0773147d6aab55ffe
+
+curl http://169.254.169.254/latest/meta-data/
+
+S3 commands
+
+aws s3 mb s3://mybucket
+aws s3 mb s3://mybucket --region us-west-1
+
+aws s3 mv test.txt s3://mybucket/test2.txt
+aws s3 mv s3://mybucket/test.txt s3://mybucket/test2.txt
+aws s3 mv s3://mybucket/test.txt test2.txt
+aws s3 mv s3://mybucket/test.txt s3://mybucket2/ (retain orginal name)
+aws s3 mv s3://mybucket . --recursive
+aws s3 mv myDir s3://mybucket/ --recursive --exclude "*.jpg"
+aws s3 mv s3://mybucket/ s3://mybucket2/ --recursive --exclude "mybucket/another/*"
+
+aws s3 ls
+aws s3 ls s3://mybucket
+aws s3 ls s3://mybucket --recursive
+aws s3 ls s3://mybucket --recursive --human-readable --summarize
+
+
+Copying a local file to S3
+aws s3 cp test.txt s3://mybucket/test2.txt
+
+Copying an S3 object to a local file
+aws s3 cp s3://myreya/text.txt text.txt
+
+Copying an S3 object from one bucket to another
+aws s3 cp s3://mybucket/test.txt s3://mybucket2/
+
+Recursively copying S3 objects to a local directory
+aws s3 cp s3://mybucket . --recursive
+
+Recursively copying local files to S3
+aws s3 cp myDir s3://myreya/ --recursive --exclude "*.jpg"
+
+Remove buckets
+
+aws s3 rb s3://mybucket
+aws s3 rb s3://mybucket --force
+
+aws s3 sync s3://mybucket s3://mybucket2
+aws s3 sync . s3://mybucket
+aws s3 sync s3://mybucket .
+aws s3 sync . s3://mybucket --delete (delete additional file in s3 if that is not in local)
+aws s3 website s3://my-bucket/ --index-document index.html --error-document error.html
+(https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html)
+
+

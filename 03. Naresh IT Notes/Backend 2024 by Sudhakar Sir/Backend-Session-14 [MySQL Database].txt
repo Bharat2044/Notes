@@ -1,0 +1,105 @@
+Database
+1. Create a new database
+- You can use "Create" command for creating any object.
+- Database can be create using "schema" or "database" reference.
+
+Syntax:
+    CREATE  DATABASE  Database_Name;
+    CREATE  SCHEMA   Database_Name;
+
+2. Using an Existing Database    
+- You have to set the database as default in order to execute queries.
+- You can use the command "USE" database name to set it default.
+
+Syntax:
+    USE  database_Name;
+
+- You can right click on GUI on the database name and select "Set as default schema".
+
+3. Delete Database
+- You can delete any database by using "DROP" command.
+- You can refer database by using  "Database or Schema".
+
+Syntax:
+    DROP DATABASE   Database_Name;
+    DROP SCHEMA   Database_Name;
+
+Ex:
+    create  database   ishop;
+    use ishop;
+
+Tables:
+1. Create a new table
+- You can create a table by using "CREATE" command.
+- Table reference is defined using "TABLE"
+- Table comprises of a name and set columns & constraints.
+
+Syntax:
+    CREATE  TABLE  table_name
+    (
+        column_name  datatype  constraint,
+    )
+
+Syntax: Table without any constraints
+
+    create table  tblcategories
+    (
+      CategoryId  INT,
+      CategoryName VARCHAR(30)
+    )
+
+2. Set primary key constraint
+- You can set primary key constraint by using the reference  "PRIMARY KEY".
+- It sets a field as UNIQUE and NOT NULL
+
+Syntax:
+    create  table  tblcategories
+    (
+      CategoryId  INT  PRIMARY KEY,
+      CategoryName  VARCHAR(30)  UNIQUE   NOT NULL
+    )
+
+- You have to explicitly define "unique & not null" for other fields in table.
+
+3. Set Auto Increment for value in a field
+- You can configure a file with auto incremented values.
+- You have to use the reference  "AUTO_INCREMENT".
+- It sets the value starting from 1 and increments automatically for others.
+
+Syntax:
+create table tblcategories
+(
+   CategoryId INT primary key auto_increment,
+   CategoryName VARCHAR(30) NOT NULL UNIQUE
+);
+
+4. Set Default value for field
+- You can configure a default constraint
+- It defines value for field, if there is no value specified.
+
+Syntax:
+ create table tblcategories
+(
+   CategoryId INT primary key auto_increment,
+   CategoryName VARCHAR(30) NOT NULL UNIQUE,
+   CategoryCode INT default 1100
+);
+
+- You can configure a custom value by replacing the default.
+
+5. Set a check constraint
+- It uses a boolean expression.
+- It verifies and ensures that the value is matching the given expression
+- CHECK refers to a field name with boolean operator.
+
+Syntax:
+create table tblcategories
+(
+   CategoryId INT primary key auto_increment,
+   CategoryName VARCHAR(30) NOT NULL UNIQUE,
+   CategoryCode INT default 1100,
+   Qty INT check(Qty>5)
+);
+
+
+             Foreign Key & Constraints

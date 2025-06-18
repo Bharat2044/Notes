@@ -1,0 +1,28 @@
+		====================================================
+					Modules in Python
+		====================================================
+=>We know that Functions are used for "Performing Certain Operations and Provides Code Re-Usability within the same Program but not able to provide Code Re-Usability across the programs.".
+=>The Purpose of Modules Concept is that "To Re-use the functions, global variables and Class Names"  from One Program to another Program provided Both The Programs present in Same Folder.
+------------------------------------------
+=>Definition of Module
+------------------------------------------
+A Module is a collection of Functions, Global Variable Names and Class Names.
+------------------------------------------------------
+Types of Modules
+-------------------------------------------------------
+=>In Python Programming, we have Two Types of Modules. They are
+		1. Pre-Defined Modules
+		2. Programmer OR User OR Custom Defined Module
+-------------------------------------------------------------
+1. Pre-Defined Modules
+-------------------------------------------------------------
+=>These Modules are already defined by Python  Lang Developers and Available in Python Software and   Used by all Python Lang Programmers and for dealing with Universal Requirements.
+Examples:  functools,sys,math,calendar,re,pickle,threading,csv..etc
+=>Out-of Many Pre-defined Modules, By default One of the pre-defined module called "builtins" imported to all python programs  and It is called Default imported python Module.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+2. Programmer OR User OR Custom Defined Module
+-----------------------------------------------------------------------------------------------
+=>These Modules are developed by Python Programmers and avilable in Python Project and Used by Other Members of Same Project for dealing with Common Requirements.
+Examples:   Aop,MathsInfo,icici...etc
+-------------------------------------------------------------------------------------------------------------------------------------
+

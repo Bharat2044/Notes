@@ -1,0 +1,80 @@
+			================================================================
+					5. Bitwise Complement Operator ( ~ )
+			================================================================
+
+=>Syntax:      varname= ~Given Number
+=>The execution process of Bitwise Complement Operator ( ~ ) is that " It Inverts the given bits".
+=>Inverting the bits is nothing but 1 becomes 0 and 0 becomes 1
+=>The formula for Bitwise Complement Operator ( ~ ) is given bellow
+				 ~Given Number =  - ( Given Number + 1)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Example1:
+--------------------
+>>> a=10
+>>> print(~a)--------------      -11
+>>> a=100
+>>> print(~a)-----------------   -101
+-----------------
+>>> a=-123
+>>> print(~a)-----------------  122
+=============================================================================================
+Q) Prove that  ~10 is -11
+=============================================================================================
+Proof : Given  ~10 =  -11
+		Here -11 is the Opposite counter part of 11
+=>Given Number  10 and Whose Binary Part is   1010
+=> ~10 ----------------- ~(1010) =   0101 (Which is the Binary form of -11 which is the 2's complement of 11)
+NOTE: All the Negative Numbers are 2's Complement of Their +Ve Numbers
+[Example:   10 whose Counter part is -10--which is 2 's complement of 10]
+------------------------------------
+=>Here -11 is the Opposite counter part of 11 (2's complement of 11 )
+=>All Negative Number stored in Main Memory in the form 2's Complement (2's complement= 1's complement+1)
+-------------------------------------------------------
+=>Here we Take 11 and whose Binary form is   1 0 1 1	
+		(1's Complement of any Number= 1 becomes 0 and 0 becomes 1)
+=>1's Complement of 11 is----------------------------0 1  0 0     
+=>2's Complement of 11 is----------------------------1's Complement of 11 + 1
+									=> 0100
+									 =>0001 Binary Addition Rules (0+0=0, 1+0=1, 0+1=1 , 1+1= 0 with carry 1 )
+									 --------------
+									     0101----which is 2's Complement of 11 --result is  -11
+									------------------
+=============================================================================================
+Q) Prove that  ~16 is -17
+=============================================================================================
+Proof : Given  ~16 =  -17
+		Here -17 is the Opposite counter part of 17
+=>Given Number  16 and Whose Binary Part is   0001  0000
+=> ~16 ----------------- ~(0001  0000) =   1110 1111 (Which is the Binary form of -17)
+---------------------------------------------------------
+=>Here -17 is the Opposite counter part of 17
+=>All Negative Number stored in Main Memory in the form 2's Complement (2's complement= 1's complement+1)
+-------------------------------------------------------
+=>Here we Take 17 and whose Binary form is   0001 0001
+	(1's Complement of any Number= 1 becomes 0 and 0 becomes 1)
+=>1's Complement of 17 is----------------------------1110  1110
+=>2's Complement of 17 is----------------------------1's Complement of 17 + 1
+								=>	1110  1110
+									0000  0001 Binary Addition Rules ( (0+0=0,1+0=1, 0+1=1,1+1= 0 with carry 1 )
+									------------------
+									1110	 1111  (Which is the Binary form of -17)
+=============================================x=================================================
+Q) Prove that  ~15 is -16
+=============================================================================================
+Proof : Given  ~15 =  -16
+		Here -16 is the Opposite counter part of 16
+=>Given Number  15 and Whose Binary Part is   0000  1111
+=> ~15 ----------------- ~(0000  1111) =   1111 0000 (Which is the Binary form of -16)
+---------------------------------------------------------
+=>Here -16 is the Opposite counter part of 16
+=>All Negative Number stored in Main Memory in the form 2's Complement (2's complement= 1's complement+1)
+-------------------------------------------------------
+=>Here we Take 16 and whose Binary form is   0001 0000
+	(1's Complement of any Number= 1 becomes 0 and 0 becomes 1)
+=>1's Complement of 16 is----------------------------1110  1111
+=>2's Complement of 16 is----------------------------1's Complement of 16 + 1
+								=>	1110  1111
+									0000  0001    Binary Addition ( (0+0=0, 1+0=1, 0+1=1 , 1+1= 0 with carry 1 )
+									------------------
+									1111	 0000  (Which is the Binary form of -16)
+=============================================x=================================================

@@ -1,0 +1,51 @@
+			==========================================================
+						3. bool
+			==========================================================
+=>"bool" is one of the Pre-Defined Class Name.
+=>The purpose of bool data type is that "To Store Logical OR Boolean values such as True and False".
+=>Here True and False are the Key words used as values for bool data type.
+=>Internally, The True is Considered as 1 and False is Considered as 0
+=>On Boolean Values we can Perform Arithmetic Operations.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> a=True
+>>> print(a,type(a))-------------------True <class 'bool'>
+>>> a=False
+>>> print(a,type(a))------------------False <class 'bool'>
+>>> a=false--------------------NameError: name 'false' is not defined. 
+>>> a=true--------------------NameError: name 'true' is not defined.
+-----------------------------------------------------
+>>> a=True
+>>> b=False
+>>> c=a+b
+>>> print(c,type(c))--------------1 <class 'int'>
+>>> print(False+False)----------0
+>>> print(True-True)-------------0
+>>> print(True-False)------------1
+>>> print(True+2+False)--------3
+>>> print(True+2*3)--------------7
+>>> print(True-2+False)---------1
+>>> print(0b1111+True)----------16
+>>> print(0xF-True)----------------14
+>>> print(False/True)---------------0.0
+>>> print(False//True)--------------0
+>>> print(False/False)ZeroDivisionError: division by zero
+>>> print(True/False)----ZeroDivisionError: division by zero
+>>> print(2*True+True-False)----------3
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------

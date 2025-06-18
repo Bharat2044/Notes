@@ -1,0 +1,153 @@
+Configuring Global State
+
+1. Create a store as initialState 
+
+	 let   initialState =  { count : 0 }
+
+
+2. Create a reducer function with state and actions  
+
+	function reducer(state, action)
+	{
+		// write logic for action type and 
+		   data to update
+	}
+
+3. Configure reducer in component
+
+	const [state, dispatch] = useReducer(reducer, initialState);
+
+	=> state collects payload [data] from store and updates into store.
+	=> dispatch defines the action type configured in reducer. 
+
+Syntax:
+	   function handleEvent()
+	   {
+		dispatch({type: 'Add'});
+	   }
+
+
+Ex:
+reducer-demo.jsx
+
+import { useReducer } from "react";
+
+let initialState = {wishList: 0};
+
+function reducer(state, action){
+    switch(action.type){
+        case "addToWhishList": 
+        return {wishList: state.wishList + 1};
+        case "removeFromWhishList":
+        return {wishList: state.wishList - 1};
+    }
+}
+
+export function ReducerDemo(){
+
+    const [state, dispatch ] = useReducer(reducer, initialState);
+
+    function handleWishListClick(){
+        dispatch({type:'addToWhishList'});
+    }
+    function handleRemoveWhishList(){
+        dispatch({type:'removeFromWhishList'});
+    }
+
+    return(
+        <div>
+            <h3>Shopping</h3>
+            <button className="btn btn-warning bi bi-heart" style={{position:'fixed', top:'50px', right:'50px'}}>
+                <span className="badge bg-danger position-absolute rounded rounded-circle"> {state.wishList}</span>
+            </button>
+            <div className="card" style={{width:'250px'}}>
+                <img src="iphone-black.jpg"  className="card-img-top" height="200"/>
+                <div className="card-header">
+                    <div>iPhone 14 (Black) 128 GB</div>
+                </div>
+                <div className="card-footer">
+                    <button onClick={handleWishListClick} className="btn btn-success bi bi-heart"></button>
+                    <button className="btn btn-warning bi bi-cart4 ms-2"></button>
+                    <button onClick={handleRemoveWhishList} className="btn btn-danger bi ms-2 bi-trash">Whishlist</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+FAQ: What are the browser storages?
+Ans:
+	a) local storage
+	b) session storage
+	c) cookies
+
+Session Storage:
+- It is temporary storage of browser.
+- It is accessible only from current tab.
+- It not available across tabs.
+- It is deleted automatically when browser is closed. 
+
+	sessionStorage.setItem("key", value);
+	sessionStorage.getItem("key");
+	sessionStorage.removeItem("key");
+
+
+LocalStorage:
+- It is permanent storage.
+- It is available for access even after browser is closed.
+- It is accessible across tabs.
+- It is removed explicitly.
+
+	localStorage.setItem()
+	localStorage.getItem()
+	localStorage.removeItem()
+
+Ex: 
+storage-demo.jsx
+
+import { useEffect, useState } from "react"
+
+
+export function StorageDemo(){
+
+    const [user, setUser] = useState('');
+
+    function handleIdChange(e){
+        setUser(e.target.value);
+    }
+    function removeSession(){
+        alert('Your session expired');
+        sessionStorage.removeItem('userid');
+        window.location.reload();
+    }
+
+    useEffect(()=>{
+        setTimeout(removeSession, 10000);
+    },[])
+
+    function handleLogin(){
+        sessionStorage.setItem("userid", user);
+        alert('Your ID Saved');
+        setTimeout(removeSession, 10000);
+    }
+
+    return(
+        <div>
+            <h2>Storage</h2>
+            <input type="text" onChange={handleIdChange} placeholder="UserId" /> 
+            <button onClick={handleLogin} >Login</button>
+            <p className="fw-bold mt-4">{sessionStorage.getItem('userid')} logged in</p>
+        </div>
+    )
+}
+
+						   Class Components 
+
+
+
+ 
+
+
+
+
+

@@ -1,0 +1,13 @@
+		==========================================================
+				Types of Arguments OR Parameters
+							(OR)
+				Arguments Passing Mechanisms
+		==========================================================
+=>Based on Passing the Vaues of Arguments from Function call to Formal Parameters of Function definition, Arguments are Classfiied into 5 Types. They are
+
+			1. Possitional Arguments
+			2. Default Arguments
+			3. Keyword Arguments
+			4. Variable Length Arguments
+			5. Keyword Variable Length Arguments
+======================================================================================

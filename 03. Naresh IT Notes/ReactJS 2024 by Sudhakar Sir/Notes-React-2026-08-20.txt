@@ -1,0 +1,113 @@
+						     Timer Events
+
+setTimeOut()
+clearTimeOut()
+setInterval()
+clearInterval()
+
+setTimeOut():
+- It is a timer event used to control "bounce" in devices that use keyboard. 
+- Bounce is a mechanism where task is loaded into memory and released immediately into process. 
+- setTimeOut() can de-bounce. It can lock the task in memory for a specific duration of time and release into process. 
+
+Syntax:
+	setTimeOut(function(){ }, interval);
+
+clearTimeOut():
+- It is a timer event uses to remove a task from memory before it is released into process. 
+- It requires a memory reference where the task is loaded. 
+
+Syntax:
+	clearTimeOut(referenceName);
+
+
+							  useRef()
+
+- It a new hook into React 17x versions.
+- It is used to create a memory reference, which is intended for process.
+- You can configure reference memory to store a value or function, which is used internally in the process and not for presentation. 
+
+Syntax:
+	  let  refName =  useRef(null);
+
+	  refName.current = value / function(){};
+
+- "current" is a property that refers to current thread process. 
+
+Ex: 
+timeout-demo.jsx
+
+import { useRef, useState } from "react"
+
+
+export  function TimeoutDemo(){
+
+    const [msg, setMsg] = useState('');
+
+    let thread2 = useRef(null);
+
+    function Msg1(){
+        setMsg('Hello !');
+    }
+    function Msg2(){
+        setMsg('How are you?');
+    }
+    function Msg3(){
+        setMsg('Welcome to React');
+    }
+
+    
+    function handleClick(){
+         setTimeout(Msg1, 3000);
+         thread2.current = setTimeout(Msg2, 6000);
+         setTimeout(Msg3, 10000);
+    }
+
+    function handleCancelClick(){
+        clearTimeout(thread2.current);
+    }
+
+    return(
+        <div className="container-fluid">
+            <button onClick={handleClick} className="btn btn-primary mt-2">Display Messages</button>
+            <button onClick={handleCancelClick} className="btn btn-danger mt-2 ms-1">Cancel Message 2</button>
+            <p className="fs-4 text-center">{msg}</p>
+        </div>
+    )
+}
+
+setInterval():
+- It is a timer event used to load task into memory and release a copy of task into process.
+- It performs the task repeatedly at regular time intervals, until removed from memory.
+
+Syntax:
+	setInterval(function(){}, interval);
+
+clearInterval():
+- It removes the task from memory, which is using the reference of setInterval.
+
+Syntax:
+	clearInterval(referenceName);
+
+
+FAQ: What is difference between timeout and interval?
+Ans:  Timeout sets the task to execute once.
+	  Interval sets the task to execute repeatedly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

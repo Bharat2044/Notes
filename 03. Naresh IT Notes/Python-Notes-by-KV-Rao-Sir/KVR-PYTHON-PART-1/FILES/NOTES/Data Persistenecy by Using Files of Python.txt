@@ -1,0 +1,20 @@
+		============================================
+			Data Persistenecy by Using Files of Python 
+		============================================
+-----------------------------------------------------
+Def. of File:
+-----------------------------------------------------
+=>A File is a collection of Records.
+=>Files Resides in Secondary Memory(HDD).
+=>Technically, A File Name is considered as  a named Location in Secondary Memory.
+=>The purpose of Files is that "To get Data Persistency".
+-----------------------------------------------------
+=>All the objects data of main memory becomes records in File of Secondary memory and records of file of secondary memory becomes the objects in main memory.
+----------------------------------------------------
+Def. of Stream:
+----------------------------------------------------
+=>The Flow of Data between object(s) of Main Memory and Files of Seconday memory is called   Stream.
+----------------------------------------------------------------------------------------------------------------------
+
+
+

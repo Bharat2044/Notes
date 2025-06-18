@@ -1,0 +1,206 @@
+Mouse Event
+Element State Events
+Two Way Binding - onChange
+
+
+						    Keyboard Events
+onKeyUp
+onKeyDown
+onKeyPress
+
+- KeyUp & KeyDown are events that fire up actions immediately when user key-in any character. 
+- KeyPress is executed when user finish a key and key-in another key.
+- KeyUp & KeyDown are the events used while working with the chars.
+- KeyPress is used while working with the ASCII code of chars.
+
+			A = 65, Z=90
+			a = 97, z = 122
+
+- You can identify the keys by using the following event properties
+	
+			keyCode
+			charCode
+			shiftKey
+			which
+			altKey 
+			ctrlKey
+
+- keyCode, charCode and which all return the actual keycode, how ever "which" is compatible with all types of keyboard layouts. 
+
+- shift, ctrl, alt are modifiers keys that return Boolean true or false. 
+
+Ex:
+key-demo.jsx
+
+
+import axios from "axios"
+import { useState } from "react"
+
+export function KeyDemo(){
+
+
+    const [error, setError] = useState('');    
+    const [validClass, setValidClass] = useState('');
+    const [toggle, setToggle] = useState('d-none');
+    const [styleObj, setStyleObj] = useState({width:''});
+    const [progressColor, setProgressColor] = useState('');
+    const [msg, setMsg] = useState('');
+
+    function VerifyUserId(e){
+        axios.get("users.json")
+        .then(response=> {
+             var user = response.data.find(item=> item.UserId===e.target.value);
+             if(user) {
+                if(user.UserId===e.target.value){
+                    setError('User Id Taken - Try Another');
+                    setValidClass('text-danger');
+                }
+             } else {
+                setError('User Id Available');
+                setValidClass('text-success');
+             }
+        })
+    }
+
+    function handleCaps(e) {
+        if(e.which>=65 && e.which<=90) {
+            setToggle('d-block');
+        } else {
+            setToggle('d-none');
+        }
+    }
+
+    function handlePassword(e){
+            if(e.target.value.match(/(?=.*[A-Z])\w{4,15}/))
+            {
+                setStyleObj({width:'100%'});
+                setProgressColor('bg-success');
+                setMsg('Strong');
+            } else {
+                if(e.target.value.length<4) {
+                    setStyleObj({width:'20%'});
+                    setProgressColor('bg-danger');
+                    setMsg('Poor');
+                } else {
+                    setStyleObj({width:'70%'});
+                    setProgressColor('bg-warning');
+                    setMsg('Weak');
+                }
+            }
+    }
+
+
+    return(
+        <div className="container-fluid">
+            <h2>Register User</h2>
+            <dl className="w-25">
+                <dt>User Id</dt>
+                <dd><input type="text" className="form-control" onKeyUp={VerifyUserId} /></dd>
+                <dd className={validClass}>{error}</dd>
+                <dt>Password</dt>
+                <dd>
+                    <input type="password" onKeyUp={handlePassword} onKeyPress={handleCaps} className="form-control" />
+                </dd>
+                <dd>
+                    <div className="progress">
+                        <div style={styleObj} className={`progress-bar progress-bar-animated progress-bar-striped ${progressColor}`}>
+                            {msg}
+                        </div>
+                    </div>
+                </dd>
+                <dd className={toggle}>
+                    <span className="bi bi-exclamation-triangle-fill text-warning"> Warning : CAPS is ON </span>
+                </dd>
+            </dl>
+        </div>
+    )
+}
+
+users.json
+
+[
+    {
+        "UserId":"john"
+    },
+    {
+        "UserId":"john12"
+    },
+    {
+        "UserId":"john1234"
+    },
+    {
+        "UserId":"john_nit"
+    },
+    {
+        "UserId":"david"
+    }
+    
+]
+
+						    Button Events
+
+onClick				single click - left button
+onDoubleClick		double click - left button
+onContextMenu		right click - right button
+
+Note: You can disable any DOM event by using a function that returns false. 
+
+Ex:
+button-demo.jsx
+
+
+export function ButtonDemo(){
+
+
+    function handleDoubleClick(){
+        window.open('iphone-black.jpg','Iphone', 'width=400 height=500');
+    }
+
+    function handleContext(){
+        alert('Right Click no allowed in this page');
+        document.oncontextmenu = function(){
+            return false;
+        }
+    }
+
+    return(
+        <div className="container-fluid" onContextMenu={handleContext}>
+            <img onDoubleClick={handleDoubleClick} src="iphone-black.jpg" width="100" height="100" />
+            <p>Double click to view large</p>
+        </div>
+    )
+}
+
+						       Timer Events
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

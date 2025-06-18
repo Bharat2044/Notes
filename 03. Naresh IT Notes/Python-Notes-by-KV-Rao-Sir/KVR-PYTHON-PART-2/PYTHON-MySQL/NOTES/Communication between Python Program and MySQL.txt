@@ -1,0 +1,67 @@
+		========================================================================
+			 Communication between Python Program and MySQL
+		========================================================================
+=>To Develop Python  and MySQL Communication (PDBC) Applications, we need the following Pre-Requisites.
+			
+		1. Install Python Software
+		2. Install MySQL Data Base Software 
+		3. Install Corresponding Data Base Module for Python Programmers 
+			(Install  mysql-connector 
+			              mysql-connector-python )
+			
+=>After Installing the above Software, we develop the Application, which Establish the Communication Python 
+   Software and MySQL Database Software. To doing this we need to learn the following the Steps.
+****************************************************************************************************************************************
+Step-1: import mysql.connector  and Other Modules if required.
+Step-2: Every Python Program Must Obtain the Connection from MySQL Database
+Step-3: Every Python Program Must  Create an object of Cursor
+Step-4: Every Python Must Design the Query ,Place the Query in Cursor object and send for Execute in Database.
+Step-5: Every Python Program Must Process the Result of the Query
+Step-6: Every Python Program is Recommned to Close the Connection from Database Software.
+==============================================================================================
+Explanation
+===============================================================================================Step-1: import mysql.connector  and Other Modules if required.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------=>When Python Programmer wants to communicate with MySQL Database then Python Programmer Must import mysql.connector 
+   
+
+Examples:      import mysql.connector 
+				
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------Step-2: Every Python Program Must Obtain the Connection from MySQL Database
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>After importing either mysql.connector  module, Python program Must the get the Connection from mySQL Database.
+=>To get the Connection from MySQL Database, we mus use connect(), which is present in mysql.connector
+---------------------
+Syntax:		varname=mysql.connector.connect(host="DNS/IPAddress",
+---------------------								user="User Name of mysql Database",
+											passwd="Password of mysql Database")
+			
+=>Here varname---->Represents Connection Object of type <class, mysql.connector.Connection>
+=>here mysql.connector---->Represents Name of Pre-Defined Third Party Module
+=>Here connect()--->It is One of the Pre-DefinedFunction used for Obtaining the connection from mysql.connector 
+					Database
+=>here user--->Represents user name of MySQL Database
+=>here passwd--->Represents Password of MySQL Database
+=>here DNS----------->DNS stands for Domain Naming System/Service. 
+				  DNS Represents Name of the Physical machine where Database Software Resides
+				  The Default DNS of Every Computer is "localhost".
+=>here IPAddress--->IPAddress stands for Internet Protocol Address.
+				   IPAddress Represents Physical Address of the Machine where Database Software Resides.
+				  The Default IPAddress of Every Computer is 127.0.0.1 (Loop Back Address).
+				
+=>If we write OR Specify any part of  Connection details   as wrong then we get exception called "mysql.connector.DatabaseError "
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step-3: Every Python Program Must  Create an object of Cursor
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>The purpose of Creating an object of Cursor is that "To carry the query from Python Program to Oracle Database and brings the result from Oracle Database and handover to Python Program".
+=>To Create an object of Cursor, we use a pre-defined function called cursor()  which is present in connection object.
+=>Syntax:     varname=connobj.cursor()
+=>Here varname is an object of <class, oracledb.Cursor>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step-4: Every Python Must Design the Query ,Place the Query in Cursor object and send for Execute in Database.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>A Query is a Request / Question to the Data Base Software for Peforming any Database Operation.
+=>To Execute the Query from Python Program in Oracle Database, we use a pre-defined function execute(), which is 
+    present in cursor object.
+=>Syntax:     curobj.execute("Query")
+=>Here Query can Either DDL, DML and DRL
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------

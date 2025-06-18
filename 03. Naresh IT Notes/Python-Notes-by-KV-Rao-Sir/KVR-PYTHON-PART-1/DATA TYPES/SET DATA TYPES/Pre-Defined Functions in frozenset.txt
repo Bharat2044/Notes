@@ -1,0 +1,60 @@
+			=====================================
+				Pre-Defined Functions in frozenset 
+			=====================================
+=>frozenset  contains the following Functions
+			a) copy()
+			b) isdisjoint()
+			c) issuperset()
+			d) issubset()
+			e) union()
+			f) intersection()
+			g) difference()
+			h) symmertic_difference()
+
+NOTE:
+-------------
+>>> fs1=frozenset({10,20,30,409})
+>>> print(fs1,type(fs1),id(fs1))--------frozenset({409, 10, 20, 30}) <class 'frozenset'>	2068835340960
+>>> fs2=fs1.copy()  # Deep Copy
+>>> print(fs2,type(fs2),id(fs2))-----frozenset({409, 10, 20, 30}) <class 'frozenset'>       2068835340960
+
+=>In General, Immutable Object content is Not Possible to copy( in the case of tuple). Where as in the case of frozenset, we are able to copy its content to another frozenset object. Here Original frozenset object and copied frozenset object contains Same Memory Address and Not at all possible to Modify / Change their content.
+
+=>frozenset  does not contain the following Functions
+			a) clear()
+			b) add()
+			c) remove()
+			d) discard()
+			e) pop()
+			f) update()
+			h) symmertic_difference_update()
+---------------------------------------------------------------------------------------------------
+Examples:
+----------------------------------------------------------------------------------------------------
+>>> print(fs1,type(fs1),id(fs1))-------frozenset({50, 20, 70, 40, 10, 60, 30}) <class 'frozenset'> 1558323909504
+>>> fs2=fs1.copy()
+>>> print(fs2,type(fs2),id(fs2))------frozenset({50, 20, 70, 40, 10, 60, 30}) <class 'frozenset'> 1558323909504
+>>> print(fs1)----------frozenset({50, 20, 70, 40, 10, 60, 30})
+-------------------
+>>> fs1=frozenset({10,20,30,40,50,60,70})
+>>> fs2=frozenset((10,20,30))
+>>> fs1.issuperset(fs2)---------True
+>>> fs2.issuperset(fs1)--------False
+>>> fs2.issubset(fs1)----------True
+>>> fs1.issubset(fs2)------------False
+-----------------------------
+>>> fs1=frozenset({10,20,30,40,50,60,70})
+>>> fs2=frozenset((100,200,300))
+>>> fs3=frozenset((10,2,3))
+>>> fs1.isdisjoint(fs2)---------True
+>>> fs1.isdisjoint(fs3)----------False
+>>> print(fs1)-------------frozenset({50, 20, 70, 40, 10, 60, 30})
+>>> print(fs2)-----------frozenset({200, 100, 300})
+>>> fs1.union(fs2)----------frozenset({100, 70, 40, 200, 10, 300, 50, 20, 60, 30})
+>>> fs1.intersection(fs2)---------frozenset()
+>>> fs1.difference(fs2)-----------frozenset({70, 40, 10, 50, 20, 60, 30})
+>>> fs2.difference(fs1)--------------frozenset({200, 100, 300})
+>>> frozenset({10,20,30,40}).symmetric_difference(frozenset([10,20,50,60]) )
+							frozenset({40, 50, 60, 30})
+>>> fs1|fs2--------------frozenset({100, 70, 40, 200, 10, 300, 50, 20, 60, 30})
+=============================================x=====================================

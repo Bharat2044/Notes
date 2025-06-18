@@ -1,0 +1,84 @@
+			===================================================================
+					Dict Category Data Type  (Collections Data Type)
+			===================================================================
+=>"dict" is one of the Pre-Defined Class and treated Dict Category
+=>The purpose of dict data type is that "To store (Key,Value) ".
+=>In (Key,Value), The values of Key are called Unique where as values of Value may or may not Unique.
+=>To store the (Key,value) in the object of dict, we use Curly Braces {} and (Key,Value) separated by comma.
+=>Syntax:    dictobj={Key1:Val1,Key2:Val2,.......,Key-n:Val-n}
+		Here Key1,Key2,....Key-n Represents Values of Key
+		Here Val1,Val2,....Val-n Represents Values of Value
+=>An obejct of dict maintains Inserion Order
+=>On the object of dict , we can't perform Indexing and Slicing Operations bcoz Values of Key Itself act as Indices.
+=>An object of dict belongs to MUTABLE. But in the dict object, Values of Value always belongs to MUTABLE where as Values of 
+    Key always belongs to IMMUTABLE.
+=>=>In Python Programming, we can create Two Types of dict objects. They are
+
+			1) Empty Dict
+			2) Non-Empty Dict
+------------------------------------
+1) Empty Dict
+------------------------------------
+=>An Empty Dict is one which does not contain any Elements and whose length is 0
+=>Syntax:  varname={ }
+			(OR)
+		   varname=dict()
+
+------------------------------------
+2) Non-Empty Dict
+------------------------------------
+=>A Non-Empty Dict is one which contains Elements and whose length is >0
+=>Syntax:  varname={Key1:Val1,Key2:Val2,.......,Key-n:Val-n}
+-------------------------------------------------------------------------
+Syntax for adding the (Key,value) to dict object
+-------------------------------------------------------------------------
+		dictobj[Key1]=Val1
+		dictobj[Key2]=Val2
+		-------------------------------
+		-------------------------------
+		dictobj[Key-n]=Val-n
+	Here Key1,Key2,....Key-n Represents Values of Key
+	Here Val1,Val2,....Val-n Represents Values of Value
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> d1={10:1.2,20:2.3,30:3.4,40:1.2}
+>>> print(d1,type(d1))-------------{10: 1.2, 20: 2.3, 30: 3.4, 40: 1.2} <class 'dict'>
+>>> d2={"Python":"RS","C":"DR","Java":"Golsing"}
+>>> print(d2,type(d2))-----------------{'Python': 'RS', 'C': 'DR', 'Java': 'Golsing'} <class 'dict'>
+>>> d3={"Python":1,"C":2,"Java":3,"C++":4}
+>>> print(d3,type(d3))-----------{'Python': 1, 'C': 2, 'Java': 3, 'C++': 4} <class 'dict'>
+------------------------------
+>>> d1={10:1.2,20:2.3,30:3.4,40:1.2}
+>>> print(d1,type(d1))--------{10: 1.2, 20: 2.3, 30: 3.4, 40: 1.2} <class 'dict'>
+>>> d1[10]-----------------------1.2
+>>> d1[20]-----------------------2.3
+>>> d1[30]-----------------------3.4
+>>> d1[0]------------------------KeyError: 0
+--------------------------------------------------------
+>>> d1={10:1.2,10:2.3,10:3.4,10:0.5}
+>>> print(d1)-----------{10: 0.5}
+--------------------------------------------------------
+>>> d1={10:1.2,20:2.3,30:3.4,40:1.2}
+>>> print(d1,type(d1))-------------{10: 1.2, 20: 2.3, 30: 3.4, 40: 1.2} <class 'dict'>
+>>> len(d1)----------------------------4
+>>> d2={}
+>>> print(d2,type(d2))------------{} <class 'dict'>
+>>> len(d2)---------------------------0
+>>> d3=dict()
+>>> print(d3,type(d3))------------{} <class 'dict'>
+>>> len(d3)---------------------------0
+---------------------------------------------------------------------------------------------------------------------
+>>> d1={}
+>>> print(d1,type(d1),id(d1))-------------{} <class 'dict'> 2382612136768
+>>> len(d1)------------------------------------0
+>>> d1[10]="PYTHON"  # Inserted Entry
+>>> d1[20]="C"   # Inserted Entry
+>>> print(d1,type(d1),id(d1))------------{10: 'PYTHON', 20: 'C'} <class 'dict'> 2382612136768
+>>> len(d1)------------------------------------2
+>>> d1[30]="Java"  # Inserted Entry
+>>> d1[40]="HTML" # Inserted Entry
+>>> print(d1,type(d1),id(d1))-----------{10: 'PYTHON', 20: 'C', 30: 'Java', 40: 'HTML'} <class 'dict'> 2382612136768
+>>> d1[30]="JS"   # Modified Entry
+>>> print(d1,type(d1),id(d1))-----------{10: 'PYTHON', 20: 'C', 30: 'JS', 40: 'HTML'} <class 'dict'> 2382612136768
+==========================================x===========================================================

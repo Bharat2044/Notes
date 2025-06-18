@@ -1,0 +1,58 @@
+		=================================================================
+				About Full Stack PYTHON Course Content
+						
+						5 Modules
+		=================================================================
+Module-1:  PYTHON PROGRAMMING-----Coding 
+----------------
+=>Core Python
+=>Advanced Python
+=>Python Programming for Data Science
+		a) NUMPY
+		b) PANDAS
+		c) MATPLOTLIB
+------------------------------------
+Module-2: UI Modules
+------------------------------------
+=>HTML
+=>Java Script
+=>CSS
+=>BOOTSTRAP
+=>ANGULAR
+=>AWS Basics
+------------------------------------
+Module-3:  FrameWorks
+------------------------------------
+=>Django
+=>Flask
+=>Rest API
+-----------------
+Module-4: Data Bases
+-----------------
+=>MySQL
+=>Mongo DB
+-----------------
+Module-5: Tools
+-----------------
+=>Git and GitHub
+=>Docker
+=>Unit Testing
+=>Integration Testing
+=>Cloud Basics
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+				Pre-Requsistes for Learing Full Stack PYTHON
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+=>For Learing Full Stack PYTHON-----No Need to Know C C++ Java----No Basics
+								KVR will Take care about Expert Coding Techniques
+								Student Becomes EXPERT in CODING---Responsibility OF KVR
+								Provided
+									1) Student Must be Puntual In Attending Classes
+									2) Student Must Practice Use Cases / Programs
+									3) Student Must Read the Notes Daily.
+	
+=>To get Job--------------------------------->Graduate----B.Com / B.Sc / B.Tech--any branch / MCA / Msc / MBA...etc
+						----------> 5 Years Gap 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Full Stack Python @ 7:00 AM (IST) By Mr. K.V.Rao
+Day-1 https://youtu.be/gE7zSos4PpA
+Day-2 https://youtu.be/LJeXNGL3LUQ

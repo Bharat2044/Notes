@@ -1,0 +1,4 @@
+blockquote::before{
+    content: '\201B';
+    font-size: 24px;
+}

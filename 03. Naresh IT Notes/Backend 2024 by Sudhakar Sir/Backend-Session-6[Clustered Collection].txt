@@ -1,0 +1,165 @@
+MongoDB Shell Commands
+- Create Database
+	use
+- Create Collection
+	createCollection()
+- Capped Collection
+- Creating Capped Collection
+- Set limits for capped collection
+	max
+	size
+- How to check it is capped or not?
+	isCapped()
+
+FAQ: How to convert a normal collection into capped?
+Ans:  By using mongodb "runCommand()" with "convertToCapped" property.
+
+Syntax:       
+ 	> db.runCommand({
+	         convertToCapped: "collectionName",
+	         size: newSize
+	   })
+Ex:
+	> db.runCommand({ convertToCapped:"products", size:6291456 })
+
+FAQ: How to change the capped size?
+Ans  :  By using  "collMod" property & "cappedSize".
+
+Syntax:
+	> db.runCommand({ 
+	        collMod: "collectionName",
+	        cappedSize: newSize
+	 })
+Ex:
+	> db.runCommand({ collMod: "products", cappedSize:3145728 })
+
+FAQ: How to change the capped max limit?
+Ans:  By using "collMod" & "cappedMax"
+
+Syntax:
+	> db.runCommand({
+	      collMod: "collectionName",
+	      cappedMax: newCount_For_Documents
+	})
+
+Ex:
+	> db.runCommand({ collMod: "products", cappedMax:15 })
+
+			          Clustered Collection
+- A clustered collection is faster than normal collection.
+- It uses less memory.
+- It performs operations on data faster than normal.
+- It can perform actions without any secondary index.
+- A clustered index can automantically expire if set with expiry.
+- A clustered collection stores index and the documents together using "_id" key.
+- It can have a custom value for auto generated key field.
+
+Limitations:
+- If collection is having a secondary index then it is slow in access.
+- It uses more memory with secondary index.
+- It operations are slow with secondary index.
+
+Syntax:
+	> db.createCollection("collectionName", { 
+	      clusteredIndex: { "key" : {keyName} ,  "unique":boolean, "name": "keyName"  }
+	})
+
+	key	=> It refers to unique key name you want to define
+	unique	=> It specifies that the value in key must be unique
+	name	=> It is reference name
+
+Note:   You can set  clusteredIndex key with auto delete functionality.
+            It requires the configuration of property "expireAfterSeconds".
+
+Ex:
+ > db.createCollection(
+            "users", 
+             { clusteredIndex: {"key":{_id:1}, "unique":true, "name":"Clustered Key for UserId"} }
+     )
+
+		           Insert Documents into Collection
+- Collection comprises of Data in the format of BSON, which is a binary format of JSON.
+- JSON is "JavaScript Object Notation".
+- Object is used to keep relative data together.
+- "Alan Kay" introduced the concept of object into computer programming in early 1960's.
+	
+		var tv = "Samsung TV";
+		var mobile = "iPhone 15";
+		var price = 65000;
+
+		{
+		  "Name": "Samsung TV",
+		  "Price": 65000
+		}
+
+- Object is a set of keys and values.
+- JSON object key must be string type and value can be any of "BSON" type, which are derived from JavaScript types.
+- JavaScript Types
+	number [signed, unsigned, float, double, decimal, binary, hexa, octa, exponent]
+	string
+	boolean
+	null
+	undefined
+	symbol
+	bigint
+	array
+	object
+	map
+	date
+	regExp
+- MongoDB BSON types are
+	"string"
+	"long"	
+	"int"		
+	"double"			Note: symbol, undefined type are deprecated in v6+
+	"decimal"
+	"timestamp"
+	"null"
+	"object"
+	"array"  etc..
+- MongoDB Provides the following methods for insert a document into collection
+	
+	a) insertOne()
+	b) insertMany()
+
+Syntax:
+	> db.collectionName.insertOne({ key:value, key:value })
+	> db.collectionName.insertMany([ { Key:value }, { key:value } ])
+
+EX:
+> db.products.insertOne({Id:1, Name: "TV", Stock:true})
+> db.products.insertMany([{Id:2, Name: "Mobile", Stock:false}, {Id:3, Name:"Watch", Stock:true}])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

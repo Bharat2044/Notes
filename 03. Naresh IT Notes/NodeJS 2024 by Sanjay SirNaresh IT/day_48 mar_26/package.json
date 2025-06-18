@@ -1,0 +1,19 @@
+{
+  "name": "day_48-mar_26",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 10000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai-http": "^4.4.0",
+    "mocha": "^10.3.0"
+  },
+  "dependencies": {
+    "chai": "^4.4.1"
+  }
+}

@@ -1,0 +1,73 @@
+		================================================
+				Combination set with set,list and tuple
+					OR
+				 Nested OR Inner  Sets
+		================================================
+Case-1 : It is Not Possible to Define One Set in Another Set bcoz sets are  unhashable type(Not Possible 
+	     to apply  Indexing + Not Possible to Modify)
+--------------------------------------------------------------------------------------------------------------------------------
+Examples:
+----------------
+>>> s1={10,"Rossum",{16,19,18},{77,76,75},"OUCET"}---------TypeError: unhashable type: 'set'
+--------------------------------------------------------------------------------------------------------------------------------
+Case-2:  It is Not Possible to Define One List in Another Set bcoz sets are  unhashable type(Not Possible 
+	     to apply  Indexing + Not Possible to Modify)
+----------------
+Examples
+----------------
+>>> s1={10,"Rossum",[16,19,18],[77,76,75],"OUCET"}-----------TypeError: unhashable type: 'list'
+--------------------------------------------------------------------------------------------------------------------------------
+Case-3: It is Possible to Define One Tuple in Another Set bcoz tuples are Immutable
+----------------------------
+Examples
+----------------------------
+>>> s1={10,"Rossum",(16,19,18),(77,76,75),"OUCET"}
+>>> print(s1,type(s1))-------{(77, 76, 75), (16, 19, 18), 'OUCET', 'Rossum', 10} <class 'set'>
+>>> for val in s1:
+...		print(val,type(val))
+...
+		(77, 76, 75) <class 'tuple'>
+		(16, 19, 18) <class 'tuple'>
+		OUCET <class 'str'>
+		Rossum <class 'str'>
+		10 <class 'int'>
+--------------------------------------------------------------------------------------------------------------------------------
+Case-4: It is Possible to Define One Set in Another List bcoz List are mutable and allows us to locate set 
+             objects by using Indices.
+------------------------
+Examples
+------------------------
+>>> lst=[10,"Rossum",{16,19,18},{77,76,75},"OUCET"]
+>>> print(lst,type(lst))----------[10, 'Rossum', {16, 18, 19}, {75, 76, 77}, 'OUCET'] <class 'list'>
+>>> print(lst[2],type(lst[2]))---------{16, 18, 19} <class 'set'>
+>>> lst[2].add(15)
+>>> print(lst)---------[10, 'Rossum', {16, 18, 19, 15}, {75, 76, 77}, 'OUCET']
+>>> lst[-2].add(66)
+>>> print(lst)--------[10, 'Rossum', {16, 18, 19, 15}, {66, 75, 76, 77}, 'OUCET']
+--------------------------------------------------------------------------------------------------------------------------------
+Case-5: It is Possible to Define One Set in Another tuple bcoz Tuples are Immutable and allows us to 
+             locate set  objects by using Indices.
+------------------------
+Examples
+------------------------
+>>> tpl=(10,"Rossum",{16,19,18},{77,76,75},"OUCET")
+>>> print(tpl,type(tpl))-------------(10, 'Rossum', {16, 18, 19}, {75, 76, 77}, 'OUCET') <class 'tuple'>
+>>> print(tpl[2],type(tpl[2]))---------{16, 18, 19} <class 'set'>
+>>> tpl[2].add(15)
+>>> print(tpl,type(tpl))--------(10, 'Rossum', {16, 18, 19, 15}, {75, 76, 77}, 'OUCET') <class 'tuple'>
+>>> tpl[-2].remove(76)
+>>> print(tpl,type(tpl))--------(10, 'Rossum', {16, 18, 19, 15}, {75, 77}, 'OUCET') <class 'tuple'>
+================================x================================================
+
+
+
+
+
+
+
+
+
+
+
+
+

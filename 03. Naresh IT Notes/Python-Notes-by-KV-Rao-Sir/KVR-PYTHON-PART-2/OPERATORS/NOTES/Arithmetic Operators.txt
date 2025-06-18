@@ -1,0 +1,39 @@
+			===============================================================
+						1. Arithmetic Operators
+			===============================================================
+=>The purpose of Arithmetic Operators is that "To perform Arithmetic Operations such as addition. Substraction, 
+    Multiplication..etc".
+=>If Two Or More Objects / Values / Variables connected with Arithmetic Operators then It is called Arithmetic Expression.
+=>In Python Programming, we have 7 Types of Arithmetic Operators. They are given in the following table
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SLNO	SYMBOL			MEANING			EXAMPLES   a=10   b=3
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.		+				Addition			print(a+b)------>13. here a+b is called Arithmetic Expression
+2.		-				Substraction		print(a-b)------->7
+3.		*				Multiplication		print(a*b)------->30
+
+4.		/				Division			print(a/b)------->3.3333333333333335
+					  (Float Quotient)
+
+5.		//				Floor Division		print(a//b)------>3
+					   (Integer Quotient)
+
+6.		%				Modulo Division	print(a%b)----->1
+					(Gives Remainder)
+
+7.		**			Exponentiation		print(a**b)----->1000
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTE:		
+--------
+>>> print(10/3)------------3.3333333333333335
+>>> print(10//3)----------3
+
+>>> print(10.0/3.0)----------3.3333333333333335
+>>> print(10.0//3.0)--------3.0
+
+>>> print(10.0/3)-----------3.3333333333333335
+>>> print(10.0//3)----------3.0
+
+>>> print(10/3.0)------------3.3333333333333335
+>>> print(10//3.0)-----------3.0
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

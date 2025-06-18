@@ -1,0 +1,216 @@
+			  Mongosh Commands
+
+1. Creating a new Database
+
+- View existing databases by using the command
+	
+	> show dbs   [databases]
+
+- View active database by using
+
+	> db
+
+- To clear screen
+
+	> cls
+
+- To create a new database mongodb provides the command "use"
+
+	> use  databaseName
+
+    Note: If database name is a new name, then it can create database.
+              If database name is an existing name then it starts using the database.
+              Database name is not displayed in list unitl or unless it contains collections.
+
+Syntax:
+	> use  demodb
+
+- Database naming rules 
+	* Always use lowercase or camel case 
+                 * Database name must be unique, even if it allows different capitalizaiton.
+		
+		   > use  demodb
+		   > use  DemoDb		// valid , but not recommended
+	
+	 * Don't use following special chars for database name
+
+		   \ / .  " $ ?
+
+	 * It is recommended to define database name without special chars.
+	 * Database name can be max 64 bytes.
+	 * It is recommended to set database name with in 255 chars.
+	 
+	 * Avoid using the system names of database 
+	        [local, admin, config]
+	
+Summary:
+- use
+- show dbs
+- db
+
+2. Create a new collection
+- Collection comprises of data.
+- Data is arranged in documents.
+
+	> db.createCollection("name", { options })
+
+- Collections are of various types
+
+	a) Capped Collections
+	b) Clustered Collections
+	c) Timestamp Collections 
+	    etc...
+
+- All collections are created by using "createCollection()", the collection type is determined by using the options.
+
+Syntax:
+            >db.createCollection("name")	        	// without configuring the options
+            >db.createCollection("name", {options})	// options sets restrictions for collection
+					   and behaviour for collection.
+Ex:
+           >db.createCollection("products")
+
+- Collection options are used to control the behaviour and set restrictions, which include the following
+
+              option		type	description
+              ------------------------------------------------------------------------------------------
+              autoIndexId		boolean	It generates a unique "id" for every document in 
+				collection.
+
+              max		number	It defines the maximum number of documents 
+				allowed in a collection.
+
+              size		number	It defines the total number of bytes allocated
+				for collection in memory.
+
+				8 bits = 1 byte
+				1024 bytes = 1 KB    1024 + 1024  = 2 KB
+				1024 KB = 1 MB	1024 * 1024  = 1 MB 
+				1024 MB = 1 GB
+				1024 GB = 1 TB
+
+              capped		boolean	It defines how to control the size and max in
+				collection. If set to true it will replace the old
+				documents with new.
+				If set to false then will not allow to add new
+				document.
+
+FAQ's:
+1. What is a capped collection?
+A. A capped collection allows replacing old documents with new when it reaches the max limit.
+
+2. How to create a capped collection?
+A. By using the attributes
+	a) max
+	b) size
+	c) capped
+  
+     > db.createCollection("name", { max:10,  size:2097152, capped:true})
+
+Note: size and max are mandatory for capped. and capped is mandatory when you configure
+          size and max attributes.
+
+3. How to know if the collection is normal or capped?
+A. By using "isCapped()"
+
+4. How to view all collections in database?
+A. "show collections"
+
+	> show collections
+	> db.collectionName.isCapped()
+	> db.products.isCapped()
+
+5. Is it possible to change the capped size and max limit?
+A. Yes by using collection "runCommand()" you can update the size and max.
+
+
+6. How to remove a capped collection?
+A. You can remove collection by using "drop()".
+
+	> db.collectioName.drop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+

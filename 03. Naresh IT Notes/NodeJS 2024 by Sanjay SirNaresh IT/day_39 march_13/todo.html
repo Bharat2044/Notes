@@ -1,0 +1,17 @@
+<script>
+    async function fetchToDos() {
+        const url = 'http://localhost:5000/todos';
+        const myQuery = `{todos{id}}`;
+
+        let response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({ query: myQuery }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        let data = await response.json();
+        console.log(data)
+    }
+    fetchToDos();
+</script>

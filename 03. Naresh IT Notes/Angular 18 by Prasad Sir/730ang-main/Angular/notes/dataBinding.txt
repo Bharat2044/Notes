@@ -1,0 +1,16 @@
+In Every Component, there will be one HTML file also called as Template file and one ts file also called component file.
+Data Binding means transferring data between template and component files. 
+There are two types of Data Binding
+ i. one way data Binding: using one way data binding, we can transfer data from either template to component or component to template
+    there are three possible ways:
+    a. string interpolation: we can send data from component(TS) to template(HTML) using string interpolation. 
+    it wraps the data between double braces
+    ** string interpolation always takes value as a string
+    b. property Binding: we can bind property values from component file to template file using propert binding
+    it wraps the data between square brackets
+    ** property binding can be used for dynamic classes or dynamic styling
+    c. event binding: we can bind events data from template file to component file using event binding 
+    it wraps the data between parenthesis
+ ii. two way data binding: it builds commmunication between template and component at a time using a directives called [(ngModel)].
+ To use ngModel, you have to import formsModule in main module file.
+ 

@@ -1,0 +1,169 @@
+CRUD Operations
+- Create - use, createCollection, insertOne(), insertMany()
+- Read - find()
+
+			      Update Query
+- You can find and update any document in a collection by using the following methods
+	a) updateOne()
+	b) updateMany()
+
+Syntax:
+	> db.collectionName.updateOne({ find }, { update })
+
+- Update operators
+
+	$set		Sets new value into a field
+	$rename		Changes the field name
+	$unset		Removes a field from collection
+
+Syntax: Changing the price of specific product
+
+	> db.products.updateOne({id:1}, { $set: { price: 200.94 } })
+	> db.products.updateOne({id:1}, { $set: { price: 200.94, 'rating.rate':4.2 })
+
+Syntax: Adding a new field into document
+
+	> db.products.updateOne({id:1}, { $set: {stock:true} })
+	> db.products.updateMany({}, { $set:{stock:true} })
+	> db.products.updateMany({category:"jewelery"}, { $set: {stock:true}})
+
+Syntax: Changing Field Name
+	
+	> db.products.updateOne({id:1}, {$rename: {"stock":"inStock"}})
+	> db.products.updateMany({}, {$rename: {"image": "pic"}})
+
+Syntax: Set stock as false for all electronic products whose rating is below 4.
+
+>db.products.updateMany({$and:[{category:"electronics"}, {'rating.rate':{$lt:4}}]},{$set:{stock:false}})
+
+Syntax: Remove stock field for all electronic products
+
+> db.products.updateMany({category:"electronics"}, {$unset:{"stock":""}})
+
+
+			     Delete Documents
+- Delete query allows to remove the documents from a collection.
+- Mongosh commands for delete are
+	a) deleteOne()
+	b) deleteMany()
+
+Syntax: Delete the document with id=2
+
+	> db.products.deleteOne({id:2})
+
+Syntax: Delete all products with rating less than or equal to 3.
+
+	> db.products.deleteMany({'rating.rate':{$lte:3}})
+
+Note: 
+ - You can delete a collection by using "drop()" method
+
+	> db.collectionName.drop();
+ 
+ - You can delete a database by using  "dropDatabase()"
+
+	demoDb > db.dropDatabase()
+
+			            ORM 
+- Object Relational Mapping [Mapper]
+- ORM allows the developers to write for business requirements instead of writing for data requirements.
+- It enables features like lazy loading, change tracking, identity resolution etc.
+- MongoDB provides built-in library for handling ORM.
+- It uses an algorithm that can create database, collections and seed data into collection if the database is not created.
+- It uses another algorithm to use existing database instead of create database.
+
+1. Create a new folder
+	D:\Server
+
+2. Open in VS code
+
+3. Install the library
+	
+	>npm install  mongodb --save
+
+     It provides "mongodb" drivers library, which is required to communicate with MongoDB database.
+
+4. Add a new JavaScript file by name "index.js"
+
+
+var mongoClient = require("mongodb").MongoClient;
+
+mongoClient.connect("mongodb://127.0.0.1:27017").then(function(obj){
+     
+
+    var database = obj.db("fakestore");
+
+    database.collection("categories").insertOne({Id:2, CategoryName:"Footwear"}).then(function(){
+         console.log('Record Inserted');
+    })
+
+})
+
+5. Open Terminal and run index.js
+
+	> node  index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

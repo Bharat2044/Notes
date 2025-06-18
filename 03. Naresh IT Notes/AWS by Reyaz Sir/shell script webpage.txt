@@ -1,0 +1,39 @@
+
+
+
+
+
+
+
+1. Launch 2 Ec2 instance with the user data(server1 userdata put it as "My first webiste on server1 and vice versa on server2")
+2. Modify SG by adding HTTP protocal with myip and dont modify default rule (all traffic)
+3. Access the 2 EC2 instances Public IP's on the browser and verify the website is working or not
+4. Create Load Balancer (in health check ensure to have /index.html) --> create target group and register targets in the TG
+5. Access ELB DNS Name.
+6. Check the targets in target groups, it should show healthy --> try stickiness
+   --> configure stickyness
+7. Explore path based routing (create 4 instances, 2 with /index.html(TG1) and 2 with /admin(TG2) and add rules in target grp)
+7. Terminate EC2 instance, ELB and target groups.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Shell script for webpage
+
+
+#!/bin/bash
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+mkdir /var/www/html
+echo 'Hey!! This is my First Website on EC2!' > /var/www/html/index.html

@@ -1,0 +1,25 @@
+		======================================
+				global key word  
+		======================================
+=>When we want MODIFY the GLOBAL VARIABLE values in side of function defintion  then global variable names must be preceded with 'global' keyword otherwise we get "UnboundLocalError: local variable names referenced before assignment"
+------------
+Syntax:
+-----------
+	var1=val1
+	var2=val2
+	var-n=val-n    #  var1,var2...var-n are called global variable names.
+	------------------
+	def   fun1():
+		------------------------
+		global var1,var2...var-n
+		# Modify var1,var2....var-n
+	    --------------------------
+	def   fun2():
+	       ------------------------
+	        global var1,var2...var-n
+	     # Modify var1,var2....var-n
+	       ---------------------------------
+
+NOTE: To MODIFY Global variable Values inside of Function Definition, we use global Keyword (Mandatory to write)
+NOTE: To ACCESS Global variable Values inside of Function Definition, we Don't use global Keyword
+====================================================================================

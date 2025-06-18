@@ -1,0 +1,16 @@
+Call() & apply() & bind()
+========================
+-call(),apply(),bind() are methods from 'Object' class.
+-used to change the context(this value) while calling a function.
+-while calling a function, if we want to pass 'this' explicitely.
+
+call() - call() is used to pass differenet object as a value to 'this'.
+	   call() method calls a function with a given 'this' value and arguments provided individually.
+       using call() one object can invoke another object's function.    
+
+apply() - apply() takes 2 arguments.1st arguement is an object(this), 2nd arguement is an array of items.
+      -it takes the values from that array and passes as individual arguements to a method.
+
+-bind() creates a new function and when that(new function) is called will have its 'this' set to the provided value with a given sequence of arguements.
+-it is most useful for binding the value of 'this' in methods of classes 
+  that you want to pass into other functions.

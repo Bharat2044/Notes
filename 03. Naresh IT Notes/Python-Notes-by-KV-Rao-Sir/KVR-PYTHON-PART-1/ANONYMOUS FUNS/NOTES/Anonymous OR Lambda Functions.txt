@@ -1,0 +1,38 @@
+		===============================================================
+				Anonymous OR Lambda Functions
+		===============================================================
+=>Anonymous Functions are those which does not contain any name explicitly (Unknown Functions are called 
+   Anonymous Functions).
+=>The purpose of Anonymous Function is that "To Perform Instant Operations".
+=>Instant Operations are nothing but Performing an Operation Only at that point of time and No Longer Interested to 
+    use  in Other Part of the Program / Project.
+=>To Define Anonymous Functions, In Python we use a Keyword called "lambda". Hence Anonymous Functions are 
+   also Lambda Functions.
+=>Since they are using to perform Instant Operations, Anonymous Functions contains Single Executable Statement(Never Contains Multiple statements).
+=>Anonymous Functions returns the result Implicitly OR Automatically (No Need to use return statement).
+------------------------------------------------------------
+Syntax for Defining Anonymous Function
+------------------------------------------------------------
+				varname=lambda Params-List : Expression
+------------------------------------------------------------
+Explanation
+***********************************************************
+=>varname Represents an object of type <class, 'function'>. Since It is treated as an object of <class,'function'> and It 
+    can be used Function call.
+=>lambda is a keyword used for Defining Anonymous Functions.
+=>Params-List represents List of Varfiables used for Holding OR Storing inputs Coming from Function call
+=>Expression Represents single executable statement and provides logic for Instant Operation.
+=>Anonymous Functions automatically OR Implicitly returns the Result (No need to use return statement).
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+My Task:  Define a Function for addition of Two Numbers
+*********************************************************************************************************************************************
+By using Normal Function					By using Anonymous Function
+----------------------------------------			-----------------------------------------------------------------------
+def   sumop(a,b):							addop=lambda a,b : a+b
+     c=a+b
+     return c
+ 
+ #Main program
+res=sumop(10,20) # Function Call
+print("Sum =",res)
+=====================================================================================

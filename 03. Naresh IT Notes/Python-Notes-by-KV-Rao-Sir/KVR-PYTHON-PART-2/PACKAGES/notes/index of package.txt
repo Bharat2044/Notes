@@ -1,0 +1,15 @@
+			======================================================
+				Packages in Python
+			======================================================
+Index
+-----------------
+=>Purpose of Package
+=>Definition of Package
+=>Differneces Between Functions,Modules and Packages
+=>Steps for Creating Package
+=>what is __init__.py
+=>Number of Approaches to Use Packages
+		a) by using sys.path.append()
+		b) by using PYTHONPATH Environmental Variable
+=>Programming Examples
+======================================================================

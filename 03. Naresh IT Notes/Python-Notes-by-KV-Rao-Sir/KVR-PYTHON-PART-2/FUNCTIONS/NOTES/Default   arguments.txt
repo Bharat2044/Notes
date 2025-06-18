@@ -1,0 +1,16 @@
+		======================================
+			2) Default  Parameters (or) arguments
+		======================================
+=>When there is a Common Value for family of Similar Function Calls then Such type of Common Value(s) must be taken  as default parameter with common value (But not recommended to pass by using Posstional arguments OR Parameters)
+----------------------------------------------------------------------------------------
+Syntax for Function Definition with Default Parameters
+----------------------------------------------------------------------------------------
+def   functionname(param1,param2,....param-n-1=Val1, Param-n=Val2):
+          ------------------------------------------------------------------
+	  ------------------------------------------------------------------
+
+Here param-n-1 and param-n are called "default Parameters".
+   and param1,param-2... are called "Possitional parameters".
+
+Rule-: When we use default parameters in the function definition, They must be used as last Parameter(s) otherwise we get Error( SyntaxError: non-default argument (Possitional ) follows default argument).
+=====================================================================================================

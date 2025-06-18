@@ -1,0 +1,38 @@
+			=======================================================
+				Handling the Exceptions in Python
+			=======================================================
+=>Handling the Exceptions in Python is Nothing But Converting Technical Error Messages into User-Friendly Error Message.
+=>To convert Technical Error Messages into User-Friendly Error Message, we have 5 Keywords in Python. They are
+	
+			1. try
+			2. except
+			3. else
+			4. finally
+			5. raise
+============================================================================================
+Syntax for Handling the Exceptions in Python
+============================================================================================
+		
+		try:
+		     Block of statements 
+		     Generating Exceptions
+		except exception-class-name-1:
+		     Block of Statements
+		     generates User-Friendly Error Message
+		except exception-class-name-2:
+		     Block of Statements
+		     generates User-Friendly Error Message
+		-----------------------------------------------------------
+		except exception-class-name-n:
+		     Block of Statements
+		     generates User-Friendly Error Message
+		else:
+			Block of statements Recommeded
+			to display Result of the Program
+		finally:
+			Block of statements Executes Compulsorily
+============================================================================================
+		   
+
+		
+

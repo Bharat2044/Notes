@@ -1,0 +1,144 @@
+Creating API 
+- Node
+- Express
+- MongoDB
+	
+			CRUD Operations
+
+- Express is a middleware that sends data in JSON by default.
+- Data from client need to be converted into JSON.
+- Early versions of Node uses "body-parser" library.
+- Express JS latest versions provide "body-parser", which application have to use to convert the input data into JSON.
+
+Syntax:
+	app.use(express.urlencoded({ extended: true }));
+	app.use(express.json());
+
+- Converting data and inserting into database, updating or deleting can be blocked
+  at API level. You can control the actions by using "CORS" library.
+
+	> npm install cors --save
+
+	var cors = require("cors");
+
+	app.use(cors());
+
+Ex:
+api.js
+
+
+var express = require("express");
+var mongoClient = require("mongodb").MongoClient;
+var cors = require("cors");
+
+var app = express();
+
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(cors());
+
+var conStr = "mongodb://127.0.0.1:27017";
+
+app.get('/', (req, res)=>{
+    res.send("<h2>API Home</h2>");
+});
+
+app.get("/men", (req, res)=>{
+    res.send("<h2>Mens' Fashion</h2>");
+});
+
+app.get("/categories", (req, res)=>{
+
+    mongoClient.connect(conStr)
+    .then(clientObj=>{
+        var database = clientObj.db("videolibrary");
+        database.collection("categories").find({}).toArray().then(documents=>{
+            res.send(documents);
+            res.end();
+        });
+    });
+});
+
+app.post("/add-category", (req, res)=>{
+
+     var category = {
+        CategoryId: parseInt(req.body.CategoryId),
+        CategoryName: req.body.CategoryName
+     }
+
+     mongoClient.connect(conStr).then(clientObj => {
+        var database = clientObj.db("videolibrary");
+        database.collection("categories").insertOne(category).then(()=>{
+              console.log('Category Added');
+              res.end();
+        })
+     })
+
+})
+
+app.put("/edit-category/:id", (req, res)=>{
+
+    var id = parseInt(req.params.id);
+
+    mongoClient.connect(conStr).then(clientObj=>{
+
+        var database = clientObj.db("videolibrary");
+        database.collection("categories").updateOne({CategoryId:id},{$set:{CategoryId:parseInt(req.body.CategoryId), CategoryName: req.body.CategoryName}}).then(()=>{
+            console.log(`Category Updated`);
+            res.end();
+        });
+
+    })
+
+
+})
+
+app.delete("/delete-category/:id", (req, res)=>{
+
+    mongoClient.connect(conStr).then(clientObj=>{
+
+        var database = clientObj.db("videolibrary");
+
+        database.collection('categories').deleteOne({CategoryId:parseInt(req.params.id)}).then(()=>{
+             console.log("Category Deleted");
+             res.end(); 
+        })
+
+    })
+
+})
+
+
+
+app.get("/products/:category", (req, res)=>{
+
+     mongoClient.connect(conStr).then(clientObj=>{
+          var database = clientObj.db("videolibrary");
+
+          database.collection("products").find({category:req.params.category}).toArray().then(documents=>{
+            res.send(documents);
+            res.end();
+          });
+     });
+
+});
+
+app.get("*", (req, res)=>{
+    res.send("Requested Path : Not Found");
+});
+
+app.listen(4000);
+console.log(`API Started : http://127.0.0.1:4000`);
+
+
+
+
+
+
+
+
+
+
+
+
+

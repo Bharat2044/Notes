@@ -1,0 +1,404 @@
+			======================================================================
+				Examples  on	String Handling Part-2  
+			======================================================================
+=>We know that on str data, we can perform Indexing and Slicing Operations
+=>With Indexing Operation, we can get Single Value from Str object
+=>With Slicing Operation, we can get Range of Chars OR Sub String from str obj.
+=>We know that str object belongs to Immutable bcoz It can't allow Item Assignment.
+=>Along with Indexing and Slicing Operations, On str Data, we can Perform Various Operations by Using Pre-Defined Functions which are Present in str object. They are
+********************************************************************************************************************************************************
+1. capitalize()
+2. title()
+3. count()
+4. swapcase()
+5. upper()
+6. lower()
+7. isupper()
+8. islower()
+9.  isdigit()
+10. isalpha()
+11. isspace()
+12. split()  
+13. split("Delimiter")
+14. index()
+15. join()
+16. isalnum()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples----capitalize()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="python"
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.capitalize()
+'Python'
+>>> s="python programming lang"
+>>> s.capitalize()
+'Python programming lang'
+>>> s="python programmming lang.python is als oop lang"
+>>> s.capitalize()
+'Python programmming lang.python is als oop lang'
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples: title()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="python"
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.title()
+'Python'
+>>> s="python programming lang"
+>>> s.title()
+'Python Programming Lang'
+>>> s="python programmming lang.python is als oop lang"
+>>> s.title()
+'Python Programmming Lang.Python Is Als Oop Lang'
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples:  count()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="MISSISSIPPI"
+>>> print(s,type(s))
+MISSISSIPPI <class 'str'>
+>>> s.count("M")
+1
+>>> s.count("I")
+4
+>>> s.count("S")
+4
+>>> s.count("P")
+2
+>>> s.count("K")
+0
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+examples:   swapcase()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> s.swapcase()
+'python'
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> s.swapcase()
+'python'
+>>>
+>>> s="PyThOn"
+>>> print(s,type(s))
+PyThOn <class 'str'>
+>>> s.swapcase()
+'pYtHoN'
+>>> s="PYThon"
+>>> print(s,type(s))
+PYThon <class 'str'>
+>>> s.swapcase()
+'pytHON'
+>>> s="PYTHON"
+>>> s.title()
+'Python'
+>>> s.swapcase()
+'python'
+>>>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+examples:   upper()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="python"
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.upper()
+'PYTHON'
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.swapcase()
+'PYTHON'
+>>> s="PYThon"
+>>> print(s,type(s))
+PYThon <class 'str'>
+>>> s.upper()
+'PYTHON'
+>>> print(s,type(s))
+PYThon <class 'str'>
+>>> s.swapcase()
+'pytHON'
+>>> s="Python Programming"
+>>> print(s,type(s))
+Python Programming <class 'str'>
+>>> s.upper()
+'PYTHON PROGRAMMING'
+>>> s.swapcase()
+'pYTHON pROGRAMMING'
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+examples:   lower()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> s.lower()
+'python'
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> s.swapcase()
+'python'
+>>> s="PYThon"
+>>> print(s,type(s))
+PYThon <class 'str'>
+>>> s.lower()
+'python'
+>>> print(s,type(s))
+PYThon <class 'str'>
+>>> s.swapcase()
+'pytHON'
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples-----isupper()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="python"
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.isupper()
+False
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> s.isupper()
+True
+>>> s="PYTHOn"
+>>> print(s,type(s))
+PYTHOn <class 'str'>
+>>> s.isupper()
+False
+>>> s="1234^&&**"
+>>> print(s,type(s))
+1234^&&** <class 'str'>
+>>> s.isupper()
+False
+>>> s="1234ABC^&&**"
+>>> print(s,type(s))
+1234ABC^&&** <class 'str'>
+>>> s.isupper()
+True
+>>> s="1234Abc^&&**"
+>>> print(s,type(s))
+1234Abc^&&** <class 'str'>
+>>> s.isupper()
+False
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples-----islower()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="python"
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.islower()
+True
+>>> s="PYTHON"
+>>> print(s,type(s))
+PYTHON <class 'str'>
+>>> s.islower()
+False
+>>> s="PYThon"
+>>> print(s,type(s))
+PYThon <class 'str'>
+>>> s.islower()
+False
+>>> s.isupper()
+False
+>>> s="123Abc$%#"
+>>> print(s,type(s))
+123Abc$%# <class 'str'>
+>>> s.islower()
+False
+>>> s.isupper()
+False
+>>> s="234cat%^&"
+>>> print(s,type(s))
+234cat%^& <class 'str'>
+>>> s.islower()
+True
+>>> s.isupper()
+False
+>>>
+>>> s="12345"
+>>> print(s,type(s))
+12345 <class 'str'>
+>>> s.islower()
+False
+>>> s.isupper()
+False
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples-----isalpha()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="Python"
+>>> print(s,type(s))
+Python <class 'str'>
+>>> s.isalpha()
+True
+>>> s="Python3.12"
+>>> print(s,type(s))
+Python3.12 <class 'str'>
+>>> s.isalpha()
+False
+>>> s="123Python$"
+>>> print(s,type(s))
+123Python$ <class 'str'>
+>>> s.isalpha()
+False
+>>> s="Python Prog"
+>>> print(s,type(s))
+Python Prog <class 'str'>
+>>> s.isalpha()
+False
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Examples: isalnum()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="Python312"
+>>> print(s,type(s))
+Python312 <class 'str'>
+>>> s.isalnum()
+True
+>>> s="python"
+>>> print(s,type(s))
+python <class 'str'>
+>>> s.isalnum()
+True
+>>> s="12334"
+>>> print(s,type(s))
+12334 <class 'str'>
+>>> s.isalnum()
+True
+>>> s="Python3.12"
+>>> print(s,type(s))
+Python3.12 <class 'str'>
+>>> s.isalnum()
+False
+>>> s="123$567"
+>>> print(s,type(s))
+123$567 <class 'str'>
+>>> s.isalnum()
+False
+>>> s="    "
+>>> print(s,type(s))
+     <class 'str'>
+>>> s.isalnum()
+False
+>>> s.isdigit()
+False
+>>> s.isalpha()
+False
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Example: isspace()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="     "
+>>> print(s,type(s))
+      <class 'str'>
+>>> len(s)
+5
+>>> s.isspace()
+True
+>>> s=""
+>>> print(s,type(s))
+ <class 'str'>
+>>> len(s)
+0
+>>> s.isspace()
+False
+>>> s="Python Prog"
+>>> print(s,type(s))
+Python Prog <class 'str'>
+>>> s.isspace()
+False
+>>> s="123 234"
+>>> print(s,type(s))
+123 234 <class 'str'>
+>>> s.isspace()
+False
+>>> s="    T    "
+>>> print(s,type(s))
+    T     <class 'str'>
+>>> s.isspace()
+False
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+examples:  split()  and split("delimter")
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="19-03-2024"
+>>> print(s,type(s))
+19-03-2024 <class 'str'>
+>>> x=s.split("-")
+>>> print(x,type(x))
+['19', '03', '2024'] <class 'list'>
+>>> print("Day=",x[0])
+Day= 19
+>>> print("Month=",x[1])
+Month= 03
+>>> print("Year=",x[2])
+Year= 2024
+>>> s="Apple#Kiwi-Sberry#Guava"
+>>> print(s,type(s))
+Apple#Kiwi-Sberry#Guava <class 'str'>
+>>>
+>>> x=s.split("#")
+>>> print(x,type(x))
+['Apple', 'Kiwi-Sberry', 'Guava'] <class 'list'>
+>>> y=x[1].split("-")
+>>> print(y,type(y))
+['Kiwi', 'Sberry'] <class 'list'>
+>>> x[1]=y[0]
+>>> print(x,type(x))
+['Apple', 'Kiwi', 'Guava'] <class 'list'>
+>>> x.insert(2,y[1])
+>>> print(x,type(x))
+['Apple', 'Kiwi', 'Sberry', 'Guava'] <class 'list'>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> s="NISSAN"
+>>> print(s,type(s))
+NISSAN <class 'str'>
+>>> s.index("N")
+0
+>>> s.index("S")
+2
+>>> for index ,value in enumerate(s):
+...     print("\t{}-->{}".format(index,value))
+...
+        0-->N
+        1-->I
+        2-->S
+        3-->S
+        4-->A
+        5-->N
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+example----join()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+>>> lst=["Rossum","is","the","Father","of","Python"]
+>>> print(lst,type(lst))
+['Rossum', 'is', 'the', 'Father', 'of', 'Python'] <class 'list'>
+>>> k=" "
+>>> k=k.join(lst)
+>>> print(k)
+Rossum is the Father of Python
+------------
+>>> tpl=("19","3","2024")
+>>> print(tpl,type(tpl))
+('19', '3', '2024') <class 'tuple'>
+>>> d="-"
+>>> d=d.join(tpl)
+>>> print(d)
+19-3-2024
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

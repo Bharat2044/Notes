@@ -1,0 +1,41 @@
+			===============================================================
+					Getting Starting with Python
+	=====================================================================================
+					History of Python
+	=====================================================================================
+=>The Python Programming Language was conceived(Foundation stone Laiddown )  in the Year 1980.
+=>The Python Programming Language was started Its Implementation (Bring into Action) in th year 1989.
+=>The Python Programming Language Officially Released in the year 1991 Feb
+=>The Python Programming Language Developed by GUIDO VAN ROSSUM( Father of Python--Dutch Lang Programmer ).
+=>The Python Programming Language Developed at Centrum Wiskunde Informatica(CWI) Institute in Nether Lands.
+=>The Python Programming Language is the Sucessor  of ABC Programming Language.
+=>The Python Programming Language Maintained and Managed by a Non-Commercial Organization called "Python Software 
+    Foundation" (PSF)
+=>The official Web Site of Python Software Foundation is www.python.org
+====================================================================================================
+						Versions of PYTHON
+====================================================================================================
+=>The Python Programming Language contains 3 Types of Versions. They are
+
+		1) Python 1.x, here 1 is called  is called Major Version and x Represents 0 1 2 3 4 5 6...etc are called Minor Version
+
+			Python 2.x does not support the syntaxes of Python 1.x bcoz
+			Python Programming does not contain Backward Compatablity
+		2) Python 2.x, here 2 is called  is called Major Version and x Represents 0 1 2 3 4 5 6,7 are called Minor Version
+			Python 3.x does not support the syntaxes of Python 2.x bcoz
+			Python Programming does not contain Backward Compatablity
+		3) Python 3.x, here 3 is called  is called Major Version and x Represents 0 1 2 3 4 5 6,7,8,9,10 ,11,12 ,13  are called 
+		                         Minor Version
+====================================================================================================
+			Down Loading Python Software
+====================================================================================================
+=>Goto  www.python.org
+=>Choose Down Loads Option and Clieck   Python 3.12
+=>Ensure that  Python 3.12 Downloaded in downloads option
+=>Double Click  on Downloaded Python 3.12 
+====================================================================================================
+Full Stack Python @ 7:00 AM (IST) By Mr. K.V.Rao
+Day-1 https://youtu.be/gE7zSos4PpA
+Day-2 https://youtu.be/LJeXNGL3LUQ
+Day-3 https://youtu.be/DNd2NAvnbps
+Day-4 https://youtu.be/MhgH-eGRApM

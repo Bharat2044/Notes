@@ -1,0 +1,42 @@
+		================================================
+			2. DML(Data Manipulation Language) Queries 
+		================================================
+=>The purpose of 	DML(Data Manipulation Language) Queries  is that " To  insert records,  delete records and update records of any table".
+=>DML(Data Manipulation Language) Queries are classfied into 3 types. They are
+		
+		1. insert
+		2. delete
+		3. update
+=>After performing any DML Operation through Python Program, we must commit the database by using commit() and to undo the operation, we  do roll back by using rollback().
+=>commit() and rollback() are present in connection object.
+---------------------------------------------------------------------------------------------------
+1. insert
+---------------------------------------------------------------------------------------------------
+=>This Query is used for inserting Record in a table.
+=>Syntax:-  
+-----------------
+SQL> insert into table-name values(val1 for col1,val2 for col2,....val-n for col-n)
+Examples:
+------------------
+SQL> insert into employee values(20,'TR',1.9,'numpy');
+---------------------------------------------------------------------------------------------------
+2) delete
+---------------------------------------------------------------------------------------------------
+=>This Query is used for deleting a record from table.
+=>Syntax1:    SQL>delete from table-name ;
+			(OR)
+=>Syntax2:    SQL>delete from table-name where cond list ;
+----------------
+Examples:
+----------------
+SQL> delete from employee;    #Deletes all records of employee table
+SQL> delete from employee where eno=10;    #Deletes Perticular record of employee table
+---------------------------------------------------------------------------------------------------
+3) update
+-----------------------------------------------------------------------------------------------------------------------------------
+=>This Query is used for updating a record in a  table.
+=>Syntax1:- SQL>update table-name set col1=Val1,col2=val2....col-n=val-n;
+			(OR)
+=>Syntax2:- 
+SQL>update table-name set col1=Val1,col2=val2....col-n=val-n  where  Cond List
+-----------------------------------------------------------------------------------------------------------------------------------

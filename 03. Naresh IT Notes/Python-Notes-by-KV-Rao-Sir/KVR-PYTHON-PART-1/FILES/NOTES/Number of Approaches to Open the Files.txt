@@ -1,0 +1,42 @@
+			=========================================================
+					Number of Approaches to Open the Files
+			=========================================================
+=>In Python Programming, we have Two Approaches to Open the File. They are
+
+			1. By using open()
+			2. By using " with open() as "
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. By using open()
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:     varname=open("File Name","File Mode")
+------------------
+Explanation
+------------------
+=>Here Varname Represents File pointer which will point to the Opened File and whose type is 
+    <class, _io.TextIOWrapper>.
+=>open() is used for Opening the File in Specified File Mode
+=>FileName Represents Name of the File to be specified by the Programmer
+=>File Mode Represents any one of the File Opening Modes ( r,w,a,r+,w+,a+,x,x+)
+=>Once we open any file name with open() then we must close the File by using close() and It is  mandatory for maintaining  Consistency of Data(Manual Closing--- there is no concept of Auto-Closeability).
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. By using " with open() as "
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:       with  open("File Name","File Mode") as varname:
+				---------------------------------
+				---------------------------------
+				Block of Statements--Performs File Operations
+				---------------------------------
+				---------------------------------
+		    Other Statements
+		    ------------------------
+************************
+Explanation
+************************
+=>Here "with" and "as" are the Keywords.
+=>Here Varname Represents File pointer which will point to the Opened File and whose type is 
+    <class, _io.TextIOWrapper>.
+=>open() is used for Opening the File in Specified File Mode
+=>FileName Represents Name of the File to be specified by the Programmer
+=>File Mode Represents any one of the File Opening Modes ( r,w,a,r+,w+,a+,x,x+)
+=>The execution Process of "with open(---) as " is that "As Long as PVM present in side of " with open(---) as " Indentation then File Name is actively Available and once PVM comes out of " with open(---) as" Indentation then File name closed Automatically and This Facility is Called Auto-Closeability of File". No Need to close the  file by using close() manually.
+------------------------------------------------------------------------------------------------------------------------------------------------------------

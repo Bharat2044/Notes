@@ -1,0 +1,7 @@
+<h1>Movies List</h1>
+<div class="movies">
+  <div *ngFor="let m of movies" class="movie">
+  <img src={{m.posterURL}} alt={{m.title}} height="300">
+   <a href="https://www.imdb.com/title/{{m.imdbId}}" target="_blank"><h2>{{m.title}}</h2></a>
+ </div>
+</div>

@@ -1,0 +1,31 @@
+		=====================================================
+				Introduction to  Exception Handling
+						(OR)
+				Types of Errors 
+		=====================================================
+=>The Purpose of Exception Handling is that "To Develop Robust(Strong) Applications".
+=>In Real time to develop any type of applications, we need to a Language.
+=>By using the language, we Develop, Compile and Run (Execute) that Applications. During this Process we get Various     Types of Errors and those errors are classifed into 3 types. They are
+
+			1. Compile Time Errors.
+			2. Logical Errors.
+			3. Runtime Errors.
+******************************************************************************************************************************************
+1. Compile Time Errors.
+******************************************************************************************************************************************
+=>These Errors occurs during Compilation Phase( .py-------> .pyc )
+=>These Errors Occurs due to Syntaxes not followed by Programmers(SyntaxError,Indentationerror)
+=>These Errors Solved by Programmers at Development Time.
+******************************************************************************************************************************************
+2. Logical Errors.
+******************************************************************************************************************************************
+=>These Errors occurs during Execution OR Run Time
+=>These Errors Occurs due to Wrong Representation of Logics and gets Wrong Result
+=>=>These Errors Solved by Programmers at Development Time.
+******************************************************************************************************************************************
+3. Runtime Errors (Implementation Errors)
+******************************************************************************************************************************************
+=>These Errors occurs during Execution OR Run Time
+=>These Errors Occurs due to Wrong Input OR Invalid Input Entered by End-User OR Application User.
+=>To Deal with Runtime Errors, Programmers Must Have ForeCasting Knowledge.
+******************************************************************************************************************************************

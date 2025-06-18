@@ -1,0 +1,41 @@
+		======================================
+				Destructors in Python
+				    and 
+				Garbage Collector
+		======================================
+=>We know that Garbage Collector is one of the in-built program in python, which is running behind of every python program and whose is role is to collect un-used memory space and it improves the performance of python based applications.
+=>Every Garbage Collector Program is internally   calling its Own Destructor Functions.
+=>The destructor function  name in python is   def  __del__(self).
+=>By default ,The destructor always called by Garbage Collector  when the program execution completed  for de-allocating the memory space of objects which are used in that program. Where as constructor called By PVM implicitly during object is creation for initlizing the object.
+
+=>When the program execution is completed, GC calls its own destructor to de-allocate the memory space of objects present in program and it is called automatic Garbage Collection.
+
+=>Hence , We have THREE programming  conditions for calling GC  and  to make the garbage collector to call destructor Function.
+
+a) By default (or) automatically  GC calls destructor, when the program execution completed(called automatic Garbage Collection).
+b) Make the object reference as None  for calling Forcefull Garbage Collection( called Forcefull Garbage Collection)
+				Syntax :   objname=None
+c) delete the object by using del operator  for calling Forcefull Garbage Collection(Called Forcefull Garbage Collection)
+					Syntax:-   del  objname
+
+-----------------
+=>Syntax:
+-----------------
+		def       __del__(self):
+		           -----------------------
+			   -----------------------
+=>No Need to write destructor in class of Python bcoz GC contains its own Destructor 
+=======================================================================
+				Garbage Collector
+--------------------------------------------------------------------------------------------------------------------------
+=>Garbage Collector contains a pre-defined module called "gc"
+=>Here gc contains the following  Functions.
+			
+			1) isenabled()
+			2) enable()
+			3) disable()
+=>GC is not under the control of Programmer but it always maintained and mangaged by OS and PVM.
+NOTE: Python Programmers need not to write destructor method / function and need not 
+            to deal with Garbage Collection Process by using gc module bcoz PVM and OS takes care about Automatic Garbage Collection Process by automatic enabling GC 
+==============================================x=============================================
+

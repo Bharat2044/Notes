@@ -1,0 +1,9 @@
+ORM - Object Relational Model
+=============================
+-The benefit of using an ORM is that programmers can continue to think in terms of JavaScript objects rather than database semantics.
+-There are many ODM/ORM solutions available-Mongoose, Sequelize, GraphQL
+
+Mongoose
+========
+-Mongoose is a MongoDB object modeling tool.
+https://mongoosejs.com/docs/guide.html

@@ -1,0 +1,26 @@
+		============================================
+				Types of Applications in Multi Threading
+		============================================
+=>The Purpose of Multi Threading is that "To Provide Concurrent Execution / Simultaneous Execxition Or Parallel Processing(executing all at once )."
+=>In Industry , we have two types of Applications / languages. They are
+
+			1. Process Based Applications
+			2. Thread Based Applications.
+-------------------------------------------------------------------------------------------------------------------
+1. Process Based Applications
+-------------------------------------------------------------------------------------------------------------------
+=>Process Based Applications contains Single Thread
+=>Process Based Applications Provides Sequential  Execution
+=>Process Based Applications Takes More Exeution Time
+=>Process Based Applications are treated as Heavy Weight Components.
+Examples:   C,CPP.
+-------------------------------------------------------------------------------------------------------------------
+2. Thread Based Applications
+-------------------------------------------------------------------------------------------------------------------
+=>Thread Based Applications contains by Default Single Thread and Programtically we can   create  Multiple Threads.
+=>Thread Based Applications Provides Both  Sequential  Execution and Concurrent  Execution.
+=>Thread Based Applications Takes Less Exeution Time
+=>Thread Based Applications are treated as Light Weight Components.
+
+=>Examples:  Python, Java, C#.net...etc
+------------------------------------------------------X--------------------------------------------------------------

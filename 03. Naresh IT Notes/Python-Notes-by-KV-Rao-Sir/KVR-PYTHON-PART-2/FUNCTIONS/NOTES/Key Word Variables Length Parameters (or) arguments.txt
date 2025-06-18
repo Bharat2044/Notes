@@ -1,0 +1,23 @@
+		================================================
+			5) Key Word Variables Length Parameters (or) arguments
+		================================================
+=>When we have familiy of multiple function calls with Key Word Variable number of values / arguments then with normal python programming, we must define mutiple function defintions. This process leads to more development time. 
+=>To overcome this process, we must use the concept of Keyword Variable length Parameters .
+=>To Implement, Keyword Variable length Parameters concept, we must define single Function Definition and takes a formal Parameter preceded with a symbol called double astrisk  ( ** param) and the formal parameter with double astrisk symbol is called Keyword Variable length Parameters  and whose purpose is to hold / store any number of (Key,Value)  coming from similar function calls and whose type is <class, 'dict'>.
+---------------------------------------------------------------------------------------------------
+Syntax for function definition with Keyword Variables Length Parameters:
+---------------------------------------------------------------------------------------------------
+	def   functionname(list of formal params,  **param) :
+	        --------------------------------------------------
+		--------------------------------------------------
+
+=>Here **param is called Keyword Variable Length parameter and it can hold any number of Key word argument values (or) Keyword variable number of argument values and **param type is <class,'dict'>
+
+=>Rule:- The **param must always written at last part of Function Heading and it must be only one (but not multiple)
+---------------------------------------------------------------
+Final Syntax for defining a Function
+---------------------------------------------------------------
+def  funcname(PosFormal parms, *Varlenparam, default params, **kwdvarlenparam):
+			-------------------------------------------------
+			---------------------------------------------------
+==============================X========================

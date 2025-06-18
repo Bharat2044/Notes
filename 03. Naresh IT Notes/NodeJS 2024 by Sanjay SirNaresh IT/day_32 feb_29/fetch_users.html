@@ -1,0 +1,11 @@
+<script>
+    async function fetchUsers() {
+        let response = await fetch('http://localhost:5000/users');
+        let users = await response.json();
+        console.log(users)
+    }
+    fetchUsers();
+
+    // fetch('http://localhost:5000/users').then(res=>res.json()).then(result=>console.log(result))
+</script>
+

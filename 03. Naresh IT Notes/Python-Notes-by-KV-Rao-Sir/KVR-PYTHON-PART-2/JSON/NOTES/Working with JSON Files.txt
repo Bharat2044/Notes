@@ -1,0 +1,69 @@
+			===========================================================
+					Working JSON Files (Java Script Object Notation)
+			===========================================================
+=>JSON stands for Java Script Object Notation.
+=>JSON File Format is a Language Independent Concept and It can be used in all the languages bcoz JSON File Format is one of     the Light Weight File Format in Data Exchanging Between Client and Server Side Application in the Internet world (Web  Application Development).
+=>Since JSON File Format Exchanging Data between Client and Server Side Application in the form (Key,value) and It is called Dictionary  and In Python It is related dict Data Type.
+=>To take Any Information in the form json file, It Must saved on Some File Name with extension .json(FileName.json) where It contains (Key,Value)
+=>To Impelment JSON File Format in Python Programming, we must use a Pre-defined Module called "json".
+=>In Python Programing , JSON File format is Shown Bellow.
+
+			varname='{"Key1":"Val1","Key2":"Val2",....,"Key-n":"Val-n"  }'
+===============================================================================================
+Functions in json module
+===============================================================================================
+=================================================
+Parse JSON (Convert from JSON Str Data to Python Dict)
+-------------------------------------------------------------------------------------
+=>json.loads() Function can parse a json string and converted into Python dictionary.
+Syntax:
+		dictobj=json.loads(json_string)
+---------------------
+Examples:
+---------------------
+# Python program to convert JSON to Python
+	import json
+	# JSON string
+	employee = '  {"id":"09", "name": "Rossum", "department":"IT"}  '
+	# Convert JSON string to Python dict
+	employee_dict = json.loads(employee)
+	print(employee_dict)
+--------------------------------------------------------------------------------------------------------------------------
+Python--- read JSON file Data 
+--------------------------------------------------------------------------------------------------------------------------
+=>json.load() Function can read the data from JSON file which contains a JSON Data and placed in dict data. 
+Syntax:
+	dictobj=json.load(file_Pointer)
+
+Examples:
+---------------
+#Program for JSON File Data  into Dict Object
+#JsonFiletoDict.py---reading the data from JSON File to  Dictobj
+import json
+try:
+	with open("emp.json","r" ) as  fp:
+		dictobj=json.load(fp)
+		print(dictobj,type(dictobj))
+		print("-------------------------------------------------")
+		for k,v in dictobj.items():
+			print("\t{}-->{}".format(k,v))
+		print("-------------------------------------------------")
+except FileNotFoundError:
+	print("Json File does not exist")
+--------------------------------------------------------------------------------------------------------------------------
+Python--- write Dict Data to JSON file
+--------------------------------------------------------------------------------------------------------------------------
+=>json.dump() Function can be used to  write  dict object data to a  JSON file. 
+Syntax:
+	json.dump(dict object, file_pointer)
+-----------------
+Examples:
+-------------------
+#Program for Dict data into JSON File
+#DicttoJsonFile.py----Writing Dict data to JSON File
+import json
+dictobj={"ENO":100,"ENAME":"TRAVIS","SAL":56,"DSG":"AUTHOR"}
+with open("emp.json","w") as fp:
+	json.dump(dictobj,fp) # Here dump() is saving dictobj data into the json file
+	print("Dict Data Saved in JSON FILE Format--verify")
+=============================================x==================================================			

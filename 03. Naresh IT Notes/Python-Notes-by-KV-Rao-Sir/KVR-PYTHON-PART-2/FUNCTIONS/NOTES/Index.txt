@@ -1,0 +1,54 @@
+				=========================================================
+						Functions in Python----8 Days
+						Functions---->Modules----->Packages
+						  (8)                   (2)----------------(1)
+				=========================================================
+Index
+-----------------------------------------------------------------------------------------------------------
+=>Purpose of Functions
+=>Types of Languages
+		a) Un-Structured Programming Languages
+		b) Structured Programming Languages
+=>Defintion of Function
+=>Parts of Functions
+=>Phases in Functions
+=>Syntax for Defining Functions
+=>Number of Approches to Define a Function for Solving a Problem
+=>Programming Examples
+------------------------------------------------------------------------------------------------------
+=>Importance of Parameters and Arguments
+=>Programming Examples
+=>Types of Arguments OR Parameters
+		a) Possitional Arguments
+		b) Default Arguments
+		c) Keyword Arguments
+		d) Variable Length Arguments
+		f)  Keyword Variable Length Arguments
+     =>Programming Examples
+-----------------------------------------------------------------------------------------------------
+=>Importance of Local and Global Variables
+=>Programming Examples
+=>global keyword
+=>Programming Examples
+=>globals()
+=>Programming Examples
+------------------------------------------------------------------------------------------------------
+=>Importance of Comprehension Concept and Types
+		a) list comprehension
+		b) set comprehension
+		c) dict comprehension
+		d) tuple comprehension(Not There)
+=>Programming Examples
+-------------------------------------------------------------------------------------------------------
+=>Importance Anonymous OR Lambda Functions
+=>Implementation of Anonymous OR Lambda Functions
+=>Programing Examples
+-------------------------------------------------------------------------------------------------------
+=>Special Functions
+		a) filter() with Normal and Anonymous Functions
+		b) map()  with Normal and Anonymous Functions
+		c) reduce() with  with Normal and Anonymous Functions
+=>Programming Examples
+===========================================x=======================================
+
+		

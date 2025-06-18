@@ -1,0 +1,35 @@
+			==================================================
+					Types of Data Members
+			==================================================
+=>In a Class of Python, we can Define Two Types of Data Members.They are'
+			
+				1. Instance Data Members
+				2. Class Level Data Members
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Instance Data Members
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Instance Data Members are those which are used for Storing Specific Values.
+=>Instance Data Members Memory Space to be created Each and Every Time when an object is created.
+=>Programtically, we can Define OR Specify the Instance Data Members in 3 ways. They are
+					1. Through an Object
+					2. Inside of Instance Method
+					3. Inside of Constructor
+=>Instance Data Members Must be Accessed either w.r.t Object Name or  self.
+			Syntax1:  objectname.Instance Data Member Name
+			Syntax2:	 self.Instance Data Member Name (use this syntax in Inside of Instnace Method)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Class Level Data Members
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Class Level Data Members are those which are used for Storing common values.
+=>Class Level Data Members Memory Space  created Only Once Irrespective of Number of Object created of Same 
+    Class
+=>Programtically, we can Define OR Specify the Class Level Data Members in 2 ways. They are
+			1. Inside the Class Definition
+			2. Inside of Class Level  Method
+=>Class Level  Data Members can be Accessed  either w.r.t Class Name or Object Name or cls or self
+			Syntax-1:  Class Name.Class Level Data member name
+			Syntax-2:  ObjectName.Class Level Data member name
+			Syntax-3:  cls.Class Level Data member name (use this syntax in Inside of Class Level  Method)
+			Syntax-4:  self.Class Level Data member name (use this syntax in Inside of Instnace Method)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+

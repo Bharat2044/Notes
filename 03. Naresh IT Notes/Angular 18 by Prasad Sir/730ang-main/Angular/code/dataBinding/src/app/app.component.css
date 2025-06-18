@@ -1,0 +1,11 @@
+div{
+    height: 200px;
+    width: 200px;
+    border:1px solid black
+}
+.x{
+    display: block;
+}
+.y{
+    display: none;
+}

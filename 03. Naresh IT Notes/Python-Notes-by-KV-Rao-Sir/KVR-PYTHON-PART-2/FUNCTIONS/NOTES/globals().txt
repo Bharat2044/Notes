@@ -1,0 +1,25 @@
+	============================================
+		global  and local variables and globals()
+	============================================
+=>When we come acrosss same global Variable names and Local Variable Names in same function definition then PVM gives preference for local variables but not for global variables.
+=>In this context, to extract / retrieve the values of global variables names along with local variables, we must use globals() and it returns an object of <class,'dict'> and this dict object stores all global variable Names as Keys and global variable values as values of value.
+
+=>Syntax:-
+		var1=val1
+		var2=val2
+		--------------
+		var-n=val-n  # var1, var2...var-n are called global Variables
+		def    functionname():
+		       ------------------------
+		       var1=val11
+		       var2=val22
+		       ------------------------
+		       var-n=val-nn  #  var1, var2...var-n are called local Variables
+		       # Extarct  the global variables values
+		       dictobj=globals()
+		       ------------------------
+		       globalval1=dictobj['var1']  #  or  dictobj.get("var1") or globals()['var1'] or global().get('var1')
+		       globalval2=dictobj['var2']  # or dictobj.get("var2") or globals()['var2']
+		       -----------------------------------------------------
+		       -----------------------------------------------------
+============================================================================================

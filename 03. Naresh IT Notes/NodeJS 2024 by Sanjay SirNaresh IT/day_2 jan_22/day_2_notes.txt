@@ -1,0 +1,12 @@
+use strict
+==========
+- 'use strict' is used to execute javascript code in strict mode.
+- when strict is mode is enabled, mistakes are converted to errors
+- in normal mode there are few mistakes which are ignored
+- 'Use strict' should be at the top of the file / top of the function
+
+Rules:
+=====
+1. variable declaration without var/let/const is not allowed
+2. Duplicate parameter name not allowed
+3. we cann't use delete operator for non deleteable things

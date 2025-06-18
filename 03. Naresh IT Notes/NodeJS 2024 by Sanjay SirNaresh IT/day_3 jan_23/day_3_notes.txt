@@ -1,0 +1,17 @@
+-A function is a block of code/statements designed to perform a particular task.
+1. pre defined / inbuilt  (log(),warn(),table())
+2. User Defined
+
+a. Function Declaration  (Named Function)
+b. Function Expression   (Anonymous)
+c. Self Invoked   (IIFE - Immediately Invoked Function Expression)
+d. Arrow Function (ES-6)
+
+Regular Function- 'this' is dynamic, it changes
+                    Where/How the function is called 
+
+Arrow Function- 'this' is not dynamic
+                where the function is declared
+                
+
+

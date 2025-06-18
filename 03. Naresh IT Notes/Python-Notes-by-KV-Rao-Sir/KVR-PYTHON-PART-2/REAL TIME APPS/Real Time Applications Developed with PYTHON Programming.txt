@@ -1,0 +1,33 @@
+		====================================================================
+				Real Time Applications Developed with PYTHON Programming
+		====================================================================
+=>By Using PYTHON Programming with Various Combined Modules, we can develop the following Real Time Applications.
+
+		
+		1. Development of WEB APPLICATIONS(Web Sites)
+				a) Java Programming Language-->Tech-->Servlets,JSP,JDBC,Hibernet,Spring, Spring with Micro Services
+					(SUN MS--->Oracle Corp)
+				b) C#.Net Programming Language---->Tech--->ASP.NET, Micro Services...etc
+					(Microsoft )
+				c) PYTHON Programming Language---->Tech---->Django OR Flask OR Bottle OR Pyramid
+				     bcoz writing the code in Python in Very Easy due Rich set of Existing Modules
+				     Less Lines of Code and More Meaning 
+				
+		2. Development of Gaming Applications.
+		3. Development of Artificial Intelligence Applications (Scikit,Scipy, nlp, nlkt....etc)
+						a) Machnine Leaning
+						b) Deep Learning
+		4. Development of Image Processing Applications(opencv)
+		5. Development of Audio and Video Applications
+		6. Development of Web Scrapping OR Web Harvesting
+		7. Development of Business Applications (Bussiness Apps)
+		8. Development of Scientific Application (NASA)
+		9. Development of Software Projects 
+		10.Development of OS Installers
+		11. Development of GUI Applications.
+		12. Development of Data Analysis and Data Analytics
+		13. Development of Automation in Testing
+		14. Development of Complex Maths Applications
+		15. Development of Languages
+		16. Development of CAD and CAM Based Applications
+		17. Development of Computer Vision...etc

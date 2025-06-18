@@ -1,0 +1,45 @@
+		=================================================
+				Pickling  and Un-Pickling 
+					   (OR)
+			Object Serialization  or    Object De-Serialization
+		=================================================
+--------------
+Pickling ( Object Serialization )
+--------------
+=>Let us assume there exist an object which contains multiple values. To  save or  write an object data of  main memory into the file of secondary memory by using write() and writelines() , they transfers the values in the form of value by value and it is one of the time consuming process( bcoz of multiple write operations).
+=>To Overcome this time consuming  process, we must use the concept of  Pickling.
+=>The advantage of pickling concept is that with single write operation , we can  save or write entire object data of main memory into the file of secondary memory.
+    ----------------------------------
+=>Definition of Pickling:
+    ----------------------------------
+  =>The Process of saving or transfering entire object content of main memory into the file of secondary memory by performing single write operation is called Pickling.
+=>Pickling concept participates in Write Operations.
+-----------------------------------------------------------
+Steps for implementing Pickling  Concept:
+-----------------------------------------------------------
+=>import  pickle module, here pickle is one of the pre-defined module
+=>Choose the file name and open it into write mode.
+=>Create an object with collection of values (Iterable object)
+=>use the dump() of pickle module. dump()  save the content of any object into the   file with single write operation.
+	Syntax:   pickle.dump(object , filepointer)
+=>NOTE That pickling concept always takes the file in Binary Format.
+----------------------------------------------------------------------------------------------------------------------
+Un-Pickling (Object De-Serialization)
+--------------------------------------------------------
+=>Let us assume there exists a record with multiple values in a file of secondary memory. To read or transfer the entire record content from file of secondary memory, if we use read(),  readlines() then they read record values in the form of value by value and it is one of the time consuming process( bcoz of multiple read operations).
+=>To overcome this time consuming process, we must use the concept of Un-pickling.
+=>The advantange of Un-pickling is that with single read operation, we can read entire record content from the file of secondary memory into the object of main memory.
+--------------------------------------------
+=>Definition of Un-Pickling:
+--------------------------------------------
+=>The process of reading or transfering the entire record content from file of secondary memory into the object of main memory by performing single read operation is called Un-pickling.
+=>Un-Pickling concept participates in Read Operations.
+--------------------------------------------------------------------------------------------------------------
+Steps for implementing Un-Pickling  Concept:
+----------------------------------------------------------------------------------------------------------------
+=>import pickle module
+=>Choose the file name and open it into read mode.
+=>Use the load() of pickle module. load() is used for transfering or loading the entire  record content  from file of secondary memory into object of main memory.
+           Syntax:     objname=pickle.load(filepointer)
+=>NOTE That Un-pickling concept always takes the file in Binary Format.
+----------------------------------------------------------------------------------------------------------------------

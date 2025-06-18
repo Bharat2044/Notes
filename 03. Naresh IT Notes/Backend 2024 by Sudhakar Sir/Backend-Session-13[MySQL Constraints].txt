@@ -1,0 +1,125 @@
+MySQL Constraints
+
+1. Primary Key
+- It is a constraint used for record in a table.
+- It ensures that the value is unique.
+- The value taken by one record can't be used by another.
+- It can't be null.
+- It can be any type.
+- You can have only one primary key constraint in a table.
+
+2. Unique Key
+- It is a constraint defined for multiple columns in a record.
+- It ensures that the value in the columns are unique.
+- Primary key can't be defined for multiple columns, hence a unique key constraint is defined.
+
+3. Foreign Key
+- It is a constraint defined for configuring relation between tables.
+- It is primary key of a table used in another table to defined relation.
+- A record can have multiple foreign keys.
+- Relation between data can be defined in various ways
+   
+    a) One-to-One
+    b) One-to-Many
+    c) Many-to-Many
+
+One-to-One:
+ - Every person can have one passport
+ - A passport can be assigned to only one person.
+
+One-to-Many
+ - An author can write multiple books.
+ - AuthorId is used for many books.
+ 
+Many-to-Many
+ - Multiple users can buy same product. [one product]
+ - A user can buy many products.
+ 
+Note: A foriegn key can have constraint refering to another field in the same entity.
+         Hence it can be between tables or within a table.
+
+4. Not Null
+- It is a constraint that defines that field must have a value.
+- It is not nullable.
+- It is a required field.
+
+5. Default
+- It is a constraint used to set some default value into the field.
+- If value is not defined then it take the default as value.
+
+6. Check
+- It uses a boolean expression to verify the value.
+- It ensures that the value is matching the specified condition.
+- It checks the value before it is stored.
+
+Logical Model
+- It configures relationship between tables.
+- It is defined with foreign keys.
+
+User Module:
+    table name:  "tblusers"
+    fields:
+    UserId        : string [PK]
+    UserName    : string
+    Password        : string
+    Email        : string
+    Mobile        : string
+    City        : string
+    Postal Code    : number
+    Address        : string
+
+Product Module
+    table name:  "tblproducts"
+    fields:
+    ProductId        : number [PK]
+    Title        : string
+    Image        : number/string
+    Price        : number
+    Stock        : boolean
+    Rating        : number
+    Reviews        : number
+    Description    : string
+    Category        : number [FK]
+    Vendor        : number [FK]
+    Shipping Charges    : number    
+
+Cart Module
+    tableName    : tblcart
+    fields:
+
+    CartId        : number [PK]
+    ProductId        : number [FK]
+    VendorId        : number [FK]
+    Title        : string
+    Image        : string
+    CustomerId    : string [FK]
+
+Vendor Module
+
+    tableName    : tblvendors
+    fields:
+   
+    VendorId        : number [PK]
+    Name        : string
+    ProductId        : number [FK]
+    Password        : string
+
+Entity Model:
+- It comprises of table name, field name, data type and relationship.
+- It represents the complete business data model.
+
+                  MySQL Types
+- MySQL is strongly typed and structured.
+- It requires the data type to configure for the fields in a table.
+- MySQL types are categorized into various groups based on the type of data they have to handle.
+
+Number Types:
+
+Note: MySQL will not provide any type for boolean, it uses TINYINT for boolean [0,1]
+          MySQL will not provide any type for image, it uses "BIT" for images stored in binary format.
+
+String Types:
+
+Date Types:
+
+CRUD

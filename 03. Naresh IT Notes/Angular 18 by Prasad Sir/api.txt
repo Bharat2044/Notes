@@ -1,0 +1,1 @@
+To use API's in Angular, we use one service called HttpClient. To use HttpClient , import HttpClientModule

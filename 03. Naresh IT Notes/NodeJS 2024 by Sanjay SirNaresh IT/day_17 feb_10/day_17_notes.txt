@@ -1,0 +1,62 @@
+How to install Node.js
+======================
+-Official packages for all the major platforms are available in the below URL
+ https://nodejs.dev/en/download/
+ https://nodejs.org/en/about/previous-releases
+ 
+ 
+How to Maintain multiple NodeJS versions
+========================================
+-NVM : Node version Manager
+-NVM is a version manager for node.js
+-Multiple nodeJS versions can be maintained with the help of NVM.
+-It allows to easily switch the Node.js version.
+  NVM for Mac - https://tecadmin.net/install-nvm-macos-with-homebrew/
+  NVM for windows - https://github.com/coreybutler/nvm-windows
+
+
+NVM useful commands
+-------------------
+-Check NVM is installed
+ nvm --version
+-List all the available Node Versions to be installed
+ nvm list available
+-List all the installed Node Versions
+ nvm list installed / nvm ls
+-To install latest node version
+ nvm install node
+-To install a particular version of node
+ nvm install 16.0.0
+-To uninstall a particular version of node
+ nvm uninstall 16.0.0
+-To switch node version
+ nvm use 16.0.0
+-To check currently used node version
+ nvm current / node -v
+ 
+ 
+
+
+REPL
+====
+-REPL stands for Read-Eval-Print-Loop.
+ R - Reads user's input
+ E - Evaluates the expression
+ P - Prints the result
+ L - Loops the above things until user kills the process
+-Node.js comes with virtual environment called REPL.
+-it is similar to Shell in Linux or command prompt in windows where 
+ a command is entered and the system responds with an output in an interactive mode
+-It is a quick and easy way to test simple Node.js/JavaScript code.
+-To launch the REPL (Node shell), open command prompt and type 'node'.
+-If you need to write multi line JavaScript expression or function then just press Enter.
+ (The REPL terminal will display three dots (...), it means you can continue on next line)
+-We can execute an external JavaScript file by writing 'node <Filename>'.
+-assign the result of the most recently evaluated expression to the special variable _ (underscore)
+	 a = 10; b = 20; a+b;
+	 sum = _; console.log(sum);
+-To Open REPL in editor mode , use .editor
+-To Exit REPL type .exit
+-if you press the tab key the REPL will try to autocomplete what you wrote to match a variable you already defined or a predefined one.
+-Used For Exploring node objects ( os, fs , http)
+ fs (enter)

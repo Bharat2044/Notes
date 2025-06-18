@@ -1,0 +1,62 @@
+Create a VPC CIDR = 192.168.0.0/16
+Create internet gateway and attach it to the VPC
+Create 2 subnets,
+  --> Public Subnet = 192.168.1.0/24
+  --> Private Subnet = 192.168.2.0/24
+
+Create NAT gateway(assign the EIP) and put it in Public Subnet
+Create Route tables
+  --> Public RT -->Routes --> Edit --> Add Route --> 0.0.0.0/0 Routing to IGW --> Public Subnet should be asscoaited
+  --> Private RT -->Routes --> Edit --> Add Route --> 0.0.0.0/0 Routing to NAT --> Private Subnet should be associated
+
+Create a new Security Group and allow SSH/22
+Launch 1 EC2 instance(Bastion/Jump Server) in Public subnet: This can be connected from internet
+launch 1 EC2 intance in Private subnet(Amazon Linux which has CLI already installed): This cannot be connected from Internet
+Enable DNS hostname from VPC --> Actions --> Enable DNS hostname
+If you want to connect to Private server--> First connect to jump server and then connect to the Private server
+--> sudo -s
+--> create a pem file on the bastion server vi 9AMBATCH.pem --> Enter --> PRess i --> paste the code of pem file here --> esc -->wq!
+--> chmod 400 xxxxBATCH.pem
+--> ssh -i "xxxxBATCH.pem" ec2-user@192.168.2.28
+
+
+
+VPC ENDPOINTS
+**************
+Login to the Private server thorugh Bastion Server
+Check the AWS Cli version or install AWS CLI
+aws --version
+Create a role with EC2 as trusted and provide S3 permissions
+Attach the role to the EC2 instance
+aws s3 ls
+aws s3 mb s3://endpointdemobkt (This will work because NAT Route is available on Private RT)
+Remove the NAT Route from Private RT
+Access aws s3 ls (This will not work because you have removed the NAT route from private RT)
+Create a VPC Endpoint ---> Select S3 endpoint --> Select Mumbai VPC --> SEelct Private RT --> Create
+Check the route after creating the endpoint on private RT(The endpoint routes is automatically created)
+Now access aws s3 ls on private server (This should work now because VPC Endpoints are configured)
+You cannot access normal internet with VPC endpoint. Only AWS services can be accessed with the VPC Endpoint
+
+VPC Peering
+***********
+Create Mumbai and Ireland Infrastructure
+Create a VPC Peering in Mumbai region (requester is Mumbai and accepter is Ireland VPC ID)
+Accept the VPC peering in Ireland Region
+Add a route in Mumbai Private RT as 192.169.0.0/16 --> Peering Connection
+Add a route in Ireland Private RT as 192.168.0.0/16 --> Peering Connection
+Add a new rule to the Mumbai SG as SSH --> 192.169.0.0/16
+Add a new rule to the Ireland SG as SSH --> 192.168.0.0/16
+
+Login to the Mumbai bastion --> SSH to Mumbai Private Server --> SSH to Ireland Private server
+
+
+
+Deleting the VPC
+--> Delete the buckets
+--> Delete Endpoints
+--> Delete the NAT first
+--> Delete VPC Peering
+--> Terminate the EC2 instances
+--> Delete the Mumbai VPC 
+--> Release EIP
+

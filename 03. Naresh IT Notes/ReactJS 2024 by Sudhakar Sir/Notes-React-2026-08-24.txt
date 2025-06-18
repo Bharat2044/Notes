@@ -1,0 +1,267 @@
+Form Events
+- onSubmit
+- onReset
+
+Ex: React Default Form Handling
+
+form-demo.jsx
+
+import { useState } from "react"
+
+export function FormDemo(){
+
+
+    const [user, setUser] = useState({UserName:'', Age:0, City:''});
+
+    function handleNameChange(e){
+        setUser({
+            UserName: e.target.value, 
+            Age: user.Age,
+            City: user.City
+        })
+    }
+
+    function handleAgeChange(e){
+        setUser({
+            UserName: user.UserName, 
+            Age: e.target.value, 
+            City: user.City
+        })
+    }
+
+    function handleCityChange(e){
+        setUser({
+            UserName: user.UserName, 
+            Age: user.Age, 
+            City: e.target.value
+        })
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log(user);
+    }
+
+    return(
+        <div className="container-fluid">
+            <form onSubmit={handleSubmit}>
+                <h3>Register</h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" onChange={handleNameChange} /></dd>
+                    <dt>Age</dt>
+                    <dd><input type="number" onChange={handleAgeChange} /></dd>
+                    <dt>City</dt>
+                    <dd>
+                        <select onChange={handleCityChange}>
+                            <option>Select City</option>
+                            <option>Delhi</option>
+                            <option>Hyd</option>
+                        </select>
+                    </dd>
+                </dl>
+                <button>Submit</button>
+            </form>
+        </div>
+    )
+}
+
+- React supports various 3rd party form libraries like
+	a) Formik
+	b) React Hook Form
+	c) Telerik Form
+	etc..
+
+						    Formik Library
+- It is a 3rd party library for React forms.
+- It provides pre-defined functions and components to handle form interactions.
+- It is easy to extend and validate the forms.
+- It provides several internal security features that prevent Scripting attacks, Request Forgery and Cross page posting.
+
+1. Install formik library for project
+
+		> npm  install  formik  --save
+
+2. Formik library provides "useFormik()"  hook to configure a form.
+
+3. Import "useFormik" from formik. 
+
+	import   { useFormik } from  "formik";
+
+4. Configure form with options
+
+	const  formik = useFormik({
+	
+		    initialValues: { },
+		    validation: function(){ },
+		    validationSchema: function(){ },
+		    onSubmit: function() { },
+		    enableReInitialization: Boolean,
+		    … 
+	})
+	
+	initialValues		: Defines the values that a form have to handle. 
+					  It is key and value collection. { Key:value }
+					  Key refers to element Name.
+
+	validation			: It defines a function, where you can manually configure
+					  validations for elements in form.
+
+	validationSchema	: It defines pre-defined validation structure from 3rd parties.
+	
+	onSubmit			: It collects the data from form and perform submit action.
+
+	onBlur			: It defines actions on blur.
+
+	onChange		: It defines actions on change. 
+
+	enableReInitialize	: It allows to change the initialized values in form elements.
+
+
+
+5. Define events for form and form elements
+
+	<form  onSubmit={ formik.handleSubmit }>
+
+	<input type="text" name="UserName" onChange={formik.handleChange}>
+	 
+	<select onChange={formik.handleChange}>
+
+	<input type="text"  name="UserName" onChange={formik.handleChange} onBlur={formik.handleBlur}>
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+import { useFormik } from "formik";
+
+export function FormDemo(){
+
+
+    const formik = useFormik({
+         initialValues: {
+            UserName: '',
+            Age: 0,
+            City: ''
+         },
+         onSubmit: (user) => {
+            console.log(user);
+         }
+    })
+   
+    return(
+        <div className="container-fluid">
+            <form onSubmit={formik.handleSubmit}>
+                <h3>Register</h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" name="UserName" onChange={formik.handleChange} /></dd>
+                    <dt>Age</dt>
+                    <dd><input type="number" onChange={formik.handleChange} name="Age" /></dd>
+                    <dt>City</dt>
+                    <dd>
+                        <select name="City" onChange={formik.handleChange} >
+                            <option>Select City</option>
+                            <option>Delhi</option>
+                            <option>Hyd</option>
+                        </select>
+                    </dd>
+                </dl>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    )
+}
+
+
+
+Ex:
+import { useState } from "react"
+import { useFormik } from "formik";
+
+export function FormDemo(){
+
+
+    const formik = useFormik({
+         initialValues: {
+            UserName: '',
+            Age: 0,
+            City: '',
+            Gender:''
+         },
+         onSubmit: (user) => {
+            console.log(user);
+         }
+    })
+   
+    return(
+        <div className="container-fluid">
+            <form onSubmit={formik.handleSubmit}>
+                <h3>Register</h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" name="UserName" onChange={formik.handleChange} /></dd>
+                    <dt>Age</dt>
+                    <dd><input type="number" onChange={formik.handleChange} name="Age" /></dd>
+                    <dt>City</dt>
+                    <dd>
+                        <select name="City" onChange={formik.handleChange} >
+                            <option>Select City</option>
+                            <option>Delhi</option>
+                            <option>Hyd</option>
+                        </select>
+                    </dd>
+                    <dt>Gender</dt>
+                    <dd>
+                        <input onChange={formik.handleChange} type="radio" name="Gender" value="Male" /> <label>Male</label>
+                        <input onChange={formik.handleChange} type="radio" name="Gender" value="Female" /> <label>Female</label>
+                    </dd>
+                </dl>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

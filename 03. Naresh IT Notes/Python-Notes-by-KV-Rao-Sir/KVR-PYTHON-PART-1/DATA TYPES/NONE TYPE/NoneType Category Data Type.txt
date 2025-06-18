@@ -1,0 +1,18 @@
+		=======================================================
+				NoneType Category Data Type 
+		=======================================================
+=>" NoneType" is one of the pre-defined class 
+=>None is the Keyword and Treated as Value of NoneType Data Type
+=>None is not False, Space, 0 and None is Nothing 
+=>We can't create an object of NoneType bcoz It contains Single Value
+--------------------------------------------------------
+Examples
+--------------------------------------------------------
+>>> a=None
+>>> print(a,type(a))--------------None <class 'NoneType'>
+>>> None==0----------------------False
+>>> None==""--------------------False
+>>> None==False----------------False
+>>> None==None----------------True
+>>> n=NoneType()------------------------NameError: name 'NoneType' is not defined
+======================================================================================

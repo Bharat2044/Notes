@@ -1,0 +1,24 @@
+			===========================================================
+				Numpy-Number of approaches  for Creating an object of ndarray
+			===========================================================
+=>In Python Programming, we have Number of approaches  for Creating an object of ndarray. Some of Esssential Approaches for Creating an object of ndarray are
+
+					1. array()
+					2. arange()
+					3. zeros()
+					4. ones()
+					5. full()
+					6. linspace()
+					7. eye()
+					8. identity()
+					9. hstack()
+					10. vstack()
+					11. numpy.random
+					      ---------------------
+					                   1) randint()
+							   2) randn()
+							   3) normal()
+							   4) rand()
+							   5) uniform()
+							   6) shuffle()...etc
+===============================================================================================

@@ -1,0 +1,53 @@
+		========================================== 
+				Pre-defined Functions in re module
+		==========================================
+=>The 're' module contains the follwing essential Functions.
+-------------------------------------------------------------------------------------------
+1) finditer():
+-------------------------------------------------------------------------------------------		
+Syntax:-       varname=re.finditer("search-pattern","Given data")
+=>here varname is an object of type <class,'Callable_Itetaror'>
+ =>This function is used for searching the "search pattern" in given data iteratively and it returns  table of entries which contains start index , end index and matched value based on the search pattern.
+ ----------------------------------------------------------------------------------------------------------------------------
+2) findall():
+----------------------------------------------------------------------------------------------
+Syntax:-      varname=re.findall("search-pattern","Given data")
+	=>here varname is an object of <class,'list'>
+
+=>This function is used for searching the search pattern in  entire given data and find all  occurences / matches  and it returns all the matched values in the form an object <class,'list'> but not returning Start and End Index Values.
+----------------------------------------------------------------------------------------------
+3) search():
+----------------------------------------------------------------------------------------------
+Syntax:-      varname=re.search("search-pattern","Given data")
+=>here varname is an object of <class,'re.match'> or <class,'NoneType'>
+
+=>This function is used for searching the search pattern in  given data for first occuence / match only but  not for other occurences / matches.
+=>if the search pattern found in  given data then it returns an object of match class  which contains matched value and start and end index values and it indicates  search is successful.
+=>if the search pattern not found in  given data then it returns None which is type <class, "NoneType"> and it indicates search is un-successful
+-----------------------------------------------------------------------------------------------
+4) group():
+----------------------------------------------------------------------------------------------
+=>This function is used obtaining matched value by the findIter() and search()
+=>This function present in match class of re module
+Syntax:-     varname=matchobj.group()
+----------------------------------------------------------------------------------------------
+5) start():
+----------------------------------------------------------------------------------------------
+=>This function is used obtaining  starting index of matched value
+=>This function present in match class of re module
+Syntax:     varname=matchobj.start()
+----------------------------------------------------------------------------------------------
+6) end():
+----------------------------------------------------------------------------------------------
+=>This function is used obtaining  end index+1 of matched value
+=>This function present in match class of re module
+Syntax:     varname=matchobj.end()
+
+-------------------------------------------------------------------------------------------------------------------------------
+7) sub() Function
+=> This function replaces the matches with the text of your choice:
+
+import re
+txt = "The rain in Spain"
+x = re.sub("\s", "9", txt)
+print(x)---------------------------------- The9rain9in9Spain

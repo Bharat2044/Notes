@@ -1,0 +1,125 @@
+Creating Database
+Creating Tables
+Configuring Constraints
+Insert Data
+
+Ex: Inserting multiple records
+
+    INSERT INTO  tblName  (Field1, Field2)
+    values (val1, val2), (val1, val2),( )... ;
+
+
+    insert  into tblvendos  (VendorId, VendorName)
+    values (1, 'Reliance'), (2, 'Bajaj');
+
+Note: If you are inserting date type values then the format must be "yyyy-MM-DD".
+
+              Querying Data
+- SQL provides "Select" & "Select From" commands to query the data from table.
+
+Select From:
+- It can fetch data from specific fields in a table.
+- It can also use wild card for fetching.
+- It can use various operators for sorting and filtering while fetching.
+
+Syntax:
+    SELECT  FieldName FROM tableName;
+    SELECT  *  FROM tableName;
+
+Select:
+- It can be used without fields.
+- It uses expression to evaluate values and store in alias fields.
+- It uses "AS" operator for configuring an alias field name.
+
+Syntax:
+    SELECT    expression/function   AS   alias_field_name;
+
+Ex:
+    select  2 * 4000 as Total;
+    select  now() as Departure;
+    select  concat('First', 'Last') as FullName;
+
+Ex:
+    Select  Name, Price, Qty, (Qty * Price) as Total from tblproducts;
+
+Note: Select From    : Fetch data from existing field
+          Select AS    : Configures a new field that contains result of given expression.
+
+                Sorting Data
+- SQL can sort data by using "ORDER BY" operator
+- It uses field name configured with sorting order "ASC" & "DESC".
+
+Syntax:
+          Select FieldName from tableName  order by FieldName asc/desc;
+
+Ex:
+       select Name, Price from tblproducts order by Price DESC;
+       select Name, Price, Qty, (Qty * Price) as Total from tblproducts order by Total asc;
+
+              Filtering Data
+
+- SQL can filter the data by using "WHERE" operator.
+- It requires various logical and comparision operators.
+
+Syntax:
+       Select FieldName from tableName  Where  Condition;
+
+- The comparision operators for SQL
+
+    =        Equal
+    < > (or) !=     Not Equal
+    >        Greater than
+    >=        Greater than or Equal
+    <         Less than
+    <=         Less than or equal
+
+Ex:
+    select  Name, Price from tblproducts where  Id=2;
+    select  Name, Price from tblproducts where  Price>=30000;
+    select  Name, Price from tblproducts where  Category!='Electronics';
+
+- The Logical operators
+
+    AND      Evaluates to true when all expressions are true
+    OR      Evaluates to true when any one expression is true
+    NOT      Returns the data that is not in specified.
+
+Ex:
+          select Name, Price from tblproducts where  Price>3000  AND  Price<10000;
+          select * from tblproducts where Category='Electronics' AND Rating>4;
+          select * from tblproducts where Category='Electronics' OR Category='Jewelery';
+
+- The BETWEEN operator is used to find range of values
+
+Syntax:
+           select  Field  from table where  field BETWEEN lower and highier;
+Ex:
+           select  Name, Price from tblproducts where Rating between 2 and 4;
+     
+- The "IN" operator is used to find the records that have the specified set of values.
+
+Syntax:
+          select  Field from table where  field  IN (range of values);
+
+Ex:
+          select  Name, Price from tblproducts where Rating IN (2,3,4);
+
+- The "LIKE" operator uses wild card expression to find and filter records.
+
+    %    zero or more occurrences
+    _    single occurrence
+
+Syntax:
+       select field from table where field LIKE '%chars';
+     
+Ex:
+       select * from tblproducts where Name like '%ile';
+       select * from tblproducts where Name like '_obile';
+       select * from tblproducts where Name like 'Mob%';
+
+- Select can use DISTINCT to avoid duplicates.
+
+Syntax:
+      select DISTINCT from tableName;
+
+                    Update & Delete

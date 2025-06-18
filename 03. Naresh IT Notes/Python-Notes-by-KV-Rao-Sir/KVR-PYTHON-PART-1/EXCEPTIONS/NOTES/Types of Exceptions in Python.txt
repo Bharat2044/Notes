@@ -1,0 +1,28 @@
+			================================================
+					Types of Exceptions in Python
+			================================================
+=>In Python Programming, We have Two Types of Exceptions. They are
+
+			1. Pre-Defined Exceptions
+			2. Programmer OR User OR Custom Defined Exceptions
+----------------------------------------------------------------------------------------------------------------------------------------------------
+1. Pre-Defined Exceptions
+----------------------------------------------------------------------------------------------------------------------------------------------------
+=> Pre-Defined Exceptions are Developed by Python Language Developers and They are Available as part of Python Software and They are Used By Python Programmers for Dealing with Universal Problems.
+=>Some of the Universal Problems are
+		1. Division by zero ( ZeroDivisionError )
+		2. Invalid Number formats Conversion (ValueError)
+		3. Invalid Operation/Arguments(TypeError)
+		4. Importing Invalid OR Wrong Module Name (ModuleNotFoundError)...etc
+NOTE: All Types of Errors of Python(Runtime) are considered as Pre-Defined Exception Classes.
+----------------------------------------------------------------------------------------------------------------------------------------------------
+2. Programmer OR User OR Custom Defined Exceptions
+----------------------------------------------------------------------------------------------------------------------------------------------------
+=> Programmer-Defined Exceptions are Developed by Python Language Programmers and They are Available as part of Python Project and They are Used By Other Python Programmers for Dealing with Common Problems.
+=>Some of the Common Problems are
+			
+			1. Attempting to enter Invalid PIN 
+			2. Attempting to withdraw More amount from Existing Account Balance.
+			3. Attempting to Enter Invalid User Name and Password 
+			....etc
+----------------------------------------------------------------------------------------------------------------------------------------------------

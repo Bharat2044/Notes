@@ -1,0 +1,29 @@
+Pipes are used to transform the data. we have to mention the pipe after | 
+There are two types of Pipes
+Built in Pipes
+ i. uppercase
+    "prasad"|uppercase  ---> prasad
+ ii. lowercase
+    "PRASAD" | lowercase --> prasad
+ iii. date
+    date-object |date : "MM-dd-yyyy" --> return current date in particular format
+ iv. json
+    object | json ---> print the object in JSON format
+ v. async
+    observable |async --> wait until observable sunscribed
+ vi. currency
+     250 | currency :"INR" ---> 250 with rupee symbol
+ vii. number
+     "250" | number ---> 250
+       
+Custom Pipe: you can generate your own pipe by using command ng g p pipe-name
+you will get one pipe Transform method which takes value and returns what you wished for.
+
+There is another classification of pipe called pure and impure pipes 
+
+pure pipes do modification to the values it recives and impure pipes don't
+
+
+
+
+

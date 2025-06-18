@@ -1,0 +1,26 @@
+			=======================================================
+					Quantifiers in Regular Expressions
+			=======================================================
+=>Quantifiers in Regular Expressions are used for searching number of occurences of the specified value (alphabets or digits or special symbols) used in search pattern  to search in the given data and obtains desired result.
+=>The Quantifiers in Regular Expressions are
+----------------------------------------------------------------------------------------------
+1)"K"------>Searches for Exactly One K.
+2) K+------>Searches for One K or More K's
+3) "K*"---->Searches for Zero K or One K or More K's
+4) "K?"--->Searches for Zero K or One K
+5) "."------>Searching all occurences of Letter of given Data.
+============================================================
+Special Formula
+-------------------------------------
+1) \d+---Searching One OR More Digits  OR  [0-9]+
+2) \d{10}  OR [0-9]{10}-------Searches 10 Digits Exactly
+3) \d{m}  OR [0-9]{m}-------->searches M-Digit Number
+4) \d{m,n}----->Searches for Minimum M-Digit Number and Maximum n-Digit Number Only.
+-------------------------------------------------------------------------------------------------------------------------------------
+1) \w+---Searching One OR MoreWord Character OR  [A-Za-z0-9]+
+2) \w{5}  OR [A-Za-z0-9]{5}-------Searches 5 Letter Word Exactly
+3) \w{m}  OR [A-Za-z0-9]{m}-------->searches M-Letter Word 
+4) \w{m,n}OR [A-Za-z0-9]{m,n}----->Searches for Minimum M-Letter Word  and Maximum n-Letter Word  Only.
+5)[A-Za-z]{3}-------------Searches for 3 Letter Word contains Purely Alphabets
+6) \dd.\dd-------->Searches for Floting Point Value contains An Integer Part with 2 Digits and  Decimal Part with 2 Digits.
+==========================================x====================================================

@@ -1,0 +1,263 @@
+		            Connecting with MongoDB 
+		            [Node App => MongoDB]
+
+- To connect with any database from server application we need database "drivers".
+- Every database have relative drivers, which you have to install for project.
+- To install mongodb drivers
+
+	> npm  install  mongodb --save
+
+- MongoDB drivers library provides  "mongodb" module.
+- MongoDB module provides a collection of various classes.
+- "MongoClient" is a class that provides all properties and methods to connect with
+   mongodb database. 
+
+	var mongoClient = require("mongodb").MongoClient;
+
+- mongoClient object uses "connect()" to connect with database
+
+Syntax:
+  mongoClient.connect("connectionString").then((clientObj)=>{}).catch((err)=>{ })
+
+Syntax: [old]
+  mongoClient.connect("conString", function(error, clientObject){
+	if(!error) {
+
+	}
+ });
+
+- "then()" returns a client object that can communicate with database using "db()".
+
+Syntax:
+	.then(clientObj=>{
+	        var database =  clientObj.db("databaseName");
+	});
+
+- "database" reference can communicate with the collections in database.
+- It can also handle all CRUD operations on the collection.
+
+Syntax:
+	database.collection("collectionName").find()
+				          .insertOne()
+				          .deleteOne()
+				          .updateOne() etc..
+
+Ex:
+index.js
+
+var http = require("http");
+var mongoClient = require("mongodb").MongoClient;
+
+var app = http.createServer((req, res)=>{
+     res.writeHead(200, {
+         'content-type': 'application/json'
+     });
+
+     mongoClient.connect("mongodb://127.0.0.1:27017")
+     .then(clientObj=>{
+          var database = clientObj.db("videolibrary");
+          database.collection("categories").find({}).toArray().then(documents=>{
+              res.write(JSON.stringify(documents));
+              res.end();
+          })
+     })
+     .catch(error=> {
+        console.log(error);
+     })
+
+});
+app.listen(4000);
+console.log(`Server Started : http://127.0.0.1:4000`);
+
+
+> node index.js
+
+browser:   http://127.0.0.1:4000
+
+		                   Express JS
+
+- It is a web framework for "Node JS".
+- It is a middleware framework.
+- Middleware is a software framework used to handle communication in network based applications.
+- Express JS provides several built in modules to configure and create API's.
+
+Creating API with Node & Express:
+
+1. Install Express JS framework for project
+
+	> npm install express  --save
+
+2. Import express module and create a new server side API app with express.
+
+	var  express = require("express");
+
+	var app = express();
+
+	// Server side routes
+	app.get('/path', (req, res) =>{ })
+	app.post()
+	app.put()
+	app.delete()..
+
+	app.listen("port");
+
+3. API route provides a "response" object that sends any type response to client.
+   And a "request" object to fetch any type of content from client.
+
+	request.body	=> form body
+	request.params	=> route parameters
+	response.send()
+	response.end()
+
+Ex:
+api.js
+
+var express = require("express");
+var mongoClient = require("mongodb").MongoClient;
+
+var app = express();
+
+app.get('/', (req, res)=>{
+    res.send("<h2>API Home</h2>");
+});
+
+app.get("/men", (req, res)=>{
+    res.send("<h2>Mens' Fashion</h2>");
+});
+
+app.get("/categories", (req, res)=>{
+
+    mongoClient.connect("mongodb://127.0.0.1:27017")
+    .then(clientObj=>{
+        var database = clientObj.db("videolibrary");
+        database.collection("categories").find({}).toArray().then(documents=>{
+            res.send(documents);
+            res.end();
+        });
+    });
+});
+
+app.get("*", (req, res)=>{
+    res.send("Requested Path : Not Found");
+});
+
+app.listen(4000);
+console.log(`API Started : http://127.0.0.1:4000`);
+ 	
+
+			 Route Parameters
+
+- Parameters allows to query any content from server.
+- Route parameters a configured in route path.
+
+Syntax:
+	app.get("/path/:param1/:param2", (req, res)=>{
+
+	})
+
+	http://server.com/path/value1/value2
+
+- You can access route parameters by using "request" object "params" property.
+
+	req.params  = {
+		param1 : value1,
+		param2 : value2
+	}
+
+Ex:
+api.js
+
+var express = require("express");
+var mongoClient = require("mongodb").MongoClient;
+
+var app = express();
+var conStr = "mongodb://127.0.0.1:27017";
+
+app.get('/', (req, res)=>{
+    res.send("<h2>API Home</h2>");
+});
+
+app.get("/men", (req, res)=>{
+    res.send("<h2>Mens' Fashion</h2>");
+});
+
+app.get("/categories", (req, res)=>{
+
+    mongoClient.connect(conStr)
+    .then(clientObj=>{
+        var database = clientObj.db("videolibrary");
+        database.collection("categories").find({}).toArray().then(documents=>{
+            res.send(documents);
+            res.end();
+        });
+    });
+});
+
+app.get("/products/:category", (req, res)=>{
+
+     mongoClient.connect(conStr).then(clientObj=>{
+          var database = clientObj.db("videolibrary");
+
+          database.collection("products").find({category:req.params.category}).toArray().then(documents=>{
+            res.send(documents);
+            res.end();
+          });
+     });
+
+});
+
+app.get("*", (req, res)=>{
+    res.send("Requested Path : Not Found");
+});
+
+app.listen(4000);
+console.log(`API Started : http://127.0.0.1:4000`);
+
+Note: Download and install web debugger "Postman" or "Fiddler" for API requests. 
+
+POST, PUT, DELETE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,234 @@
+						JavaScript Classes 
+- Programming technologies use various types systems in real world application development.
+	a) POPS
+	b) OBPS
+	c) OOPS
+
+POPS
+- Process Oriented Programming System
+- It supports low level features.
+- It can directly interact hardware services.
+- It uses less memory.
+- It is faster in interactions.
+
+Ex: C, Pascal
+
+- Reusability issues 
+- Extensibility issues
+- Dynamic memory problems 
+
+OBPS
+- Object Based Programming System
+- Supports reusability, extensibility [limited], dynamic memory
+
+Ex: JavaScript, VB
+
+- No dynamic polymorphism
+- No code level security
+
+
+OOPS
+- Object Oriented Programming System
+- Reusability
+- Extensibility
+- Code Level Security
+- Dynamic Polymorphism 
+
+Ex: C++, Java, C#
+
+- Don't support low level features
+- Can't directly interact with hardware services.
+- Need more memory.
+- Slow in interactions. 
+- It is tedious.
+
+Note: JavaScript is not an OOP language, it supports few features of OOP.
+
+What is a Class?
+- Class is a program template. 
+- A template provides pre-defined data and logic, which you can implement and customize according to requirements. 
+- Class have various behaviours like "Entity" & "Modal".
+- If a class is designed for business requirements then it is known as "Entity".
+- If a class is designed for data requirements then it is known as "Modal".
+- It is often known as a blue print for creating multiple instances. 
+
+How a class is configured?
+- You can configure class using 2 techniques 
+	
+	a) Class Declaration
+	b) Class Expression
+
+Syntax: Declaration
+
+	class  Product
+	{
+	}
+
+Syntax: Expression
+
+	var Product = class {
+
+	}
+
+What are class members?
+- Class is a template.
+- Its members must be mutable. 
+- JavaScript class member can be any one of the following
+	a) Property
+	b) Accessor
+	c) Constructor 
+	d) Method
+
+FAQ: Can we have a variable as class member?
+Ans: No. 
+
+FAQ: Can we have variable in class?
+Ans: Yes.
+
+FAQ: Why we can't have a variable as class member?
+Ans: Variables are immutable. And class can have only mutable member.
+
+						     Property
+- A property is mutable.
+- It is used to store data for class. 
+- It can store any type of data
+	a) Primitive
+	b) Non Primitive 
+
+Syntax:
+	class Name
+	{
+	  Property = number/string/Boolean/array/object/date etc..;
+	}
+
+- You can access class member with in class by using "this" keyword. 
+- You can access class member outside class by using instance of class.
+
+	let  obj = new ClassName();
+	obj.Property
+
+Ex:
+<script>
+    class Demo 
+    {
+        Name = "Samsung TV";
+        Price = 45000;
+        Stock = true;
+        Cities = ["Delhi", "Hyd"];
+        Rating = {Rate: 3.5}
+    }
+    let obj = new Demo();
+    document.write(`${obj.Name}<br>${obj.Price}`);
+</script>
+
+						Accessors
+- Accessors give a fine grained control over property. 
+- They can handle read-write operations on property.
+- Accessors are of 2 types
+
+		a) get()		getter
+		b) set()		setter
+
+- getter is used to read and return value of a property.
+- setter is used to store a new value into property.
+
+Syntax:
+		get  aliasName()
+		{
+		  return  Property_Value;
+		}
+
+		set  aliasName(newValue)
+		{
+			Property = newValue;
+		}
+
+Ex:
+<script>
+    var username = prompt("Enter Name");
+    var role = prompt("Enter Your Role", "admin|customer");
+    class Product
+    {
+        _productName;
+
+        get ProductName(){
+            return this._productName;
+        }
+
+        set ProductName(newName) {
+            if(role==="admin"){
+                this._productName = newName;
+            } else {
+                document.write(`Hello ! ${username} you are not authorized to set product name`);
+            }
+        }
+    }
+
+    let obj = new Product();
+    obj.ProductName = prompt("Enter Product Name");
+    if(obj.ProductName)
+    {
+        document.write(`Product Name : ${obj.ProductName}`);
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

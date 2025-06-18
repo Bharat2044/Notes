@@ -1,0 +1,58 @@
+				=================================================================
+						Number of Approaches to Develop the Programs
+				=================================================================
+------------------------------------
+=>Definition of Program
+------------------------------------
+=>A Program is a set of Optmized Instructions and performs Perticular Task
+=>Program are written to solve Problems in Real Time.
+=>In Python Programming, we have Two  Approaches to Develop the Programs. They are
+
+				1. Interactive Approach
+				2. Batch Mode Approach
+*********************************************************************************************************************************************
+1. Interactive Approach
+*********************************************************************************************************************************************
+=>In Interactive Approach, Prtogrammer can Issue One statement at a time and gets One Result at a Time.
+=>Interactive Approach useful to Test One Instruction  at a time.
+=>Interactive Approach is not recommended to use for Developing Big Problem Solving bcoz It won't allow to save and more 
+    over It never provides re-usability of that  code in others parts of the program / Project.
+=>To Solve Big Problem Solving, we always prefer to use Batch Mode Approach.
+---------------------------------
+Examples
+---------------------------------
+>>> a=100
+>>> b=200
+>>> c=a+b
+>>> print(a,b,c)----100 200 300
+------------------------------------------
+Example Softwares:	Python Command Prompt
+					Python IDLE Shell
+*********************************************************************************************************************************************
+2. Batch Mode Approach
+*********************************************************************************************************************************************
+=>In Batch Mode Approach, Programmer can develop Multiple OR Group OR Batch of Optimized Instructions in a Single Unit 
+   and It Must saved on Some Name (Called File Name) with extension .py (FileName.py)
+=>Batch Mode Approach is use for Developing Big Problem Solving bcoz It  allows to save and more 
+    over It  provides re-usability of that  code in others  parts of the program / Project.
+----------------------------
+Example Softwares
+-----------------------------
+					Python IDLE Shell----Installed on the Installation of Python Software
+					************************
+					Third Party IDES(Intergated Development Environment)
+					----------------------------------------------------------------------------------
+									1. Pycharm
+									2. Anaconda Jupiter Note Book
+									3. Anaconda Spider
+									4. VS Code
+									5. Atom
+									6. Google Clab
+									7. Sublime Text
+									8. ...........................etc
+=>To Run Python Program From Windows Command Prompt
+		a) Goto windows cmd prompt
+		b) Goto Folder where ur program saved
+		c) Syntax:    python  filename.py
+
+*********************************************************************************************************************************************

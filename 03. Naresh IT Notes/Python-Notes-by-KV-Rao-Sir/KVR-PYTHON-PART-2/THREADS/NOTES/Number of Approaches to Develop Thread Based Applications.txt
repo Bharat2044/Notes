@@ -1,0 +1,23 @@
+			=================================================================
+					Number of Approaches to Develop Thread Based Applications
+			=================================================================
+=>In Python,To Develop Thread Based Applications, We Have Two Approaches. They are
+
+			1. By using Functional programming
+			2. By using Object Oriented Programming
+===========================================================================================
+1. By using Functional programming
+===========================================================================================
+Step-1: import threading module and Other Modules if Required
+Step-2: Define Function(s) where It Contains Operational Logic executed by Sub Thread
+Step-3: Create Sub Thread(s) 
+Step-4: Dispatch the Sub Threads by using start()
+===========================================================================================
+2. By using Object Oriented Programming
+===========================================================================================
+Step-1: import threading module and Other Modules if Required
+Step-2:Define a Programmer-Defined Class
+Step-3: Define a Programmer-Defined Method(s)) where It Contains Operational Logic executed by Sub Thread
+Step-4: Create Sub Thread(s) 
+Step-5: Dispatch the Sub Threads by using start()
+===========================================================================================

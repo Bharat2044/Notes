@@ -1,0 +1,65 @@
+How to exit from a Node.js shell
+================================
+There are various ways to terminate a Node.js application.
+-Press Ctrl + C twice.
+-Press Ctrl + D once.
+-type .exit and press Enter
+-process.exit()
+-process.kill(process.pid)
+
+
+
+
+
+accept arguments from the command line
+======================================
+-we can pass any number of arguments while invoking a Node.js application.
+-Arguments can be standalone or have a key-value.
+ ex: node app.js sanjay
+     node app.js name=sanjay
+-arguments can be collected by using 'process' module's argv property which is an array.
+-The first element is the full path of the node command.
+-The second element is the full path of the file being executed.
+-All the additional arguments are present from the third position going forward.
+-we can iterate over all the arguments (including the node path and the file path) using a loop:
+	process.argv.forEach((val, ind) => {
+	  console.log(`index ${ind} argument -> ${val}`);
+	})
+-we can get only the additional arguments by creating a new array that excludes the first 2 params
+ const args = process.argv.slice(2)
+
+
+Assignment:
+-Ask user to enter 2 numbers and 1 operator(+ - * /) 
+-perform arithmetic operation on those 2 numbers
+Note: hanlde edge cases also
+
+How to Collect command Line arg in Key=Value pair
+=================================================
+
+
+
+Minimist
+========
+-The best way to deal with key:value arguements is by using the 'minimist' library.
+ const args = require('minimist')(process.argv.slice(2))
+ console.log(args['name'])
+-use double dashes before each argument name
+ node app.js --name=sanjay --add=bangalore
+Note: process module does not need a "require", it's defaultly available.
+
+VS Code Extensions
+==================
+vscode-icons
+prettier
+tab nine
+thunderclient
+ESLint
+
+
+Browser extensions
+==================
+-json viewer 
+-POSTMAN 
+-Allow CORS
+-Mobile Simulator

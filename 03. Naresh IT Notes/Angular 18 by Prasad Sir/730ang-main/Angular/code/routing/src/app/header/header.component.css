@@ -1,0 +1,27 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px;
+    background-color: black;
+    color: white;
+}
+header .logo{
+    font-size: 32px;
+}
+.logo span{
+    color: aqua;
+}
+ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    gap: 20px;
+}
+a{
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    color: aqua;
+}

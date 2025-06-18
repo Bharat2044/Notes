@@ -1,0 +1,72 @@
+				================================================
+						Files  OR Streams in Python
+				================================================
+Index
+------------
+=>Purpose of Files
+=>Types of Applications
+		a) Non-Persistant Applications
+		b) Persistant Applications
+=>Definition of File, Stream
+=>Operations on Files
+		a) Write Operation
+		b) Read Operation
+=>Types of Files
+		a) Text Files
+		b) Binary Files
+----------------------------------------------------
+=>File Opening Modes
+		1) r   2) w  3) a
+		4) r+ 5) w+ 6) a+
+		7) x  8) x+
+=>Number of Approaches to Open the Files
+		a) By using open()
+		b) By using ' with open() as '
+=>Programming Examples
+=>Writing the Data to the file
+		a) write()
+		b) writelines()
+=>Programming Examples
+=>Reading the Data From Files
+		a) read()
+		b) readlines()
+=>Programming Examples
+=>Random Access Files
+		a) tell()
+		b) seek()
+=>Programming Examples
+--------------------------------------------------------------
+=>Pickling(Object Serialization) and Un-Pickling(Object De-Serialization) Operations.
+=>Implementation of Pickling and Un-Pickling Operations
+=>pickle module
+		a) dump()
+		b) load()
+=>Programming Examples
+-----------------------------------------------------------------
+=>Working with CSV Files (Microsoft MS-Excel )--Most Imp
+=>Importance of CSV Files with Pandas and Numpy
+=>csv Module
+	a) csv.reader()
+	b) csv.writer()
+	c) csv.DictReader()
+	d) csv.DictWriter()
+=>Programming Examples
+--------------------------------------------------------------------
+=>Working with OS Based Operations
+=>os module
+		a) mkdir()
+		b) makedirs()
+		c) rename()
+		d) rmdir()
+		e) removedirs(), rename()
+		d) listdir()
+=>Programming Examples
+------------------------------------------------------------------------------------------
+=>Working with JSON(Java Script Object Notation) Files
+=>JSON Files with PANDAS AND NUMPY.
+=>json Module
+	a) loads()
+	b) load()
+	c) dump()
+=>Programming Examples
+==================================================================================

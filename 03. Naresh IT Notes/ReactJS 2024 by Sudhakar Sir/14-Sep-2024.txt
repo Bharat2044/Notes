@@ -1,0 +1,156 @@
+		                  Routing in React
+- Routing is technique used in web applications to configure user and SEO friendly URL's.
+
+Without Route:
+   https://www.amazon.in/products.html?category=electronics&product=mobile&model=samsung
+
+With Route:
+   https://www.amazon.in/electronics/mobile/samsung
+
+- User friendly URL allows to query any content directly from address bar.
+- SEO friendly URL allows SEO to find and access the exact location of user in page.
+- Route enables navigation in SPA, where user can stay on one page and get access to everything from the page.
+- Route uses Ajax calls, which can load new content into page without reloading the page.
+- Routing is implemented both 
+	a) Server Side
+	b) Client Side
+- React is using routes client side.
+- Client side route allows to access and render a component from one page.
+
+React Routing Library:
+- React Router DOM is the library for routing. [ react-router-dom ]
+- Router DOM library V5 [Version 5] is used in react up to 17x versions.
+- Router DOM Version 6 is latest and it is a complete re-write of routing. 
+
+1. Install Router DOM library
+
+	>npm install react-router-dom  --save
+
+2. Route Table is created by using <BrowserRouter> component 
+
+3. Router Table contains a collection of  Routes defined with <Routes> component.
+
+4. Every Individual Route in routes collection is defined with <Route> component.
+
+Syntax:
+	<BrowserRouter>
+	    <Routes>
+	          <Route />
+	          <Route />
+	    </Routes>
+	</BrowserRouter>
+
+5. Each Route is defined with various attributes
+
+	a) path
+	b) element
+	c) children 
+	d) outLet
+
+Note: <BrowserRouter> is responsible for mapping the Virtual Routes into Actual DOM
+          Routes. It maps with browser "location" object, which handles the navigation.
+	
+           Hence make sure that all router components are defined within the scope of
+           <BrowserRouter>
+
+Syntax:
+	<Route  path="requestName"   element={ <Component /> }  />
+	<Route  path="requestName"  element={<markup> JSX </markup>}  />
+
+- You can configure wild card routes that define what to render according to situation.
+
+	<Route path="/" />	 It renders element when user request is empty.
+	<Route path="*" />	 It renders element when user request not found.
+
+Note: Make sure that the wild card route "*" is configured at the end of rotues collection.
+
+
+- You can configure navigation to any route by using <Link> component.
+
+	<Link to="pathName"> Text | Image .. </Link>
+
+Ex:
+1. Go to App.js
+
+import logo from './logo.svg';
+import './App.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { EMICalculator } from './components/emi-calculator/emi-calculator';
+
+function App() {
+  return (
+    <div className="container-fluid">
+       <BrowserRouter>
+          <header className='bg-dark d-flex justify-content-around text-white p-2'>
+              <div className='fs-5 fw-bold'>Shopper.</div>
+              <div className='fs-4' >  
+                 <Link to="/" className='link-light text-decoration-none'> Home </Link>
+                 <Link to="men" className='link-light text-decoration-none mx-3'> Men's Fashion </Link>
+                 <Link to="women" className='link-light text-decoration-none mx-3'> Women's Fashion </Link>
+                 <Link to="kids" className='link-light text-decoration-none'> Kid's Fashion </Link>
+                 <Link to="emi" className='link-light mx-2 text-decoration-none'> EMI </Link>
+              </div>
+              <div>
+                <span className='bi bi-person-fill'></span>
+                <span className='bi bi-heart-fill mx-3'></span>
+                <span className='bi bi-cart'></span>
+              </div>
+          </header>
+          <section className='mt-4'>
+              <Routes>
+                  <Route path='/' element={<div><h1>Welcome to online shopping</h1><p>Men's | Women | Kids Fashion</p></div>} />
+                  <Route path='men' element={<div><h3>Men's Fashion</h3><img src="men-fashion.jpg" width="200" height="200"/></div>} />
+                  <Route path='women' element={<div><h3>Women's Fashion</h3><img src="women-fashion.jpg" width="200" height="200"/></div>} />
+                  <Route path='kids' element={<div><h3>Kid's Fashion</h3><img src="kids-fashion.jpg" width="200" height="200"/></div>} />
+                  <Route path='emi' element={<EMICalculator />} />
+                  <Route path='*' element={<div><h3 className='text-warning'>Looking for something?</h3><code>Sorry unable to find your request</code></div>} />
+              </Routes>
+          </section>
+       </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+
+
+2. Index.js
+
+  <React.StrictMode>
+         <App />
+    </React.StrictMode>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

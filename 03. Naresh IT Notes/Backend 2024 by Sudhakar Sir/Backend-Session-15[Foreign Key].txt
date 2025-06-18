@@ -1,0 +1,112 @@
+Create a Table
+Primary Key Constraint
+
+
+Note: You can use show command for display the structure of any operation performed in SQL.
+        "show create table tableName"
+
+                 Foreign Key Constraint
+- A foreign key constraint is defined by using "FOREIGN KEY" command.
+- It additionally uses various reference options on Update and Delete.
+
+Syntax:
+    Constraint   [constraint_name]  
+    Foreign Key (foreignkey_field)  
+    References  tableName(fieldName)
+    ON Update  reference_option,
+    ON Delete reference_option
+
+- Constraint name is required to edit or delete the constraints.
+- Foreign Key field must be in current table with same data structure.
+- Reference table name is parent table that have the foreign key field.
+- On update and delete defines the actions to perform on child data when parent content is
+   modified or deleted.
+- Reference options supported by MySQL are
+    a) RESTRICT
+    b) CASCADE
+    c) SET NULL
+- If reference option is not defined then the default is "RESTRICT".
+Ex:
+Create Table tblProducts
+(
+  ProductId int,
+  Name varchar(30),
+  CategoryId int,
+  Constraint fk_categoryid
+  foreign key (CategoryId)
+  references tblcategories(CategoryId)
+  )
+- The default reference is "RESTRICT".
+- It specifies that you can't modify or delete the parent data if it is having matching content in child.
+
+Cascade Foreign Key:
+- It is a reference option that sets cascading foreign keys.
+- If the parent table is modified then it reflects all records matching in child table.
+- If you delete a field from parent table, then it deletes all records in child table that match the given reference.
+- If you modify a field in parent, then it updates all records in child table.
+
+Ex:
+Create Table tblProducts
+(
+  ProductId int,
+  Name varchar(30),
+  CategoryId int,
+  Constraint fk_categoryid
+  foreign key (CategoryId)
+  references tblcategories(CategoryId)
+  on update cascade
+  on delete cascade
+  )
+
+Foreign Key SET NULL:
+- Null specifies that there is no value provided dynamically at runtime.
+- You can set null into child records only when the field is configured a nullable.
+- If any field is non-nullable then it can't set null and will not allow to modify or delete parent.
+Ex:
+Create Table tblProducts
+(
+  ProductId int,
+  Name varchar(30),
+  CategoryId int,
+  Constraint fk_categoryid
+  foreign key (CategoryId)
+  references tblcategories(CategoryId)
+  on update set null
+  on delete set null
+  )
+
+FAQ: Can we define multiple foreign keys for a table?
+Ans: Yes
+
+Syntax:
+    Constraint   [constraint_name]  
+    Foreign Key (foreignkey_field, field2, field3,...)  
+    References  tableName(fieldName, field2, field3)
+    ON Update  reference_option,
+    ON Delete reference_option
+   
+FAQ: Can we configure foreign keys from multiple tables?
+Ans: Yes. It requires reference of multiple fields from multiple tables.
+         You can define multiple constraints.
+
+Syntax:
+    Constraint   A
+    foreign key (field) references tableName(field) on update ref_option
+    Constraint B
+    foreign key (field) references tableName(field) on update ref_option
+
+Note: To remove a foreign key you can use "alter" command.
+
+                  Inserting Data
+- Insert command is used to insert data into table.
+- It requires the field names and values to configure.
+
+Syntax:
+    INSERT  INTO  tableName (Fields,...)  values (value1, value2,..)
+
+- Value type must match with the data type of field and all the constraints defined.
+
+Ex:
+  Insert into  tblcategories (CategoryId, CategoryName)  values (1, 'Electronics')
+ 
+               Querying Data

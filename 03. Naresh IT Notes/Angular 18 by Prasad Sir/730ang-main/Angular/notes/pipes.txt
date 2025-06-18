@@ -1,0 +1,19 @@
+Pipes: pipes are used to transform the data using a pipeTransform method. pipes are given with pipe symbol ( | )
+ ther are default built in pipes we can use
+  i. uppercase: uppercase is used to transform data into uppercase
+  ii. lowercase: lowercase is used to transform data to lowercase
+  iii. currency: currency is used to transform data to specific currency by taking arguments. default is dollar
+  250 | currency ===> $250
+  250 | currency:"INR" ===> ₹250
+  iv. Date: date is used to transform the given date into specific format
+  variable | date:"YYYY-MM-dd HH/mm/SS"
+  v. json: it converts given values of object into json
+  obj | json
+  vi.percentage : percentage pipe is used to transform the given data to specific percentage. it multiplies value with 100 and return with % in given format
+  value | percent : ' min digits before decimal . min digits after decimal - max digits after decimal '
+  vii. decimal : it is used to transform given intergers to decimals
+   value | decimal : ' min digits before decimal . min digits after decimal - max digits after decimal '
+
+   Async pipe will discussed later
+
+   b. custom pipes: we can create our own pipe to transform the data the way we want

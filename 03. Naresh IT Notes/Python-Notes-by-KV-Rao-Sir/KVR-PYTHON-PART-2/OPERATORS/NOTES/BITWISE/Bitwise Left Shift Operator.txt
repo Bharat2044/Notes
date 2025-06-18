@@ -1,0 +1,19 @@
+			=======================================================
+				1. Bitwise Left Shift Operator ( << )
+			=======================================================
+Syntax:	varname = Given Number << No. of Bits
+--------------------
+Explanation:
+--------------------
+The Execution Process of Bitwise LeftShift Operator ( << ) is that "It Moves Number of Bits Towards Left Side By Adding Number of Zeros (Number of Zeros=Depending No. Of bits we Flipped-off) at Right Side.
+-------------------------------
+Examples
+-------------------------------
+>>> a=10
+>>> b=a<<3
+>>> print(b)------------80
+>>> print(4<<3)-------32
+>>> print(9<<2)-------36
+>>> print(10<<0)-----10
+>>> print(10.3<<2)-----------TypeError: unsupported operand type(s) for <<: 'float' and 'int'
+========================================x===============================================================

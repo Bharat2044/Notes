@@ -1,0 +1,34 @@
+		=========================================================================
+			Inheriting the features of Base Class into Derived Class
+		=========================================================================
+=>To Inherit the Features of Base Class into Derived Class , we use the following Syntax:
+
+		class <clsname-1>:
+		     ---------------------
+		     ---------------------
+		class <clsname-2>:
+		     -----------------------
+		     -----------------------
+		----------------------------
+		----------------------------
+		class <clsname-n>:
+		     -----------------------
+		     -----------------------
+
+		class <clsname-n+1>(clsname-1,clsname-2,....clsname-n):
+			-------------------------------------------
+			-------------------------------------------
+			-------------------------------------------
+*******************************************
+EXPLANATION:
+*******************************************
+=>Here <clsname-n+1> Represents Name of the Derived OR Sub Class
+=>Here clsname-1,clsname-2,....clsname-n Represents Name of the Base OR Super Class
+=>Here All the Data Members, Methods and Constructors are Inherited from clsname-1,clsname-2,....clsname-n into 
+    classname-n+1 Vitually OR Logically.
+=>Here the Derived Class classname-n+1 can access the all the features of Base Classes.
+=>When we develop any Inheritance Based Application, It is always Recommended to Create an object of Bottom Most 
+    derived Class bcoz It Inherits all the Features of Base Class, intermediate Base Class(es) .
+=>For Every Class in Python, there Exist an implicit Pre-Defined Super Class calss "object" and It provides Garbage 
+   Collection facility .
+=================================================x======================================

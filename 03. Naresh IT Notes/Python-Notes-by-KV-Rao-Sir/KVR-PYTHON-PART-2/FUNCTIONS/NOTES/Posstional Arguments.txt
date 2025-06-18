@@ -1,0 +1,18 @@
+			=========================================================================
+						1. Posstional Arguments
+			=========================================================================
+=>Posstional Arguments Mechanism is the default arguments passing mechanism used by PVM in Functions for Passing the values of Arguments of Function Call to Formal Parameters of Function Defintion.
+=>Possitional Arguments concept says that Every Argument  Value Passing to Every  Formal Parameter Based on their Posstion by maintaining Order and Meaning for Higher Accuracy. In Otherwords The number of arguments must be equal to Number of Formal Parameters.
+=>Possitional Arguments concept always used for Passing Specific Data from Function calls to Function Definitions.
+ =>PVM gives High Priority for Possitional Arguments
+---------------------------------
+Syntax:     def  functionname(Param1,Param2,....Param-n):  # Function Definition
+			-----------------------------------------------
+			-----------------------------------------------
+			Block of Statements--perform Operation
+			------------------------------------------------
+			-----------------------------------------------
+-------------
+Syntax:       functioname(arg1,arg2,.....,arg-n)  # Function call
+=>Here the values of arg1,arg2,.....,arg-n of  Function call are passing to Param1,Param2,....Param-n of Function Definition Respectively.
+===============================================x===========================================

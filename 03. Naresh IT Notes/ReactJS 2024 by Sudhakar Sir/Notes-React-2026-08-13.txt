@@ -1,0 +1,212 @@
+						Event Binding in React
+
+1. What is Event?
+A. Event is a message sent by sender to its subscriber in order to notify the change.
+    Event uses a "delegate" mechanism, function pointer mechanism.
+    Event follows a software design pattern called "Observer".
+    "Observer" is a communication pattern.
+
+2. What is sender and subscriber?
+A. Sender sends a notification from element.
+	 <button onclick="InsertClick()">
+
+    Subscriber defines the actions to perform.
+
+	  function  InsertClick()
+	  {
+	  }
+
+3. What is Event Handler?
+A. It is a "delegate", function pointer.
+
+	onclick="InsertClick()"			// Event Handler
+	onclick						// Event
+ 
+    Event handler triggers notification to a specific function on particular event.
+    You can define a handler for any element that is static.
+
+4. What is Event Listener? 
+A. Event Listener is defined for elements that are added to page dynamically and also to existing elements on specific actions.
+    You can configure listener for elements according to state and situation, so that
+     they are registered only when they are required.
+
+Syntax:
+	document.querySelect("button").addEventListener("Event", function(){
+
+	})
+
+5. What is difference between onclick & click?
+A.  "onclick" is a handler event.
+     "click" is listener event.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function InsertClick(){
+               document.write("Record Inserted");
+          }
+          function bodyload(){
+               var btnDelete = document.createElement("button");
+               btnDelete.innerHTML = "Delete";
+               btnDelete.addEventListener("click", function(){
+                    document.write("Record Deleted");
+               })
+               document.querySelector("body").appendChild(btnDelete);
+
+               document.getElementById("btnUpdate").addEventListener("click",()=>{
+                    document.write("Record Updated Successfully..");
+               })
+
+          }
+     </script>
+</head>
+<body onload="bodyload()">
+     <button id="btnUpdate">Update</button>
+     <button onclick="InsertClick()">Insert</button>
+
+</body>
+</html>
+
+6. What are Event Arguments?
+A. Event argument defines the "Payload" of event. 
+    Every event have 2 default arguments to define in handler
+		a) this
+		b) event
+ 
+    "this" contains information about the current element like
+		a) id
+		b) name
+		c) className
+		d) src
+		f) href etc..
+    "event" container information about current event like
+		a) clientX 
+		b) clientY 
+		c) keycode
+		d) charCode
+		e) which etc..
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+         function Database(btn, e){
+               document.write(`Button Name: ${btn.name}<br>X Position: ${e.clientX} <br> Ctrl Key : ${e.ctrlKey}`);
+         }
+     </script>
+</head>
+<body>
+    <button onclick="Database(this, event)" name="Insert">Insert</button>
+    <button onclick="Database(this, event)" name="Update">Update</button>
+    <button onclick="Database(this, event)" name="Delete">Delete</button>
+
+    
+</body>
+</html>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+        function ImageClick(e) {
+            console.log(e.clientX + "\n" + e.clientY);
+            if((e.clientX>=40 && e.clientX<=159) && (e.clientY>=30 && e.clientY<=144)) {
+                document.write("32 Pixel Dual Camera")
+            } else {
+               document.write("Silicon Panel");
+            }
+        }
+     </script>
+</head>
+<body>
+   <img src="../public/iphone-black.jpg" onclick="ImageClick(event)">
+</body>
+</html>
+
+ - Event can have custom arguments. You can define along with default args or only custom args.
+
+	<button onclick="Details('string', number, Boolean, [ ], { })"> Details </button>
+
+	function Details(name, price, stock, cities, rating)
+	{
+	}
+
+- Event listener can have only one argument that refers to "event". However event can access both event and element related information.
+
+Syntax:
+
+	  btnInsert.addEventListener("click", function(e) {
+
+		   e.clientX;
+		   e.clientY;
+		   e.ctrlKey;
+
+		   e.target.id;
+		   e.target.name;
+		   e.target.className;
+
+	})
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function bodyload(){
+                document.getElementById("btnDetails").addEventListener("click", function(e){
+                      document.write(`
+                             Button Id: ${e.target.id} <br>
+                             X Poistion: ${e.clientX} <br>
+                             Ctrl : ${e.ctrlKey} <br>
+                             Button Class: ${e.target.className}
+                      `);
+                })
+          }
+     </script>
+</head>
+<body onload="bodyload()">
+     <button class="btn btn-primary" id="btnDetails">Details</button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

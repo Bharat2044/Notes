@@ -1,0 +1,219 @@
+					   Conditional Rendering
+- Conditional rendering is the process of rendering different content according to state and situation. 
+- A component can render different JSX elements according to situation. 
+
+Syntax:
+	(condition) ? <component1 /> : <component2 />
+
+Ex: Conditional Rendering in Uncontrolled component
+
+conditional-rendering.jsx
+
+import { useEffect, useState } from "react"
+
+export function ConditionalRendering(){
+
+    const [signedIn, setSignedIn] = useState(false);
+
+  
+    function handleSignIn(){
+        setSignedIn(true);
+    }
+    function handleSignout(){
+        setSignedIn(false);
+    }
+
+    return(
+        <div className="container-fluid">
+            <nav className="d-flex justify-content-between p-2 mt-3">
+                <div className="fs-5 fw-bold">Shopper.</div>
+                 {
+                    (signedIn===true)? <div className="fs-5">
+                    <span className="mx-3">Home</span>
+                    <span className="mx-3">Shop</span>
+                    <span className="mx-3">Pages</span>
+                    <span className="mx-3">Blog</span>
+                    </div>
+                    : <div></div>
+                 }
+                <div>
+                    {
+                        (signedIn===true)?<button onClick={handleSignout} className="btn btn-danger">Signout</button>:<button className="btn btn-primary" onClick={handleSignIn}>Signin</button>
+                    }
+                </div>
+            </nav>
+        </div>
+    )
+}
+
+Ex: Conditional rendering in controlled component
+
+	function Component(props)
+	{
+	    if(props.key===value)
+	    {
+		return ( <JSX> </JSX>);
+	    }
+	   else {
+		return (<JSX> </JSX>);
+	   }
+	}
+
+1. Go to custom-components and add 
+
+		data-grid.jsx
+
+export function DataGrid(props){
+    if(props.layout==="grid"){
+        return(
+            <div>
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            {
+                                props.fields.map(field=><th key={field}>{field}</th>)
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            props.data.map(item=>
+                                <tr key={item}>
+                                    {
+                                        Object.keys(item).map(key=> <td key={key}>{item[key]}</td>)
+                                    }
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
+    } else if(props.layout==="card") {
+        return (
+            <div className="d-flex flex-wrap">
+                {
+                    props.data.map(item=>
+                        <div className="card m-2 p-2" style={{width:'200px'}} key={item}>
+                            <div className="card-header">
+                                {item[Object.keys(item)[0]]}
+                            </div>
+                            <div className="card-body">
+                              <dl>
+                                <dt>{Object.keys(item)[1]}</dt>
+                                <dd>{item[Object.keys(item)[1]]}</dd>
+                              </dl>
+                            </div>
+                            <div className="card-footer">
+                                <button className="btn btn-warning bi bi-cart4 w-100"> Buy </button>
+                            </div>
+                        </div>
+                    )
+                }
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <h3>Please Select a Layout</h3>
+            </div>
+        )
+    }
+}
+
+2. conditional-rendering.jsx
+
+import { useEffect, useState } from "react"
+import { DataGrid } from "../../custom-components/data-grid";
+
+
+export function ConditionalRendering(){
+
+    const [signedIn, setSignedIn] = useState(false);
+    const [layout, setLayout] = useState('');
+
+  
+    function handleSignIn(){
+        setSignedIn(true);
+    }
+    function handleSignout(){
+        setSignedIn(false);
+    }
+
+    function handleLayoutChange(e){
+        setLayout(e.target.value);
+    }
+
+    return(
+        <div className="container-fluid">
+            <nav className="d-flex justify-content-between p-2 mt-3">
+                <div className="fs-5 fw-bold">Shopper.</div>
+                 {
+                    (signedIn===true)? <div className="fs-5">
+                    <span className="mx-3">Home</span>
+                    <span className="mx-3">Shop</span>
+                    <span className="mx-3">Pages</span>
+                    <span className="mx-3">Blog</span>
+                    </div>
+                    : <div></div>
+                 }
+                <div>
+                    {
+                        (signedIn===true)?<button onClick={handleSignout} className="btn btn-danger">Signout</button>:<button className="btn btn-primary" onClick={handleSignIn}>Signin</button>
+                    }
+                </div>
+            </nav>
+            <section className="mt-4">
+                <div className="my-2">
+                    <select onChange={handleLayoutChange} className="form-select w-25" >
+                        <option>Select Layout</option>
+                        <option value="grid">Grid</option>
+                        <option value="card">Card</option>
+                    </select>
+                </div>
+                <DataGrid layout={layout} fields={["Name", "Price"]} data={[{Name:"Samsung TV", Price: 45000.44}, {Name:"Mobile", Price:13000.44}]} />
+            </section>
+        </div>
+    )
+}
+
+							useReducer()
+- It maintains a global state.
+- Global state is referred as "Application State".
+- Usually application contains data from application start to application end.
+- Data in application state is accessible to all sessions. 
+- Application state is global and requires features for developer like
+	a) Predictable 
+	b) Extensible 
+	c) Debuggable 
+	e) Centralized 
+	f) Cross platform
+- At large scale these features are supported by a JavaScript library called "Redux".
+- Application State is managed by using following components
+
+	a) Store
+	b) State
+	c) Reducer 
+
+- Store is a location where the data is kept. It is a global location for application.
+- State is a component used to access the data from store provide to UI. 
+- Reducer comprises of actions that identify the changes in UI and update to store.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

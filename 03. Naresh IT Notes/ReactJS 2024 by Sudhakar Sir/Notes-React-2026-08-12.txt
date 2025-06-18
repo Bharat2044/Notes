@@ -1,0 +1,246 @@
+Ex:
+nested-demo.jsx
+
+import { useState } from "react"
+
+
+export function NestedDemo(){
+
+    const [data] = useState(
+        [
+            {Category:"Electronics", Products:["Televisions", "Mobile"]},
+            {Category:"Footwear", Products:["Casuals", "Sneakers", "Boots"]}
+        ]
+    );
+
+
+    return(
+        <div className="container-fluid">
+            <h2>Nested List</h2>
+            <ol>
+                {
+                    data.map(item=>
+                        <li key={item}>
+                            {item.Category}
+                            <ul>
+                                {
+                                    item.Products.map(product=> <li key={product}> {product} </li>)
+                                }
+                            </ul>
+                        </li>
+                    )
+                }
+            </ol>
+            <select>
+                {
+                    data.map(item=>
+                        <optgroup key={item.Category} label={item.Category}>
+                            {
+                                item.Products.map(product=> <option key={product}>{product}</option>)
+                            }
+                        </optgroup>
+                    )
+                }
+            </select>
+        </div>
+    )
+}
+
+						        Map Type
+
+Issues with Object type:
+- It is key and value collection
+- Key must be string type
+- Value can be any type
+- It requires lot of explicit operators and functions to handle interactions.
+- It is slow in interactions 
+
+Map Type:
+- It is also a key and value collection.
+- Key can any type and value also any type.
+- It provides implicit methods and properties to handle interactions 
+- Hence it is faster than object.
+- However it is schema less. 
+
+Syntax:
+	var  data = new Map();
+	data.set(key, value);
+	data.get(key);
+	data.keys()
+	data.values()
+	data.entries()
+	data.delete(key)
+	data.clear()
+	data.has()
+	data.size
+	
+						     Date Type
+- React can configure date and time values by using Date() constructor. 
+- It allocates memory to store current date and time.
+
+Syntax:
+	const [now] = useState(Date());
+
+	<p> { now } </p>
+
+- React requires various 3rd party date libraries to handle date and time values, the most commonly uses date adapters are
+		a) dayjs
+		b) moment
+		c) luxon 
+
+Ex:
+1. Install  moment for React project
+
+	>npm install  moment  --save
+
+2. Import moment into component
+
+	import   moment  from  "moment";
+
+3. Apply date and time format using  "format()" method
+
+	{   moment(yourDate).format('pre-defined-format') }
+
+	D		single digit date value
+	DD		double digit date value
+	
+	ddd		short weekday name
+	dddd	long weekday name
+
+	MM		month number
+	MMM	short month name
+	MMMM	long month name
+	
+	yy / yyyy	Full Year
+
+Syntax:
+	const  [mfd]  = useState(Date());
+
+	{  moment(mfd).format('dddd DD  MMMM, yyyy')  }
+
+
+					Regular Expression Type
+
+- Regular expression is used to verify the format of a value.
+- Expression is defined with meta characters and quantifiers.
+- Regular expression is enclosed in "/  regExp /".
+- Regular expression is verified by using "match()" method of string.
+
+Syntax:
+	const [regExp]  = useState(/ meta_chars_quantifier /);
+
+	value.match(regExp)		// returns true if value is matching with expression.
+
+Ex:
+nested-demo.jsx
+
+import { useEffect, useState } from "react"
+
+export function NestedDemo(){
+
+
+    const [mobile, setMobile] = useState("9876543210");
+    const [regExp] = useState(/\+\(1\)\(\d{3}\)\s\d{3}-\d{4}/);
+
+    useEffect(()=>{
+        setMobile(prompt('Enter Mobile Number'));
+    },[])
+
+    return(
+        <div className="container-fluid">
+             {
+                (mobile.match(regExp))?"Mobile Verified":"Invalid Mobile : US Format +(1)(000) 000-0000"
+             }
+        </div>
+    )
+}
+
+Summary: 
+- Primitive Types
+	number
+	string
+	Boolean 
+	null
+	undefined 
+	symbol 
+	BIGINT
+- Non Primitive 
+	array
+	object
+	map
+- Additional 
+	date
+	regExp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

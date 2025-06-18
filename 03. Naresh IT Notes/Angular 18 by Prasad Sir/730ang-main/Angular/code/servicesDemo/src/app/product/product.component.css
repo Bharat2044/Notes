@@ -1,0 +1,6 @@
+.product{
+    padding: 20px;
+    box-shadow: 2px 3px black;
+    border-radius: 20px;
+    width: max-content;
+}

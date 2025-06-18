@@ -1,0 +1,71 @@
+	=============================================
+			Package in Python
+	=============================================
+=>The Function concept is used for Performing some operation and provides code re-usability within the same program and unable to provide code re-usability across the programs.
+
+=>The Modules concept is a collection of Variables, Functions and classes and we can re-use the code across the Programs provided Module name and main program present in same folder but unable to provide code re-usability across the folders / drives / enviroments.
+
+=>The Package Concept is a collection of Modules. 
+=>The purpose of Packages is that to provide code re-usability across the folders / drives / enviroments.
+
+=>To deal with the package, we need to the learn the following.
+			a) create a package
+			b) re-use the package
+--------------------------------------------------------------------------------------------------
+a) create a package:
+  ----------------------------
+=>To create a package, we use the following steps.
+		i) create a Folder
+		ii) place / write an empty python file called __init__.py (Optional)
+		iii) place / write the module(s) in the folder where  it is considered as Package Name
+--------------
+Example:
+--------------
+			bank           <-----Package Name
+		      -----------
+		              __init__.py    <----Empty Python File
+			      simpleint.py  <--- Module Name
+			      aop.py-----Module Name
+			      icici1.py---Module Name
+			      welcome.py  <--- Module Name
+			      greet.py<---Module names
+========================================================
+b) re-use the package
+---------------------------------
+=>To the re-use the modules of the packages across  the folders / drives / enviroments, we have to two approaches. They are
+	i) By using sys.path.append()
+	ii) by using PYTHONPATH Environmental Variable Name
+------------------------------------------------------------------------------------------
+i) By using sys.path.append()
+-------------------------------------
+Syntax:
+-----------  sys.path.append("Absolute Path of Package")
+
+=>sys is pre-defined module
+=>path is a pre-defined object of list  / variable present in sys module
+=>append() is pre-defined function present in path and is used for locating the package name of python( specify the absolute path)
+
+Example:
+-----------------
+sys.path.append("D:\\KVR-PYTHON-11am\\PACKAGES\\BANK")
+			(or)
+sys.path.append("D:\KVR-PYTHON-11am\ACKAGES\BANK")
+		(or)
+sys.path.append("D:/KVR-PYTHON-6PM/PACKAGES/BANK")
+-----------------------------------------------------------------------------------------------
+ii) by using PYTHONPATH Enviromental Variables:
+------------------------------------------------------------------------
+=>PYTHONPATH is one of the Enviromental Variable
+=>Search for Enviromental Variable
+Steps for setting :
+------------------------------
+                         Var name : PYTHONPATH       
+			 Var Value : D:\\KVR-PYTHON-11am\\PACKAGES\\BANK
+
+The overall path
+				PYTHONPATH= D:\\KVR-PYTHON-11am\\PACKAGES\\BANK
+-------------------------------------------------------------------------------------------------------------
+
+
+
+

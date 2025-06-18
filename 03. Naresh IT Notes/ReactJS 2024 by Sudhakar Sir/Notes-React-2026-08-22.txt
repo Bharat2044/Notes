@@ -1,0 +1,90 @@
+						 Distributed Computing
+- Distributed computing allows communication between two different applications running on two different machines.
+- It is also about the communication between two different objects running in two different process of same machine.
+- To build distributed applications various distributed technologies are required.
+- Some of the popular distributed technologies are
+
+			CORBA			Common Object Request Broken Architecture
+			DCOM			Distribute Component Object Model
+			RMI				Remote Method Invocation
+			EJB				Enterprise Java Beans
+			Web Service
+			Remoting 
+			etc..
+
+- Web Service is one of the popular distributed computing technology known to all software systems like Java, .NET, PHP, Python etc..
+
+Issues with Web Service: 
+- It can use only SOAP as specification.
+- It can run only on web server.
+- It can use only "http" as protocol
+
+Web Service Specifications:
+a) SOAP
+b) REST
+c) JSON
+
+SOAP 
+- Service Oriented Architecture Protocol
+- Consumer sends an XML request
+
+	<Products>
+		<Product>
+		   <Id>1</Id>
+		</Product>
+	</Products>
+
+- Provides sends an XML response
+	<Products>
+	    	<Product>
+			<Id>1</Id>
+			<Name>TV</Name>
+			<Price>34000</Price>
+		</Product>
+	</Products>
+
+REST
+- Representational State Transfer
+- Consumer sends a query request
+
+	http://server.com/products?id=1
+
+- Provider sends XML or JSON response. 
+
+	{
+	  "Id":1,
+	 "Name": "TV",
+	 "Price": 34000.44
+	}
+
+JSON
+- JavaScript Object Notation
+- Consumer sends a JSON request.
+- Provider sends JSON response.
+
+
+						        Web API
+- Application Programming Interface 
+- API provides a programming interface that handles communication in distributed applications.
+- It is intention is to make the data available to any OS service and any Device.
+- Features
+	a) It uses REST & JSON
+	b) It can run on any server
+	c) It can use any protocol
+	d) Light weight
+	e) Modular
+	f) Faster
+
+
+
+
+
+
+
+
+
+
+
+
+
+

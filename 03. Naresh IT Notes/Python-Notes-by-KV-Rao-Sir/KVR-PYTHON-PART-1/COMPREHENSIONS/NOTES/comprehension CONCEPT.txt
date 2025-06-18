@@ -1,0 +1,20 @@
+		==========================================
+					comprehension
+		==========================================
+=>Python is famous for allowing you to write code that’s elegant, easy to write, and almost as easy to read as plain English. One of the language’s most distinctive features is the list comprehension, which you can use to create powerful functionality within a single line of code rather than writing legacy lines of Code.
+=>The purpose of List comprehension is that to read the values dynamically from key board separated by a delimeter ( space, comma, colon..etc)  
+=>List comprehension is the most effective way for reading the data for list instead tradtional reading the data.
+=>Syntax:-        listobj=[ expression   for  varname  in  Iterable_object   if test Cond ] 
+=>here expression represents either type casting or mathematical  expression
+
+Examples:
+----------------------
+print("Enter List of values separated by space:")  # [10 2  22  50  10 4 55  -3  0  22]
+lst=  [float(val)  for val  in input().split() ]
+print("content of lst",lst)
+------------------
+Examples:
+------------------
+lst=[4,3,7,-2,6,3]
+newlst=[ val*2  for val  in lst ]
+print("new list=",newlst)  # [ 8, 6, 14,-4,12,6 ]

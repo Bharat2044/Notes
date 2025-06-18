@@ -1,0 +1,18 @@
+<h1>Products</h1>
+<p>The square of {{b}} is {{b|square}}</p>
+<p>The power of {{b}} with 3 is {{b|power:3}}</p>
+<!-- {{obj | json}} -->
+ <p class="disc">Congratulations, use code "PRASAD" to get 
+  {{a | percent:'1.0-2'}} discount excluding tax {{tax|number:'2.2-2'|percent:'2.2-2'}}</p>
+
+<div class="products" 
+[ngStyle]="{'fontSize':isHeading?'48px':'24px','background-color':bgColor}">
+  <div class="product" *ngFor="let p of products" 
+  [ngClass]="{'dark':isDark}">
+      <img src={{p.image}} alt={{p.title}} height="200"/>
+      <p>{{dt | date:"dd/MM/YY HH:mm:SS"}}</p>
+      <h2>{{p.title | lowercase}}</h2>
+      <p>Price: {{p.price | currency:"INR"}}</p>
+      <button>Add to cart</button>
+  </div>
+</div>

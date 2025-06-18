@@ -1,0 +1,38 @@
+			=====================================================================
+				 Introduction to Object Oriented  Principles or Features or Concepts 
+			======================================================================
+=>In Real Time, to develop any project, we need to choose a Language.
+=>The Language, which we select for developing the Project can satisfy Two Types of Principles. They are
+	
+			1. Procedure OR Functional Oriented Principles
+			2. Object Oriented Principles
+=>In Otherwords, In Industry, we have Two Types of Programming Languages. They are
+
+			1. Procedure OR Functional Oriented Programming Languages.
+			2. Object Oriented  Programming Languages.
+--------------------------------------------------------------------------------------------
+1. Procedure OR Functional Oriented Programming Languages:
+--------------------------------------------------------------------------------------------
+=>If Programming Language satisfies Procedure OR Functional Oriented Principles then that Languages are called Procedure OR Functional Oriented Programming Language.
+=>Examples:  C , Pascal,COBOL,PYTHON,upto Oracle7.3...etc
+--------------------------------------------------------------------------------------------
+2. Object Oriented  Programming Languages
+--------------------------------------------------------------------------------------------
+=>If Programming Language satisfies  Object Oriented   Principles then that Languages are called Object Oriented  Programming Language.
+=>Examples:  Lisp,Small Talk,Ruby,C++,Java,C#.net, PYTHON,from Oracle 8 onwards...etc
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Even though PYTHON Belongs to Both Functional and Object Oriented  Programming Language, Internally Every Thing tretaed as Object.
+
+				*********************************************************************************
+					Every Thing in Python is an object--Advantages
+							(OR)
+					Advantages of OOPs
+				*********************************************************************************
+		1. It Stores Unlimited amount Data.
+		2. The large of Volume of Data Transfered between Multiple Remote Machines all at once and gets Effective 
+		     Communication.
+		3. The confidential Data Transfered between Multiple Remote Machines in the form of Cipher Text. So that 
+		    Security Enhanced (improved)
+		4. The Data always available around the objects and gives Less Memory
+		5. We can Bulild High end Re-Usable Applications by using Inheritance
+=============================================================================================

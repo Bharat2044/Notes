@@ -1,0 +1,160 @@
+- useState
+- useEffect
+- useContext
+- useRef
+
+						Controlled Components
+
+- A controlled component is manipulated by its parent.
+- The functionality, design and behaviour of component is defined from parent.
+- A controlled component will not have any individual behaviour.
+- A component can be controlled by using "Properties".
+- Properties are configured as parameters.
+
+Syntax:
+	function  Component(props)
+	{
+		return (<div> </div>);
+	}
+
+- "props" is an object type with key and value reference.
+- Every key is designated as property of component
+
+		props.title
+		props.items
+		props.src
+
+	<Component   title=" "   items={ [ ] }  src=" " />
+
+- Property value type can be Primitive or Non Primitive.
+- Key is a dynamic type, which is resolved at runtime of application. 
+- Every property is not a required property, mostly string type are optional. 
+
+Ex:
+1. Add a new folder  "custom-components"
+
+2. Add a new file  "navbar.jsx"  
+
+export function NavBar(props)
+{
+    return(
+        <nav className={`d-flex justify-content-between p-3 m-2 border border-1 ${props.theme}`}>
+            <div className="fw-bold fs-4"> <img src={props.logo} width="30" height="30" /> {props.title}</div>
+            <div className="fs-5">
+                {
+                    props.menuItems.map(item=> <span key={item} className="mx-3"><a>{item}</a></span> )
+                }
+            </div>
+            <div>
+                <button className="btn btn-warning bi bi-person-circle"> Signin </button>
+            </div>
+        </nav>
+    )
+}
+
+3. Controlled-Demo.jsx
+
+import { NavBar } from "../../custom-components/navbar";
+
+export function ControlledDemo(){
+    return(
+        <div className="container-fluid">
+            <h2>Controlled Demo</h2>
+            <NavBar theme="bg-dark text-white" title="Shopper." menuItems={['Home', 'Shop', 'Products', 'Docs']} logo="logo192.png" />
+            <NavBar theme="bg-danger text-white" title="NareshIT" menuItems={['Home', 'Courses', 'New Batches']} logo="m1.jpg" />
+        </div>
+    )
+}
+
+FAQ: How to transport data from parent to child component?
+Ans:  a) By using Context
+	  b) By using Properties
+
+FAQ: When to use context?
+Ans: Context is required when the child component is  uncontrolled component.
+         Props are required when child component is controlled component.
+
+Ex:
+user-control.jsx
+
+
+
+export function UserControl(props){
+    return(
+        <div>
+            <label className="form-label fw-bold">{props.label}</label> 
+            <div>
+                <input type={props.type} className="form-control" />
+            </div>
+        </div>
+    )
+}
+
+
+	   <div className="w-25">
+                <UserControl label="Departure" type="date" />
+                <UserControl label="Your Photo" type="file" />
+                <UserControl label="Fav Color" type="color" />
+            </div>
+
+Ex:
+grid.jsx
+
+
+
+export function Grid(props){
+    return(
+        <div className="container-fluid">
+            <table className="table table-hover">
+                <thead>
+                    <tr>
+                        {
+                            props.fields.map(field=><th  key={field}>{field} <span className="dropdown"><button data-bs-toggle="dropdown" className="bi bi-three-dots-vertical btn"> <ul className="dropdown-menu"><li className="dropdown-item"> <span className="bi bi-sort-alpha-down"> Sort Ascending</span> </li> <li className="dropdown-item"><span className="bi bi-sort-alpha-up">Sort Descending</span></li> </ul> </button></span> </th>)
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        props.data.map(item=>
+                            <tr key={item}>
+                                {
+                                    Object.keys(item).map(key => <td key={key}> {item[key]} </td> )
+                                }
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+
+
+controlled-demo.jsx
+
+import { Grid } from "../../custom-components/grid";
+import { NavBar } from "../../custom-components/navbar";
+import { UserControl } from "../../custom-components/user-control";
+
+export function ControlledDemo(){
+    return(
+        <div className="container-fluid">
+            <h2>Products</h2>
+            <Grid  fields={['Name', 'Price', 'Stock']} data={[{Name:'TV', Price:24000.44, Stock:'Available'}, {Name:'Mobile', Price:12300.44, Stock:'Out of Stock'}]} />
+            <h2>Employee</h2>
+            <Grid  fields={['First Name', 'Designation']} data={[{FirstName:'John', Designation:'Manager'}]} />
+        </div>
+    )
+}
+
+					       Conditional Rendering
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+			========================================================
+					Programmer-Defined Character Classes
+			========================================================
+=>The Programmer-Defined Character Classes are defined OR Designed by Programmers for Defining OR Designing 
+    Search Pattern which is used to search OR Match OR Find in Given Data and Obtains Desired Result.
+=>In otherwords Programmer-Defined Character Classes are used in Defining Search Patterns.
+=>Syntax:  "[Programmer-Defined Character Classes]"
+=>The Complete Programmer-Defined Character Classes are  giveb Bellow.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.  [abc]---->Searches for either 'a' or 'b' or 'c' only
+2.  [^abc]--->searches for all except 'a' or 'b' or 'c' 
+3.  [A-Z]------->Searches for all Upper Case Alphabets only
+4.  [^A-Z]----->Searches for all  except Upper Case Alphabets 
+5.  [a-z]------->Searches for all Lower Case Alphabets only
+6.  [^a-z]------->Searches for all  except Lower Case Alphabets
+7.  [0-9]-------->Searches for all Digits only
+8.  [^0-9]-------->Searches for all except  Digits
+9.  [A-Za-z]----->Searches for Both Upper and Lower Case Alphabets
+10.[^A-Za-z]----->Searches for all except  Upper and Lower Case Alphabets
+11. [A-Za-z0-9]--->Searches for Alpha-numeric Values ( Other than special symbols)
+12. [^A-Za-z0-9]--->Searches for  special symbols 
+13. [A-Z0-9]-------->searches for Upper Case Alphabets and Digits
+14. [^A-Z0-9]-------->searches for all except Upper Case Alphabets and Digits
+15. [a-z0-9]---------->searches for Lower Case Alphabets and Digits
+16  [^a-z0-9]---------->searches for all except Lower Case Alphabets and Digits
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	gd="cH4LuaP7#Bb6@QpWmD9%"
+Find the Letters a b c

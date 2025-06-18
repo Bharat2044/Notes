@@ -1,0 +1,17 @@
+{
+  "name": "day_42-mar_16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-fileupload": "^1.5.0",
+    "nodemailer": "^6.9.12"
+  }
+}

@@ -1,0 +1,68 @@
+NodeJs Modules
+==============
+-A way of encapsulating code in to separate logical units.
+-Module:A set of functions you want to include in your application.
+-In Node.js module system, each file is treated as a separate module.
+-Node.js includes three types of modules:
+	1. Core(Built-in) Modules     	  (os,fs,http,process,path,url)
+	2. Local(Custom) Modules    	  (created locally in our application)
+	3. Third Party(External) Modules  (can be installed using NPM, and can be used) ex:-minimist,express,mongoose,lodash,moment,chalk,cors,axios
+
+
+Core Modules:
+-------------
+os-Get OS information
+fs-work with the file system
+path-handles path elegantly
+url-url module includes methods for URL resolution and parsing.
+querystring-querystring module includes methods to deal with query string.
+http-launch a server,send requests
+https-launch a SSL server
+events-working with events
+util-util module includes utility functions useful for programmers.
+
+
+
+Local(Custom) Modules 
+=====================
+-Node.js has two types of modules: 
+	1. ES modules 
+	2. CommonJS modules
+-By default, Node.js treats JavaScript as CommonJS modules. But we can tell Node.js to treat JavaScript code as ES modules.
+-Node.js will treat the following files as ES modules:
+	a.Files ending in .mjs
+	b.if "type": "module" is set in package.json
+
+
+
+External Modules(minimist,chalk,validator,lodash,moment)
+----------------
+1. Installing an npm Module
+   npm install validator
+2. Importing an npm Module
+   const validator = require('validator')
+   console.log(validator.isURL('https://www.google.co.in/')) // true
+   console.log(validator.isEmail('abc@gmail.com')) // true
+
+
+Node.js OS Module
+=================
+-The OS module provides information about the computer's operating system.
+-while downloading gitbash,mongoDB,postman(OS is auto-populated)
+
+arch()	      Returns the operating system CPU architecture-32/64
+constants	 Returns an object containing the operating system's constants for process signals, error cotes etc.
+cpus()	       Returns an array containing information about the computer's CPUs
+endianness()	Returns the endianness of the CPU
+EOL	Returns the end-of-line marker for the current operating system
+freemem()	Returns the number of free memory of the system
+hostname()	Returns the hostname of the operating system
+loadavg()	Returns an array containing the load averages, (1, 5, and 15 minutes)
+networkInterfaces()	Returns the network interfaces that has a network address
+platform()	Returns information about the operating system's platform
+release()	Returns information about the operating system's release
+tmpdir()	Returns the operating system's default directory for temporary files
+totalmem()	Returns the number of total memory of the system
+type()	    Returns the name of the operating system
+uptime()	Returns the uptime of the operating system, in seconds
+userInfo()	Returns information about the current user

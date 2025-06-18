@@ -1,0 +1,42 @@
+Function Curring
+================
+-It is a concept of breaking a function with many arguments into many functions with single arguments in such a way the the output remains same.
+-It helps to create higherOrder functions.
+
+// Function Curring
+let sum = function (a) {
+    return function (b) {
+        return function (c) {
+            console.log(a + b + c);
+        }
+    }
+}
+sum(2)(3)(4)
+
+
+
+Pure Function
+=============
+-Pure functions are functions that accepts input and returns a value without modifying the data outside its scope.(without side effects)
+-A function is called pure if it follows the below 3 standards
+    1.Function Shouldn't Update the data outside it's scope.
+    2. Function must return a value
+    3. The return value must be dependent on input value/ argument.
+
+
+Higher Order Function
+=====================
+-HigherOrder function is a function that either receives another function as argument and/or returns a function.
+-A function is called Higher order, if that function has either of the below 2 abilities
+    a. a function has ability to return another function
+    b. a function has ability to take another function as argument
+-Array forEach(),map(),filter(),reduce(),sort()
+
+
+Function recursion
+==================
+-A recursive function is a function that calls itself until the program achieves the desired result.
+-A recursive function should have a conditionthat stops the function from calling itself. otherwise
+'RangeError: Maximum call stack size exceeded' error will be seen.
+-A recursive function should be used instead of loop where we don't know how many times the loop needs to be executed.
+

@@ -1,0 +1,40 @@
+		==============================================================
+				Syntax for Defining the Class in Python
+		==============================================================
+=>To Define a Class in Python, we use the following Syntax:
+		
+			class <clsname>:
+				Class Level Data Members
+				def instancemethodname(self,list of formal params if any):
+				        -------------------------------------------
+					Block of statements Perfoms Specific Operations on Objects
+					Specify Instance Data Members
+					-------------------------------------------
+				@classmethod
+				def  classlevelmethod(cls,list of formal Params if any):
+				       -------------------------------------------
+				       Block of statements Perfoms Common Operations on objects of Same Class
+				       Specify Class Level Data Memebrs
+				       -------------------------------------------
+				@staticmethod
+				def  staticmethodname(list of formal Params if any):
+					-----------------------------------------------------
+					Block of statements Perfoms Universal / utility Operations
+					-----------------------------------------------------
+				
+				def  __init__(self,list of formal Params if any):
+				        ---------------------------------------------------
+					Block of statements which will Initlize the Object of Same Class
+					---------------------------------------------------
+				def  __del__(self):
+				        -------------------------------------------------
+					Block of statements which will De-allocate the Memory Space
+					Related with garbage collector
+					-----------------------------------------------
+
+
+
+				
+				
+				
+

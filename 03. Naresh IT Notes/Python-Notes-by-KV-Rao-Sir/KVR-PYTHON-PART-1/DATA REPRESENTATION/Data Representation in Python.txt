@@ -1,0 +1,90 @@
+			=================================================================
+					Data Representation in Python
+			=================================================================
+Index
+-------------------------------------------------------------------------------------------
+=>What is Data
+=>Purpose of Data
+=>Types of Literals OR Values OR Data
+=>Importance of Identifiers OR Variables
+=>Rules for Using Identifiers OR Variables in Python Program
+==============================================================================================
+				What is Data and Purpose of Data
+==============================================================================================
+=>Processed information is called Data
+=>The Purpose of Collecting Data is that "To Take Effective Decisions"
+==============================================================================================
+				Types of Literals OR Values OR Data
+==============================================================================================
+=>In Programming Languages, In General we have 5 Types of Literals. They are
+
+				1. Integer Literals
+				2. Float Literals  
+				3. String Literals
+				4. Boolean Literals
+				5. Collections Literals
+===============================================================================================
+			Importance of Identifiers OR Variables
+===============================================================================================
+=>In Any Programming Language, Literals Must be Stored in Main Memory by allocating Sufficient 
+    Amount of Memory space with the Help Of Data Types.
+=>We know that All types Literals are stored in main memory by having memory space.
+=>To Process values which are present in memory space , Programmers must give DISTINCT NAMES to created memory spaces. These DISTINCT NAMES makes us to identify the values present in memory space and hence they are called IDENTIFIERS.
+=>The IDENTIFIER Values are Changing/ Varying during Program Execution and hence IDENTIFIERS are also called  VARIABLES.
+=>Hence All types of LITERALS are stored in the form VARIABLES and all Variables are called OBJECTS.
+------------------------------------
+Definition of Variable:   
+A Variable is an Identifier, whose Value can be Changed OR Varying During the Program Execution.
+------------------------------------
+===============================================================================================
+			Rules for Using Identifiers OR Variables in Python Program
+===============================================================================================
+=>To Use Variables in PYTHON Program, we follow the Following Rules
+------------
+Rule-1:	The Variable  Name is a Combination of Alphabtes, Digits and Special Sytmbol Under Score ( _ ).
+------------
+Rule-2:	The First Letter of Variable Name Must strats with either Alphabet OR Under Score ( _ ) Only
+------------
+			Examples:
+			----------------
+						sal=56----Valid
+						_sal=67---valid
+						-sal=67---Invalid
+						sal$=67---Invalid
+						__sal=56--Valid
+						__=56--valid
+						123=56--Invalid
+---------------
+Rule-3:		Within the Variable Name, No special symbols are allowed except Under score ( _ ) 
+---------------
+			Examples
+			----------------		emp sal=45-----Invalid
+							emp-sal=56----Invalid
+							emp_sal=56--valid
+							emp$sal=56--Invalid
+							emp1sal=56--Valid
+						
+----------------
+Rule-4:		No Keywords to be used as Variable Names (Bcoz Keywords are the Reserved Words and they give					special meaning to the compilers)
+----------------     
+
+			Examples
+			---------------
+						while=56--Invalid
+						while1=56--valid
+						_while=67--valid
+						for=56--Invalid
+						for2=67---Valid
+						False=67---Invalid
+						false=67--valid
+---------------
+Rule-5			All the Variable Name are Case Sensitive
+---------------
+			Examples:
+			------------------
+						 age=99
+						 AGE=98
+						 Age=97
+						 aGe=96
+						 print(age,AGE,Age,aGe)----99 98 97 96
+===============================================================================================

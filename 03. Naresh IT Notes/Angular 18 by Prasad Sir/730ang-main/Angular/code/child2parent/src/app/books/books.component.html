@@ -1,0 +1,7 @@
+<p>I'm books Parent Component</p>
+<p>{{bujji.c1}}</p>
+<button (click)="incr()">click me</button>
+<button (click)="fun()">call child</button>
+<div style="height: 150px;width: 150px;border: 2px solid red;">
+    <app-books-child [count]="c" #bujji></app-books-child>
+</div>

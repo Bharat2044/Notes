@@ -1,0 +1,326 @@
+			==========================================================
+					Pre-defined Functions in set
+			==========================================================
+=>We know that on the object of set, we can't perform Indexing and Slicing Operations.
+=>By using the functions of set, we can Various operations. They are
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. add() 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:     setobj.add(value)
+=>This Function is used for adding Value to the set.
+--------------------
+Examples
+--------------------
+>>> s1={10,"RS",23.45}
+>>> print(s1,type(s1))
+{'RS', 10, 23.45} <class 'set'>
+>>> s1.add("Python")
+>>> print(s1,type(s1))
+{'RS', 10, 'Python', 23.45} <class 'set'>
+>>> s1.add("NL")
+>>> print(s1,type(s1))
+{'NL', 'Python', 10, 'RS', 23.45} <class 'set'>
+>>> s1.add(True)
+>>> print(s1,type(s1))
+{True, 'NL', 'Python', 10, 'RS', 23.45} <class 'set'>
+----------------------
+>>> s1=set()
+>>> print(s1,type(s1))
+set() <class 'set'>
+>>> s1.add(100)
+>>> s1.add("Python")
+>>> s1.add(True)
+>>> print(s1,type(s1))
+{'Python', True, 100} <class 'set'>
+>>> s1.add(2+3.5)
+>>> print(s1,type(s1))
+{'Python', True, 100, 5.5} <class 'set'>
+>>> s1.add(2+3.5j)
+>>> print(s1,type(s1))
+{True, 'Python', 100, 5.5, (2+3.5j)} <class 'set'>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2) remove()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Syntax:   setobj.remove(Value)
+
+=>This Function is used for Removing Specified Value from set object
+=>If the Value does not exist in set object then we get KeyError bcoz all the elements of set are Unique
+-----------------------------
+Examples
+-----------------------------
+>>> s1={10,"RS",23.45,"Python"}
+>>> print(s1,type(s1),id(s1))
+{'RS', 10, 'Python', 23.45} <class 'set'> 2777007078560
+>>> s1.remove('Python')
+>>> print(s1,type(s1),id(s1))
+{'RS', 10, 23.45} <class 'set'> 2777007078560
+>>> s1.remove(10)
+>>> print(s1,type(s1),id(s1))
+{'RS', 23.45} <class 'set'> 2777007078560
+>>> s1.remove(100)-------KeyError: 100
+---------------------------
+>>> s1=set()
+>>> print(s1,type(s1))---------set() <class 'set'>
+>>> s1.remove(100)----------KeyError: 100
+>>> set().remove(100)----------KeyError: 100
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3) pop()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax: setobj.pop()
+=>This Function is used for Removing  Any Arbitrary Element provided Order of Display of set elements are not given
+=>This Function is used for Removing  First  Element provided Order of Display of set elements are  given
+=>When we call this function on empty set then we get KeyError.
+-------------------------------
+Examples
+-------------------------------
+>>> s1={10,"RS",23.45,"Python",True,2+3j,"NL"}  # Order of Display not given
+>>> s1.pop()-----------'RS'
+>>> s1.pop()-----------True
+>>> s1.pop()-----------'NL'
+>>> s1.pop()----------'Python'
+>>> s1.pop()----------23.45
+>>> s1.pop()-----------10
+>>> s1.pop()----------(2+3j)
+>>> print(s1,type(s1),id(s1))----set() <class 'set'> 2777007078560
+>>> s1.pop()-------------------------KeyError: 'pop from an empty set'
+-----------------------------------
+>>> s1={10,20,30,40,50,10,20}   # Order of Display given
+>>> print(s1,type(s1),id(s1))-----------{50, 20, 40, 10, 30} <class 'set'> 2777007078784
+>>> s1.pop()------------------------50
+>>> s1.pop()-----------------------20
+>>> s1.pop()----------------------40
+>>> s1.pop()----------------------10
+>>> s1.pop()----------------------30
+>>> print(s1,type(s1),id(s1))---------set() <class 'set'> 2777007078784
+>>> s1.pop()------------------------------KeyError: 'pop from an empty set'
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4) clear()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:  setobj.clear()
+=>This Function remove all the Elements from set object
+=>When we call this Function empty set object then we get None OR Space as Rersult
+------------------
+Examples
+-----------------
+>>> s1={12.34,45.67,"Python",45,67,12}
+>>> print(s1,type(s1),id(s1))--------{12, 67, 'Python', 45.67, 12.34, 45} <class 'set'> 2777007078784
+>>> s1.clear()
+>>> print(s1,type(s1),id(s1))------------set() <class 'set'> 2777007078784
+>>> s1.clear()-------------------Space
+		(OR)
+>>> print(s1.clear())------------None
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5) copy()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:   setobj2=setobj1.copy()
+=>This Function is used for Copying the content of one set object to another set object(Implements Shallow Copy)
+---------------------
+Examples
+---------------------
+>>> s1={12.34,45.67,"Python"}
+>>> print(s1,type(s1),id(s1))
+{12.34, 'Python', 45.67} <class 'set'> 2777007071840
+>>> s2=s1.copy() # Shallow Copy
+>>> print(s2,type(s2),id(s2))
+{12.34, 'Python', 45.67} <class 'set'> 2777007078784
+>>> s1.add("HYD")
+>>> s2.add("NL")
+>>> print(s1,type(s1),id(s1))
+{12.34, 'Python', 45.67, 'HYD'} <class 'set'> 2777007071840
+>>> print(s2,type(s2),id(s2))
+{12.34, 'NL', 'Python', 45.67} <class 'set'> 2777007078784
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6) isdisjoint()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:  This Function returns True provided Both sets are not containing Common Elements
+		  This Function returns False provided Both sets are containing at least one Common Element(s)
+---------------------
+Examples
+---------------------
+>>> s1={10,20,30,40}
+>>> s2={1,2,3,4}
+>>> s3={10,15,25}
+>>> s1.isdisjoint(s2)--------True
+>>> s1.isdisjoint(s3)--------False
+>>> s2.isdisjoint(s3)--------True
+---------------------
+>>> s1.isdisjoint( set() )---------True
+>>> set().isdisjoint( set() )-----------True
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7) issuperset()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:   setobj1.issuperset(setobj2)
+=>This Function returns True Provided setobj1 contains all the Elements of setobj2. Otherwise It returns False.
+-----------------------
+Examples
+----------------------
+>>> s1={10,20,30,40}
+>>> s2={10,20}
+>>> s3={10,20,30,35}
+>>> s1.issuperset(s2)-----------True
+>>> s1.issuperset(s3)-----------False
+>>> s3.issuperset(s2)-----------True
+>>> s2.issuperset(s3)----------False
+-------------------------
+>>> set().issuperset(s1)--------False
+>>> s1.issuperset(set())--------True
+>>> set().issuperset(set())---True
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8) issubset()
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Syntax:   setobj1.issubset(setobj2)
+=>This Function returns True Provided  all elements setobj1 must present in setobj2 Otherwise returns False.
+-----------------------
+Examples
+-----------------------
+>>> s1={10,20,30,40}
+>>> s2={10,20}
+>>> s3={10,20,30,35}
+>>> s2.issubset(s1)--------True
+>>> s2.issubset(s3)--------True
+>>> s1.issubset(s3)--------False
+>>> s1.issubset(s2)-------False
+-----------------
+>>> s1={10,20,30,40}
+>>> set().issubset(s1)-------True
+>>> s1.issubset(set())-------False
+>>> set().issubset(set())----True
+=========================================================================================================
+9) union()
+=========================================================================================================
+Syntax:   setobj3=setobj1.union(setobj2)
+=>This Function Takes All unique Elements of both setobj1 and setobj2 and place them setobj3
+---------------------
+Examples
+--------------------
+>>> s1={10,20,30}
+>>> s2={30,40,50}
+>>> s3=s1.union(s2)
+>>> print(s1,type(s1))--------------{10, 20, 30} <class 'set'>
+>>> print(s2,type(s2))--------------{40, 50, 30} <class 'set'>
+>>> print(s3,type(s3))--------------{50, 20, 40, 10, 30} <class 'set'>
+=========================================================================================================
+10) intersection()
+=========================================================================================================
+Syntax:   setobj3=setobj1.intersection(setobj2)
+=>This Function obtains Common Elements from setobj1 and setobj2
+=>If no common elements then function returns set()
+------------------
+Examples
+-----------------
+>>> s1={10,20,30}
+>>> s2={30,40,50}
+>>> s3=s1.intersection(s2)
+>>> print(s1,type(s1))--------------{10, 20, 30} <class 'set'>
+>>> print(s2,type(s2))--------------{40, 50, 30} <class 'set'>
+>>> print(s3,type(s3))--------------{30} <class 'set'>
+>>> {10,20,30}.intersection({15,25,35})----set()
+-----------------------------
+Special Examples
+-----------------------------
+>>> s1={10,20,30}
+>>> s2={30,40,50}
+>>> s3={13,14,15}
+>>> s4=s1.union(s1,s2)
+>>> print(s4,type(s4))
+{50, 20, 40, 10, 30} <class 'set'>
+>>> s5=s1.union(s1).union(s2).union(s3)
+>>> print(s5,type(s5))
+{50, 20, 14, 40, 10, 13, 30, 15} <class 'set'>
+>>> s4=s1.intersection(s1,s2)
+>>> print(s4,type(s4))
+{30} <class 'set'>
+>>> s4=s1.intersection(s2,s3)
+>>> print(s4,type(s4))
+set() <class 'set'>
+>>> s4=s1.intersection(s1).intersection(s3)
+>>> print(s4,type(s4))
+set() <class 'set'>
+=========================================================================================================
+11) difference()
+=========================================================================================================
+=>Syntax:  setobj3=setobj1.difference(setobj2)
+=>This Function removes the common elements from setobj1 and setobj2 and Takes the Remaining Elements from setobj1 
+    and place them in setobj3
+------------------------
+Examples
+------------------------
+>>> s1={10,20,30}
+>>> s2={30,40,50}
+>>> print(s1,type(s1))
+{10, 20, 30} <class 'set'>
+>>> print(s2,type(s2))
+{40, 50, 30} <class 'set'>
+>>> s3=s1.difference(s2)
+>>> print(s3,type(s3))
+{10, 20} <class 'set'>
+>>> s4=s2.difference(s1)
+>>> print(s4,type(s4))
+{40, 50} <class 'set'>
+>>> {10,20,30}.difference({10,20,30})
+set()
+>>> {10,20,30}.difference({11,21,31})
+{10, 20, 30}
+------------------
+>>> set().difference(set())---------set()
+=========================================================================================================
+12) symmetric_difference()
+=========================================================================================================
+Syntax:      setobj3=setobj1.symmetric_difference(setobj2)
+---------				OR
+By Formula:  setobj3=setobj1.union(setobj2).difference(setobj1.intersection(setobj2) )
+-----------------
+=>This Function removes the common elements from setobj1 and setobj2 and Takes the Remaining Elements from Both  
+    setobj1 and setobj2 and place them in setobj3
+-----------------------
+Examples
+-----------------------
+>>> s1={10,20,30,40}
+>>> s2={10,20,15,25}
+>>> print(s1,type(s1))-----------{40, 10, 20, 30} <class 'set'>
+>>> print(s2,type(s2))-----------{25, 10, 20, 15} <class 'set'>
+>>> s3=s1.symmetric_difference(s2)
+>>> print(s3,type(s3))----------{40, 15, 25, 30} <class 'set'>
+>>> s4=s1.union(s2).difference(s1.intersection(s2))
+>>> print(s4,type(s4))----------{40, 25, 30, 15} <class 'set'>
+=========================================================================================================
+13) symmetric_difference_update()
+=========================================================================================================
+Syntax:      setobj3=setobj1.symmetric_difference_update(setobj2)
+=>This Function removes the common elements from setobj1 and setobj2 and Takes the Remaining Elements from Both  
+    setobj1 and setobj2 and place them in setobj1 and setobj3 contains None
+----------------
+Examples
+-----------------
+>>> s1={10,20,30,40}
+>>> s2={10,20,15,25}
+>>> print(s1,type(s1))-----{40, 10, 20, 30} <class 'set'>
+>>> print(s2,type(s2))-----{25, 10, 20, 15} <class 'set'>
+>>> s3=s1.symmetric_difference_update(s2)
+>>> print(s3,type(s3))----None <class 'NoneType'>
+>>> print(s1,type(s1))----{40, 15, 25, 30} <class 'set'>
+=========================================================================================================
+14) update()
+==================================================================================
+Examples:   setobj1.update(setobj2)
+=>This Function is used for Merging OR Adding the Elements of setobj2 to setobj1
+-----------------------
+Examples
+-----------------------
+>>> s1={10,20,30,40}
+>>> s2={1,2,3,4}
+>>> s3=s1.update(s2)
+>>> print(s1,type(s1))---------{1, 2, 3, 4, 40, 10, 20, 30} <class 'set'>
+>>> print(s3,type(s3))---------None <class 'NoneType'>
+>>> print(s2,type(s2))---------{1, 2, 3, 4} <class 'set'>
+---------------------
+>>> s2={1,2,3,4}
+>>> s1={1,2,30,40}
+>>> s1.update(s2)
+>>> print(s1,type(s1))------------{1, 2, 3, 4, 40, 30} <class 'set'>
+------------------------------
+>>> s1={10,20,30,40}
+>>> s2={10,20,30,40}
+>>> s1.update(s2)
+>>> print(s1,type(s1))----------{40, 10, 20, 30} <class 'set'>
+=========================================================================================

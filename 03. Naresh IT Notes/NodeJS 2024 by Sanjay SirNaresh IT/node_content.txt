@@ -1,0 +1,54 @@
+Recommended to learn before Node.js
+===================================
+Variables
+Scopes
+Functions
+Arrow Function
+this operator
+String
+Array
+fetch()
+ES-6 and beyond 
+(class,module,rest,spread,promise,async await)
+
+Node.js Syllabus
+================
+-Node.JS - Introduction, Advantages
+-Traditional Web Server Model, Node.js Process Model
+-Local Environment SetUp
+-Node.js Console - REPL
+-NPM , NPX , NVM
+-Modules: Core, Local , 3rd party
+-Global Objects
+-File System
+-Debugging Node JS Application
+-Buffer & Streams
+-Events (Event Loop,Event Emitter)
+-Creating web server & Handling http requests (HTTP)
+-Express Framework-routes
+-NodeJS & MongoDB Connection
+-Mongoose,graphQL
+-Template Engines (Jade/Pug, vash, EJS, handlebars)
+-Redis (Caching)
+-ESLint 
+-Swagger  (API Documentation)
+-Unit testing (Mocha, Jasmine)
+-JWT
+
+
+
+
+Projects
+========
+-CRUD HTTP Module
+-CRUD ExpressJS
+-GraphQL
+-Template Engine
+-Server Side Validation
+-Image Upload (express-file-uploader)
+-Image Upload (Formidable) 
+-NodeEmailer (Send Email)
+-Chat Application (Socket.io)
+-Swagger
+-Unit testing
+-JWT Token

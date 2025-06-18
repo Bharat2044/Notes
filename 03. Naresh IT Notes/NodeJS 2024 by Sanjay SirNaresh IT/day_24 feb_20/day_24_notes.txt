@@ -1,0 +1,70 @@
+Node.js fs module
+=================
+-The fs module provides a lot of very useful functionality to access and interact with the file system.
+-There is no need to install it. Being part of the Node.js core, it can be used by simply requiring it. and have access to all its methods.
+
+ex: 
+const fs = require('fs');
+fs.readFile(fileName [,options], callback)	Reads existing file.
+fs.writeFile(filename, data[, options], callback)	Writes to the file. If file exists then overwrite the content otherwise creates new file.
+fs.open(path, flags[, mode], callback)	Opens file for reading or writing.
+fs.rename(oldPath, newPath, callback)	Renames an existing file.
+fs.chown(path, uid, gid, callback)	Asynchronous chown.
+fs.stat(path, callback)	Returns fs.stat object which includes important file statistics.
+fs.link(srcpath, dstpath, callback)	Links file asynchronously.
+fs.unlink(path, callback);	Delete a file.
+fs.symlink(destination, path[, type], callback)	Symlink asynchronously.
+fs.rmdir(path, callback)	Renames an existing directory.
+fs.mkdir(path[, mode], callback)	Creates a new directory.
+fs.readdir(path, callback)	Reads the content of the specified directory.
+fs.utimes(path, atime, mtime, callback)	Changes the timestamp of the file.
+fs.exists(path, callback)	Determines whether the specified file exists or not.
+fs.access(path[, mode], callback)	Tests a user's permissions for the specified file.
+fs.appendFile(file, data[, options], callback)	Appends new content to the existing file.
+
+
+
+
+
+file encoding
+=============
+-Both fs.readFileSync() and fs.readFile() take an optional argument encoding. 
+-while reading a file, a string will be returned if character encoding is specified.
+-while reading a file, a buffer will be returned if character encoding is not specified.
+ex: bufferData = fs.readFileSync("./customer.json");
+	stringData = fs.readFileSync("./customer.json", "utf8");
+Note: UTF-8 is an encoding system for Unicode. It can translate any Unicode character to a matching unique binary string.
+
+
+
+JSON
+====
+-Node has some built in utilities that make it easy to read and write JSON files.
+-The simplest way to read a JSON file is to require it. 
+ ex: const config = require("./config.json");
+-But reading JSON files with require has its downsides. 
+-The file will only be read once; requiring it again returns the cached data from the first time require was run. 
+-This is fine for loading static data on startup (like config data). But for reading a file that changes on disk, we need to manually read the file using fs.readFile()
+  const jsonString = fs.readFileSync("./customer.json","utf8");
+  const customer = JSON.parse(jsonString);
+  
+  
+  
+  
+
+FS Module Error Handling
+========================
+-No Error tracking is required : appendFile(), writeFile()
+ File gets created if it doesn't exist
+-default error tracking : readFile() 
+ callBack(err,data)
+ Program Execution doesn't stop, as no error object is thrown.
+ Its Recommended to handle error scenario.
+-manual error tracking is required: unlink(),rename()
+ No Param CallBack - error should be thrown explicitely
+
+
+
+What is an error-first callback?
+---------------------------------
+in NodeJS The first argument is always an error object that the programmer has to check if something went wrong.

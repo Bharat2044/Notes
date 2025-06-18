@@ -1,0 +1,21 @@
+Process Module
+==============
+-Process Module provides the env property which hosts all the environment variables that were set at the moment the process was started.
+Note: process does not need a "require", it's automatically available.
+-If you have multiple environment variables in your node project, create an .env file in the root directory of project, and then use the dotenv package to load them during runtime.
+.env file
+	USER_ID="239482"
+	USER_KEY="abcd"
+	NODE_ENV="development"
+	PORT=1234
+-npm install dotenv
+ require('dotenv').config();
+	process.env.USER_ID; // "239482"
+	process.env.USER_KEY; // "abcd"
+	process.env.NODE_ENV; // "development"
+-How to find which version of V8 ships with a particular version of Node.js?
+	node -p process.versions.v8
+-process.nextTick() : invoke this function at the end of the current operation, before the  next event loop tick starts
+-This function defers the execution of a callback function until the next Event Loop Iteration.
+-Every time the event loop takes a full trip, we call it a tick.
+-setTimeout(() => {}, 0) will execute the function at the end of next tick, much later than when using nextTick() which prioritizes the call and executes it just before the beginning of the next tick

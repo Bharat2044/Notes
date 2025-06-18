@@ -1,0 +1,214 @@
+MongoDB Install & Configure
+1. Setup Server
+2. MongoDB Compass
+3. Connection String
+	mongodb://127.0.0.1:27017  
+
+FAQ: What is MongoDB Compass?
+Ans:  It is a client tool of database management system. [DBMS]
+         DBMS comprises of 2 locations
+	a) Server 
+	b) Client
+         Server is the location where data is kept.
+         Client is the location from where developer can handle interactions with data.
+
+Connecting with MongoDB Server:
+1. Open MongoDB Compass
+
+2. Click on "Create New Connection"
+
+3. Enter the connection string 
+
+	mongodb://127.0.0.1:27017
+
+4. Save & Connect
+
+Note: MongoDB provides GUI and CLI tools.
+          GUI allows to manage the database with visual interface.
+          CLI  provides a shell that requires commands to handle database.
+
+5.  Select the connection  "mongodb://127.0.0.1:27017"  and open "Mongosh" [Shell]
+
+MongoDB Database Components:
+
+1. Database	
+- Database is a store in DBMS.
+- Data is kept in database.
+- A database is created for every application.
+- However an application can use multiple databases.
+- MongoDB provides sample databases for administration
+	a) admin
+	b) local
+	c) config
+
+2. Collection
+- MongoDB stores the data in a collection.
+- Collection represents an array of objects. [ ]
+- Collection is schema less [structure less or semi-structured]
+
+Note: SQL based database are structured and data is kept in a "Table".
+         NoSQL database are structure less and data is kept in a "Collection".
+
+3. Document
+- MongoDB collection is schema less and stores data in the format document.
+- Document is a set of keys and values.
+
+	{ Key: value,  Key:value }
+
+- MongoDB document format is "BSON".  
+- BSON is binary format of JSON. [JavaScript Object Notation].
+
+FAQ: What is BSON?
+Ans:  It is a binary format of JSON.
+
+FAQ: What is the purpose of BSON?
+Ans:  It is used for serialization and de-serialization.
+
+FAQ: What is serialization & de-serialization?
+Ans:  De-serialization is the process reading object => encoding to binary => decode to object.
+         Serialization is the process of writing object => encode to binary => decode to object.
+	
+	       De-serialization is "Reading"  & Serialization is "Writing"
+	       	           [ https://bsonspec.org/ ]
+
+FAQ: What is COM-to-Marshal?
+Ans:  Common Object Model is followed to convert the object code to binary & vice versa.
+         The process of encoding and decoding is called marshalling.
+
+FAQ: What are the features of BSON?
+Ans:  It is light weight.
+         It can flow through the firewalls.
+         It is less effected by VIRUS.
+         It is easy to marshal. [encode]
+         It is cross platform.
+         It can run on any device and OS.
+         It can easily communicate with JSON.
+
+FAQ: How BSON is different from JSON?
+Ans:  JSON uses JavaScript data types to handle data.
+	a) Primitive Types
+	b) Non Primitive Types
+         BSON types are different from JSON, however similar format.
+	ex:
+	byte, signed_byte, unsigned_byte, int32, int64 etc..
+	
+4. Embedded Document
+- It represents a JOIN.
+- Embedded document comprises a multi level hierarachy of data.
+- It can join multiple views and configure the data.
+
+	SQL 			NoSQL
+	----------------------------------------------------------------------------
+	Database			Database
+
+	Table			Collection
+
+	Records / Rows		Document
+
+	Field			Key
+
+	Joins			Embedded Document
+
+	
+		              MongoDB Shell Commands
+		                  [ CRUD operations ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+			============================================================
+					Type Casting Techniques in Python
+			============================================================
+=>The process of Converting One Type of Possible Value into another type of Possible Value is Called Type Casting.
+=>Fundamentally, we have 5 Type of Type Casting Techniques in Python. They are
+
+		1. int()
+		2. float()
+		3. bool()
+		4. complex()
+		5. str()
+================================================================================================

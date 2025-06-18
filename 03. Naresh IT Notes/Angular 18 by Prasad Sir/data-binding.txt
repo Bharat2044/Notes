@@ -1,0 +1,21 @@
+Data Binding Means How the data transfers  from component to template or template to component
+In angular, we can do 
+  i. one way Data Binding:
+     there are three ways
+     a.  string Interpolation: it alwaYS BRINGS DATA FROM COMPONENT(ts) to TEMPLATE(html). wrap the variable in double braces
+     html:  <h1>Hi, my name is {{x}} </h1>
+      ts: x="prasad"
+
+      but the probelm it bring even boolean values as strings
+      b. property Binding: You can assign attributes/properties from COMPONENT(ts) to TEMPLATE(html) using square brackets([])
+       html:  <button [disabled]="isDisabled">click me</button>
+      ts: isDisabled= false
+
+      c. event Binding: it is used to send data from TEMPLATE(html) to COMPONENT(ts) using paranthesis on events
+      html:  <button (click)="display()">click me</button>
+      ts: function display(){
+        alert("helloooo")
+      }
+
+  ii. Two Way Data Binding: it is used to send data from component to template and template to omponent at a time
+  To achieve this we need to use "ngModel" directives

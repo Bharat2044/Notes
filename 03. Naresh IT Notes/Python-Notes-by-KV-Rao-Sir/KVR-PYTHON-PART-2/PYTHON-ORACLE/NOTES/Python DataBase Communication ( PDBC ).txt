@@ -1,0 +1,41 @@
+		=============================================
+			Python DataBase Communication ( PDBC )
+		=============================================
+=>Even we acheived the Data Persistency by using Files, Files has the following Limitations.
+	
+	1. Files of any language does not contain security bcoz Files are unable to provide security in  the form of User 
+	     Name and  Password.
+	2. Files are unable to store large amount of data
+	3. File are differing  from One OS to another OS (Files are OS depenedent)
+	4. Querying and Processing the data from Files is Very Complex  bcoz file data is 
+	    organized w.r.t Indices and idenfying the indices is very complex.
+	5. Files does not contain  Column Names (Except CSV Files) and complex to Process data
+
+=>To Overcome the limitation of files and to acheive the Data Persistency, we must use the concept of any RDBMS DataBase Softwares ( Oracle, MYSQL, Mongo DB, DB2, SQL Server, Postgey SQL, SQLITE3...........etc).
+		
+		1. All RDBMS DataBase Softwares Provides Security bcoz RDBMS DataBase 
+		    Softwares considers User names and Password.
+		2. All RDBMS DataBase Softwares stores large amount of data Compared to Files
+		3. All RDBMS DataBase Softwares Arch Remains Same on all types of OSes ( OS Independent)
+		4. Querying and Processing the data from All RDBMS DataBase Softwares  is Very  Simple 
+		     bcoz data of All RDBMS DataBase Softwares oranganized  records in the form  of Tables with Column Names.
+		5. The Data Present in any RDBMS DataBase Softwares oranganized in the form of Tables    
+		   with  Column Names makes the processing Easy.
+
+=>If Python Program want to communicate with any RDBMS DataBase Softwares then we must use a PRE-DEFINED MODULE and such  PRE-DEFINED MODULE  does not exist in Python Software.
+=>Some Third Party Software Vendors( Ex: "Anthony Tuininga")  developed a Module for Python Programmers to communicate with  RDBMS DataBase Softwares and placed in github and Third  Party Software Modules must be installed.
+=>To install any Third  Party Software Modules in python , we use a tool called pip and it is present in C:\Users\KVR\AppData\Local\Programs\Python\Python310\Scripts folder.
+
+=>Syntax :   pip install   Module Name     (at any Windows command prompt)
+
+=>If Python Program want to communicate with Oracle Database, then we must install 
+    cx_Oracle Module OR oracledb Module
+=>Examples :   pip   install   cx_Oracle  (upto Python 3.10)
+			  pip  install  oracledb ( python 3.11 and higher)
+
+=>If Python Program want to communicate with MySQL Database, then we must install 
+    mysql-connector or  mysql-connector-python Module.
+
+=>Examples :   pip   install   mysql-connector (at any Windows command prompt)
+=>Examples :   pip   install   mysql-connector-python (at any Windows command prompt)
+====================================x============================================

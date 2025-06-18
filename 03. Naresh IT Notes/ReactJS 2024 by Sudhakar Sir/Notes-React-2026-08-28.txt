@@ -1,0 +1,367 @@
+Summary:
+- Formik  useFormik
+- Yup for validations
+- Formik Components
+
+		<Formik>
+		<Form>
+		<Field>
+		<ErrorMessage>
+
+Form State Validation:
+- Validation have 2 states
+	a) Input State
+	b) Form State
+- Input state is verifying every field individually.
+- Form state is verifying all fields in the form simultaneously at the same time.
+- Formik provides pre-defined services for Form State.
+- <Form> component can return the form state, which contains services like
+		a) pristine		not touched
+		b) dirty			modified
+		c) valid			all fields valid
+		d) invalid			any one field invalid
+		etc.. 
+- All validation services return Boolean true / false.
+
+Syntax:
+	<Formik>
+	      {
+		form => <Form>  </Form>
+	      }
+	</Formik>
+
+	  form.dirty
+	  form.isInvalid
+	  form.isValid
+	  etc..
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
+
+export function FormDemo(){
+
+ 
+
+    return(
+        <div className="container-fluid">
+            <h2>Register User</h2>
+            <Formik initialValues={{UserName:'', Age:0, Mobile:''}} validationSchema={yup.object({UserName:yup.string().required('Name Required'), Age: yup.number().required('Age Required')})} onSubmit={(values)=>{console.log(values)}} >
+                {
+                    form =>
+                        <Form>
+                        <dl>
+                            <dt>User Name</dt>
+                            <dd> <Field name="UserName" type="text" /> </dd>
+                            <dd className="text-danger"> <ErrorMessage name="UserName" /> </dd>
+                            <dt>Age</dt>
+                            <dd> <Field name="Age" type="text" /> </dd>
+                            <dd className="text-danger"> <ErrorMessage name="Age" /> </dd>
+                            <dt>Mobile</dt>
+                            <dd> <Field name="Mobile" type="text" /> </dd>
+                            <dd className="text-danger"> <ErrorMessage name="Mobile" /> </dd>
+                        </dl>
+                        <button disabled={!form.isValid} type="Submit">Submit</button>
+                        <button className={(form.dirty)?'d-inline':'d-none'} >Save</button>
+                    </Form>
+                }
+            </Formik>
+        </div>
+    )
+}
+
+
+						    React Hook Form
+
+https://react-hook-form.com/
+
+
+Clipboard Events:
+
+	onCut
+	onCopy
+	onPaste
+
+- Clipboard is the temporary memory of your device where it keeps the content you cut or copy from any location.
+- You can configure status on cut, copy and paste. And you can also disable the clipboard actions.
+
+Syntax:
+		function handlePaste()
+		{
+		  document.onpaste = function(){
+		      return false;
+		    }
+		}
+
+		<input type="text"  onPaste={handlePaste} />
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+
+export function FormDemo(){
+
+    const [msg, setMsg] = useState('');
+
+    function handleCopy(){
+        setMsg('Number Copied');
+    }
+    function handleBlur(){
+        setMsg('');
+    }
+
+    function handlePaste(){
+        document.onpaste = function(){
+            return false;
+        }
+    }
+
+    return(
+        <div className="container-fluid">
+            <h2>Register User</h2>
+            <dl>
+                <dt>Account Number</dt>
+                <dd><input type="text" onCopy={handleCopy} onBlur={handleBlur} /></dd>
+                <dd>{msg}</dd>
+                <dt>Verify Account Number</dt>
+                <dd><input type="text" onPaste={handlePaste} /></dd>
+            </dl>
+        </div>
+    )
+}
+
+Touch Events:
+	onTouchStart
+	onTouchEnd
+	onTouchMove
+
+- Touch event arguments are different from the default event arguments of other events.
+- It provides "toches" array [ ] gives access to default event properties like
+		a) clientX
+		b) clientY 
+
+Syntax:
+		e.touches[0].clientX
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+
+export function FormDemo(){
+
+    const [msg, setMsg] = useState('');
+    const [styleObj, setStyleObj] = useState({position:'', top:'', left:''});
+
+    function GetDetails(data, e){
+        setMsg(data);
+        console.log(e.touches[0].clientX);
+    }
+
+    function handleTouchMove(e){
+        setStyleObj({
+            position: 'fixed',
+            top: e.touches[0].clientY + 'px',
+            left: e.touches[0].clientX + 'px'
+        })
+    }
+
+    return(
+        <div className="container-fluid">
+              <aside style={styleObj} onTouchMove={handleTouchMove} className="border border-4 border-primary p-2 w-25">
+                  <figure>
+                      <img src="m1.jpg" width="100" height="100" />
+                      <figcaption>Ads</figcaption>
+                  </figure>
+              </aside>
+              <div className="mt-4">
+                    <img src="ds.png" onTouchStart={(e) => GetDetails('Data Science - New Batch Starts 29-Aug-2024', e)} width="200" height="200" className="me-4" />
+                    <img src="dotnet.png" onTouchStart={(e) => GetDetails('.NET Fullstack (C#) - New Batch Starts 30-Aug-2024', e)} width="200" height="200" />
+              </div>
+              <h2>{msg}</h2>
+        </div>
+    )
+}
+
+Summary:
+- Mouse Events
+	onMouseOver
+	onMouseOut
+	onMouseDown
+	onMouseUp
+- Keyboard Events
+	onKeyUp
+	onKeyDown
+	onKeyPress
+- Button Events
+	onClick
+	onDoubleClick
+	onContextMenu
+- Element State Events
+	onFocus
+	onBlur
+	onSelectStart
+- Timer Events
+	setTimeOut
+	clearTimeOut
+	setInterval
+	clearInterval
+- Clipboard Events
+	onCut
+	onCopy
+	onPaste
+- Form Events
+	onSubmit
+	onReset
+- Touch Events
+	onTouchStart		
+	onTouchEnd
+	onTouchMove
+
+Ex:
+ fakestore.jsx
+
+import axios from "axios";
+import { useEffect, useState } from "react"
+
+
+export function FakeStore()
+{
+
+    const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([{id:0, title:'', price:0, description:'', image:'', rating:{rate:0, count:0}}]);
+
+
+    function LoadCategories(){
+        axios.get(`https://fakestoreapi.com/products/categories`)
+        .then(response=>{
+            response.data.unshift('all');
+            setCategories(response.data);
+        })
+    }
+
+    function LoadProducts(){
+        axios.get(`https://fakestoreapi.com/products`)
+        .then(response=>{
+            setProducts(response.data);
+        })
+    }
+
+    useEffect(()=>{
+        LoadCategories();
+        LoadProducts();
+    },[])
+
+    return(
+        <div className="container-fluid">
+            <header className="d-flex bg-dark text-light fs-5 justify-content-between p-2 border mt-2">
+                <div>
+                    <span className="fs-4">Fakestore</span>
+                </div>
+                <nav>
+                    <span> Electronics </span>
+                    <span className="mx-2"> Men's Clothing </span>
+                    <span> Women Fashon </span>
+                    <span className="ms-2"> Jewelery </span>
+                </nav>
+                <div>
+                    <button className="btn btn-light"><span className="bi bi-person"></span></button>
+                    <button className="btn btn-light mx-2"><span className="bi bi-heart"></span></button>
+                    <button className="btn btn-light"><span className="bi bi-cart"></span></button>
+                </div>
+            </header>
+            <section className="mt-3 row">
+                <nav className="col-2">
+                    <div>
+                        <label className="form-label fw-bold">Select Category</label>
+                        <div>
+                            <select className="form-select">
+                                {
+                                    categories.map(category=><option value={category} key={category}>{category.toUpperCase()}</option>)
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </nav>
+                <main className="col-10 d-flex flex-wrap overflow-auto" style={{height:'500px'}}>
+                    {
+                        products.map(product=>
+
+                            <div key={product.id} className="card p-2 m-2" style={{width:'200px'}}>
+                                <img className="card-img-top" height="120" src={product.image} />
+                                <div className="card-header" style={{height:'100px'}}>
+                                    {product.title}
+                                </div>
+                                <div className="card-body">
+                                    <dl>
+                                        <dt>Price</dt>
+                                        <dd>{product.price}</dd>
+                                        <dt>Rating</dt>
+                                        <dd> {product.rating.rate} <span className="bi bi-star-fill text-success"></span> </dd>
+                                    </dl>
+                                </div>
+                                <div className="card-footer">
+                                    <button className="btn btn-warning w-100"> <span className="bi bi-cart4"> Add to Cart </span> </button>
+                                </div>
+                            </div>
+
+                        )
+                    }
+                </main>
+            </section>
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

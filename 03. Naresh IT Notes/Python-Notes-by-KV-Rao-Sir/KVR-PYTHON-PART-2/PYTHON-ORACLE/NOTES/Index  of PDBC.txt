@@ -1,0 +1,36 @@
+			=========================================================
+				Python Data Base Communication (PDBC)------Oracle, MySQL
+			=========================================================
+Index
+------------
+=>Limitations of Files
+=>Advantages of Python Data Base Communication (PDBC)
+=>Set-up of Python and Database Software-----( Python Software, Database Software and Module)
+=>Importance of Third Party Modules---------
+=>Installation of Third Party Modules by using PIP Tool and IDEs
+=>Steps for Developing Python Data Base Communication (PDBC) Applications.
+=>Programming Examples
+--------------------------------------------------------------------
+=>Types of Queries
+		a) DDL Queries
+		b) DML Queries
+		c) DRL Queries
+=>Importance of DDL Queries and their Type
+		a) create
+		b) alter with add and modify
+		c) drop
+=>Programming Examples(Executing DDL Statements through Python Program)
+-----------------------------------------------------------------
+=>Importance of DML Queries and their Type
+		a) insert
+		b) delete
+		c) update
+=>Programming Examples(Executing DML Statements through Python Program)	
+=>Importance of DRL Queries and their Type
+		a) select
+=>Programming Examples(Executing DRL Statements through Python Program)	
+------------------------------------------------------------------------------
+=>Meta Data
+=>Implementation of Meta Data
+=>Programing Examples
+==================================x============================================

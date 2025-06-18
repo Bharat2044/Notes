@@ -1,0 +1,79 @@
+		=================================================	
+			Types of Methods in Class of Python
+		=================================================	
+=>In a class of Python programming, we can define 3 Types of Methods. They are
+
+			1. Instance Methods
+			2. Class Level Methods
+			3. Static Methods 
+---------------------------------------------------------------------------------------------------------------------------
+1. Instance Methods
+---------------------------------------------------------------------------------------------------------------------------
+=>Instance Methods are those which are used for performing Specific Operations on 
+    Objects and Hence Instance Methods are also called Object Level Methods.
+=>The Syntax for Defining Instance Methods is
+		def  instancemethodname(self,list of formal params if any):
+				--------------------------------------
+				Specify Instance Data Members
+				Perform Specific Operations
+				---------------------------------------
+=>Instance Methods Must accessed w.r.t Object Name OR self.
+					objectname.InstanceMethodName()
+							(OR)
+					self.InstanceMethodName() ( To be used Inside of Instance Method Only)
+--------------------------
+=>What is "self"
+--------------------------
+=>"self" is one of the implicit object and it contains Address of Current Object
+=>"self" always to be  used as First Formal Parameter in Instance Method.
+=>Since "self" is a Formal parameter, so that it can access inside of Corresponding Instance Method Definition only but not possible to access other part of Program.
+---------------------------------------------------------------------------------------------------------------------------
+2. Class Level Methods
+---------------------------------------------------------------------------------------------------------------------------
+=>Class Level Methods are used for Performing Common Operation on all objects of Same Class.
+=>The Syntax for Defining Class Level Method is
+			
+			@classmethod
+			def   classlevelmethodname(cls  ,  List of formal Params if any):
+			          ----------------------------------------------------
+				  Peforms Common Operations for the Objects of same Class.
+				  Specify Class Level Data Members
+				  ----------------------------------------------------
+=>All Class Level Methods mjust be accssed w.r.t Class Name OR Object Name OR cls OR self
+
+			Syntax:    clsname.ClassLevelMethodName()
+							OR
+			Syntax:    cls.ClassLevelMethodName()
+							OR
+			Syntax:    objectname.ClassLevelMethodName()
+							OR
+			Syntax:    self.ClassLevelMethodName()
+what is cls
+-----------------
+=>"cls" is one of the implicit object and it contains Current Class Name.
+=>"cls" always to be  used as First Formal Parameter in Class Level Method.
+=>Since "cls" is a Formal parameter, so that it can access inside of Corresponding Class Level Method Definition only 
+    but not possible to access other part of Program.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Static Methods
+------------------------------------------------------------------------------------------------------------------------------------------------------
+=>Static Methods are used for performing Universal Operations or Utility Operations
+=>Static Methods definition must be preceded with a predefined decorator called 
+   @staticmethod and it  never takes "cls" or "self" but always takes object of other classes.
+=>The Syntax for Static Method is
+		@staticmethod
+		def   staticmethodname(list of Formal Params):
+			-------------------------------------
+			Utility Operation / Universal Operations
+			------------------------------------
+=>Static Methods can be accessed w.r.t Class Name OR object name OR cls OR self
+
+			ClassName.static method name()
+					(OR)
+			ObjectName.static method name()
+					(OR)
+			cls.static method name()
+					(OR)
+			self.static method name()
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+

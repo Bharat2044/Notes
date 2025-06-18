@@ -1,0 +1,4 @@
+.movies{
+    display: flex;
+    justify-content: space-between;
+}

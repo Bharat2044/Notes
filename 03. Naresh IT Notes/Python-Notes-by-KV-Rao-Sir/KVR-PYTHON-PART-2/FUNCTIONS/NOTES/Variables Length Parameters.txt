@@ -1,0 +1,19 @@
+		================================================
+			4) Variables Length Parameters (or) arguments
+		================================================
+=>When we have familiy of multiple Similar function calls with Variable number of values / arguments then with normal python programming, we must define mutiple function defintions. This process leads to more development time. 
+=>To overcome this process, we must use the concept of Variable length Parameters .
+=>To Impelement,  Variable length Parameters concept, we must define single Function Definition and takes a formal Parameter preceded with a symbol called astrisk ( * param) and the formal parameter with astrisk symbol is called Variable length Parameters  and whose purpose is to hold / store any number of values coming from similar function calls and whose type is <class, 'tuple'>.
+---------------------------------------------------------------------------------------------------
+Syntax for function definition with Variables Length Parameters:
+--------------------------------------------------------------------------------------------------
+	def   functionname(list of Posstional formal params,  *param1 , param2=value) :
+	        --------------------------------------------------
+		--------------------------------------------------
+
+=>Here *param1 is called Variable Length parameter and it can hold any number of argument values (or) variable number of argument values and *param1 type is <class,'tuple'>
+
+=>Rule:- The *param1 must always written at last part of Function Heading and it must be only one (but not multiple)
+
+=>Rule:- When we use Variable length and default parameters  in function Heading, we use default parameter as last and before we use variable length parameter and in function calls, we should not use default parameter as Key word argument bcoz Variable number of values are treated as Posstional Argument Value(s) .
+=====================================x========================================

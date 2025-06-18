@@ -1,0 +1,34 @@
+		=======================================================================
+			Number of approaches to define a Function for Problem Solving
+		=======================================================================
+************************************
+Approach-1
+************************************
+INPUT       :   Through Function calls
+PROCESS : Inside of Function Body
+RESULT    : Holding in Function Call
+Examples:ApproachEx1.py
+************************************
+Approach-2
+************************************
+INPUT       : Inside of Function Body
+PROCESS : Inside of Function Body
+RESULT    : Inside of Function Body
+Example:  ApproachEx2.py
+************************************
+Approach-3
+************************************
+
+INPUT       :  Through Function calls
+PROCESS : Inside of Function Body
+RESULT    : Inside of Function Body
+
+Examples:  ApproachEx3.py
+************************************
+Approach-4
+************************************
+INPUT       : Inside of Function Body
+PROCESS :  Inside of Function Body
+RESULT    :  Holding in Function Call
+Examples: ApproachEx4.py
+================================================================================================

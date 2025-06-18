@@ -1,0 +1,16 @@
+Memoization
+===========
+-Memoization is a programming technique that attempts to increase a function’s performance by caching its previously computed results.
+-Memoization is an optimization technique used to speed up performance by storing the results of expensive function calls and returning the cached result when the same inputs occur again.
+-its a kind of caching the data.
+-used with recursion.
+
+
+function closure
+================
+-A closure is an inner function that has access to its outer function's variables even after the outer function's execution is Completed/Closed.
+
+-When the outer function execution completes, you’d expect all its variables to be no longer accessible. However, if the inner function uses variables from the outer function, those variables remain accessible.
+
+-The inner function retains access to the outer function’s scope, because the inner function ‘remembers’ the environment in which it was created.
+

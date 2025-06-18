@@ -1,0 +1,13 @@
+Services is a core feature of angular framework designed to handle business logic, data management, and shared functionality within angular components
+To create service , use cmd/terminal , "ng generate service service-name"
+it creates service.ts and service.spec.ts files where service.ts is actual service files
+make sure module.ts knows services in providers
+
+any component can access service using dependency injection. angular services leverage dependency injection, which means that they can be provided and injected into components or other services via constructors. we create an instance in constructor parameter
+
+
+
+
+
+
+// access modiefiers in TS are public, private,protected but in angular public and private can be used for service injection. if we use public, template can access that value ,else it cannot

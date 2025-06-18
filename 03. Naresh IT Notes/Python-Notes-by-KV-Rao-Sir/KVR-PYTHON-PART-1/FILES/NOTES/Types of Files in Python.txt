@@ -1,0 +1,27 @@
+		===============================================
+			Types of Files in Python
+		===============================================
+=>In any Programming lang, we have Two Types of Files. They are
+
+		1. Text Files
+		2. Binary Files
+----------------------------------------------------------------------------------------------------------------------------------------------------
+1. Text File
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+=>A Text File is One, which always contains alphabets, Digits and Special Symbols.
+=>Text Files are denoted by a letter  "t". (by deafult)
+=>By deafult Python Programming Lang Treats every file as Text File.
+Examples:      .py    .java    .cpp     .c
+			.txt   .xlsx, .doc...etc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Binary File
+------------------------------------------------------------------------------------------------------------------------------------------------------
+=>A Binary File is One, which contains the data in the form of Binary Format (Pixels).
+=>Binary Files are denoted by a letter  "b".
+----------------------
+=>Examples
+----------------------
+		=> Images (.png, .jpeg, .jpg, .gif....etc)
+		=> Audio and Video Files (.mvi, .avi...etc)
+		=> PDF File with Images
+===================================================================

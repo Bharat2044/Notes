@@ -1,0 +1,411 @@
+Form Events
+ onSubmit
+ onReset
+Handling Forms using 3rd Party
+ - Formik
+
+						        Validations
+- Validation is the process of verifying user input.
+- Validation is required to ensure that contradictory and unauthorized data is not get stored into database.
+- Formik supports validation function and validation schema. 
+
+Validation Function:
+- You have to write validation function explicitly and validate the input values.
+- It requires all JavaScript data type verification, string functions, regular expression etc.
+
+Syntax:
+1. You have to configure a function that takes form data as input and returns errors object.
+
+		function ValidateUser(formData)
+		{
+		      var errors = {  };
+
+		      return errors;
+		}
+
+2. "formData" is an object type parameter that contains  "key-value" collection, Key is
+     field name. [defined in initialValues]
+
+3. You have to write validations manually for every field and report errors in error object.
+
+		if(formData.fieldName==="")
+		{
+		    errors.fieldName = "Error Message";
+		}
+
+4. Assign the validation function to formik validation.
+
+	  const formik = useFormik({
+			initialValues: {  },
+			validation: Validation_Function,
+	   })
+
+5. You can access the errors and display in UI by using "formik.errors".
+
+	   { formik.errors.fieldName }
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+import { useFormik } from "formik";
+
+export function FormDemo(){
+
+    function ValidateUser(formData){
+        var errors = {UserName:'', Age:'', City:'', Mobile:''};
+
+        if(formData.UserName.length===0) {
+            errors.UserName = 'User Name Required';
+        } else {
+            if(formData.UserName.length<4){
+                errors.UserName = 'Name too short';
+            } else {
+                errors.UserName = ' ';
+            }
+        }
+
+        if(formData.Age==="") {
+            errors.Age = 'Age Required';
+        } else {
+            if(isNaN(formData.Age)){
+                errors.Age = 'Age must be a number';
+            } else {
+                errors.Age = ' ';
+            }
+        }
+
+        if(formData.City==='-1') {
+            errors.City = 'Please select your city';
+        } else {
+            errors.City = ' ';
+        }
+
+        if(formData.Mobile.match(/\+91\d{10}/)) {
+            errors.Mobile = '';
+        } else {
+            errors.Mobile = 'Invalid Mobile';
+        }
+
+        return errors;
+    }
+
+    const formik = useFormik({
+         initialValues: {
+            UserName: '',
+            Age: 0,
+            City: '',
+            Mobile:''
+         },
+         validate : ValidateUser,
+         onSubmit: (user) => {
+            console.log(user);
+         }
+    })
+   
+    return(
+        <div className="container-fluid">
+            <form onSubmit={formik.handleSubmit}>
+                <h3>Register</h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" name="UserName" onChange={formik.handleChange} /></dd>
+                    <dd className="text-danger">{formik.errors.UserName}</dd>
+                    <dt>Age</dt>
+                    <dd><input type="text" onChange={formik.handleChange} name="Age" /></dd>
+                    <dd className="text-danger">{formik.errors.Age}</dd>
+                    <dt>City</dt>
+                    <dd>
+                        <select name="City" onChange={formik.handleChange} >
+                            <option value="-1">Select City</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Hyd">Hyd</option>
+                        </select>
+                    </dd>
+                    <dd className="text-danger">{formik.errors.City}</dd>
+                    <dt>Mobile</dt>
+                    <dd><input type="text" name="Mobile" onChange={formik.handleChange} /></dd>
+                    <dd className="text-danger">{formik.errors.Mobile}</dd>
+                </dl>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    )
+}
+
+						Yup Validation Library
+
+- Yup provides a validation schema.
+- It comprises of pre-defined validation functions, which you can use to validate the input values.
+
+1. Install Yup library
+
+	>npm install yup  --save
+
+2. Import the validation schemas into component
+
+	import   { required, min, max, matches } from "yup";
+	
+					(or)
+	
+	import  * as yup from "yup";
+
+3. Configure the validation schema using "yup.object()"
+
+	useFormik({
+	
+		initialValues: { },
+		
+		validationSchema: yup.object({
+
+			FieldName: yup.dataType().required().min().matches()….
+			
+		})
+	})
+
+4. Validation errors are displayed using  "formik.errors" object
+
+	{ formik.errors.fieldName }
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+export function FormDemo(){
+
+ 
+
+    const formik = useFormik({
+         initialValues: {
+            UserName: '',
+            Age: 0,
+            City: '',
+            Mobile:''
+         },
+         validationSchema : yup.object({
+              UserName: yup.string().required('User Name Required').min(4, 'Name too short'),
+              Age: yup.number().required('Age Required').min(15, 'Age min 15').max(30, 'Age max 30'),
+              Mobile: yup.string().required('Mobile Required').matches(/\+91\d{10}/, 'Invalid Mobile')
+         }) ,
+         onSubmit: (user) => {
+            console.log(user);
+         }
+    })
+   
+    return(
+        <div className="container-fluid">
+            <form onSubmit={formik.handleSubmit}>
+                <h3>Register</h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" name="UserName" onChange={formik.handleChange} /></dd>
+                    <dd className="text-danger">{formik.errors.UserName}</dd>
+                    <dt>Age</dt>
+                    <dd><input type="text" onChange={formik.handleChange} name="Age" /></dd>
+                    <dd className="text-danger">{formik.errors.Age}</dd>
+                    <dt>City</dt>
+                    <dd>
+                        <select name="City" onChange={formik.handleChange} >
+                            <option value="-1">Select City</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Hyd">Hyd</option>
+                        </select>
+                    </dd>
+                    <dd className="text-danger">{formik.errors.City}</dd>
+                    <dt>Mobile</dt>
+                    <dd><input type="text" name="Mobile" onChange={formik.handleChange} /></dd>
+                    <dd className="text-danger">{formik.errors.Mobile}</dd>
+                </dl>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    )
+}
+
+
+Note: The default validations fire up on the formik change event. You can configure for blur event.
+
+  <input type="text"  onChange={formik.handleChange} onBlur={formik.handleBlur} />
+
+		
+				               Formik Spread Approach 
+
+- If you have to write validations for all events supported by formik then you can use "spread" operator method   "getFieldProps()".
+
+Syntax:
+
+ <input type="text"  { ...formik.getFieldProps("fieldname") }  />
+
+- It handles onBlur and onChange events implicitly for every element.
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+export function FormDemo(){
+
+ 
+
+    const formik = useFormik({
+         initialValues: {
+            UserName: '',
+            Age: 0,
+            City: '',
+            Mobile:''
+         },
+         validationSchema : yup.object({
+              UserName: yup.string().required('User Name Required').min(4, 'Name too short'),
+              Age: yup.number().required('Age Required').min(15, 'Age min 15').max(30, 'Age max 30'),
+              Mobile: yup.string().required('Mobile Required').matches(/\+91\d{10}/, 'Invalid Mobile')
+         }) ,
+         onSubmit: (user) => {
+            console.log(user);
+         }
+    })
+   
+    return(
+        <div className="container-fluid">
+            <form onSubmit={formik.handleSubmit}>
+                <h3>Register</h3>
+                <dl>
+                    <dt>User Name</dt>
+                    <dd><input type="text" {...formik.getFieldProps("UserName")} name="UserName" /></dd>
+                    <dd className="text-danger">{formik.errors.UserName}</dd>
+                    <dt>Age</dt>
+                    <dd><input type="text" {...formik.getFieldProps("Age")} name="Age" /></dd>
+                    <dd className="text-danger">{formik.errors.Age}</dd>
+                    <dt>City</dt>
+                    <dd>
+                        <select name="City" {...formik.getFieldProps("City")} >
+                            <option value="-1">Select City</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Hyd">Hyd</option>
+                        </select>
+                    </dd>
+                    <dd className="text-danger">{formik.errors.City}</dd>
+                    <dt>Mobile</dt>
+                    <dd><input type="text" {...formik.getFieldProps("Mobile")} name="Mobile" /></dd>
+                    <dd className="text-danger">{formik.errors.Mobile}</dd>
+                </dl>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    )
+}
+
+						 Formik Components
+- Formik provides pre-defined components for form and validation.
+- Implicitly these components can build the UI and set validation.
+
+		<Formik>
+		<Form>
+		<Field>
+		<ErrorMessage>
+
+Syntax:
+	<Formik   initialValues={ }   validate={ }  validationSchema={ }  onSubmit={ }>
+
+		<Form>
+
+			<Field type="text|number|password" />
+			<ErrorMessage name="fieldname" />
+
+		</Form>
+
+	</Formik>
+
+
+Ex:
+form-demo.jsx
+
+import { useState } from "react"
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
+
+export function FormDemo(){
+
+ 
+
+    return(
+        <div className="container-fluid">
+            <h2>Register User</h2>
+            <Formik initialValues={{UserName:'', Age:0, Mobile:''}} validationSchema={yup.object({UserName:yup.string().required('Name Required'), Age: yup.number().required('Age Required')})} onSubmit={(values)=>{console.log(values)}} >
+                <Form>
+                    <dl>
+                        <dt>User Name</dt>
+                        <dd> <Field name="UserName" type="text" /> </dd>
+                        <dd className="text-danger"> <ErrorMessage name="UserName" /> </dd>
+                        <dt>Age</dt>
+                        <dd> <Field name="Age" type="text" /> </dd>
+                        <dd className="text-danger"> <ErrorMessage name="Age" /> </dd>
+                        <dt>Mobile</dt>
+                        <dd> <Field name="Mobile" type="text" /> </dd>
+                        <dd className="text-danger"> <ErrorMessage name="Mobile" /> </dd>
+                    </dl>
+                    <button type="Submit">Submit</button>
+                </Form>
+            </Formik>
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

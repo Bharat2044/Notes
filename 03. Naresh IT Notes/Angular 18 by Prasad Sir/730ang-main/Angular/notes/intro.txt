@@ -1,0 +1,87 @@
+1. what is Angular?
+Angular is JS framework and developer platform used to build single page applications(SPA) and Progressive Web Apps(PWA)
+Angular is developed and maintained by Google
+
+2. what is the difference between Angular and Angular JS?
+Angular JS uses JS , developed by Google in 2010.
+Angular uses TS, developed by Google in 2012. TS is developed by Microsoft
+
+3. what is difference between React and Angular?
+React is a JS library wheareas Angular is a JS framework
+React uses one way data binding. Angular uses two way data binding
+React uses other packages for different purposes
+Angular has an architecture and will complete the application without other packages
+
+4. what is the difference between library and framework?
+library is pre written code used for specific purposes
+framework is a complete package of architecture , can used
+ for multiple purposes
+
+
+Installation:
+-----------------
+you must have already installed node js, npm.
+goto cmd, type following command
+"npm install -g @angular/cli"
+
+To check whether angular installed correctly or not, we can use
+"ng v" command
+
+Note: Angular use command line interface to generate / delete/update any of its components,directives etc..,
+This technique of using command prompt for everything is called scaffolding
+
+
+start first Angular application
+--------------------------------
+Goto vs code , open a specific folder , 
+goto terminal, goto specific folder
+
+"ng new app-name --standalone=false"
+
+folder structure:
+-------------------
+tsconfig -- it sets rules to typescript compiler
+tsconfig.json -- main tsconfig file for whole project
+tsconfig.app.json -- tsconfig file for only app
+tsconfig.spec.json -- specification tsconfig file is for testing
+README.md -- it is for instructions
+package.json- it is the metadata of your project
+package-lock.json -- it is the meta data about package.json
+angular.json-- angular settings are here
+.gitignore -- these files are ignored by giti
+editorConfig -- it balances multiple
+editor for single application
+public  -- folder for public(for images,robots)
+node-modules -- all packages are stored here
+src -- 
+index.html -- it is the main html and it is having app-root by default
+main.ts -- main typescript file which is bootstrapping (converting static dom to dynamic dom) APP MODULE
+styles.css -- main css file which is empty by default
+app -- it contains
+  routing modules
+  component files
+  app module
+
+component: component is the building block of User Interface
+component file contains
+  -- css -- for styling
+  -- html -- for view/structure -- also called template
+  -- ts -- for model/logic/controller -- also called component file
+  -- spec.ts -- for testing
+-----------------------------------------------------
+To Run Angular Application : ng serve -o
+-----------------------------------------------------
+To Build Angular Application : ng build 
+-----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

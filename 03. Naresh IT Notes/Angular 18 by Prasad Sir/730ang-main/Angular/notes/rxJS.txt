@@ -1,0 +1,25 @@
+rxJS: reactive extension for javascript.
+it is used to deal asynchronous actions in angular
+There are three major concepts in rxjs
+  i. observable
+  ii. subject
+  iii. operators
+  --- httpRequest returns obserbles
+  --- buttons clicks/form submit may return observable
+  --- routing may retuns obserbles
+
+ 1.  Observable: An obserbale is a series of asynchronous functions , got released by subscribing them
+ Every obserble will have an observer and will have events like next,error,complete
+ 2.  Subjects: subjects are used to notify different components when any change happens in any one of the components.
+ it is also a special type of observable that can multicast values to multiple components
+
+ -- there are actually 4 types of subjects
+ i. normal subject  -- will multi cast to multiple component
+ ii. behaviour subject -- will multi cast to multi components but it starts with a default value
+ iii. replay subject -- will multi cast to multple components again and again
+ iv. async subject --it will send only the last emitted value
+
+ 3. operators: rxJS also provide some default functions which you can use for several purposes. these functions are called operators
+ eg: of,map,from,filter etc..,
+ 
+

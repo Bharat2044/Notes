@@ -1,0 +1,33 @@
+			========================================================
+					Types of Application in Network Programming
+							OR
+					Types of Application in Client-Server Arch
+			========================================================
+=> As a Part of Network Programming, we can develop Two Types of Applications. They are
+			1. Server Side Application
+			2. Client Side Application
+------------------------------------------------------------------------------------------------------------------
+1. Server Side Application
+------------------------------------------------------------------------------------------------------------------
+Step-1 :  import socket module and Other Modules if required
+Step-2 : Create an object of Socket called Server Socket
+Step-3 : Every Server Side Program(Server Socket) must BIND with Certain Machine(DNS) and It should run at a Unique			Port Number.
+Step-4 : Every Server Side Program Must be CONFIGURED in such way that To how Many client Server Side Program 
+              must communicate.
+Step-5 : Every Server Side Program(Server Socket) Must ACCEPT the Client Side Program
+Step-6: Every Server Side Program(Server Socket) Must READ the Data of Client Side Program Request and PROCESS.
+Step-7: Every Server Side Program(Server Socket) Must Givs RESPONSE to Client Side Program
+Step-8: Repeat Step-(5), Step-(6) and Step-(7) for Multiple Requests of  Client Side Program
+------------------------------------------------------------------------------------------------------------------
+2. Client Side Application
+------------------------------------------------------------------------------------------------------------------
+Step-1: import socket module and Other Modules if required
+Step-2: Create an object of Socket called Client Socket
+Step-3: Every Client Side Application(Client Socket) must get the CONNECTION from Server Side Program (Server 
+             Socket)
+Step-4: Every Client Side Application(Client Socket) must Make a Request to Server Side Program (ServerSocket).
+Step-5: Every Client Side Application(Client Socket)  Must RECEIVE the Response coming from Server Side Program 
+            (ServerSocket)
+
+Step-6: Repeat Step-(4) and Step-(5) until all Client Side Application Request Completes.
+=============================================x===========================================

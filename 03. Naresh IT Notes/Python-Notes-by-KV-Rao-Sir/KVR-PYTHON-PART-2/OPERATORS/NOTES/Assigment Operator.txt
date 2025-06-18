@@ -1,0 +1,48 @@
+		==================================================
+				2. Assigment Operator   
+		==================================================
+=>The purpose of assignment operator is that " To assign or transfer Right  Hand Side (RHS)  Value /  Expression Value to the Left Hand Side (LHS) Variable "
+=>The Symbol for Assigment Operator   is single equal to ( = ).
+=>In Python Programming,we can use Assigment Operator  in two ways.
+				1. Single Line Assigment
+				2. Multi Line Assigment
+
+1. Single Line Assigment:
+----------------------------------------
+=>Syntax:       LHS Varname= RHS Value
+			LHS Varname= RHS Expression
+
+=>With  Single Line Assigment, at a time we can assign one RHS Value / Expression to the single LHS Variable Name.
+------------------
+Examples:
+-----------------
+>>> a=10
+>>> b=20
+>>> c=a+b
+>>> print(a,b,c)------------10 20 30
+-----------------------------------------------------------------------------------
+2. Multi Line Assigment:
+----------------------------------------
+
+=>Syntax:       Var1,Var2.....Var-n = Val1,Val2....Val-n
+			
+			Var1,Var2.....Var-n = Expr1,Expr2...Expr-n
+
+Here The values of Val1, Val2...Val-n are assigned to Var1,Var2...Var-n Respectively.
+Here The values of Expr1, Expr2...Expr-n are assigned to Var1,Var2...Var-n Respectively.
+
+Examples:
+-------------------
+>>> a,b=10,20
+>>> print(a,b)------------10 20
+>>> c,d,e=a+b,a-b,a*b
+>>> print(c,d,e)-------------30  -10  200
+>>> sno,sname,marks=10,"Rossum",34.56
+>>> print(sno,sname,marks)---------10 Rossum 34.56
+------------------------------------------
+>>> a,b=10,20
+>>> print(a,b)-------------------10 20
+>>> a,b=b,a # Swapping Logic
+>>> print(a,b)-----------20 10
+===================================X======================================
+

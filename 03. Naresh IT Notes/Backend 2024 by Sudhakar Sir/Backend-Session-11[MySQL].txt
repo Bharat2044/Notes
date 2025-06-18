@@ -1,0 +1,160 @@
+			               MySQL 
+
+- It is an open source and cross platform database.
+- It is Relational Database Management system.
+- It manages structured data. [Schema Based]
+- It is good in analytics, wearhouse and BI. [Business Intelligence].
+- It uses SQL as language.
+- SQL language provides various methods of interaction with database.
+- SQL language classifies its operations into following types
+
+	a) DDL 
+	b) DML
+	c) DCL
+
+DDL
+- Data Definition Language
+- It is responsible for creating and configuring the database.
+
+DML
+- Data Manipulation Language
+- It is responsible for manipulating data.
+- It includes querying, inserting, updating, deleting like actions.
+
+DCL
+- Data Control Language
+- It is responsible for controlling database.
+- It includes security, authorizations, authentications etc.
+
+		                 MySQL Database Objects
+
+1. Database	: It is a store to keep the data.
+
+2. Table		: In database data is kept in table. It is structured data.
+
+3. Row / Field	: In a table data is arranged in rows and columns.
+
+4. View		: It is an object with virtual data from various tables and with different
+		  queries.
+
+5. Join		: It is like embedded documents, with data from multiple tables.
+
+6. Triggers	: It is a like a macro with set of actions defined. So that the actions
+		  are executed in the same sequence when ever required.
+
+7. Stored Procedure : It is used to refactor the code, so that you can reuse the functionality.
+
+- The other database objects in various relational database management systems..
+
+8. Forms		: It provides an UI for handling interaction with data. It uses a middleware.
+
+9. Reports		: It is used to generate documents for priting and exporting into various
+		  formats. [Xls, PDF, CSV..]
+
+10. Macro		: It is a set of actions.
+
+
+Setup MySQL on your PC:
+
+1. Download and Install MySQL from installer
+
+	https://dev.mysql.com/downloads/installer/
+
+2. In the install process select "custom" install
+
+3. Select Products
+	a) MySQL Server
+	b) MySQL Shell
+	c) MySQL Workbench 
+
+4. Select authentication method as  "Use Strong Password"
+
+5. Specify the connection and password details
+
+	server	: localhost / 127.0.0.1
+	password : 1234
+
+6. Select "grant full access" 
+
+7. Your PC comprises of  MySQL Shell and MySQL workbench
+
+8. Open MySQL Workbench and Add new connection
+
+	host	:  localhost  or  127.0.0.1
+	user	:  root
+	port	:  3306
+	Store in vault : set password [1234]
+
+9. Start MySQL Server from your  "Services.msc"
+
+10. Connect the client tool with server
+
+11. Open Workbench  dashboard and switch to "Schemas" category to work with "database objects".
+
+		               Data Definition Language
+1. create		
+- It is a command used to create the database and define the structure.
+- You can create various database objects like
+	a) database
+	b) procedure
+	c) view
+	d) tigger
+	e) table etc..
+
+Syntax:
+	create database demodb;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
