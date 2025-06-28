@@ -1,0 +1,176 @@
+Last Session:
+=============
+
+	-->We have completed spring cloud microservices successfully
+
+Today Session:
+==============
+
+	-->How to implement parallel calls in project
+
+
+Java ThreadPoolExecutor:
+========================
+
+  1. Thread Pool : It is a container holding one or more pre created threads
+
+  2. Task Queue : blocking bounded or unbounded queue used to hold tasks
+
+  3. Queue Capacity :  The Size of the task Queue, this decides how many tasks can be queued
+
+  4. Core Pool Size :  The minimum no.of threads need to present in the thread pool
+
+  5. Max Pool Size  :  The maximum no.of threads that is allowed to be created in the thread pool
+
+  6. Active Thread  :  A thread which is currently executing a task
+
+  7. Active Thread Count : the no.of threads in the thread pool which are currently executing a task
+
+  
+ How the ThreadPoolExecutor will works:
+
+	
+	1. A new task is given to the ThreadPoolExecutor
+	2. ThreadPoolExecutor will check the current active thread count in the thread pool
+
+			ex : active thread count = 1 and core pool size = 2
+		
+	3. If the no.of active threads is less than the core pool size ( 1 < 2 ), then
+
+		a. It means that no.of tasks currently being executed is less than the core pool size
+
+		b.  There should be some free threads are available in thread pool as no.of tasks being
+	            executed are less than the core pool size
+
+		c. In this case Thread Pool Executor will find a free thread and assign the submitted task to
+	          that free thread. In case if there is no free thread is available it will create a new thread
+		  because the no.of threads with in the core pool size
+
+		d. in this case task is never put into the task queue, instead the task is directly handed off
+		   to the free thread
+
+
+	4. If the no.of active threads is equal or greater than the core pool size ( 3 < 2 ), then
+
+		active threads account = 3 core pool size = 2
+
+		a. It means that no.of tasks currently being executed is equal  or morethan core pool size
+		b. This means that no.of threads in the thread pool will be equal or morethan core pool size
+		c. In this case ThreadPoolExecutor will not try to find a free thread as it knows that it
+	           won't find a new thread because the no.of threads are already reached to the core pool size
+		   and all the threads present in executing a task
+
+			no.of executing tasks = no.of core pool size threads
+
+		d. Since ThreadPoolExecutor can't find a free thread, what it does it, It will put the task
+	           in the task queue
+
+		e. It is important note that a task is added  to task queue only when the ThreadPoolExecutor
+	           can't find a free thread  and no.of active threads are equal or morethan core pool size
+
+		f. when the ThreadPoolExecutor tries to add a task to the task queue, If the task queue is not 		   full then task get added to the queue successfully. Incase if task is full then 
+		   ThreadPoolExecutor will check no.of threads in the thread pool and does one of the following
+		   
+			i. Task Queue number is < max pool size then ThreadPoolExecutor will create a new 			   Thread and assign the task to the new thread
+
+			ii. If the number is equal to max pool size then it means that ThreadPool already
+			    has the max no.of threads are configured, In this case ThreadPool Executor can't
+			    add task to the task queue because it is full and it can't create new thread
+			    also no.of threads already reached  the max pool size.
+			    Hence ThreadPoolExecutor rejects the task in this case
+
+		g. So the rejection of task happen only when both task queue and max pool size reached their
+		   capacity
+		
+		
+	
+
+There some types of ThreadPoolExecutor
+
+	1. SingleThreadExecutor
+	2. FixedThreadExecutor
+	3. CachedThreadPoolExecutor
+	4. ElasticThreadPoolExecutor
+	
+
+
+How to Implement Parallel calls in project: 
+===========================================
+
+	1. Write ThreadPoolExecutor Configuration classes
+
+		@Configurable
+public class ThreadPoolExecutorConfig implements AsyncConfigurer {
+	
+	@Bean(name="threadPoolExecutor")
+	@Override
+	public Executor getAsyncExecutor() {
+		
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		
+		executor.setCorePoolSize(2);
+		executor.setMaxPoolSize(10);
+		executor.setQueueCapacity(20);
+		executor.setThreadNamePrefix("threadPoolExecutor");
+		executor.initialize();
+		
+		
+		return executor;
+	}
+	
+
+}
+
+
+2. declare @Async annotation in all the integration classes
+
+	public class MOffersDaoImpl {
+
+	@Async("threadPoolExecutor")
+	public CompletableFuture<OffersDaoResponse> getOffers(OffersDaoRequest daoRequest){
+	
+	}
+
+	}
+
+	public class POffersDaoImpl{
+
+		@Async("threadPoolExecutor")
+		public CompletableFuture<OffersDaoResponse> getOffers(OffersDaoRequest daoRequest){
+
+
+		}
+
+	}
+
+
+3. invoke these tasks from service class as below
+
+	public class OffersServiceImpl implements IOffersService {
+
+
+		public OffersResponse getOffers(OffersRequest offersRequest){
+
+
+		CompletableFuture<OffersDaoResponse> pOffersDaoResp = pOffersDao.getOffers(daoReq);;
+		CompletableFuture<OffersDaoResponse> mOffersDaoResp = mOffersDao.getOffers(daoReq);
+
+		//Prepare the final offersResponse using pOffersDaoResp and mOffersDaoResp
+
+		
+
+		}	
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+ 

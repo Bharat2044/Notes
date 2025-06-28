@@ -1,0 +1,64 @@
+Last Session:
+
+	-->we have completed Redis cache theory and implementation in project
+
+Today Session:
+
+	-->Microservices Implementation in project
+
+1. Introduction
+	|-monolithic vs microservices
+
+2. spring cloud config server and client
+
+3. discovery server or eureka server
+
+4. interservice communication using
+
+	|-discovery client
+	|-ribbon client
+	|feign client
+
+5. spring cloud api gateway
+
+6. distributed logging :  sleuth and zipkin
+
+7. Resilience4j - Time Limiter, Rate Limiter, Retry, Circuit Breaker, Bulk Head
+	
+==============================================================================================================
+
+2. spring cloud config server and client
+
+	-->It is used to externalize the configuration information
+
+
+
+3. Discovery Server or Eureka Server :
+   ===================================
+
+	-->It is used to store or configure all the microservices instances
+	-->Every microservice should be register with Eureka Server
+
+
+To implement microservices in project, we should create below services 
+
+1. barclays-spring-cloud-config-server
+
+2. barclays-eureka-server
+
+3. ms-offer-details-service
+
+4. ms-enrollment-service
+	a. ms-enrollment-service1
+	b. ms-enrollment-service2
+	c. ms-enrollment-service3
+
+5. ms-spring-cloud-api-gateway
+
+
+
+
+	
+
+
+
