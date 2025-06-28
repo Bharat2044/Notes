@@ -1,0 +1,43 @@
+Last Session:
+============
+
+	-->We have completed examples Mockito and PowerMockito
+
+Today Session:
+==============
+
+	-->How to implement Mockito and PowerMockito in project
+
+
+In realtime we should do unit testing for all the classes like
+
+	1. Controller class
+	2. Service class
+	3. Dao class
+	4. Service Client class
+
+
+When we are testing one class, if any dependencies are exists on that class then we need test that class without dependent on
+dependencies.
+
+offerDetailsValidator
+offersService
+requestBuilder
+
+enrollmentServiceClient
+EnrollmentServiceClientImpl
+
+
+
+
+
+
+Saturday : 9:00 AM  to 1:00 PM  : webservice , ssl
+
+Sunday :  9:00 AM  to 1:00 PM  : Mockito and PowerMockito implementation in project
+
+
+
+
+
+

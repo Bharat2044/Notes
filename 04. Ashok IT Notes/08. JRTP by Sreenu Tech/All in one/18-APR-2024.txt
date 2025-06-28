@@ -1,0 +1,45 @@
+Last Session:
+	
+	-->How to write the stored procedure
+
+Today Session:
+
+	-->How to implement the stored procedure in the project
+
+Database Team develope the tables and stored procedures and share the below details to dev team
+
+	1. database details like db url, portno, username, password
+	2. stored procedure name
+	3. stored procedure input and output param details like element name, data types, 
+	   sample values
+	4. how to call the stored procedure and what is the order elements we should send
+	5. list of error codes
+	6. sample request and response for success and failure scenarios
+	7. ResultSet element names, data types, sample values..etc
+
+Database will documents all the details in msword or msexcel, which is called database userguide document
+
+Rest API --------->Provider-------->Swagger Documentation-------->share to --->Consumers/Client
+Database --------->DB Team -------->DB userguide documentation--->share to---->Development team
+
+How to write the StoredProcedure in our project:
+===============================================
+
+
+	-->Angular Implementation in project
+	-->Docker - 3 /4 ohurs --------- CICD
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

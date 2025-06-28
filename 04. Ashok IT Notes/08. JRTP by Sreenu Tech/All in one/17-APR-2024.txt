@@ -1,0 +1,45 @@
+Last Session:
+============
+
+	-->Parallel Calls has been completed - POC with different usecases
+	-->How to implement parallel calls in project - using CompletableFuture - Not Started.
+
+Today Session:
+=============
+
+	-->Database Integration
+
+
+	
+Database Integration : 
+
+	-->In realtime there are 2 types of databases
+		|-sql database
+		|-no sql database
+
+
+	Java     : IDE's : Eclipse, Intellij, STS 
+
+	Database : IDE's : Oracle TOAD, MySQL Yog,  DBeaver, Aqua Studio...etc
+
+	
+	Using Database IDE's we can connect to database server and perform required operations 
+	IDE's will help to provide the SQL commands, so it will improve the developer productivity
+
+
+Databse Team should develope the tables and stored procedure, share the below details to development/dev team
+
+1. Database details like dburl, username, password, porno.
+
+2. stored procedurename
+
+
+
+
+
+
+
+
+
+
+			

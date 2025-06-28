@@ -1,0 +1,302 @@
+Last Session:
+============
+
+	-->Mockito Examples
+	
+Today Session:
+==============
+
+	-->Drawbacks of Mockito
+	-->Power Mockito 
+		|-Introduction
+		|-Software Installation
+		|-Examples
+	-->How to implement mocking frameworks in projects
+
+
+Drawbacks of Mockito:
+====================
+
+	-->We can't apply Mockito if the backend class has below properties
+
+		1. final class
+		2. final method
+		3. static method
+		4. new operator
+		5. constructor
+		6. private methods
+
+
+	--> We can't test all the scenarios of the source code due to above limitations
+	--> Code Coverage will be less
+
+To overcome all these drawbacks, Powermockito has introduced into market
+
+
+PowerMockito :
+
+	-->PowerMockito is an unit testing framework
+	-->The main objective of powermockito is without depending on external systems/backend systems
+	   developer can test his code is working fine properly or not
+	
+
+	==================================================================
+	 PowerMockito = Mockito + Extra features ( Drawbacks of Mockito )
+	==================================================================
+
+
+-->PowerMockito internally using custom class loaders to mock the above scenarios classes
+
+Advantages:
+==========
+
+	-->We can test all the scenarios
+	-->code coverage will be increased
+
+PowerMockito Software Installations:
+===================================
+
+	-->It is an opensource software
+	-->It is in the form of .jar file, download powermockito jars freely 
+	    from https://powermockito.org/downloads
+	-->To enable powermockito we should add below dependencies in pom.xml
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+
+
+PowerMockito Annotations:
+=========================
+
+1. @Runwith(PowerMockRunner.class) : Initialize the powermockito framework
+
+2. @PrepareforTest({-,-,-}) : declare all the mocking classes here.
+
+
+PowerMockito Implementation Steps:
+==================================
+
+ To implement any mocking frameworks we should follow 3 steps 
+
+	1. stubbing		2. expectation		3. verifying
+
+
+
+1. stubbing :  dummy/fake/mock
+
+2. expectation : what we are expecting from real object, same we must expect from mock object
+
+3. verify : verify the result
+
+
+Use Case 1: How to test a final class and final method
+==========
+	
+		class A {		final class B{		
+
+		B b;
+
+		}			}
+	
+
+	Note : using Mockito we can't mock B class, always class A will entered into class B, so class B will
+	       give error then we can't test class A
+
+
+
+	//1. stubbing
+		Syn : classname ref = Powemockito.mock(classname.class);
+		Ex  : B mockB = Powermockito.mock(B.class)	
+
+	//2. expectation
+
+	Syn : When x call thenReturn Y
+	
+	Ex  : PowerMockito.when(mockB.m2(Matchers.any(BReq.class))).thenReturn(mockBRes);
+
+
+	//3. verify the result using assertXXX() method
+
+
+
+Use Case 2: How to test static method
+==========
+
+		class A {		class B{		
+
+		B b;			
+					public static m2(){
+
+					
+					}
+		}			}
+
+
+	//stubbing
+	Syn : PowerMockito.mockStatic(classname.class)
+	ex  : PowerMockito.mockStatic(C.class) 
+
+	//expectation
+
+	PowerMockito.mock(classname.methodname).thenReturn(mockResp)
+	
+
+
+
+Use Case 3 : How to test new operator
+=========== 
+
+	//1. stubbing
+		Syn : classname mockclass = Powemockito.mock(classname.class);
+		      PowerMockito.whenNew(classname.class).withNoArgConstructor().thenReturn(mockclass);			
+
+		Ex  : B mockB = Powermockito.mock(B.class);
+		     PowerMockito.whenNew(B.class).withNoArgConstructor().thenReturn(mockB); 	
+				
+
+	//2. expectation
+
+	Syn : When x call thenReturn Y
+	
+	Ex  : PowerMockito.when(mockB.m2(Matchers.any(BReq.class))).thenReturn(mockBRes);  
+
+	
+Use Case 4: How to test constructor
+
+		class Parent{
+
+		 Parent(){
+
+		   int a = 10/0;
+		
+		}
+
+		
+		}
+
+		class Child extends Parent{
+
+
+		  public Child(){
+
+			
+			super();
+
+		  }
+
+
+		public Resp getOffers(Request req){
+
+
+
+		}
+
+
+		}
+
+
+ Sol : we need suppress/hide the parent class constructor using supress() method
+
+	
+
+
+Use Case 5: How to test private methods
+
+
+
+
+package com.sreenutech.a;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import com.sreenutech.b.B;
+import com.sreenutech.c.C;
+import com.sreenutech.model.AReq;
+import com.sreenutech.model.ARes;
+import com.sreenutech.model.BReq;
+import com.sreenutech.model.BRes;
+
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({A.class, B.class, C.class})
+public class ATest {
+
+	@Test
+	public void testM1() throws Exception {
+		
+		//B b = new B();
+		
+		//1. stubbing or mocking
+		//B mockB = Mockito.mock(B.class);
+		//C mockC = Mockito.mock(C.class);
+		
+		B mockB = PowerMockito.mock(B.class);
+		PowerMockito.whenNew(B.class).withNoArguments().thenReturn(mockB);
+		
+				
+		PowerMockito.mockStatic(C.class);
+		
+		
+		//2. expectation
+		
+		PowerMockito.when(mockB.m2(Matchers.any(BReq.class))).thenReturn(mockBResp());
+		PowerMockito.when(C.getPrice(Matchers.anyString())).thenReturn(1000.0f);
+		
+		
+		A a = new A();
+		
+		AReq areq = new AReq();
+		areq.setOid("1234");
+		areq.setName("mobile");;
+		
+		ARes aresp = a.m1(areq);
+		
+		
+		assertEquals("delivered", aresp.getStatus());
+		assertEquals(1000.0f, aresp.getPrice(), 0.0);
+		
+		
+	}
+
+	
+	private BRes mockBResp() {
+		
+		System.out.println("Entered into mockBResp");
+		
+		BRes bresp = new BRes();
+		
+		bresp.setStatus("delivered");
+		bresp.setDesc("good");
+		
+		return bresp;
+	}
+
+}
+
+	
+
+
+ How to implement Mocking frameworks in project
+
+	|---very very important
+
+
+	5:30 PM to 7 : 00 PM
+
+
+	
