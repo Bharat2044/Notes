@@ -1,0 +1,431 @@
+Docker
+======
+
+	1. Introduction?
+		a. what is virualization? adv & drawbacks?
+		b. what is containerization? adv?
+	2. What is containerization technologies, why do we need to use it?
+	3. The architecture of the docker
+	4. docker workflow
+	5. docker software installation
+	6. docker image
+	7. docker container
+	8. docker directives
+	9. docker volumes
+	10. docker networking
+	11. docker container lifecycle
+	12. docker container registry
+	13. Realtime examples on docker
+
+
+==========================================================================================================
+
+Docker Introduction:
+===================
+
+ Virtualization:
+
+	Virtualization is technic or a mechanism through which we can run multiple parallel isolated 
+	enironments on single computer/machine through the help of using Hypervisor software
+	
+	i.e. The process of splitting single machine into multiple machines is called virtulization
+		
+
+advantages:
+===========
+
+	1. each virtual machine can run their own os independent of the host os of the computer
+	   so that we can easily deploy and run the software applications on different operating system
+	   environments
+
+	2. software applications which requires dedicated operating system of their own by creating 
+	   virtual machine and installing the operating system on the vm separately
+
+	3. Since all the virtual machines are isolated from each other and runs independent of the host
+	   operating system, we can implment more security
+
+		i.e if the host machine has compromised on security then guest machines are not impacted
+	            as each vm has runs on dedicated os
+
+	4. It is suitable for deploying and running applications that are long running processes
+
+ dis advatanges:
+ ===============
+
+	1. VM's are heavy weight : dedicated os + resources like cpu, ram 
+		
+		i.e. It consumes lot of system resources in running the software applications
+
+	2. Since VM's are heavy weight (i.e. huge in size in diskspace) and are not portable to be carried
+	   acorss all the environments
+
+	3.  Difficult to acheive CICD
+
+	4. More cost as we need buy the os licences for all the vms
+
+	5. Difficult to scale the vm's
+
+
+To overcome all these problems, market has been introduced containerization technologies
+
+	Containerization =  package/combine ( application code + software + configuration )
+		|
+	Deploy this package in all the envrionments, make sure it should work in all the enrionments/systems
+
+
+ Containerization
+ =================
+"Containerization is technic through which we can package software applications and the corresponding
+libraries/binaries which are required for running the application"
+
+-->Multiple containers can run in parallel isolated from each other on the same machine
+
+
+Advantages:
+===========
+
+	-->The containers are lightweight, in each container the operating system is not installed rather only libs/bins are 
+	   packaged as part of them
+	-->Since we don't install operating system as part of the container, the container images are very small in size
+	   and can be easily portable across the computers
+	-->Since the containers are very small in size, It is good for CICD
+	-->We can optimize the physical resources of the computer by running lot of programs in parallel
+	-->patching and upgradting is very easy while using containerization
+
+Dis Advantages:
+===============
+
+	-->The containers always shares the same operating system of host, so we can't install independent operating system
+	   of that host computer while using containers
+	-->containers are not highly secured, if the host has bee compromised then containers also compromised
+	-->only suitable for short running application
+
+
+Q) when should we use virtualization and when containerization?
+
+Sol : If we want share a physical computer and its resources between 2 parties where they wanted to run their applications on
+      dedicated environment then we should use virtualization only
+
+      If we want to run software applications isolated from each other, then we can go for containerization		
+		
+
+There are lot of containerization technology supported tools are available in market
+
+	1. Docker
+	2. Redhat Openshift		====> out of all these, Docker is most popular
+	3. Mesosphere
+	4. Microsoft Container
+
+Docker :
+
+	-->Docker is a word that is derviedfrom dock-worker, dock worker is a job of person who loads containers and un loads the
+	   containers in a ship from where it has been named as 'Docker'
+
+	-->Using docker we can implement containerization technologies where we can package software applications into docker images
+	   and ship them. People can run applications packaged in docker isolated from other as containers.
+
+
+	Docker workflow
+		
+		Developer ------------->Package------------->Ship
+		Developer -------->build--->package---------->release
+
+
+	How to package the Software Application : Docker Image
+	How to run the packaged application	: Docker Containers
+
+		=====================================================================================
+		|Docker Image = libs and bins + appication code + required softwares + configuration|
+		=====================================================================================
+
+		Docker image is a packaged with all the required details to run the application
+
+		Docker Container = execute/run the docker image then docker container will be created.
+
+
+
+		Developer---- Dockerfile---->Docker engine (Docker Software )---->Docker image ---> Docker Container
+
+How does the containers are kept isolated from each other and running on the same machine?
+
+Sol :  As part of the linux operating system, there are lot of enhancements and features to be added to make the containers work
+       on the same machine isolated from each other.
+
+	1. Linux Namespace		2. Control Groups ( cgroups )		3. Union File System
+
+	
+
+	1. Linux Namespace :
+
+		-->Docker uses below namespaces of the linux os to run containers are isolated
+
+			1. pid = run  the container in a separate process namespace
+			2. net = network namespace managing the network interface
+			3. ipc = inter process communication namespace
+			4. mnt = filesystem mounts
+			5. uts = unit timesharing
+
+	2. Control Groups ( cgroups ):
+
+		-->Docker Engine uses cgroups of the linux operating system in sharing the physical resource of the computer
+	 	   and limiting their usage by the container
+
+
+	3. Union File System :
+
+		-->Docker container images are packaged and assembled based on union filesystem technic
+
+
+
+
+Docker Architecture:
+===================
+
+	There are 3 parts in docker architecture : 1.  Docker CLI    2. Docker Engine	3. Docker Container Registry
+
+     
+       
+  1.  Docker CLI :
+
+		-->docker CLI stands for docker command line interface, which is provided as part of the docker install
+		-->There are handful docker commands that allows the users to communicate with  docker engine in managing
+		   images and containers     
+
+
+
+2. Docker Engine (Docker Software) : 
+
+	-->It is the main component that takes care of running docker containers from an docker image
+	-->There are 3 main components  : 1. docker daemon	2. docker containerd	3. runc
+	
+
+	1. docker daemon:
+	   =============
+
+		-->It is a rest api endpoint through which docker engine is exposed to the users
+		-->The users can interact with docker engine by using docker cli, so that cli will send the commands over the
+	           network using http protocol and communicate with docker daemon
+		-->Docker daemon will receive the request (docker commands) from  users and will ask containerd to perform
+		   appropriate operation
+
+	
+
+	2. containerd : 
+
+		-->containerd is a component build by docker team, which takes care of building the images, pulling images
+		   from container registry, convert these images into OCI image fromat and passes it as an input to the
+		   runc for running a docker container
+
+		   OCI = 1. Open Container Intiative Specification
+			 2. It will standardize the way images has to build and the way containers are executed and manage the
+			    Underlying operating system
+
+	3. Runc :
+
+		-->It is an low level component that interact with the underlying operating system of our computer in creating/
+		   destroying/managing the container based on the oci image specification
+			 
+
+ 
+3. Docker Registry:
+
+	-->DCR (Docker Container Registry) is a repository where docker images are published and distributed across the 
+	   envrionments/world
+	
+	-->The docker has provided a "http://hub.docker.com" docker registry in whoch people around the world build their own
+	   images publishes and distriubted to the world
+
+
+Docker Objects
+
+	|-1. Docker Images
+	|-2. Docker Containers
+
+
+	Software Application Source Code ---->Build (Compile , Jar/war) ----> Deploy the application --->Run the application
+
+
+	
+	We should build docker image and get container from image
+
+	To run Software Application we need below softwares are required
+
+		1. JDK
+		2. Tomcat	 + Instruction	
+		3. Application
+		
+
+ Software Application to docker image steps:
+ ===========================================
+
+	1. Devops Engineer will discuss with dev team, undestand the software application requirement
+
+	2. write the docker file
+
+		Dockerfile
+		----------
+
+			1. Get the jdk software (jdk image)
+			2. Get the tomcat software (tomcat image) + libs and bins ( To communicate with host operating system )
+			3. configuration of jdk, tomcat
+			4. Get the application code
+			5. add the instruction to run the application ( base images like alpine, ubuntu ..etc) .
+			6. get ubuntu
+			:
+			:
+
+	3. Give this dockerfile to docker engine, which will execute 3 steps internally (1. docker daemon 2. containerd  3. runc)
+
+		>docker build -t imagename dockerfile
+
+		o/p : dockerimage  ( once the docker image has been created you can't edit or modify that imge )
+
+		
+	4. Push the images into dockerhub registries (*.images)
+
+	5. Get/Pull the image and run the image
+
+		>docker pull imagename : download image from docker container registry to computer
+		>docker run imagename  : docker container will be generated ( i.e. application is up and running )
+
+	6. Access the application
+
+====================================================================================================================================
+
+
+Docker Advantages:
+
+	1. To maintain the consistency in all the environments
+	2. Cost Optimization. i.e. cost saving
+
+
+	Before Docker
+	============
+
+		1. mysql software -- while installing mysql operating system will allocate fixed resources like CPU and RAM
+				     once it is fixed either mysql will utilize or may under utilize
+
+		2. Tomcat Software
+
+		3. JDK Software
+
+		 :
+		 :
+		If all these software will not utilize allocated resources then these are wasting the system resources
+
+
+	To overcome this issues, most of the softwaare vendors has been releasing their corresponding docker images along with 	existing supported formates
+
+		JDK    ----------- .exe          .zip		.image
+		Tomcat ----------- .exe          .zip           .image
+		MySQl  ----------- .exe          .zip           .image
+		Jenkins ---------- .exe          .zip           .image
+		sonarqube -------- .exe          .zip           .image
+
+		:
+		:
+
+
+							Docker Images
+							   |
+						-----------------------------------------
+						|					|	
+					Predefined Image			Userdefined Image
+
+					jdk				1. according to the application requirements development
+					tomcat				   team and devops team will have discussion
+					mysql				2. devops team will prepare the dockerfile
+					sonarqube			3. build the image from docker file
+					jenkins				4. push the image into docker registry
+					:				
+					:
+
+	1. Every Software vendor team has written dockerfile
+	2. build the image
+	3. push the image into docker container registry
+
+
+#1. Docker Image:
+
+	-->Docker image is a file packaged with 
+
+		1. application binary (.jar/.war)
+		2. software packages required to run the application ( like jdk, tomcat..etc )
+		3. instructions in running the application
+		4. bins/libs = that enables to communicate with docker engine
+
+	all these together to run an application in an isolated environment of a computer
+
+	
+	Dockerhub is an container repository/docker registry hosted by docker team to help the people around the world to 
+	publish and distribute thier own images
+
+	To publish an docker image into a docker registry per each image we need to create an repository into which we can publish
+	one image, There are 2 types of repositories
+
+		1. public repository   : The image will be published into public repository will be open to the world and anyone
+				         can use it or modify it
+
+		2. private repository :  These repositories are used by individuals/corporate who are working on commercial/private
+				         objects and don't want expose these images to the public world
+					 These images can be delivered/distributed across the stages of our project.
+		
+
+	There are lot of docker images are created and published as part of docker hub registry we can categorie these image into 
+	2 types
+
+	1. docker officals/certified/verified images :
+
+		-->These images rare created by docker/partners and are verified by the docker team and published as part of the
+		   repository
+
+	2. community images :
+
+		-->any of the users who wanted to contribue for opensource stack can create and publish their own images which
+		   are called community images and should used at our own discreation.
+
+
+
+	For our software application inorder to containerize the application, we need to build our own docker image
+	packaging the applications with instructions and bins,libs
+	
+	It is an usual practice to build the image of our own by extending the existing docker images
+
+	The docker team has provided a base docker image which containers bins/libs which can used as base image from
+	which we can extend and create our ownimage which is called 'alpine' of size 2 mb
+
+	use ubuntu image instead of alpine image
+
+	Q) Why docker images are read only?
+	Q) docker images are layered and stackable?
+	
+
+#2. Docker Containers:
+
+	-->A running process or a programs that is created out of an existing docker image that runs isolated from other process	   is called an container
+	-->The lifetime of the container is dependent on the amount of time the application is running, once the application 
+	   inside the container terminates the container also will get terminated
+
+		"docker containers will be created from an docker image"
+
+		docker container is an instance of a docker image
+
+		we can create multiple containers from an one docker image	
+
+
+
+Docker Software Installation
+
+Docker image commands
+Docker contaienr commands
+How to write the dockerfile
+Docker directives
+
+
+	meeting link is same , timings are 7:00 AM to 9:00 AM
+
+
+
+
+
+

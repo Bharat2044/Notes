@@ -1,0 +1,168 @@
+Junit:
+======
+
+1. Introduction
+2. Project Structure
+3. Software Installation
+4. Coding Standards
+5. Annotations and Methods
+6. Examples
+7. Code Coverage
+8. Junit - Implementation in project
+9. Drawbacks of Junit
+10. Mocking Frameworks
+	|-Mockito
+	|-Powermockito
+11. Mockito
+	
+	1. Introduction
+	2. Software Installation
+	3. Implementation Steps
+	4. Mockito Examples
+	5. Mockito - Implementation in Project
+	6. Drawbacks of Mockito 
+	
+12. Power Mockito
+
+	1. Introduction
+	2. Software Installation
+	3. Implementation Steps
+	4. Power Mockito Examples
+	5. Power Mockito - Implementation in Project
+
+13. Spring Junit
+
+
+===============================================================================================================
+
+Junit Introduction :
+
+	Project ======>	| Analysis ---> Design ---> Build --->Testing ---> Production |
+
+
+	 		During Testing phase testers may find so many bugs/defects, then it is impact on
+			code quality, developers not deliver the quality code.
+
+
+
+ -->Junit stands for Java Unit Testing
+
+		 unit = A class or Collaboration of classes or Block of code
+
+-->The main objective of Junit is developer can test his code is working fine properly or not
+
+Advantages:
+==========
+
+	1. No.of bugs can be reduced
+	2. Without depending on server developer can test the code
+	3. Improved the code quality
+	4. more testcases can be executed in milli seconds
+
+Note : 
+	1. Developer must and should write the unit tests for every class. 
+	2. Unit testcases are mandatory in project. 
+	3. Without unit testing client will not approve the move code into production.
+	4. If any unit testcases are failure then building a jar/war will be failed by the maven software
+
+
+Junit Project Structure:
+=======================
+
+	-->All the junit classes placed under src/test/java and src/test/resources
+	-->test folder source code will not included in jar/war file
+
+
+Junit Software Installation:
+=============================
+	-->Junit is an opensource software and it is in the form of .jar file
+	-->Download Junit jar freely from https://junit.org/download
+	-->How to enable junit software
+	-->Junit software versions are 4.x and 5.x
+
+	case 1 : set the junit.jar into classpath, so that we can access all the classes from junit.jar
+
+	case 2 : add the below maven dependency in pom.xml
+
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+</dependency>
+	
+Note : All the junit related jars scope is test, so that these jars will not included in production deployable
+       artifact (jar/war)
+
+i.e. Junit related source code, configuration files, jars will not be part of production deployable artifacts
+		
+
+Junit Coding Standards:
+======================
+
+-->For every junit class should be suffix with test
+
+		class A{		class ATest{
+
+
+		}			}
+
+-->For every junit method should be prefix with test, access specifier is public and return type is void
+
+
+	class A{				class ATest{
+
+	public int m1(){			public void m1(){
+						
+						 
+	
+	}					}
+
+	}					}
+
+
+Annotation and Methods - 4.x
+
+	1. @BeforeClass	: before execute all the testcases this annotation will be executed
+	2. @Before	: before execute every test case this annotation will be executed
+	3. @Test	: for every test class this annotation is mandatory
+	4. @After	: after execute every test case this will be executed
+	5. @AfterClass  : after executing all the test cases this will be executed
+	6. @Ignore	: It will ignore the testcase, i.e. testcase will not execute
+	7. @Runwith	: run the multiple testcases at one.
+
+
+
+
+class JunitDemo{
+
+
+	public int m1(){
+
+	}
+
+	public int m2(){
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

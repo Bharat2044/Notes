@@ -1,0 +1,510 @@
+Junit:
+======
+
+1. Introduction
+2. Project Structure
+3. Software Installation
+4. Coding Standards
+5. Annotations and Methods
+6. Examples
+7. Code Coverage
+8. Junit - Implementation in project
+9. Drawbacks of Junit
+10. Mocking Frameworks
+	|-Mockito
+	|-Powermockito
+11. Mockito
+	
+	1. Introduction
+	2. Software Installation
+	3. Implementation Steps
+	4. Mockito Examples
+	5. Mockito - Implementation in Project
+	6. Drawbacks of Mockito 
+	
+12. Power Mockito
+
+	1. Introduction
+	2. Software Installation
+	3. Implementation Steps
+	4. Power Mockito Examples
+	5. Power Mockito - Implementation in Project
+
+13. Spring Junit
+
+
+===============================================================================================================
+
+Junit Introduction :
+
+	Project ======>	| Analysis ---> Design ---> Build --->Testing ---> Production |
+
+
+	 		During Testing phase testers may find so many bugs/defects, then it is impact on
+			code quality, developers not deliver the quality code.
+
+
+
+ -->Junit stands for Java Unit Testing
+
+		 unit = A class or Collaboration of classes or Block of code
+
+-->The main objective of Junit is developer can test his code is working fine properly or not
+
+Advantages:
+==========
+
+	1. No.of bugs can be reduced
+	2. Without depending on server developer can test the code
+	3. Improved the code quality
+	4. more testcases can be executed in milli seconds
+
+Note : 
+	1. Developer must and should write the unit tests for every class. 
+	2. Unit testcases are mandatory in project. 
+	3. Without unit testing client will not approve the move code into production.
+	4. If any unit testcases are failure then building a jar/war will be failed by the maven software
+
+
+Junit Project Structure:
+=======================
+
+	-->All the junit classes placed under src/test/java and src/test/resources
+	-->test folder source code will not included in jar/war file
+
+
+Junit Software Installation:
+=============================
+	-->Junit is an opensource software and it is in the form of .jar file
+	-->Download Junit jar freely from https://junit.org/download
+	-->How to enable junit software
+	-->Junit software versions are 4.x and 5.x
+
+	case 1 : set the junit.jar into classpath, so that we can access all the classes from junit.jar
+
+	case 2 : add the below maven dependency in pom.xml
+
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+</dependency>
+	
+Note : All the junit related jars scope is test, so that these jars will not included in production deployable
+       artifact (jar/war)
+
+i.e. Junit related source code, configuration files, jars will not be part of production deployable artifacts
+		
+
+Junit Coding Standards:
+======================
+
+-->For every junit class should be suffix with test
+
+		class A{		class ATest{
+
+
+		}			}
+
+-->For every junit method should be prefix with test, access specifier is public and return type is void
+
+
+	class A{				class ATest{
+
+	public int m1(){			public void m1(){
+						
+						 
+	
+	}					}
+
+	}					}
+
+
+Annotation and Methods - 4.x
+
+	1. @BeforeClass	: before execute all the testcases this annotation will be executed
+	2. @Before	: before execute every test case this annotation will be executed
+	3. @Test	: for every test case this annotation is mandatory
+	4. @After	: after execute every test case this will be executed
+	5. @AfterClass  : after executing all the test cases this will be executed
+	6. @Ignore	: It will ignore the testcase, i.e. testcase will not execute
+	7. @Runwith	: run the multiple testcases at one.
+
+
+
+
+class JunitDemo{
+
+
+	public int m1(){
+
+	}
+
+	public int m2(){
+
+	}
+
+}
+
+
+===============================================================================================================
+09-May-2024
+
+Last Session:
+
+	-->We have discussed on Junit Annotations, Lifecycle examples
+
+Today Session:
+ 
+	-->Junit examples
+	-->Code Coverage tools
+	-->How to implement Junit in project
+
+
+
+
+Junit Examples:
+
+	1. Junit Lifecycle example
+	2. Calculator example
+	
+
+
+
+
+BOOFAT
+	setUp() method
+		m1() method
+	tearDown() method
+
+	setUp() method
+		m2() method
+	tearDown() method
+AOOFAT
+
+
+To write unit testing we must follow the below things:
+
+	1. Try to understand the source code
+	2. Write as many as test cases for each functionality
+
+		a. add () method functionality test cases: 
+
+			1. test add functionality with +ve numbers
+			2. test add functionality with -ve numbers
+			3. test add functionality with both +ve and -ve numbers
+
+	3. apply assertxxx() method on every test cases. every testcase atleast one assertXXX() method
+	   to verify the testcase result.
+
+	4. For every testcase there are 3 types of results
+
+		a. pass : testcase expected result and actual result is same : showing in gree color	
+		b. fail : testcase expected result and actual result is not same : showing in red color
+		c. error : testcase not executed due to errors : no color
+
+	5. for every testcases atleast 1 @Test annotation is mandatory otherwise it will treat as normal class
+	   instead of junit class
+
+	6. In junit, based on test case requirement, developer should prepare the request and send the request
+	   to source class by calling the method
+		
+		
+		
+Code Coverage Tool:
+===================
+
+The process of finding no.of lines tested by the developer using junit is called 'code coverage'
+
+
+	code coverage = no.of lines tested by the developer/total no.of lines
+		      = 70 / 100 = 0.07 = 70%
+
+
+Note : Clients are expecting minimum 80% is the code coverage. i.e. 80 lines of the code out of 100 lines
+       should be tested
+
+There are so many code coverage tools are there
+
+	1. Jacoco
+	2. Cobertura
+	3. eclima
+
+Cobertura:
+==========
+
+	-->Cobertura is the code coverage tool
+	-->It will scan the source code of the junit and actual source code, verify how much code has been
+	   tested using junit and provide the code coverage report
+
+How to enable cobertura : 
+
+	-->add the cobertura plugins in pom.xml and run the mvn cobertura:cobertura
+	
+<reporting>
+  <plugins>
+ 
+	<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>cobertura-maven-plugin</artifactId>
+		<version>2.6</version>
+		<configuration>
+			<formats>
+				<format>html</format>
+				<format>xml</format>
+			</formats>
+		</configuration>
+	</plugin>
+
+   </plugins>
+</reporting>
+		
+
+
+
+>mvn cobertura:cobertura
+
+	o/p : code coverage report
+	
+		 tested code  : green color
+		untested code : red color
+
+	write as many as test cases to convert red color to green color 
+
+
+=================================================================================================================================
+
+10-May-2024
+
+	Last Session:
+
+		-->Junit Examples
+		-->Java Code Coverage : Cobertura 
+
+	Today Session:
+
+		-->How to improve the code coverage : add more testcases to test the code
+		-->How to implement Junit in project
+		-->Drawbacks of Junit
+		-->Why we should go for Mocking framework
+
+
+How to implement the Junit in our project:
+=========================================
+
+Writing Junit is nother writing unit testing for each and every class, where each class has multiple scenarios to test that class
+
+Let us write unit test for OfferDetailsValidator class
+
+
+1. add junit dependeny in pom.xml
+
+2. write validator class unit testing
+
+	1. test client id invalid scenario
+	2. test channel id invalid scenario
+	3. test cardnumber invalid scenario
+
+	
+	
+Line Coverage   :  Each and every line code should be covered
+
+Branch Coverage : Conditional Checks like if, while, ..etc covered for both +ve and -ve scenarios
+
+ 
+package com.barclays.offers.validator;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Date;
+import java.util.UUID;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.barclays.offers.exception.OffersInvalidRequestDataException;
+import com.barclays.offers.model.OffersRequest;
+
+public class OfferDetailsValidatorTest {
+	
+	OfferDetailsValidator offerDtlsValidator;
+	OffersRequest offersRequest;
+
+	@Before
+	public void setUp() throws Exception {
+		
+		offerDtlsValidator = new OfferDetailsValidator();
+		offersRequest = buildOffersRequest();
+	}
+
+	
+	private OffersRequest buildOffersRequest() {
+		
+		
+		OffersRequest offersRequest = new OffersRequest();
+		
+		offersRequest.setClientId("web");
+		offersRequest.setChannelId("online");
+		offersRequest.setMsgTs(new Date().toString());
+		offersRequest.setCorrelationId(UUID.randomUUID().toString());
+		offersRequest.setCardNum("0521114005823912");
+		offersRequest.setAuthToken("#$%^&(*&^%@#$%^&");
+		
+		return offersRequest;
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		
+		offerDtlsValidator = null;
+		offersRequest = null;
+	}
+
+	@Test
+	public void testValidateRequest_ClientId_Null_Scenaio()  {
+		
+		offersRequest.setClientId(null);
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc001", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_ClientId_Empty_Scenaio() {
+		
+		offersRequest.setClientId(" ");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc001", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_ChannelId_Null_Scenaio() {
+		
+		
+		offersRequest.setChannelId(null);
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc002", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_ChannelId_Empty_Scenaio() {
+		
+		offersRequest.setChannelId(" ");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc002", e.getRespCode());
+			
+		}
+		
+	}
+	
+	
+	@Test
+	public void testValidateRequest_CardNum_Null_Scenaio() {
+		
+		offersRequest.setCardNum(null);
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc003", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_CardNum_Empty_Scenaio() {
+		
+		offersRequest.setCardNum(" ");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc003", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_CardNum_Length_Scenaio() {
+		
+		offersRequest.setCardNum("43854378954");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc003", e.getRespCode());
+			
+		}
+		
+	}
+
+}
+
+
+How to verify all the lines of the validator class code tested by the Junit? or Find how much percentage code tested by the developer
+using Junit?
+
+Sol : Code Coverage Tools like  Cobertura or Jacoco
+
+	
+How to enable Jacoco
+
+	-->JACOCO stands java code coverage
+	-->We need to add the JACOCO plugins in pom.xml
+
+		
+	<plugin>
+		<groupId>org.jacoco</groupId>
+		<artifactId>jacoco-maven-plugin</artifactId>
+		<version>0.8.2</version>
+		<executions>
+			<execution>
+				<goals>
+					<goal>prepare-agent</goal>
+				</goals>
+			</execution>
+			<!-- attached to Maven test phase -->
+			<execution>
+				<id>report</id>
+				<phase>test</phase>
+				<goals>
+					<goal>report</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
+
+
+
+11:00 AM to 12:00 PM

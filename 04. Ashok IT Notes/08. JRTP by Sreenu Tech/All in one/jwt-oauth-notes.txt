@@ -1,0 +1,247 @@
+JWT : 
+
+	-->JWT stands for Json Web Token
+	-->It is an open standard that defines self contained way of security transfer the information
+	   between 2 parties of a Json Object
+	
+			client			server
+			  |-----send json req----|
+
+	-->The client will need to authenticate with the server using the credentials like uname, pwd
+	    The server will validate the credentials and returns the client a JWT if the credentials
+	    are valid.For all the future requests the client can authenitcate to the server using
+	    the JWT, so doesn't require to send the credentials like uname, pwd
+
+
+JWT Structure:
+==============
+
+				HEADER   +   PAYLOAD 	+ SIGNATURE
+
+-->
+
+
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MTMwNjg3MTYsImV4cCI6MTc0NDYwNDcxNiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.t10Igf1sd_XLxt7tBF5UV8D97szBquqxAvuR6l3i6UY
+
+
+
+
+
+
+
+
+
+
+JWT Token Implementation in Spring Boot:
+=========================================
+
+	#1. add sprign boot parent and spring-srarter-security, jwt dependencies in our pom.xml
+
+	#2. write security related classes to generate the JWT token
+
+		1. write the 2 rest api  : 
+
+			a. one api for validate the credentials and generate th token
+			b. another api for validate  the request toke using token and give response
+
+
+
+		2. Spring Security and JWT configruation classes
+
+		3. spring security configuration classes 
+
+			a. AuthenticationManager : 
+
+				|- i/p : username and password 
+				   o/p : if the authentication successfull return true else 
+				         throw InvalidUserException
+
+			
+			b. JWTRequestFilter extends OncePerRequestFilter
+	
+			For any incoming request this filter will gets executed
+			It will cheks if the request has valid JWT token, if it valid JWT token
+			it set the Authentication in the context, so that is user is authenticated
+
+			c. JWTUserDetailsService implements UserDetailsService
+
+				-loadUserByUsername() : to fetch the user details from the database
+							using username
+
+				- calls AuthenticationManager to validate the credentials
+
+
+
+
+
+
+ 	1. /authenticate : generate the JWT token
+
+	2. /hello or /offers : validate the token and provide the response
+
+
+
+
+
+http://localhost:9090/authenticate
+
+requestbody : 
+
+{
+
+	"username":"sreenu"	-------->Filter : verify the request header contais token or not
+	"password":"password"			  if token is ther then call to other service
+}						  if token is not ther call to JWTAuthController
+
+	
+	1. From JWTAuthController call to Authentication Manger to validate the credentails
+		a. If the credentaisl are valid it will return userdetails
+		b. send user details to JWTTokenUtil
+			 |--using JWT f/w classes it will generate the token
+
+
+{
+    "timestamp": "2024-04-14T05:23:50.885+0000",
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/authenticate"
+}
+
+
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzcmVlbnUiLCJleHAiOjE3MTMwOTAyMDksImlhdCI6MTcxMzA3MjIwOX0.xCIG1MTRZVhIbmuu2h6kbRGGQ7fuJZxJXjsh-V9YMnry7lnCLoYkwFkQjbWX1SSB267DRysD6SL2Rr4fUjA4qg"
+}
+
+==================================================================================================
+
+OAuth2:
+
+	-->OAuth stands for Open Authorization
+	-->It is an open standard for token based authentication and authorized on the internet
+	-->OAuth2 is a not an authentication technique to protect the access to the application
+	   rather it is an authorization layer attached in between to grant access to the http
+	   service to third pary application
+
+	-->It allows an end users account information to be used by the third party services 
+	   such as fb, udemy, linkedin..etc
+
+
+In traditional days:
+
+	-->we use uname/pwd based authentication to gain access to an secured resources
+
+
+What is OAuth2, what is the purpose of it?
+
+OAuth2 is an authorization standards through which we can grant access to a resource on behalf of the
+resource owner to a third party application.
+
+There are 4 roles in OAuth2.0
+
+	1. Resource Owner : User wants to access the thrid pary applications/resources  using 				    accesstoken
+	2. Third Party Application  :  Application requesting access to protected
+		/client application    resource on behlaf of the resource owner
+	3. Resource Server	    : Rest API's will provide the resposne using tokens
+	4. Authorization Server     : It will provide the tokens to the client
+
+
+	1. Resource Owner (End User)
+	2. Client Application
+	3. Resource Server 
+	4. Authorization Server: 
+
+OAuth specification describes 5 grants for acquiring access token
+
+	1. authorization code
+	2. implicit
+	3. passowrd or resource owner credentials 
+	4. refresh token
+	5. client credentails
+
+https://accounts.google.com/v3/signin/identifier?opparams=%253Fenable_granular_consent%253Dtrue&dsh=S-636931749%3A1713077436753938&access_type=offline&
+client_id=700206021005-as1l679sch207mp70msgjhma1krf3k9q.apps.googleusercontent.com
+
+&ddm=0&gsiwebsdk=3&include_granted_scopes=true&o2v=2&prompt=consent&redirect_uri=storagerelay%3A%2F%2Fhttps%2Fwww.udemy.com%3Fid%3Dauth458365&response_type=code&
+scope=email+profile&service=lso&theme=mn&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMAkdvH53V2YyCmH420TIfpxSqdHPxkTkxNaR-6RNA8E5Peh55jEkjqPke495tAIkB4sgW7QQ57bOaNVivD8RRsQYxvqiqAaEN18_TzMMm6nJRCfNBudi_mNLu22Z3wGZ-WBJnqT_A8KgS6Tw02MajUoQzT8Ce9BcVqlQG00C-jvk6SF-JPcwdUGFFCGhj6kvIgcjb6oNHuhL_4n2NyZPrm6mKxGv-lEgg6kT5vl3mYRtZrgx2OoTSwa1CLYnB7qPxZtHALGwn3VXxA9YPf5anXGRoJnHoxY-9RXjskD88gehONylvlnIjV5KSHakouaB_v-w62u-mRvWPMAW12SnZ_BTDXpHTUPFXZUWT1KTCDOdY-W47Rxl-8QiHGUN6Fj4pP49qrbo0BWA86xg6RJWIYdrF1cpoOg_KXm5u8JCawpRDIr9nr4ULM6rAJItrqIXRO8NtRMxaNZjVW2sRoKNObNrSXdw%26flowName%3DGeneralOAuthFlow%26as%3DS-636931749%253A1713077436753938%26client_id%3D700206021005-as1l679sch207mp70msgjhma1krf3k9q.apps.googleusercontent.com%26theme%3Dmn%23&app_domain=https%3A%2F%2Fwww.udemy.com&
+rart=ANgoxcc-N5e248ANT0UAcjeqbuTvHpEPd2UHugWTqn1cTWhvTtvCp-hEZt6KDrFEAEcHbWqe3jiZP05SVnkuG7CKTu93zf03YOjwPCGtWU47gEsdhpbs0tU
+
+https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-904928472%3A1713077567970069&access_type=online&approval_prompt=auto&client_id=917071888555.apps.googleusercontent.com&ddm=0&
+o2v=2&redirect_uri=https%3A%2F%2Fwww.quora.com%2Fgoogle_%2Fcallback&response_type=code&
+scope=email+profile&service=lso&state=eyJwZXJtcyI6ICJub19jb250YWN0cyIsICJjc3JmIjogIjg5Y2JmN2ZkNGQyMGNhNjM4MDdkNTA5M2E3NzFmZWQ2IiwgInBsYXRmb3JtIjogImRlc2t0b3AiLCAidGFyZ2V0IjogInNpZ251cCJ9&theme=mn&
+flowName=GeneralOAuthFlow&
+continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPzeukSLvKffu3iHmAcXu_zHwS7_XKOirFZp_OR2lrn9-4eItlHiKNmOqr1h86ozBQJaPNlCB830d1Cj3ftWwjeGzK8654wS2Ye4gu3_9OHWy0v7_oHTuFNbzSxXgOBeFS_QnezYtMdmAFlFqanPqIwiPhxFhgThdveVZ1NN7mNDI8WmAKANg8e4i_Mdv_POMDFECU0kChY7DHa90FyYRYJKI-Nogf1qjbsE4c9YwOVrowhKdCtjXca2Da4VTVT-sXg5yz9YHOutakdjZTeJX1CVHCBs0ZwIf78UqhQtAPei69d76dr6ylbEcvzlezkpuKypR8v9Vlrjs0nT12DalOBq66loRfgo3x9Thu3gQTVXv3NctDH_TkI0VZh_kLvXF0yfFcjGZprEGcZN8xf3SNViSGhLIBLF--ZO4UiH2UYArlaX1g%26flowName%3DGeneralOAuthFlow%26as%3DS-904928472%253A1713077567970069%26client_id%3D917071888555.apps.googleusercontent.com%26theme%3Dmn%23&
+app_domain=https%3A%2F%2Fwww.quora.com&
+rart=ANgoxccDydhnV4966SRT8CW05L3RMZxW1d57xkEx4DDlDBtk3qTgwAyYijrtrgm73htSbR4LLxcqDZkiKjP5zYJY8_EOyZgymH7hA7AMNTEamcnz9W2Rccc
+
+
+OAuth2.0 Implementation Steps:
+=============================
+
+	1. assume that registration process already has been completed and we got client id and 
+	   secret keys in place
+
+	2. develop authorization server which will generate the token
+
+		i/p : clientid, secrekt key, username, password
+		o/p : access token
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+		</dependency>
+
+	3. develop the resource server
+
+		i/p : request data + token
+		o/p : success response if the token is valid
+		      error response if the token is invalid
+
+
+
+http://localhost:9091/oauth/token
+
+grant_type:password
+username:sreenutech-user
+password:sreenutech-pass
+
+
+Response:
+=========
+
+{
+    "access_token": "816bbf8f-f168-4eca-8063-e62fbaedf54a",
+    "token_type": "bearer",
+    "refresh_token": "f2c63eac-2b96-4634-9a8a-0892ff232908",
+    "expires_in": 43199,
+    "scope": "read write"
+}
+
+{
+    "timestamp": 1713078843790,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Bad credentials",
+    "path": "/oauth/token"
+}
+
+
+{
+    "error": "unauthorized",
+    "error_description": "Full authentication is required to access this resource"
+}
+
+
+{
+    "error": "invalid_token",
+    "error_description": "816bbf8f-f168-4eca-8063-e62fbaedf54"
+}
+
+
+
+	   
