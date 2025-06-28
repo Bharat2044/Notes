@@ -1,0 +1,106 @@
+Last Session:
+	
+	-->We have completed Mockito & Power Mockito implementation in project
+
+Today Session:
+
+	-->Redis Cache Implementation
+
+Redis Cache:
+============
+
+	-->Redis is an open source  in memory data structure store (database) that offers
+	   high performance, replication and unique data model
+
+	-->Redis stands for Remote Directory Server
+
+	-->It provides data structure like string, list, set ..etc	
+	
+	-->Redis also can use for MQ (Message Broker)
+	
+	-->Redis database is an in memory database that persist on disk, it means when we use redis database
+	   we occupy a memory on the disk to use as database. 
+
+	-->The data model is key value but many several kind of values supported such as string, list, 			set, ..etc
+	
+
+Advantages:
+
+	1. Increase application performance
+	2. Reduce the cost
+
+
+
+Redis software Installation:
+=============================
+
+	-->It is an opensource software and it is in the form of .msi/.zip
+	-->Download redis server.zip file freely from https://redis.io/downloads/
+	-->Extract the zip file and start redis using redis-server.exe file
+	-->redis will start on default port is 6379	
+
+
+There some important annotations to enable redis cache
+
+	1. @EnableCaching : apply at the main class of our application in order to tell spring container
+			    that we need caching feature in our application
+
+	2. @Cacheable	  : 
+		a. It is used to fetch data from database to the application and store in redis cache
+		b. It will apply on methods to get the data from database
+		c. It requires a return value of the method that adds or updates data in the cache
+		d. It offers us to use attributes
+
+	3. @Cacheput : 
+
+		a. This annotation will be used to update the data in the redis cache while there is any
+	           update of data in DB
+		b. It will apply on the methods that make modifications in DB
+
+
+	4. @CacheEvict
+	
+	a. This annotation is sued to remove the data in the Redis cache while there is any removal
+	   of data in Database. 
+	b. This will apply on methods that delete data from database and it can be used with void methods
+
+
+Redis cache implementation steps in spring boot application:
+============================================================
+
+	#1. add spring boot redis starter dependency in pom.xml
+
+		<artifactid>spring-boot-starter-data-redis</artifactid>
+
+	#2. update the application.properties
+
+		
+		//configure redis server details like url, port, uname, pwd.. to connect redis server
+
+	#3. Apply the below annotation to enable redis cache in the project
+
+		1. @EnableCaching	: Initialize the caching framework
+		2. @Cacheable		: insert or get the data from the cache  : C, R
+		3. @CachePut		 : update the data into cache	         : U
+		4. @CacheEvict		 : delete the data from cache            : D
+
+
+	#4. 
+
+
+
+
+
+
+Note :
+
+1. RedisConnection and RedisConnectionFactory interfaces comes under org.spf.data.redis.connection
+2. We need to use these api's of spring data redis for working with connections to Redis
+3. There are 2 widely used implementations of the RedisConnectionFactory interface which are based on the Jedis and Lettuce 
+   redis clients
+4. 
+
+There are 2 widely implementation 
+
+
+	

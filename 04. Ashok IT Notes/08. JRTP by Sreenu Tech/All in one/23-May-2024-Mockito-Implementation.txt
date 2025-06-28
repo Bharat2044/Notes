@@ -1,0 +1,122 @@
+Last Session:
+============
+
+	-->We have implemented Mockito and Power Mockito in below classes
+
+Today Session:
+==============
+
+	-->How to implement Mockito and Power Mockito for DAO class
+	-->Code Coverage
+
+package com.barclays.offers.dao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import com.barclays.offers.exception.BusinessException;
+import com.barclays.offers.exception.SystemException;
+import com.barclays.offers.model.OffersDaoRequest;
+import com.barclays.offers.model.OffersDaoResponse;
+import com.mysql.cj.jdbc.CallableStatement;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({MOffersDaoImpl.class, DriverManager.class, Connection.class, CallableStatement.class, ResultSet.class})
+public class MOffersDaoImplTest {
+
+	Connection mockConnection;
+	CallableStatement mockCallableStmt;
+	ResultSet mockResultSet;
+	
+	@Before
+	public void setUp() throws Exception {
+		
+		PowerMockito.mockStatic(DriverManager.class);
+		
+		mockConnection = PowerMockito.mock(Connection.class);
+		
+		PowerMockito.when(DriverManager.getConnection(Matchers.anyString(), Matchers.anyString(), Matchers.anyString())).
+		thenReturn(mockConnection);
+		
+		mockCallableStmt = PowerMockito.mock(CallableStatement.class);
+		
+		PowerMockito.when(mockConnection.prepareCall(Matchers.anyString())).thenReturn(mockCallableStmt);
+		
+		
+		mockResultSet = PowerMockito.mock(ResultSet.class);
+		
+		
+		
+		
+		
+	}
+
+	
+
+	@Test
+	public void test_getOffers_Success_Scenario() throws BusinessException, SystemException, SQLException {
+		
+		
+		PowerMockito.when(mockCallableStmt.executeQuery()).thenReturn(mockResultSet);
+		
+		PowerMockito.when(mockCallableStmt.getString(4)).thenReturn("0");
+		PowerMockito.when(mockCallableStmt.getString(5)).thenReturn("success");
+		
+		PowerMockito.when(mockResultSet.next()).thenReturn(true).thenReturn(false);
+		
+			PowerMockito.when(mockResultSet.getString(1)).thenReturn("212121");
+			PowerMockito.when(mockResultSet.getString(2)).thenReturn("iphone");
+			PowerMockito.when(mockResultSet.getString(3)).thenReturn("http://amazon.com/offers/iphone");
+			PowerMockito.when(mockResultSet.getString(4)).thenReturn("good");
+			PowerMockito.when(mockResultSet.getString(5)).thenReturn("moffers");
+			PowerMockito.when(mockResultSet.getString(6)).thenReturn("23-05-2024");
+			PowerMockito.when(mockResultSet.getString(7)).thenReturn("23-06-2024");
+			PowerMockito.when(mockResultSet.getString(8)).thenReturn("active");
+			PowerMockito.when(mockResultSet.getString(9)).thenReturn("na");
+		
+		
+		MOffersDaoImpl moffersDaoImpl = new MOffersDaoImpl();
+		
+		
+		OffersDaoRequest daoRequest = new OffersDaoRequest();
+		daoRequest.setCardNum("687867687");
+		daoRequest.setClientId("web");
+		daoRequest.setChannelId("online");
+		daoRequest.setTypeOfOffers("moffers");
+		
+		OffersDaoResponse daoResp = moffersDaoImpl.getOffers(daoRequest);
+		
+		assertNotNull(daoResp);
+		
+		assertEquals("0", daoResp.getRespCode());
+		
+	}
+	
+	
+	@After
+	public void tearDown() throws Exception {
+		
+		 mockConnection=null;
+		 mockCallableStmt=null;
+		 mockResultSet=null;
+	}
+
+}
+
+====================================================================================================
+
+	8:00 AM to 9:00 AM  --> What is Redis cache and how to implement in project

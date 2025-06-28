@@ -1,0 +1,190 @@
+Last Session:
+============
+
+	-->We have discussed how to create the tables and stored procedures in the project
+
+Today Session:
+==============
+	-->How to create the tables
+	-->How to write  the stored procedure
+	-->How to call the stored procedure from plain jdbc
+
+Dbeaver database IDE to create the tables and develop the stored procedure
+
+-- oms.client_details definition
+
+CREATE TABLE `client_details` (
+  `id` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO oms.client_details (id, name, description) VALUES('1', 'web', 'good');
+INSERT INTO oms.client_details (id, name, description) VALUES('2', 'mobile', 'good');
+INSERT INTO oms.client_details (id, name, description) VALUES('3', 'netbanking', 'good');
+
+-- oms.channel_details definition
+
+CREATE TABLE `channel_details` (
+  `id` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO oms.channel_details (id, name, description) VALUES('1', 'online', 'online customers');
+INSERT INTO oms.channel_details (id, name, description) VALUES('1', 'offline', 'online customers');
+
+-- oms.customers_info definition
+
+CREATE TABLE `customers_info` (
+  `id` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `emailid` varchar(100) NOT NULL,
+  `dob` varchar(100) NOT NULL,
+  `cardnum` varchar(100) NOT NULL,
+  `nameoncard` varchar(100) NOT NULL,
+  `mobnum` varchar(100) NOT NULL,
+  `accountnum` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO oms.customers_info (id, name, emailid, dob, cardnum, nameoncard, mobnum, accountnum, status)
+VALUES('111', 'sreenu', 'sreenu.sreenutech', '24-03-1998', '0521114009876532', 'sreenu', '9876543286', 
+'310970876543', 'active');
+
+INSERT INTO oms.customers_info (id, name, emailid, dob, cardnum, nameoncard, mobnum, accountnum, status)
+VALUES('111', 'sujit', 'sujit.sreenutech@gmail.com', '24-03-1998', '0521114009876534', 'sujith', '9876543286', 
+'110970876543', 'active');
+
+select * from customers_info;
+
+desc offer_details;
+
+-- oms.offer_details definition
+
+CREATE TABLE `offer_details` (
+  `oid` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `image_url` varchar(100) DEFAULT NULL,
+  `desc` varchar(100) DEFAULT NULL,
+  `offertype` varchar(100) DEFAULT NULL,
+  `startdate` varchar(100) NOT NULL,
+  `enddate` varchar(100) DEFAULT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  `remarks` varchar(100) DEFAULT NULL,
+  `cardnum` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO oms.offer_details
+(oid, name, image_url, `desc`, offertype, startdate, enddate, status, remarks, cardnum)
+VALUES('111', 'mobile', 'http://amazon.com/iphone', 'good', 'p001', '15-04-2024', '30-06-2024', 'active', 'na', '0521114009876534');
+
+INSERT INTO oms.offer_details
+(oid, name, image_url, `desc`, offertype, startdate, enddate, status, remarks, cardnum)
+VALUES('222', 'gift card', 'http://amazon.com/iphone', 'good', 'p001', '15-04-2024', '30-06-2024', 'active', 'na', '0521114009876534');
+
+INSERT INTO oms.offer_details
+(oid, name, image_url, `desc`, offertype, startdate, enddate, status, remarks, cardnum)
+VALUES('333', 'life style', 'http://amazon.com/iphone', 'good', 'p001', '15-04-2024', '30-06-2024', 'active', 'na', '0521114009876534');
+
+INSERT INTO oms.offer_details
+(oid, name, image_url, `desc`, offertype, startdate, enddate, status, remarks, cardnum)
+VALUES('444', 'food bevarages', 'http://amazon.com/iphone', 'good', 'p001', '15-04-2024', '30-06-2024', 'active', 'na', '0521114009876534');
+
+INSERT INTO oms.offer_details
+(oid, name, image_url, `desc`, offertype, startdate, enddate, status, remarks, cardnum)
+VALUES('555', 'entertainment', 'http://amazon.com/iphone', 'good', 'p001', '15-04-2024', '30-06-2024', 'active', 'na', '0521114009876534');
+
+select * from offer_details;
+
+{ CALL oms.GET_OFFERS_V1('web2121','online','0521114009876534',?,?) }
+100	invalid client id
+
+{ CALL oms.GET_OFFERS_V1('web','online3232','0521114009876534',?,?) }
+101	invalid channel id
+
+
+{ CALL oms.GET_OFFERS_V1('web','online','052111400987653412',?,?) }
+
+102	invalid cardnumber
+
+{ CALL oms.GET_OFFERS_V1('web','online','0521114009876534',?,?) }
+
+111	mobile	http://amazon.com/iphone	good	p001	15-04-2024	30-06-2024	active	na	0521114009876534
+222	gift card	http://amazon.com/iphone	good	p001	15-04-2024	30-06-2024	active	na	0521114009876534
+333	life style	http://amazon.com/iphone	good	p001	15-04-2024	30-06-2024	active	na	0521114009876534
+444	food bevarages	http://amazon.com/iphone	good	p001	15-04-2024	30-06-2024	active	na	0521114009876534
+555	entertainment	http://amazon.com/iphone	good	p001	15-04-2024	30-06-2024	active	na	0521114009876534
+
+
+CREATE PROCEDURE oms.GET_OFFERS_V1( in client_id_in varchar(10), in channel_id_in varchar(10), 
+ in cardnumber_in varchar(20), out respcode_out varchar(10), out respmsg_out varchar(100))
+
+ proc_label:begin
+  
+   declare CLIENT_ID_COUNT int;
+   declare CHANNEL_ID_COUNT int;
+   declare CARDNUM_COUNT int;
+  
+   select count(*) into client_id_count from oms.client_details where name = client_id_in;
+   
+   if ( client_id_count = 0 ) then
+   	
+   	set respcode_out = '100';
+   	set respmsg_out  = 'invalid client id';
+   	
+   	leave proc_label;
+   end if;
+  
+   select count(*) into CHANNEL_ID_COUNT from oms.channel_details cd where name = channel_id_in;
+   
+   if ( CHANNEL_ID_COUNT = 0 ) then
+   	
+   	set respcode_out = '101';
+   	set respmsg_out  = 'invalid channel id';
+   	
+   	leave proc_label;
+   end if;
+  
+   select count(*) into CARDNUM_COUNT from oms.customers_info where cardnum = cardnumber_in;
+   
+   if ( CARDNUM_COUNT = 0 ) then
+   	
+   	set respcode_out = '102';
+   	set respmsg_out  = 'invalid cardnumber';
+   	
+   	leave proc_label;
+   end if;
+  
+  SELECT oid, name, image_url, `desc`, offertype, startdate, enddate, status, remarks, cardnum
+  FROM oms.offer_details where cardnum = cardnumber_in;
+ 
+ 	set respcode_out = '0';
+   	set respmsg_out  = 'success';
+  
+  
+  
+	
+END
+
+=============================================================================================================
+
+How to call the stored procedure using
+
+	1. plain jdbc : CallableStatement
+				|-executeQuery() -- ResultSet
+
+	2. spring jdbc : StoredProcedure, 	RowMapper
+			   |-execute() 		 |-mapRow() : handle the ResultSet
+				|-execute the stored procedure
+
+	3. spring data jpa : @Query() - call the stored procedure
+
+
+	7:00 AM to 9:00 AM : Docker theory + practials + how to implement in the project
+
+
+
+
+
+

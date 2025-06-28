@@ -1,0 +1,206 @@
+Last Session:
+=============
+
+	-->we have discussed on offer-details-service development, controller layer
+	-->What are the request and response objects are required at controller layer
+
+Today Session:
+==============
+
+	-->Today Session will continue the service layers and integration layer
+
+{
+  "offers" : [ {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  } ],
+  "statusBlock" : {
+    "respCode" : "0",
+    "respMsg" : "success"
+  }
+}
+
+====================================================================================
+
+{
+  "statusBlock" : {
+    "respCode" : "0",
+    "respMsg" : "success"
+  },
+  "offers" : [ {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  }, {
+    "offerId" : "12121",
+    "name" : "apple 15x",
+    "imageUrl" : "http://s3.amazon.com:8080/apple.png",
+    "desc" : "good",
+    "date" : "01-04-2024",
+    "status" : "active"
+  } ]
+}
+
+@Component
+public class OffersServiceImpl implements IOffersService {
+
+	@Autowired
+	IEnrollmentServiceClient enrollmentServiceClient;
+	@Autowired
+	ICardVerifyServiceClient cardVerifySvcClient;
+	@Autowired
+	IOffersDao offersDao;
+	@Autowired
+	OffersRequestBuilder requestBuilder;
+	@Autowired
+	OffersResponseBuilder responseBuilder;
+
+	@Override
+	public OffersResponse getOffers(OffersRequest offersRequest) {
+
+		//1. Get the request from controller
+		
+		//2. Prepare the  RequestBuilder Object for cardVerify request object obj 
+		
+		CardVerifyRequest cardVerifyReq = requestBuilder.buildCardVerifyReq(offersRequest);
+		
+		//3. Call cardverify service client by sending cardverifyreq and get the cardverify response
+		
+		CardVerifyResposne cardverifyResp = cardVerifySvcClient.verifyCard(cardVerifyReq);
+		
+		//4. Prepare the  RequestBuilder Object for enrollmentReq obj
+		EnrollmentRequest enrollmentRequest = requestBuilder.buildEnrollmentRequest(offersRequest);
+		
+		//5. Call EnrollmentServiceClient by sending enrollmentRequest object and get the EnrollmentResponse
+		EnrollmentResponse enrollmentResp = enrollmentServiceClient.enrollment(enrollmentRequest); 
+		
+		//6. apply the business logic on enrollmentResp
+		
+
+		//7. apply business logic on cardverify response
+		
+		//8. prepare the request for dao object. convert offersRequest to daoRequest
+		
+		 OffersDaoRequest daoReq = requestBuilder.buildDaoRequest(offersRequest);
+		 
+		 //9. call dao by sending offersDaoReq and get the daoresp
+		 
+		 OffersDaoResponse daoResp = offersDao.getOffers(daoReq);
+		 
+		 //10. apply business logic in dao response
+		 
+		 //11. prepare the offersResponse
+		 
+		OffersResponse offersResp = responseBuilder.buildOffersResp(daoResp,cardverifyResp,enrollmentResp);
+		 
+		 
+		 return offersResp;
+	}
+
+}
+
+@Component
+public class OffersRequestBuilder {
+
+	/** Description : Prepare the request object with the help of offersRequest object
+	 * @param offersRequest
+	 * @return EnrollmentRequest
+	 */
+	public EnrollmentRequest buildEnrollmentRequest(OffersRequest offersRequest) {
+		
+		EnrollmentRequest enrollmentReq = new EnrollmentRequest();
+		enrollmentReq.setCardNumber(offersRequest.getCardNum());
+		offersRequest.setCorrelationId(offersRequest.getCorrelationId());
+		
+		
+		return enrollmentReq;
+	}
+
+	/** Description : prepare the cardVerify request object with the help of offersRequest object
+	 * @param offersRequest
+	 * @return CardVerifyRequest
+	 */
+	public CardVerifyRequest buildCardVerifyReq(OffersRequest offersRequest) {
+		
+		
+		return null;
+	}
+
+	/**
+	 * @param offersRequest
+	 * @return
+	 */
+	public OffersDaoRequest buildDaoRequest(OffersRequest offersRequest) {
+		
+		OffersDaoRequest offersDaoRequest = new OffersDaoRequest();
+		
+		offersDaoRequest.setCardNum(offersRequest.getCardNum());
+		offersDaoRequest.setClientId(offersRequest.getClientId());
+		offersDaoRequest.setChannelId(offersRequest.getChannelId());
+		//offersDaoRequest.setTypeOfOffers(typeOfOffers);
+		
+		
+		return offersDaoRequest;
+	}
+
+}
+
+
+5:30 PM IST to 7:15 PM IST
+

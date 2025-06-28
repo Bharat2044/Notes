@@ -1,0 +1,563 @@
+Last Session:
+=============
+
+	-->We have implemented Mockito & Power Mockito for controller classes
+
+Today Session:
+==============
+
+	-->How to test service class using Mockito and Power Mockito
+	package com.barclays.offers.enrollment.svcclient;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import com.barclays.offers.model.EnrollmentRequest;
+import com.barclays.offers.model.EnrollmentResponse;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({EnrollmentServiceClientImpl.class,RestTemplate.class})
+public class EnrollmentServiceClientImplTest {
+	
+	EnrollmentServiceClientImpl enrollmentServiceClientImpl;
+    RestTemplate mockRestTemplate;
+	
+	
+	@Before
+	public void setUp() throws Exception {
+		
+		enrollmentServiceClientImpl = new EnrollmentServiceClientImpl();
+		
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testEnrollment() throws Exception {
+		
+		//mock RestTemplate Object
+		mockRestTemplate = PowerMockito.mock(RestTemplate.class);
+		
+		//replace new object with Mock Object
+		PowerMockito.whenNew(RestTemplate.class).withNoArguments().thenReturn(mockRestTemplate);
+		
+		PowerMockito.when(mockRestTemplate.exchange(Matchers.anyString(), Matchers.any(HttpMethod.class), Matchers.any(),
+				Matchers.<Class<EnrollmentResponse>>any())).thenReturn(buildResponseEntity());
+		
+		
+		EnrollmentRequest enrollmentRequest = new EnrollmentRequest();
+		enrollmentRequest.setCardnum("78798979879");
+		enrollmentRequest.setDate("23-05-2024");
+		enrollmentRequest.setName("sreenu");
+		
+		EnrollmentResponse enrollmentResp = enrollmentServiceClientImpl.enrollment(enrollmentRequest);
+		
+		assertNotNull(enrollmentResp);
+		assertEquals("0", enrollmentResp.getRespCode());
+		
+	}
+
+	
+	private ResponseEntity<EnrollmentResponse> buildResponseEntity() {
+		
+		System.out.println("Entered into mock Enrollment");
+		EnrollmentResponse enrollmentResponse = new EnrollmentResponse();
+		enrollmentResponse.setRespCode("0");
+		enrollmentResponse.setRespMsg("succcess");
+		enrollmentResponse.setStatus("active");
+		
+		return  new ResponseEntity<EnrollmentResponse>(enrollmentResponse, HttpStatus.OK);
+	}
+
+}
+
+/* 
+ * @CopyRight 2024 Keybank pvt ltd.  All rights are reservered. you shuldn't disclose the information
+ *  outside world, otherwise terms and conditions will apply.
+ */
+
+package com.barclays.offers.service;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Matchers;
+import org.mockito.Mock;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import com.barclays.offers.builder.OffersRequestBuilder;
+import com.barclays.offers.builder.OffersResponseBuilder;
+import com.barclays.offers.dao.IOffersDao;
+import com.barclays.offers.enrollment.svcclient.IEnrollmentServiceClient;
+import com.barclays.offers.exception.BusinessException;
+import com.barclays.offers.exception.SystemException;
+import com.barclays.offers.model.EnrollmentRequest;
+import com.barclays.offers.model.EnrollmentResponse;
+import com.barclays.offers.model.OfferDetailsDao;
+import com.barclays.offers.model.OffersDaoRequest;
+import com.barclays.offers.model.OffersDaoResponse;
+import com.barclays.offers.model.OffersRequest;
+import com.barclays.offers.model.OffersResponse;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ OffersServiceImpl.class, IEnrollmentServiceClient.class, IOffersDao.class, OffersRequestBuilder.class,
+		OffersResponseBuilder.class })
+public class OffersServiceImplTest {
+
+	OffersRequest offersRequest;
+	@Mock
+	IEnrollmentServiceClient enrollmentServiceClient;
+	@Mock
+	IOffersDao offersDao;
+	@Mock
+	OffersRequestBuilder requestBuilder;
+	@Mock
+	OffersResponseBuilder responseBuilder;
+
+	@InjectMocks
+	OffersServiceImpl mockOffersServiceImpl;
+
+	@Before
+	public void setUp() throws Exception {
+
+		offersRequest = buildOffersRequest();
+
+		// enrollmentServiceClient = PowerMockito.mock(IEnrollmentServiceClient.class);
+		// offersDao = PowerMockito.mock(IOffersDao.class);
+		// requestBuilder = PowerMockito.mock(OffersRequestBuilder.class);
+		// responseBuilder = PowerMockito.mock(OffersResponseBuilder.class);
+
+	}
+
+	@Test
+	public void testGetOffers_Success_Scenario() throws BusinessException, SystemException {
+
+		PowerMockito.when(requestBuilder.buildEnrollmentRequest(Matchers.any(OffersRequest.class)))
+				.thenCallRealMethod();
+		PowerMockito.when(enrollmentServiceClient.enrollment(Matchers.any(EnrollmentRequest.class)))
+				.thenReturn(buildEnrollmentResp());
+		PowerMockito.when(requestBuilder.buildDaoRequest(Matchers.any(OffersRequest.class))).thenCallRealMethod();
+
+		PowerMockito.when(offersDao.getOffers(Matchers.any(OffersDaoRequest.class))).thenReturn(buildDaoResp());
+
+		PowerMockito.when(responseBuilder.buildOffersResp(Matchers.any(OffersDaoResponse.class),
+				Matchers.any(EnrollmentResponse.class))).thenCallRealMethod();
+
+		OffersResponse offersResp = mockOffersServiceImpl.getOffers(offersRequest);
+
+		assertNotNull(offersResp);
+
+		assertEquals("0", offersResp.getStatusBlock().getRespCode());
+
+	}
+
+	@Test
+	public void testGetOffers_BusinessException_Scenario() {
+
+		OffersResponse offersResp = null;
+
+		try {
+			PowerMockito.when(requestBuilder.buildEnrollmentRequest(Matchers.any(OffersRequest.class)))
+					.thenCallRealMethod();
+			PowerMockito.when(enrollmentServiceClient.enrollment(Matchers.any(EnrollmentRequest.class)))
+					.thenReturn(buildEnrollmentResp());
+			PowerMockito.when(requestBuilder.buildDaoRequest(Matchers.any(OffersRequest.class))).thenCallRealMethod();
+
+			PowerMockito.when(offersDao.getOffers(Matchers.any(OffersDaoRequest.class)))
+					.thenThrow(new BusinessException("100", "Client Id Invalid"));
+
+			PowerMockito.when(responseBuilder.buildOffersResp(Matchers.any(OffersDaoResponse.class),
+					Matchers.any(EnrollmentResponse.class))).thenCallRealMethod();
+
+			offersResp = mockOffersServiceImpl.getOffers(offersRequest);
+			
+		} catch (BusinessException e) {
+			//assertNotNull(offersResp);
+			assertEquals("100", e.getRespCode());
+		} catch (SystemException e) {
+
+		}
+
+	}
+
+	/**
+	 * @return
+	 */
+	private OffersDaoResponse buildDaoResp() {
+
+		OffersDaoResponse offerDaoResp = new OffersDaoResponse();
+		offerDaoResp.setRespCode("0");
+		offerDaoResp.setRespMsg("success");
+
+		List<OfferDetailsDao> offerDaoList = new ArrayList<OfferDetailsDao>();
+
+		OfferDetailsDao offersDao = new OfferDetailsDao();
+		offersDao.setOfferId("1234");
+		offersDao.setDesc("good");
+		offersDao.setEnDate("23-06-2024");
+		offersDao.setImageUrl("http://amazon.com/offers/iphone");
+		offersDao.setName("iphone");
+		offersDao.setOfferType("m-offers");
+		offersDao.setStDate("23-05-2024");
+
+		offerDaoList.add(offersDao);
+
+		offerDaoResp.setOfferDaoList(offerDaoList);
+
+		return offerDaoResp;
+	}
+
+	private EnrollmentResponse buildEnrollmentResp() {
+
+		System.out.println("Entered into mock enrollment response");
+
+		EnrollmentResponse enrollmentResponse = new EnrollmentResponse();
+
+		enrollmentResponse.setRespCode("0");
+		enrollmentResponse.setRespMsg("success");
+		enrollmentResponse.setStatus("active");
+
+		return enrollmentResponse;
+	}
+
+	private OffersRequest buildOffersRequest() {
+
+		OffersRequest offersRequest = new OffersRequest();
+
+		offersRequest.setClientId("web");
+		offersRequest.setChannelId("online");
+		offersRequest.setMsgTs(new Date().toString());
+		offersRequest.setCorrelationId(UUID.randomUUID().toString());
+		offersRequest.setCardNum("0521114005823912");
+		offersRequest.setAuthToken("#$%^&(*&^%@#$%^&");
+
+		return offersRequest;
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+	}
+
+}
+
+
+package com.barclays.offers.validator;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Date;
+import java.util.UUID;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.barclays.offers.exception.OffersInvalidRequestDataException;
+import com.barclays.offers.model.OffersRequest;
+
+public class OfferDetailsValidatorTest {
+	
+	OfferDetailsValidator offerDtlsValidator;
+	OffersRequest offersRequest;
+
+	@Before
+	public void setUp() throws Exception {
+		
+		offerDtlsValidator = new OfferDetailsValidator();
+		offersRequest = buildOffersRequest();
+	}
+
+	
+	private OffersRequest buildOffersRequest() {
+		
+		
+		OffersRequest offersRequest = new OffersRequest();
+		
+		offersRequest.setClientId("web");
+		offersRequest.setChannelId("online");
+		offersRequest.setMsgTs(new Date().toString());
+		offersRequest.setCorrelationId(UUID.randomUUID().toString());
+		offersRequest.setCardNum("0521114005823912");
+		offersRequest.setAuthToken("#$%^&(*&^%@#$%^&");
+		
+		return offersRequest;
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		
+		offerDtlsValidator = null;
+		offersRequest = null;
+	}
+
+	@Test
+	public void testValidateRequest_ClientId_Null_Scenaio()  {
+		
+		offersRequest.setClientId(null);
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc001", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_ClientId_Empty_Scenaio() {
+		
+		offersRequest.setClientId(" ");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc001", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_ChannelId_Null_Scenaio() {
+		
+		
+		offersRequest.setChannelId(null);
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc002", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_ChannelId_Empty_Scenaio() {
+		
+		offersRequest.setChannelId(" ");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc002", e.getRespCode());
+			
+		}
+		
+	}
+	
+	
+	@Test
+	public void testValidateRequest_CardNum_Null_Scenaio() {
+		
+		offersRequest.setCardNum(null);
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc003", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_CardNum_Empty_Scenaio() {
+		
+		offersRequest.setCardNum(" ");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc003", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_CardNum_LengthLessthan_16_Scenaio() {
+		
+		offersRequest.setCardNum("43854378954");
+		
+		try {
+			offerDtlsValidator.validateRequest(offersRequest);
+		} catch (OffersInvalidRequestDataException e) {
+			
+			assertEquals("offsvc003", e.getRespCode());
+			
+		}
+		
+	}
+	
+	@Test
+	public void testValidateRequest_CardNum_LengthGreaterthan_16_Scenaio() throws OffersInvalidRequestDataException {
+		
+		offersRequest.setCardNum("438543789542432432423");
+		
+		
+		offerDtlsValidator.validateRequest(offersRequest);
+		
+		
+	}
+
+}
+
+package com.barclays.offers.controller;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
+
+import com.barclays.offers.exception.BusinessException;
+import com.barclays.offers.exception.OffersInvalidRequestDataException;
+import com.barclays.offers.exception.SystemException;
+import com.barclays.offers.model.OfferDetails;
+import com.barclays.offers.model.OffersRequest;
+import com.barclays.offers.model.OffersResponse;
+import com.barclays.offers.model.StatusBlock;
+import com.barclays.offers.service.IOffersService;
+import com.barclays.offers.validator.OfferDetailsValidator;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({OfferDetailsValidator.class, IOffersService.class })
+public class OfferDetailsControllerTest {
+	
+	OfferDetailsValidator mockOfferDetailsValidator;
+	IOffersService mockOffersService;
+	OfferDetailsController offerDtlsController;
+
+	@Before
+	public void setUp() throws Exception {
+		
+		offerDtlsController = new OfferDetailsController();
+		
+		mockOfferDetailsValidator = PowerMockito.mock(OfferDetailsValidator.class);
+		mockOffersService = PowerMockito.mock(IOffersService.class);
+		
+		//It will use refelctions api's to replace the real object with mock object in controller
+		Whitebox.setInternalState(offerDtlsController, "offerDetailsValidator", mockOfferDetailsValidator);
+		Whitebox.setInternalState(offerDtlsController, "offersService", mockOffersService);
+		
+		
+		
+		
+	}
+
+	
+
+	@Test
+	public void testGetOffers() throws OffersInvalidRequestDataException, BusinessException, SystemException {
+		
+		
+		
+		PowerMockito.doNothing().when(mockOfferDetailsValidator).validateRequest(Matchers.any(OffersRequest.class));
+		
+		PowerMockito.when(mockOffersService.getOffers(Matchers.any(OffersRequest.class))).thenReturn(buildMockResponse());
+		
+		OffersResponse offersResp = offerDtlsController.getOffers("2389238429414567", "web", "online", "20-05-2024", "abc123xyz", "@#$%^&*(");
+		
+		assertNotNull(offersResp);
+		assertEquals("0", offersResp.getStatusBlock().getRespCode());
+		
+	}
+	
+	
+	/**
+	 * @return
+	 */
+	private OffersResponse buildMockResponse() {
+		
+		OffersResponse offersResp = new OffersResponse();
+		
+		
+		StatusBlock statusBlock = new StatusBlock();
+		
+		statusBlock.setRespCode("0");
+		statusBlock.setRespMsg("success");
+		
+		
+		offersResp.setStatusBlock(statusBlock);
+		List<OfferDetails> offersList = new ArrayList<OfferDetails>();
+		
+		OfferDetails offerDetails = new OfferDetails();
+		offerDetails.setOfferId("1234");
+		offerDetails.setName("mobile");
+		offerDetails.setDate("20-05-2024");
+		offerDetails.setDesc("good");
+		offerDetails.setImageUrl("http://amazon.com/offers/details");
+		offerDetails.setStatus("delivered");
+		
+		offersList.add(offerDetails);
+		
+		offersResp.setOffers(offersList);
+		
+		
+		
+		
+		return offersResp;
+	}
+
+
+
+	@After
+	public void tearDown() throws Exception {
+		
+		 mockOfferDetailsValidator=null;
+		 mockOffersService=null;
+		 offerDtlsController=null;
+	}
+
+}
+
+	
+
+
+				      	

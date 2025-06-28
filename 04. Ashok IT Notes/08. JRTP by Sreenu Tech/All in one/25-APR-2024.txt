@@ -1,0 +1,88 @@
+Till Saturday 7:00 Am to 9:00 AM ( 28th, 29th, 30th)
+Evening Classes will have break : 26th APR to 30th APR (5 days : sat & sund)
+
+Business Logics:
+================
+
+	JDK8 Stream API : https://www.youtube.com/watch?v=TiCFAfzt9TY
+
+3. As per business requirements the offers order would be 
+
+			a. membership offers - moffers
+			b. personalized offers - poffers
+			c. generalized offers  - goffers
+
+4. Always we should send atmost 10 offers to the customers as per below order
+
+		a. if m-offers >= 10 then send only 10 moffers by ignoring other offers
+		b. if m-offers < 10 then how many offers count for <10 . (ex : moffers - 5, ..etc)
+		   get the remaining offers from p-offers
+
+			ex : 1. m-offers = 10 ---> ignore p-offers, g-offers
+			ex : 2. m-offers = 4  ----> get 6 from p-offers and ignore g-offers
+
+				10 = m-offers + p-offers + g-offers
+				10 = 10 + 0 + 0
+				10 = 4 + 6 + 0
+
+			add remaining poffers to reach the count for 10 offers.
+
+				
+                 c. The combination of m-offers and p-offers <10 then goto g-offers, get remaining 
+		    offers from g-offers
+
+			ex :  m-offers = 4, p-offers=5, g-offers=1
+
+				10 = m-offers + p-offers + g-offers
+				10 =  0 + 0 + 10 
+				10 =  0 + 9 + 1
+				10 =  3 + 4 + 3
+		
+
+	 	Summary : max up to 10 offers
+		
+			10 = m-offers + p-offers + g-offers
+
+			10 = 0 + 0 + 9 (m-offers =0, p-offers = 0,g-offers = 9)
+			10 = 2 + 2 + 6 (m-offers =2, p-offers = 2,g-offers = 20)
+			10 = 5 + 0 + 5 (m-offers =5, p-offers = 0,g-offers = 50)
+			10 = 9 + 1 + 0 (m-offers =9, p-offers = 20,g-offers = 5)
+			10 = 6 + 6 + 0 (m-offers =6, p-offers = 4,g-offers = 9)
+			10 = 4 + 2 + 3 (m-offers =4, p-offers = 2,g-offers = 3)
+
+	5. The combination of m-offers, p-offers or m-offers, p-offers and g-offers ..etc
+	   will reach morethan/greaterthan 10 then consider the offers which expired near time
+
+		
+	   		10 = 0 + 0 + 9 (m-offers =0, p-offers = 0,g-offers = 9)
+			10 = 2 + 2 + 6 (m-offers =2, p-offers = 2,g-offers = 20)
+			10 = 5 + 0 + 5 (m-offers =5, p-offers = 0,g-offers = 50)
+			10 = 9 + 1 + 0 (m-offers =9, p-offers = 20,g-offers = 5)
+			10 = 6 + 6 + 0 (m-offers =6, p-offers = 4,g-offers = 9)
+			10 = 4 + 2 + 3 (m-offers =4, p-offers = 2,g-offers = 3)
+
+		For every offers will have expiry date, consider which offer expdate will near date
+		from current date and get those offers.
+
+	6. Get the offers in sorting order based on given input feild
+
+		i/p : sortfield = offerid  o/p : sort all the offers based
+		i/p : sortfield = name     o/p : sort all the offers name 
+
+
+	7. Give priority on expiry offers or near end date offers
+
+
+		m-offers > 10 ---> Get the list of offers based on early exp offers.
+			
+		
+				
+
+
+
+
+
+
+
+
+				  

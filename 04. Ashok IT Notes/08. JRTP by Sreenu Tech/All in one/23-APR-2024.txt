@@ -1,0 +1,118 @@
+Last Session:
+	
+	-->we have created tables, stored procedures of our project
+	-->Tested stored procedure from IDE, it is working fine as expected
+
+Today Session:
+=============
+
+	-->How to call the stored procedure from 
+			
+			a. plain jdbc
+			b. spring jdbc
+
+
+public class OffersPlainJdbcDemo {
+
+	
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/oms", "root", "root");
+		
+		String sp = "CALL oms.GET_OFFERS_V1(?,?,?,?,?)";
+		
+		CallableStatement cstmt = connection.prepareCall(sp);
+		
+		cstmt.setString(1, "web");
+		cstmt.setString(2, "online");
+		cstmt.setString(3, "0521114009876534");
+		cstmt.registerOutParameter(4, Types.VARCHAR);
+		cstmt.registerOutParameter(5, Types.VARCHAR);
+		
+		cstmt.execute();
+		
+		ResultSet rs = cstmt.executeQuery();
+		
+		System.out.println("RespCode :"+cstmt.getString(4));
+		System.out.println("RespMsg" +cstmt.getString(5));
+		
+		while(rs.next()) {
+			
+			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(2));
+			System.out.println(rs.getString(3));
+			System.out.println(rs.getString(4));
+			System.out.println(rs.getString(5));
+			System.out.println(rs.getString(6));
+			System.out.println(rs.getString(7));
+			System.out.println(rs.getString(8));
+			System.out.println(rs.getString(9));
+			System.out.println(rs.getString(10));
+		}
+		
+		
+		
+
+	}
+
+}
+
+
+{
+    "statusBlock": {
+        "respCode": "0",
+        "respMsg": "success"
+    },
+    "offers": [
+        {
+            "offerId": "111",
+            "name": "mobile",
+            "imageUrl": "http://amazon.com/iphone",
+            "desc": "good",
+            "status": "active"
+        },
+        {
+            "offerId": "222",
+            "name": "gift card",
+            "imageUrl": "http://amazon.com/iphone",
+            "desc": "good",
+            "status": "active"
+        },
+        {
+            "offerId": "333",
+            "name": "life style",
+            "imageUrl": "http://amazon.com/iphone",
+            "desc": "good",
+            "status": "active"
+        },
+        {
+            "offerId": "444",
+            "name": "food bevarages",
+            "imageUrl": "http://amazon.com/iphone",
+            "desc": "good",
+            "status": "active"
+        },
+        {
+            "offerId": "555",
+            "name": "entertainment",
+            "imageUrl": "http://amazon.com/iphone",
+            "desc": "good",
+            "status": "active"
+        }
+    ]
+}
+
+===================================================================================================
+Spring Jdbc:
+============
+
+
+
+
+
+
+
+
