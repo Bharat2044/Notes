@@ -1,0 +1,267 @@
+KAFKA Topics:
+=============
+
+	1. Introduction
+	2. Kafka Architecture
+	3. KAFKA Elements
+		a. Topic
+		b. Partition
+		c. Broker
+		d. Producer/Publisher
+		e. Consumer/Subscriber
+		f. Leader
+		g. Follower
+		h. Replica
+
+	4. KAFKA Software Installation
+
+	5. Examples
+
+		a. without spring boot
+		b. with spring boot
+
+===========================================================================================================
+
+ Kafka Introduction:
+
+	-->Apache Kafka was originated at LinkedIn and later became an open source Apache Project in 2011
+	-->Apache Kafka is written in java and scala language
+	-->Apache Kafka is publish and subscribe based fault tolerance messaging system	
+	-->It is very fast, scalable and distributed by design
+	-->High performance - latency of less than 10 ms in realtime
+
+In realtime what are the challenges with data
+
+		1. How to collect the large volume of data
+		2. How to analyse the collected data
+		
+
+To overcome these issue messaging system has introduced into market
+
+ Messaging System : 
+
+	-->It is used to transfer the data from one system to another system
+	-->The application will focus only data but we don't worry how to transfer the data
+	-->To transfer the data, we can use distributed messaging system based on the concept of reliable
+	   message queue.
+		    
+
+Use cases:
+==========
+
+1. messaging system
+2. decouple of system dependencies
+3. stream processing
+4.  application logs gathering
+5. Integration with spark, flink, storm , Hadoop...etc
+
+In realtime clients
+
+	1. Netflix  : uses kafka to apply the recommendations in realtime while we are watching tv shows
+
+	2. Uber     : uses kafka to gather user,taxi and trip data in realtime to compute and forecast
+		      demand, compute pricing in realtime
+
+	3. LinkedIn
+
+
+Kafka elements :
+
+	1. Topic 
+
+		-->It is a particular stream of data . i.e. cricket score, movies, news ..etc
+		-->It is similar to a table in database
+		-->we can have many topics as you want
+		-->A topic is identified by name
+		-->Topic split into partitions
+			a. Each partition is ordered
+			b. each message with in a partition get an incremental id called offset
+			
+					|---partition 0  : 0  1  2  3  4  5  6  7  8 9 10
+					|---partition 1  : 0  1  2  3  4  5  6  7  8 9 10
+			Topic ----------|---partition 2  : 0  1  2  3  4  5  6  7  8 9 10
+					|---partition 3  : 0  1  2  3  4  5  6  7  8 9 10
+
+
+		Note: Partition 0, Partition 1, Partition 2,..etc are not going have same no.of message
+
+	
+		-->Offset = meaning for a specific partition
+			
+		ex : offset in partition 0 doesn't represent the same data as offset 2 in partition1
+
+		-->Ordered is guaranteed only with in partition ( not across partition )
+		-->Data is only kept for limited time ( default is one week )
+		-->Once the data is written to partition, it can't be changed
+		-->Data is assigned randomly to a partition unless a key is provided
+
+	2. Brokers :
+	
+		-->A kafka is composed of multiple brokers ( servers )
+		-->Each broker is identified with its id ( integer )
+		-->Each broker contains certain topic partitions
+		-->After connecting to any broker ( called a bootstrap broker ) you will be connected to 
+		   the entire cluster
+		-->A good number to get started is 3 broker but some big clusters have over 100 brokers
+				
+
+		ex : Topic A has 3 partitions : partition 0, partition 1, partition 2 
+		     Topic B has 2 partitions : partition 0, partition 1	
+
+	3. Topic Replication factor :
+
+		-->Replication means backup
+		-->If one machine/broker goes down then the things should work
+		-->Topic should have a replication factor > 1 ( usually 2 or 3 )
+		   this way if a broker is down another broker can serve the data
+
+		ex : Topic A with 2 partitions and replication factor 2
+
+
+	4. Leader :
+
+		-->At any time only one broker can be a leader for given partition
+		-->Only that leader can receive and serve data for a partition and other brokers will 
+		   synchronize the data
+
+		-->Each partition has one leader and multiple ISR ( In Sync Replica )
+
+
+
+	5. Producer : 
+
+		-->Producer write the data into topics ( which is made of partitions )
+		-->Producer automatically know to which broker and partition write to
+		-->Incase broker failure then producer will automatically recover
+		-->Producer can choose to receive acknowledgement of data writes
+			
+			1. acks = 0 
+				
+				--> producer won't wait for acknowledgement
+				-->producer just send data, if broker will down we don't know that
+				   i.e. we may lose the data here
+	
+			2. acks =1 
+
+				-->producer will wait for leader acknowledgement
+
+			3. acks = all 
+			
+				--> Leader + replicas acknowledgement
+				--> No data loss
+				--> Even if we lose broker then we can it from another broker
+			
+		-->Producer can choose a send a key with the message
+
+			a. if key = null then data is sent round robbin
+			
+			b. If key is sent then all messages for that key will always goto same partition
+		
+
+	6. Consumers  : 
+
+		-->Consumer read the data from topic ( identified by name )
+		-->Consumer knows which broker to read from
+		-->Incase consumer of broker failures, consumers know how to recover
+		-->Data is read in order within each partition
+
+
+	7. zookeeper :
+
+		-->zookeeper manages the brokers ( keeps a list of them )
+		-->zookeeper helps in performing leader election for partition
+		-->zookeeper sends notification to kafka in case of changes like new topic, broker dies,
+		   broker comes up, delete topic..
+		-->zookeeper has a leader (handle writes) and the rest of the servers are the followers(handle 		   read)
+
+
+How to install kafka Software:
+==============================
+
+	-->It is an opensource software and it is in the form of zip file
+	-->Download kafka zip freely from https://kafka.apache.org/downloads
+	-->once it is downloaded extract the zip file
+
+
+How to start zookeeper :
+
+	D:\Srenu-Backup\kafka_2.12-2.7.0\kafka_2.12-2.7.0\config
+	D:\Srenu-Backup\kafka_2.12-2.7.0\kafka_2.12-2.7.0\bin\windows
+
+>zookeeper-server-start.bat ../../config/zookeeper.properties
+>zookeeper-server-start.bat D:\Srenu-Backup\kafka_2.12-2.7.0\kafka_2.12-2.7.0\config\zookeeper.properties
+
+kafka start :
+
+	D:\Srenu-Backup\kafka_2.12-2.7.0\kafka_2.12-2.7.0\config\server.properties
+
+	>kafka-server-start.bat ../../config/server.properties
+	>kafka-server-start.bat D:\Srenu-Backup\kafka_2.12-2.7.0\kafka_2.12-2.7.0\config\server.properties
+
+
+
+
+>kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic  test-topic
+>kafka-console-producer.bat --broker-list localhost:9092 --topic test-topic
+
+	welcome to sreenutech
+
+>kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test-topic --from-beginning
+
+
+
+Kafka Implementation in spring boot:
+==================================
+
+	-->Add the kafka maven dependency in pom.xml
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+	-->Write configuration code to connect to kafka server either by using 
+	    application.properties or java config
+
+
+	@Bean
+	public Map<String, Object> producerConfigs() {
+	    Map<String, Object> props = new HashMap<>();
+	    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+	    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+	    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+	    return props;
+	}
+	
+	@Bean
+	public ProducerFactory<String, String> producerFactory() {
+	    return new DefaultKafkaProducerFactory<>(producerConfigs());
+	}
+
+	@Bean
+	public KafkaTemplate<String, String> kafkaTemplate() {
+	    return new KafkaTemplate<String, String>(producerFactory());
+	}
+
+
+	-->Using KafkaTemplate.send() method publish/push the message into kafka server
+
+	-->Spring boot will write consumer code using @kafkaListner to pull/get the data from kafka server
+
+	
+ Tuesday : 6:00 PM IST
+
+	Topics left  :
+
+		1. Agile      : JIRA
+		2. Kubernetes : 
+
+
+
+Please reachout to my email id : sreenu.sreenutech@gmail.com if you need any help
+
+
+
+
+
+ 	

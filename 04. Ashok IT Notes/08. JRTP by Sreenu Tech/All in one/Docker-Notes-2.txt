@@ -1,0 +1,265 @@
+Last Session:
+============
+
+	-->We have discussed on docker volumes
+
+Today Session:
+=============
+	-->HEALTHCHECK directive
+	-->export directive
+	-->Docker Networking
+
+Docker container states:
+========================
+
+	There are 7 different states
+
+		1. created
+		2. running
+		3. paused
+		4. exited
+		5. restarting
+		6. removed
+		7. dead
+
+
+
+HEALTHCHECK:
+============
+
+	-->when we run docker container, the application packaged inside the container will be running and the status of 
+	   the container is reported as 'running'
+
+	-->by looking at status of the container as "running" we can't say what is the underlying status of the application
+	   packaged inside the container, may be the application packaged inside the container may have not started and might has 	    resulted in failure state, due to heavy loads or various reasons the application might go into unresponsive state
+
+	   i.e. just by looking at the container status we can't predict or say the state/heath of the application
+
+
+Q) How to monitor the status/health of the application that is running inside the container?
+
+Sol : Using HEALTHCHECK directive we can get the status of the application
+
+
+	1. developer can write manual code to enable healthcheck endpoint
+
+			@Get("/health")
+			public String healthCheck(){
+
+			return "up and running";		http://localhost:2021/health
+
+			}
+
+
+	2. Docker has provided HEALTHCHECK directive upon declaring it with endpoint information and polling the during
+	   The docker daemon repeated polls the healthendpoint and report the status of the container rather than showing it as
+	   running
+
+	
+	 		ex : cfc608b6a1aa   sreenivas18/enrollment-svc:1.0   "java -jar /enrollme…"   48 seconds ago   Up
+
+				Up = running
+
+
+		1. HEALTHCHECK [options] CMD [commandToVerifyTheEndpoint]
+
+			
+		options: 
+
+			1. --interval = DURATION = how frequent intervals at which it has to execute the CMD supplied 
+					to determine the status of the application
+			2. --timeout  = how long should wait for getting a response from HEALThCHECK CMD
+			3. --start-period = milliseconds to be waited before starting the HEALTHCHECK to allow application to start
+			4. --retires = N how many retries it has todo before reporting the application failure status
+
+
+
+
+EXPOSE :
+=======
+
+	-->EXPOSE directive doesn't expose any port of the docker container to the target, it is just for sake of documentation
+	   stating the containerized application is running on which port so that the user who is launching the container
+	   can expose the port
+
+	 Dockerfile
+
+		EXPOSE 2021	
+
+
+Summary Docker Directives:
+==========================
+
+	-->Docker directives are used to write docker instructions in docker file
+	-->Using Dockerfile only docker engine will create the docker image
+	-->Docker images are 
+
+		1. predefined  image : docker team has already written Dockerfile, using that prepared/generated docker image
+
+		2. userdefined image : If we want build our own (custom) image then developer/devops must write the dockerfile
+				       according to our application requirement
+
+ 				DE		     Run	
+		Dockerfile------------>DockerImge--------> Docker Container ---> Application is up and running and 
+									         Access the application		
+
+
+	To write the docker file, we need directives, These directive 2 types
+
+		1. Image Build Directives	: These directives are used to build the docker image
+
+				1. FROM		6. COPY
+				2. ENV		7. WORKDIR
+				3. ARG		8. LABEL
+				4. RUN
+				5. ADD
+
+		2. Container Instruction Directives :  These directives are used to to launch the container. i.e. these are executed
+						       at the time of launching the container to run the application packaged
+						      inside the image
+				
+				9. CMD
+			       10. ENTRYPOINT
+			       11. VOLUME
+			       12. HEALTHCHECK  
+			       13. EXPOSE
+			 
+
+Dockerfile
+===========
+
+FROM
+ENV
+ARG
+RUN
+ADD		===================> >Docker build -t imagename:tag .
+COPY
+WORKDIR
+LABEL
+CMD
+ENTRYPOINT
+VOLUME
+HALTHCHECK
+EXPOSE
+::
+
+
+==================================================================================================================================
+
+Docker Networking:
+
+	-->Docker will allows a docker container can talk to the host or host to the container
+	-->Docker container can talk to the other docker container running on the docker engine
+	   i.e. Docker containers can communicate and run in a network of clustered applications
+
+	-->Docker network based on the network drivers, we can build our own network drivers and plugin onto the docker engine
+	   
+	-->The docker supports 5 modes of networking
+
+		1. bridge network
+		2. host   network
+		3. overlay network
+		4. mcvlan network
+		5. none
+	
+
+
+	1. bridge network
+ 
+		-->The default docker container networking is "Bridge"
+		-->When we run a docker container without specifying any network option the default mode of networking with which 
+	           the docker container will be launched as "Bridge"
+		-->If we want isolate our docker container from other containers running on the docker engine, we can create a
+	           bridge network, so group of containers that are connected to the same bridge network can communicate with 
+		   each other by isolating themself from other containers on the docker engine
+
+		 i.e. Here each container can talk to other container that is connected to the default bridge thus making is insecure
+	
+		 So it is recommended avoid using default bridge network
+
+		
+
+	To overcome this we should create our own bridge network in launching the container rather than using default bridge
+	
+
+
+	How to create our own network bridge?
+
+		>docker network create bridgename
+		>docker network remove bridgename
+		>docker network connect bridgename containername
+		>docker network disconnect bridgename containername
+		
+		>docker network ls = shows all the network adapters available on the docker engine
+
+
+
+	while launching the docker container we can specify the network option and bridge to be connect as below
+
+
+	>docker network create mybridge
+	>docker container run --name java --bridge mybridge -p  2021:2021 sreenivas8/offers-service:1.0
+	>docker container run --name mysql --bridge mybridge -p 3306:3306 sreenivas8/offers-service:1.0
+
+
+
+
+2. host network:
+
+	-->There is only one host network per docker engine will be created, when we launch an docker container under host network
+	   the container will be running on the network of the host directly
+
+	-->The host container can communicate with each other
+
+	-->When we use host container there is no need of port forwarding, since both are on the same network.
+
+
+3. overlay :
+
+	-->Using overlay we can make a container of one docker workstation (docker engine) to communicate with another 
+	   docker container running on different docker engine/workstation
+
+	
+
+4. macvlan : 
+
+	-->It will allow us to attach mac address to an docker container, appearing it is a physical network adapter
+	   The docker engine will route the network traffic to a specific container based on mac address.
+
+5. none
+	
+	 no networking
+
+
+
+
+Docker Compose:
+===============
+
+	-->Docker compose is used to run multiple container as a single service
+	-->For ex, we have application which required  java and MySQL then create one file which will start both containers as a 
+	   service without need to start each container separately
+
+
+		web application  = front end + backend + database	= 3 images
+
+
+	docker-compose.yml
+	===================
+
+		services: 
+			frontend:
+			  image: offers-web-app
+			backend:
+			  image: offers-service
+			database:
+			   image: mysql
+
+
+	>docker-compose up
+	>docker-compose start
+	>docker-compose -f custom-compose-file.yml start
+	>docker-compose stop  : stop the active services we can use stop which will preserve containers, volumes and networks
+	
+
+

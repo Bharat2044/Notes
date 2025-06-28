@@ -1,0 +1,196 @@
+Docker Compose:
+
+	-->Docker compose is used to run  multiple containers as a single service
+	-->For ex, we have java web application that requires database, Redis cache, api..etc, we can create one file which will 
+	   start all of these docker containers as a service without the need to start each container separately
+
+advantages:
+==========
+
+	1. Simplified Control : 
+
+		-->docker compose allows us to define and manage multiple containers in one single yaml file
+		   It simplifies the complext task of orchestrating and coordinating various containers/services making the job
+	            easier
+
+				api ----> database
+
+			  first database container should up and running then api container should up and running
+
+
+	2. docker compose support variables in compose configuration file, so that we can customize and make the compose 
+	   portable across the environments	
+
+
+	3. using docker compose we can replicate the process of running the containers across the environments easily
+
+
+How to install docker compose?
+
+Sol : upon installing docker desktop for windows by default it will have docker compose installed in it we can start directly
+
+	>docker-compose version
+
+					   container1		container2	
+						|		   |	
+		SimpleService =========>  springboot-api -------> MySQL database 
+
+
+
+docker-compose.yml:
+==================
+
+	services:
+
+		contianer1(api):
+
+			containername:offers-service
+			image: offers-image:1.0
+			networks:
+			    -offers-network
+			ports:
+			  -2021:2021
+			depends_on
+			    -mysqldbcontainer
+			volumes:
+			   -offersmysqlvol
+		container(mysqldbcontainer):
+			container_name:mysqldbcontaienr
+			image:mysql:8.3.0
+			restart: always
+			volumes :
+				
+			envrionments:
+				mysql_databse:
+				mysql_username:
+				mysql_password:		
+		  
+
+
+environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3307/basics?allowPublicKeyRetrieval=true
+
+
+	>docker-compose up
+
+
+		
+						
+	Microservice ------> Database
+
+Instead of run multiple container individually, We will run all the containers at once under one service
+
+	service
+	   |-------image1
+	   |-------image2 ========> docker-compose up
+	   |-------image3		
+			o/p : all the containers will execute one by one based on specified dependencies
+
+
+		These container are connected to default bridge network or custom bridge network
+
+
+
+
+FROM eclipse-temurin:17
+
+LABEL mentainer="sreenu.sreenutech@gmail.com"
+
+WORKDIR /app
+
+COPY target/springboot-restful-webservices-0.0.1-SNAPSHOT.jar /app/springboot-restful-webservices.jar
+
+ENTRYPOINT ["java", "-jar", "springboot-restful-webservices.jar"]
+
+
+version: "3.8"
+
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: employeedb
+    networks:
+      springboot-mysql-net:
+
+  springboot-restful-webservices:
+    container_name: springboot-restful-webservices
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2024:2024"
+    depends_on:
+      - mysqldb
+    networks:
+      springboot-mysql-net:
+    restart: on-failure
+
+networks:
+  springboot-mysql-net:
+
+Docker compose commands:
+
+	1. >docker-compose up
+
+	2. 
+
+
+
+post : http://localhost:2024/api/users
+request : 
+{
+    "firstName": "sreenu",
+    "lastName":"tech",
+    "email": "sreenu.sreenutech@gmail.com"
+}
+
+response:
+
+{
+    "id": 1,
+    "firstName": "sreenu",
+    "lastName": "tech",
+    "email": "sreenu.sreenutech@gmail.com"
+}
+
+{
+    "id": 2,
+    "firstName": "mahesh",
+    "lastName": "tech",
+    "email": "mahesh.sreenutech@gmail.com"
+}
+get : http://localhost:2024/api/users/1
+get : http://localhost:2024/api/users
+del : http://localhost:2024/api/users/1
+
+How can we verify these users data stored into MySQL dabase server?
+
+1. enter inside the container
+
+	>docker exec -it container_id command
+	>docker exec -it 17c017e6cd6b4e27c4022202cc9594a31190d778026ff4187a027f5b4c21b925 bash
+	>MySQL -u root -p
+	  enter password : root
+	mysql>
+		show databases;
+		use database;
+		show tables;
+==============================================================================================================
+
+Morning has been completed all the stuff except Kubernetes
+
+	|- week end workshops on k8s 
+
+
+Tomorrow no class - Sunday
+
+Our next class will be on Monday at 6:00 PM IST
+
+
+
+
+
+		  
