@@ -1,0 +1,663 @@
+					-------------SOLID Principles----------------
+
+Pre Requisite:
+==============
+	OOP's Concepts like  inheritance, polymorphism, object, class..etc
+
+
+Why we should learn SOLID Principles?
+
+	"The goal of SOLID principles is a coding standards that all the developers should have a clear 
+
+	concept for developing software properly to avoid bad design"
+
+
+	"SOLID Priciples will help to reduce code complexity, the coupling between classes, separating
+
+	responsibilities for each class and definfing their relations"
+
+Introduction:
+============
+	
+	-->In Java, SOLID principles are an Object Orirented approach that are applied to software structure design
+
+	-->It is conceputalized by Robert C. Martin
+
+	-->These  5 principles have changed the world of object oriented programing, also changed the way or
+
+	   writing software
+
+	-->It also ensures that the software is modular, easy to understand, debug and refactor
+
+
+SOLID Acronym : 
+===============
+
+	S : Single Responsibility Principle - (SRP)
+
+	O : Open Closed Principle - (OCP)
+
+	L : Liskov Substitution Principle - (LSP)
+
+	I : Interface Segregation Principle - (ISP)
+
+	D : Dependency Inversion Principle  - (DIP)
+	
+
+	1. Single Responsibility Principle - (SRP):
+	   ============================================
+
+			This principle states that 
+
+					a. A class should have only one reason to change 
+
+					b. A class should have a single responsibility or single job or single purpose
+
+
+		Example-1:
+		=========
+
+			In single controller class we are implementing all these below features 
+
+					1. validations
+
+					2. business logic
+
+					3. calling backend systems
+
+					4. request and response preparation
+
+
+		This will impact code maintainability, code readability, code understandability..etc
+
+		So it will voilates the SRP.
+
+
+		To overcome this problems, split controller class into multiple classes 
+	
+
+
+					1. validations     ------------ validator class
+
+					2. business logic  ------------- service class or business class or process class or logic class	
+
+					3. calling backend systems ----- DAO class , Service Client class
+
+					4. request and response preparation -- RequestBuilder class, ResponseBuilder class
+
+
+Note : If we are implementing SRP there would more classes present in your project as each class will have
+
+	   only one responsibility
+
+
+Example-2:
+=========
+
+		BankServices:						public class BankService{
+			
+			1. deposit								public long deposit(long amount, String accountNo){
+			2. withdraw
+			3. Get Loans									//deposit amount
+			4. Send OTP 							return 0;
+												   }
+
+												   public long withDraw(long amount, String accountNo){		
+			
+															//withdraw amount
+													return 0;
+													}
+
+												  public void getLoanIntrestDetails(String loanType){
+
+															if("homeLoan".equals(loanType)){
+
+																//write some logic to get the home loan
+															 }
+															if("personal loan".equals(loanType)){
+
+																//write some logic to get the home loan
+															 }
+															if("car".equals(loanType)){
+
+																//write some logic to get the home loan
+															 }	
+
+														 }
+
+												public void sendOTP(String medium){
+														
+															if("email".equals(medium)){
+																//write email related logic to send email
+																//using java mail api
+															}
+
+												}
+															
+
+	This class doesn't follow the SRP because this class has many responsibilities
+
+	To achive SRP then we should implement a separate classes that performs single functionality only.
+
+
+						public class LoanService{
+
+									 public void getLoanIntrestDetails(String loanType){
+													if("homeLoan".equals(loanType)){
+
+																//write some logic to get the home loan
+															 }
+															if("personal loan".equals(loanType)){
+
+																//write some logic to get the home loan
+															 }
+															if("car".equals(loanType)){
+
+																//write some logic to get the home loan
+															 }	
+
+														 }
+															
+
+
+
+	} 
+
+							public class NotificationService{
+
+											public void sendOTP(String medium){
+														
+															if("email".equals(medium)){
+																//write email related logic to send email
+																//using java mail api
+															}
+
+												}
+
+							}
+
+
+===========================================================================================================
+
+2.  Open Closed Principle - (OCP)
+	==============================
+
+		-->This Principle states that software entities (classes, modules, functiona..etc) should be 
+
+		   open for extension but closed for modification.
+
+			i.e. we should able to extend class behaviour without modifying existing code
+
+
+	Example : 
+
+		public class NotificationService{
+
+				public void sendOTP(String medium){
+
+						//1. send otp via email
+
+						if("email".equals(medium)){		
+
+							// write email related logic using java mail api
+						}
+
+						if("sms".equals(medium)){
+							
+							// write sms related logic using one of the java sms provider api
+						}
+
+				}
+				
+		}
+
+
+ Problem Statement:
+ =================
+
+		-->Current logic will send notifications via email, sms but in future if we want send notifications
+		   via whatsup then we need to modify source code in NotificationService
+
+
+ To overcome this problems, what OCP says "Open for extension but close for modification" 
+
+  i.e. It is not recommended to modifiy the NotificationService for each OTP feature, it will voilate OCP
+
+
+Solution:
+========
+
+	To overcome this we need to design our code in such a way that everyone can reuse your feature by just
+
+	extending it and if the need any customization then can extend it and add their feature on top of it. 
+
+	We should design as below
+
+	public interface NotificationService{
+
+		public void sendOTP(String medium);
+	}
+
+	1. Email Notification
+
+		public class EmailNotification implements NotificationService{
+
+			public void sendOTP(String medium){
+
+				//write logic using java mail api
+			}
+
+		}
+
+
+	2. Mobile Notification
+	
+		public class MobileNotification implements NotificationService{
+
+			public void sendOTP(String medium){
+
+				//write logic using Twilio SMS api
+			}
+
+		}
+
+	3. Whatsup Notification
+	
+		public class WhatsupNotification implements NotificationService{
+
+			public void sendOTP(String medium){
+
+				//write logic using Whatsup api
+			}
+
+		}
+
+	4. Telegram Notification
+	
+		public class TelegramNotification implements NotificationService{
+
+			public void sendOTP(String medium){
+
+				//write logic using Telegram api
+			}
+
+		}
+
+==========================================================================================================
+
+3. Liskov Substitution Principle - (LSP):
+   ======================================
+
+This principle states that " Derived or child classes must be substitutable for their base or parent classes"
+
+i.e. If class A if child class of class B, then we should able replace B with A without interrupting the 
+
+	 behaviour of the program
+
+
+	class B{		class A extend B{
+												B b = new A();
+
+	}				}
+
+
+
+
+Example 1 :
+===========
+
+	public abstract class SocialMedia{
+
+		public abstract void chatWithFreind();
+		public abstract void groupVedioCall();
+		public abstract void publishPosts();
+		public abstract void sendPhotosAndVideos();
+
+	}
+
+
+Some of the Social medias are Facebook, Whatsup
+
+
+public class Facebook extends SocialMedia{
+
+		public abstract void chatWithFreind(){
+			
+			//logic
+		}
+		public abstract void groupVedioCall(){
+														SocialMedia sm = new Facebook();
+				//logic
+		}
+		public abstract void publishPosts(){
+
+			//logic
+
+		}
+		public abstract void sendPhotosAndVideos(){
+
+			//logic
+		}
+
+	}
+
+public class Whatsup extends SocialMedia{
+
+		public abstract void chatWithFreind(){
+			
+			//logic
+		}
+		public abstract void groupVedioCall(){
+
+				//logic								SocialMedia sm = new Whatsup(); // wrong
+		}
+		public abstract void publishPosts(){		because whatsup doesn't support upload publishposts
+													for friends, it just for chatting only
+			//Not applicable
+													This application doesn't follow the LSP
+		}
+		public abstract void sendPhotosAndVideos(){
+
+			//logic
+		}
+
+	}
+
+
+Note: Similarly instagram doesn't support groupVedioCall() feature so we say instagram child is not substitue
+
+	  of parents SocialMedia
+
+
+Solution : 
+==========
+
+	To overcome this problem we should write the code as below which will follow LSP
+
+	
+		public interface SocialMedia{						public interface SocialPostManager{
+
+		public abstract void chatWithFreind();					public abstract void publishPosts(Object post);
+		public abstract void sendPhotosAndVideos();			}
+
+	}
+
+public interface VedioCallManager{
+	
+public abstract void groupVedioCall(String[] users);
+
+}
+
+
+
+Note : We have segregate specific functionality to separate classes to follow LSP
+
+	
+	public class Facebook implements SocialMedia, SocialPostManager , VedioCallManager{
+
+			//write implementation for all the features
+	}
+
+	public class Instagram implements SocialMedia, SocialPostManager{
+
+			//write implementation for all the freatures of SocialMedia, SocialPostManager
+	}
+
+ This how we can design our LSP
+
+	Benifits of LSP :
+		
+		1. Code Reusability
+		2. Easier Maintenance
+		3. Reduced Copuling	
+ 
+
+		
+=============================================================================================================
+
+
+4. Interface Segregation Principle - (ISP)
+   =======================================
+
+			-->No client should be forced to depend on methods that it does not use.
+			-->This pinciple states that we should split our interfaces into smaller and more specific ones
+			-->ISP, ask you to create a different interfaces for different responsibilites 
+i.e. don't group unrelated behaviour in one interface, we should break if we have already an interface
+	 with many responsibilites and the impementor doesn't need all this stuff.
+
+
+Problem Statements:
+===================
+
+	-->Polluting the interface in project development
+
+ Example 1 : 
+
+public  interface Animal {				
+        func fly()				===>
+        func eat()
+    }
+
+interface Flyable {			 interface Feedable {	
+    func fly();					func eat();
+ }
+
+	
+
+Examples 2: 
+
+	public interface CardOffers{							public interface CreditCardOffers{			
+
+		public void getRewardPointsAsCreditBalance();			public void getRewardPointsAsCreditBalance();
+		public void getCashBackAsCreditBalance();				public void getCashBackAsCreditBalance();
+		public void getCreditHistory(); 						public void getCreditHistory(); 
+		public void doPayments(); 						    }
+
+	}			
+
+
+	public interface DebitCardOffers{
+
+	public void getRewardPointsAsCreditBalance();
+	public void doPayments(); 
+
+	}
+
+
+Example 3 : 		
+
+		public interface UPIPayments{							UPI Payments are goolge pay and paytm
+
+			public void payMoney();
+			public void getScratchCard();
+			publlic void getCashBackAsCreditBalance();
+
+
+		}
+
+Problem Statement: 
+
+	Google Pay supports all the above features and this can be implement UPIPayments interface but
+
+	Paytm doesn't support getCashBackAsCreditBalance() feature , so here we shouldn't force paytm client 
+
+	to override this method by implementing UPIPayment interface
+
+
+
+Solution: 
+
+	We need to segregate interface based on client need, so it support ISP we can design something like below
+
+
+	public interface UPIPayments{					public interface CashBackManager{			
+
+			public void payMoney();					  publlic void getCashBackAsCreditBalance();
+			public void getScratchCard();			}
+			
+
+
+		}
+
+============================================================================================================
+
+5. Dependency Inversion Principle  - (DIP)
+   =======================================	
+
+This principle states that we must use abstract classes and interfaces instead of concrete impelementation.
+
+
+Problem Statement:
+================
+
+	We will goto Hyderabad Central for shopping to buy something, and we decide to pay for it using card. 
+
+	when we will give card to check for making the payment, that clerk guy doesn't bother to check what kind of
+
+	card you have given.
+
+	Even if we given a debit card of credit card it not even matter, they will simply swipe it
+
+	This is what abstraction between clerk and customer to relay on card processing. 
+
+
+Example : 
+
+	public class DebitCard{
+		public void doTransaction(int amount){
+			S.o.p("txn done with debitcard")
+		}
+	}
+
+  public class CreditCard{
+		public void doTransaction(int amount){
+			S.o.p("txn done with creditcard")
+		}
+	}
+
+	
+Now with these 2 cards customer went shopping mall and purchased some order and decided to pay using creditcard
+
+public class ShoppingMall{
+
+	private DebitCard debitCard;
+
+	public ShoppingMall(DebitCard debitCard){
+
+		this.debitCard = debitCard;
+	}
+
+	public void doPayment(Object order, int amount){
+
+		debitCard.doTransaction(amount);
+	}
+
+	public static void main(String[] args){
+
+		DebitCard debitCard = new DebitCard();
+
+		ShoppingMall shoppingMall = new ShoppingMall(debitCard);
+			
+			shoppingMall.doPayment("order item name", 10000);
+	}
+}
+
+Note : If we observe this is wrong design of coding, now shoppingmall is tightly coupled with DebitCard
+
+		If user is trying pay the bill using credit card then he will get error liks some error in your card
+
+
+What can we do?
+
+	If we remove debitcard from constructor and inject creditcard, which is not good approach to write the code
+	Now it would tightly coupled with credit card
+
+	If we want for DIP we need to design our application in such a way that ShoppingMall application 
+	should accept any type of card ( It shouldn't care whether it is debit card or credit card)
+
+	To simplify this designing pinciple we need write interface called BankCard
+
+	public interface BankCard{
+
+		public void doTransaction(int amount);
+	} 
+
+
+	 public class CreditCard implements BankCard {
+
+		public void doTransaction(int amount){
+
+			S.o.p("txn done with creditcard")
+		}
+		
+	}
+
+	public class DebitCard implements BankCard{
+		public void doTransaction(int amount){
+			S.o.p("txn done with debitcard")
+		}
+	}
+	
+
+Now we need to redesign shoppingmall application code
+
+
+public class ShoppingMall{
+
+	private BankCard bankCard;
+
+	public ShoppingMall(BankCard bankCard){
+
+		this.bankCard = bankCard;
+	}
+
+	public void doPayment(Object order, int amount){
+
+		bankCard.doTransaction(amount);
+	}
+
+	public static void main(String[] args){
+
+		BankCard bankcard = new CreditCard();
+
+		ShoppingMall shoppingMall = new ShoppingMall(bankcard);
+			
+			shoppingMall.doPayment("order item name", 10000);
+	}
+}
+
+Note : If we observe shopping mall is loosely coupled with BankCard, any type of card process the payment
+
+	   without any impact, which proofs DIP
+
+
+
+Summary :
+=========
+
+	1. SRP  : A class should only one responsibility and one reason to change/modify that class
+
+	2. OCP  : Open for extension and Closed for modification. 
+			 i.e. not recommeded to modify the logic for every feature, try to write new class for each feature
+
+
+	3. LSP : A Dervied or child classes should be substituable for their base or parent class
+
+	4. ISP : Dont group unrelated behaviour in one interface, we should break/split intferface into smaller
+
+			 or more specific one. i.e. ask to create different interfaces for different responsibilites
+
+	5. DIP : Use interface or abstract class instead of concrete classes to supply the dependent objects
+
+			 i.e. objects should be loosely coupled using interfaces, abstract classes
+
+			 Dont tightly coupled with concrete classes.
+
+
+	
+
+
+
+
+
+

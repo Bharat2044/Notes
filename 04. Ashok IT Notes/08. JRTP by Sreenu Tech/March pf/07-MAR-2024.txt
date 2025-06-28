@@ -1,0 +1,45 @@
+
+Last Session: 
+=============
+
+	-->We have discussed on importance of java realtime tools
+	-->In project course, we will cover 20+ java realtime tools, we have discussed on each and 
+	   and every tool with one line description
+
+Today Session:
+=============
+
+	-->Importance distributed technologies, how we will implement in java realtime project
+
+	1. SOLID principles : https://youtube.com/playlist?list=PL6Dc5k_HPPe0344vjAXid7a2tCKia5Pb6
+
+	2. Json  : https://youtube.com/playlist?list=PL6Dc5k_HPPe3SuagrLb7GJoSD1wX5PNJF
+
+	3. Java Restfulwebservices : https://youtube.com/playlist?list=PL6Dc5k_HPPe0BH1TPlkFKPInW7VdWdnAA
+
+	4. Spring Boot : https://youtube.com/playlist?list=PL6Dc5k_HPPe3PQHDZZ3vyhAKYZGo6w2Bf
+
+
+
+	I will share notes to your email id + above topics sreenu tech youtubue videos
+
+	1. Tomorrow sivaratri - holiday
+	2. first weekend classes - no classses on sat and sund
+
+	our next class will be on Monday (11-MACH-2024) at 6:00 PM IST, use same meeting link
+
+ Please find the details for Fee payment
+	Account Details.
+	Account No : 914010022496787			
+	IFSC Code: UTIB0000008
+	Bank : Axis Bank
+	Branch : Hyderabad Main Branch
+	Account Name : T Maheshwar
+
+	UPI ID : mahesh485@okaxis
+	Gpay : 9948753853
+
+	Please send payment screenshot to sreenutechnologies@gmail.com
+
+	Telegram group will be added you so that you will get realtime communication on live notes, ..etc
+

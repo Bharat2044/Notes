@@ -1,0 +1,83 @@
+  Last Session:
+  =============
+
+	-->What is distributed application?
+	-->How many realtime usecases in Distributed Applications?
+
+ Today Session:
+ ==============
+
+	-->What is project high level architecture?
+
+	Project Architectures: 
+
+		-->Project Architecture means, how the different systems can communicate with each other
+		-->There are 2 types of architectures
+
+			a. Logical Architecture  : Application deployment process
+			b. Physical Architecture : How the infrastructure will work
+		
+	 	-->Architecutre Components :
+
+			1. API gateway
+			2. list services of services like service1, service2, service3..etc
+			3. security : how these services can communicate with each other
+			4. docker
+			5. redis cache
+			6. kafka integration
+			7. Static files/Imges storage : AWS S3
+			
+
+			Backend Engineer ----> will not work on UI stuff, only work on microservices..etc
+			 (BE)
+
+
+	1. API Gateway : Perform Authentication. i.e. only authorised users can able to access the application
+
+	2. services   : develope the rest api using spring boot and microservice architecture
+
+		a. containerization
+		b. integration/interaction with other services using one of the mechanisim
+
+			non microservices : 
+
+				i. using RestTemplate
+			       ii. apache cxf
+			      iii. rest easy
+			       iv. http client
+
+			microservices  :
+
+				i. discovery client 2. ribbon client 3. feign client
+
+	3. Performance : redis cache
+
+			a. only first time will goto backend from next time get the data from cache
+			b. imporve the application performance
+			c. save the cost
+
+	4. Event drivern : Kafka Integration
+
+			a. to make our service integrations are loosely copuled
+
+	5. spring batch  : To process the millions of the records per day without user interaction
+
+	6.  Load balancer : distribute the load to multiple instances
+
+
+Please find the details for Fee payment
+Account Details.
+Account No : 914010022496787
+IFSC Code: UTIB0000008
+Bank : Axis Bank
+Branch : Hyderabad Main Branch
+Account Name : T Maheshwar
+
+UPI ID : mahesh485@okaxis
+Gpay : 9948753853
+
+Note: Please attach the receipt of Payment to Email Id : sreenutechnologies@gmail.com, So will check & acknowledge.	
+
+
+
+

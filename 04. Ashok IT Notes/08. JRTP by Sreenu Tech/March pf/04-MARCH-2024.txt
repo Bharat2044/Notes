@@ -1,0 +1,48 @@
+
+	Name : Sreenivas
+	15 - IT exp in java, j2ee, springboot, microservices, rest api's, aws, azure, docker, k8s, kakfka..etc
+	10 + yrs - exp in teaching
+
+	sreenu technologies had established in 2013. 
+
+
+	Who are the audiance for java realtime project:
+
+Goal Realtime Project:
+
+	-->Non Realtime exp Employees,Most the candiates having good theory knowledge, but no realtime knowledge
+	-->Realtime Employees, those are working on supporting projects, no hands on development side
+	-->Realtime Employees are working but didn't opportunity latest tech stack
+
+	Java Realtime Project  =  8+ yrs of realtime exp
+
+===============================================================================================================
+
+	In realtime why every project mandatory 20+ realtime tools are required? 
+		How to learn these tools? 
+		When to use these realtime tools? 
+       		Where to apply?
+
+
+	I will share some sreenu technologies youtube videos
+
+		-->Json complete tutorial : 
+		-->Java Restful service 
+		-->Spring IOC : 		=========> Before come to the class you should do revision
+		-->Spring Boot : 
+		-->Microservices :
+		-->JDK8 features :
+		-->SOLID principles
+		   :
+
+
+	First 5 classes attend free , from 6th class you should take admission
+ 
+ 	 Please use same meeting link until we will communicate further.
+
+
+
+
+
+
+
