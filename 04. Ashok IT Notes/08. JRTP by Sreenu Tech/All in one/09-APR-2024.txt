@@ -1,0 +1,113 @@
+Logging Monitoring/Aggregation Tools:
+=====================================
+
+  In Realtime There are more no.of servers required in production envrionments to handle the live 
+  traffic. Make sure production support team should monitor the applications continuously and dev team need
+  to search the logs if any issues find in production. 
+
+  Without these tools, there would be lot of manual work to identify the root cause of the issue
+
+ Using this monitoring tools, we can easily get the details and quickly identify the issue
+
+ There are so many logging monitoring tools are available in market
+
+	1. ELK				Note: Based on the clients needs and cost they will choose respective
+	2. SPLUNK			      tool
+	3. Sumo Logic
+	4. Data Dog
+	5. App Dynamics
+	6. Cloud Watch - AWS
+	7. App Insights - Azure
+
+
+
+ELK :
+=====
+
+	-->ELK consists of 3 open source products : 1. Elastic Search	2. Logstash	3. Kibana
+
+These projects are used together for log analysis in various environments, So logstash collect the
+logs and parse it, elastic search indexes and store this information and kibana provides UI
+layer that provides logs insights
+
+Elastic Seach:
+==============
+
+	-->Elastic Search is No SQL database that is based on the Lucene Search Engine
+	-->It is an open source software and in the form of zip file
+	-->Download freely from https://elastic.co/downloads/elasticsearch
+	-->Extract the zip file 
+	-->Run the elastic using elasticsearch.bat file, elastic search will be up and running with 	default
+	   port is 9200
+
+		elasticsearch : http://localhost:9200
+
+Kibana :
+========
+	
+	-->Kibana is an visualization UI layer that works on top of elastic seach
+	-->It is an open source software and in the form of zip file
+	-->Download freely from https://elastic.co/downloads/kibana
+	-->Extract the zip file 
+	-->modify the kibana.yml to point to the elasticsearch instance location
+
+		kibana.yml
+
+			elasticsearch.url: "http://localhost:9200"
+
+	-->Run the kibana.bat using the commnd prompt, kabana UI can access using default port 5601
+
+		http://localhost:5601
+
+logstash:
+=========
+
+	-->logstash is log pipeline tool that accepts input from various sources, executes different
+	   transformations and export the data to various targets
+	-->It is a dynamic data collection pipeline with an strong elastic search
+	-->It is an open source software and in the form of zip file
+	-->Download freely from https://www.elastic.co/downloads/logstash
+	-->Extract the zip file
+
+	logstash.conf
+	==============
+
+	  input{
+
+		file{
+
+		 type => "java"
+		 path => "c:/elk/springboot-elk.log"
+		 codec => mulitline{
+
+				pattern = >
+				negate  =>true
+
+			  }
+		}
+		}
+
+
+	filter{
+
+
+	}
+
+	output{
+
+		elasticsearch {
+
+			hosts =>["localhost:9200"]
+
+			}
+
+	}
+
+
+
+
+
+
+
+
+

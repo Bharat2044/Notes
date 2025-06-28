@@ -1,0 +1,209 @@
+Last Session:
+============
+
+	-->Log4j complete details with examples
+
+Today Session:
+==============
+
+	-->Importance of SLF4J
+	-->Implementation of SLF4J/Log4J in our project
+
+
+				JDBC (API)  -- abstract layer --- it has only interface with abstract methods
+				 |
+			--------------------------------
+			|		|		|
+			Oracle	      MySQL           Postgres  ===> vendors will write the implementations to
+								     connect their respective database
+
+To wrok the database, we need to add 2 jars in our class path or maven dependency
+
+	1. jdbc.jar
+	2. vendor jar like Oracle.jar or MySQL.jar..etc	
+
+Why this model, developer can switch one implementation vendor/database to another vendor/database easily without any changes.
+			  
+
+
+						
+SLF4J:
+=====
+
+-->SLF4J stands for Simple Logging Facade for Java
+-->It is used to designed to give access to many logging frameworks like log4j, logback, loggingutil..etc
+-->It is an abstraction layer, It is not a logging implementation, using this some other logging f/w vendors
+   will write the implementation details
+-->Log4J and SLF4J are different and they are not similar components. SLF4J does not do actual logging
+   It is only an abstraction layer to an underlaying logging component
+
+						==============
+						|Application |
+						==============
+						      |
+						==============
+						|  SLF4J     |
+						==============
+						      |
+					-----------------------------------------------------------
+					|		 |	    |		   |
+				       Log4J		Logback    commons	  java.util.logging framework
+								   logging f/w
+						
+
+
+
+-->Using SLF4J means, underlaying which logging framework are we using, so that run time SLF4J will use that
+   logging framework
+
+-->Using SLF4J we can switch from one logging f/w to another logging f/w easily without any major changes
+
+
+-->If we want work with SLF4J then we must add 2 jars in the classpath or pom.xml
+
+		i.  SLF4J jar
+		ii. Log4J-1.2.17
+
+		i.  SLF4J jar
+		ii. Log-back-1.2.17
+
+Why SLF4J is preffered than Log4J?
+
+Sol : If we use SLF4J ( logging abstraction ), we can migrate/switch  from one logging framework to another
+      logging framework
+
+      SLF4J doesn't replace of log4J, they both work together, we can remove log4J dependency and add any
+     other logging f/w required dependnecy easily
+
+SLF4J features:
+==============
+
+	1. It is always better to use abstraction
+	2. SLF4J is an opensource library that makes independent of any particular logging implemenation
+	3. SLF4J provides placeholder based logging, which improves the code readability by removing
+	   checks like enabled info or debug ..etc
+	4. using SLF4 improves the application performance because it will remove unncessary message
+
+
+Log4J vs Logback
+
+	-->Log4J is a flexible logging library in 2002
+	-->Logback was developed as a more powerful alternative to Log4J
+
+Logback:
+
+	-->It is an successor to the log4j project and faster than log4j
+
+To work with logback logging, the below dependencies should be used
+
+	1. logback-core
+	2. logback-classic
+	3. slf4J-api
+
+
+========================================================================================================
+
+Log4J implementation in the project:
+
+	-->spring boot uses slf4j with logback logging framework
+	-->when we start application, spring boot will automatically lod it over the default configuration
+
+		1. logback-spring.xml
+		2. logback.xml
+		3. logback-spring.groovy
+		4. loback.groovy
+
+	-->We need write the below things to implement the logging
+
+	 1. logback.xml or application.properties
+
+			<configruation>
+				
+				<layout>
+
+				</layout>
+				
+				<appender name="appender1" class=" ">
+					<File></File>
+				</appender>
+
+				<root level="INFO">
+				
+					<appender-ref ref="appender1"/>
+				
+				</root>
+			<configruation>
+
+				or
+
+
+		application.properties
+
+			logging.level.org.springframework.cache:DEBUG
+			logging.pattern.console
+			logging.pattern.file
+			logging.pattern.level
+			:
+			:
+	 
+
+	   2.  create the logger object in all the classes, configure debug, info, error, fatal..etc
+	      wherever we want
+
+	   3. run the application and get the required logs
+
+
+
+
+
+[Date=%d{MM/dd/yyyy}] 
+[Time=%d{HH:mm:ss.SSS}] 
+[Thread=%t] 
+[Level=%p] 
+[LOB=CardPayments] 
+[APP=COMS] 
+[BP=Forms] 
+[Class= %C] 
+[Method=%M] 
+
+[User=%X{user_id}] 
+[Trace:%X{request_id}] 	===> How to set the userdefined values
+[FRIENDLY_MSG=%m]%n
+
+
+	MDC.put("userid" , "")        
+	MDC.put("cardnum", "")
+
+In realtime there are 2 types of envrionments
+
+1. non prod environments	: dev, test, uat : The traffic will be fixed. i.e. max 10 users will
+							   access the application
+
+						   -->Here only one server is enough in each environment
+						      i.e. application will be deployed in one server
+
+2. production envrionments      : prod servers	 : The traffic will be in lakhs. i.e. lakhs of users
+							   will be accessing the application
+
+						   -->Application will be deployed into multiple server
+						      to handle large no.of request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
