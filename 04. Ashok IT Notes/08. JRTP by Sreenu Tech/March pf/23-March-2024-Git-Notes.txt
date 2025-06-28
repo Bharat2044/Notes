@@ -1,0 +1,691 @@
+Git - Topics:
+============
+
+	1. Introduction
+	2. What is version control systems(VCS) and Types vcs				
+	3. Git Software Installation
+	4. Git Project Structure
+
+
+	5. Git Architecture
+	6. Git commands/operations
+
+		1. git version		9.  git commit		17. git status
+		2. git init		10. git log 		18. git merge
+		3. git help		11. git clone		19. git rebase
+		4. git config		12. git push		20. git show
+		5. git add		13. git pull		21. git remote
+		6. git status		14. git branch		:
+		7. git rm		15. git checkout
+		8. git restore		16. git fetch
+
+	7. How to work with git commands using CLI and IDE
+	
+	8. Github account creations
+
+		a. public repositories creation
+		b. private repositories creation
+
+	9. .git folder structure
+
+	10. Git branching strategy
+
+		1. development branch
+		2. master branch
+		3. release branch
+		4. hot fix branch
+		5. for branch
+
+	11. PR (Pull Request) Process, Code Review, Code Merge
+
+	12. Realtime Problems with Git and How to fix them
+
+	13. FAQ's
+
+	14. Summary
+
+=============================================================================================================
+
+Introduction:
+=============
+
+	-->Git is a popular version control system(VCS), It was created by Linus Torvalds in 2005 and has been
+	   maintained by Junio Hamano
+	-->Git is used for 
+
+		a. Tracking the code changes
+		b. Distribute the code to entire team, so that team can contribute the work
+		   i.e. coding colloboration
+		c. Track the code who made changes like history of the files
+
+
+
+Version Controlling System:
+===========================
+
+	-->VCS is a system that records changes to a file or set of files over time, so that you can recall
+	   specific version later
+
+		i.e. for every source code changes in a file a new version will be created
+
+	-->There are 3 types of VCS are there
+
+		1. Local ersion control system (LVCS)	
+		2. Centralized Version Control System (CVCS)
+		3. Distributed Version Control System (DVCS)
+
+	
+Local ersion control system (LVCS):
+==================================
+
+	-->It is used to maintain the file versions and retrive the files based on specific version
+	
+   Drawbacks:
+   ==========
+
+	1. If our system will be corrupted then there might be data loss issue
+	2. It is easty to forgot which directory you are in and some accidentally write the data into the wrong
+	   file or copy the other files
+	3. by  mistake we can delete the those files
+
+
+Centralized Version Control System (CVCS):
+=========================================
+
+	-->Developers can collaborate and do the changes
+	-->ex : subversion (svn), cvs, perforce..etc
+	-->CVCS will have single server that contains all the versioned files
+	-->more no.of clients are connected to cvcs to get the files 
+
+	Adv:
+	
+	 -->Everyone knows to certain degree what everyone else on the project is doing
+	 -->Adminstrator will have full control over who can do what and easier to manage
+
+	Drawbacks:
+	=========
+
+	   -->SPF (Single Point of Failure) that centralized server represents
+	   -->If the server goes down for an hour then during that time noboday can collobarate at all
+	      or save versioned changes to server
+	   -->If the hard disk of the CVCS will be corrupted and proper backups haven't been kept then 
+	      we will lost the data
+	 -->whever we will try to get the project source code from CVCS to local system, CVCS will not send
+	    complete history of the data, it will send only latest code  
+		
+
+Note : in CVCS, always developers will get the latest code from the server and not complete history of the 
+       source code. This is the major drawback with svn.
+
+
+
+
+Distributed Version Control System (DVCS):
+==========================================
+
+	-->DVCS are like Git, Mercurial, Darcs, Bazaar, Bitbucket ..etc
+	-->Developer don't get latest code rather than they will get fully mirror of the repository
+	   including its full history
+	-->If server will dies then these systems were restor it because every copy is a fully
+           bcakcup of all the data
+
+	-->It will maintain 2 types of repositories
+
+		1. remote repo
+		2. local repo : It is mirror of remote repository. 
+				     i.e. whatever code in remote repository, same copy will be in local repo
+				     also
+		if remote repo will be down, developer will contiue their development using local repo
+		unitll remote repo will up, once it is up then move the changes from local repo to remote repo
+		
+	-->If remote server will down for an one hour then no porblem, developer will do the changes in local
+	   and moved to local repo, whenever server will up then code will be moved to remote repo
+
+	
+3. Git Software Installation:
+   =========================
+
+	-->There are 2 types git softwares : 1. Git Server	2. Git Client
+	
+1. Git Server:
+==============
+
+	-->It is source code repository
+	-->It is used to maintain the source code of all the projects. i.e. It is the largest host of source
+	   in the world
+	-->Git server tools are : Github, Bitbucket, Gitlab, Gitblit ..etc
+	
+
+2. Git client Software:
+   ====================
+
+	  -->It is an opensource software
+	  -->It is in the form .exe file
+	  -->download git.exe file from https://git-scm.com/downloads
+	  -->just double click on .exe file, then click on next , next and finish
+	  -->Developer machine no need github software, just we need url, username, password to connect to 
+	     git server
+	  -->git client software install will be successful then it will bring 3 tools
+
+		1. git bash
+		2. git CMD
+		3. git GUI
+
+
+	To connect with git server, we need url, username, password but where to provide these details
+	we can use tools like git bash, git cmd, git gui..etc to connect git servers
+
+
+
+	Git Client Software  + git url, uname, password ==============>Git Server (Git Hub)
+	   |-git bash
+	   |-git gui
+	   |-git cmd
+	   |-tortoise git		
+	
+
+
+Git Project Structure :
+======================
+
+	projectname
+        -----------
+	  |--branch  : 1.0. SNAPSHOT
+
+	  |--master  : 1.0.SNAPSHOT
+
+	  |--tags    : Released version	
+ 
+
+Project Development Code :
+==========================
+Generally developers will do the development in branches, once the code is working fine then move the code
+from branch to master
+
+from master branch deploy the changes into production
+
+once the production is successfull then release the code from master to tags
+
+Note : Once the code will be released  then we should not touch/modify that source code. 
+
+Scratch Project:
+===============
+
+	1. Developer will develop the project code
+	2. move the code from local system to remote server
+	3. do the proper testing branch, if it is working then move the code from baranch to master
+	4. do the proper testing in master, if it working fin in master then do the prodction deployment
+	5. once production is successful then move the code from laster to tags folder
+
+
+Enhancement Project:
+===============
+
+	1. Developer will get the source code from branch
+	2. do the development in branch
+	2. move the code from local system to remote server
+	3. do the proper testing branch, if it is working then move the code from baranch to master
+	4. do the proper testing in master, if it working fin in master then do the prodction deployment
+	5. once production is working in production, then release the code/freeze from master to target
+
+5. Git Architecture :
+   =================
+
+		
+
+
+
+
+
+
+
+6. Git commands/operations:
+   =======================
+
+	1. git version: it is used to check which version of git you are using
+	
+		git version 2.44.0.windows.1
+
+	     -->git version or git --version both are same
+
+	2. git help : if we want see the list of all the git commands then use help command
+
+	3. git init : 
+
+		-->This command will create a new repository
+		-->This is the first command you will start your new project
+		-->This command is used to convert current directory ito git repository
+
+		>git init 
+			
+		  o/p : creates an empty repository with the name of .git
+	
+
+	4. git add:
+	   
+		-->This command is used to add new files to the stage area
+		-->staging area is a middle step between your working directory and repository
+		-->we can add single or multiple files with git add command
+
+		>git add command
+		>git add filename : add single file name to stage area
+		>git add .        : add multiple file stage area
+
+
+	Note : 
+
+		1. We can't move the files from work area to git remote repo, because working area files are
+	           not recognized by the git
+		2. If we want move the files to git repo then it should be moved to stage area, because
+		   stagig area files are recognized by the git
+
+		  i.e.   file ----------------------->git repo ---- not possible
+		         file ---- git add ----> stage area ----->git repo --- possible
+		
+
+
+	5. git status
+
+		-->It will display the status of the files
+		-->There are 3 types of status are available
+
+			1. Untracked file : The files are present in working directory and not added to the
+					    stage area
+			2. Tracked file   : Files are added to stage are
+			3. Modified	  : files are already stage are but they are modfied
+
+	6. git rm --cached :
+
+		     -->This command is used to move the files from stage area to working area
+
+		>git rm --cached filename
+
+
+	7. git config :
+
+		-->This command is used when you are using git for the first time or you have new git 
+		   installation
+		-->This command will setup the developer/user identity with name and email address
+		-->This information will be used for every commit operation
+
+		syn : git config --global user.email "you@example.com"
+  		      git config --global user.name "Your Name"
+
+		ex : git config --global user.email "sreenu.sreenutech@gmail.com"
+  		     git config --global user.name "sreenu"
+
+		     git config --get user.email : o/p : sreenu.sreenutech@gmail.com
+
+
+	8. git commit  :
+
+		-->It is sued commit then changes from working directory to git local repository
+		-->Here the -m option will set a commit message
+
+		syn : git commit -m "message"
+
+	9. git log  : 
+
+		-->It is used to list the version history of the current branch
+
+		$ git log
+			
+			$ git log
+			commit dbe86718c6aa23f99156e530450e6bc7a3fab092 (HEAD -> master)
+			Author: sreenu <sreenu.sreenutech@gmail.com>
+			Date:   Sat Mar 23 12:45:29 2024 +0530
+
+    				test file
+
+			commit 6dd948f812bf750f842b4c8625702f5df767767a
+			Author: sreenu <sreenu.sreenutech@gmail.com>
+			Date:   Sat Mar 23 12:41:38 2024 +0530
+
+    			demo file
+
+	10. git restore : 
+
+		 -->It is used to discard the changes in working directory
+		 
+		git rm vs git restore
+
+		git rm: 
+			-->git rm is used remove the files from stage area and moved to working area
+			-->if we want move the same file to stage area then use git add command
+
+		git restore:
+
+			-->This command is used for modified files. i.e. The files are avialable in stage area
+		           and developer did some changes then it becomes status from tracked to modified
+			   ie. it is available in work area
+
+			-->use add command to move the latest code from work area to stage area
+			-->Use restore to replace the new content with old content without adding to stage area
+			   i.e. if we remove the new changes the file will be available in stage area only
+			   
+
+	>git restore file : discard the changes in working directory. i.e. it will be moved to stage area
+
+	>git restore --staged file : It removes the files from stage area and move to working area
+				      i.e. untracked files
+
+		git rm --cached == git restore --staged 
+					
+	11. git push :
+
+		-->This command is used to push the files from git local repo to remote repo
+
+	
+		push new repository:
+
+		   1. create a new repository using git init command
+		   2. create the files inside the repository
+		   3. add the files to stage area using git add command
+		   4. move the files to git local repository using git commit command
+		   5. git branch -m master
+		   6. add local repo name to git remote repo
+		      >git remote add origin remoterepourl
+		   7. push the files to remote repo
+			>git push -u origin master
+
+			echo "# test-repository" >> README.md
+			git init
+			git add README.md
+			git commit -m "first commit"
+			git branch -M master
+			git remote add origin https://github.com/sreenutech18/test-repository.git
+			git push -u origin master
+
+		Existing Repository
+
+		   >git remote add origin remoterepourl
+		   >git push -u origin <branchname>
+
+		   >git push -u origin master
+
+		>git remote add origin https://github.com/sreenutech18/test-repository.git
+
+
+
+	12. git clone : 
+
+		-->This command is used to obtain a repository from an existing URL
+		-->git clone internally uses git init to create a new repository
+
+		>git clone remoterepourl
+
+		o/p : source code along with git repository (.git)
+
+
+	13. git pull : 
+
+		-->This command is used to fetch the data from remote to local and merge the changes on
+	           remote server to your working directory
+
+		-->If any new branches created and code changes also there then it will pull both branches
+	           and code changes
+
+		>git pull 
+
+
+	Note : Before you push the code into remote repo, always apply pull operation it will update the remote
+               repo changes into local repo and merge the changes
+
+
+	14. git stash : 
+
+		-->This command is used to temporarily store all the modified tracked files 
+
+			>git stash save  : temporarily stores all the modified tracked files
+			>git stash pop   : restores the most recently stashed files
+			>git stash list  : list all the stashed changes
+			>git stash drop  : discard the most recently stashed changeset
+
+	15. git branch :
+
+		 -->It is sued lists all the local branches in the current repository
+
+	   >git branch  	    : get list of all the local branches 
+	   >git branch <branchname> : creates a new branch
+	   >git branch -d <branchbane> : deletes the branch name
+
+	16. git checkout :
+
+		 -->This command is used switch from one branch to another branch
+
+		syn : git checkout <branchname>
+		ex  : git checkout featurbranch
+
+
+		syn : git checkout -b <branchname> : This command creates new branch and also switches to it
+
+
+branch : it is nothing but a peice of the code from large code
+
+In realtime there are different types of branches
+
+	1. feature branch
+	2. develop branch
+	3. master branch
+	4. release branch
+
+
+	17. git fetch : It will fetch only if new new branches will be created in git repo, it will update 
+		        all the branches form remote repo to local repo
+
+
+Requirement:
+============
+
+	1. we have already master branch
+	2. created one more branch using master branch
+	
+
+git pull vs git fetch:
+
+	-->git pull is used to fetch the latest source code and new branches from git repo
+	-->git fetch is used to fetch only new branch details from git repo
+
+
+	18. git merge : 
+
+	19. git rebase :
+
+		-->git merge and rebase both integrate the changes from one branch to antoher branch
+		-->git merge is a command that allows you to merge branches from git
+		
+		 syn : git merge sourcebranch targetbranch
+
+		-->when we use git merge, only the target branch is changed. i.e. source branch history
+		   remains same
+
+	       -->we we use git rebase, it will transfer complte work from one branch to another branch	
+	
+			syn : git rebase sourcebranch targetbranch
+
+
+ Note : Till now we have practiced command line, we should do from IDE also
+
+	9:15 AM to 1:15 PM 
+		
+		1. merge and rebase
+		2. branching strtegy
+		3. commdns using IDE
+	
+
+Summary:
+=======
+
+	1. Introduction
+	2. what is vcs and types of vcs : 1. local vcs  2. central vcs   3. distributed vcs
+	3. git software installtion
+	4. git project structure
+	5. git architecture
+	6. git commands : 
+		git version, 
+		git init, 
+		git help, 
+		git add, 
+		git rm, 
+		git restore, 
+		git commit, 
+		git log
+		git config
+		git status
+		git push
+	
+===============================================================================================================
+
+Last Session:
+============
+
+	1. Introduction
+	2. What is VCS and Types of VCS
+	3. Git Software Installation
+	4. Git Project Structure
+	5. Git Architecture
+	6. Git Commands or Operations
+		1. git init		
+		2. git help
+		3. git config
+		4. git add
+		5. git rm
+		6. git restore
+		7. git commit
+		8. git push
+		9. git pull
+		10. git fetch
+		12. git stash
+		13. git branch
+		14. git checkout
+		15. git merge
+		16. gt rebase
+		17. git clone
+		18. git status
+		19. git log
+
+
+Git Branching Strategy:
+=====================
+
+branch : a module of source code
+
+In realtime we have different types of envrionments
+
+1. dev envrionment	  
+2. test/qe envrionment		
+3. UAT/stage/pre prod envrionment  
+4. production environment
+
+
+dev envrionment:
+===============
+
+	-->every developer will develop the code in their local system (using local host url) and 
+	   merge all the changes into one place, deploy that into development server
+	-->Developers will do testing in dev server using 'dev.keybank.com', 
+	   if the application is working fine then promote the code to higher environments
+
+QE/Test envrionment:
+===================
+
+	-->Code has been deployed into QE environment
+	-->Testers will do the testing using "test.keybank.com", if the application is working in test
+	   envirionment then promote the code to next higher envrionment
+
+
+Stage/UAT envrionment:
+======================
+
+	  -->Code has been deployed into UAT (User Acceptance Testing) environment
+	  -->Here business team/stake holders will do the testing, If the application is working fine then
+	     they will give sign off to move the code into production
+
+Production Environment:
+=======================
+
+	   -->The code has been deployed into production envrionment
+	   -->Live users can access the application
+
+ 
+There are some production issues like 
+
+	p1 - priority 1 - very critical issues -- users not able login  -- with in hours
+	p2 - priority 2 - critical issue  - with in 2 days
+	p3 - priority 3 -- major          -- with in a week
+	p4 -- priority 4 -- medium
+	:
+	:
+
+
+Question:
+==========
+
+one week back, i took feature branch from master branch
+now, master branch got updated with hot fix branch but feature branch doesn't have hot fix branch changes
+
+when you will merge the code changes from feature to master, you will check only your files are merging or not
+
+	
+
+How to create private repository in github:
+==========================================
+
+1. public repository can be access by anyone. It is read only for all the users/developers
+2. private repository can be access by only authorised users/developers
+
+
+
+.gitignore:
+ =========
+
+	-->We should commit/push only source code of the project into git repo.
+	   i.e. we shouldn't commit/push .class, .project, .settings /target folder into git repo
+	-->.gitIgnore will exclude other than.java files, it will commit only .java files into git repo
+	
+
+How to provide the private repo access to other users/developer?
+
+ goto github repository --> settings --> collaborators --> add people
+
+
+
+What are the problems will get in git and how to resolve them?
+
+	1. Code Conflicts issues, due to this code merge will get failed
+	2. If we push/commit by mistake to git repo, how to rever it. i.e. how to get specific version of
+	   the source code.
+
+===========================================================================================================
+
+How to work git command/operations with IDE (Eclipse, Intellij, STS ..etc)
+==========================================================================
+
+ 1. In realtime we can connect github (git server) using either git bash or ide
+ 
+ 2. we need github credentails like username, password and tools like bash, ide to connect to git server
+
+ 3. Always don't use plan text password to connect git repo, github will not support plain text password
+
+      a. plain text password is used for to login into github portal not for connecting from external apps
+
+      b. To connect github from extenal apps like ides, jenkins, ..etc we need to generate password token
+         from gitub portal	
+
+ How to generate the password token:
+
+	1. loging into github.com
+	2. goto-->account profile-->settings
+
+	https://github.com/sreenutech18/card-offer-details.git
+	sreenutech18		 
+	
+
+
+
+
+
+	
+			 
+
+	

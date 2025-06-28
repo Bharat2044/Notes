@@ -1,0 +1,66 @@
+Last Session:
+=============
+
+	-->We have discussed on offer-details-service sequence flow diagram
+
+Today Session:
+=============
+
+	-->How to start the offer-details-service development
+
+Java Coding Standards:
+=====================
+
+	-->For readability, understandability, maintainability we should follow the java coding standards
+	-->80% of the development code will be moved to maintaince, if any enhancements will come then
+	   developer should understand quickly and able to implement it
+
+For every java application, we must follow the java coding standards
+
+1. comments:
+
+	-->comments are used for readability of the program
+	-->There are 2 types of the comments
+
+		a. implementation comments		b. documentational comments
+
+
+a. implementation comments :
+
+	-->These comments will not be included in HTML document
+	-->These comments will be used outside of classes, interfaces and inside of methods
+	-->There are 3 types of comments
+
+		i.   single level comments : /* ---- */
+		ii.  multi level commens   : /*
+					      * --- 
+					      */
+		iii. trail comments //
+
+b. documentational comments:
+
+	-->These comments will be included in HTML document
+	-->These comments will be used outside of classes, interfaces and methods but will not include inside
+           of methods
+	-->There are 2 types of comments
+
+		i.   single level comments : /** ---- */
+		ii.  multi level commens   : /**
+					      *  ---- 
+					      */
+
+
+	
+ex :
+
+	/* 
+	 * @CopyRight 2024 Keybank pvt ltd.  All rights are reservered. you shuldn't disclose the information
+         *  outside otherwise terms and conditions will apply.
+	*/
+
+
+Tomorrow no class - 26th March 2024, will connect day after tomorrow i.e. 28th March 2024
+
+
+
+	

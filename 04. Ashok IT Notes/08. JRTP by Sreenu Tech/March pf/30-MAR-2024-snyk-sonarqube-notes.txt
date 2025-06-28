@@ -1,0 +1,232 @@
+
+Today's Agenda 
+
+	1. Library Security Vluerabilities
+	2. Source  Code Quality tools
+
+
+
+				Project
+				  |
+			-------------------------------------
+			|				     |
+		 1. Libraries Scanning			2. Source Code Scanning
+
+
+For every production release,client should have checklist on quality coding, unit testing, library
+scanning..etc make sure our source code should reach all the quality gates.
+
+1. Library Security Vluerabilities:
+   ===============================
+
+	-->In java libraries means : .jar, .war, .ear
+	-->Generally a project will have list of jars (predefined and userdefined)
+	-->Security tools are used to scan all libraries in the project and identifies vluerabilities
+
+	Vluenrability:
+
+		"Vluenrability is a quality or state of being exposed to the posibility of being
+		attacked or harmed either physically or emotionally"
+
+		-->Vluenrability is a weakness that can be exploited by cybercriminals/hackers to
+	           gain unauthorised access to a computer system
+
+		-->After exploiting  a vluerability a hacker can run malicious code, install malware
+		    and even steal the sensitive data
+			
+		   
+There are so many security vluerability tools are available in market, some of them are
+
+	1. Snyk
+	2. Jfrog
+	3. nexus
+
+Snyk:
+=====
+
+	-->Snyk was designed to serve as a developer security platform
+	-->The main goal of snyk is help us to detect and fix vluerabilities in your application
+	   source code, third party depdencies and infrastructure configuration like terraforms, k8s
+
+	"Snyk is used to scan our project dependencies by analysing the libraries and packages that 	our application relies on"
+
+
+Snyk Setup:
+===========
+
+	#1. Installing the Snyk using CLI
+
+		>npm install -g snyk
+
+	#2. Authenticating
+
+		>snyk auth // it will redirect to https//snyk.io and asking  credentials for authenti
+		              cation. Once it is success then run the project
+
+	#3. Scan the application
+
+		>snyk test
+
+		This command will scan all the dependencies, analyse dependencies and find the
+		vluerabiliites/probelms
+
+		Snyk will provide the detailed report showing the vulenrabiliites
+
+		Each vulenrability has some priority like P1, P2, P3, P4
+
+		 
+		Vulenrability -- P1 -- Critical Severity -- we should fix the issue in hours
+		Vulenrability -- P2 -- High Severity	 -- we should fix the issue in days like 1 weeks
+		Vulenrability -- P3 -- Medium Severity 	 -- we should fix the issue in a month
+		Vulenrability -- P4 -- Low Severity      -- we should fix the issue when will get bandwidth
+
+
+				
+-->For every release or any new dependencies added in the project then it is mandatory to run the security
+   scanning tool which will take care scan and analyse the dependencies and generte the reports with
+   vlunerabilities
+
+-->Developer need to fix and do the regression/unit testing once before move the changes into production
+	
+==============================================================================================================
+
+Source Code Quality/Anlysis tools:
+==================================
+
+	-->Source Code Analysis tool is also known as Static Application Security Testing (SAST)
+	-->It is used to analyse the source code of the project and identifies common mistakes done by
+	   the developer
+	-->There are so many SAST tools are available in market, some of them are
+	
+		a. PMD : Programmer Mistake detector
+		b. SonarQube
+		c. Findbugs
+		d. Checkmarx
+		e. CheckStyle
+		
+		
+
+ SonarQube:
+ =========
+
+	-->It is an source code analyser tool, used for analysing the source code identify the common mistakes
+	   done by the developer
+
+	-->It is used to help for developer to write the clean code
+
+	   clean cod is nothing but the code that results in secure, realiable, maintainble..etc
+
+	-->SonarQube will generate the reports with all the issues/mistakes
+
+	-->There are 3 types of issues : 1. Bug		2. Vlunerability	3. Code Smell
+
+
+1. Bug :  A coding mistake that can lead to an error or unexpected behaviour ar tuntime
+
+2. Vlunerability : A point in your code that's open to attack
+
+3. Code Smell  : A maintainability issues that makes your code confusing and difficult to maintain
+
+
+The severity of the issue is determined based on its impact on the software quality, There are 3 levels of sevirity/priority, They are 1. High	2. Medium	3. Low
+
+1. High (P1/Sev1):
+
+	-->Issues with a high probablity to impact the behaviour of the application in production
+	-->For ex users can't able to login appn, a memory leaks, unclosed data base connections, an empty 
+	   catch block, SQL injection..etc
+
+		http://keybank.com/offers?cardnum=
+
+2. Medium (P2/Sev2):
+
+	-->A quality flaw that can highly impact the developers productivity
+
+	   ex : uncovered peice of code, duplicate blocks, unused parameters, Sop shouldn't use..etc
+
+3. Low (P3/Sev3) : 
+
+	-->A quality flaw that can slightly impact the developers productivity
+
+	    ex : lises should not be too long, unused import statements, switch stmt should have atleast 3 		 cases
+
+
+	Priority	 old severity		new severity(mapping)
+
+	 P1     	 Blocker, Critical		 High
+
+	 P2     	 Major				Medium
+
+	 P3		 Minor, Info			 Low
+
+
+	
+	
+3 types of issues 
+
+	1. Bug 		 : P1, P2, P3
+	2. Vlunerability : P1, P2, P3
+	3. Code Smell    : P1, P2, P3
+
+
+
+How to install/setup sonarqube software:
+========================================
+
+	There are 2 types of sonarqube softwares
+
+		1. sonarlint  2. sonarqubeserver
+		
+
+	1. sonarlint : 
+
+		-->we need install sonalint pluging in IDE
+		-->It provides immediate feedback in your IDE as you write the code and you can find
+		    and fix issues before a commit
+
+	2. sonarqube server:
+
+	-->It is an opensource software and in the form of zip file
+	-->sonarqube server zip file freely from https://www.sonarsource.com/products/sonarqube/downloads/
+	-->extract the zip file
+
+	--> start sonarqube
+
+D:\Srenu-Backup\softwares\sonarqube-8.9.10.61524\sonarqube-8.9.10.61524\bin\windows-x86-64>startsonar.bat
+
+	3. using docker we can install the sonarqube server
+
+		>docker pull sonarqube:latest
+		>doker run -d --name sonarqube -p 9000:9000 sonarqube:latest
+
+Access the sonarqube using 
+
+URL : http://localhost:9000/
+credentials : uname:pwd : admin:admin
+	
+How to enable sonarqube software:
+=================================
+
+	1. add the below sonarqube build plugins in pom.xml
+
+	2. goto the project location, run the sonarqube tool
+
+		>mvn clean install sonar:sonar  -Dsonar.projectkey=offers-project
+						-Dsonar.projectName=Project_name
+						-Dsonar.host.url=http://localhost:9000
+						-Dsonar.token=34080dd5d5f8e3f7f3576361992b93975de16dda
+								
+mvn sonar:sonar  -Dsonar.projectKey=offers-project  -Dsonar.host.url=http://localhost:9000 -Dsonar.login=34080dd5d5f8e3f7f3576361992b93975de16dda
+
+
+	mvn sonar:sonar \
+  -Dsonar.projectKey=offers-project \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=34080dd5d5f8e3f7f3576361992b93975de16dda
+
+
+
+===========================================================================================================
+
+	Tomorrow : 9:00 AM IST --> Topic : Log4J
+		

@@ -1,0 +1,144 @@
+Last Session:
+=============
+
+	-->How to create project structure
+	-->Just started coding on how to add the dependency injection between these layers
+
+Today Session:
+=============
+
+	-->Continuation of development
+
+@RestController
+@RequestMapping("/v1")
+public class OfferDetailsController {
+	
+	@Autowired
+	OfferDetailsValidator offerDetailsValidator;
+	@Autowired
+	IOffersService offersService;
+	
+	/**
+	 * Description : This method is used to get the list of all the offers for the given cardnumber
+	 * @param cardNum
+	 * @param clientId
+	 * @param channelid
+	 * @param msgTs
+	 * @param correlationId
+	 * @param authToken
+	 * @return OffersResponse
+	 */
+	@GetMapping("/offers/{cardnumber}") //http://localhost:8080/v1/offers/688767868 or http://localhost:8080/v1/offers?cardnum=688767868
+	OffersResponse getOffers( @PathVariable("cardnumber") String cardNum, 
+							  @RequestHeader(name = "clientId", required=false) String clientId,
+							  @RequestHeader(name = "channelid", required=false ) String channelid, 
+							  @RequestHeader(name = "msgTs", required=false ) String msgTs, 
+							  @RequestHeader(name = "correlationId", required=false ) String correlationId, 
+							  @RequestHeader(name = "authToken", required=false ) String authToken ) {
+		
+		 OffersRequest offersRequest = new OffersRequest(); 
+		 
+		 
+		//1. validate the request
+		 
+		 offerDetailsValidator.validateRequest(offersRequest);
+		 
+		//2. prepare the request for service layer
+		
+		//3. call the service layer and get the response
+		
+		OffersResponse offersResponse = offersService.getOffers(offersRequest);
+		
+		
+		return offersResponse;
+	}
+	
+
+}
+
+public interface IOffersService {
+	
+		OffersResponse getOffers(OffersRequest offersRequest);
+
+}
+
+@Component
+public class OffersServiceImpl implements IOffersService {
+
+	@Autowired
+	IEnrollmentServiceClient enrollmentServiceClient;
+	@Autowired
+	ICardVerifyServiceClient cardVerifySvcClient;
+	@Autowired
+	IOffersDao offersDao;
+	@Autowired
+	OffersRequestBuilder requestBuilder;
+	@Autowired
+	OffersResponseBuilder responseBuilder;
+
+	@Override
+	public OffersResponse getOffers(OffersRequest offersRequest) {
+
+		// 1. Get the request from controller layer
+
+		// 2. prepare the request for enrollmentServiceClient
+
+		EnrollmentRequest enrollmentRequest = new EnrollmentRequest();
+
+		// 3. call enrollmentServiceClient and get the response
+
+		EnrollmentResponse enrollmentResp = enrollmentServiceClient.enrollment(enrollmentRequest);
+
+		// 4. prepare the request for cardVerifySvcClient
+		
+		CardVerifyRequest cardVerifyReq = new CardVerifyRequest();
+
+		// 5. call cardVerifySvcClient and get the response
+		
+		CardVerifyResposne cardVerifyResp = cardVerifySvcClient.verifyCard(cardVerifyReq);
+
+		// 6. prepare the request for dao
+
+		// 7. call dao and get the response
+
+		// 8. prepare the offersresponse
+
+		return null;
+	}
+
+}
+
+public interface IEnrollmentServiceClient {
+	
+EnrollmentResponse enrollment(EnrollmentRequest enrollmentRequest);
+
+}
+
+@Component
+public class EnrollmentServiceClientImpl implements IEnrollmentServiceClient {
+
+	@Override
+	public EnrollmentResponse enrollment(EnrollmentRequest enrollmentRequest) {
+		
+		//1. Get the request from service layer
+		
+		//2. prepare the request for enrollment service
+		
+		//3. call enrollment service and get the response
+		
+		
+		return null;
+	}
+
+}
+
+public interface ICardVerifyServiceClient {
+
+	/**
+	 * 
+	 */
+	CardVerifyResposne verifyCard(CardVerifyRequest verifyRequest);
+
+}
+
+
