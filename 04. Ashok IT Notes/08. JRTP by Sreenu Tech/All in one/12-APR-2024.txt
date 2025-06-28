@@ -1,0 +1,97 @@
+Last Session:
+=============
+
+	-->One Integration Layer (EnrollmentService) has been completed and it is working fine
+	   as expected
+
+Today Session:
+==============
+
+	-->Sequnetial calls and Prallel Calls
+	-->Database Integration Layer
+
+ There are 3 different sor's (system of records/database) , each sor will maintain as one type of offer
+
+	1 sor  -- will give moffer
+	2 sor  -- will provide poffers
+	3 sor  -- will provide goffers
+
+
+	
+Sequential Calls:
+================
+
+-->Sequnetial calls is nothing but one by one or step by step or one after another
+-->If we want connect 2 or more backend system, if one backend is depending on another backend
+   or second backend input is depending first backend output then we should go for sequnetial calls
+	
+Usecases :
+==========
+	
+	usecase 1 : success response
+
+		-->Assume all the integrations/backend systems will give success response, send
+		   success respose to client
+
+	usecase 2 : partial response
+
+		-->If first backend will give success response but second backend will give error resp
+		   then client may ask send partial response (oid, name) instead whole response to 
+		   consumer. i.e. ignore the second backend eerror response
+
+	usecase 3 : error response
+
+		-->Either send full response or send error response , don't send partial response		-->eventhough first backend will give success response then second backend will give
+		   error, will send whole response as error response
+		-->If first backend itself will give error resposne, we can't call second backend		
+
+Parallel Calls:
+===============
+
+   -->Parallel calls is nothing but invoke/call all the backend/dependent systems at a time
+   -->If we want connect 2 or more backend systems, all the backend systems can perform independently
+      (i.e. none of the backend systems are depending on other systems) then we should use parallel
+        calls
+
+    -->we can implement parallel calls using 
+
+		a. java.util.concurrency or
+		b. ThreadPoolExecutor -- spring boot
+
+UseCases:
+========
+
+usecase 1 : success response 
+
+	-->All the backend systems will give success response then prpeare the final response by combining
+	   all the backend respones and send to consumer
+
+usecase 2 : partial response
+
+	-->If any one of the thread will give error response then ignore that thread response, send remaining
+	   threads response to consumer
+
+			service --- T1 --- success  ====> send T1, T2 response to consumer
+				    T2 --- success
+				    T3 --- error response -- ignore this thread response
+
+usecase 3 : error response
+
+	-->If any one of the thread will give error response then ignore other threads response (i.e. either 	   other threads or success or failure) and send error response to consumer
+
+========================================================================================================
+
+Tomorrow : 13-apr-2024 :  no class 
+
+Sunday   : 14-APR-2024 : 8:30 AM to 1:30 PM , Topic : JWT, OAUTH2.0 - how the security implement in project
+
+
+ 
+15th April to 19th April :  8:00 AM to 9:15 AM, topic : angular or faqs
+			    6:00 PM to 7:00 PM, regualr class like database integration
+
+
+
+
+		
+	

@@ -1,0 +1,134 @@
+Last Session:
+============
+
+	-->We have discussed on 
+
+		a. Junit Implementation Project
+		b. Code Coverage - Jacoco
+
+Today Session:
+==============
+	-->Drawbacks of Junit
+	-->Mocking Frameworks
+		|-Mockito, PowerMockito
+
+-->Drawbacks of Junit:
+   ==================
+
+	1. We can't test all the scenarios (success and failure ) at a time using Junit
+	2. Code Coverage will be less
+
+Note : Junit should be used if the class doesn't have any backend systems/downstream systems then use Junit
+       
+
+To overcome the drawbacks of Junit, we should use Mocking frameworks
+
+"The main goal of  Mocking frameworks are without depending on backend system or external system developer
+ can test his code is working fine properly or not"
+
+ There are so many mocking frameworks are available in market, some of them are 
+
+	1. Mockito
+	2. PowerMockito
+	3. JMock
+	4. EasyMock
+	:
+	:
+	
+
+Mockito :
+
+	"The main objective of Mockito is without depending on external systems or backend systems developer
+	 can test his code is working fine properly or not"
+
+	
+Advantages:
+
+	1. Using Mockito we can test all the scenarios like positive and negative ..etc
+	2. code coverage will be increased because we are testing all the scenarios
+
+
+Mockito Software Installation:
+==============================
+
+	-->It is an opensource software and in the form of .jar file
+	-->Download Mockito.jar freely from https://mockito.org/downloads
+	-->Enable Mockito.jar by using either set the jar into classpath or add the dependency in pom.xml
+
+		<dependency>
+    			<groupId>org.mockito</groupId>
+    			<artifactId>mockito-all</artifactId>
+    			<version>1.10.19</version>
+    			<scope>test</scope>
+		</dependency>
+
+
+Mockito Implementation Steps:
+===========================
+
+	To implement any mocking framework, we should follow 3 steps 
+
+		1. stubbing
+		2. expectation
+		3. verifying
+		
+	
+
+class A{	class B{	Class A is depending on Class B, There is no guarantee class B is 
+				always up and running, without depending on Class B, how to test class A
+B b;				we must follow the 3 steps to test class A			
+				
+m1(){		m2(){
+
+b.m2();
+
+}		}
+}		}
+
+
+
+1. Stubbing  :  Mock / Fake / Dummy
+
+	
+	-->Mock the backed class/dependent class. i.e. convert real class into mock class or dummy class
+	
+
+	
+	class B{		Syn  :   Classname ref = Mockito.mock(Class.class);			
+
+				Ex   :   B mockB = Mockito.mock(B.class)
+						
+						(OR)
+	}
+				@Mock				@Mock
+				classname ref;			B mockB;
+
+
+2. Expectation : 
+
+
+		"What are getting from real class, we should get same from mock class"
+		i.e. what real object is giving, same should give by mock object.
+
+	 	
+				============================
+				   When X call thenReturn Y
+				=============================
+
+		
+		Syn :  Mockito.when(mockobj.m2(Matchers.any(reqobj))).thenReturn(mockResp);
+		
+		Ex  : Mockito.when(mockB.m2(Matchers.any(BReq.class))).thenReturn(mockBResp);
+	
+
+
+3. Verify :
+
+	-->Verify the result  using assertXXX() method.
+
+
+===========================================================================================================
+
+
+
+

@@ -1,0 +1,102 @@
+Last Session
+============
+
+	-->Parallel Calls Implementation - POC ( Proof Of Concept )
+
+Today Session:
+==============
+
+	-->Different Types of usecases
+	-->DB Integrations
+
+Usecase1 : success response
+
+before invoking parallel calls
+Entered into Moffers task
+Entered into Goffers task
+Entered into Poffers task
+Exit from Goffers task
+Exit from Moffers task
+Exit from Poffers task
+offersList are :
+
+[
+
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024], Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024], Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024]
+
+]
+
+
+Usecase2 : partial success respose
+
+	-->If any one of the backend will give error resposne, then we need to ignore  that thread 	   response, send remaining threads response
+
+	-->we need to skip/hide that thread errors in task level, so that caller doesn't know about
+	   the exceptions of that task
+
+
+[
+ Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024],
+ Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024]
+]
+	
+
+Usecase3 : failure response
+
+	-->If any one of the thread/task is failed then complte response treat as a failure.
+
+
+Exception in thread "main" java.util.concurrent.ExecutionException: java.lang.ArithmeticException: / by zero
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.sreenutech.service.OffersService.getOffers(OffersService.java:50)
+	at com.sreenutech.service.OffersService.main(OffersService.java:107)
+Caused by: java.lang.ArithmeticException: / by zero
+	at com.sreenutech.dao.POffersDao.getOffers(POffersDao.java:20)
+	at com.sreenutech.tasks.POffersTask.call(POffersTask.java:36)
+	at com.sreenutech.tasks.POffersTask.call(POffersTask.java:1)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+======================================================================================================
+
+How to implement parallel calls using java.util.concurrency api
+					|-Executors
+					|-ExecutorService
+					|-Future
+			
+
+Drawbacks:
+==========
+
+	-->During application startup required threads will be created in threadpool
+	   but once the thread will be complted the task then developer manually close those threads
+	   if we will not close the threads then we will get OutOfMemory issues.
+
+
+How to implement Parallel calls using spring features like
+
+	1. @EnableAsync
+	2. @Async		====> During application startup required threads will be created in
+	3. ThreadPoolExecutor	      thread pool, once the threads are complted the tasks then 
+	4. CompletableFture	      automatically shutdown/terminated those threads.
+					
+
+
+8:00 AM to 9:15 AM - FAQ's -- another meeting url
+6:00 PM to 7:00 PM - Database Integrations
+
+
+
+
+
+
+
+
+
+
+
+
+
+

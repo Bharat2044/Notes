@@ -1,0 +1,53 @@
+Last Session:
+
+	-->We have discussed on Agile Scrum Methodologies theory
+
+Today Session:
+
+	-->Scrum Implementation Practical's using Rally and Jira
+
+Rally :
+=======
+
+	-->It is a Agile process management tools
+	-->It is used for configure the projects, requirements as backlog, sprints, user stories, tasks..etc
+	-->During sprint refinement/planning, scrum master will assign the tasks to the users
+	-->Every day developers will login into Rally and work on their assigned tasks and update the status
+	   
+
+Rally Software Installation:
+===========================
+
+	-->It is not a opensource, we can use rally trail version using below credentials like url, uname, pwd
+
+		username   : jbmca2011@gmail.com
+		password   : 789456***
+	
+
+
+JIRA Software:
+==============
+
+1. It is not open source software but we can use trail version in local for practice purpose
+
+2. It is in the form of .exe file, download freely from https://www.atlassian.com/software/jira/download.
+
+3. just double click on .exe file, it will install the software. 
+
+	access the Jira using : http://localhost:2025
+	in realtime access Jira using : http://keybank.jira.com
+					http://citibank.jira.com
+
+
+
+BRVN-PWE5-P3AI-KZDJ
+
+
+
+
+
+
+
+	
+	 
+
