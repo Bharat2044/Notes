@@ -1,0 +1,69 @@
+1. Can you introduce yourself or May i know about your or tell me about yourself?
+
+Sol : 
+	Hi, I am Sreenivas postgraduation completed from jntu and having 4 yrs of experience in Java and J2ee, spring boot and 	microservices technologies Currently i am working as Software Engg or Sr.S/w Engg in TCS, During my experience i got the 	opportunity to work mutliple domains like banking, insurance ..etc on different tech stack like microservices, spring boot, 	aws, docker,jdk8 and also some realtime tools like Git, maven, jenkins, sonarqube, junit..etc
+
+		Tell me about yourself = exp, role, current company, domain, techstack
+
+
+2. Can you explain your current project?
+
+	My current project name is COMS which stands for card offers management system
+	The main objective of COMS product is customer can get the list of eligible offers based on the card type and usage of the
+	card.These offers can be categoried into differt types such as membership offers, personalized offers and generalized offers
+	There are 4 modules has introduced to enable these offers
+	
+		1. batch module   : to update the offers for specified time in non business hours using spring batch
+		2. service module : this module is used to develope the microservices
+		3. web module 	  : this module is used to devlope the web applications for the customers
+		4. admin module   : ths module is used to manage these offers by business team/stakeholders
+
+
+	1. batch module :
+
+		1. As you know, these batch jobs will be executed without user interaction using schedules/cron expression
+	           Generally batch jobs will be executed non business hours ( i.e. no traffic )
+		2. This module is used to collect the different types offers from all the source systems
+		3. process the offers data by removing inactive and expired offers
+		4. send/write these offers destination location
+
+
+	2. service module :
+
+	1. using this modules we can develope the microservices, as part of this requirement we have developed 4 microservices
+
+		a. offers-service	: This service is used to get the list of offers
+		b. enrollment-service   : This service is used to verify the card is enrolled for  membership offers 
+		c. card-verify-service  : This service is used to verify the card numbers status like active, cvv validations..etc
+		d. user-auth-service	: This service is used to authenticate the request. i.e. validate the access token
+
+
+	3. web module : This module is used to display the all the eligble offers on UI, so that customer can able to use these
+			offers
+
+	4. admin module : This module will be used by business team to manage (create/update/delete) the offers for specific type
+			  of cards
+
+	
+
+3. Can you explain your project architecture?
+
+Sol :  Project Architecture =  How the different systems can communicate with each other.
+
+	1. Rest API/Service
+	2. Redis Cache
+	3. AWS S3 - to store offer image
+	4. Database (Mysql/postgres)
+	5. Batch component
+	6. KAFKA
+	
+
+
+
+
+
+
+
+
+
+	

@@ -1,0 +1,175 @@
+Project FAQ's:
+==============
+
+Module 1 : Project level
+
+	1. Can you introduce yourself or May i know about your or tell me about yourself?
+	2. Can you explain your current project?
+	3. Can you explain your project architecture?
+	4. Can you explain your project technical flow?
+	5. Can you explain how are you implemented security in your project?
+	6. What are the problems or risks you have faced in this project or till your experience
+	7. How can you improve the application (api/web) performance?
+		ex : currently api is taking morethen 10 sec, how to bring down from 10 sec to 2 sec
+
+	8. How are you deploying your application into production?
+		  		or
+	   Can you explain the deployment process model?
+
+			       or
+
+	  How the code will move from lower environment (dev, test, uat) to higher environment (prod)
+	
+			dev --> test --> uat --> prod
+
+	9. What are your roles and responsibilities in your project?
+
+	10. what methodologies you are using? or
+	    Can you explain how you got the requirements from the client?
+
+	  Hint  : Agile Scrum methodologies : sprint, userstory, backlog, 
+	  Tools : JIRA or Rally or Azure ADO
+
+	11. what are the day 2 day activities/task in your project/office?
+
+
+Module 2 : Core Java
+
+	1. Which version if JDK you are using? What are the features of JDK8?
+	2. Usecase/Scenario based problems
+		
+	   I have list of Employees and each employee has some attributes like id, name, design, sal, city, state
+	   country, dob, emailid..etc
+
+		List<Employees> empList = new ArrayList<Employees>();
+			
+			Employees e1 = new Employees();
+			e1.setId();
+
+	   w.a.p for the below usecase using jdk8 stream api
+
+		i. Get the list of employee details who are belongs to Hyderabd
+
+				public List<EmployeeCity> getEmpListByHydCity(List<Employee> empList){
+
+				}
+		ii. Get list of employee details count on each city wise
+		
+				Map<String, Object>  where key = cityname value = count
+
+		iii. Get the max emp salry on each city or over all in company?
+
+		iv. Remove the duplicates employee details in list
+		
+		v. sort the emp details based on given input
+
+			a. if the input dob the sort the employee details using dob
+			b. if the input is salary the sort the employee details using salary
+			:
+
+	3. Please write project code of JDk8 feature. what are the features you have implemented in your project code?
+
+	4. What are the collections you have used in your project? Please write the skelton/sudo code?
+
+		a. How does HasMap internally work?
+		b. How does ArrayList inernally work?
+
+	5. What is polymorphism? where you have implemented in the project? write the skelton/sudo code?
+
+	6. What is encapsulation? where you have implemented in the project? write the skelton/sudo code?
+
+	7. What is String, StringBuffer, StringBuilder, toString? where you have implemented in the project? 	    write the skelton/sudo code?
+
+	8. Can you explain SOLID Principles? where you have implemented in the project?
+
+	9. How are you handling exceptions in your project?write the skelton/sudo code?
+
+		a. Can you explain few of the expection names during project development?
+		b. Can you explain few of the expection names during project deployment?
+		c. different types of questions like how to handle exceptions without try, catch and how to
+	           handle NullPointerException
+
+	10. What is enum? How does it works? diff between enum and constant?
+	11. How are we implemented Multithreading in your project? Can you explain?
+	
+	
+
+Module 3:  Spring Core & Spring Boot
+
+	1. Spring Core questions like 
+		which version of spring core you are using
+		@Bean vs @Component
+		can we use @Autowired for predefined classes? i.e. can we inject every class with @Autowired
+		Spring Scopes
+		How to inject the values
+		How to load the environment based properties file
+
+		https://www.youtube.com/watch?v=H47ewetqyMw
+
+	2. Spring Boot : https://www.youtube.com/watch?v=p_9iHOjF8yA
+
+		what is the spring boot version you are using? 3.x
+		how autoconfiguration will work internally?
+		what happen when the SpringApplication.run() method will execute
+		How to run the spring boot application?
+		How to get values form environments?
+		How to connect mulitple databases? can you explain?
+		What are the actuator? How it works?
+
+Module 4 : Rest API & Microservices
+
+	1. Have you worked on provider side or consumer side? 
+
+	2. Write the skelton/sudo code how you have developed the service?
+
+	3. Can you write skelton/sudo code how you will make rest api calls
+
+	4. How are you testing rest API? postman or swagger
+
+	5. Rest API error code ?  200, 201, 400, 401, 404, 403, 500, 503..etc
+
+	6. microservices vs monolithic
+
+	7. Realtime Usecase 
+
+			a. If we modify the service how can avoid the impact for all the consumers
+			b. What are the reatlime problems you have faces?
+			c. how are you handling timeout scenarios
+
+	8. How inter service communication happend? write the skelton code
+
+	9. How does api gateway will work?
+
+	10. How the service can be resillient?
+			
+
+	
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
