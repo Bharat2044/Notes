@@ -1,0 +1,68 @@
+Last Session:
+=============
+	
+	-->Sequential calls and Parallel Calls
+
+Today Session:
+==============
+
+	-->Some POC on Parallel Calls
+	-->DB integration
+
+create 2 backends
+
+	1. GOffersDao	--- T1	-- task1	class TaskResult{
+	2. POffersDao	--- T2	-- task2	private String taskName; // name of task	
+	3. MOffersDao	--- T3	-- task3	private Object result; //hold the thread response
+						
+						}	
+	i/p : cardnumber
+	o/p : list of offers
+
+	
+
+before invoking parallel calls
+Entered into Goffers task
+Entered into Moffers task
+Entered into Poffers task
+Exit from Goffers task
+Exit from Poffers task
+Exit from Moffers task
+offersList are :
+[
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024], 
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024], 
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024]
+]
+		
+
+
+before invoking parallel calls
+Entered into Goffers task
+Entered into Moffers task
+Entered into Poffers task
+Exit from Goffers task
+Exit from Moffers task
+Exit from Poffers task
+offersList are :
+[
+ Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024],
+ Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024],
+ Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024]
+]
+
+before invoking parallel calls
+Entered into Goffers task
+Entered into Poffers task
+Entered into Moffers task
+Exit from Poffers task
+Exit from Goffers task
+Exit from Moffers task
+offersList are :[
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024], 
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024], 
+Offers [oid=111, name=mobile, desc=good, imageUrl=http://amazon.com/mobile, expDate=30-May-2024]
+]
+
+					
+	

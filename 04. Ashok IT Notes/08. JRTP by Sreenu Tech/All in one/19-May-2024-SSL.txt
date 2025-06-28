@@ -1,0 +1,76 @@
+Last Session :
+==============
+
+	-->Message Level Security : Encryption & Decryption
+	-->Application Level Security : Authentication & Authorization : OAuth
+	
+
+Today Session:
+==============
+
+	-->How SSL will work internally
+
+
+SSL : 
+
+	-->SSL Stands for Secure Socket Layer
+	-->It is used transfer the data in secure way between client and server
+
+
+HTTPS security can be split into 2 parts
+
+	1. To validate the certificate of a website
+	2. To create a secure connection ( encrypts outgoing and incoming data )
+
+
+
+1. To validate the certificate of a website :
+
+	To validate the certificate we should apply both Symmetric and Asymmetric Encryption
+
+
+	1. when we enter any https URL (https://amazon.com, https://google.co.in) then server gives its public key and certificate
+	    ( which is singed by one of the CA like GeoTrust .i.e. using CA private key apply the encryption ) to the client
+
+	2. Now Brower/Rest Client should verify the server public key is valid or not
+
+		a. most of the browser has all the CA's public keys
+		b. Now browser has to verify the authenticity of the certificate. ie. It is actually signed by GeoTrust or not
+		   as browser comes with a pre installed list of public keys from all the major CA's, it picks the public key
+		   from GeoTrust and tries to decrypt it 
+		c. If it is able to decrypt then it is valid public key then we can proceed further.
+
+
+	3. using public key we can encrypt any data ( text or number or anything )
+
+
+2. To create a secure connection ( encrypts outgoing and incoming data ):
+
+	
+	1. After validating the certificate, browser creates a new key lets call session key and make it 2 copies of it
+	   Using this key we can encrypt as well as decrypt the data
+
+	2. The browser sends the key  in encrypted with server public key (encrypted key ) to server
+
+	3. google server or amazon server decrypts the encrypted data using its private key and get the original key
+
+	Note: now both client and server has same key
+
+	4. When client send any request data  like html document, text , ..etc first it will apply the encryption using 
+	   session key then send encrypted data to server, server will decrypt the data using same session key
+
+	  
+	5. This process will continue for all the transactions ( i.e. all the request and response ) between client and server
+
+Note : This session key is only used for that session. If the user will closes the  website and opens again, a new session will be
+       key will be created.
+
+
+=====================================================================================================================================
+
+
+
+
+
+
+

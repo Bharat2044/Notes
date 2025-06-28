@@ -1,0 +1,12 @@
+Last Session:
+
+	-->we have discussed on how to implement Mockito and Power Mockito in the project
+
+Today Session:
+
+	-->We will implement Mockito and Power Mockito in the project
+
+
+	1. How to test offerdetailscontroller
+	2. How to test offerdetailsservice
+	

@@ -1,0 +1,204 @@
+Webservice Security Topics:
+===========================
+
+	1. Introduction
+	2. Types of securities
+	3. Importance of Keytool and Keystore
+	4. Keytool commands
+	5. Importance of CA's
+	6. Examples
+	7. How SSL will work internally
+
+
+
+Introduction:
+============
+
+key tool : It is used to manage the keys like create, update, delete..etc
+
+Keystore : It is repository and used for store the keys
+
+
+#1. How to generate the keystore
+
+	>keytool -genkey -alias hdfc -keyalg RSA -keystore server.jks  -keysize 2048
+
+			.jks = java keystore
+			.ks  = keystore
+
+
+	>keytool -genkey -alias amz -keyalg RSA -keystore amzon-client.jks  -keysize 2048
+
+
+	>keystore -list -v -keystore  <name of keystore>
+
+	>keytool -export -alias hdfc -file hdpub.crt -keystore server.jks
+	>keytool -import  -alias amz -file hdpub.crt -keystore amzon-client.jks
+
+
+Summary :
+=========
+
+	-->Messagelevel Security can be implemented using encryption and decryption
+
+	-->Encryption is 2 types : 1. Symmetric Encryption	2. Asymmetric Encryption
+					|				|
+				      single key		   key pair (public key and private key)	
+				        |			        |
+			    apply encryption and  decryption	   apply encryption using one key and decryption using opposite key
+			    using same key
+								    Generally provider will share public key	
+								    Consumers will apply encryption with public key and 
+								    Provider will decrypt using private key	
+								    
+
+
+
+
+
+Message Level Security (Asymmetric Encryption) Implementation Steps:
+====================================================================
+
+ Rest API with Rest Easy Implementation vendor
+
+ Consumer End Steps:
+ ====================
+
+	1. consumer/client jks is ready
+
+			a. provider already shared public key and imported into client jks file
+			b. client.jks will have client private key, public key  + provider public key
+
+	2. write the rest client code to call the service/api
+
+			a. prepare the request object
+			b. convert request object to json
+			
+
+	3. Apply the encryption
+
+			a. read the client.jks file
+			b. get the provider public key from client.jks file
+			c. apply the encryption using client.jks file
+			d. now we got the ciphertext
+
+	4. send ciphertext to provider and get the response
+
+
+Provider End Steps:
+===================
+
+	1. provider jks is already ready
+
+		a. server JKS has  private key and public key
+
+	2. Write the rest api
+		
+		a. Read the encrypted json data from provider
+
+	3. Apply the Decryption
+
+		a. load the server.jks file
+		b. get the private key of server jks file
+		c. apply the decryption using server jks file
+
+	4. now got the original data. i.e. plain json text
+
+	5. convert json to java object
+
+	6. process the request and prepare the response 
+
+	7. send the response to consumer/client
+
+
+	http://localhost:2021/06b_rest_easy_jwe_encryption_client/send/encrypted
+
+	http://localhost:2021/06a_rest_easy_jwe_encryption_server/encrypted/verify
+
+
+Plain Text:
+
+{
+  "id" : "abc123",
+  "name" : "Cust One",
+  "email" : "cust@gm.com",
+  "phone" : 123456789,
+  "address" : {
+    "houseNumber" : "1234",
+    "street" : "Community Hall Road",
+    "city" : "Hyderabad",
+    "state" : "Telangana",
+    "pinCode" : 500045
+  }
+}
+
+Cipher Text: 
+===========
+	
+---------- Client Log: Sending encrypted request to server as below ----------
+eyJhbGciOiJSU0ExXzUiLCJlbmMiOiJBMjU2Q0JDX0hTNTEyIn0.S4cVMU4Puj0hR1RP7MRxCO6czOBjNLN7ElKMQuXwh2uNkZKGAAWhEu3ET-KfShk-3GpRyjnDyGsrlsCfgJZzL1UCNJJgTZX3HVs71M8A1rD0BaeRbnSl169oa-HkL1LLI9DZGEJ_znLNp5QGErju9xbo6dWxap_994haihm2xoncpvv6kvjiVY1WcYSrcxp2eFfmhRoB-IIXQLiAJ5uaW2UGqwfnAhwHWS_1fWU3QoLLUQaXvHW4b661Mjkxl9Itt2Cf3k5Bvh049HbV7Y6lE1-J68eM-uaEpMVuXQAdoR8z1aU0RISER7DlfKXSt7BeqItlgtb3UHPfPPvYkTXZgg.7cwmnIRLN5DwjhCnf0cbDg.Nx4tWSExFN1ZiaRDFzh1kw4-2rSY1qal_PakIvcWl7_IYPpCEORdbXMAOyg5HVzNyP4PNgcg-TmJqJx3bTYa0AUV-3HcCvh_h0fmY_tGASaiiERmMJqohQxwsYoZGLnUap9qaucSoZmm4XBVJdFI_WPFMGISESzfcQPwQGFyJI7kPDNqbJFMW-KxQpywQ9guN4RYDLF1hp0VO50la0HoPh_z2k6FUljzWzpXsJktbCqTmHg-g-DmxLP9uXuX57AMBWHFP91HZspn6oV6SkZdcNHdzKusi6VnLxZe4waNrNeF4qx2nAH-384j6Q1tO8G6puwBxnLvS4z1BT0qFwULxXZIKU6P0tkFqnhk8TP0X0s.6-vBlQuNzr0BaglWqlige9iy7UMBQwZa_BXB4tPJhQM
+---------- --------------------------------------------------------------- ----------
+	
+
+Cipher Text:
+============
+
+---------- Server Log: Received a encrypted message from client and it is as below ----------
+eyJhbGciOiJSU0ExXzUiLCJlbmMiOiJBMjU2Q0JDX0hTNTEyIn0.S4cVMU4Puj0hR1RP7MRxCO6czOBjNLN7ElKMQuXwh2uNkZKGAAWhEu3ET-KfShk-3GpRyjnDyGsrlsCfgJZzL1UCNJJgTZX3HVs71M8A1rD0BaeRbnSl169oa-HkL1LLI9DZGEJ_znLNp5QGErju9xbo6dWxap_994haihm2xoncpvv6kvjiVY1WcYSrcxp2eFfmhRoB-IIXQLiAJ5uaW2UGqwfnAhwHWS_1fWU3QoLLUQaXvHW4b661Mjkxl9Itt2Cf3k5Bvh049HbV7Y6lE1-J68eM-uaEpMVuXQAdoR8z1aU0RISER7DlfKXSt7BeqItlgtb3UHPfPPvYkTXZgg.7cwmnIRLN5DwjhCnf0cbDg.Nx4tWSExFN1ZiaRDFzh1kw4-2rSY1qal_PakIvcWl7_IYPpCEORdbXMAOyg5HVzNyP4PNgcg-TmJqJx3bTYa0AUV-3HcCvh_h0fmY_tGASaiiERmMJqohQxwsYoZGLnUap9qaucSoZmm4XBVJdFI_WPFMGISESzfcQPwQGFyJI7kPDNqbJFMW-KxQpywQ9guN4RYDLF1hp0VO50la0HoPh_z2k6FUljzWzpXsJktbCqTmHg-g-DmxLP9uXuX57AMBWHFP91HZspn6oV6SkZdcNHdzKusi6VnLxZe4waNrNeF4qx2nAH-384j6Q1tO8G6puwBxnLvS4z1BT0qFwULxXZIKU6P0tkFqnhk8TP0X0s.6-vBlQuNzr0BaglWqlige9iy7UMBQwZa_BXB4tPJhQM
+---------- --------------------------------------------------------------- ----------
+
+---------- Server Log: Decryption successful and the data is as below ----------
+{
+  "id" : "abc123",
+  "name" : "Cust One",
+  "email" : "cust@gm.com",
+  "phone" : 123456789,
+  "address" : {
+    "houseNumber" : "1234",
+    "street" : "Community Hall Road",
+    "city" : "Hyderabad",
+    "state" : "Telangana",
+    "pinCode" : 500045
+  }
+}
+---------- --------------------------------------------------------------- ----------
+
+---------- Server Log: After converting json to customer and the data is as below ----------
+Customer [id=abc123, name=Cust One, email=cust@gm.com, phone=123456789, address=Address [houseNumber=1234, street=Community Hall Road, city=Hyderabad, state=Telangana, pinCode=500045]]
+---------- --------------------------------------------------------------- ----------
+
+===============================================================================================================================
+
+	Application Level Security:
+
+		-->Authentication : verify the credentials (username and password) are valid or not : OAuth 2.0
+		-->Authorization  : RBAC : Role based access control
+
+	Network Level Security :
+
+		-->The process of converting http to https is called network level security
+
+		-->Using SSL (Secure Socket Layer) we can implement network level security
+
+
+	To understand SSL, we should have knowledge on
+
+		1. Symmetric Encryption
+		2. Asymmetric Encryption
+
+
+	1. Data will be send in encrypted text automatically while sending from client to server
+	2. No one can see the data while transferring from client and server
+
+
+
+	7:00 AM to 10:00 AM
+
+	1st one hour : SSL will complete
+	2 hours      : Power Mockito implementation in project
+
+
+
+
+
+
