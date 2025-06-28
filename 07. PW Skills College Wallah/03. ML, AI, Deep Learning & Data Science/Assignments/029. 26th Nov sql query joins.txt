@@ -1,0 +1,323 @@
+Checkout this video
+https://drive.google.com/drive/folders/1dfb70ncNGoJa89DPUjQeQJWS52OBmlLo
+
+
+
+-- DDL - create , alter , truncate , drop 
+
+create database pwskills;
+
+use pwskills;
+
+
+
+create table pwStudents1 (
+studentid int,
+student_name char(50), 
+student_email varchar(100),
+joining_date date,
+short_desc text,
+marks decimal(3,2) -- 000.00
+);
+
+select * from pwstudents1;
+
+describe pwstudents1;
+
+drop table pwStudents;
+
+drop database pwskills;
+
+alter table pwstudents1 add weight float;
+
+alter table pwstudents drop column short_desc;
+
+alter table pwstudents modify weight int;
+
+alter table pwstudents rename column weight to mass;
+
+describe pwstudents;
+
+select * from pwstudents;
+
+insert into pwstudents value (1,"deepak suneja", "deepak123@gmail.com", "2023-11-11", 8.4 ,67);
+
+select * from pwstudents;
+
+truncate pwstudents;
+
+select * from insurance_data;
+
+truncate insurance_data;
+
+drop table insurance_data;
+
+
+
+use pwskills;
+
+-- create table tablename (
+-- columnname1 datatype constraint,
+-- columnname2 datatype constraint,
+-- columnname3 datatype constraint
+-- )
+
+drop table pwStudents1;
+
+create table teachers(
+t_id int,
+t_name char(50),
+primary key (t_id)
+);
+use pwskills;
+
+create table pwStudents1 (
+studentid int ,
+student_name char(50) not null, 
+student_email varchar(100) unique,
+joining_date date default('2023-11-05'),
+short_desc text,
+marks decimal(3,2), -- 0.00
+teacher_id int,
+primary key (studentid),
+foreign key (teacher_id) references teachers(t_id)
+);
+
+describe pwStudents1;
+
+-- DML - insert , update , delete
+
+-- insert into tablename(column names) value ();
+
+insert into teachers value (6, 'sudhanshu');
+
+insert into teachers (t_id) value (3);
+
+insert into teachers values (4, "Ekta"),(5, 'Krish');
+
+select * from teachers;
+
+-- update my teachers table and set t_name value as nitin where t_id is equal to 2
+update teachers set t_name = "nitin" where t_id = 2;
+
+-- delete values from the teachers table whereever you find t_id as 3
+delete from teachers where t_id = 3 ;
+
+-- DQL - select 
+show databases;
+
+show tables;
+
+select * from teachers;
+
+select t_id from teachers;
+
+-- operations - from , join , where , group by , having , select , order by , limit
+
+use pwskills;
+
+
+-- operators -
+
+use mavenmovies;
+
+-- Arithmatic operator -- + - * / %
+
+select * from payment;
+
+select amount, amount * amount as doubled_amount from payment;
+
+select amount from payment where amount = 2*amount/2;
+
+-- comparsion operator - < > = <> <= >=
+
+select * from film;
+
+select * from film where replacement_cost >= 20;
+
+select * from film where rating <> 'PG';
+
+
+-- logical operator -- and , or , not , in , between
+
+select * from film where not rating != 'PG';
+
+select * from film where length in (80 , 90 , 100);
+
+-- constraints - set of rules 
+-- not null , default , unique, check, primary key , foregin key , candidate key , super key , 
+-- composite key  , artifical key
+
+describe film;
+
+create table pwStudents1 (
+-- addharcard + last_nam of student 
+student_name char(50) not null, 
+adhaar_card int , -- candidate key
+student_email varchar(100) unique,
+joining_date date default('2023-11-05'),
+age int check(age>=18),
+short_desc text,
+marks decimal(10,2), -- 00000000.00
+teacher_id int,
+primary key (studentid),
+foreign key (teacher_id) references teachers(t_id)
+);
+
+-- Retrieve the titles of films that have a rental rate greater than $4.00.
+select title , rental_rate from film where rental_rate > 4;
+
+-- List the customer names and emails of those who live in the address with the ID 300.
+select first_name , last_name , email , address_id from customer where address_id = 300;
+
+-- Find the films with a length between 120 and 150 minutes (inclusive). Display the title and length.
+select title , length from film where length between 120 and 150;
+
+-- wildcard operator - like - _ % - text data
+
+-- Retrieve the first and last names of customers whose last name contains with the letter 'S' .
+select first_name , last_name from customer where last_name like "S%";
+select first_name , last_name from customer where last_name like "%S";
+select first_name , last_name from customer where last_name like "%S%";
+select first_name , last_name from customer where last_name like "S%S";
+select first_name , last_name from customer where last_name like "%es%";
+
+-- Retrieve the first and lastname of customer whose first name should end with e and start with a?
+select first_name , last_name from customer where first_name like "a%e";
+
+-- Retrieve the first and lastname of customer whose first name where letter a is on second position?
+select first_name , last_name from customer where first_name like "_a%";
+
+-- Retrieve the first and lastname of customer whose first name have letter a is on second position and
+-- e on 4th position?
+select first_name , last_name from customer where first_name like "_a_e%";
+
+-- Retrieve the first and lastname of customer whose first name have letter a is on second position and
+-- last name have letter e on 4th position?
+select first_name , last_name from customer where first_name like "_a%" and last_name like "___e%";
+
+select * from address;
+
+select concat(district, address) from address;
+
+
+-- SQL pre defined functions mathematical/aggregate functions, strings, datetime
+
+select sum(amount) from payment; -- summing all the column values and giving single output
+select avg(amount) from payment; -- averaging all the column values and giving single output
+select count(*) from payment; -- counting all the values in column
+select min(amount) from payment; -- minimum
+select max(amount) from payment; -- maximum
+ 
+select concat(first_name, " " , last_name) as full_name from actor;-- concat to join multiple strings together
+select concat(first_name, " " , last_name) as full_name, 
+length(concat(first_name,  last_name)) as length from actor; -- length to find number of char in text
+select lower(first_name) from actor; -- upper , lower to convert text into upper or lower case letters
+select upper("SaHiL");
+select substr(address, 3, 10) from address; -- substr( text data, starting point, no. of char)
+-- its a function to extract/slice text data
+select substr("Sahil Garg", 3,5);
+
+-- datetime functions - month, year, day , monthname , datediff
+select rental_date, day(rental_date) from rental;
+select return_date, rental_date, datediff(return_date, rental_date) from rental; -- datediff is used to find difference between dates
+
+-- What smallest rental duration ?
+select min(rental_duration) from film;
+-- What is the highest replacement cost amongst all the films
+select max(replacement_cost) from film;
+-- Display all films whose title length is greater than 10 characters
+select title, length(title) from film where length(title) > 10;
+-- Provide the count of unique ratings of films provided
+select count(distinct(rating)) from film;
+-- Display the list of first 4 cities which start and end with ‘a’
+select * from city where city like "a%a" limit 4;
+
+-- operations - from , join , where , group by , having , select , order by , limit
+
+-- Group by
+select * from film;
+select rating , sum(rental_duration) from film group by rating;
+
+select rating, avg(rental_duration) from film where rating = 'PG';
+
+select actor_id , count(film_id) as num_of_films from film_actor group by actor_id order by num_of_films desc;
+
+
+-- List the total sales amount for each customer in the database
+select * from payment;
+
+SELECT 
+    customer_id, SUM(amount) AS total_amount
+FROM
+    payment
+WHERE
+    staff_id = 2
+GROUP BY customer_id
+HAVING total_amount > 100;
+
+
+-- Joins - inner join , left join , right join and full join
+-- T1					t2
+-- stid name age      stid tid subject
+-- 1	abc		12		2	3	maths
+-- 2	bdc		23		4	3	maths	
+-- 3	ojn		25		5	4	science
+-- 4	ljn		26
+
+-- right join - stid
+-- stid name age      stid tid subject
+-- 2	bdc		23		2	3	maths
+-- 4	ljn		26		4	3	maths	
+-- nul	nul	nul			5	4	science
+-- 
+
+select * from actor;
+select * from actor_award;
+select * from actor inner join actor_award on actor.actor_id = actor_award.actor_id;
+
+-- Display all the cities with there postal code in India ?
+
+select * from country; -- country data
+select * from city; -- city data
+select * from address; -- postal codes 
+SELECT 
+    postal_code, city, country
+FROM
+    address
+        INNER JOIN
+    city ON address.city_id = city.city_id
+        INNER JOIN
+    country ON city.country_id = country.country_id
+WHERE
+    country = 'India';
+    
+-- Display the names of actors and the names of the films they have acted in.
+select * from actor; -- names of actor
+select * from film_actor; -- common connection
+select * from film; -- title
+
+SELECT 
+    concat(first_name, " ", last_name) as Name, title
+FROM
+    actor
+        INNER JOIN
+    film_actor ON actor.actor_id = film_actor.actor_id
+        INNER JOIN
+    film ON film.film_id = film_actor.film_id;
+
+-- Display all the actors and total number of films they have acted in.
+
+SELECT 
+    concat(first_name, " ", last_name) as Name, count(title) as count_of_movies
+FROM
+    actor
+        left JOIN
+    film_actor ON actor.actor_id = film_actor.actor_id
+        left JOIN
+    film ON film.film_id = film_actor.film_id
+group by Name
+order by count_of_movies;
+
+
+

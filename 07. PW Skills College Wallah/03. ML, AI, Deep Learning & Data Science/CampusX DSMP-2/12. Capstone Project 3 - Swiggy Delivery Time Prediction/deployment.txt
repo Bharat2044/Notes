@@ -1,0 +1,198 @@
+# Steps:
+
+1. Create an IAM role for ASG Launch Template - Allow CodeDeploy to interact with your resources.
+2. Create an ASG (Auto Scaling Group) - Define your EC2 instances that will host the application.
+3. Create a CodeDeploy application - Configure the CodeDeploy application for deployment.
+4. Create a CodeDeploy deployment group - Set the target EC2 instances (from ASG) for deployment.
+5. Create an AppSpec file - Define the deployment process and lifecycle hooks.
+6. Create a deployment in CodeDeploy - Start the deployment from ECR to the EC2 instances in your ASG. (Doing in Step 7)
+OR
+7. Update the CI/CD pipeline - Include the steps to push zip file to S3 and then deploy the application using CodeDeploy.
+
+############################################################################################################
+
+## STEP 1:
+Create IAM Roles
+a. For Launch Template
+	1. Allow EC2 instances to connect to CodeDeploy.
+	2. Pull images from ECR.
+	3. Read Access to S3.
+b. For CodeDeploy
+	1. CodeDeploy Service Role - Handles the S3 bucket where deployment script is present, ASG's to perform scaling and other 								   deployment related permissions(Shutting down Traffic, Load Balancer Permissions).
+	
+************************************************************************************************************
+
+**Install CodeDeploy Agent on each instance using the Launch Template**
+
+#!/bin/bash
+
+# update packages
+sudo apt update -y
+
+# install ruby required for code deploy
+sudo apt install ruby-full -y
+
+# get additional packages
+sudo apt install wget -y
+cd /home/ubuntu
+
+# import the agent
+wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/latest/install
+
+# install the agent
+chmod +x ./install
+sudo ./install auto
+
+# run the agent
+sudo systemctl start codedeploy-agent
+	
+*************************************************************************************************************
+
+**Check if CodeDeploy agent is successfully installed**
+
+sudo systemctl status codedeploy-agent
+-------------------------------------------------------------------------------------------------------------
+
+## STEP 2:
+1. Create Auto Scaling Group with:
+	Desired: 2
+	Minimum: 1
+	Maximum: 3
+2. Attach the Launch Template to the ASG.
+3. Create an Application Load Balancer that is Internet Facing with a Target Group Attached.
+4. Start the ASG.
+------------------------------------------------------------------------------------------------------------
+
+## STEP 3 & 4: 
+1. Create a CodeDeploy Application.
+2. Attach the ASG as the Deployment Group.
+3. Attach the IAM Role - CodeDeploy Service Role to allow CodeDeploy to access other AWS services.
+4. Create the deployment using In Place Deployment.
+5. Use Deployment Strategy as One at a time.
+
+-------------------------------------------------------------------------------------------------------------
+
+## STEP 5:
+Copy the Code for `appspec.yml` and other deployment hooks(stages).
+
+*************************************************************************************************************
+`appspec.yml`
+
+version: 0.1
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/app
+hooks:
+  BeforeInstall:
+    - location: deploy/scripts/install_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: deploy/scripts/start_docker.sh
+      timeout: 300
+      runas: ubuntu
+
+***************************************************************************************************************
+
+`install_dependencies.sh`
+
+#!/bin/bash
+
+# Ensure that the script runs in non-interactive mode
+export DEBIAN_FRONTEND=noninteractive
+
+# Update the package lists
+sudo apt-get update -y
+
+# Install Docker
+sudo apt-get install -y docker.io
+
+# Start and enable Docker service
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Install necessary utilities
+sudo apt-get install -y unzip curl
+
+# Download and install AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/ubuntu/awscliv2.zip"
+unzip -o /home/ubuntu/awscliv2.zip -d /home/ubuntu/
+sudo /home/ubuntu/aws/install
+
+# Add 'ubuntu' user to the 'docker' group to run Docker commands without 'sudo'
+sudo usermod -aG docker ubuntu
+
+# Clean up the AWS CLI installation files
+rm -rf /home/ubuntu/awscliv2.zip /home/ubuntu/aws
+
+*****************************************************************************************************************
+`start_docker.sh`
+
+#!/bin/bash
+# Log everything to start_docker.log
+exec > /home/ubuntu/start_docker.log 2>&1
+
+echo "Logging in to ECR..."
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 891377050051.dkr.ecr.ap-south-1.amazonaws.com
+
+echo "Pulling Docker image..."
+docker pull 891377050051.dkr.ecr.ap-south-1.amazonaws.com/food_delivery_time_prediction:latest
+
+echo "Checking for existing container..."
+if [ "$(docker ps -q -f name=delivery_time_pred)" ]; then
+    echo "Stopping existing container..."
+    docker stop delivery_time_pred
+fi
+
+if [ "$(docker ps -aq -f name=delivery_time_pred)" ]; then
+    echo "Removing existing container..."
+    docker rm delivery_time_pred
+fi
+
+echo "Starting new container..."
+docker run -d -p 80:8000 --name delivery_time_pred -e DAGSHUB_USER_TOKEN=0b44756fc3f18f453afbddad59dec563ff9e691c 891377050051.dkr.ecr.ap-south-1.amazonaws.com/food_delivery_time_prediction:latest
+
+echo "Container started successfully."
+
+*****************************************************************************************************************
+------------------------------------------------------------------------------------------------------------------
+
+## STEP 6:
+Required for doing the deployment manually.
+	
+----------------------------------------------------------------------------------------------------------------- 
+
+## STEP 7:
+
+Update the CI/CD workflow file
+
+******************************************************************************************************************
+# Zip the required files
+- name: Zip files for deployment
+if: success()
+run: |
+    zip -r deployment.zip appspec.yml deploy/scripts/install_dependencies.sh deploy/scripts/start_docker.sh
+
+# Upload the ZIP file to S3
+- name: Upload ZIP to S3
+if: success()
+run: |
+    aws s3 cp deployment.zip s3://deliverytimepredictiondeployment/deployment.zip
+
+# Deploy to AWS CodeDeploy using the uploaded ZIP file
+- name: Deploy to AWS CodeDeploy
+if: success()
+run: |
+    aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    aws deploy create-deployment \
+    --application-name deliverytimeprediction \
+    --deployment-config-name CodeDeployDefault.OneAtATime \
+    --deployment-group-name deliverytimepredictiondeploymentgroup \
+    --s3-location bucket=deliverytimepredictiondeployment,key=deployment.zip,bundleType=zip \
+    --file-exists-behavior OVERWRITE \
+    --region ap-south-1
+    
+*********************************************************************************************************************
+---------------------------------------------------------------------------------------------------------------------
