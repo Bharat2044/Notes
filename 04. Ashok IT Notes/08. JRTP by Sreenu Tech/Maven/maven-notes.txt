@@ -1,0 +1,358 @@
+Maven Agenda:
+=============
+
+	1. Introduction					
+	2. Software Installation
+	3. Project Structure
+	4. Importance of pom.xml
+	5. examples
+	6. Types of repositories
+	7. Importance of pom.xml and setting.xml
+	8. Types of pom.xml
+	9. Maven Plugins
+	10. Maven scopes
+	11. Maven life cyle
+	12. Realtime example
+	13. Summary
+
+
+Note : 
+ 1. Every role( backend engg, devops engg, qe..etc ) developer should know build tools like ant,    	maven, gradle
+ 2. pre requesting is :  xml knowledge, java path and classpath, jar..etc
+
+
+Introduction:
+============
+
+	-->Maven is  build tool
+	-->It is used to perform the below activities like 
+		a. validate the source code
+		b. compile the source code
+		c. generate the jar, war, ear
+		d. generate documentation
+		e. deploy the application
+
+	-->If any code changes will happen then build tools will take care to build the application
+	    quickly
+
+Software Installation:
+======================
+
+	-->Maven was developed using Java language
+	-->Java software is mandatory enabled to run maven tool
+
+Java Software Setup:
+====================
+
+	-->Download Jdk8/11 software from oracle 				https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html
+	-->Set the Path 
+
+		JAVA_HOME = C:\Program Files\Java\jdk1.8.0_181
+		PATH = C:\Program Files\Java\jdk1.8.0_181\bin  or %JAVA_HOME%\bin
+
+	 Verify the java software:
+		
+		>java --version
+
+Maven Software Setup:
+=====================
+
+	-->It is an opensource software and it is in the form of .zip file
+	-->Download the maven software freely from https://maven.apache.org/download.cgi
+
+		windows : extract the zip file and set the path
+
+			M2_HOME:D:\Srenu-Backup\softwares\apache-maven-3.6.3-bin\apache-maven-3.6.3			PATH: %M2_HOME%\bin
+
+	Verify the maven software
+
+		>mvn --version
+	
+
+Maven Project Structure:
+=======================
+
+	The project structure will be different for jar and war
+
+	For every maven project
+	
+		projectname/src/main/java
+		projectname/src/main/resources
+		projectname/src/test/java
+		projectname/src/test/resources
+		projectname/pom.xml
+		projectname/target
+
+Importance pom.xml
+==================
+
+	-->pom stands for project object model.
+	-->It is in the form of xml document and it contains information about project like
+
+		a. how to the compile code
+		b. how to generate jar, war, ear
+
+	>For every pom.xml 3 elements are mandatory, they are 
+
+		1. groupid		2. artifactid	 3. version
+
+		groupid  : com.sreenutech
+		artifact : first-app
+		version  : 1.0-SNAPSHOPT
+
+
+		groupid  : com.spf.core			com
+		artifact : spring-core			 |-springframework
+		version  : 1.0-release				|-core
+								     -spring-context.jar
+								     -spring-core.jar
+
+
+
+	always the groupid:artifactid:version should be unique
+		
+		   org.spf.core:spring-core:1.0-release
+		   org.spf.core:spring-core:5.0-release
+		   org.spf.core:spring-core:6.0-release
+
+	-->When we run maven goal, always it looks for pom.xml and execute the pom.xml
+
+	  maven goals/commands/operations
+	  =============================		"when we run any goal maven software always looks for	                                        pom.xml and read the content of the pom.xml then 
+		1. mvn clean		        excute the pom.xml will get the output"
+		2. mvn install		======>
+		3. mvn deploy
+		4. mvn dependency:tree
+		5. mvn cobertura:cobertura
+		6. :
+
+
+	Difference between snapshot and release version
+
+	snapshot : development is currently going on : code is not freezed
+	release  : development and testing has done and released into market
+
+	snapshot : spring f/w : core module : spring-core-7.0-snapshot
+	release  : spring f/w : core module : spring-core-7.0.jar or spring-core-7.0-release.jar
+
+
+	snapshot : spring f/w : core module : spring-core-7.1-snapshot
+	release  : spring f/w : core module : spring-core-7.1.jar or spring-core-7.1-release.jar
+
+
+How to enabled maven software:
+
+	1. without ide :  set the M2_HOME and path
+	2. with IDE    :  need to install maven plugins in IDE
+
+	   Note : By default maven software is availale in all the latest IDE
+
+How to verify the maven software in IDE
+
+	>Launch IDE -->File-->New -->Maven Project 
+
+If we are able see maven project option then maven software is already available in ide
+
+
+ default maven folder creation location: c:\user\<username>\.m2 folder
+
+
+Type Of Repositories:
+=====================
+
+	There are 3 types of repositories in maven
+
+	1. Local repository		2. Remote Repository		3. Central Repository
+	
+	
+
+ When we execute maven install goal then it will perform below things
+
+	-->Maven first read the pom.xml and collect all the dependencies then start finding those dependencies
+	-->Maven will read the settings.xml file to get the location repo and remote repo
+	-->Start execution flow
+
+	1. Local Repository (c:/user/<username/.m2>):
+
+		-->maven s/w will read the pom.xml and looks for required jars in loca repo
+		-->If the jars found in local repo then it will use it and set the jar into classpath
+		-->If the jars not found in local repo then it will goto remote repository
+
+	2. Remote Repository : http://repo.keybank.com/projects
+
+		-->This is private repository created and maintained by client/customer
+		-->It will check required jars present in remote repository or not, if is available download
+	           from there and set the jar into classpath, store one copy into local repo for future purpose
+		-->if it is not available then it will goto central repository
+
+	3. Central Repository : https://repo.maven.apache.org/maven2
+
+		-->This repository will be maintainded by maven software, anyone can access this repository
+		-->It will search required jars are available in cental repo, if it is there get it from
+		   cental repo else will get an error artifact not found.
+
+	
+Types of pom.xml:
+=================
+
+	There are 4 types of pom.xml
+
+		1. normal pom
+		2. parent pom
+		3. super pom
+		4. aggerator or module pom
+
+
+Aggregator pom or module pom
+============================
+
+	-->This is one of pom project. i.e. the packaging is pom only
+	-->It is used execute/run all the maven projects at once instead of run individual maven project
+
+	pom.xml
+        =======
+	<project>
+		
+		<gd></gd>
+		<ad></ad>
+		<version></version>
+		
+		<modules>
+			
+			<module>parent-pom</module>
+			<module>first-pom</module>
+			<module>second-pom</module>
+			<module>third-pom</module>
+			<module>war-pom</module>
+
+		</modules>
+
+
+        </project>
+
+Maven Plugins:
+==============
+
+	-->Plugins are used to perform task where as dependencies are used to provide the jars into classpath
+	-->Plugins may use dependency to complete the task
+	-->There are 2 types of plugins, 1. build plugin	2. report plugin
+	-->build plugins are used to provide the compiler version, scaning the source code..etc
+	-->report plugins are used to generate reports like code coverage, documentation, code quality..etc
+
+	<build>
+
+		<plugins>
+			<plugin>
+				//jdk compiler plugin
+			</plugin>
+			<plugin>
+				//code scanning plugin
+				
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+
+		<plugins>
+			<plugin>
+				//code coverage report
+			</plugin>
+			<plugin>
+				//code quality report
+				
+			</plugin>
+
+			<plugin>
+				//document generation report
+				
+			</plugin>
+
+		</plugins>
+	</reporting>
+
+	
+10. Maven scopes:
+==================
+
+	-->Scope is nothing but lifetime of jar
+	-->There are 6 scopes are available: 
+
+	  1. compile 2. runtime	3. provided  4. test  5. system 6. import
+
+		
+Maven Lifecycle:
+===============
+
+	maven build lifecycle consists of the following phases 
+
+		1. validate the syntax of pom.xml
+		2. compile the source code
+		3. execute the unit testcases
+		4. packaging the jar or war or ear
+		5. verify the pacakging
+		6. deploy the jar into local or temote repo
+
+		1. validate
+		2. compile
+		3. test
+		4. package
+		5. verify
+		6. install
+		7. deploy
+
+ 
+maven goals:
+
+	dependency:tree
+
+		war
+		 |--third-app
+			|-second-app
+				|-first-app
+			|-spring-core
+				|-spring-context
+		
+
+
+
+com.sreenutech:web-application:war:1.00-SNAPSHOT
+[INFO] +- junit:junit:jar:4.13:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] \- com.sreenutech:third-app:jar:0.0.1-SNAPSHOT:compile
+[INFO]    +- com.sreenutech:second-app:jar:1.0.0-SNAPSHOT:compile
+[INFO]    \- org.springframework:spring-core:jar:5.2.25.RELEASE:compile
+[INFO]       \- org.springframework:spring-jcl:jar:5.2.25.RELEASE:compile
+
+
+[INFO] com.sreenutech:web-application:war:1.00-SNAPSHOT
+[INFO] +- junit:junit:jar:4.13:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] \- com.sreenutech:third-app:jar:0.0.1-SNAPSHOT:compile
+[INFO]    +- com.sreenutech:second-app:jar:1.0.0-SNAPSHOT:compile
+[INFO]    |  \- com.sreenutech:first-app:jar:1.0.0-SNAPSHOT:compile
+[INFO]    \- org.springframework:spring-core:jar:5.2.25.RELEASE:compile
+[INFO]       \- org.springframework:spring-jcl:jar:5.2.25.RELEASE:compile
+
+
+[INFO] +- junit:junit:jar:4.13:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] \- com.sreenutech:third-app:jar:0.0.1-SNAPSHOT:compile
+[INFO]    +- com.sreenutech:second-app:jar:1.0.0-SNAPSHOT:compile
+[INFO]    |  \- com.sreenutech:first-app:jar:1.0.0-SNAPSHOT:compile
+[INFO]    \- org.springframework:spring-core:jar:5.2.25.RELEASE:compile
+
+
+most of the used maven goals are:
+
+	1. mvn clean
+	2. mvn install
+	3. mvn clean install
+	4. mvn test
+	5. mvn deploy
+	6. mvn cobertura:cobertura
+	7. mvn dependency:tree
+
+
+
+
