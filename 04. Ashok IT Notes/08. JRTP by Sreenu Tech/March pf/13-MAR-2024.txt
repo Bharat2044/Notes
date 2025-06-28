@@ -1,0 +1,214 @@
+Last Session:
+=============
+
+	-->Banking Domain
+	
+We have discussed on how many line of business in banking financial services
+In realtime there are multiple line of buiness like
+
+	cards
+	payments
+	loans
+	offers
+	accounts
+	trading
+	:
+	:
+
+	cards: 
+	======
+	
+		1. credit card
+		2. debit  card
+		3. prepaid card
+		
+
+	1. credit card ----------1. rewards or points
+				 2. rebate or cashback
+				 3. cobrand cards like flipkat, amazon card
+				 4. petrol card
+				 5. pvr card
+				 :
+				 :
+				 :
+
+	Based on the usage of the card bank will provide the offers on reward, cashback ..etc
+
+
+	#1. card reward points generation
+	#2. card transaction details generated
+	#3. redemption points
+
+
+	every month we will get credit card statement
+
+		month1 : card statement amount : 1,00,000 : earned points : 1000
+		month2 : card statement amount : 50,000   : earned points : 2000
+		:
+		month12 : --------------------------------------------- total earned points : 10000 pts
+
+	Redemption :
+
+		convert these points into different categories like 
+
+			a. amazon gift voucher
+			b. cashback	
+			c. movie ticket
+			d. hote booking		1 point = 1 rs
+			e. flight booking	1 point = 1 rs
+			f. electronics          10 points = 1 rs
+			
+
+								configure
+								=========
+								category  --- points vs amount ration
+
+Sreenu -- 10000 pts --- make mytrip -- 10000 voucers --- book flight ticket --- 
+:
+:
+      ---10,00,000 pts  --- makemytips --- 1000000 rs voucher ---- book flight ticket
+
+There is settlement period on every day/2 days..etc
+
+midnight (non business hours) - some batch jobs -- executes millions of the txns per day
+
+for all the txn amount -- bank will send to makemytrip
+
+Bank : if you spend more on this card, bank will collect some txn charges
+Customer : Spend more on card, get more offers like reward, rebate..etc
+Partners : make mytrip, easeMytrip, eazedineer..etc -- more business from these bank customers.
+ 
+
+ customer will use these points to buy the products instead of paying the amount
+ This process is called redemption
+
+
+ millions of customers --- 10 lakhs ----- 10 M points redemption will be happend everyday
+
+	1. use points
+	2. use points + cash
+	3. use cash
+
+============================================================================================================
+
+ Client will decide to develop the product like redem points or reward points generation
+
+
+ credit cards --- every month/quarter -- most of the bank -- will release new product card
+
+ Every card product will have dirrent offers
+ If any product will be launched who are the customers eligible to get this product and what are offers are
+ available
+
+ offers:
+ =======
+
+	-->These offers are specific to paricular customer
+	-->There are 3 types of offers in realtime
+
+		a. membership offers   : customer should enrolled into those offers            -- 10
+		b. personalized offers : bank will provide the specific offers to the customers -- 20 
+		c. general offers      : These offers are public and everyone can able access it -- 100
+
+	
+	  100's of offers but max 10 offers only will send to customers
+	 buinsess logics on collections : How to get only 10 offers out of 100's of offers.
+
+	List<Offers> memoffers  10
+	List<Offers> poffers    10  ========> 
+	List<Offers> goffers    20 
+
+
+
+=============================================================================================================
+
+
+	Banks to amazon
+	Banks to payment gateway
+
+		customer -- will do shopping -- offline -- lifestyle..etc
+		
+		when customer swipe the card amount will be debited but it will not credited immediately into
+		merchant account
+
+		1. realtime transations
+		2. batch transactions
+
+
+ Based on the customer feedback or new innovation ideas the project will be intiated or started
+
+	Goal  = How to increase the business ( This year ROI = $1M, Next year ROI  = $2M ..etc)
+
+
+Customers feedback:
+==================
+
+	1. application too slow
+	2. offers not good
+	3. txn chanrges high
+	4. the payments are getting failure
+	5. automate the process
+		a. online we can change branch address
+		b. deposit amount using atm machine
+		c. one card  credit card - metal card
+		:
+		:
+
+Types of Projects:
+==================
+	#1. migration projects
+	#2. scratch level projects
+	#3. enchancement projects
+	#4. support or maintaince projects
+
+	
+	Pre requesiting:
+	================
+		0. jdk8
+		1. Json
+		2. java restful services
+		3. Spring core, Spring Boot
+
+Core Java Task:
+	
+	customerid name mobnum  emailid              citiy   cardnum dob			 balance
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	1111~sreenu~5678098756~sreenu.sreenutech@gmail.com~hyderabad~0512223445678432~24-03-1986~10000
+	:
+	:
+	:
+	100
+
+JDK8 Stream API : https://www.youtube.com/watch?v=TiCFAfzt9TY
+
+All thes answers should write in jdk8 stream api only?
+
+	1. w.a.p get the list of unique customer details? i.e. remove the duplicates records based on custid?
+	2. Get the customer details on location wise?
+		Map<String, List<Customer>> // key = location like hyderbad, banglore
+					       value = hyderbad customer list, banglore customer list..etc
+
+
+public class Customer{
+
+ p s custid
+ p s name
+ :
+}
+
+read file line by line
+spllit the line using delimer ~
+prepare the java object
+
+sreenutech.projects@gmail.com -- send your answers?
+
+sreenutechnologies@gmail.com -- they will send telgram link to join
+
+				

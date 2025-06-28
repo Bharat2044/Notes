@@ -1,0 +1,168 @@
+Last Session:
+=============
+
+	-->High Level Project Architecture
+	-->What are the tech stack we are going to implement in our project
+		1. jdk8 - business logic
+		2. spring f/w
+		3. rest api - spring boot, microservices, restful services
+		4. cache - redis cache - improve the application performance and reduce the cost
+		5. kafka - to make our services are loosely coupled
+		6. cloud - aws/azure - deploy the applications
+		7. api gateway - single entrypoint for authentication and authorization
+		8. load balancer - distirbute the load to across all the services
+		9. dokcer - containerization
+		10. Integration patters
+			a. service to service   integration
+			b. service to database  integration
+			c. service to kafka     integration
+			d. service to cache     integration
+		11. security implementation
+			a. oauth2.0
+			b. ssl - secure socket layer
+		12. spring batch - It is used to execute millions of the records perday without
+			           user interaction.
+
+Today Session:
+==============
+
+	-->Domain
+	-->How the project will be started
+	-->Types of the projects
+	-->Prepare the requirements
+
+Domain : BFS - Banking Financial Services
+
+Client : Any bank name ( bof, keybank, barclays, ..etc )
+
+Description : 
+
+Modules : 
+
+
+Banking Domain:
+
+-->Banking domain will comes under different lines of business, some of the business lines are
+
+	a. cards 
+	b. payments
+	c. offers
+	d. accounts
+	e. loans
+	f. trading
+	g. :
+	   :
+
+
+	cards:
+	=====
+
+		1. credit card
+		2. debit card
+		3. prepaid card	
+
+
+	1. credit cards : 
+
+		There are many no.of creditcards are available in market from each bank
+
+	Axis Bank :
+	=========
+		1. rewards card :
+
+		2. rebate/cashback card: 
+
+		3. cobrand card			====> master card, visa card, amex card
+
+		4. petrol card
+
+		5. travel card
+
+		6. pvr card
+		:
+		:
+		10. 
+
+	
+
+	sreenu has credit card and sreenu spent 10,000 rs for shopping purpose
+
+	rewards --- points
+	rebates --- cashback
+	cobrand --- flipkart, amazon..outlets
+	travel  --- flight tickets
+
+
+	sreenu -- 10,000 rs ---- 100 pts   ( 100 rs -- 1 pts)
+
+
+
+
+	develop the product --- deliver the product to globally ---
+
+		domestic -- india
+		global   -- us, uk, japa, india --- America, EMEA, APAC
+
+		product --- develop -- many forms --- 
+
+			
+			low code and no code -- LCNC -- power apps
+							form builder like form.io
+						
+
+ card statement genrated date : 15-feb-2024
+ card payment date : 01-mar-2024
+
+ card statement genrated date : 15-mar-2024
+ card payment date : 01-apr-2024
+ 
+ 16-feb-2024   --- 1000		
+ 17-feb-2024   --- 5000
+ :  
+ 14-march-2024 ---- 20000
+
+	total credit amount  = 1,00,000	
+
+									download : pdf/exce/csv
+									
+	txid	 date	      name    desc  merhcantname	amount   rewardpts  status  remarks
+        1111     12-03-2024   mobile  good  amazon		50000     500       delived  na
+	:
+	:
+	:
+	:
+	:
+	:
+	:
+	:
+        :
+ 	:
+
+	Recent txns
+	Last one month txns
+	Last 3 months txns
+	Last financial years apr-2023 to march2024
+	:
+	:
+ 
+					|--- spring batch
+		UI  --- Rest API --- Database	
+			 |-- redis cache
+
+
+=====================================================================================================
+
+Please find the details for Fee payment
+
+Account Details.
+Account No : 914010022496787
+IFSC Code: UTIB0000008
+Bank : Axis Bank
+Branch : Hyderabad Main Branch
+Account Name : T Maheshwar
+
+UPI ID : mahesh485@okaxis
+Gpay : 9948753853
+
+Note: Please attach the receipt of Payment to Email Id : sreenutechnologies@gmail.com, So will check & acknowledge.
+

@@ -1,0 +1,133 @@
+Last Session:
+============
+	
+	-->We have discussed on banking project domain
+	-->Types of Projects
+
+Today Session:
+=============
+
+	Types of project and their importance
+
+	1. Migration Projects
+	2. Scratch Level Projects
+	3. Enhancement Projects
+	4. Migration Or Supported Projects
+
+
+
+Migration Projects :
+===================
+
+	Migartion can be happend in any one of the scenarios like
+
+	1. Database Migration : sql server to postgres
+				postgres 8 to postgres 12
+
+				mainframes to bigdata
+
+	2. Service Level      : jax rpc
+				jax rpc to jaxws			100 of microservices/rest api
+				jaxws to jax rs
+				rest api using microservices
+
+	3. front appns        : angular 2 --- angular3, angular10
+
+
+	poc -- proof of concept 
+
+		migrate one api from jaxws to rest api
+		prepare the documentation with list of tasks, challenges, ..etc
+
+		one api --- 1 resource --- 10  -- 10 * 1000 = 1000 days
+							 
+			    10 resource -- 10 months 
+
+
+
+	4. Performance -----> migarte the project architecture form monolythic to microservices
+	   issues
+
+
+ 2. Scratch Level Project:
+    ======================
+
+	According to the client requirements, developer need to develop the project from the scratch
+	like creating packages, classes..etc	
+
+	client technical person -- he will decide tech stack for the project
+	non technical person	-- tech team will take decision on tech statck
+
+	most of the scratch must use latest tech stack
+
+	Advantages :
+	===========
+	
+		1. developer should get complte grip on coding
+		2. we can write the resuable, readable, maintainable, understandable..etc
+		3. code is unit testable
+
+  3. Enhancement Project:
+     ====================
+
+	 Already source code is present, accoring to the client requirements 
+	 we need to modify the existing source code
+
+	public class CreditCardOffers{
+
+	public OffersResp getOffers(OffersRequest  request){
+
+		if("master".equals(cardType)){
+
+		   //----- logic
+									master card related changes
+		}else if( "visa".equals(cardType) ){			  --unit testing
+
+		  //-- logic			 			regression testing
+									  --visa, amex cards are
+		 }							    not impacting
+		  else if( "amex".equals(cardType) ){
+
+		  //-- logic			 
+
+		 }
+	}
+
+	}
+	}
+		 
+	
+-->understand the existing source code
+-->difficult to write the unit testcases
+-->take lot of time for regression testing
+:
+	 
+
+4. support or maintainance project:
+   ===============================
+
+	In realtime we have L1 support, L2 support, L3 supports team
+
+	This team will monitor the logs of all the applications in production/live, if any errors
+	found then inform to application team
+
+	This team should have strong knowledge on tools like Grafana, Splunk, Data Dog, ..etc
+
+	Advantages :
+	===========
+
+		
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
