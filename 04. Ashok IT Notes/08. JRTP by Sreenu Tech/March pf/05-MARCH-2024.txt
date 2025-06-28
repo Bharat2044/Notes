@@ -1,0 +1,86 @@
+Last Session:
+=============
+
+Day 1:
+	-->What is java relatime project?
+	-->What are the tech stack we will be implemented in java project
+	-->What is the importance of java realtime tools
+	-->Discussed about functional requirements and non functional requirements
+
+Today Session:
+==============
+
+	-->Why we should learn 20+ java realtime tools?
+	
+
+ Scrum Team ( POD ) / Team Composition
+
+	1. Product Owner	--- 1			Team Size : 10
+	2. Business Analyst     --- 1 or 2
+	3. Scrum Master		--- 1
+	4. Tech Lead		--- 1
+	5. Backend Developers   --- 2 or 3
+	6. Front End Developers --- 1 or 2 or 3 
+	7. Quality Engineers/Testing Team -- 1 or 2
+	8. Database Engineer		  -- 1 or 2
+	9. Devops Engineer      --- 1
+
+=========================================================================================================
+
+	1. Analysis : 
+		
+		1. MS Word or Excel or PDF 
+		2. Agile tools  : JIRA or Rally or Azure ADO   
+
+	Q) How are you getting the requirements from the clients?
+
+	 Sol : We have PO and BA, they will work with business team and gather the requirements 
+	       place all the requirements in scrum board or in JIRA board
+
+		3. Source Code Management : Git & Github
+
+
+	2. Design : 
+
+					Teams --- 1. Backend Team   -- logical diagram, technical flow
+						  2. Database Team  -- ER diagrams
+
+		Data Base Team  --- ER diagram
+		Development Team -- UML diagram like sequence diagram
+
+		1. Visio or rational rose
+		2. draw.io
+
+	3. Build : 
+
+		
+  
+
+ Today core java task:
+ =====================
+
+	1.  i/p : 0521 1500 7865 1476
+	    o/p : XXXX XXXX XXX 51476
+
+	2. i/p  : 0521 1500 7865 1476
+
+	    o/p :  print cardnumber is a primary card or not
+
+		Get the 12 and 13th digit from the given card number
+		either of 12th and 13th digits are 0 then it is not a primary card
+		else it is a primary card
+
+		If both 12th and 13th are zero then send like cardnumber is invalid
+
+
+Please send email to sreenutech.projects@gmail.com
+
+
+
+
+
+
+
+
+
+ 	

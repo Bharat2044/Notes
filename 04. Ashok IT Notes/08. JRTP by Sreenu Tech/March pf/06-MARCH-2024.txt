@@ -1,0 +1,145 @@
+Last Session:
+
+Day1 : 
+
+	-->What is java relatime project?
+	-->What are the tech stack we will be implemented in java project
+	-->What is the importance of java realtime tools
+	-->Discussed about functional requirements and non functional requirements
+
+
+Day 2 : 
+
+	-->What is SDLC?
+	-->What is the difference between waterfall and agile methodologies
+	-->When to use waterfall model and agile methodologies
+	-->Importance of Java Realtime Projects? what tools we should learn in each phase
+
+Today Session: 
+
+	-->Using Agile we can deliver the product early into market, so that client can get
+	   ROI early. 
+
+	-->Because of Agile methodlogies only Devops was popular in market
+
+ 	Traditional -- waterfall model -- deployments are once in a while .i..e every 2 months
+					  or every 3 months..etc
+
+	Modern   --- Agile --- Deployments are in every 2 weeks, we should build and deploy
+			       the appilcations quickly into market.
+
+	Devops --- CICD --- for evevery new commit into github --- automatic build and deploy the 
+								   applications
+
+	
+	===========================================================================
+	Project ========> Analysis ---- Design --- Build --- Testing --- Production
+	============================================================================
+
+
+	#1. Analysis :
+	    ==========
+
+		1. MS Word or Excel or PDF 
+		2. Agile tools  : JIRA or Rally or Azure ADO
+		3. Source Code Management : Git & Github
+
+	#2. Design:
+	    ======
+
+		1. UML diagrams : visio, rational rose, draw.io
+		2. Source Code Management : Git & Github
+
+	#3. Build/Development/Coding:
+	    ========================
+	
+	  before start development:
+	  ===========================
+		1. Java Coding Standards
+		2. Core java logics - to improve the coding skills for business logics
+		3. Build Tool  -- Maven
+		4. Version Control - Git & Github ( Bitbucket, ..etc )
+
+	 In project development:
+
+		5. Logging Framework : Log4J, SLF4J
+			
+			 To debug the issues where is the issue, when and how the issue
+
+		6. Test the API's  : Postman
+
+		7. Java Debugging   : to trace the application line by line
+
+	 After development : 
+	
+		8. Code Quality Tools : PMD, Sonarqube 
+		
+				-->Scan the source code of the project, identify all the
+				   mistakes and generates the reports. 
+		9. Libraries Scanning tools : Snyk 
+		
+				-->Scan the libraries( .jar/.ts/.js/.css/.html..etc) identify the
+				   vluenrabilities and generates the reports
+
+		10. Unit Testing : Junit 4.x, 5.x
+	
+		11. Mocking Frameworks : Mockito, PowerMockito
+
+		12. Code Coverage Tool  : Cobertura/Jacoco
+
+			-->it will scan unit test code and generate the reports with tested code and
+			   untested code
+			
+		13. Rest API userguide documentation : Swagger
+
+		14. Remote Server Communication : Putty, Winscp
+		     (AWS/AZURE)
+
+		15. Linux basic commands 
+
+		16. CICD : Continous Integration and Continous Deployments -- Jenkins,Bamboo
+
+			-->Enable automatic build and deploy the application into remote server
+
+		17. Containerization : Docker
+
+
+	Testing Phase:
+	===============
+
+		18. Agile tools  : JIRA or Rally or Azure ADO 
+	
+			-->Write the testcases and upload the test cased into scrum board
+			-->Automation testing using selenium or playwright
+
+		19. Performance Testing : Jmeter
+
+			-->Load Testing, Stress Testing, Endurance Testing
+
+
+	Production :
+	============		
+
+		20. Logging Monitoring tools : Grafana, Kibana, Splunk, Datadog, sumologic
+					      AWS - Cloud watch, Azure -- App insights
+		      	
+		
+	Production Support team 24/7 monitor the all live applications using logging monitoring tools
+	If any errors in application these tools will give notification/alerts, Production Support 	team will inform to tech team, then tech should fix that issue
+
+		
+	more no.of users impacting ---> Priority1 -- P1 issue / Sev1 --> more business loss
+	few people got impact 	   --->Prioirty 2 --- P2 issue / Sev2 ---> business loss
+	medium impact 		   --->Prioirty 3 --- P3 issue / Sev3
+	less impact 		   --->Prioirty 4 --- P4 issue / Sev4
+			
+
+======================================================================================================	
+
+	
+
+
+
+
+
+
