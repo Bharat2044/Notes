@@ -1,0 +1,86 @@
+Last Session:
+=============
+
+	-->offer-details-service development with mock response
+	-->Implemented swagger documentation in project
+	-->swagger doc vs postman
+
+Today Session:
+=============
+
+	-->Project Happy Path flow and Error Path flow
+	-->How to handle the exceptions in our project
+
+
+Success Response:
+================
+
+{
+  "statusBlock": {
+        "respCode": "0",
+        "respMsg": "success"
+    },
+
+    "offers": [
+        {
+            "offerId": "12121",
+            "name": "apple 15x",
+            "imageUrl": "http://s3.amazon.com:8080/apple.png",
+            "desc": "good",
+            "date": "01-04-2024",
+            "status": "active"
+        },
+        //list of offers
+    ]
+   
+}
+
+Error Response:
+=================
+{
+  "statusBlock": {
+        "respCode": "off01",
+        "respMsg": "client id invalid"
+    }
+}
+
+{
+  "statusBlock": {
+        "respCode": "off02",
+        "respMsg": "channel id invalid"
+    }
+}
+
+{
+  "statusBlock": {
+        "respCode": "off03",
+        "respMsg": "cardnumber invalid"
+    }
+}
+
+
+
+How to write user defined exception
+	|-checked exceptions
+	|-unchecked exceptions -- why all the spring f/w exceptions are unchecked exceptions
+
+Revise the exception skills
+
+Difference between try catch and throws ? when to use them
+Difference between throws and throws
+Can we handle exceptions without try catch?
+How to handle NullPointerException..
+
+
+
+
+
+
+	
+
+
+
+
+
+
+

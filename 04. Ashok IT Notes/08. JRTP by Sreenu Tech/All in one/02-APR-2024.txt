@@ -1,0 +1,204 @@
+Last Session:
+============
+
+	-->How to implement card-offer-details-service development in progress
+
+Today Session:
+=============
+
+	-->will continue card-offer-details-service development continue
+
+Request URI : http://localhost:2020/v1/offers/4353454353534
+
+Request Headers
+
+clientId:online
+channelid:web
+msgTs:02-04-2024
+correlationId:abc123xyz
+authToken:@#$%^&sfgdfwr*)(*&^%werwer
+
+Response:
+========
+{
+    "offers": [
+        {
+            "offerId": "12121",
+            "name": "apple 15x",
+            "imageUrl": "http://s3.amazon.com:8080/apple.png",
+            "desc": "good",
+            "date": "01-04-2024",
+            "status": "active"
+        },
+        {
+            "offerId": "12121",
+            "name": "apple 15x",
+            "imageUrl": "http://s3.amazon.com:8080/apple.png",
+            "desc": "good",
+            "date": "01-04-2024",
+            "status": "active"
+        },
+        {
+            "offerId": "12121",
+            "name": "apple 15x",
+            "imageUrl": "http://s3.amazon.com:8080/apple.png",
+            "desc": "good",
+            "date": "01-04-2024",
+            "status": "active"
+        }
+    ],
+    "statusBlock": {
+        "respCode": "0",
+        "respMsg": "success"
+    }
+}
+===========================================================================================================
+
+Service Provider has provided the services, now the clients/consumers should call this service to get the offers data, but there is no guarantee all the clients will use same technologies and different clients/consumers will use different technologies.
+
+To overcome these issues, service provider should prepare the service user guide documentation which can understand by all the tehcnology developers
+
+The service userguide is called "swagger document"
+
+In traditional days, developer need to spend lot of time to prepare the rest user guide using msword or excel
+document
+
+In modern days, developer no need spend lot of time, just add the configuration class in project, which will
+take genarate the swagger document.
+
+Swagger Documentation:
+======================
+
+	-->It is an rest api user guide document
+	-->It is in the form of json/yaml/Rich UI formate
+	-->It contains the information about service like 
+
+		a. service api(endpoint) details
+		b. each api detail like uri, http method name (get,post, put, delete..etc)
+		   content type like xml , json..etc
+		c. each api input and out put param details like param name, data type, description, 
+		   sample values..etc
+		d. error code details
+		e. sample request and response structure
+
+	-->Service provider should implement the swagger documentation and share this swagger documentation
+	   to consumers, using this document consumer will prepare the client request object and call the 
+	   service and get the response
+
+	-->Using swagger document both provider and consumer can test the service also
+
+
+How to enable Swagger Software:
+===============================
+	-->It is an opensource software
+	-->It is in the form of .zip file
+	-->Download swagger UI from https://github.com/swagger-api/swagger-ui
+	-->Download swagger editor from https://github.com/swagger-api/swagger-editor
+
+
+Swagger Implementation in project:
+==================================
+
+	1. add the swagger maven dependency in pom.xml
+
+		<!-- start : swagger -->
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<!-- end : swagger -->
+			
+	2. write the swagger configration class which will take care scan the controller class and generate the
+	   swagger document
+
+		@EnableSwagger2
+		@Configuration
+		public class CardTransactionswaggerConfig {
+	
+		@Bean
+		public Docket api() {
+        	return new Docket(DocumentationType.SWAGGER_2).select()
+                .apis(RequestHandlerSelectors.basePackage("com.keybank.transaction.controller"))
+                .build();
+    }
+
+}
+			
+
+	3. Access the swagger url
+
+		http://localhost:2020/swagger-ui/indext.html
+
+===============================================================================================================
+
+Swagger Implementation in 2 types
+
+	1. contract first approach or code last approach or top to bottm approach
+	2. contract last approach or code fist approach or bottom to top approach
+
+
+1. contract first approach :
+
+	-->According to the client requirement developer first create the json/yaml document
+	-->Generate the model classes
+	-->Start write the controller class
+	-->Here developer should have strong knowledge on json / yml
+	
+
+2. contract last approach :
+
+	-->According to the client requirement developer first write the controller classes, prepare the
+	   model classes manually
+	-->Write the configuration class which will take care to scan the source code and generate the swagger
+	   documetnation
+       -->Here developer no need to learn Json/Yaml
+
+
+@Data
+public class OffersResponse {
+	
+	
+	private StatusBlock statusBlock;
+	private List<OfferDetails> offers;
+}
+
+@GetMapping("/offers/{cardnumber}") //http://localhost:8080/v1/offers/688767868 or http://localhost:8080/v1/offers?cardnum=688767868
+	public OffersResponse getOffers( @PathVariable("cardnumber") String cardNum, 
+							  @RequestHeader(name = "clientId", required=false) String clientId,
+							  @RequestHeader(name = "channelid", required=false ) String channelId, 
+							  @RequestHeader(name = "msgTs", required=false ) String msgTs, 
+							  @RequestHeader(name = "correlationId", required=false ) String correlationId, 
+							  @RequestHeader(name = "authToken", required=false ) String authToken ) {
+
+
+
+
+
+@Data
+@JsonInclude(value = Include.NON_NULL)
+public class OfferDetails {
+	
+	private String offerId;
+	private String name;
+	private String imageUrl;
+	private String desc;
+	private String date;
+	private String status;
+
+}
+
+@Data
+public class StatusBlock {
+	
+	private String respCode;
+	private String respMsg;
+
+}
+
+
+
+
+

@@ -1,0 +1,341 @@
+Log4J Continuation:
+===================
+
+	-->Last Session we have discussed on below topics
+
+		1. Introduction - Importance of Log4J
+		2. SopvsLog4J - Log4J features
+		3. Log4J Software Installation
+		4. Log4J Architecture
+		5. Log4J levels, Appenders, Layouts
+
+
+For Log4J application we should follow 3 components
+
+
+	1. Logger   : How to generate the logs				
+
+	2. Appender :  Where to display the logs like console, file, database ..etc
+		
+		1. ConsoleAppender
+		2. FileAppender
+		3. DailyRollingFIleAppender
+		4. JdbcAppender
+
+	3. Layout   : How to formate the logs like text, xml, html ..etc
+
+		1. HTML LAYOUT
+		2. XML LAYOUT
+		3. TEXT LAYOUT
+
+
+				Logger  -- what do you want to log?
+				   |
+				Appender -- where do you want to log?
+				   |
+				Layout	 -- how to i log?
+
+	Logging Levels:
+
+		Debug  - fine grained information events that are most useful to debug an application
+		Info   - Informational messages that highlights of the appplication
+		WARN   - potentially harmful situations
+		ERROR  - error events that might still allow the application to continue running
+		FATAL  - very severe error events that will lead the applicaiton to abort
+
+
+			ALL < Debug < INFO < ERROR < WARN < FATAL < OFF
+
+		Logger.LEVEL = ALL ( by default all then all the logs will be displayed)
+		Logger.Debug = debug and next levels will be printed
+		Logger.ERROR = error , warn, fatal will be printed
+
+
+How to print the log? What type of elements we should log in logging?
+
+Sol : classname
+      methodname
+      date and time
+      linenumber
+      :
+	
+
+logging framework has provided so many predefined characters which will take care to print the data
+automatically using log4J
+
+
+We can develop log4J in 2 waves
+
+	1. Porgramatic approach
+	2. Confugration approach
+
+		 1 : M			   M : 1
+	Logger ==============> Appenders ===============>Layout
+
+			  1. Console	----> PatternLayout
+	Log Message ----> 2. FIle
+			  3. Database
+
+
+Log4J Example1:
+
+	1. add the log4j dependency in pom.xml
+	  <dependency>
+     		 <groupId>log4j</groupId>
+     		 <artifactId>log4j</artifactId>
+      		<version>1.2.17</version>
+    	</dependency>
+	2. write java application with main() method
+	3. Create Logger Object in our application
+	4. add the logger methods
+
+ 
+
+
+logger.debug(" ") - confirmation message like entering into class, entering method ..etc
+logger.info(" ")  - information message like print the message along with details
+		    req object, resp object, connection object..etc
+
+
+public OffersResp getOffers(OffersRequest request){
+
+logger.debug("entered into getOffer method");
+
+try{
+
+	OfferResp response = offersService.getOffers(request);
+	logger.info("response is :"+response);
+
+	if( "vip".equals(typeOfcustomer) ){
+
+		logger.warn("you are not eligble to view these offers");
+		logger.warn( "you don't have sufficient balance ");
+	}
+
+
+}
+
+catch(RequestInvalidDataException e){
+
+	logger.error(" ")
+
+
+}
+
+catch(Exception e){
+
+	logger.fatal(" ")
+
+}
+
+
+logger.debug("exit from getOffer method");
+
+}
+
+
+Note : By default logging f/w will use ConsoleAppender to print logs on the console and PatternLayout
+       to print the text message with minimal information
+
+
+Example 2 : logg the message using SimpleLayout with ConsoleAppender
+
+
+PatternLayout:  %r %t %p %c %m %n
+==============
+0 [main] DEBUG com.sreenutech.Log4JApplication  -  This is debug message 
+3 [main] INFO com.sreenutech.Log4JApplication  -  This is debug message 
+3 [main] WARN com.sreenutech.Log4JApplication  -  This is debug message 
+3 [main] ERROR com.sreenutech.Log4JApplication  -  This is debug message 
+3 [main] FATAL com.sreenutech.Log4JApplication  -  This is debug message 
+
+SimpleLayout:
+=============
+
+	%p	 %m
+
+	DEBUG -  Simple debug message 
+	INFO -  Simple debug message 
+	WARN -  Simple debug message 
+	ERROR -  Simple debug message 
+	FATAL -  Simple debug message 
+
+
+				  1. SimpleLayout
+	ConsoleAppender --------- 2. HTMLLayout
+				  3. XMLLayout
+				  4. PatternLayout
+
+
+				  1. SimpleLayout
+       FileAppender ---------     2. HTMLLayout
+				  3. XMLLayout
+				  4. PatternLayout
+
+using manual or pogramatic approach, all the appenders, layout, logger objects are written by the
+developers/programmers
+
+It is not recommended to use in the realtime projects, we never place  appenders, layouts, logger
+in java file directly, because if any changes are required then we should modify the source code
+
+
+File based or Declarative approach:
+====================================
+
+	In this approach we can configure log4J in 2 ways, 
+	They are 1. using log4j.properties 2. using log4j.xml file
+
+
+1. using lo4j.properties:
+   =====================
+
+	we can configure (appenders, layouts, level) thorugh properties file, we should place the
+	properties file under resource folder
+
+	
+log4j.properties:
+=================
+
+	log4j.rootLogger=level,appendernameref
+	log4j.appender.appendernameref=name of the appender
+	log4j.appeder.appendernameref.layout=simplelayout
+
+	log4j.rootLogger=debug,abc
+	log4j.appender.abc=org.apache.log4j.ConsoleAppender
+	log4j.appender.abc.layout=org.apache.log4j.SimpleLayout
+
+log4j.rootLogger=debug,file
+log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.file.File=dailyrolling.txt
+log4j.appender.file.DatePattern='.'yyyy-mm-dd
+
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+
+log4j.appender.file.layout.conversionPattern=[%p] %d %c %M -%m%n
+
+
+
+  		what to print in log		conversion character
+		====================		======================
+
+		Category or classname			C
+		fully qualified classname		C
+		file name of java class			F
+	Location(class, method and linenumber)		l
+		Line number only			L
+		Log Message				m
+		Methodname				M
+		Priority (Level)			p
+		new line separator			N
+		Thread Name				T
+		Time elapsed 				r
+		Thread nested dianostic			X
+		Percent Sign 				% %
+
+
+In realtime there different enviornments like dev, test, uat, production evnironment
+
+non prod environments : dev, test, uat
+    prod environment  : prod
+
+Genrally the traffic will be very less in non prod, because it can be used by 
+Developer (5), testers(3), business team(2)
+
+we should enable debug logs to debug the application easily
+
+In project there are millions of the requests are coming, it is not recommeded to enable all the logs
+It should be enabled error or fatal logs in production.
+
+Q) What type of logs will be enabled in production? Sol: error logs
+
+For most of the requirements log4J has provided predefined conversion character, if we want our own
+message like clientid, reqid, channelid to print logging, it can be possible usnig MDC
+
+	MDC - Mapped Diagnostic Context
+
+	
+	MDC
+	====
+
+	-->It is used to instrument for distinguishing interleaved log output from different sources
+
+		MDC mdc = new MDC();
+		mdc.put("client-id", "web");
+		mdc.put("channel-id", "web");
+		mdc.put("request-id", "web");
+
+
+	How to move MDC data into logging?
+
+		
+		%X{client-id}
+		%X{channel-id}
+	        %X{request-id}
+
+
+
+log4j xml based configuration:
+==============================
+
+<log4j:configuration>
+
+	<appender name="appender1 " 	class="org.apache.log4j.ConsoleAppeder ">
+
+		<layout class="org.apache.log4j.PatternLayouer">
+
+			<pattern name="conversionPattern"  value="%-7p %d [%t] %c %x - %m%n" />
+
+		</layout>
+
+	</appender>
+	
+	
+		<appender name="appender2 " 	class="org.apache.log4j.FileAppeder ">
+			<param name="File" value="application.txt"/>
+	
+		<layout class="org.apache.log4j.PatternLayouer">
+
+			<pattern name="conversionPattern"  value="%-7p %d [%t] %c %x - %m%n" />
+
+		</layout>
+
+	</appender>
+	
+		<root>
+			<priority value="DEBUG"/>
+			<appender-ref ref ="appender1"/>
+			<appender-ref ref ="appender2"/>
+			
+		</root>
+
+
+</log4j:configuration>
+
+============================================================================================================
+
+How to implement log4j in our project
+
+How to use logging aggregator tools like Kibana, Splunk, Data Dog, App Dynamics 
+
+
+	9:00 AM to 10:30 ---> How to implement logging in the project
+	Logging aggregatation tools like Kibana
+	SLF4J
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+

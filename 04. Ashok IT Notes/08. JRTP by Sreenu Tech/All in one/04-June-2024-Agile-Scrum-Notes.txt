@@ -1,0 +1,275 @@
+Agile Topics:
+============
+
+	1. Introduction
+	2. Agile Scrum Team
+	3. Agile Terminologies
+		a. Scrum Master
+		b. Product Owner
+		c. Sprint Backlog
+		d. Sprint Refinement
+		e. Sprint demo
+		f. Standup call/Scrum call
+		g. Sprint
+		h. User story
+		i. tasks
+	4. Scrum Lifecycle
+	5. Agile Tools : Jira or Rally or Version or Azure ADO ..etc
+
+
+Introduction:
+=============
+
+	In Realtime every project development should follow the development methodologies like SDLC
+
+				
+
+Agile Scrum Team Structure:
+===========================
+
+	1. Product Team						Team Size = 10
+		
+		 i.  Business Analyst
+		ii. Product Manager/Product Owner
+		
+	2. Scrum Master
+	
+	3. Dev Team
+		 i.  Tech Lead : Full stack - 1
+		ii.  Backend Engineer - 1 or 2
+		iii. Front End Engineer - 1 or 2
+
+	4. QE Team
+		i. Quality Engineer - 1 or 2
+
+	5. Database Team
+		i. Database Developer - 1
+		
+	6. Devops Team
+		i. Devops Engineer - 1
+
+
+
+
+Product Owner (PO): 
+
+	-->PO is from client side
+	-->PO will connect with stake holders ( business team ) to get the business requirements, 
+	   understand the business requirements
+	-->Convert Business Requirements into EPICS, ex : MOffers
+	-->Convert these EPICS into features
+	-->PO is the responsible for ROI (Return on Investment)
+
+Business Analyst  (BA):
+
+	-->BA responsible to understand the business requirements features
+	-->Convert these features into User Stories
+
+
+
+Epic : 
+
+	--> An Epic is a large body of work that can be broken down into a no.of smaller stories
+
+
+feature : 
+
+	-->It is an customer focused functionality that provides business value
+	-->It helps developer clarify and organize work by defining broader user focused functionalities that make it easier
+	   for stake holder
+
+User Story:
+
+	-->A user story is the smallest unit of work in agile framework
+	-->It is an end  goal, not a feature
+
+
+task : 
+
+	-->Tasks are used to break down the user stories into smaller components that can then be assigned to individual team 
+	   member.
+
+
+
+
+Sprint : 
+
+	-->Sprints are time-boxed periods of one week or 2 weeks or 1 month
+	-->Generally sprint duration would be 2 weeks
+	-->What features we can deliver in 2 weeks
+
+
+
+User Story Estimates : 
+
+	-->User Stories estimates will be in either T-shirt size or Fibonacci
+
+		T-Shirt Size  :  S, M, L, XL, XXL 
+		Fibonacci     :  1, 3, 5, 7, 9, 11 ..etc
+
+	-->Generally working hours would be 8 hours, productive hours would be 6 hours per day
+	
+	-->Sprint Duration is : 2 weeks ( 10 working days )
+
+		10 * 6 = 60 hours
+	
+	
+	1 resource capacity = 60 hours per sprint
+
+	Velocity  = team size * 60 =  5 * 60 = 300 hours
+
+	-->User Stories will be measured in story points (SP)
+
+		a. If it is small requirements then 1 SP	( 1 SP = 6 hours = 1 day )
+		b. If it is medium requirements then 3 sp	( 3 SP = 18 hours = 3 days work )
+		c. If it is large requirements then  5 sp	( 5 SP = 30 hours = 5 days work )
+		d. If it is very big requirements then 13 sp	:
+
+	
+Tasks :
+
+	-->Task will be measured in hours. i.e. 6 hrs or 12 hrs or 18 hrs..etc
+
+
+
+ Scrum Call or Standup call :
+ ============================
+
+	-->This scrum call duration is 15 mins every day
+	-->Generally the scrum call timings are either morning 10:00 to 10:15 AM or 7:00 PM to 7:15 PM
+	-->Scrum Master will schedule a 15 mins meeting
+	-->In this scrum meeting each and every resource should tell their status as below formate
+
+		Hi This is Sreenu
+
+			What you did yesterday
+			What you are going to do today
+			Do you have any impediments ( Problems or Risks ) or not?
+			
+		Ex : Hi This is Sreenu,
+
+			I have completed database integration work yesterday, 50% work has been completed 
+			I am going continue same work tomorrow
+			I don't have any impediments
+				
+
+ Sprint Demo/ Show & Tell : 
+ ==========================
+
+	-->Scrum Master will schedule show & tell meeting before end of every sprint
+	-->Every team member should show the output and explain what he has done in last 2 weeks
+	-->If the PO should be happy with the output then that user story will be mark as completed
+
+
+Backlog Refinement :
+===================
+
+	-->It is also known as backlog grooming
+	-->When the product owner and the rest of the team review the items on the backlog to ensure backlog contains appropriate
+	   items, they should be prioritized, that priority items at top of the backlog are ready to deliver
+	-->This is an ongoing activity 	for every sprint. 
+	-->Take one priority requirements, PO or BA will explain the requirements to team, if the team has any doubts then they 
+	   clarify with BA or PO.
+	
+
+Retrospective : 
+==============
+
+	-->Scrum master will schedule a meeting after end of every sprint
+	-->Need to collect the below points from the team, It will be learning for upcoming sprint
+
+		1. what went well?
+		2. What didn't go well?
+		3. What are challenges/risks/any issues in last sprint
+
+
+ US-1 : Develop the offers-management-service  = 5 SP   ( 5 * 6 =  30 hours )
+	
+
+	TS -1  :  offer-service-project-skeleton creation - 2 hrs
+	TS-2   :  offer-service-happy path implementation - 10 hrs
+	TS-3   :  offers-service exception handling 	  - 6 hrs
+	TS-4   :  offers-service enrollment service integration - 10
+	TS-5   :  offer-service code cleanup - 2 hours
+
+
+
+Task Status:
+===========
+	
+	
+	D -- Define	 	P - Progress		C - Completed		A - Accepted
+
+	
+	Day-1 :
+									 Estimated Hrs	Completed hrs	TODO 		Status
+
+		TS -1  :  offer-service-project-skeleton creation	   2               0              0            Completed
+		TS-2   :  offer-service-happy path implementation         10               4              6            In progress
+
+	Day-2
+		TS-2   :  offer-service-happy path implementation         10               4              0            Completed
+							   	                         
+	        TS-3   :  offers-service exception handling 	  	   6		    2              4           In progress
+
+	Day-3	 		
+		TS-3   :  offers-service exception handling 	  	   6		    4             0            Completed
+	
+		TS-4   :  offers-service enrollment service integration    10               2             8            In progress
+		
+	
+	Day-4 
+	
+		TS-4   :  offers-service enrollment service integration    10               6            2            In progress
+
+	Day -5 
+
+		TS-4   :  offers-service enrollment service integration    10               6            0            Completed
+		TS-5   :  offer-service code cleanup 			    2		    2		 0            Completed	
+
+
+
+
+	MVP 
+	
+		-->MVP stands for Minimum viable product ( MVP )
+		-->It is a concept from Lean Startup that stresses the impact of learning in new product development
+		
+		-->The MVP will do, develop basic feature of the product instead develop whole product at once
+		   If the basic feature will be success in market and customers are happy then business team will start extending
+		   of advanced features of that product.
+		-->MVP reduces the time to market and allows a quicker release of the product and it is a risk reduction tool
+		-->It allows fail fast without investing in their development
+		-->MVP is the real value for the learning opportunities it provides instead of jumping to create all the features
+		
+
+	The advantages of MVP is 
+
+		1. Too much speed 
+
+		2. Flexibility  : while you work to ward final product then client has something to use and test
+
+		3. Better Product : learn more about our clients expectations in realtime and reduces the changes of
+			            building something that no one wants
+
+
+
+
+	MMP : A minimum marketable Product is more developed version of MP and it is ready to sold to customers like SAS products
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
