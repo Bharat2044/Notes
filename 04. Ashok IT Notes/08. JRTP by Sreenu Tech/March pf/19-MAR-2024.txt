@@ -1,0 +1,53 @@
+Last Session:
+=============
+
+	-->we have discussed on project domain, name, description and requirements
+
+Today Session:
+==============
+
+	-->will continue the requirements
+	-->Importance of layered architecture
+
+
+Requirements:
+=============
+
+	-->manage the offers using batch jobs
+	-->each category offer will have its own SOR (System Of Records)
+	
+
+ For every project, it may be web application or distributed application
+
+ If it is web application 	  - compulsory we should follow the MVC architecture, 
+				    here UI is mandatory.i.e. developer must use front end technologies like
+				    html, css js, ts, angular, react..etc
+
+
+ If it is distributed application - comulsory we should follow the Layered Architecture, here UI is not 
+				    mandatory, developer no need learn front end technologies
+
+
+   Layered Architecture:
+   =====================
+
+    There are 3 layers in Layered Architecture, They are 
+
+		1. Controller Layer
+		2. Service Layer or Process Layer or Business Layer or Logic Layer
+		3. Integration Layer 
+
+
+     Request Flow:
+
+     client ===> controller layer ==>service layer ==> integration layer==>backend systems
+									|-database, service, kafka,..etc
+								       	
+     Response Flow:
+
+     client<===controller layer<==service layer<==integration layer<==backend systems
+
+
+
+
+	

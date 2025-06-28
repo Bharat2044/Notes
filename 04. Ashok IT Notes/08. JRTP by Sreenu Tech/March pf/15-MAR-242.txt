@@ -1,0 +1,64 @@
+Last Session:
+============
+
+	-->Types Of Projects
+
+		1. Migration Projects
+		2. Scratch Level Projects
+		3. Enhancement Projects
+		4. Support/Maintainance Projects
+
+Today Session:
+==============
+
+4. Support/Maintainance Projects
+
+	In realtime we have L1 support, L2 support, L3 supports team
+
+	This team will monitor the logs of all the applications in production/live, if any errors
+	found then inform to application team
+
+	This team should have strong knowledge on tools like Grafana, Splunk, Data Dog, ..etc
+
+
+     Client has 100 products/projects --- should have knowledge on all the projects? why?
+
+    sreenu --- till 15Match 2024, from April 2024 sreenu will be allocated for new projects
+
+    If any production issue will come in previous/last project then sreenu can't look into that issue
+    because he will busy with new project
+
+
+ developer --- once rollout the project into production -- handover the project to support team
+
+	i.e. dev team should give proper KT to support team, like that every project should handover to 
+	support team.
+
+	
+		project1 -----------------
+		project2 -----------------  =========>handover to production support team
+		:
+		project20 ----------------
+
+		L1  --- they are not good at coding, only supporting
+		L2,L3 -- if any minor changes then they should do the code changes into deploy into production
+
+
+	Advantages:
+	===========
+
+		-->This team should work on tools like grafana, splunk, app dynamics..etc
+		-->strong domain knowledge on all the projects
+		-->They should have knowledge on shell scripting programings like linux shell scripting..etc
+
+	Drawbacks:
+	==========
+		-->No coding/development opportunities
+
+
+  If you get any opportunity on support project, please don't stay long duration
+  You should work on support project get the more domain knowledge (SME) and switch to development side
+
+
+
+

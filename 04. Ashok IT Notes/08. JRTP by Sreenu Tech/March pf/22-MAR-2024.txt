@@ -1,0 +1,26 @@
+Last Session:
+
+	-->Layered Architecture explanation
+	-->Services Skelton
+
+Today Session:
+==============
+
+	-->Layered Architecture Technical Flow
+	-->Sequence Diagram
+
+
+Sequence Diagram:
+=================
+
+	-->This diagram will be helpful for understanding the technical flow of the project
+	-->How the classes can intefacting from one class to another class
+
+
+	9:15 AM IST. we have class topic : Git
+	
+	Saturday Timings  : 9:15 AM to 1:15 PM
+			    2:30 PM to 4:30 PM
+
+		  
+

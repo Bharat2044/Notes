@@ -1,0 +1,131 @@
+Last Session:
+=============
+	
+	-->Types of Projects
+	-->Relationship between client and vendors
+	-->Banking projects-how the projects will be distributed to multiple vendors
+
+Today Session:
+==============
+
+	-->Project Details like domain, no.of modules, architecture, techstack
+
+
+Domain     : BFS (Banking and Financial Service)
+Name       : Customers Offers Management (COMS)
+Description: The main objective of coms product is, customers get list of offer details
+	     Based on the category of the customers like enrollment date, type of customers...etc
+	     bank will provide the list of offers. There are different types of offers like
+	     membership offers, personalized offers, generalized offers.
+
+	     membership offers (m-offers)   : customer should be member/enrolled these offers
+	     personalized offers (p-offers) : based on the type of the card bank will generate these
+					      offers
+	     generalized offers  (g-offer)  : These are called public offers, everyone can able
+					      access these offers
+
+Modules:
+========
+
+	1. batch component : every 24 hours batch jobs will managese the offers like adding/deleting
+			     new offers
+
+	2. service module  : This module is used to provide the list of services to get the eligble
+			     offers
+
+	3. web module	   : This module is used to display the list of offers on dashboard
+
+	4. admin module    : This module is used for business team where business team can 
+			     controlling these offers
+
+Requirements:
+============
+
+	1. A customer max get 10 offers out of 'N' offers
+	2. Business team will prioritise these offers for the customers view
+	   i.e. always generalized offers are least priority and where as membership offers are 		highest priority
+
+	3. As per business requirements the offers order would be 
+
+			a. membership offers - moffers
+			b. personalized offers - poffers
+			c. generalized offers  - goffers
+
+	4. Always we should send atmost 10 offers to the customers as per below order
+
+		a. if m-offers >= 10 then send only 10 moffers by ignoring other offers
+		b. if m-offers < 10 then how many offers count for <10 . (ex : moffers - 5, ..etc)
+		   get the remaining offers from p-offers
+
+			ex : 1. m-offers = 10 ---> ignore p-offers, g-offers
+			ex : 2. m-offers = 4  ----> get 6 from p-offers and ignore g-offers
+
+				10 = m-offers + p-offers + g-offers
+				10 = 10 + 0 + 0
+				10 = 4 + 6 + 0
+
+			add remaining poffers to reach the count for 10 offers.
+
+				
+                 c. The combination of m-offers and p-offers <10 then goto g-offers, get remaining 
+		    offers from g-offers
+
+			ex :  m-offers = 4, p-offers=5, g-offers=1
+
+				10 = m-offers + p-offers + g-offers
+				10 =  0 + 0 + 10 
+				10 =  0 + 9 + 1
+				10 =  3 + 4 + 3
+		
+
+	 	Summary : max up to 10 offers
+		
+			10 = m-offers + p-offers + g-offers
+
+			10 = 0 + 0 + 9 (m-offers =0, p-offers = 0,g-offers = 9)
+			10 = 2 + 2 + 6 (m-offers =2, p-offers = 2,g-offers = 20)
+			10 = 5 + 0 + 5 (m-offers =5, p-offers = 0,g-offers = 50)
+			10 = 9 + 1 + 0 (m-offers =9, p-offers = 20,g-offers = 5)
+			10 = 6 + 6 + 0 (m-offers =6, p-offers = 4,g-offers = 9)
+			10 = 4 + 2 + 3 (m-offers =4, p-offers = 2,g-offers = 3)
+
+	5. The combination of m-offers, p-offers or m-offers, p-offers and g-offers ..etc
+	   will reach morethan/greaterthan 10 then consider the offers which expired near time
+
+		
+	   		10 = 0 + 0 + 9 (m-offers =0, p-offers = 0,g-offers = 9)
+			10 = 2 + 2 + 6 (m-offers =2, p-offers = 2,g-offers = 20)
+			10 = 5 + 0 + 5 (m-offers =5, p-offers = 0,g-offers = 50)
+			10 = 9 + 1 + 0 (m-offers =9, p-offers = 20,g-offers = 5)
+			10 = 6 + 6 + 0 (m-offers =6, p-offers = 4,g-offers = 9)
+			10 = 4 + 2 + 3 (m-offers =4, p-offers = 2,g-offers = 3)
+
+		For every offers will have expiry date, consider which offer expdate will near date
+		from current date and get those offers.
+
+	6. every offers should be displayed as image,user should clck on that image to the offer
+	   detailed information
+
+	7. Every 24-48 offers same offers will be displayed
+
+	8. We need to display the below error message when customer doesn't have any offers
+
+	"You are not eligble to view these offers/offers not found please try again after sometime"
+
+	9. If the customer not enrolled the offers then don't send membership offers
+	   i.e. consider only p-offers and g-offers.
+
+	10. We need to send these offers to all our clients/customers for marketting or camaign
+
+
+
+			  
+		
+		
+
+
+
+
+
+
+

@@ -1,0 +1,327 @@
+Today Topic:
+===========									
+
+Log4J Topics:
+=============
+
+	1. Introduction
+	2. Log4J installation
+	3. Architecture
+	4. Layout and Its Types
+	5. Appenders and Its Types
+	6. Logging Levels
+	7. Examples on Appenders and Layouts
+	8. Log4J vs SLF4J
+
+
+What is Logging:
+===============
+
+	-->Logging is the process of writing/recording the state of the program/application at various stages
+	   of the application execution
+	-->Log statements can be sent to file, console, database..etc
+	-->It helps developer to debug application easily while in development phase
+	-->It helps production support/developement team to troubleshoot problems easily while application in
+	   production maintainance phase.
+
+1. public class OfferDetails{						TroubleShoot the application in 3 ways
+
+									1. s.o.p												2. java debugging - f4,f5,f6,f7
+	public OffersResp getOffers(OffersRequest request){		3. logging frameworks like log4j
+
+		try{
+
+		S.o.p("----"+)						RCA - Root Cause Analysis
+		//lines of code
+		
+		}
+
+		catch( ){
+
+			S.o.p("----"+)
+
+		}
+ 500.
+ }
+
+ }
+
+
+System.out.println() drawbacks:
+===============================
+
+	1. It can print logs only on console.i.e. if the application stopped then all the logs will be gone
+	2. Performance is very flow
+	3. We can't group into particular types of message like eror info, success info..etc
+	4. Mulithreading environment issue
+	:
+	:
+
+Java Debugging:
+===============
+
+	-->It is used to trace the application line by line but it should be used only at local system
+	   to debug the application quickly
+
+Log4j:
+=====
+
+	-->Log4J is an opensource framework, reliable, flexible and fast logging framework
+	-->Log4j can be used with C++, Java, Ruby..etc
+	-->Log4J is a tool to help the programmer output log statements to variety of output targets
+	-->Incase if any problems in application then it will helpful enable logging so that can locate the
+	   problem
+
+Log4J fatures:
+==============
+
+	1. Log4J support thread safety
+	2. Multiple output foramtes like console, file, database supported 
+	3. We can group logs into particular types of message
+	4. Internalization configuration  logging
+	5. It is very spped to log the messages
+
+
+we can print log message as below
+
+day1 : 
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	:
+	:
+	:
+	10 laksh log message
+
+day2 : 
+
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	date&time:classname:methodname:url:clientid:respcode:respmsg:description:custid:cardnumber:typeoferror
+	:
+	:
+	:
+	10 laksh log message
+
+
+ex :  31-03-2024:10:00AM UTC :ProductController:getProducts:amazon:XXXXXXXXXXXX4346:0:success:abc123xyz
+      31-03-2024:10:00AM UTC :ProductController:getProducts:amazon:XXXXXXXXXXXX4346:0:success:abc123xyz	
+      	
+
+
+>sudo grep filename 'abc123xyz' ==>  Loggig Aggregator framemorks like SPLUNK, Kibana, Data Dog, ..etc
+
+
+In realtime we need to decide what are the elements should be print in log message
+
+	1. date & time
+	2. ipaddress
+	3. uri path
+	4. classname
+	5. method name			==========> we can print all the logging information and store into
+	6. clientid				    where. we can get these details based on the input
+	7. requestid/correlationid		    requested input like cardnumber, date and time..etc
+	8. cardnumber
+	9. respcode
+	10. respmsg
+	11. typeoferror
+	12. 
+	
+
+	Log4J has 3 main components
+
+		1. Loggers	: Responsible for capturing the logging information
+
+		2. Appenders    : Responsible for publish the logging information to various preferred 
+				  destination. i.e. console, file, database
+
+		3. Layouts	: Responsible for format logging information in different styles/types
+				  i.e. html, xml, json..etc
+		
+		
+	=====================================================	
+	|  Loggers --------> Appenders ----------> Layouts |
+	=====================================================
+
+	will generate ===> where to store the ==> How and what formate show the logs
+	the logs	    the logs
+
+	
+
+	Levels : Trace, Info, Debug, warn, error fatal, All, off
+
+
+		Trace < Debug < Info < Warn < Error < Fatal 
+
+		Off - logs will be disabled
+		On  - Logs will displayed as per above order
+
+	I want only effor logs
+
+		logs.level = error // error and fatal
+		logs.level = info // info, warn, error, fatal
+		logs.level = debug // debug, info,warn, error, fatal
+		
+
+
+
+1. Loggers:
+
+	-->Logger is an top level layer which provides the Logger Object
+	-->The Logger Object is responsible for taking logging information and stored in some place
+	-->For every java class developer must create the Logger Object, which is available in 
+		org.apache.log4j.*
+	-->Inorder to get Logger Object we need to call static factory method which will give an same object
+	   as return type
+
+		
+	 Syn : static Logger logger = Logger.getLogger(Currentclassname.class);
+
+	-->Logger object has some methods are used to print the status of the application
+
+			.trace()
+			.info()
+			.debug()
+			.error()
+			.warn()
+			.fatal()
+
+
+2. Appender:
+
+	-->Appender object is responsible for publishing logging information to various preferred destination
+	   such  as file, console, database..etc
+	-->Logger classes are used to generate the statmentd in different level and Appenders takes those logs
+	   will be stored in file, database..etc
+	-->Appender is not a class, it is an interface, there are so many implementation classes are there
+
+					Appenders
+					   |
+		--------------------------------------------------------------------
+		|			|		|		|	    	
+	  FileAppender		  ConsoleAppender    JdbcAppender    SMTPAppender   
+	        |
+	  -------------
+		1. RollingFileAppender
+		2. DailyRollingFileAppender
+
+		
+	
+	   
+	   FileAppender: 
+
+		-->It is used to append log events to a file, It supports 2 more appenders
+	   	-->RollingFileAppender : extends FileAppender class to backup the log files when they reach
+				         to certain size
+		-->DailyRollingFileAppender:extends FileAppender class to backup the log files on daily basis
+
+	ConsoleAppender : It is used to print the logs on the console using System.out
+			  The default Appender is console Appender
+
+	
+	JdbcAppender: It is used to print the logs in database
+
+	SMTPAppender : It is used for send an email when specific logging event occurs
+
+
+
+
+	3. Layout:
+
+		-->It is used to provide support to appender object before publishing logging information
+		-->Layout is an inteface it has 4 types of implementation classes
+
+					Layout
+				  	  |
+			-------------------------------------------------- 
+			|		|		|		 |
+		      SimpleLayout    PatternLayout   HTMLLayout      XMLLayout	
+
+
+
+	1. SimpleLayout: It is used to format the output in a very simple manner, it prints the level
+			 then a dash - and then the log message
+
+	2. PatternLayout : It is used to print the logs in particular pattern, if we will not specified any
+			   pattern then default conversion pattern is considered
+
+	3. HTMLLayout  : It formates the output as HTML table
+
+	4. XMLLayout   : It formates the output as XML file
+			 
+
+
+Lo4J installation:
+===================
+
+	-->It is an opensource software
+	-->It is in the form of .jar file
+	-->Add the log4j dependency in pom.xml as below
+
+		<dependency>
+    			<groupId>log4j</groupId>
+    			<artifactId>log4j</artifactId>
+    			<version>1.2.17</version>
+	       </dependency>
+
+
+To implement log4j we must follow the below things:
+===================================================
+
+	1. Add the log4J dependency in pom.xml
+	2. write the configuration
+		1. xml
+		2. properties
+
+	3. load the configuration and print the logging in application source code
+
+	
+Trace < Debug < Info < Warn < Error < Fatal 
+
+
+ Confiugrtion:
+
+	#1. Define the root logger with appender x
+
+		log4j.rootLogger=LEVEL,X	here LEVEL = DEBUG
+
+	#2. Set the appender named X to be a FileAppender
+
+		log4j.appender.X=org.apache.log4j.FileAppender
+		log4j.appender.X.File=d:\logs\log.out
+
+	#3. Define the layout for X appender
+
+		log4j.appender.X.layout=org.apache.log4j.PatternLayout
+		log4j.appender.X.layout.conversionPattern=%m%n
+
+
+
+Summary:
+========
+	
+	1. Importance of Logging
+	2. Log4J architecture : 1. Logger 	2. Appender 	3. Layout
+	3. Logging components details
+	4. Logging levels	: Trace, Debug, Info, Error, WARN, FATAL
+	5. Configuration
+
+		|-what is the root logger
+		|-what is the log level
+		|-what appender we are using
+		|-what layout we are using
+
+Logger class will load this configuration, generate the logs and display the logs as per configuration
+
+ Examples :
+
+	
+
+
+
+
+

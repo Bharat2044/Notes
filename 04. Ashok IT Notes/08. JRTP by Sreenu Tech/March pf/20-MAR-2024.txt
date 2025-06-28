@@ -1,0 +1,63 @@
+Last Session:
+=============
+
+	-->Project High Level Architecture
+
+Today Session:
+==============
+
+	-->Layered Architecture
+
+	-->Project : 1. web application		: MVC architecture where presentation layer is mandatory
+		     2. distributed application : Layered architecture where no presentation layer
+						  i.e. here rest api, microservice ..etc
+
+Layered Architecture:
+====================
+
+	There are 3 layers in layered architecture (LA)
+
+1. controller layer	2. service layer or business layer or process layer   3. Intg layer
+
+1. controller layer :
+
+	-->Get the request from client/consumer. always request data will be in the form of xml or json
+	-->Convert this xml/json into java object
+
+		  JAXB --> xml to java object --> unmarshalling
+			   java object to xml --> marshalling
+
+		  JACKSON --> json to java object --> JsonDeserialization
+			      java object to json --> JsonSerialization
+
+	-->Validate the request, if the request is good then send the request to service layer
+
+ 2. Service Layer:
+    =============
+
+		-->Get the request from controller
+		-->Perform the business logic like data tranmission, data manipulation, sorting, searching
+		   filtering, paging, pagination..etc
+		-->Prepare the request for integration layer and send request to integration layer
+
+ 3. Integration Layer:
+    =================
+
+		-->This layer is used to integrate with backend/downstream systems
+		-->The downstream systems may be database, service, message queue, file..etc
+
+			DAO -------------->Database
+			ServiceClient----->Service
+			KAFKA Publisher--->Message Queue
+			java.io.File Client-->File
+
+
+
+
+
+
+
+
+
+ 
+

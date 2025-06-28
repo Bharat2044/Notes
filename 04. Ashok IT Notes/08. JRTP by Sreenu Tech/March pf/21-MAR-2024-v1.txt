@@ -1,0 +1,146 @@
+Last Session:
+=============
+
+	-->Project Layered Architecture
+	-->In LA there are 3 layers : 
+		1. Controller Layer	2. Service Layer    3. Integration Layer
+
+Today Session:
+==============
+
+	-->We will create the project structure on layered architecture
+
+	SOLID Principles : 
+
+		Q) Why so many classes are required in the project?
+		Q) Why should we implement oops in the project?
+		Q) Why we should use dependency injection and where we should use in the project?
+
+  
+	project
+	  |	
+	  src
+	    |-main
+		|-java
+                    *.java
+	    	|-resources
+			*.properties
+	    |-test
+		|-java
+		|-resources
+	|--pom.xml	
+
+	
+		com/org.clientname.featurename
+		com.barclays.offers
+		com.barclays.enrollment
+		com.barclays.verification
+
+====================================================================================================
+		
+	com.barclays.offers
+	com.barclays.offers.controller
+	com.barclays.offers.validator
+	com.barclays.offers.model
+	com.barclays.offers.service
+	com.barclays.offers.serviceclient
+	com.barclays.offers.dao
+	com.barclays.offers.exception
+	com.barclays.offers.builder
+	com.barclays.offers.util
+
+
+	com.barclays.offers
+		OffersServiceApplication.java
+	com.barclays.offers.controller		==============> Controller Layer
+		OfferDetailsController.java
+	com.barclays.offers.validator		==============> Validations
+		OfferDetailsValidator.java
+	com.barclays.offers.model/dto/entity	==============>Request and Response model class
+		OffersRequest.java
+		OffersResponse.java
+		OffersDaoRequest.java
+		OffersDaoResponse.java
+		EnrollmentRequest.java
+		EnrollmentResponse.java
+		CardVerifyRequest.java
+		CardVerifyResposne.java
+	com.barclays.offers.service  ======================>Service Layer
+		IOffersService.java(I)
+		OffersServiceImpl.java
+	com.barclays.offers.enrollment.svcClient ======================>Integration layer-1
+		IEnrollmentServiceClient.java(I)
+		 EnrollmentServiceClientImpl.java
+	com.barclays.offers.verify.svcClient	=======================>Integration layer-2
+		ICardVerifyServiceClient.java
+		 CardVerifyServiceClientImpl.java
+	com.barclays.offers.dao		======================>Integration layer-3
+		IOffersDao.java
+		OffersDaoImpl.java
+	com.barclays.offers.exception
+		OffersInvalidRequestDataExceptioon.java
+		BusinessException.java
+		SystemException.java
+	com.barclays.offers.builder
+		OffersRequestBuilder.java //It is used to prepare the request object for each layer
+		OffersResponseBuilder.java //It is used to prepare the response object for each layer  
+	com.barclays.offers.util
+		OfferDetailsConstant.java
+		OfferDetailsEnum.java
+		OfferDetailsUtil.java
+
+
+
+
+SOLID Principles :
+==================
+S -- SRP : Single Responsibile Principle : every class should has only one responsible
+O -- OCP : Open and Closed Principle	 : Open for extension and closed for modification
+L -- LSP : Liskov Substitution Principle : parent to child relations shipd - polymorphism
+I -- ISP : Interface Seggregation Principle : Devide the single interfaces into multiple interfaces
+					      as per the feature
+D -- DIP : Dependency Injection Principle : Spring core : Dependency Injection
+
+
+
+	com.barclays.enrollment
+		EnrollmentServiceApplication.java
+	com.barclays.enrollment.controller		==============> Controller Layer
+		EnrollmentDetailsController.java
+	com.barclays.enrollment.validator		==============> Validations
+		EnrollmentDetailsValidator.java
+	com.barclays.enrollment.model/dto/entity==============>Request and Response model class
+		EnrollmentDaoRequest.java
+		EnrollmentDaoResponse.java
+		EnrollmentRequest.java
+		EnrollmentResponse.java
+	com.barclays.enrollment.service  ======================>Service Layer
+		IEnrollmentService.java(I)
+		EnrollmentServiceImpl.java
+	com.barclays.enrollment.dao		
+		IEnrollmentDao.java
+		EnrollmentDaoImpl.java
+	com.barclays.enrollment.exception
+		EnrollmentInvalidRequestDataExceptioon.java
+		BusinessException.java
+		SystemException.java
+	com.barclays.enrollment.builder
+	EnrollmentRequestBuilder.java //It is used to prepare the request object for each layer
+	EnrollmentResponseBuilder.java //It is used to prepare the response object for each layer  
+	com.barclays.enrollment.util
+		EnrollmentConstant.java
+		EnrollmentEnum.java
+		EnrollmentUtil.java
+
+
+
+
+    json : https://youtube.com/playlist?list=PL6Dc5k_HPPe3SuagrLb7GJoSD1wX5PNJF
+    solid principles:https://youtube.com/playlist?list=PL6Dc5k_HPPe0344vjAXid7a2tCKia5Pb6 
+    java restful service: https://youtube.com/playlist?list=PL6Dc5k_HPPe0BH1TPlkFKPInW7VdWdnAA
+    spring core:https://youtube.com/playlist?list=PL6Dc5k_HPPe0JTb9LIdOVCbu3xZwYy5PS
+    spring boot:https://www.youtube.com/playlist?list=PL6Dc5k_HPPe3PQHDZZ3vyhAKYZGo6w2Bf
+
+
+
+	
