@@ -1,0 +1,94 @@
+Last Session:
+=============
+
+	-->Resilience4J theory has been completed
+
+Today Session:
+=============
+
+	-->Resilience4J practicals
+
+1. Time Limiter:
+		================		===============
+		|product-service| ============> |Rating-Service|
+		================		===============
+		
+	If the rating service will not respond with in time interval then instead of sending error resp
+	send default response.
+
+response time is >2 sec  : 3967
+	
+{"productId":1,"description":"Blood On The Dance Floor","price":12.45,"productRating":{"avgRating":4.5,"reviews":[{"userFirstname":"sreenu-default","userLastname":"tech-default","productId":1,"rating":4,"comment":"decent"},{"userFirstname":"mahesh-default","userLastname":"defaultuser","productId":1,"rating":4,"comment":"decent"}]}}
+
+response time is < 2 sec : 35
+
+{"productId":1,"description":"Blood On The Dance Floor","price":12.45,"productRating":{"avgRating":4.5,"reviews":[{"userFirstname":"vins","userLastname":"guru","productId":1,"rating":5,"comment":"excellent"},{"userFirstname":"marshall","userLastname":"mathers","productId":1,"rating":4,"comment":"decent"}]}}
+
+response time is >2 sec  : 4043
+
+{"productId":1,"description":"Blood On The Dance Floor","price":12.45,"productRating":{"avgRating":4.5,"reviews":[{"userFirstname":"sreenu-default","userLastname":"tech-default","productId":1,"rating":4,"comment":"decent"},{"userFirstname":"mahesh-default","userLastname":"defaultuser","productId":1,"rating":4,"comment":"decent"}]}}
+
+response time is >2 sec  : 3090
+
+{"productId":2,"description":"The Eminem Show","price":12.12,"productRating":{"avgRating":4.5,"reviews":[{"userFirstname":"sreenu-default","userLastname":"tech-default","productId":1,"rating":4,"comment":"decent"},{"userFirstname":"mahesh-default","userLastname":"defaultuser","productId":1,"rating":4,"comment":"decent"}]}}
+
+
+
+2. Rate Limiter :
+   =============
+
+	-->The no.of request per sec is limited, if it reaches morethan that limit then it will give error
+	   message
+
+
+	application.yaml
+
+resilience4j.ratelimiter:
+  instances:
+    abcservice:
+      limitForPeriod: 10
+      limitRefreshPeriod: 30s
+      timeoutDuration: 0
+      
+server.port: 9090
+
+3. Retry :
+   ======
+
+		================		===============
+		|product-service| ============> |Rating-Service|
+		================		===============
+	
+
+  Assume that Rating Service is intermittently down, i.e. for every 1 hour it will down for 1 sec or 2sec
+  then instead of give failure response, retry for 1 or 2 times then if it will give success response with
+   retry then send success response else will send error response
+
+resilience4j.retry:
+  instances:
+    ratingService:
+      maxRetryAttempts: 3
+      waitDuration: 5s
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+      ignoreExceptions:
+        - org.springframework.web.client.HttpClientErrorException
+    someOtherService:
+      maxRetryAttempts: 3
+      waitDuration: 10s
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+
+
+8:00 AM to 9:00 AM
+
+
+Pending Topics:
+==============
+
+1. Agile
+2. Kafka
+3. Kubernetes
+4. parallel calls
+	  		

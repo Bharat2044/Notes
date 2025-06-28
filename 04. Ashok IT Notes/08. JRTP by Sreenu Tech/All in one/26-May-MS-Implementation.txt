@@ -1,0 +1,264 @@
+Last Session :
+
+	-->Microservices implementation in project - theory and project setup has been completed
+
+Today Session :
+
+	-->we will implement microservices in project.
+
+
+There are 3 ways we can perform inter service communication with each other, they are
+
+1. discovery client
+
+2. ribbon client
+
+3. feign client
+
+
+Entered into EnrollmentServiceClientImpl
+instancelist[
+[EurekaServiceInstance@4ff074 instance = InstanceInfo [instanceId = host.docker.internal:enrollment-service:2025, appName = ENROLLMENT-SERVICE, hostName = 192.168.29.180, status = UP, ipAddr = 192.168.29.180, port = 2025, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@75f33a04], 
+
+[EurekaServiceInstance@4cdb27c7 instance = InstanceInfo [instanceId = host.docker.internal:enrollment-service:2024, appName = ENROLLMENT-SERVICE, hostName = 192.168.29.180, status = UP, ipAddr = 192.168.29.180, port = 2024, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@35f4ee6c]]
+
+
+serviceBaseUrlhttp://192.168.29.180:2025
+enrollmentSvcUrihttp://192.168.29.180:2025/v1/enrollment
+ enrollmentResp from EnrollmentServiceClient is :EnrollmentResponse(respCode=0, respMsg=success-instance2, status=active)
+EnrollemtnResp from OffersServiceImpl *************EnrollmentResponse(respCode=0, respMsg=success-instance2, status=active)
+
+
+Discovery Client :
+==================
+
+@Component
+public class EnrollmentServiceDiscoveryClientImpl implements IEnrollmentServiceClient {
+
+	
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@Autowired
+	DiscoveryClient discoveryClient;
+	
+	
+	
+
+	@Override
+	public EnrollmentResponse enrollment(EnrollmentRequest enrollmentRequest) {
+		
+		System.out.println("Entered into EnrollmentServiceClientImpl");
+		
+		EnrollmentResponse enrollmentResp = new EnrollmentResponse();
+		
+		  List<ServiceInstance> instancelist = discoveryClient.getInstances("enrollment-service");
+		  
+		  System.out.println("instancelist"+instancelist);
+		  
+		  String serviceBaseUrl = instancelist.get(0).getUri().toString();
+		  
+		  System.out.println("serviceBaseUrl"+serviceBaseUrl);
+		  
+		  String enrollmentSvcUri = serviceBaseUrl + "/v1/enrollment";
+		
+		  System.out.println("enrollmentSvcUri"+enrollmentSvcUri);
+		
+		//Write the restclient code to call the service and get the response
+
+		
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+		
+		headers.add("authToken", "@#$%^&*(*&^%");
+		headers.add("channelid", "app");
+		headers.add("clientId", "coms");
+		headers.add("correlationId", UUID.randomUUID().toString().substring(0, 16));
+		headers.add("msgTs", new Date().toString());
+		
+		
+	   HttpEntity<EnrollmentRequest> requestEntity = new HttpEntity<EnrollmentRequest>(enrollmentRequest,headers);
+		
+	    
+	   
+	   ResponseEntity<EnrollmentResponse> responseEntity = restTemplate.exchange("", HttpMethod.POST, requestEntity , EnrollmentResponse.class);
+	 
+	   		if( responseEntity != null && responseEntity.getStatusCode() != null ) {
+	   			
+	   			if( 200 == responseEntity.getStatusCode().OK.value()) {
+	   				
+	   				enrollmentResp = responseEntity.getBody();
+	   			}
+	   			  			
+	   		}
+	   
+	   		System.out.println(" enrollmentResp from EnrollmentServiceClient is :"+enrollmentResp);
+	   			
+		return enrollmentResp;
+	}
+	
+	
+
+}
+
+
+Server side load balancing - Discovery Client:
+==============================================
+
+	#1. The load is not distributed properly, even though multiple instances are running and always get the
+	    same instance
+
+	#2. If we have 100 microservices then 100 load balancers are required , it would be more cost to the 
+	    company
+
+
+To overcome the above problems, we should choose client side load balancing
+
+Client Side Load Balancing:
+===========================
+
+	#1. client should aware how many instances are running
+	#2. make sure it doesn't send a request to same instance always
+	#3. Ribbon client is used handle client side load balancing
+	
+
+RibbonClient Code:
+=================
+
+public class EnrollmentServiceRibbonClientImpl implements IEnrollmentServiceClient {
+
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@Override
+	public EnrollmentResponse enrollment(EnrollmentRequest enrollmentRequest) {
+		
+		System.out.println("Entered into EnrollmentServiceClientImpl");
+		
+		EnrollmentResponse enrollmentResp = new EnrollmentResponse();
+		
+		  
+		  String enrollmentSvcUri = "http://enrollment-service/v1/enrollment";
+		
+		  System.out.println("enrollmentSvcUri : "+enrollmentSvcUri);
+		
+		//Write the restclient code to call the service and get the response
+
+		
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+		
+		headers.add("authToken", "@#$%^&*(*&^%");
+		headers.add("channelid", "app");
+		headers.add("clientId", "coms");
+		headers.add("correlationId", UUID.randomUUID().toString().substring(0, 16));
+		headers.add("msgTs", new Date().toString());
+		
+		
+	   HttpEntity<EnrollmentRequest> requestEntity = new HttpEntity<EnrollmentRequest>(enrollmentRequest,headers);
+		
+	    
+	   
+	   ResponseEntity<EnrollmentResponse> responseEntity = restTemplate.exchange(enrollmentSvcUri, HttpMethod.POST, requestEntity , EnrollmentResponse.class);
+
+		--------------------------------
+
+}
+}
+
+
+
+Fiegn Client Code:
+====================
+
+	-->It is used to remove the boiler plate code
+	-->It provides the just declaration, implementation will take care to prepare the client code and call	   the service
+
+	-->Spring cloud feign client is a declarative client library that can be used to access the 	 	microservices or rest endpoints without writing the code
+
+@EnableFeignClients : It is used to enable the feignclient api's
+
+@FeignClient("enrollment-service")
+public interface EnrollmentServiceFeignClient {
+	
+	@PostMapping("/v1/enrollment") 
+	public EnrollmentResponse enrollment( @RequestBody EnrollmentRequest EnrollmentRequest,  
+			@RequestHeader(name = "clientId", required=false) String clientId,
+			@RequestHeader(name = "channelid", required=false ) String channelid, 
+			@RequestHeader(name = "msgTs", required=false ) String msgTs, 
+			@RequestHeader(name = "correlationId", required=false ) String correlationId, 
+			@RequestHeader(name = "authToken", required=false ) String authToken );
+
+}
+
+
+===========================================================================================================
+
+Summary : 
+
+	1. What is Eureka Server
+
+		a. How to connect to Eureka and register the microservices into Eureka Server
+		b. How to get the instance details of microservices from Eureka Server
+
+	2. How to interservice communication using 3 different rest client codes
+
+		a. discovery client
+		b. ribbon client
+		c. feign client
+
+
+
+
+spring cloud api gateway:
+========================
+
+	-->API gateay acts as an single entrypoint for a collection of microservices
+	-->Any external client shouldn't access the microservices directly but access them only through the
+	  application gateway
+
+ Advantages:
+
+	1. It will proves the security of the microservices as we limit the access of external calls to all 
+	   the microservices
+
+	2. The cross cutting concerns like authentication, monitoring and metrics ..etc only in the api gateway
+	   as all calls will be routed through it
+
+	3. The client doesn't know about the internal architecture of our microservies, client will not
+	   able to determine the location of the microservices instances.
+
+	4. The client interaction access to microservices only a single service call for all the requirements
+
+
+
+spring cloud api gateway implementation:
+========================================
+
+	1. add spring-aloud-api-gateway dependency in pom.xml
+
+	2. write properties/yml file and configure all the microservices uri, path, ..etc
+
+	
+
+spring cloud api gateway can be implemented in 2 ways
+
+	1. with Eureka
+	
+	2. without Eureka 
+
+
+
+
+
+http://localhost:2023/v1/offers/0521114009876534
+http://localhost:9999/v1/offers/0521114009876534
+http://localhost:9999/v1/enrollment
+
+
+
+
+
+
+
+		
+           

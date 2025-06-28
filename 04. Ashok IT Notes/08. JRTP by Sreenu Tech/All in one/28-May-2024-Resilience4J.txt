@@ -1,0 +1,62 @@
+Last Session:
+=============
+
+	-->Distributed logging theory and implementation has completed
+		|-using spring cloud sleuth and zipkin
+
+Today Session:
+==============
+
+	Resilience4j 
+
+
+ 	"Resilience4j is a lightweight fault tolerance library that provides a variety of fault tolerance"
+
+	"Fault tolerance is the ability of a system to maintain proper operations in the event of failres
+	 or faults in one or more its components"
+	
+
+		      ----------------	    call	----------------
+		      |	microservice1 |  ----------->  | microservice2|
+		      ----------------			---------------
+
+
+	The goal of fault tolerance is microservice1 always it should operational even though microservice2
+	is down or providing error response.
+
+	when microservice1 will make a call to microservice2, The microservice2 might not be respond due
+	below scenarios
+
+		1. Error response 
+		2. latency issue : i.e. taking more time to respond
+		3. intermittently service id down
+		4. limitations with volume. i.e. It will support max 100 request per second..etc
+
+	The resource utilization will be wasted. for ex : There only 10 threads are in thread pool
+
+	as per SLA (Service Level agreement) microservice 2 should respond in 1 sec but it is taking 
+	more than 1 sec. If it is taking more than one second then all threads are busy with executing current
+	request and new requests are on hold due to unavailable threads.
+	
+	
+ To overcome all these issue spring cloud has introduced a module is called Resilience4J.	
+
+ Resilience4J has provided some utility api's to make the services are always up and running , operational
+
+ Some of the utilities are 
+
+	1. Time Limiter : @TimeLimiter	: It is used to handle the timeout scenarios or latency
+
+	2. Rate Limiter : @RateLimiter  : It is used to handle the no.of calls / volume limitation
+
+	3. Retry  : @Retry	        : It is used to handle intermittent service down issues
+
+	4. Circuit Breaker : @CircuitBreaker : It is used to handle the partial service down
+
+	5. Bulkhead : @Bulkhead  : It is used to handle huge load of the service
+
+	
+
+
+
+

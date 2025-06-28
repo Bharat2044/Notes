@@ -1,0 +1,91 @@
+Last Session:
+============
+
+	-->We have implemented spring cloud microservices topics like
+
+		1. Eureka Server
+		2. Inter service communication
+
+			a. discovery client
+			b. ribbon client
+			c. feign client
+
+		3. spring cloud api gateway : single point of contact for externa client
+					      route the request to specific microservice
+					      	
+
+			a. without Eureka
+			b. with Eureka
+
+Today Session:
+==============
+
+	-->Distributed Logging using sleuth and zipkin
+	-->Resilience4J 
+
+
+
+Distributed Logging:
+===================
+
+To implement distributed logging we should follow only 2 steps
+
+	1. add the spring-boot starter sleuth dependency in pom.xml
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+
+	2. implement log4j in project
+	
+	3. download the zipkin server and start the zipkin
+
+	4. configure the zipkin url in microservice application.properties, so that the generated logs of
+	   microservice will be published in zipkin dashboard
+
+		spring.zipkin.base-url=http://localhost:9411
+
+
+Request 1 :
+
+[microservice1,0d894f546857d2a5,0d894f546857d2a5,true]
+[microservice2,0d894f546857d2a5,7dd27d1771cca5e6,true]
+[microservice3,0d894f546857d2a5,2df26df7a312a9b0,true]
+[microservice4,0d894f546857d2a5,e407995d43608204,true]	  
+
+Request 2 : 
+
+[microservice1,94abc2ed8da63586,94abc2ed8da63586,true]
+[microservice2,94abc2ed8da63586,32137f7dbbfb3c34,true]
+[microservice3,94abc2ed8da63586,c6d2b4ea98ad237d,true]
+[microservice4,94abc2ed8da63586,5ec3a40740c4469b,true]
+
+
+Resilience4J 					8:00 AM to 9:00 AM
+	
+           
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

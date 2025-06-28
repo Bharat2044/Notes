@@ -1,0 +1,94 @@
+Last Session:
+
+	-->Resilience4j patterns : Time Limiter, Rate Limiter, Retry mechanisim
+
+Today Session:
+
+	-->Resilience4j patterns : circuit breaker, bulk head
+
+
+circuit breaker:
+
+
+		================		===============
+		|product-service| ============> |Rating-Service|
+		================		===============
+	 
+	-->product service is calling to rating server, if rating service is down due to some
+	   infrastructure outage or any other reason. what will happen?
+
+	-->If any other requests will come to rating service then will have same situation 
+	   i.e. it will give failure
+
+	
+ 
+How to solve this problem using Circuit Breaker
+
+
+	-->Circuit Breaker will behave like electrical circuit
+	-->When one service get remote service calls failure morethan a given threshold then
+	   for a particular time period, after that timeout expires then circuit breaker will 
+	   allows limited no.of request. If those requests are getting succeded then circuit breaker
+	   will be closed and normal operation will be resumed other wise it will fail.
+
+	-->Circuit Breaker Lifecycle states
+
+
+		1. CLOSED		2. OPEN 	3. HALF OPEN
+
+
+
+	1. CLOSED : when both services interacting is up and running. i.e. no errors are getting
+		    circuit breaker is counting the no.of remote api calls continuously
+
+	2. OPEN	  : As soon as the percentage of failing remote api calls is exceeding the given
+		    threshold, Circuit breaker changes its state to OPEN state.
+
+		   Calling microservice will fail immediately and an exception will be returned
+		   i.e. execution will be stopped
+
+
+	3. HALF OPEN State : 
+
+		-->After staying at OPEN state for a given time period breaker will automatically
+	           turns its state into HALF OPEN State
+
+		-->In this state limited no.of remote api calls are allowed to pass through
+	           If the failing calls count is greater than the limited number, breaker turns
+		   again into OPEN state otherwise it is closed
+		  
+
+
+
+	Circuit Breaker - fault tolerance
+	Rate Limiter    - block too many requests
+	Time Limiter    - Limit time while calling remote operations
+	Retry mechanism - automatic retry for failed operations
+	Bulk Head	- limit no.of concurrent requests
+
+		
+
+					----------------------
+	no.of users can access this     |offer-details-service|
+	is 100k users				-----------------------
+
+
+	1,00,000 users continuously hitting the service then how to handle the bulk requests
+
+	200k	users continuously hitting the service then how to handle it?		
+
+
+
+using Jmeter we can perform load testing. i.e. we can configure 100k, 200k users and start accessing
+the application, if the application will not support huge load then it will give error resposne
+
+=====================================================================================================
+
+Today evening no class : 6:00 PM to 7:00 PM
+
+Tomorrow class : 8:00 AM to 9:30 AM
+		 6:00 PM to 7:30 PM
+
+
+
+
